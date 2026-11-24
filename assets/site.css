@@ -318,6 +318,46 @@ legend small{font-weight:400;font-size:.9rem;color:var(--muted);margin-inline-st
 }
 @media (max-width:420px){.result-cols{grid-template-columns:1fr}}
 
+/* מסלולים: מה מקבלים בכל הצעה */
+.pkgs-sec{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+.pkgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(11,auto);gap:0 14px;margin-top:clamp(28px,4vw,48px)}
+.pkg{position:relative;display:grid;grid-row:span 11;grid-template-rows:subgrid;align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px 8px}
+.pkg.is-rec{background:linear-gradient(180deg,#283041,var(--panel) 60%);border-color:var(--muted);box-shadow:var(--lift);transform:translateY(-8px)}
+.pkg h3{font-size:var(--step-1);padding-inline-end:4.5em}
+.pkg-badge{position:absolute;top:20px;inset-inline-end:16px;font-size:.78rem;font-weight:700;color:var(--base);background:var(--text);border-radius:999px;padding:3px 10px}
+.pkg-fit{margin-top:4px;color:var(--muted);font-size:.92rem;line-height:1.45}
+.pkg-price{display:flex;align-items:baseline;gap:6px;margin:14px 0 10px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pkg-price span{color:var(--muted);font-size:.9rem}
+.pkg-price b{font-size:var(--step-2);color:#fff;font-variant-numeric:tabular-nums}
+.pkg-row{display:flex;flex-direction:column;gap:1px;padding:9px 0;border-bottom:1px solid rgba(52,60,75,.6);font-size:.95rem}
+.pkg-row:last-child{border-bottom:0}
+.pkg-row span{color:var(--muted);font-size:.8rem}
+.pkg-row b{font-weight:600;color:var(--text)}
+.pkg-row[data-k="design"] b,.pkg-row[data-k="revisions"] b{font-size:1.25rem;line-height:1.2;color:#fff}
+.pkgs-note{margin-top:16px;font-size:.88rem;color:var(--muted)}
+.pkgs-more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,48px);margin-top:clamp(36px,5vw,56px);padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--line)}
+.pkgs-more h3{font-size:var(--step-1)}
+.pkgs-more .ticks{margin-top:14px;font-size:.96rem;color:var(--muted)}
+.ticks-x li::before{width:12px;height:2px;border-width:0;background:var(--muted);transform:none;top:.8em}
+.price-list{margin-top:14px;display:grid;gap:8px;font-size:.96rem}
+.price-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+.price-list span{color:var(--muted)}
+.price-list b{flex:none;font-weight:600;color:var(--text)}
+@media (max-width:1100px){
+ .pkgs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:12px 2px 18px;margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);scrollbar-width:thin}
+ .pkg{flex:0 0 min(300px,82%);display:block;scroll-snap-align:center}
+ .pkg.is-rec{transform:none}
+ .pkgs:focus-visible{outline-offset:-3px}
+}
+@media (max-width:860px){.pkgs-more{grid-template-columns:1fr}}
+
+/* מה כלול בתוצאת המתכנן */
+.result-incl{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px;padding:12px 14px;background:var(--base-2);border:1px solid var(--line);border-radius:10px;font-size:.88rem}
+.result .result-incl li{padding:0}
+.result .result-incl li::before{display:none}
+.result-incl span{display:block;color:var(--muted);font-size:.76rem}
+.result-incl b{color:#fff;font-weight:600}
+
 /* בכל אתר */
 .basics{padding:clamp(56px,8vw,104px) 0}
 .ticks-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px clamp(28px,5vw,64px);margin-top:clamp(28px,4vw,44px)}

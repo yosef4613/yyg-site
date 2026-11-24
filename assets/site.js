@@ -1,11 +1,19 @@
 /* ===== פרטי קשר ומחירים: להחליף כאן לפני העלייה לאוויר ===== */
 const CONFIG = {
-  email: 'hello@example.com',
-  phone: '050-000-0000',              // לשיחות בלבד
-  // הערכת מחיר במתכנן, לפי מחירי השוק בארץ (אפשרות ב: אמצע השוק). null מסתיר את ההערכה.
-  prices:  { landing: 2200, site: 4500, club: 6900, store: 7900 },
-  english: { landing: 600,  site: 1200, club: 1800, store: 2000 }
+  email: 'yyrkg22@gmail.com',
+  phone: '054-854-0700',              // לשיחות בלבד
+  showPrice: true                     // false מסתיר את הערכת המחיר במתכנן
 };
+/* המחירים ומה שכלול בכל מסלול נקראים מכרטיסי המסלולים ב-index.html (data-price, data-en),
+   כך שמעדכנים מחיר במקום אחד בלבד. */
+const PKG = {};
+document.querySelectorAll('.pkg[data-track]').forEach((el) => {
+  const row = (k) => { const r = el.querySelector(`[data-k="${k}"]`); return r ? { label: r.querySelector('span').textContent, value: r.querySelector('b').textContent } : null; };
+  PKG[el.dataset.track] = {
+    price: Number(el.dataset.price), en: Number(el.dataset.en),
+    incl: ['design', 'revisions', 'delivery', 'support'].map(row).filter(Boolean)
+  };
+});
 
 const root = document.documentElement;
 const telHref = 'tel:' + CONFIG.phone.replace(/[^\d+]/g, '');
@@ -273,8 +281,9 @@ const progressIn = (el, start = 1, span = 1) => {
     if (track === 'club' || (track === 'store' && upd === 'team')) feats.push('חשבונות משתמש ורשימת תפוצה עם הסכמה');
     if (en) feats.push('גרסה באנגלית עם מעבר בלחיצה');
     feats.push('התאמה לגוגל ולטלפון');
-    const price = CONFIG.prices ? CONFIG.prices[track] + (en ? CONFIG.english[track] : 0) : null;
-    return { track, pages, feats, price };
+    const pkg = PKG[track];
+    const price = CONFIG.showPrice && pkg ? pkg.price + (en ? pkg.en : 0) : null;
+    return { track, pages, feats, price, incl: pkg ? pkg.incl : [] };
   };
 
   const fill = (ul, items, key) => {
@@ -314,6 +323,13 @@ const progressIn = (el, start = 1, span = 1) => {
     else setPrice(p.price);
     fill($('r-pages'), p.pages, 'pages');
     fill($('r-feats'), p.feats, 'feats');
+    $('r-incl').replaceChildren(...p.incl.map(({ label, value }) => {
+      const li = document.createElement('li');
+      const sp = document.createElement('span'); sp.textContent = label;
+      const b = document.createElement('b'); b.textContent = value;
+      li.append(sp, b);
+      return li;
+    }));
 
     planText = [
       'שלום, מילאתי את המתכנן באתר ואשמח להצעת מחיר.',
@@ -323,7 +339,8 @@ const progressIn = (el, start = 1, span = 1) => {
       `מי יעדכן: ${UPD[ans.upd]}`,
       ans.en ? 'צריך גם גרסה באנגלית' : null,
       `המסלול שהומלץ: ${TRACK[p.track].name}`,
-      p.price !== null ? `הערכה ראשונית: ${nis(p.price)}` : null,
+      p.price !== null ? `הערכה ראשונית: ${nis(p.price)} לפני מע״מ` : null,
+      ...p.incl.map(({ label, value }) => `${label}: ${value}`),
       '',
       'שם העסק: ',
       'טלפון לחזרה: '
