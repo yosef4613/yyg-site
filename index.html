@@ -19,11 +19,12 @@
 <meta property="og:image:height" content="630">
 <link rel="icon" href="assets/img/icon-64.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/plex-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/plex-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="stylesheet" href="assets/site.css?v=9">
 <script>(function(){var s=null;try{s=localStorage.getItem('yyg-motion')}catch(e){}if(s==='off'||(!s&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-off')})()</script>
-<script defer src="assets/site.js?v=8"></script>
+<script defer src="assets/site.js?v=9"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"YYG","alternateName":"YYG עיצוב ובניית אתרים","description":"עיצוב ובניית אתרים לעסקים קטנים ולמוסדות","url":"https://yosef4613.github.io/yyg-site/","logo":"https://yosef4613.github.io/yyg-site/assets/img/logo-320.webp","image":"https://yosef4613.github.io/yyg-site/assets/img/og.jpg","telephone":"+972-54-854-0700","email":"yyrkg22@gmail.com","priceRange":"₪1,900–₪6,900","areaServed":{"@type":"Country","name":"IL"},"knowsLanguage":["he","en"],"founder":{"@type":"Person","name":"יהודה גורדון"}}
 </script>
@@ -43,17 +44,16 @@
   </button>
   <div class="menu" id="menu">
    <nav class="nav" aria-label="ניווט ראשי">
-    <a href="#story">ככה נבנה אתר</a>
     <a href="#work">עבודות</a>
     <a href="#about">מי אני</a>
     <a href="#process">איך עובדים</a>
-    <a href="#plan">תכנון</a>
+    <a href="#plan">מחשבון מחיר</a>
     <a href="#packages">מסלולים ומחירים</a>
     <a href="#faq">שאלות</a>
    </nav>
    <button class="motion" type="button" id="motion-toggle" aria-pressed="true">
     <span class="motion-switch" aria-hidden="true"></span>
-    <span>תנועה</span>
+    <span>אנימציות</span>
    </button>
    <a class="text-link top-contact" href="#contact">יצירת קשר</a>
   </div>
@@ -62,7 +62,7 @@
 
 <main id="main">
 
-<!-- מבחן המראה: הכאב, למי, מה מקבלים, מה עושים עכשיו -->
+<!-- מבחן המראה: למי, הכאב וההבטחה, מה עושים עכשיו -->
 <section class="hero" id="top" aria-labelledby="hero-title">
  <div class="hero-bg" aria-hidden="true">
   <svg class="orbit" viewBox="0 0 1000 520">
@@ -83,21 +83,21 @@
  </div>
  <div class="wrap hero-grid">
   <div class="hero-copy">
-   <p class="pain">האתר שלכם איטי בטלפון, או שעדיין אין לכם אתר?</p>
-   <h1 id="hero-title">אתר שמביא לעסק שלכם פניות, ונפתח מהר גם בטלפון</h1>
-   <p class="lead">לעסקים קטנים ולמוסדות. את הדוגמה הראשונה רואים לפני שמשלמים: כמה עיצובים של האתר שלכם, ובוחרים. אחר כך אני בונה, מעלה לאוויר ומלמד אתכם לעדכן.</p>
+   <p class="kicker">בניית אתרים לעסקים קטנים ולמוסדות</p>
+   <h1 id="hero-title">אתר שמביא לעסק שלכם פניות, ואת העיצוב רואים לפני שמשלמים</h1>
+   <p class="lead">לא צריך לנחש איך האתר ייראה: מקבלים 2 עד 3 עיצובים של האתר שלכם, עם התוכן שלכם. אהבתם? ממשיכים. לא אהבתם? לא משלמים. אחר כך אני בונה, מעלה לאוויר ומלמד אתכם לעדכן לבד.</p>
    <div class="hero-cta">
-    <a class="btn btn-gold" href="#plan">לתכנן את האתר שלי</a>
-    <p class="cta-note">שלוש שאלות, ומקבלים מחיר משוער ורשימת עמודים, בלי להשאיר פרטים. דף נחיתה החל מ־1,900 ₪.</p>
+    <a class="btn btn-gold" href="#plan">כמה יעלה האתר שלי?</a>
+    <p class="cta-note">3 שאלות קצרות, בלי להשאיר פרטים. דף נחיתה מ־1,900&nbsp;₪.</p>
    </div>
-   <p class="hero-call">מעדיפים לדבר? <a class="text-link" href="tel:0548540700" data-tel>054-854-0700</a> <span class="muted">(שיחות בלבד), או פגישה בזום</span></p>
+   <p class="hero-call">מעדיפים לדבר? <a class="text-link" href="tel:0548540700" data-tel>054-854-0700</a> <span class="muted">בין 9:00 ל־13:00 או בין 22:30 ל־24:00, שיחות בלבד</span></p>
   </div>
 
   <figure class="hero-proof" aria-labelledby="proof-cap">
    <div class="lab-wrap">
-    <div class="lab" id="lab" data-theme="noir">
-     <div class="lab-chrome" aria-hidden="true"><span class="lab-dots"><i></i><i></i><i></i></span><span class="lab-url" id="lab-url">הכיף שבאפיה, כיוון נואר</span></div>
-     <div class="mini" id="mini" role="img" aria-label="דף הבית של הכיף שבאפיה בכיוון העיצוב נואר">
+    <div class="lab" id="lab">
+     <div class="lab-chrome" aria-hidden="true"><span class="lab-dots"><i></i><i></i><i></i></span><span class="lab-url" id="lab-url">hakef.com, האתר שבאוויר</span></div>
+     <div class="mini" id="mini" data-theme="live" role="img" aria-label="דף הבית של הכיף שבאפיה, האתר שבאוויר">
       <div class="m-nav" aria-hidden="true">
        <span class="m-logo">הכיף שבאפיה</span>
        <span class="m-links"><i>בר קינוחים</i><i>עוגות</i><i>פטיפורים</i><i>מתכונים</i></span>
@@ -112,35 +112,40 @@
         <span class="m-trust"><i>כשרות מהודרת</i><i>משלוח והקמה</i></span>
        </div>
        <div class="m-media">
-        <img class="m-img" id="m-img" src="assets/img/hk/cake-glaze-480.webp" width="480" height="480" alt="" fetchpriority="high">
-        <img class="m-inset" id="m-inset" src="assets/img/hk/pf-single-480.webp" width="480" height="720" alt="" loading="lazy">
+        <img class="m-img" id="m-img" src="assets/img/hk/ev-mousse-close-480.webp" width="480" height="480" alt="" fetchpriority="high">
+        <img class="m-inset" id="m-inset" src="assets/img/hk/ev-bar-flowers-480.webp" width="480" height="760" alt="">
        </div>
       </div>
      </div>
+     <span class="lab-scan" aria-hidden="true"></span>
     </div>
    </div>
    <p class="note hero-note" aria-live="polite">
-    <span id="proof-note">אותו תוכן, עיצוב אחר</span>
+    <span id="proof-note">זה האתר שבאוויר. נסו עיצוב אחר</span>
     <svg class="note-arrow" viewBox="0 0 90 60" aria-hidden="true"><path d="M86 6C60 4 30 14 14 46" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 36l8 12 12-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
    </p>
    <div class="switch" role="group" aria-label="להחליף את העיצוב של האתר בדוגמה">
-    <button type="button" aria-pressed="true" data-theme="noir" data-name="כיוון נואר" data-img="cake-glaze" data-inset="pf-single" data-note="אותו תוכן, עיצוב אחר">נואר</button>
+    <button type="button" aria-pressed="true" data-theme="live" data-name="האתר שבאוויר" data-img="ev-mousse-close" data-inset="ev-bar-flowers" data-note="זה האתר שבאוויר. נסו עיצוב אחר">האתר שבאוויר</button>
+    <span class="switch-sep" aria-hidden="true"></span>
+    <button type="button" aria-pressed="false" data-theme="noir" data-name="כיוון נואר" data-img="cake-glaze" data-inset="pf-single" data-note="אותו תוכן, עיצוב אחר">נואר</button>
     <button type="button" aria-pressed="false" data-theme="royal" data-name="כיוון רויאל" data-img="hero-petitfours-tall" data-inset="cake-glaze" data-note="אותו תוכן, עיצוב אחר">רויאל</button>
     <button type="button" aria-pressed="false" data-theme="atelier" data-name="כיוון אטלייה" data-img="cake-wedding" data-inset="pf-single" data-note="אפשר גם בהיר">אטלייה</button>
     <button type="button" aria-pressed="false" data-theme="rose" data-name="כיוון רוז" data-img="ev-mousse-close" data-inset="cake-wedding" data-note="או משהו אחר לגמרי">רוז</button>
-    <span class="switch-sep" aria-hidden="true"></span>
-    <button type="button" aria-pressed="false" data-theme="live" data-name="האתר שבאוויר" data-img="ev-mousse-close" data-inset="ev-bar-flowers" data-note="וזה הכיוון שעלה לאוויר">האתר שבאוויר</button>
    </div>
-   <figcaption id="proof-cap">זה לא צילום: זה אתר אמיתי שמתעצב מחדש בלחיצה. ארבעה מתוך ששת הכיוונים שהצגתי ל"הכיף שבאפיה", והכיוון שעלה לאוויר.</figcaption>
+   <figcaption id="proof-cap">זה לא צילום: זה אתר אמיתי שמתעצב מחדש בלחיצה. האתר שבאוויר היום, וארבעה מתוך ששת הכיוונים שהצגתי ל"הכיף שבאפיה" לפני שבחרו.</figcaption>
   </figure>
  </div>
 </section>
 
-<!-- סיפור: איך נבנה אתר, מהשרטוט ועד המהירות (דבר אחד זז בכל שלב) -->
-<section class="story" id="story" aria-labelledby="story-title">
+
+<!-- עבודות -->
+<section class="work" id="work" aria-labelledby="work-title">
  <div class="wrap">
-  <h2 id="story-title" class="sec-title">ככה נבנה אתר: הכיף שבאפיה</h2>
-  <p class="sec-lead">ארבעה שלבים, מהשרטוט הראשון ועד אתר שנפתח מהר בטלפון. גללו לאט.</p>
+  <h2 id="work-title" class="sec-title">עבודות אחרונות</h2>
+
+  <div class="story" id="story" aria-labelledby="story-title" role="group">
+   <h3 id="story-title" class="story-title">הכיף שבאפיה: מהשרטוט ועד האתר באוויר</h3>
+   <p class="story-kind">קייטרינג בוטיק ובר פטיפורים בירושלים והסביבה</p>
   <div class="story-grid">
    <div class="story-stage">
     <div class="stage" id="stage" data-step="1">
@@ -170,7 +175,7 @@
         <path pathLength="1" d="M1100 400H760" stroke-width="16"/>
         <path pathLength="1" d="M1100 455H700M1100 485H760" stroke-width="3" stroke-opacity=".7"/>
        </g>
-       <g class="g g4" fill="none" stroke="#FFD27A" stroke-width="3" stroke-linecap="round">
+       <g class="g g4" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
         <rect pathLength="1" x="880" y="525" width="220" height="56" rx="28"/>
         <path pathLength="1" d="M1100 615h-14l6-6M1100 615l-8 8M1060 615H920M900 615h-14l6-6" stroke="#7FE8F2" stroke-width="2"/>
        </g>
@@ -186,11 +191,11 @@
         <path pathLength="1" d="M240 120C290 90 330 92 370 115"/><path pathLength="1" d="M252 108l-12 12 16 4"/>
        </g>
        <g class="g g7 bp-notes">
-        <text x="635" y="262" text-anchor="end">כאב והבטחה, במשפט אחד</text>
-        <text x="750" y="545" text-anchor="end">כפתור אחד, בולט</text>
-        <text x="1100" y="645" text-anchor="end" class="bp-small">56px, נוח לאצבע</text>
-        <text x="295" y="705" text-anchor="end">שובר את הקצה</text>
-        <text x="510" y="112" text-anchor="end">חיוג ופנייה תמיד נראים</text>
+        <text x="635" y="262" text-anchor="start">כאב והבטחה, במשפט אחד</text>
+        <text x="750" y="545" text-anchor="start">כפתור אחד, בולט</text>
+        <text x="1100" y="645" text-anchor="start" class="bp-small">56px, נוח לאצבע</text>
+        <text x="295" y="705" text-anchor="start">שובר את הקצה</text>
+        <text x="510" y="112" text-anchor="start">חיוג ופנייה תמיד נראים</text>
         <text x="345" y="200" text-anchor="middle" class="bp-small">תמונה אמיתית מאירוע</text>
        </g>
       </svg>
@@ -201,9 +206,9 @@
      </div>
      <img class="stage-live" src="assets/img/hk-site-1200.webp" srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 1000px) 640px, 92vw" width="1200" height="750" loading="lazy" alt="דף הבית של hakef.com כפי שהוא באוויר">
      <div class="stage-race race" id="race" aria-hidden="true">
-      <div class="race-row"><span class="race-label">האתר הקודם</span><span class="race-bar"><i style="--w:100%;--t:3.4s" data-sec="8.5"><em class="race-clock"></em></i></span><span class="race-num"><b>8.5</b> שניות</span></div>
-      <div class="race-row is-new"><span class="race-label">האתר החי</span><span class="race-bar"><i style="--w:34%;--t:1.16s" data-sec="2.9"><em class="race-clock"></em></i></span><span class="race-num"><b>2.9</b> שניות</span></div>
       <button type="button" class="race-replay" id="race-replay" tabindex="-1">להריץ שוב</button>
+      <div class="race-row"><span class="race-label">האתר הקודם</span><span class="race-bar"><i style="--w:100%;--t:3.4s" data-sec="8.5"></i></span><span class="race-num"><b data-to="8.5">8.5</b> שניות</span></div>
+      <div class="race-row is-new"><span class="race-label">האתר החי</span><span class="race-bar"><i style="--w:34%;--t:1.16s" data-sec="2.9"></i></span><span class="race-num"><b data-to="2.9">2.9</b> שניות</span></div>
      </div>
      <span class="stage-tag" id="stage-tag" aria-hidden="true">שרטוט</span>
     </div>
@@ -211,65 +216,30 @@
    <ol class="story-steps" id="story-steps">
     <li data-step="1">
      <span class="story-n" aria-hidden="true">1</span>
-     <h3>שרטוט</h3>
+     <h4>שרטוט</h4>
      <p>לפני צבעים ותמונות, משרטטים: מה הלקוח רואה קודם, איפה הכפתור, ומה מוכיח שהוא במקום הנכון. כל קו בשרטוט עונה על שאלה אחת.</p>
     </li>
     <li data-step="2">
      <span class="story-n" aria-hidden="true">2</span>
-     <h3>כמה כיוונים, לפני תשלום</h3>
-     <p>על אותו שרטוט אני מעצב כמה כיוונים מלאים, עם התוכן האמיתי. בעלת העסק ראתה שישה כיוונים, גללה בהם בטלפון ובחרה.</p>
+     <h4>כמה עיצובים, לפני תשלום</h4>
+     <p>על אותו שרטוט אני מעצב כמה עיצובים מלאים, עם התוכן האמיתי. כאן הכנתי שישה, ובעלת העסק גללה בהם בטלפון ובחרה.</p>
     </li>
     <li data-step="3">
      <span class="story-n" aria-hidden="true">3</span>
-     <h3>אתר אמיתי, באוויר</h3>
-     <p>הכיוון שנבחר הופך לאתר קל ומהיר, עם מתכנן בר ומתכונים שבעלת העסק מוסיפה לבד. היום הוא באוויר ב־<a class="text-link" href="https://hakef.com/" target="_blank" rel="noopener">hakef.com<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>
+     <h4>אתר אמיתי, באוויר</h4>
+     <p>הכיוון שנבחר הפך לאתר קל ומהיר: קטלוג לפי קטגוריות, מתכנן בר ששולח לעסק בקשה מסודרת, ותבנית מתכונים שבעלת העסק ממלאת לבד והאתר מעצב בעצמו. אותן כתובות עמודים כמו באתר הישן, כדי לשמור על הדירוג בגוגל.</p>
+     <p class="story-links"><a class="btn btn-line" href="https://hakef.com/" target="_blank" rel="noopener">לאתר החי: hakef.com<span class="sr"> (נפתח בחלון חדש)</span></a> <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/" target="_blank" rel="noopener">לכל כיווני העיצוב<span class="sr"> (נפתח בחלון חדש)</span></a></p>
     </li>
     <li data-step="4">
      <span class="story-n" aria-hidden="true">4</span>
-     <h3>התוצאה: פי שלושה מהר יותר</h3>
+     <h4>התוצאה: פי שלושה מהר יותר</h4>
      <p>בטלפון בקליטה חלשה, האתר הקודם נפתח אחרי 8.5 שניות. האתר החי נפתח אחרי 2.9 שניות.</p>
      <p class="race-method">פרטי הבדיקה: 4G איטי ומעבד מואט פי 4, עד שהתוכן הראשי במסך מוכן. האתר הקודם נמדד לפני ההחלפה, והאתר החי ב־hakef.com בנובמבר 2026, חציון של 3 מדידות.</p>
     </li>
    </ol>
   </div>
- </div>
-</section>
+  </div>
 
-<!-- עבודות -->
-<section class="work" id="work" aria-labelledby="work-title">
- <div class="wrap">
-  <h2 id="work-title" class="sec-title">עבודות אחרונות</h2>
-
-  <article class="case" aria-labelledby="hk-title">
-   <div class="case-media">
-    <div class="shot">
-     <div class="proof">
-      <div class="proof-sheet">
-       <div class="screen live"><img src="assets/img/hk-tall-d.webp" width="900" height="2812" loading="lazy" alt="האתר החי של הכיף שבאפיה במחשב, מדף הבית ועד בחירת הקינוחים"></div>
-      </div>
-     </div>
-     <div class="phone"><img src="assets/img/hk-tall-m.webp" width="300" height="3231" loading="lazy" alt="האתר של הכיף שבאפיה בטלפון"></div>
-     <p class="note case-note">כפתור פנייה תמיד במרחק לחיצה
-      <svg class="note-arrow" viewBox="0 0 90 60" aria-hidden="true"><path d="M86 44C60 46 28 36 10 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M11.4 24L10 12l11 4.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-     </p>
-    </div>
-   </div>
-   <div class="case-copy">
-    <h3 id="hk-title">הכיף שבאפיה</h3>
-    <p class="case-kind">קייטרינג בוטיק ובר פטיפורים בירושלים והסביבה</p>
-    <p>האתר הקודם היה כבד ונפתח לאט בטלפון. בניתי אתר חדש וקל, והוא באוויר היום בכתובת hakef.com: קטלוג מוצרים, מתכנן בר קינוחים ששולח את הבקשה ישר לעסק, ומתכונים שבעלת העסק מוסיפה לבד.</p>
-    <ul class="ticks">
-     <li>קטלוג לפי קטגוריות: בר קינוחים, עוגות ופטיפורים</li>
-     <li>מתכנן בר: בוחרים סוג אירוע ומספר אורחים ומקבלים הרכב מומלץ</li>
-     <li>מתכונים עם מסך הוספה פשוט, כך שמוסיפים מתכון בלי עזרה</li>
-     <li>אותן כתובות עמודים כמו באתר הישן, כדי לשמור על הדירוג בגוגל</li>
-    </ul>
-    <div class="links">
-     <a class="btn btn-line" href="https://hakef.com/" target="_blank" rel="noopener">לאתר החי: hakef.com<span class="sr"> (נפתח בחלון חדש)</span></a>
-     <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/" target="_blank" rel="noopener">לכל כיווני העיצוב<span class="sr"> (נפתח בחלון חדש)</span></a>
-    </div>
-   </div>
-  </article>
 
   <article class="case case-flip" aria-labelledby="ps-title">
    <div class="case-media">
@@ -309,66 +279,15 @@
  </div>
 </section>
 
-<!-- מי אני -->
-<section class="about" id="about" aria-labelledby="about-title">
- <div class="wrap about-grid">
-  <div class="about-copy">
-   <h2 id="about-title" class="sec-title">נעים מאוד, יהודה גורדון</h2>
-   <p class="about-lead">אני מעצב ובונה אתרים לעסקים קטנים ולמוסדות. את כל העבודה, מהשרטוט ועד העלייה לאוויר, אני עושה בעצמי, כך שאתם מדברים כל הזמן עם אותו אדם.</p>
-   <dl class="facts">
-    <div><dt>זמינות</dt><dd>שיחות ופגישות בזום בין 9:00 ל־13:00 ובין 22:30 ל־24:00, או בזמן אחר בתיאום מראש</dd></div>
-    <div><dt>תשלום</dt><dd>את הדוגמה הראשונה אני מכין לפני תשלום. כדי להמשיך לבנייה משלמים 50%, ואת היתרה בסיום הבנייה, אחרי שאתם מאשרים שהכול טוב ולפני העלייה לאוויר</dd></div>
-    <div><dt>מחירים</dt><dd>סופיים, בלי תוספת מע״מ</dd></div>
-    <div><dt>בעלות</dt><dd>האתר והדומיין רשומים על שמכם</dd></div>
-    <div><dt>קשר</dt><dd>טלפון לשיחות בלבד, <a class="text-link" href="tel:0548540700" data-tel>054-854-0700</a>, ומייל</dd></div>
-   </dl>
-  </div>
-  <div class="about-mark" aria-hidden="true">
-   <img src="assets/img/logo-320.webp" width="320" height="237" alt="" loading="lazy">
-  </div>
- </div>
-</section>
 
-<!-- תהליך -->
-<section class="process" id="process" aria-labelledby="process-title">
- <div class="wrap">
-  <h2 id="process-title" class="sec-title">איך עובדים יחד</h2>
-  <p class="sec-lead">חמישה שלבים. בכל שלב אתם רואים משהו אמיתי ומחליטים אם להמשיך.</p>
-  <div class="steps-wrap" id="steps-wrap">
-   <span class="steps-pulse" aria-hidden="true"></span>
-   <ol class="steps" id="steps">
-    <li>
-     <h3>שאלון קצר</h3>
-     <p>מה העסק עושה, למי הוא פונה ומה אנשים צריכים לעשות באתר.</p>
-     <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/questionnaire/" target="_blank" rel="noopener">שאלון לדוגמה<span class="sr"> (נפתח בחלון חדש)</span></a>
-    </li>
-    <li>
-     <h3>כמה עיצובים, לפני תשלום</h3>
-     <p>עיצובים מלאים עם התוכן שלכם. גוללים בהם בטלפון כמו באתר אמיתי.</p>
-    </li>
-    <li>
-     <h3>משוב ובחירה</h3>
-     <p>מה אהבתם, מה להוריד, ובאיזה כיוון ממשיכים. כדי להמשיך משלמים 50%.</p>
-     <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/design-feedback/" target="_blank" rel="noopener">שאלון משוב לדוגמה<span class="sr"> (נפתח בחלון חדש)</span></a>
-    </li>
-    <li>
-     <h3>בנייה</h3>
-     <p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות. בסוף אתם בודקים ומאשרים, ומשלמים את היתרה.</p>
-    </li>
-    <li>
-     <h3>עלייה לאוויר והדרכה</h3>
-     <p>חיבור דומיין ואחסון על שמכם, והדרכה קצרה לעדכון התוכן.</p>
-    </li>
-   </ol>
-  </div>
- </div>
-</section>
+
+
 
 <!-- דוגמה חינם: שאלון קצר והערכת מחיר -->
 <section class="plan" id="plan" aria-labelledby="plan-title">
  <div class="wrap plan-grid">
   <div class="plan-intro">
-   <h2 id="plan-title" class="sec-title">איזה אתר מתאים לכם, ובכמה?</h2>
+   <h2 id="plan-title" class="sec-title">כמה יעלה האתר שלכם?</h2>
    <p class="sec-lead">שלוש שאלות, ומקבלים מסלול מומלץ, רשימת עמודים ומחיר משוער. בלי להשאיר פרטים.</p>
   </div>
 
@@ -409,6 +328,7 @@
    <p class="result-why" id="r-why">כמה עמודים, ומסך פשוט לעדכון מה שמשתנה.</p>
    <p class="result-price" id="r-price-wrap"><span class="result-price-label">מחיר משוער</span> <b id="r-price">3,900 ₪</b></p>
    <p class="result-extra" id="r-extra" hidden></p>
+   <a class="btn btn-gold" id="r-send" href="#contact">לקבל הצעה מסודרת לתכנית הזו</a>
    <p class="result-fine">תשלום חד־פעמי להקמה, בלי תוספת מע״מ. אחסון ודומיין בנפרד. המחיר הסופי בהצעה מסודרת.</p>
    <ul class="result-incl" id="r-incl"></ul>
    <div class="result-cols">
@@ -421,7 +341,6 @@
      <ul id="r-feats"></ul>
     </div>
    </div>
-   <a class="btn btn-gold" id="r-send" href="#contact">להמשיך עם התכנית הזו</a>
    <a class="text-link result-more" id="r-more" href="#packages">מה עוד כלול במסלול הזה</a>
    <div class="result-alt">
     <button type="button" class="text-link as-button" id="r-copy">העתקת התכנית</button>
@@ -440,7 +359,7 @@
  <div class="wrap">
   <h2 id="pkgs-title" class="sec-title">מה מקבלים בכל מסלול</h2>
   <p class="sec-lead">אצל רוב המעצבים מקבלים סקיצה אחת. אצלי רואים 2 עד 3 עיצובים מלאים של האתר שלכם לפני שמשלמים, ובוחרים. המחירים סופיים, בלי תוספת מע״מ.</p>
-  <div class="pkgs" role="region" tabindex="0" aria-label="ארבעת המסלולים. בטלפון אפשר לגלול לצדדים">
+  <div class="pkgs" role="region" aria-label="ארבעת המסלולים. בטלפון אפשר לגלול לצדדים">
     <article class="pkg" data-track="landing" data-price="1900" data-en="500" data-quota="1" aria-labelledby="pkg-landing">
      <h3 id="pkg-landing">דף נחיתה</h3>
      <p class="pkg-fit">עמוד אחד ברור שמביא פניות</p>
@@ -503,7 +422,7 @@
      <button type="button" class="btn btn-line pkg-pick" data-pick="store" aria-pressed="false">לבחור במסלול הזה<span class="sr">: חנות אונליין</span></button>
     </article>
   </div>
-  <p class="pkgs-note">לוחצים על מסלול כדי לבחור בו וממשיכים ליצירת קשר. זמן האספקה נספר מהיום שמקבלים את כל החומרים: טקסטים, תמונות ולוגו.</p>
+  <p class="pkgs-note">ללקוחות הראשונים הכנתי יותר עיצובים. בכל מסלול מובטחים 2 עד 3, וכל עיצוב נוסף עולה 400&nbsp;₪. זמן האספקה נספר מהיום שמקבלים את כל החומרים: טקסטים, תמונות ולוגו.</p>
 
   <div class="pkgs-more">
    <div>
@@ -537,6 +456,61 @@
      <li>עמלות של חברת הסליקה (בחנות)</li>
     </ul>
    </div>
+  </div>
+ </div>
+</section>
+
+<!-- תהליך -->
+<section class="process" id="process" aria-labelledby="process-title">
+ <div class="wrap">
+  <h2 id="process-title" class="sec-title">איך עובדים יחד</h2>
+  <p class="sec-lead">חמישה שלבים. בכל שלב אתם רואים משהו אמיתי ומחליטים אם להמשיך.</p>
+  <div class="steps-wrap" id="steps-wrap">
+   <span class="steps-pulse" aria-hidden="true"></span>
+   <ol class="steps" id="steps">
+    <li>
+     <h3>שאלון קצר</h3>
+     <p>מה העסק עושה, למי הוא פונה ומה אנשים צריכים לעשות באתר.</p>
+     <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/questionnaire/" target="_blank" rel="noopener">שאלון לדוגמה<span class="sr"> (נפתח בחלון חדש)</span></a>
+    </li>
+    <li>
+     <h3>כמה עיצובים, לפני תשלום</h3>
+     <p>עיצובים מלאים עם התוכן שלכם. גוללים בהם בטלפון כמו באתר אמיתי.</p>
+    </li>
+    <li>
+     <h3>משוב ובחירה</h3>
+     <p>מה אהבתם, מה להוריד, ובאיזה כיוון ממשיכים. כדי להמשיך משלמים 50%.</p>
+     <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/design-feedback/" target="_blank" rel="noopener">שאלון משוב לדוגמה<span class="sr"> (נפתח בחלון חדש)</span></a>
+    </li>
+    <li>
+     <h3>בנייה</h3>
+     <p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות. בסוף אתם בודקים ומאשרים, ומשלמים את היתרה.</p>
+    </li>
+    <li>
+     <h3>עלייה לאוויר והדרכה</h3>
+     <p>חיבור דומיין ואחסון על שמכם, והדרכה קצרה לעדכון התוכן.</p>
+    </li>
+   </ol>
+  </div>
+ </div>
+</section>
+
+<!-- מי אני -->
+<section class="about" id="about" aria-labelledby="about-title">
+ <div class="wrap about-grid">
+  <div class="about-copy">
+   <h2 id="about-title" class="sec-title">נעים מאוד, יהודה גורדון</h2>
+   <p class="about-lead">אני מעצב ובונה אתרים לעסקים קטנים ולמוסדות. את כל העבודה, מהשרטוט ועד העלייה לאוויר, אני עושה בעצמי, כך שאתם מדברים כל הזמן עם אותו אדם.</p>
+   <dl class="facts">
+    <div><dt>זמינות</dt><dd>שיחות ופגישות בזום בין 9:00 ל־13:00 ובין 22:30 ל־24:00, או בזמן אחר בתיאום מראש</dd></div>
+    <div><dt>תשלום</dt><dd>את הדוגמה הראשונה אני מכין לפני תשלום. כדי להמשיך לבנייה משלמים 50%, ואת היתרה בסיום הבנייה, אחרי שאתם מאשרים שהכול טוב ולפני העלייה לאוויר</dd></div>
+    <div><dt>מחירים</dt><dd>סופיים, בלי תוספת מע״מ</dd></div>
+    <div><dt>בעלות</dt><dd>האתר והדומיין רשומים על שמכם</dd></div>
+    <div><dt>קשר</dt><dd>טלפון לשיחות בלבד, <a class="text-link" href="tel:0548540700" data-tel>054-854-0700</a>, ומייל</dd></div>
+   </dl>
+  </div>
+  <div class="about-mark" aria-hidden="true">
+   <img src="assets/img/logo-320.webp" width="320" height="237" alt="" loading="lazy">
   </div>
  </div>
 </section>
@@ -611,9 +585,9 @@
   </div>
 
   <form class="lead-form" id="lead-form" novalidate>
-   <p class="lead-form-title">אחזור אליכם</p>
-   <label class="field"><span>שם</span><input name="name" autocomplete="name" required></label>
-   <label class="field"><span>טלפון</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required></label>
+   <p class="lead-form-title">אחזור אליכם בזמן הזמינות הקרוב</p>
+   <label class="field"><span>שם</span><input name="name" autocomplete="name" required aria-describedby="err-name"><small class="field-err" id="err-name"></small></label>
+   <label class="field"><span>טלפון</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required aria-describedby="err-phone"><small class="field-err" id="err-phone"></small></label>
    <label class="field"><span>שם העסק <small>לא חובה</small></span><input name="business" autocomplete="organization"></label>
    <label class="field"><span>מתי נוח שאתקשר?</span>
     <select name="when">
@@ -625,7 +599,7 @@
    <label class="field"><span>הערות <small>לא חובה</small></span><textarea name="notes" rows="3"></textarea></label>
    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
    <input type="hidden" name="plan" id="lead-plan">
-   <button type="submit" class="btn btn-gold lead-submit" id="lead-submit">לשלוח ואחזור אליכם</button>
+   <button type="submit" class="btn btn-gold lead-submit" id="lead-submit">לקבל שיחה חוזרת</button>
    <p class="lead-privacy">הפרטים נשלחים רק אליי, דרך השירות FormSubmit, ומשמשים רק כדי לחזור אליכם.</p>
    <p class="lead-status" id="lead-status" role="status" aria-live="polite"></p>
   </form>

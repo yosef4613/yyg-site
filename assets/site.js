@@ -66,6 +66,7 @@ window.addEventListener('scroll', onScrollHeader, { passive: true });
   menu.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('is-open')) { set(false); btn.focus(); } });
   document.addEventListener('click', (e) => { if (!e.target.closest('.top')) set(false); });
+  menu.addEventListener('focusout', (e) => { if (menu.classList.contains('is-open') && !header.contains(e.relatedTarget)) set(false); });
 })();
 
 /* ===== מתג תנועה (כלל 4: חייב להיות מתג כיבוי) ===== */
@@ -113,7 +114,8 @@ window.addEventListener('scroll', requestMovers, { passive: true });
 window.addEventListener('resize', requestMovers);
 motionListeners.push(requestMovers);
 
-/* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) ===== */
+/* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) =====
+   קו אור עובר על האתר מימין לשמאל, ומאחוריו כבר מופיע העיצוב החדש. הכול בתוך המסגרת. */
 (() => {
   const lab = $('lab');
   const mini = $('mini');
@@ -121,16 +123,21 @@ motionListeners.push(requestMovers);
   const url = $('lab-url');
   const img = $('m-img');
   const inset = $('m-inset');
+  const scan = lab && lab.querySelector('.lab-scan');
+  const sw = document.querySelector('.switch');
   const buttons = [...document.querySelectorAll('.switch button')];
   if (!lab || !buttons.length) return;
   const src = (name) => `assets/img/hk/${name}-480.webp`;
-  /* מכינים מראש את התמונות של כל הכיוונים, כדי שהמעבר יהיה חלק */
-  const warm = () => buttons.forEach((b) => { [b.dataset.img, b.dataset.inset].forEach((n) => { const i = new Image(); i.src = src(n); }); });
-  if (document.readyState === 'complete') setTimeout(warm, 300);
-  else window.addEventListener('load', () => setTimeout(warm, 300), { once: true });
+  /* את התמונות של שאר העיצובים טוענים רק כשמתקרבים לכפתורים */
+  let warmed = false;
+  const warm = () => {
+    if (warmed) return; warmed = true;
+    buttons.forEach((b) => [b.dataset.img, b.dataset.inset].forEach((n) => { const i = new Image(); i.src = src(n); }));
+  };
+  ['pointerenter', 'focusin', 'touchstart'].forEach((ev) => sw.addEventListener(ev, warm, { passive: true, once: true }));
 
   const apply = (btn) => {
-    lab.dataset.theme = btn.dataset.theme;
+    mini.dataset.theme = btn.dataset.theme;
     img.src = src(btn.dataset.img);
     inset.src = src(btn.dataset.inset);
     url.textContent = btn.dataset.theme === 'live' ? 'hakef.com, האתר שבאוויר' : `הכיף שבאפיה, ${btn.dataset.name}`;
@@ -138,38 +145,41 @@ motionListeners.push(requestMovers);
     note.textContent = btn.dataset.note;
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
   };
-  const show = (btn) => {
-    if (btn.getAttribute('aria-pressed') === 'true') return;
-    if (motionOn() && document.startViewTransition) document.startViewTransition(() => apply(btn));
-    else apply(btn);
+  let busy = false;
+  const show = async (btn) => {
+    if (btn.getAttribute('aria-pressed') === 'true' || busy) return;
+    if (!motionOn() || !mini.animate) { apply(btn); return; }
+    busy = true;
+    /* עותק של המצב הנוכחי נשאר מעל, והאתר האמיתי מתחלף מתחתיו */
+    const clone = mini.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    clone.classList.add('mini-clone');
+    clone.setAttribute('aria-hidden', 'true');
+    lab.appendChild(clone);
+    apply(btn);
+    await Promise.all([img, inset].map((i) => (i.decode ? i.decode().catch(() => {}) : null)));
+    const dur = 650, ease = 'cubic-bezier(.55,0,.25,1)';
+    const a = clone.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 100% 0 0)' }], { duration: dur, easing: ease, fill: 'forwards' });
+    scan.animate([{ right: '0%', opacity: 1 }, { right: '100%', opacity: 1 }], { duration: dur, easing: ease });
+    await a.finished.catch(() => {});
+    clone.remove();
+    busy = false;
   };
   buttons.forEach((b) => b.addEventListener('click', () => show(b)));
-  document.querySelector('.switch').addEventListener('keydown', (e) => {
+  sw.addEventListener('keydown', (e) => {
     const i = buttons.indexOf(document.activeElement);
     if (i < 0) return;
     let n = null;
     if (e.key === 'ArrowLeft') n = (i + 1) % buttons.length;   // RTL: שמאלה = הבא
     if (e.key === 'ArrowRight') n = (i - 1 + buttons.length) % buttons.length;
+    if (e.key === 'Home') n = 0;
+    if (e.key === 'End') n = buttons.length - 1;
     if (n === null) return;
     e.preventDefault();
     buttons[n].focus();
     show(buttons[n]);
   });
-
-  /* במחשב רק המסגרת נוטה עם העכבר. שום דבר אחר בפתיחה לא זז */
-  const hero = document.querySelector('.hero');
-  if (finePointer) {
-    hero.addEventListener('pointermove', (e) => {
-      if (!motionOn()) return;
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      lab.style.setProperty('--ry', `${11 + x * 9}deg`);
-      lab.style.setProperty('--rx', `${5 - y * 7}deg`);
-    });
-    hero.addEventListener('pointerleave', () => ['--ry', '--rx'].forEach((v) => lab.style.removeProperty(v)));
-  }
-  motionListeners.push((on) => { if (!on) ['--ry', '--rx'].forEach((v) => lab.style.removeProperty(v)); });
 })();
 
 /* ===== עבודות: מסך המחשב גולל את האתר האמיתי בזמן הגלילה (תפקיד: להראות את המוצר) ===== */
@@ -197,8 +207,9 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   const TAGS = { 1: 'שרטוט', 2: 'כיווני עיצוב', 3: 'באוויר', 4: 'התוצאה' };
 
   /* המרוץ: רץ פעם אחת כשמגיעים לשלב 4 */
-  const bars = [...race.querySelectorAll('.race-bar i')].map((i) => ({
-    clock: i.querySelector('.race-clock'), sec: parseFloat(i.dataset.sec), dur: parseFloat(i.style.getPropertyValue('--t')) * 1000
+  const nums = [...race.querySelectorAll('.race-num b')];
+  const bars = [...race.querySelectorAll('.race-bar i')].map((i, k) => ({
+    num: nums[k], sec: parseFloat(i.dataset.sec), dur: parseFloat(i.style.getPropertyValue('--t')) * 1000
   }));
   const longest = Math.max(...bars.map((b) => b.dur));
   let raf = 0, raced = false;
@@ -206,8 +217,7 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
     let running = false;
     bars.forEach((b) => {
       const k = Math.min(1, (t - t0) / b.dur);
-      b.clock.textContent = (b.sec * k).toFixed(1) + 's';
-      b.clock.classList.toggle('is-done', k === 1);
+      b.num.textContent = (b.sec * k).toFixed(1);       // המספר נספר יחד עם הפס
       if (k < 1) running = true;
     });
     if (running) raf = requestAnimationFrame(tick(t0));
@@ -215,7 +225,6 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   const runRace = () => {
     if (!motionOn()) return;
     cancelAnimationFrame(raf);
-    bars.forEach((b) => b.clock.classList.remove('is-done'));
     race.classList.remove('is-running');
     race.classList.add('is-ready');
     void race.offsetWidth;
@@ -225,6 +234,17 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   };
   $('race-replay').addEventListener('click', runRace);
   if (motionOn()) race.classList.add('is-ready');
+  const finalNums = () => bars.forEach((b) => { b.num.textContent = b.sec.toFixed(1); });
+
+  /* התמונות של הבמה נטענות מראש כשמתקרבים לסיפור, כדי שהחשיפה לא תראה מסגרת ריקה */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => {
+      if (!es.some((e) => e.isIntersecting)) return;
+      stage.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; if (im.decode) im.decode().catch(() => {}); });
+      io.disconnect();
+    }, { rootMargin: '1200px 0px' });
+    io.observe(stage);
+  }
 
   let step = 0;
   const setStep = (n) => {
@@ -233,7 +253,7 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
     stage.dataset.step = String(n);
     tag.textContent = TAGS[n];
     items.forEach((li) => li.classList.toggle('is-active', Number(li.dataset.step) === n));
-    if (n === 4 && !raced) { raced = true; if (motionOn()) setTimeout(runRace, 450); else race.classList.remove('is-ready'); }
+    if (n === 4 && !raced) { raced = true; if (motionOn()) { bars.forEach((b) => { b.num.textContent = '0.0'; }); setTimeout(runRace, 450); } else { race.classList.remove('is-ready'); finalNums(); } }
   };
   const activeStep = (vh) => {
     let best = 1, d = Infinity;
@@ -257,8 +277,8 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
     },
     settle(where) {
       const vh = window.innerHeight;
-      if (where === 'static') { stage.style.setProperty('--p', '1'); setStep(activeStep(vh)); if (!raced) { raced = true; } race.classList.remove('is-ready', 'is-running'); return; }
-      if (where === 'after') { stage.style.setProperty('--p', '1'); if (!raced) { raced = true; race.classList.remove('is-ready'); } setStep(4); }
+      if (where === 'static') { stage.style.setProperty('--p', '1'); setStep(activeStep(vh)); raced = true; race.classList.remove('is-ready', 'is-running'); finalNums(); return; }
+      if (where === 'after') { stage.style.setProperty('--p', '1'); if (!raced) { raced = true; race.classList.remove('is-ready'); finalNums(); } setStep(4); }
       else { stage.style.setProperty('--p', '0'); setStep(1); }
     }
   });
@@ -288,6 +308,7 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
 requestMovers();
 
 /* ===== הבחירה: מה שנשלח ביצירת קשר (מהמתכנן או מכרטיס מסלול) ===== */
+const extraText = (n) => n === 1 ? `כולל עמוד אחד נוסף (${nis(CONFIG.extraPagePrice)})` : `כולל ${n} עמודים נוספים (${nis(CONFIG.extraPagePrice)} לעמוד)`;
 const Selection = (() => {
   const box = $('picked');
   const en = $('picked-en');
@@ -301,8 +322,8 @@ const Selection = (() => {
     const p = PKG[s.track];
     return [
       `${s.source === 'planner' ? 'התכנית מהמתכנן' : 'המסלול שנבחר'}: ${p.name}`,
-      `מחיר ${s.source === 'planner' ? 'משוער' : 'החל מ־'}: ${nis(priceOf())} (סופי, בלי מע״מ)` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
-      s.extraPages ? `כולל ${s.extraPages} עמודים מעבר למסלול` : null,
+      `מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
+      s.extraPages ? extraText(s.extraPages) : null,
       ...p.incl.map((r) => `${r.label}: ${r.value}`),
       s.answers ? `\nתשובות במתכנן:\n${s.answers}` : null,
       s.pages ? `עמודים: ${s.pages.join(', ')}` : null,
@@ -315,7 +336,7 @@ const Selection = (() => {
     box.hidden = false;
     $('picked-k').textContent = s.source === 'planner' ? 'התכנית שלכם' : 'המסלול שבחרתם';
     $('picked-name').textContent = p.name;
-    $('picked-price').textContent = `${s.source === 'planner' ? 'מחיר משוער' : 'החל מ־'} ${nis(priceOf())} (סופי, בלי מע״מ)` + (en.checked ? ', כולל אנגלית' : '');
+    $('picked-price').textContent = `${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ` + (en.checked ? ', כולל אנגלית' : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = r.label;
@@ -327,7 +348,7 @@ const Selection = (() => {
     setMailLinks(`${s.source === 'planner' ? 'תכנית לאתר' : 'בחירת מסלול'}: ${p.name}`, `שלום יהודה,\n\n${text}\n\nשם: \nשם העסק: \nטלפון לחזרה: \nמתי נוח שתתקשר: \n`);
   };
   en.addEventListener('change', render);
-  $('picked-change').addEventListener('click', () => $('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' }));
+  $('picked-change').addEventListener('click', () => { const h = $('pkgs-title'); h.setAttribute('tabindex', '-1'); $('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' }); h.focus({ preventScroll: true }); });
   return {
     set(next) {
       s = next;
@@ -444,7 +465,7 @@ const Planner = (() => {
     if (!CONFIG.showPrice) $('r-price-wrap').hidden = true; else setPrice(p.price);
     const extra = $('r-extra');
     extra.hidden = !p.extraPages;
-    extra.textContent = p.extraPages ? `כולל ${p.extraPages === 1 ? 'עמוד אחד' : p.extraPages + ' עמודים'} מעבר למסלול (${nis(CONFIG.extraPagePrice)} לעמוד)` : '';
+    extra.textContent = p.extraPages ? extraText(p.extraPages) : '';
     $('r-incl').replaceChildren(...PKG[p.track].incl.map(({ label, value }) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = label;
@@ -460,7 +481,7 @@ const Planner = (() => {
     $('r-status').textContent = '';
   };
 
-  const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)} (סופי, בלי מע״מ)\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
+  const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)}, סופי, בלי מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
 
   $('r-send').addEventListener('click', (e) => {
     e.preventDefault();
@@ -475,6 +496,9 @@ const Planner = (() => {
     const card = PKG[last.p.track].el;
     card.scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'center', inline: 'center' });
     card.classList.remove('is-flash'); void card.offsetWidth; card.classList.add('is-flash');
+    card.classList.add('is-open');
+    const tg = card.querySelector('.pkg-toggle');
+    if (tg) { tg.setAttribute('aria-expanded', 'true'); tg.textContent = 'פחות פרטים'; }
     card.querySelector('.pkg-pick').focus({ preventScroll: true });
   });
 
@@ -511,6 +535,7 @@ const Planner = (() => {
   cards.forEach((c) => {
     c.addEventListener('click', (e) => {
       if (e.target.closest('a, .pkg-toggle')) return;
+      if (!finePointer && !e.target.closest('.pkg-pick')) return;   // בטלפון: נגיעה בכרטיס לא קופצת
       if (String(window.getSelection && window.getSelection()).length) return;   // מסמנים טקסט, לא בוחרים
       pick(c.dataset.track);
     });
@@ -522,12 +547,18 @@ const Planner = (() => {
       t.textContent = open ? 'פחות פרטים' : 'כל הפרטים';
     });
   });
-  /* מעבר אור זהב אחד סביב המסלול המומלץ, בפעם הראשונה שמגיעים אליו (תפקיד: להוביל את העין) */
+  /* בטלפון המסלולים נגללים לצדדים: נפתחים על המסלול המומלץ, ואפשר לגלול אותם במקלדת */
   const grid = document.querySelector('.pkgs');
-  if ('IntersectionObserver' in window && grid) {
-    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting) && motionOn()) { grid.classList.add('is-lit'); io.disconnect(); } }, { threshold: 0.35 });
-    io.observe(grid);
-  }
+  const small = window.matchMedia('(max-width: 700px)');
+  const syncGrid = () => {
+    if (small.matches) {
+      grid.setAttribute('tabindex', '0');
+      const rec = grid.querySelector('.pkg.is-rec');
+      if (rec) grid.scrollLeft = rec.offsetLeft - (grid.clientWidth - rec.offsetWidth) / 2;
+    } else grid.removeAttribute('tabindex');
+  };
+  syncGrid();
+  small.addEventListener('change', syncGrid);
 })();
 
 /* ===== יצירת קשר: טופס שחוזר אליכם ===== */
@@ -538,19 +569,26 @@ const Planner = (() => {
   const submit = $('lead-submit');
   const fields = { name: form.elements.name, phone: form.elements.phone };
   const validPhone = (v) => v.replace(/\D/g, '').length >= 9;
-  const fallback = () => {
+  const setErr = (name, msg) => {
+    const f = fields[name];
+    f.setAttribute('aria-invalid', String(!!msg));
+    $('err-' + name).textContent = msg || '';
+  };
+  const fallback = (data) => {
+    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nהערות: ${data.notes}\n\n${data.plan}`;
     status.textContent = '';
     status.append('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
-      ' או ', Object.assign(document.createElement('a'), { className: 'text-link', href: document.querySelector('[data-mail]').href, textContent: 'לשלוח מייל עם הפרטים' }), '.');
+      ', או ', Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(`פנייה מהאתר: ${data.name}`, body), textContent: 'לשלוח את הפרטים במייל' }),
+      ' או ', Object.assign(document.createElement('a'), { className: 'text-link', href: gmailHref(`פנייה מהאתר: ${data.name}`, body), target: '_blank', rel: 'noopener', textContent: 'ב־Gmail' }), '.');
   };
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = fields.name.value.trim();
     const phone = fields.phone.value.trim();
-    fields.name.setAttribute('aria-invalid', String(!name));
-    fields.phone.setAttribute('aria-invalid', String(!validPhone(phone)));
-    if (!name) { status.textContent = 'נא לכתוב שם.'; fields.name.focus(); return; }
-    if (!validPhone(phone)) { status.textContent = 'נא לכתוב מספר טלפון מלא.'; fields.phone.focus(); return; }
+    setErr('name', name ? '' : 'נא לכתוב שם.');
+    setErr('phone', validPhone(phone) ? '' : 'נא לכתוב מספר טלפון מלא, למשל 050-1234567.');
+    if (!name) { status.textContent = ''; fields.name.focus(); return; }
+    if (!validPhone(phone)) { status.textContent = ''; fields.phone.focus(); return; }
     if (form.elements._honey.value) return;
     const data = {
       name, phone,
@@ -571,9 +609,9 @@ const Planner = (() => {
       if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || res.status);
       form.reset();
       status.className = 'lead-status is-ok';
-      status.textContent = `תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בשעה שבחרתם.`;
+      status.textContent = `תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`;
     } catch (err) {
-      fallback();
+      fallback(data);
     } finally {
       submit.disabled = false;
     }
