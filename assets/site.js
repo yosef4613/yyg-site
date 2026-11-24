@@ -1,26 +1,57 @@
-/* ===== פרטי קשר: להחליף כאן לפני העלייה לאוויר ===== */
+/* ===== פרטי קשר ומחירים: להחליף כאן לפני העלייה לאוויר ===== */
 const CONFIG = {
-  whatsapp: '972500000000',          // מספר בפורמט בינלאומי, בלי + ובלי אפס בהתחלה
-  greeting: 'שלום יוסף, ראיתי את האתר שלך ואשמח לדבר על אתר לעסק שלי.'
+  email: 'hello@example.com',
+  phone: '050-000-0000',              // לשיחות בלבד
+  // הערכת מחיר במתכנן (מתוך הצעת המחיר של פרחי שמיים). null מסתיר את ההערכה.
+  prices: { landing: 1500, site: 3000, club: 4300 },
+  english: { landing: 200, site: 400, club: 500 }
 };
 
-const waLink = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const root = document.documentElement;
+const telHref = 'tel:' + CONFIG.phone.replace(/[^\d+]/g, '');
+const mailHref = (subject, body) =>
+  `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}` + (body ? `&body=${encodeURIComponent(body)}` : '');
 
-/* כל כפתורי הוואטסאפ */
-document.querySelectorAll('[data-wa]').forEach((a) => {
-  if (a.id === 'r-send') return; // כפתור המתכנן מקבל הודעה משלו
-  a.href = waLink(CONFIG.greeting);
-  a.target = '_blank';
-  a.rel = 'noopener';
+/* פרטי הקשר בכל העמוד */
+document.querySelectorAll('[data-tel]').forEach((a) => {
+  a.href = telHref;
+  const label = a.querySelector('bdi') || (/\d/.test(a.textContent) ? a : null);
+  if (label && label !== a) label.textContent = CONFIG.phone;
+  else if (label) a.textContent = CONFIG.phone;
+});
+document.querySelectorAll('[data-mail]').forEach((a) => {
+  a.href = mailHref('פנייה מהאתר: אתר לעסק שלי', 'שלום,\n\nהעסק שלי: \nיש לו כבר אתר? \nהטלפון שלי: \n');
+  const b = a.querySelector('bdi');
+  if (b) b.textContent = CONFIG.email;
 });
 
 /* קו תחתון לכותרת אחרי גלילה */
 const header = document.querySelector('.top');
-const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 8);
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
+const onScrollHeader = () => header.classList.toggle('is-stuck', window.scrollY > 8);
+onScrollHeader();
+window.addEventListener('scroll', onScrollHeader, { passive: true });
 
-/* ===== החלפת כיווני העיצוב בפתיחה ===== */
+/* ===== מתג תנועה (כלל 4: חייב להיות מתג כיבוי) ===== */
+const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const store = {
+  get() { try { return localStorage.getItem('yyg-motion'); } catch (e) { return null; } },
+  set(v) { try { localStorage.setItem('yyg-motion', v); } catch (e) { /* בלי אחסון: המתג עובד עד רענון */ } }
+};
+const motionOn = () => !root.classList.contains('motion-off');
+const motionBtn = document.getElementById('motion-toggle');
+const motionListeners = [];
+const setMotion = (on, save) => {
+  root.classList.toggle('motion-off', !on);
+  motionBtn.setAttribute('aria-pressed', String(on));
+  motionBtn.setAttribute('aria-label', on ? 'תנועה פועלת. לחצו לכיבוי' : 'תנועה כבויה. לחצו להפעלה');
+  if (save) store.set(on ? 'on' : 'off');
+  motionListeners.forEach((fn) => fn(on));
+};
+const saved = store.get();
+setMotion(saved ? saved === 'on' : !reduceQuery.matches, false);
+motionBtn.addEventListener('click', () => setMotion(!motionOn(), true));
+
+/* ===== פתיחה: החלפת כיווני העיצוב (תנועה רק בתגובה ללחיצה) ===== */
 (() => {
   const img = document.getElementById('proof-img');
   const url = document.getElementById('proof-url');
@@ -41,9 +72,8 @@ window.addEventListener('scroll', onScroll, { passive: true });
   const show = (btn) => {
     const s = btn.dataset.shot;
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-    url.textContent = btn.dataset.shot === 'hk-site' ? 'הכיף שבאפיה, האתר שנבנה' : `הכיף שבאפיה, ${btn.dataset.name}`;
+    url.textContent = s === 'hk-site' ? 'הכיף שבאפיה, האתר שנבנה' : `הכיף שבאפיה, ${btn.dataset.name}`;
     note.textContent = btn.dataset.note;
-    img.classList.add('is-swapping');
     const swap = () => {
       img.srcset = srcset(s);
       img.src = `assets/img/${s}-1200.webp`;
@@ -52,8 +82,8 @@ window.addEventListener('scroll', onScroll, { passive: true });
       if (img.complete) requestAnimationFrame(done);
       else img.addEventListener('load', done, { once: true });
     };
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    reduce ? swap() : setTimeout(swap, 140);
+    if (motionOn()) { img.classList.add('is-swapping'); setTimeout(swap, 140); }
+    else swap();
   };
 
   buttons.forEach((b) => {
@@ -62,7 +92,6 @@ window.addEventListener('scroll', onScroll, { passive: true });
     b.addEventListener('focus', () => warm(b.dataset.shot));
   });
 
-  /* חיצים במקלדת בין הכפתורים */
   document.querySelector('.switch').addEventListener('keydown', (e) => {
     const i = buttons.indexOf(document.activeElement);
     if (i < 0) return;
@@ -76,12 +105,56 @@ window.addEventListener('scroll', onScroll, { passive: true });
   });
 })();
 
-/* ===== מתכנן האתר ===== */
+/* ===== השוואת מהירות: מרוץ שמראה את התוצאה, פעם אחת כשמגיעים אליו ===== */
+(() => {
+  const box = document.getElementById('speed');
+  const replay = document.getElementById('speed-replay');
+  if (!box) return;
+  const run = () => {
+    if (!motionOn()) return;
+    box.classList.remove('is-running');
+    box.classList.add('is-ready');
+    void box.offsetWidth;            // מאפס את הפסים לפני הריצה
+    box.classList.add('is-running');
+  };
+  if ('IntersectionObserver' in window && motionOn()) {
+    box.classList.add('is-ready');
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { run(); io.disconnect(); }
+    }, { threshold: 0.6 });
+    io.observe(box);
+  }
+  replay.addEventListener('click', run);
+  motionListeners.push((on) => { if (!on) box.classList.remove('is-ready', 'is-running'); });
+})();
+
+/* ===== תהליך: הקו מתמלא בגלילה ומוביל את העין לשלב הבא ===== */
+(() => {
+  const steps = document.getElementById('steps');
+  if (!steps) return;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (!motionOn()) { steps.style.setProperty('--p', 1); return; }
+    const r = steps.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+    steps.style.setProperty('--p', p.toFixed(3));
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  motionListeners.push(update);
+  update();
+})();
+
+/* ===== מתכנן האתר: הדוגמה החינמית ===== */
 (() => {
   const form = document.getElementById('planner');
   if (!form) return;
   const $ = (id) => document.getElementById(id);
   const prev = { pages: new Set(), feats: new Set() };
+  const nis = (n) => n.toLocaleString('he-IL') + ' ₪';
 
   const KIND = {
     products: { label: 'מוצרים או תפריט', pages: ['קטלוג', 'עמוד לכל מוצר'] },
@@ -89,9 +162,9 @@ window.addEventListener('scroll', onScroll, { passive: true });
     service: { label: 'שירות מקצועי', pages: ['שירותים', 'לקוחות ועבודות'] }
   };
   const ACT = {
-    order: { label: 'להזמין או לבקש הצעת מחיר', feat: 'טופס הזמנה שנשלח לוואטסאפ עם כל הפרטים' },
+    order: { label: 'להזמין או לבקש הצעת מחיר', feat: 'טופס הזמנה שמגיע למייל עם כל הפרטים' },
     register: { label: 'להירשם', feat: 'טופס הרשמה ואישור קבלה במייל', page: 'הרשמה' },
-    contact: { label: 'להתקשר או לשלוח וואטסאפ', feat: 'כפתור וואטסאפ וחיוג שתמיד נראה' },
+    contact: { label: 'להתקשר או לכתוב במייל', feat: 'כפתור חיוג ומייל שתמיד נראה' },
     read: { label: 'לקרוא תוכן שמתעדכן', feat: 'מדור תוכן (מתכונים, שירים או מאמרים)', page: 'מדור תוכן' }
   };
   const UPD = { none: 'אף אחד, הוא קבוע', me: 'אני, מדי פעם', team: 'צוות, עם רשימת תפוצה' };
@@ -111,7 +184,8 @@ window.addEventListener('scroll', onScroll, { passive: true });
     if (upd === 'team') track = 'club';
     else if (upd === 'none' && !acts.includes('register') && !acts.includes('read')) track = 'landing';
 
-    let pages, feats = [];
+    let pages;
+    const feats = [];
     if (track === 'landing') {
       pages = ['עמוד אחד: פתיחה, מה אתם מציעים, אודות ויצירת קשר', 'הצהרת נגישות'];
     } else {
@@ -124,7 +198,8 @@ window.addEventListener('scroll', onScroll, { passive: true });
     if (track === 'club') feats.push('חשבונות משתמש ורשימת תפוצה עם הסכמה');
     if (en) feats.push('גרסה באנגלית עם מעבר בלחיצה');
     feats.push('התאמה לגוגל ולטלפון');
-    return { track, pages, feats };
+    const price = CONFIG.prices ? CONFIG.prices[track] + (en ? CONFIG.english[track] : 0) : null;
+    return { track, pages, feats, price };
   };
 
   const fill = (ul, items, key) => {
@@ -137,29 +212,51 @@ window.addEventListener('scroll', onScroll, { passive: true });
     prev[key] = new Set(items);
   };
 
+  let planText = '';
   const render = () => {
     const ans = read();
     const p = plan(ans);
     $('r-track').textContent = TRACK[p.track].name;
     $('r-why').textContent = TRACK[p.track].why;
     $('r-count').textContent = p.track === 'landing' ? '1' : String(p.pages.length);
+    if (p.price === null) { $('r-price-wrap').hidden = true; }
+    else {
+      const el = $('r-price');
+      const txt = nis(p.price);
+      if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('is-new'); void el.offsetWidth; el.classList.add('is-new'); }
+    }
     fill($('r-pages'), p.pages, 'pages');
     fill($('r-feats'), p.feats, 'feats');
 
-    const msg = [
-      'שלום יוסף, בניתי תכנית באתר שלך ואשמח להצעת מחיר.',
+    planText = [
+      'שלום, מילאתי את המתכנן באתר ואשמח להצעת מחיר.',
       '',
       `מה יש לנו: ${KIND[ans.kind].label}`,
       `מה הלקוח צריך לעשות: ${ans.acts.length ? ans.acts.map((a) => ACT[a].label).join(', ') : 'לא נבחר'}`,
       `מי יעדכן: ${UPD[ans.upd]}`,
-      ans.en ? 'צריך גם גרסה באנגלית' : '',
-      `המסלול שהומלץ: ${TRACK[p.track].name}`
-    ].filter((l, i) => l !== '' || i === 1).join('\n');
-    const send = $('r-send');
-    send.href = waLink(msg);
-    send.target = '_blank';
-    send.rel = 'noopener';
+      ans.en ? 'צריך גם גרסה באנגלית' : null,
+      `המסלול שהומלץ: ${TRACK[p.track].name}`,
+      p.price !== null ? `הערכה ראשונית: ${nis(p.price)}` : null,
+      '',
+      'שם העסק: ',
+      'טלפון לחזרה: '
+    ].filter((l) => l !== null).join('\n');
+    $('r-send').href = mailHref(`תכנית לאתר: ${TRACK[p.track].name}`, planText);
+    $('r-status').textContent = '';
   };
+
+  $('r-copy').addEventListener('click', async () => {
+    const status = $('r-status');
+    try {
+      await navigator.clipboard.writeText(planText);
+      status.textContent = `התכנית הועתקה. אפשר להדביק אותה במייל אל ${CONFIG.email}`;
+    } catch (e) {
+      status.textContent = `לא הצלחנו להעתיק. אפשר לכתוב אל ${CONFIG.email}`;
+    }
+  });
+  $('r-send').addEventListener('click', () => {
+    $('r-status').textContent = `נפתחת תוכנת המייל. אם היא לא נפתחה, כתבו אל ${CONFIG.email}`;
+  });
 
   form.addEventListener('change', render);
   render();
