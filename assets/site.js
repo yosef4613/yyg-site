@@ -102,7 +102,7 @@ const runMovers = () => {
     const r = m.el.getBoundingClientRect();
     if (r.bottom <= 0) { m.settle('after'); return; }
     if (r.top >= vh) { m.settle('before'); return; }
-    const d = Math.abs((r.top + r.bottom) / 2 - vh / 2);
+    const d = (r.top <= vh / 2 && r.bottom >= vh / 2) ? 0 : Math.abs((r.top + r.bottom) / 2 - vh / 2);
     if (d < best) { best = d; active = m; }
   });
   if (!active || performance.now() < busyUntil) return;
@@ -113,54 +113,37 @@ window.addEventListener('scroll', requestMovers, { passive: true });
 window.addEventListener('resize', requestMovers);
 motionListeners.push(requestMovers);
 
-/* ===== פתיחה: חפיסת כיווני העיצוב (תפקיד: להראות את המוצר) ===== */
+/* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) ===== */
 (() => {
-  const deck = $('deck');
+  const lab = $('lab');
+  const mini = $('mini');
   const note = $('proof-note');
+  const url = $('lab-url');
+  const img = $('m-img');
+  const inset = $('m-inset');
   const buttons = [...document.querySelectorAll('.switch button')];
-  if (!deck || !buttons.length) return;
-  const cards = [...deck.querySelectorAll('.card')];
-  let order = cards.map((c) => c.dataset.shot);
+  if (!lab || !buttons.length) return;
+  const src = (name) => `assets/img/hk/${name}-480.webp`;
+  /* מכינים מראש את התמונות של כל הכיוונים, כדי שהמעבר יהיה חלק */
+  const warm = () => buttons.forEach((b) => { [b.dataset.img, b.dataset.inset].forEach((n) => { const i = new Image(); i.src = src(n); }); });
+  if (document.readyState === 'complete') setTimeout(warm, 300);
+  else window.addEventListener('load', () => setTimeout(warm, 300), { once: true });
 
-  /* הקלפים האחוריים נטענים רק אחרי שהעמוד מוכן, כדי לא להאט את הפתיחה */
-  const loadCard = (card) => {
-    const img = card.querySelector('img[data-src]');
-    if (!img) return;
-    img.srcset = img.dataset.srcset; img.src = img.dataset.src;
-    img.removeAttribute('data-src'); img.removeAttribute('data-srcset');
-  };
-  const loadAll = () => cards.forEach(loadCard);
-  if (document.readyState === 'complete') setTimeout(loadAll, 200);
-  else window.addEventListener('load', () => ('requestIdleCallback' in window ? requestIdleCallback(loadAll, { timeout: 1500 }) : setTimeout(loadAll, 300)), { once: true });
-
-  const layout = () => {
-    order.forEach((shot, d) => {
-      const card = cards.find((c) => c.dataset.shot === shot);
-      card.style.setProperty('--d', d);
-      card.dataset.depth = d;
-      const img = card.querySelector('img');
-      const btn = buttons.find((b) => b.dataset.shot === shot);
-      if (d === 0) { card.removeAttribute('aria-hidden'); img.alt = btn.dataset.alt; }
-      else { card.setAttribute('aria-hidden', 'true'); img.alt = ''; }
-    });
-  };
-
-  const show = (shot) => {
-    order = [shot, ...order.filter((s) => s !== shot)];
-    const btn = buttons.find((b) => b.dataset.shot === shot);
-    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+  const apply = (btn) => {
+    lab.dataset.theme = btn.dataset.theme;
+    img.src = src(btn.dataset.img);
+    inset.src = src(btn.dataset.inset);
+    url.textContent = btn.dataset.theme === 'live' ? 'hakef.com, האתר שבאוויר' : `הכיף שבאפיה, ${btn.dataset.name}`;
+    mini.setAttribute('aria-label', `דף הבית של הכיף שבאפיה, ${btn.dataset.name}`);
     note.textContent = btn.dataset.note;
-    const front = cards.find((c) => c.dataset.shot === shot);
-    loadCard(front);
-    layout();
-    if (motionOn()) {     // קו סריקה אחד על הקלף שעלה: מראה מה השתנה
-      front.classList.remove('is-scan'); void front.offsetWidth; front.classList.add('is-scan');
-      setTimeout(() => front.classList.remove('is-scan'), 900);
-    }
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
   };
-
-  buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.shot)));
-  cards.forEach((c) => c.addEventListener('click', () => { if (c.dataset.depth !== '0') show(c.dataset.shot); }));
+  const show = (btn) => {
+    if (btn.getAttribute('aria-pressed') === 'true') return;
+    if (motionOn() && document.startViewTransition) document.startViewTransition(() => apply(btn));
+    else apply(btn);
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => show(b)));
   document.querySelector('.switch').addEventListener('keydown', (e) => {
     const i = buttons.indexOf(document.activeElement);
     if (i < 0) return;
@@ -170,23 +153,10 @@ motionListeners.push(requestMovers);
     if (n === null) return;
     e.preventDefault();
     buttons[n].focus();
-    show(buttons[n].dataset.shot);
+    show(buttons[n]);
   });
 
-  /* החלוקה: הקלפים נפרסים פעם אחת. הטקסט כבר מוצג, רק התמונות זזות */
-  layout();
-  let dealt = false;
-  const deal = () => {
-    if (dealt) return; dealt = true;
-    if (!motionOn()) { deck.classList.remove('is-stacked', 'is-dealing'); return; }
-    deck.classList.add('is-dealing');
-    requestAnimationFrame(() => requestAnimationFrame(() => deck.classList.remove('is-stacked')));
-    setTimeout(() => deck.classList.remove('is-dealing'), 1400);
-  };
-  const frontImg = cards[0].querySelector('img');
-  if (frontImg.complete) deal(); else { frontImg.addEventListener('load', deal, { once: true }); setTimeout(deal, 1200); }
-
-  /* במחשב רק החפיסה נוטה עם העכבר. שום דבר אחר בפתיחה לא זז */
+  /* במחשב רק המסגרת נוטה עם העכבר. שום דבר אחר בפתיחה לא זז */
   const hero = document.querySelector('.hero');
   if (finePointer) {
     hero.addEventListener('pointermove', (e) => {
@@ -194,14 +164,12 @@ motionListeners.push(requestMovers);
       const r = hero.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;
-      deck.style.setProperty('--ry', `${14 + x * 10}deg`);
-      deck.style.setProperty('--rx', `${7 - y * 8}deg`);
+      lab.style.setProperty('--ry', `${11 + x * 9}deg`);
+      lab.style.setProperty('--rx', `${5 - y * 7}deg`);
     });
-    hero.addEventListener('pointerleave', () => ['--ry', '--rx'].forEach((v) => deck.style.removeProperty(v)));
+    hero.addEventListener('pointerleave', () => ['--ry', '--rx'].forEach((v) => lab.style.removeProperty(v)));
   }
-  motionListeners.push((on) => {
-    if (!on) { deck.classList.remove('is-stacked', 'is-dealing'); ['--ry', '--rx'].forEach((v) => deck.style.removeProperty(v)); }
-  });
+  motionListeners.push((on) => { if (!on) ['--ry', '--rx'].forEach((v) => lab.style.removeProperty(v)); });
 })();
 
 /* ===== עבודות: מסך המחשב גולל את האתר האמיתי בזמן הגלילה (תפקיד: להראות את המוצר) ===== */
@@ -218,15 +186,22 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   img.addEventListener('load', requestMovers);
 });
 
-/* ===== מרוץ המהירות: מראה את התוצאה, פעם אחת כשהוא במרכז המסך ===== */
+/* ===== סיפור: שרטוט, כיוונים, האתר החי והתוצאה. דבר אחד זז בכל שלב ===== */
 (() => {
-  const box = $('race');
-  if (!box) return;
-  const bars = [...box.querySelectorAll('.race-bar i')].map((i) => ({
+  const stage = $('stage');
+  const list = $('story-steps');
+  const race = $('race');
+  if (!stage || !list) return;
+  const items = [...list.querySelectorAll('li')];
+  const tag = $('stage-tag');
+  const TAGS = { 1: 'שרטוט', 2: 'כיווני עיצוב', 3: 'באוויר', 4: 'התוצאה' };
+
+  /* המרוץ: רץ פעם אחת כשמגיעים לשלב 4 */
+  const bars = [...race.querySelectorAll('.race-bar i')].map((i) => ({
     clock: i.querySelector('.race-clock'), sec: parseFloat(i.dataset.sec), dur: parseFloat(i.style.getPropertyValue('--t')) * 1000
   }));
   const longest = Math.max(...bars.map((b) => b.dur));
-  let raf = 0, done = false;
+  let raf = 0, raced = false;
   const tick = (t0) => (t) => {
     let running = false;
     bars.forEach((b) => {
@@ -237,55 +212,57 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
     });
     if (running) raf = requestAnimationFrame(tick(t0));
   };
-  const run = () => {
+  const runRace = () => {
     if (!motionOn()) return;
     cancelAnimationFrame(raf);
     bars.forEach((b) => b.clock.classList.remove('is-done'));
-    box.classList.remove('is-running');
-    box.classList.add('is-ready');
-    void box.offsetWidth;            // מאפס את הפסים לפני הריצה
-    box.classList.add('is-running');
-    busyUntil = performance.now() + longest;
+    race.classList.remove('is-running');
+    race.classList.add('is-ready');
+    void race.offsetWidth;
+    race.classList.add('is-running');
+    busyUntil = performance.now() + longest + 450;
     raf = requestAnimationFrame((t0) => tick(t0)(t0));
   };
-  if (motionOn()) box.classList.add('is-ready');
-  movers.push({
-    el: box,
-    update(r, vh) { if (!done && r.top > 0 && r.bottom < vh) { done = true; run(); } },
-    settle(where) { if (where !== 'before' && !done) { done = true; box.classList.remove('is-ready'); } }
-  });
-  $('race-replay').addEventListener('click', run);
-  motionListeners.push((on) => { if (!on) { box.classList.remove('is-ready', 'is-running'); done = true; } });
-})();
+  $('race-replay').addEventListener('click', runRace);
+  if (motionOn()) race.classList.add('is-ready');
 
-/* ===== משרטוט לאתר חי (תפקיד: להראות שינוי מצב) ===== */
-(() => {
-  const ba = $('ba');
-  if (!ba) return;
-  const range = ba.querySelector('.ba-range');
-  let touched = false;
-  const set = (p) => {
-    p = clamp01(p);
-    ba.style.setProperty('--p', p.toFixed(3));
-    const v = Math.round(p * 100);
-    range.value = v;
-    range.setAttribute('aria-valuetext', `${v}% שרטוט, ${100 - v}% האתר החי`);
+  let step = 0;
+  const setStep = (n) => {
+    if (n === step) return;
+    step = n;
+    stage.dataset.step = String(n);
+    tag.textContent = TAGS[n];
+    items.forEach((li) => li.classList.toggle('is-active', Number(li.dataset.step) === n));
+    if (n === 4 && !raced) { raced = true; if (motionOn()) setTimeout(runRace, 450); else race.classList.remove('is-ready'); }
   };
-  range.addEventListener('input', () => { touched = true; set(range.value / 100); });
-  ba.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    const r = ba.getBoundingClientRect();
-    const move = (ev) => { touched = true; set((r.right - ev.clientX) / r.width); };
-    move(e);
-    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  });
+  const activeStep = (vh) => {
+    let best = 1, d = Infinity;
+    items.forEach((li) => {
+      const r = li.getBoundingClientRect();
+      const dist = (r.top <= vh * 0.55 && r.bottom >= vh * 0.55) ? 0 : Math.abs((r.top + r.bottom) / 2 - vh * 0.55);
+      if (dist < d) { d = dist; best = Number(li.dataset.step); }
+    });
+    return best;
+  };
+  const drawProgress = (vh) => {
+    const r = items[0].getBoundingClientRect();
+    return clamp01((vh * 0.9 - r.top) / (r.height * 0.95 + vh * 0.15));
+  };
   movers.push({
-    el: ba,
-    update(r, vh) { if (!touched) set(0.92 - clamp01((vh * 0.85 - r.top) / (vh * 0.85)) * 0.84); },
-    settle(where) { if (!touched) set(where === 'static' ? 0.5 : where === 'after' ? 0.08 : 0.92); }
+    el: list,
+    update(r, vh) {
+      const n = activeStep(vh);
+      stage.style.setProperty('--p', n > 1 ? '1' : drawProgress(vh).toFixed(3));
+      setStep(n);
+    },
+    settle(where) {
+      const vh = window.innerHeight;
+      if (where === 'static') { stage.style.setProperty('--p', '1'); setStep(activeStep(vh)); if (!raced) { raced = true; } race.classList.remove('is-ready', 'is-running'); return; }
+      if (where === 'after') { stage.style.setProperty('--p', '1'); if (!raced) { raced = true; race.classList.remove('is-ready'); } setStep(4); }
+      else { stage.style.setProperty('--p', '0'); setStep(1); }
+    }
   });
+  motionListeners.push((on) => { if (!on) race.classList.remove('is-ready', 'is-running'); });
 })();
 
 /* ===== תהליך: הקו מתמלא ומדליק כל שלב שהוא מגיע אליו (תפקיד: להוביל את העין) ===== */
@@ -324,7 +301,7 @@ const Selection = (() => {
     const p = PKG[s.track];
     return [
       `${s.source === 'planner' ? 'התכנית מהמתכנן' : 'המסלול שנבחר'}: ${p.name}`,
-      `מחיר ${s.source === 'planner' ? 'משוער' : 'החל מ־'}: ${nis(priceOf())} לפני מע״מ` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
+      `מחיר ${s.source === 'planner' ? 'משוער' : 'החל מ־'}: ${nis(priceOf())} (סופי, בלי מע״מ)` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
       s.extraPages ? `כולל ${s.extraPages} עמודים מעבר למסלול` : null,
       ...p.incl.map((r) => `${r.label}: ${r.value}`),
       s.answers ? `\nתשובות במתכנן:\n${s.answers}` : null,
@@ -338,7 +315,7 @@ const Selection = (() => {
     box.hidden = false;
     $('picked-k').textContent = s.source === 'planner' ? 'התכנית שלכם' : 'המסלול שבחרתם';
     $('picked-name').textContent = p.name;
-    $('picked-price').textContent = `${s.source === 'planner' ? 'מחיר משוער' : 'החל מ־'} ${nis(priceOf())} לפני מע״מ` + (en.checked ? ', כולל אנגלית' : '');
+    $('picked-price').textContent = `${s.source === 'planner' ? 'מחיר משוער' : 'החל מ־'} ${nis(priceOf())} (סופי, בלי מע״מ)` + (en.checked ? ', כולל אנגלית' : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = r.label;
@@ -483,7 +460,7 @@ const Planner = (() => {
     $('r-status').textContent = '';
   };
 
-  const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)} לפני מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
+  const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)} (סופי, בלי מע״מ)\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
 
   $('r-send').addEventListener('click', (e) => {
     e.preventDefault();

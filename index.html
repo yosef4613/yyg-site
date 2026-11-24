@@ -21,9 +21,9 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/plex-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/plex-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=7">
+<link rel="stylesheet" href="assets/site.css?v=8">
 <script>(function(){var s=null;try{s=localStorage.getItem('yyg-motion')}catch(e){}if(s==='off'||(!s&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-off')})()</script>
-<script defer src="assets/site.js?v=7"></script>
+<script defer src="assets/site.js?v=8"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"YYG","alternateName":"YYG עיצוב ובניית אתרים","description":"עיצוב ובניית אתרים לעסקים קטנים ולמוסדות","url":"https://yosef4613.github.io/yyg-site/","logo":"https://yosef4613.github.io/yyg-site/assets/img/logo-320.webp","image":"https://yosef4613.github.io/yyg-site/assets/img/og.jpg","telephone":"+972-54-854-0700","email":"yyrkg22@gmail.com","priceRange":"₪1,900–₪6,900","areaServed":{"@type":"Country","name":"IL"},"knowsLanguage":["he","en"],"founder":{"@type":"Person","name":"יהודה גורדון"}}
 </script>
@@ -43,6 +43,7 @@
   </button>
   <div class="menu" id="menu">
    <nav class="nav" aria-label="ניווט ראשי">
+    <a href="#story">ככה נבנה אתר</a>
     <a href="#work">עבודות</a>
     <a href="#about">מי אני</a>
     <a href="#process">איך עובדים</a>
@@ -93,44 +94,144 @@
   </div>
 
   <figure class="hero-proof" aria-labelledby="proof-cap">
-   <div class="deck-wrap">
-    <div class="deck is-stacked" id="deck">
-    <div class="card" data-shot="hk-noir" style="--d:0;--i:0">
-     <div class="chrome"><span class="chrome-url">הכיף שבאפיה, כיוון נואר</span></div>
-     <div class="screen"><img src="assets/img/hk-noir-1200.webp" srcset="assets/img/hk-noir-720.webp 720w, assets/img/hk-noir-1200.webp 1200w" sizes="(min-width: 1180px) 600px, 86vw" width="1200" height="750" alt="הכיף שבאפיה בכיוון העיצוב נואר: רקע כהה, עוגת שוקולד ואותיות זהב" fetchpriority="high"></div>
-    </div>
-    <div class="card" data-shot="hk-royal" aria-hidden="true" style="--d:1;--i:1">
-     <div class="chrome"><span class="chrome-url">הכיף שבאפיה, כיוון רויאל</span></div>
-     <div class="screen"><img data-src="assets/img/hk-royal-720.webp" data-srcset="assets/img/hk-royal-720.webp 720w, assets/img/hk-royal-1200.webp 1200w" sizes="(min-width: 1180px) 600px, 86vw" width="1200" height="750" alt=""></div>
-    </div>
-    <div class="card" data-shot="hk-ivory" aria-hidden="true" style="--d:2;--i:2">
-     <div class="chrome"><span class="chrome-url">הכיף שבאפיה, כיוון אטלייה</span></div>
-     <div class="screen"><img data-src="assets/img/hk-ivory-720.webp" data-srcset="assets/img/hk-ivory-720.webp 720w, assets/img/hk-ivory-1200.webp 1200w" sizes="(min-width: 1180px) 600px, 86vw" width="1200" height="750" alt=""></div>
-    </div>
-    <div class="card" data-shot="hk-rose" aria-hidden="true" style="--d:3;--i:3">
-     <div class="chrome"><span class="chrome-url">הכיף שבאפיה, כיוון רוז</span></div>
-     <div class="screen"><img data-src="assets/img/hk-rose-720.webp" data-srcset="assets/img/hk-rose-720.webp 720w, assets/img/hk-rose-1200.webp 1200w" sizes="(min-width: 1180px) 600px, 86vw" width="1200" height="750" alt=""></div>
-    </div>
-    <div class="card" data-shot="hk-site" aria-hidden="true" style="--d:4;--i:4">
-     <div class="chrome"><span class="chrome-url">hakef.com, האתר שבאוויר</span></div>
-     <div class="screen"><img data-src="assets/img/hk-site-720.webp" data-srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 1180px) 600px, 86vw" width="1200" height="750" alt=""></div>
-    </div>
+   <div class="lab-wrap">
+    <div class="lab" id="lab" data-theme="noir">
+     <div class="lab-chrome" aria-hidden="true"><span class="lab-dots"><i></i><i></i><i></i></span><span class="lab-url" id="lab-url">הכיף שבאפיה, כיוון נואר</span></div>
+     <div class="mini" id="mini" role="img" aria-label="דף הבית של הכיף שבאפיה בכיוון העיצוב נואר">
+      <div class="m-nav" aria-hidden="true">
+       <span class="m-logo">הכיף שבאפיה</span>
+       <span class="m-links"><i>בר קינוחים</i><i>עוגות</i><i>פטיפורים</i><i>מתכונים</i></span>
+       <span class="m-pill">הצעת מחיר</span>
+      </div>
+      <div class="m-hero" aria-hidden="true">
+       <div class="m-copy">
+        <span class="m-kicker">בר קינוחים לאירועים בירושלים</span>
+        <span class="m-title"><span class="m-t1">עושים אירוע?</span> <span class="m-t2">בר פטיפורים שכל האורחים ידברו עליו</span></span>
+        <span class="m-sub">מעצבים, אופים ומקימים לכם בר מתוק שלם, בהתאמה לאירוע.</span>
+        <span class="m-btn">לתכנן את הבר</span>
+        <span class="m-trust"><i>כשרות מהודרת</i><i>משלוח והקמה</i></span>
+       </div>
+       <div class="m-media">
+        <img class="m-img" id="m-img" src="assets/img/hk/cake-glaze-480.webp" width="480" height="480" alt="" fetchpriority="high">
+        <img class="m-inset" id="m-inset" src="assets/img/hk/pf-single-480.webp" width="480" height="720" alt="" loading="lazy">
+       </div>
+      </div>
+     </div>
     </div>
    </div>
    <p class="note hero-note" aria-live="polite">
     <span id="proof-note">אותו תוכן, עיצוב אחר</span>
     <svg class="note-arrow" viewBox="0 0 90 60" aria-hidden="true"><path d="M86 6C60 4 30 14 14 46" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 36l8 12 12-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
    </p>
-   <div class="switch" role="group" aria-label="כיווני העיצוב שהצגתי להכיף שבאפיה">
-    <button type="button" aria-pressed="true" data-shot="hk-noir" data-alt="הכיף שבאפיה בכיוון העיצוב נואר: רקע כהה, עוגת שוקולד ואותיות זהב" data-note="אותו תוכן, עיצוב אחר">נואר</button>
-    <button type="button" aria-pressed="false" data-shot="hk-royal" data-alt="הכיף שבאפיה בכיוון העיצוב רויאל: מסגרת זהב דקה וכותרת גדולה" data-note="אותו תוכן, עיצוב אחר">רויאל</button>
-    <button type="button" aria-pressed="false" data-shot="hk-ivory" data-alt="הכיף שבאפיה בכיוון העיצוב אטלייה: רקע בהיר ועוגה לבנה" data-note="אפשר גם בהיר">אטלייה</button>
-    <button type="button" aria-pressed="false" data-shot="hk-rose" data-alt="הכיף שבאפיה בכיוון העיצוב רוז: גוני ורוד ותמונה מעוגלת" data-note="או משהו אחר לגמרי">רוז</button>
+   <div class="switch" role="group" aria-label="להחליף את העיצוב של האתר בדוגמה">
+    <button type="button" aria-pressed="true" data-theme="noir" data-name="כיוון נואר" data-img="cake-glaze" data-inset="pf-single" data-note="אותו תוכן, עיצוב אחר">נואר</button>
+    <button type="button" aria-pressed="false" data-theme="royal" data-name="כיוון רויאל" data-img="hero-petitfours-tall" data-inset="cake-glaze" data-note="אותו תוכן, עיצוב אחר">רויאל</button>
+    <button type="button" aria-pressed="false" data-theme="atelier" data-name="כיוון אטלייה" data-img="cake-wedding" data-inset="pf-single" data-note="אפשר גם בהיר">אטלייה</button>
+    <button type="button" aria-pressed="false" data-theme="rose" data-name="כיוון רוז" data-img="ev-mousse-close" data-inset="cake-wedding" data-note="או משהו אחר לגמרי">רוז</button>
     <span class="switch-sep" aria-hidden="true"></span>
-    <button type="button" aria-pressed="false" data-shot="hk-site" data-alt="האתר החי של הכיף שבאפיה ב־hakef.com: לוגו בכתב יד, מוס ורוד ברקע וכפתור לתכנון בר קינוחים" data-note="וזה האתר שבאוויר היום">האתר שבאוויר</button>
+    <button type="button" aria-pressed="false" data-theme="live" data-name="האתר שבאוויר" data-img="ev-mousse-close" data-inset="ev-bar-flowers" data-note="וזה הכיוון שעלה לאוויר">האתר שבאוויר</button>
    </div>
-   <figcaption id="proof-cap">ארבעה מתוך ששת כיווני העיצוב שהצגתי ל"הכיף שבאפיה", והאתר שבאוויר היום. לחצו כדי להחליף.</figcaption>
+   <figcaption id="proof-cap">זה לא צילום: זה אתר אמיתי שמתעצב מחדש בלחיצה. ארבעה מתוך ששת הכיוונים שהצגתי ל"הכיף שבאפיה", והכיוון שעלה לאוויר.</figcaption>
   </figure>
+ </div>
+</section>
+
+<!-- סיפור: איך נבנה אתר, מהשרטוט ועד המהירות (דבר אחד זז בכל שלב) -->
+<section class="story" id="story" aria-labelledby="story-title">
+ <div class="wrap">
+  <h2 id="story-title" class="sec-title">ככה נבנה אתר: הכיף שבאפיה</h2>
+  <p class="sec-lead">ארבעה שלבים, מהשרטוט הראשון ועד אתר שנפתח מהר בטלפון. גללו לאט.</p>
+  <div class="story-grid">
+   <div class="story-stage">
+    <div class="stage" id="stage" data-step="1">
+      <svg class="bp" id="bp" viewBox="0 0 1200 750" role="img" aria-label="שרטוט של דף הבית: מיקום הכותרת, הכפתור, התמונה ושורת האמון, עם הערות של מעצב">
+       <defs>
+        <pattern id="bp-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#3FD8E6" stroke-opacity=".08" stroke-width="1"/></pattern>
+        <pattern id="bp-grid-l" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#3FD8E6" stroke-opacity=".14" stroke-width="1"/></pattern>
+       </defs>
+       <rect width="1200" height="750" fill="#0B1621"/>
+       <rect width="1200" height="750" fill="url(#bp-grid)"/>
+       <rect width="1200" height="750" fill="url(#bp-grid-l)"/>
+       <g class="g g1" fill="none" stroke="#7FE8F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect pathLength="1" x="60" y="40" width="1080" height="660" rx="14"/>
+        <path pathLength="1" d="M60 84H1140"/>
+        <circle pathLength="1" cx="92" cy="62" r="6"/><circle pathLength="1" cx="114" cy="62" r="6"/><circle pathLength="1" cx="136" cy="62" r="6"/>
+       </g>
+       <g class="g g2" fill="none" stroke="#7FE8F2" stroke-width="2" stroke-linecap="round">
+        <circle pathLength="1" cx="1080" cy="130" r="30"/>
+        <path pathLength="1" d="M990 130H930M900 130H840M810 130H750M720 130H660"/>
+        <rect pathLength="1" x="110" y="112" width="130" height="38" rx="19"/>
+        <path pathLength="1" d="M60 180H1140" stroke-dasharray="6 8" stroke-opacity=".5"/>
+       </g>
+       <g class="g g3" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+        <path pathLength="1" d="M1100 240H840"/>
+        <path pathLength="1" d="M1100 300H660" stroke-width="16"/>
+        <path pathLength="1" d="M1100 350H700" stroke-width="16"/>
+        <path pathLength="1" d="M1100 400H760" stroke-width="16"/>
+        <path pathLength="1" d="M1100 455H700M1100 485H760" stroke-width="3" stroke-opacity=".7"/>
+       </g>
+       <g class="g g4" fill="none" stroke="#FFD27A" stroke-width="3" stroke-linecap="round">
+        <rect pathLength="1" x="880" y="525" width="220" height="56" rx="28"/>
+        <path pathLength="1" d="M1100 615h-14l6-6M1100 615l-8 8M1060 615H920M900 615h-14l6-6" stroke="#7FE8F2" stroke-width="2"/>
+       </g>
+       <g class="g g5" fill="none" stroke="#7FE8F2" stroke-width="2" stroke-linecap="round">
+        <rect pathLength="1" x="110" y="215" width="470" height="430" rx="8"/>
+        <path pathLength="1" d="M110 215L580 645M580 215L110 645" stroke-opacity=".45"/>
+        <rect pathLength="1" x="430" y="520" width="190" height="230" rx="8" stroke="#FFFFFF"/>
+       </g>
+       <g class="g g6" fill="none" stroke="#7FE8F2" stroke-width="2.2" stroke-linecap="round">
+        <path pathLength="1" d="M640 270C700 230 760 240 820 285"/><path pathLength="1" d="M812 270l10 16-18 2"/>
+        <path pathLength="1" d="M760 560C800 600 840 600 872 565"/><path pathLength="1" d="M856 570l18-6-2 18"/>
+        <path pathLength="1" d="M300 690C340 660 380 650 425 660"/><path pathLength="1" d="M410 650l16 10-14 12"/>
+        <path pathLength="1" d="M240 120C290 90 330 92 370 115"/><path pathLength="1" d="M252 108l-12 12 16 4"/>
+       </g>
+       <g class="g g7 bp-notes">
+        <text x="635" y="262" text-anchor="end">כאב והבטחה, במשפט אחד</text>
+        <text x="750" y="545" text-anchor="end">כפתור אחד, בולט</text>
+        <text x="1100" y="645" text-anchor="end" class="bp-small">56px, נוח לאצבע</text>
+        <text x="295" y="705" text-anchor="end">שובר את הקצה</text>
+        <text x="510" y="112" text-anchor="end">חיוג ופנייה תמיד נראים</text>
+        <text x="345" y="200" text-anchor="middle" class="bp-small">תמונה אמיתית מאירוע</text>
+       </g>
+      </svg>
+     <div class="stage-dirs" aria-hidden="true">
+      <img src="assets/img/hk-noir-720.webp" width="720" height="450" alt="" loading="lazy">
+      <img src="assets/img/hk-ivory-720.webp" width="720" height="450" alt="" loading="lazy">
+      <img src="assets/img/hk-rose-720.webp" width="720" height="450" alt="" loading="lazy">
+     </div>
+     <img class="stage-live" src="assets/img/hk-site-1200.webp" srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 1000px) 640px, 92vw" width="1200" height="750" loading="lazy" alt="דף הבית של hakef.com כפי שהוא באוויר">
+     <div class="stage-race race" id="race" aria-hidden="true">
+      <div class="race-row"><span class="race-label">האתר הקודם</span><span class="race-bar"><i style="--w:100%;--t:3.4s" data-sec="8.5"><em class="race-clock"></em></i></span><span class="race-num"><b>8.5</b> שניות</span></div>
+      <div class="race-row is-new"><span class="race-label">האתר החי</span><span class="race-bar"><i style="--w:34%;--t:1.16s" data-sec="2.9"><em class="race-clock"></em></i></span><span class="race-num"><b>2.9</b> שניות</span></div>
+      <button type="button" class="race-replay" id="race-replay" tabindex="-1">להריץ שוב</button>
+     </div>
+     <span class="stage-tag" id="stage-tag" aria-hidden="true">שרטוט</span>
+    </div>
+   </div>
+   <ol class="story-steps" id="story-steps">
+    <li data-step="1">
+     <span class="story-n" aria-hidden="true">1</span>
+     <h3>שרטוט</h3>
+     <p>לפני צבעים ותמונות, משרטטים: מה הלקוח רואה קודם, איפה הכפתור, ומה מוכיח שהוא במקום הנכון. כל קו בשרטוט עונה על שאלה אחת.</p>
+    </li>
+    <li data-step="2">
+     <span class="story-n" aria-hidden="true">2</span>
+     <h3>כמה כיוונים, לפני תשלום</h3>
+     <p>על אותו שרטוט אני מעצב כמה כיוונים מלאים, עם התוכן האמיתי. בעלת העסק ראתה שישה כיוונים, גללה בהם בטלפון ובחרה.</p>
+    </li>
+    <li data-step="3">
+     <span class="story-n" aria-hidden="true">3</span>
+     <h3>אתר אמיתי, באוויר</h3>
+     <p>הכיוון שנבחר הופך לאתר קל ומהיר, עם מתכנן בר ומתכונים שבעלת העסק מוסיפה לבד. היום הוא באוויר ב־<a class="text-link" href="https://hakef.com/" target="_blank" rel="noopener">hakef.com<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>
+    </li>
+    <li data-step="4">
+     <span class="story-n" aria-hidden="true">4</span>
+     <h3>התוצאה: פי שלושה מהר יותר</h3>
+     <p>בטלפון בקליטה חלשה, האתר הקודם נפתח אחרי 8.5 שניות. האתר החי נפתח אחרי 2.9 שניות.</p>
+     <p class="race-method">פרטי הבדיקה: 4G איטי ומעבד מואט פי 4, עד שהתוכן הראשי במסך מוכן. האתר הקודם נמדד לפני ההחלפה, והאתר החי ב־hakef.com בנובמבר 2026, חציון של 3 מדידות.</p>
+    </li>
+   </ol>
+  </div>
  </div>
 </section>
 
@@ -169,27 +270,6 @@
     </div>
    </div>
   </article>
-
-  <div class="race" id="race" role="group" aria-labelledby="race-title">
-   <div class="race-head">
-    <div>
-     <h3 id="race-title">כמה זמן מחכים עד שהאתר נפתח בטלפון</h3>
-     <p>הכיף שבאפיה, בטלפון בקליטה חלשה. האתר הקודם נמדד לפני ההחלפה, והאתר החי נמדד ב־hakef.com בנובמבר 2026.</p>
-     <p class="race-method">פרטי הבדיקה: 4G איטי ומעבד מואט פי 4, עד שהתוכן הראשי במסך מוכן. חציון של 3 מדידות.</p>
-    </div>
-    <button type="button" class="race-replay" id="race-replay">להריץ שוב</button>
-   </div>
-   <div class="race-row">
-    <span class="race-label">האתר הקודם</span>
-    <span class="race-bar"><i style="--w:100%;--t:3.4s" data-sec="8.5"><em class="race-clock" aria-hidden="true"></em></i></span>
-    <span class="race-num"><b>8.5</b> שניות <small>3.9MB</small></span>
-   </div>
-   <div class="race-row is-new">
-    <span class="race-label">האתר החי</span>
-    <span class="race-bar"><i style="--w:34%;--t:1.16s" data-sec="2.9"><em class="race-clock" aria-hidden="true"></em></i></span>
-    <span class="race-num"><b>2.9</b> שניות <small>כ־370KB</small></span>
-   </div>
-  </div>
 
   <article class="case case-flip" aria-labelledby="ps-title">
    <div class="case-media">
@@ -237,29 +317,14 @@
    <p class="about-lead">אני מעצב ובונה אתרים לעסקים קטנים ולמוסדות. את כל העבודה, מהשרטוט ועד העלייה לאוויר, אני עושה בעצמי, כך שאתם מדברים כל הזמן עם אותו אדם.</p>
    <dl class="facts">
     <div><dt>זמינות</dt><dd>שיחות ופגישות בזום בין 9:00 ל־13:00 ובין 22:30 ל־24:00, או בזמן אחר בתיאום מראש</dd></div>
-    <div><dt>תשלום</dt><dd>את הדוגמה הראשונה אני מכין לפני תשלום. כדי להמשיך לבנייה משלמים 50%</dd></div>
+    <div><dt>תשלום</dt><dd>את הדוגמה הראשונה אני מכין לפני תשלום. כדי להמשיך לבנייה משלמים 50%, ואת היתרה בסיום הבנייה, אחרי שאתם מאשרים שהכול טוב ולפני העלייה לאוויר</dd></div>
+    <div><dt>מחירים</dt><dd>סופיים, בלי תוספת מע״מ</dd></div>
     <div><dt>בעלות</dt><dd>האתר והדומיין רשומים על שמכם</dd></div>
     <div><dt>קשר</dt><dd>טלפון לשיחות בלבד, <a class="text-link" href="tel:0548540700" data-tel>054-854-0700</a>, ומייל</dd></div>
    </dl>
   </div>
   <div class="about-mark" aria-hidden="true">
    <img src="assets/img/logo-320.webp" width="320" height="237" alt="" loading="lazy">
-  </div>
- </div>
-</section>
-
-<!-- משרטוט לאתר: תנועה שמראה שינוי מצב -->
-<section class="sketch" id="sketch" aria-labelledby="sketch-title">
- <div class="wrap">
-  <h2 id="sketch-title" class="sec-title">משרטוט לאתר חי</h2>
-  <p class="sec-lead">כך נראה דף הבית של הכיף שבאפיה בשלב השרטוט, וכך הוא נראה היום באוויר. גררו את הידית כדי להשוות.</p>
-  <div class="ba" id="ba" style="--p:.5">
-   <img class="ba-after" src="assets/img/hk-site-1200.webp" srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 1260px) 1200px, 94vw" width="1200" height="750" loading="lazy" alt="דף הבית של hakef.com כפי שהוא באוויר">
-   <div class="ba-before"><img src="assets/img/hk-bp-1200.webp" srcset="assets/img/hk-bp-720.webp 720w, assets/img/hk-bp-1200.webp 1200w" sizes="(min-width: 1260px) 1200px, 94vw" width="1200" height="750" loading="lazy" alt="אותו דף בשלב השרטוט: קווי מתאר על רשת"></div>
-   <span class="ba-tag ba-tag-before" aria-hidden="true">שרטוט</span>
-   <span class="ba-tag ba-tag-after" aria-hidden="true">באוויר</span>
-   <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="השוואה בין השרטוט לאתר החי" aria-valuetext="חצי שרטוט, חצי האתר החי">
-   <span class="ba-handle" aria-hidden="true"><i></i></span>
   </div>
  </div>
 </section>
@@ -288,7 +353,7 @@
     </li>
     <li>
      <h3>בנייה</h3>
-     <p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות.</p>
+     <p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות. בסוף אתם בודקים ומאשרים, ומשלמים את היתרה.</p>
     </li>
     <li>
      <h3>עלייה לאוויר והדרכה</h3>
@@ -344,7 +409,7 @@
    <p class="result-why" id="r-why">כמה עמודים, ומסך פשוט לעדכון מה שמשתנה.</p>
    <p class="result-price" id="r-price-wrap"><span class="result-price-label">מחיר משוער</span> <b id="r-price">3,900 ₪</b></p>
    <p class="result-extra" id="r-extra" hidden></p>
-   <p class="result-fine">תשלום חד־פעמי להקמה, לפני מע״מ. אחסון ודומיין בנפרד. המחיר הסופי בהצעה מסודרת.</p>
+   <p class="result-fine">תשלום חד־פעמי להקמה, בלי תוספת מע״מ. אחסון ודומיין בנפרד. המחיר הסופי בהצעה מסודרת.</p>
    <ul class="result-incl" id="r-incl"></ul>
    <div class="result-cols">
     <div>
@@ -374,7 +439,7 @@
 <section class="pkgs-sec" id="packages" aria-labelledby="pkgs-title">
  <div class="wrap">
   <h2 id="pkgs-title" class="sec-title">מה מקבלים בכל מסלול</h2>
-  <p class="sec-lead">אצל רוב המעצבים מקבלים סקיצה אחת. אצלי רואים 2 עד 3 עיצובים מלאים של האתר שלכם לפני שמשלמים, ובוחרים. המחירים לפני מע״מ.</p>
+  <p class="sec-lead">אצל רוב המעצבים מקבלים סקיצה אחת. אצלי רואים 2 עד 3 עיצובים מלאים של האתר שלכם לפני שמשלמים, ובוחרים. המחירים סופיים, בלי תוספת מע״מ.</p>
   <div class="pkgs" role="region" tabindex="0" aria-label="ארבעת המסלולים. בטלפון אפשר לגלול לצדדים">
     <article class="pkg" data-track="landing" data-price="1900" data-en="500" data-quota="1" aria-labelledby="pkg-landing">
      <h3 id="pkg-landing">דף נחיתה</h3>
@@ -483,11 +548,11 @@
   <div class="faq-list">
    <details>
     <summary>כמה עולה אתר?</summary>
-    <p>דף נחיתה החל מ־1,900 ₪, אתר עם אזור ניהול החל מ־3,900 ₪, אתר עם הרשמה ורשימת תפוצה החל מ־5,900 ₪ וחנות החל מ־6,900 ₪, לפני מע״מ. במתכנן מקבלים מחיר משוער לפי מה שאתם צריכים, ואחרי שיחה קצרה מקבלים הצעת מחיר מסודרת.</p>
+    <p>דף נחיתה החל מ־1,900 ₪, אתר עם אזור ניהול החל מ־3,900 ₪, אתר עם הרשמה ורשימת תפוצה החל מ־5,900 ₪ וחנות החל מ־6,900 ₪. המחירים סופיים, בלי תוספת מע״מ. במתכנן מקבלים מחיר משוער לפי מה שאתם צריכים, ואחרי שיחה קצרה מקבלים הצעת מחיר מסודרת.</p>
    </details>
    <details>
     <summary>איך משלמים?</summary>
-    <p>את הדוגמה הראשונה, כמה עיצובים של האתר שלכם, אני מכין לפני תשלום. אם ממשיכים, משלמים 50% ואז אני בונה.</p>
+    <p>את הדוגמה הראשונה, כמה עיצובים של האתר שלכם, אני מכין לפני תשלום. אם ממשיכים, משלמים 50% ואני בונה. את היתרה משלמים בסיום הבנייה, אחרי שאתם מאשרים שהכול טוב, ורק אז האתר עולה לאוויר.</p>
    </details>
    <details>
     <summary>כמה עיצובים ותיקונים כלולים?</summary>
