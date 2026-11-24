@@ -17,9 +17,9 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/plex-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/plex-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=4">
+<link rel="stylesheet" href="assets/site.css?v=6">
 <script>(function(){var s=null;try{s=localStorage.getItem('yyg-motion')}catch(e){}if(s==='off'||(!s&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-off')})()</script>
-<script defer src="assets/site.js?v=4"></script>
+<script defer src="assets/site.js?v=6"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"YYG","description":"עיצוב ובניית אתרים לעסקים קטנים ולמוסדות","areaServed":"IL","knowsLanguage":["he","en"]}
 </script>
@@ -36,8 +36,8 @@
   <nav class="nav" aria-label="ניווט ראשי">
    <a href="#work">עבודות</a>
    <a href="#process">איך עובדים</a>
-   <a href="#packages">מסלולים ומחירים</a>
    <a href="#plan">תכנון</a>
+   <a href="#packages">מסלולים ומחירים</a>
    <a href="#faq">שאלות</a>
   </nav>
   <button class="motion" type="button" id="motion-toggle" aria-pressed="true">
@@ -53,9 +53,19 @@
 <!-- מבחן המראה: למי, מה מקבלים, מה עושים עכשיו -->
 <section class="hero" id="top" aria-labelledby="hero-title">
  <div class="hero-bg" aria-hidden="true">
+ <div class="hero-light"></div>
+ <svg class="orbit" viewBox="0 0 1000 520">
+  <defs>
+   <linearGradient id="og-steel" x1="0" x2="1"><stop offset="0" stop-color="#5D687C" stop-opacity="0"/><stop offset=".45" stop-color="#C9D1DD" stop-opacity=".55"/><stop offset="1" stop-color="#5D687C" stop-opacity="0"/></linearGradient>
+   <linearGradient id="og-cyan" x1="0" x2="1"><stop offset="0" stop-color="#3FD8E6" stop-opacity="0"/><stop offset=".6" stop-color="#3FD8E6" stop-opacity=".9"/><stop offset="1" stop-color="#3FD8E6" stop-opacity="0"/></linearGradient>
+  </defs>
+  <ellipse cx="500" cy="260" rx="470" ry="150" fill="none" stroke="url(#og-steel)" stroke-width="10"/>
+  <ellipse cx="500" cy="260" rx="440" ry="128" fill="none" stroke="url(#og-cyan)" stroke-width="2"/>
+  <path d="M90 330C260 440 700 440 930 250" fill="none" stroke="url(#og-cyan)" stroke-width="3" stroke-linecap="round"/>
+ </svg>
  <svg class="dial" viewBox="0 0 800 800">
   <circle cx="400" cy="400" r="380" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="400" cy="400" r="352" fill="none" stroke="currentColor" stroke-width="14" stroke-dasharray="2 13.4" opacity=".7"/>
+  <circle class="dial-ticks" cx="400" cy="400" r="352" fill="none" stroke-width="14" stroke-dasharray="2 13.4"/>
   <circle cx="400" cy="400" r="300" fill="none" stroke="currentColor" stroke-width="1"/>
   <path d="M400 20v40M400 740v40M20 400h40M740 400h40" stroke="currentColor" stroke-width="3"/>
  </svg>
@@ -91,7 +101,7 @@
      <div class="screen"><img src="assets/img/hk-rose-1200.webp" srcset="assets/img/hk-rose-720.webp 720w, assets/img/hk-rose-1200.webp 1200w" sizes="(min-width: 960px) 600px, 86vw" width="1200" height="750" alt="" fetchpriority="low"></div>
     </div>
     <div class="card" data-shot="hk-site" aria-hidden="true" style="--d:4;--i:4">
-     <div class="chrome"><span class="chrome-url">הכיף שבאפיה, האתר שנבנה</span></div>
+     <div class="chrome"><span class="chrome-url">hakef.com, האתר שבאוויר</span></div>
      <div class="screen"><img src="assets/img/hk-site-1200.webp" srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 960px) 600px, 86vw" width="1200" height="750" alt="" fetchpriority="low"></div>
     </div>
     </div>
@@ -105,9 +115,9 @@
     <button type="button" aria-pressed="false" data-shot="hk-royal" data-alt="הכיף שבאפיה בכיוון העיצוב רויאל: מסגרת זהב דקה וכותרת גדולה" data-note="אותו תוכן, עיצוב אחר">רויאל</button>
     <button type="button" aria-pressed="false" data-shot="hk-ivory" data-alt="הכיף שבאפיה בכיוון העיצוב אטלייה: רקע בהיר ועוגה לבנה" data-note="אפשר גם בהיר">אטלייה</button>
     <button type="button" aria-pressed="false" data-shot="hk-rose" data-alt="הכיף שבאפיה בכיוון העיצוב רוז: גוני ורוד ותמונה מעוגלת" data-note="או משהו אחר לגמרי">רוז</button>
-    <button type="button" aria-pressed="false" data-shot="hk-site" data-alt="האתר החדש של הכיף שבאפיה: צילום פטיפורים ברקע וכפתור לתכנון בר קינוחים" data-note="וזה האתר שנבנה בסוף">האתר שנבנה</button>
+    <button type="button" aria-pressed="false" data-shot="hk-site" data-alt="האתר החי של הכיף שבאפיה ב־hakef.com: לוגו בכתב יד, מוס ורוד ברקע וכפתור לתכנון בר קינוחים" data-note="וזה האתר שבאוויר היום">האתר שבאוויר</button>
    </div>
-   <figcaption id="proof-cap">ארבעה מתוך ששת כיווני העיצוב שהוצגו להכיף שבאפיה, והאתר שנבנה. לחצו כדי להחליף.</figcaption>
+   <figcaption id="proof-cap">ארבעה מתוך ששת כיווני העיצוב שהוצגו להכיף שבאפיה, והאתר שבאוויר היום. לחצו כדי להחליף.</figcaption>
   </figure>
  </div>
 </section>
@@ -122,7 +132,7 @@
     <div class="shot">
      <div class="proof">
       <div class="proof-sheet">
-       <div class="screen live"><img src="assets/img/hk-tall-d.webp" width="900" height="2812" loading="lazy" alt="האתר החדש של הכיף שבאפיה במחשב, מדף הבית ועד הקטלוג"></div>
+       <div class="screen live"><img src="assets/img/hk-tall-d.webp" width="900" height="2812" loading="lazy" alt="האתר החי של הכיף שבאפיה במחשב, מדף הבית ועד בחירת הקינוחים"></div>
       </div>
      </div>
      <div class="phone live"><img src="assets/img/hk-tall-m.webp" width="300" height="3231" loading="lazy" alt="האתר של הכיף שבאפיה בטלפון"></div>
@@ -134,16 +144,16 @@
    <div class="case-copy">
     <h3 id="hk-title">הכיף שבאפיה</h3>
     <p class="case-kind">קייטרינג בוטיק ובר פטיפורים בירושלים והסביבה</p>
-    <p>האתר הקודם נבנה באלמנטור ונטען לאט בטלפון. בניתי אתר חדש בלי אלמנטור, עם קטלוג מוצרים ומתכנן בר קינוחים ששולח את ההזמנה ישר לעסק.</p>
+    <p>האתר הקודם נבנה באלמנטור ונטען לאט בטלפון. בניתי אתר חדש בלי אלמנטור, והוא באוויר היום בכתובת hakef.com: קטלוג מוצרים, מתכנן בר קינוחים ששולח את הבקשה ישר לעסק, ומתכונים שבעלת העסק מוסיפה לבד.</p>
 
     <ul class="ticks">
-     <li>30 עמודים: קטלוג, 4 קטגוריות, 19 מוצרים, אודות ויצירת קשר</li>
+     <li>קטלוג לפי קטגוריות: בר קינוחים, עוגות ופטיפורים</li>
      <li>מתכנן בר: בוחרים סוג אירוע ומספר אורחים ומקבלים הרכב מומלץ</li>
      <li>מתכונים עם מסך הוספה פשוט, כך שמוסיפים מתכון בלי עזרה</li>
      <li>אותן כתובות עמודים כמו באתר הישן, כדי לשמור על הדירוג בגוגל</li>
     </ul>
     <div class="links">
-     <a class="btn btn-line" href="https://yosef4613.github.io/hakef-boutique/site/" target="_blank" rel="noopener">לצפייה באתר<span class="sr"> (נפתח בחלון חדש)</span></a>
+     <a class="btn btn-line" href="https://hakef.com/" target="_blank" rel="noopener">לאתר החי: hakef.com<span class="sr"> (נפתח בחלון חדש)</span></a>
      <a class="text-link" href="https://yosef4613.github.io/hakef-boutique/" target="_blank" rel="noopener">לכל כיווני העיצוב<span class="sr"> (נפתח בחלון חדש)</span></a>
     </div>
    </div>
@@ -152,20 +162,20 @@
   <div class="race" id="race" role="group" aria-labelledby="race-title">
    <div class="race-head">
     <div>
-     <h3 id="race-title">זמן עד שהמסך הראשון מוכן</h3>
-     <p>הכיף שבאפיה, בטלפון בקליטה חלשה (4G איטי ומעבד מואט פי 4)</p>
+     <h3 id="race-title">זמן עד שהתוכן הראשי במסך מוכן</h3>
+     <p>הכיף שבאפיה בטלפון בקליטה חלשה (4G איטי ומעבד מואט פי 4). האתר הקודם נמדד לפני ההחלפה, והאתר החי נמדד ב־hakef.com בנובמבר 2026.</p>
     </div>
     <button type="button" class="race-replay" id="race-replay">להריץ שוב</button>
    </div>
    <div class="race-row">
     <span class="race-label">האתר הקודם</span>
-    <span class="race-bar"><i style="--w:100%;--t:3.4s"></i></span>
+    <span class="race-bar"><i style="--w:100%;--t:3.4s" data-sec="8.5"><em class="race-clock" aria-hidden="true"></em></i></span>
     <span class="race-num"><b>8.5</b> שניות <small>3.9MB</small></span>
    </div>
    <div class="race-row is-new">
-    <span class="race-label">האתר החדש</span>
-    <span class="race-bar"><i style="--w:24%;--t:.8s"></i></span>
-    <span class="race-num"><b>כ־2</b> שניות <small>כ־150KB</small></span>
+    <span class="race-label">האתר החי</span>
+    <span class="race-bar"><i style="--w:34%;--t:1.16s" data-sec="2.9"><em class="race-clock" aria-hidden="true"></em></i></span>
+    <span class="race-num"><b>2.9</b> שניות <small>כ־370KB</small></span>
    </div>
   </div>
 
@@ -174,7 +184,7 @@
     <div class="shot">
      <div class="proof">
       <div class="proof-sheet">
-       <div class="screen live"><img src="assets/img/ps-tall-d.webp" width="900" height="2812" loading="lazy" alt="הדגמת אתר החוגים של מקהלת פרחי שמיים במחשב: פתיחה, חיפוש חוג לפי גיל ועיר וטופס הרשמה"></div>
+       <div class="screen live"><img src="assets/img/ps-tall-d.webp" width="900" height="2812" loading="lazy" alt="האתר החי של מקהלת פרחי שמיים במחשב: פתיחה, חיפוש חוג לפי גיל ועיר וטופס הרשמה"></div>
       </div>
      </div>
      <div class="phone live"><img src="assets/img/ps-tall-m.webp" width="300" height="3231" loading="lazy" alt="אתר החוגים של פרחי שמיים בטלפון"></div>
@@ -190,20 +200,36 @@
    <div class="case-copy">
     <h3 id="ps-title">פרחי שמיים</h3>
     <p class="case-kind">מקהלת ילדים וחוגי פיתוח קול לבנים</p>
-    <p>המקהלה רצתה אתר שמציג את המוזיקה ועוזר להורים למצוא חוג. הכנתי חמש חוויות עיצוב ושלוש הדגמות של היקף האתר, כדי שיהיה קל להחליט מה באמת צריך.</p>
+    <p>המקהלה רצתה אתר שמציג את המוזיקה ועוזר להורים למצוא חוג. הכנתי חמש חוויות עיצוב ושלוש הדגמות של היקף האתר, ואחרי הבחירה בניתי את האתר שבאוויר היום בכתובת פרחישמים.com.</p>
     <ul class="ticks">
-     <li>חמש חוויות עיצוב, עם מעבר ביניהן בלחיצה</li>
+     <li>חיפוש חוג לפי גיל הילד ועיר, עם הסבר על מבדק ההתאמה</li>
+     <li>טופס הרשמה מלא, עם אפשרות לפתוח חשבון ולקבל עדכונים</li>
      <li>ספריית שירים מהערוץ, עם נגן שנטען רק אחרי לחיצה ולכן לא מאט את האתר</li>
-     <li>חוגים לפי עיר, כולל הסבר על מבדק ההתאמה</li>
-     <li>הדגמות של הרשמה לחוגים, אזור ניהול וגרסה באנגלית</li>
-     <li>הצעת מחיר בשלושה מסלולים, ולכל מסלול הדגמה חיה</li>
+     <li>גרסה באנגלית</li>
+     <li>לפני הבנייה: חמש חוויות עיצוב לבחירה והצעת מחיר בשלושה מסלולים</li>
     </ul>
     <div class="links">
-     <a class="btn btn-line" href="https://yosef4613.github.io/pirchei-shomayim-designs/" target="_blank" rel="noopener">לחמש חוויות העיצוב<span class="sr"> (נפתח בחלון חדש)</span></a>
-     <a class="text-link" href="https://yosef4613.github.io/pirchei-shomayim-designs/demos/2/" target="_blank" rel="noopener">להדגמת אתר החוגים<span class="sr"> (נפתח בחלון חדש)</span></a>
+     <a class="btn btn-line" href="https://xn--cebeaqd7a2ak.com/" target="_blank" rel="noopener">לאתר החי: פרחישמים.com<span class="sr"> (נפתח בחלון חדש)</span></a>
+     <a class="text-link" href="https://yosef4613.github.io/pirchei-shomayim-designs/" target="_blank" rel="noopener">לחמש חוויות העיצוב<span class="sr"> (נפתח בחלון חדש)</span></a>
     </div>
    </div>
   </article>
+ </div>
+</section>
+
+<!-- משרטוט לאתר: תנועה שמראה שינוי מצב -->
+<section class="sketch" id="sketch" aria-labelledby="sketch-title">
+ <div class="wrap">
+  <h2 id="sketch-title" class="sec-title">משרטוט לאתר חי</h2>
+  <p class="sec-lead">כך נראה דף הבית של הכיף שבאפיה בשלב השרטוט, וכך הוא נראה היום באוויר. גררו את הידית כדי להשוות.</p>
+  <div class="ba" id="ba" style="--p:.5">
+   <img class="ba-after" src="assets/img/hk-site-1200.webp" srcset="assets/img/hk-site-720.webp 720w, assets/img/hk-site-1200.webp 1200w" sizes="(min-width: 1260px) 1200px, 94vw" width="1200" height="750" loading="lazy" alt="דף הבית של hakef.com כפי שהוא באוויר">
+   <div class="ba-before"><img src="assets/img/hk-bp-1200.webp" srcset="assets/img/hk-bp-720.webp 720w, assets/img/hk-bp-1200.webp 1200w" sizes="(min-width: 1260px) 1200px, 94vw" width="1200" height="750" loading="lazy" alt="אותו דף בשלב השרטוט: קווי מתאר טורקיז על רשת"></div>
+   <span class="ba-tag ba-tag-before" aria-hidden="true">שרטוט</span>
+   <span class="ba-tag ba-tag-after" aria-hidden="true">באוויר</span>
+   <span class="ba-handle" aria-hidden="true"><i></i></span>
+   <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="כמה מהשרטוט להציג מול האתר הגמור">
+  </div>
  </div>
 </section>
 
@@ -213,6 +239,7 @@
   <h2 id="process-title" class="sec-title">איך עובדים יחד</h2>
   <p class="sec-lead">חמישה שלבים. בכל שלב אתם רואים משהו אמיתי ומחליטים אם להמשיך.</p>
   <ol class="steps" id="steps">
+   <span class="steps-pulse" aria-hidden="true"></span>
    <li>
     <h3>שאלון קצר</h3>
     <p>מה העסק עושה, למי הוא פונה ומה הלקוח צריך לעשות באתר.</p>
@@ -236,103 +263,6 @@
     <p>חיבור דומיין ואחסון, והדרכה קצרה לעדכון התוכן.</p>
    </li>
   </ol>
- </div>
-</section>
-
-<!-- מסלולים: מה מקבלים בכל הצעה -->
-<section class="pkgs-sec" id="packages" aria-labelledby="pkgs-title">
- <div class="wrap">
-  <h2 id="pkgs-title" class="sec-title">מה מקבלים בכל מסלול</h2>
-  <p class="sec-lead">בשוק מקובל לקבל סקיצה אחת ועד 3 סבבי תיקונים. אצלי רואים 2 עד 3 כיווני עיצוב מלאים לפני שבוחרים. המחירים לפני מע״מ.</p>
-  <div class="pkgs" tabindex="0" aria-label="ארבעת המסלולים, אפשר לגלול לצדדים בטלפון">
-    <article class="pkg" data-track="landing" data-price="1900" data-en="500" aria-labelledby="pkg-landing">
-     <h3 id="pkg-landing">דף נחיתה</h3>
-     <p class="pkg-fit">עמוד אחד ברור שמביא פניות</p>
-     <p class="pkg-price"><span>החל מ־</span><b>1,900 ₪</b></p>
-     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>2</b></p>
-     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>2</b></p>
-     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עמוד אחד, עד 7 חלקים</b></p>
-     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>שינויים קטנים עליי</b></p>
-     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>עד 7 ימי עבודה</b></p>
-     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>הסבר קצר</b></p>
-     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>חודש</b></p>
-     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>טופס פנייה למייל וכפתור חיוג</b></p>
-    </article>
-    <article class="pkg is-rec" data-track="site" data-price="3900" data-en="1000" aria-labelledby="pkg-site">
-     <h3 id="pkg-site">אתר עם אזור ניהול</h3>
-     <span class="pkg-badge">מומלץ</span>
-     <p class="pkg-fit">מתאים לרוב העסקים והמוסדות</p>
-     <p class="pkg-price"><span>החל מ־</span><b>3,900 ₪</b></p>
-     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
-     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
-     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עד 6</b></p>
-     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>עדכון התוכן שמשתנה</b></p>
-     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>3 עד 4 שבועות</b></p>
-     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
-     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>חודשיים</b></p>
-     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>טפסים ומדור תוכן</b></p>
-    </article>
-    <article class="pkg" data-track="club" data-price="5900" data-en="1500" aria-labelledby="pkg-club">
-     <h3 id="pkg-club">אתר ומועדון עדכונים</h3>
-     <p class="pkg-fit">מוסדות וחוגים עם הרשמה וקהל</p>
-     <p class="pkg-price"><span>החל מ־</span><b>5,900 ₪</b></p>
-     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
-     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
-     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עד 8</b></p>
-     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>תוכן, פניות ומנויים</b></p>
-     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>4 עד 5 שבועות</b></p>
-     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
-     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>3 חודשים</b></p>
-     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>הרשמה, חשבונות, רשימת תפוצה ו־3 תבניות מייל</b></p>
-    </article>
-    <article class="pkg" data-track="store" data-price="6900" data-en="1800" aria-labelledby="pkg-store">
-     <h3 id="pkg-store">חנות אונליין</h3>
-     <p class="pkg-fit">מוכרים ורוצים לקבל תשלום באתר</p>
-     <p class="pkg-price"><span>החל מ־</span><b>6,900 ₪</b></p>
-     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
-     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
-     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>חנות מלאה, עד 30 מוצרים מוזנים</b></p>
-     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>מוצרים, מלאי והזמנות</b></p>
-     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>4 עד 6 שבועות</b></p>
-     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
-     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>3 חודשים</b></p>
-     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>עגלה, סליקה באשראי ומשלוחים</b></p>
-    </article>
-  </div>
-  <p class="pkgs-note">זמן האספקה נספר מהיום שמקבלים את כל החומרים: טקסטים, תמונות ולוגו.</p>
-
-  <div class="pkgs-more">
-   <div>
-    <h3>בכל מסלול</h3>
-    <ul class="ticks">
-     <li>עיצוב מותאם אישית, בלי תבנית מוכנה</li>
-     <li>התאמה מלאה לטלפון וטעינה מהירה</li>
-     <li>קידום בסיסי בגוגל: כותרות, תיאורים, מפת אתר ונתונים מובנים</li>
-     <li>התאמות נגישות והצהרת נגישות</li>
-     <li>חיבור דומיין, תעודת אבטחה (SSL) ו־Google Search Console</li>
-    </ul>
-   </div>
-   <div>
-    <h3>תוספות</h3>
-    <ul class="price-list">
-     <li><span>גרסה באנגלית</span><b>500 עד 1,800 ₪</b></li>
-     <li><span>עמוד נוסף</span><b>350 ₪</b></li>
-     <li><span>כיוון עיצוב נוסף</span><b>400 ₪</b></li>
-     <li><span>סבב תיקונים נוסף או שעת עבודה</span><b>150 ₪</b></li>
-     <li><span>10 מוצרים נוספים בחנות</span><b>200 ₪</b></li>
-     <li><span>תחזוקה: עדכונים, גיבויים ושינויים קטנים עד חצי שעה</span><b>199 ₪ לחודש</b></li>
-    </ul>
-   </div>
-   <div>
-    <h3>לא כלול במחיר</h3>
-    <ul class="ticks ticks-x">
-     <li>אחסון ודומיין, בדרך כלל 40 עד 60 ₪ לחודש, משולמים ישירות לחברת האחסון</li>
-     <li>כתיבת תוכן מלאה. אני עוזר לנסח את מה שתביאו</li>
-     <li>צילום מקצועי</li>
-     <li>עמלות של חברת הסליקה (בחנות)</li>
-    </ul>
-   </div>
-  </div>
  </div>
 </section>
 
@@ -394,6 +324,7 @@
     </div>
    </div>
    <a class="btn btn-gold" id="r-send" href="#contact">לשלוח את התכנית במייל</a>
+   <a class="text-link result-more" id="r-more" href="#packages">מה עוד כלול במסלול הזה</a>
    <div class="result-alt">
     <button type="button" class="text-link as-button" id="r-copy">העתקת התכנית</button>
     <span class="muted">או</span>
@@ -404,17 +335,118 @@
  </div>
 </section>
 
+<!-- מסלולים: מה מקבלים בכל הצעה -->
+<section class="pkgs-sec" id="packages" aria-labelledby="pkgs-title">
+ <div class="wrap">
+  <h2 id="pkgs-title" class="sec-title">מה מקבלים בכל מסלול</h2>
+  <p class="sec-lead">בשוק מקובל לקבל סקיצה אחת ועד 3 סבבי תיקונים. אצלי רואים 2 עד 3 כיווני עיצוב מלאים לפני שבוחרים. המחירים לפני מע״מ.</p>
+  <div class="pkgs" tabindex="0" aria-label="ארבעת המסלולים, אפשר לגלול לצדדים בטלפון">
+    <article class="pkg" data-track="landing" data-price="1900" data-en="500" aria-labelledby="pkg-landing">
+     <h3 id="pkg-landing">דף נחיתה</h3>
+     <p class="pkg-fit">עמוד אחד ברור שמביא פניות</p>
+     <p class="pkg-price"><span>החל מ־</span><b>1,900 ₪</b></p>
+     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>2</b></p>
+     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>2</b></p>
+     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עמוד אחד, עד 7 חלקים</b></p>
+     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>שינויים קטנים עליי</b></p>
+     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>עד 7 ימי עבודה</b></p>
+     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>הסבר קצר</b></p>
+     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>חודש</b></p>
+     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>טופס פנייה למייל וכפתור חיוג</b></p>
+     <button type="button" class="btn btn-line pkg-pick" data-pick="landing" aria-pressed="false">לבחור במסלול הזה<span class="sr">: דף נחיתה</span></button>
+    </article>
+    <article class="pkg is-rec" data-track="site" data-price="3900" data-en="1000" aria-labelledby="pkg-site">
+     <h3 id="pkg-site">אתר עם אזור ניהול</h3>
+     <span class="pkg-badge">מומלץ</span>
+     <p class="pkg-fit">מתאים לרוב העסקים והמוסדות</p>
+     <p class="pkg-price"><span>החל מ־</span><b>3,900 ₪</b></p>
+     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
+     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
+     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עד 6</b></p>
+     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>עדכון התוכן שמשתנה</b></p>
+     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>3 עד 4 שבועות</b></p>
+     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
+     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>חודשיים</b></p>
+     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>טפסים ומדור תוכן</b></p>
+     <button type="button" class="btn btn-gold pkg-pick" data-pick="site" aria-pressed="false">לבחור במסלול הזה<span class="sr">: אתר עם אזור ניהול</span></button>
+    </article>
+    <article class="pkg" data-track="club" data-price="5900" data-en="1500" aria-labelledby="pkg-club">
+     <h3 id="pkg-club">אתר ומועדון עדכונים</h3>
+     <p class="pkg-fit">מוסדות וחוגים עם הרשמה וקהל</p>
+     <p class="pkg-price"><span>החל מ־</span><b>5,900 ₪</b></p>
+     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
+     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
+     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>עד 8</b></p>
+     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>תוכן, פניות ומנויים</b></p>
+     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>4 עד 5 שבועות</b></p>
+     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
+     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>3 חודשים</b></p>
+     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>הרשמה, חשבונות, רשימת תפוצה ו־3 תבניות מייל</b></p>
+     <button type="button" class="btn btn-line pkg-pick" data-pick="club" aria-pressed="false">לבחור במסלול הזה<span class="sr">: אתר ומועדון עדכונים</span></button>
+    </article>
+    <article class="pkg" data-track="store" data-price="6900" data-en="1800" aria-labelledby="pkg-store">
+     <h3 id="pkg-store">חנות אונליין</h3>
+     <p class="pkg-fit">מוכרים ורוצים לקבל תשלום באתר</p>
+     <p class="pkg-price"><span>החל מ־</span><b>6,900 ₪</b></p>
+     <p class="pkg-row" data-k="design"><span>כיווני עיצוב</span><b>3</b></p>
+     <p class="pkg-row" data-k="revisions"><span>סבבי תיקונים</span><b>3</b></p>
+     <p class="pkg-row" data-k="pages"><span>עמודים</span><b>חנות מלאה, עד 30 מוצרים מוזנים</b></p>
+     <p class="pkg-row" data-k="cms"><span>ניהול עצמי</span><b>מוצרים, מלאי והזמנות</b></p>
+     <p class="pkg-row" data-k="delivery"><span>זמן אספקה</span><b>4 עד 6 שבועות</b></p>
+     <p class="pkg-row" data-k="training"><span>הדרכה</span><b>שיחה אישית ומדריך כתוב</b></p>
+     <p class="pkg-row" data-k="support"><span>ליווי אחרי ההשקה</span><b>3 חודשים</b></p>
+     <p class="pkg-row" data-k="extra"><span>מיוחד למסלול</span><b>עגלה, סליקה באשראי ומשלוחים</b></p>
+     <button type="button" class="btn btn-line pkg-pick" data-pick="store" aria-pressed="false">לבחור במסלול הזה<span class="sr">: חנות אונליין</span></button>
+    </article>
+  </div>
+  <p class="pkgs-note">לוחצים על מסלול כדי לבחור בו וממשיכים ליצירת קשר. זמן האספקה נספר מהיום שמקבלים את כל החומרים: טקסטים, תמונות ולוגו.</p>
+
+  <div class="pkgs-more">
+   <div>
+    <h3>בכל מסלול</h3>
+    <ul class="ticks">
+     <li>עיצוב מותאם אישית, בלי תבנית מוכנה</li>
+     <li>התאמה מלאה לטלפון וטעינה מהירה</li>
+     <li>קידום בסיסי בגוגל: כותרות, תיאורים, מפת אתר ונתונים מובנים</li>
+     <li>התאמות נגישות והצהרת נגישות</li>
+     <li>חיבור דומיין, תעודת אבטחה (SSL) ו־Google Search Console</li>
+    </ul>
+   </div>
+   <div>
+    <h3>תוספות</h3>
+    <ul class="price-list">
+     <li><span>גרסה באנגלית</span><b>500 עד 1,800 ₪</b></li>
+     <li><span>עמוד נוסף</span><b>350 ₪</b></li>
+     <li><span>כיוון עיצוב נוסף</span><b>400 ₪</b></li>
+     <li><span>סבב תיקונים נוסף או שעת עבודה</span><b>150 ₪</b></li>
+     <li><span>10 מוצרים נוספים בחנות</span><b>200 ₪</b></li>
+     <li><span>תחזוקה: עדכונים, גיבויים ושינויים קטנים עד חצי שעה</span><b>199 ₪ לחודש</b></li>
+    </ul>
+   </div>
+   <div>
+    <h3>לא כלול במחיר</h3>
+    <ul class="ticks ticks-x">
+     <li>אחסון ודומיין, בדרך כלל 40 עד 60 ₪ לחודש, משולמים ישירות לחברת האחסון</li>
+     <li>כתיבת תוכן מלאה. אני עוזר לנסח את מה שתביאו</li>
+     <li>צילום מקצועי</li>
+     <li>עמלות של חברת הסליקה (בחנות)</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+
 <!-- מה יש בכל אתר -->
 <section class="basics" aria-labelledby="basics-title">
  <div class="wrap">
   <h2 id="basics-title" class="sec-title">מה יש בכל אתר</h2>
   <ul class="ticks ticks-2">
-   <li><b>מהיר גם בטלפון</b> נטען מהר גם בקליטה חלשה, בלי בוני עמודים כבדים.</li>
-   <li><b>פנייה בלחיצה</b> כפתור חיוג ומייל שתמיד נראה, ופנייה שמגיעה עם כל הפרטים.</li>
-   <li><b>מוכן לגוגל</b> מפת אתר, תיאורים לכל עמוד ונתונים מובנים.</li>
-   <li><b>נגישות</b> מבנה נגיש, ניווט במקלדת, מתג לכיבוי תנועה והצהרת נגישות.</li>
-   <li><b>דומיין ואחסון</b> מחוברים ומאובטחים. העלות השנתית כתובה מראש בהצעת המחיר.</li>
-   <li><b>עדכון לבד</b> מה שמשתנה לעיתים קרובות מקבל מסך עדכון פשוט והדרכה קצרה.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><b>מהיר גם בטלפון</b> נטען מהר גם בקליטה חלשה, בלי בוני עמודים כבדים.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><b>פנייה בלחיצה</b> כפתור חיוג ומייל שתמיד נראה, ופנייה שמגיעה עם כל הפרטים.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><b>מוכן לגוגל</b> מפת אתר, תיאורים לכל עמוד ונתונים מובנים.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M5 8l7 2 7-2M12 10v5l-3 6M12 15l3 6"/></svg></span><b>נגישות</b> מבנה נגיש, ניווט במקלדת, מתג לכיבוי תנועה והצהרת נגישות.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><b>דומיין ואחסון</b> מחוברים ומאובטחים. העלות השנתית כתובה מראש בהצעת המחיר.</li>
+   <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13 7 4 4"/></svg></span><b>עדכון לבד</b> מה שמשתנה לעיתים קרובות מקבל מסך עדכון פשוט והדרכה קצרה.</li>
   </ul>
  </div>
 </section>
@@ -456,9 +488,19 @@
 
 <!-- יצירת קשר -->
 <section class="contact" id="contact" aria-labelledby="contact-title">
+ <svg class="swoosh" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+  <path pathLength="1" d="M1200 40C900 20 760 140 600 170S240 250 0 230"/>
+ </svg>
  <div class="wrap contact-in">
   <h2 id="contact-title">מתחילים בשיחה קצרה</h2>
   <p>ספרו מה העסק עושה ואם יש לו כבר אתר. אחזור אליכם עם שאלון קצר, ואחריו תראו את האתר שלכם בכמה עיצובים.</p>
+  <div class="picked" id="picked" hidden tabindex="-1" aria-live="polite">
+   <p class="picked-k">המסלול שבחרתם</p>
+   <p class="picked-name"><b id="picked-name"></b> <span id="picked-price"></span></p>
+   <ul class="picked-incl" id="picked-incl"></ul>
+   <label class="toggle picked-en"><input type="checkbox" id="picked-en"><span>להוסיף גרסה באנגלית</span></label>
+   <button type="button" class="text-link as-button picked-change" id="picked-change">להחליף מסלול</button>
+  </div>
   <div class="contact-actions">
    <a class="btn btn-gold" href="mailto:yyrkg22@gmail.com" data-mail>לשלוח מייל</a>
    <a class="btn btn-line" href="tel:0548540700" data-tel>להתקשר: <bdi>054-854-0700</bdi></a>

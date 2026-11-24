@@ -101,6 +101,11 @@ const progressIn = (el, start = 1, span = 1) => {
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
     note.textContent = btn.dataset.note;
     layout();
+    if (motionOn()) {
+      const front = cards.find((c) => c.dataset.shot === shot);
+      front.classList.remove('is-scan'); void front.offsetWidth; front.classList.add('is-scan');
+      setTimeout(() => front.classList.remove('is-scan'), 900);
+    }
   };
 
   buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.shot)));
@@ -138,6 +143,8 @@ const progressIn = (el, start = 1, span = 1) => {
       const r = hero.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;
+      hero.style.setProperty('--mx', `${(x + 0.5) * 100}%`);
+      hero.style.setProperty('--my', `${(y + 0.5) * 100}%`);
       deck.style.setProperty('--ry', `${14 + x * 10}deg`);
       deck.style.setProperty('--rx', `${7 - y * 8}deg`);
       dial.style.setProperty('--dx', `${x * -24}px`);
@@ -190,12 +197,27 @@ const progressIn = (el, start = 1, span = 1) => {
   const box = document.getElementById('race');
   const replay = document.getElementById('race-replay');
   if (!box) return;
+  const bars = [...box.querySelectorAll('.race-bar i')].map((i) => ({
+    clock: i.querySelector('.race-clock'), sec: parseFloat(i.dataset.sec), dur: parseFloat(i.style.getPropertyValue('--t')) * 1000
+  }));
+  let raf = 0;
+  const tick = (t0) => (t) => {
+    let running = false;
+    bars.forEach((b) => {
+      const k = Math.min(1, (t - t0) / b.dur);
+      if (b.clock) b.clock.textContent = (b.sec * k).toFixed(1) + 's';
+      if (k < 1) running = true;
+    });
+    if (running) raf = requestAnimationFrame(tick(t0));
+  };
   const run = () => {
     if (!motionOn()) return;
+    cancelAnimationFrame(raf);
     box.classList.remove('is-running');
     box.classList.add('is-ready');
     void box.offsetWidth;            // מאפס את הפסים לפני הריצה
     box.classList.add('is-running');
+    raf = requestAnimationFrame((t0) => tick(t0)(t0));
   };
   if ('IntersectionObserver' in window && motionOn()) {
     box.classList.add('is-ready');
@@ -223,6 +245,115 @@ const progressIn = (el, start = 1, span = 1) => {
     });
   });
   requestScrollJobs();
+})();
+
+/* ===== משרטוט לאתר חי: לפני ואחרי (כלל 4, תפקיד: להראות שינוי מצב) ===== */
+(() => {
+  const ba = document.getElementById('ba');
+  if (!ba) return;
+  const range = ba.querySelector('.ba-range');
+  let touched = false;
+  const set = (p) => ba.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(3));
+  const fromRange = () => { touched = true; set(range.value / 100); };
+  range.addEventListener('input', fromRange);
+  /* גרירה ישירה על התמונה, גם בטלפון */
+  ba.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    const r = ba.getBoundingClientRect();
+    const move = (ev) => { touched = true; const p = (r.right - ev.clientX) / r.width; set(p); range.value = Math.round(p * 100); };
+    move(e);
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  });
+  /* עד שנוגעים: השרטוט "נבנה" לאתר בזמן הגלילה */
+  scrollJobs.push(() => {
+    if (touched) return;
+    if (!motionOn()) { set(0.5); range.value = 50; return; }
+    const r = ba.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const k = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.85)));
+    const p = 0.92 - k * 0.84;
+    set(p); range.value = Math.round(p * 100);
+  });
+  requestScrollJobs();
+})();
+
+/* ===== יצירת קשר: קו האור נמשך אל הכפתור (תפקיד: להוביל את העין) ===== */
+(() => {
+  const sw = document.querySelector('.swoosh');
+  const sec = document.getElementById('contact');
+  if (!sw || !sec) return;
+  scrollJobs.push(() => {
+    const d = motionOn() ? progressIn(sec, 1, 0.6) : 1;
+    sw.style.setProperty('--draw', d.toFixed(3));
+  });
+  requestScrollJobs();
+})();
+
+/* ===== בחירת מסלול: לחיצה על כרטיס בוחרת וממשיכה ליצירת קשר ===== */
+const pickPackage = (() => {
+  const cards = [...document.querySelectorAll('.pkg[data-track]')];
+  const box = document.getElementById('picked');
+  if (!cards.length || !box) return () => {};
+  const nis = (n) => n.toLocaleString('he-IL') + ' ₪';
+  const en = document.getElementById('picked-en');
+  let current = null;
+
+  const render = () => {
+    if (!current) return;
+    const card = cards.find((c) => c.dataset.track === current);
+    const name = card.querySelector('h3').textContent;
+    const price = Number(card.dataset.price) + (en.checked ? Number(card.dataset.en) : 0);
+    const rows = [...card.querySelectorAll('.pkg-row')].map((r) => ({ k: r.dataset.k, label: r.querySelector('span').textContent, value: r.querySelector('b').textContent }));
+    document.getElementById('picked-name').textContent = name;
+    document.getElementById('picked-price').textContent = `החל מ־${nis(price)} לפני מע״מ` + (en.checked ? ', כולל אנגלית' : '');
+    document.getElementById('picked-incl').replaceChildren(...rows.filter((r) => ['design', 'revisions', 'delivery', 'support'].includes(r.k)).map((r) => {
+      const li = document.createElement('li');
+      const sp = document.createElement('span'); sp.textContent = r.label;
+      const b = document.createElement('b'); b.textContent = r.value;
+      li.append(sp, b); return li;
+    }));
+    const body = [
+      'שלום,', '',
+      `אשמח להתקדם עם המסלול: ${name}`,
+      `מחיר: החל מ־${nis(price)} לפני מע״מ` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
+      ...rows.map((r) => `${r.label}: ${r.value}`),
+      '', 'שם העסק: ', 'יש לעסק כבר אתר? ', 'טלפון לחזרה: '
+    ].join('\n');
+    document.querySelectorAll('#contact [data-mail]').forEach((a) => { a.href = mailHref(`בחירת מסלול: ${name}`, body); });
+  };
+
+  const pick = (track, go = true) => {
+    current = track;
+    cards.forEach((c) => {
+      const on = c.dataset.track === track;
+      c.classList.toggle('is-selected', on);
+      c.querySelector('.pkg-pick').setAttribute('aria-pressed', String(on));
+      c.querySelector('.pkg-pick').firstChild.textContent = on ? 'נבחר. ממשיכים' : 'לבחור במסלול הזה';
+    });
+    box.hidden = false;
+    box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
+    render();
+    if (go) {
+      document.getElementById('contact').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'start' });
+      setTimeout(() => box.focus({ preventScroll: true }), motionOn() ? 700 : 0);
+    }
+  };
+
+  cards.forEach((c) => {
+    c.addEventListener('click', (e) => { if (e.target.closest('a')) return; pick(c.dataset.track); });
+  });
+  /* מסגרת האור של המסלול המומלץ זזה רק כשרואים אותה */
+  const grid = document.querySelector('.pkgs');
+  if ('IntersectionObserver' in window && grid) {
+    new IntersectionObserver((es) => es.forEach((e) => grid.classList.toggle('is-live', e.isIntersecting)), { threshold: 0.25 }).observe(grid);
+  }
+  en.addEventListener('change', render);
+  document.getElementById('picked-change').addEventListener('click', () => {
+    document.getElementById('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' });
+  });
+  return pick;
 })();
 
 /* ===== מתכנן האתר: הדוגמה החינמית (כלל 5) ===== */
@@ -313,9 +444,13 @@ const progressIn = (el, start = 1, span = 1) => {
   };
 
   let planText = '';
+  let lastTrack = null;
+  const resultBox = document.getElementById('result');
   const render = () => {
     const ans = read();
     const p = plan(ans);
+    if (lastTrack && motionOn()) { resultBox.classList.remove('is-pulse'); void resultBox.offsetWidth; resultBox.classList.add('is-pulse'); }
+    lastTrack = p.track;
     $('r-track').textContent = TRACK[p.track].name;
     $('r-why').textContent = TRACK[p.track].why;
     $('r-count').textContent = p.track === 'landing' ? '1' : String(p.pages.length);
@@ -360,6 +495,15 @@ const progressIn = (el, start = 1, span = 1) => {
   });
   $('r-send').addEventListener('click', () => {
     $('r-status').textContent = `נפתחת תוכנת המייל. אם היא לא נפתחה, כתבו אל ${CONFIG.email}`;
+  });
+
+  $('r-more').addEventListener('click', (e) => {
+    e.preventDefault();
+    const card = document.querySelector(`.pkg[data-track="${lastTrack}"]`);
+    if (!card) return;
+    card.scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'center', inline: 'center' });
+    card.classList.remove('is-flash'); void card.offsetWidth; card.classList.add('is-flash');
+    card.querySelector('.pkg-pick').focus({ preventScroll: true });
   });
 
   form.addEventListener('change', render);
