@@ -9,7 +9,7 @@ OUT=$(mktemp -d)
 cd "$SRC"
 git archive HEAD | tar -x -C "$OUT"
 cd "$OUT"
-rm -rf CNAME README.md .gitignore .hostinger tools _private .htaccess ./*.php
+rm -rf CNAME README.md .gitignore .hostinger tools _private admin .htaccess ./*.php
 python3 - "$OUT" <<'PY'
 import sys, pathlib, re
 root = pathlib.Path(sys.argv[1])
