@@ -98,7 +98,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && in_array($_POST['do'] ?? ''
     if (!hash_equals($csrf, (string) ($_POST['csrf'] ?? ''))) { http_response_code(400); exit('הטופס פג תוקף. רעננו את הדף ונסו שוב.'); }
     $did = (string) ($_POST['id'] ?? '');
     $where = '';
-    if ($_POST['do'] === 'lead_delete') { jsonl_remove('leads.jsonl', $did); unset($status[$did]); @file_put_contents($statusFile, json_encode($status, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX); $where = 'leads'; }
+    if ($_POST['do'] === 'lead_delete') { jsonl_remove('leads.jsonl', $did); data_update('lead-confirm.json', static function (array &$c) use ($did): void { unset($c[$did]); }); unset($status[$did]); @file_put_contents($statusFile, json_encode($status, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX); $where = 'leads'; }
     if ($_POST['do'] === 'form_delete') { jsonl_remove('forms.jsonl', $did); form_files_remove($did); $where = 'forms'; }
     if ($_POST['do'] === 'quote_delete') { $qq = quotes_load(); unset($qq[$did]); quotes_save($qq); $where = 'quotes'; }
     header('Location: /admin/?deleted=1#' . $where, true, 303); exit;
@@ -135,10 +135,10 @@ if (($_GET['export'] ?? '') === '1') {
     header('Content-Disposition: attachment; filename="yyg-leads-' . date('Y-m-d') . '.csv"');
     $out = fopen('php://output', 'w');
     fwrite($out, "\xEF\xBB\xBF");
-    fputcsv($out, ['תאריך', 'שם', 'טלפון', 'שם העסק', 'מתי נוח', 'רקע מועדף', 'אתרים שאוהב', 'הערות', 'מסלול ותכנית', 'סטטוס', 'הערה שלי']);
+    fputcsv($out, ['תאריך', 'שם', 'מייל', 'אישר את המייל', 'טלפון', 'שם העסק', 'מתי נוח', 'רקע מועדף', 'אתרים שאוהב', 'הערות', 'מסלול ותכנית', 'סטטוס', 'הערה שלי']);
     /* תא שמתחיל ב־= + - @ יכול להפוך לנוסחה באקסל: מוסיפים לפניו גרש */
     $cell = static fn($v): string => preg_match('/^[=+\-@\t\r]/', (string) $v) ? "'" . $v : (string) $v;
-    foreach (array_reverse($leads, true) as $id => $r) fputcsv($out, array_map($cell, [$fmt((int) $r['t'], 'd/m/Y H:i'), $r['name'] ?? '', $r['phone'] ?? '', $r['business'] ?? '', $r['when'] ?? '', $r['style'] ?? '', $r['likes'] ?? '', $r['notes'] ?? '', $r['plan'] ?? '', STATUSES[$stOf((string) $id)], $status[$id]['note'] ?? '']));
+    foreach (array_reverse($leads, true) as $id => $r) fputcsv($out, array_map($cell, [$fmt((int) $r['t'], 'd/m/Y H:i'), $r['name'] ?? '', $r['email'] ?? '', !empty($r['email_ok']) ? 'כן' : 'לא', $r['phone'] ?? '', $r['business'] ?? '', $r['when'] ?? '', $r['style'] ?? '', $r['likes'] ?? '', $r['notes'] ?? '', $r['plan'] ?? '', STATUSES[$stOf((string) $id)], $status[$id]['note'] ?? '']));
     exit;
 }
 
@@ -221,8 +221,9 @@ ob_start(); ?>
   <div class="lead-h"><b><?= $e($r['name'] ?? '') ?></b><span class="muted"><?= $e($fmt((int) $r['t'], 'd/m/Y H:i')) ?></span><span class="tag"><?= $e(STATUSES[$st]) ?></span>
    <?php if (!empty($r['score'])): ?><span class="tag warn">חשד לספאם: <?= $e(implode(', ', (array) ($r['why'] ?? []))) ?></span><?php endif; ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
-   <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?></div>
-  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? ''])) ?>">העתקת קישור לשאלון</button><form method="post" class="del" onsubmit="return confirm('למחוק את הפנייה? אי אפשר לשחזר.')"><input type="hidden" name="do" value="lead_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $id) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></div>
+   <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?>
+   <?php if (!empty($r['email_ok'])): ?><span class="tag ok">✓ אישר/ה את המייל</span><?php elseif (!empty($r['ctok'])): ?><span class="tag">המייל עוד לא אושר</span><?php endif; ?></div>
+  <div class="acts"><?php if (!empty($r['email'])): ?><a class="btn gold" href="mailto:<?= $e($r['email']) ?>?subject=<?= $e(rawurlencode('הפנייה שלך ל־YYG')) ?>"><bdi><?= $e($r['email']) ?></bdi></a><?php endif; ?><a class="btn<?= empty($r['email']) ? ' gold' : '' ?>" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'email' => $r['email'] ?? '', 'phone' => $r['phone'] ?? '', 'business' => $r['business'] ?? ''])) ?>">העתקת קישור לשאלון</button><form method="post" class="del" onsubmit="return confirm('למחוק את הפנייה? אי אפשר לשחזר.')"><input type="hidden" name="do" value="lead_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $id) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>

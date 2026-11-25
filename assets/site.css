@@ -997,19 +997,24 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 }
 
 /* ===== פנייה מהירה: שם וטלפון, מתחת לעבודות וליד המסלולים ===== */
-.quick-lead{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:14px clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,44px);padding:clamp(18px,2.6vw,26px) clamp(18px,3vw,30px);background:linear-gradient(180deg,#262D3A,var(--panel));border:1px solid var(--line-2);border-radius:16px;box-shadow:var(--lift)}
+.quick-lead{position:relative;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);align-items:center;gap:14px clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,44px);padding:clamp(18px,2.6vw,26px) clamp(18px,3vw,30px);background:linear-gradient(180deg,#262D3A,var(--panel));border:1px solid var(--line-2);border-radius:16px;box-shadow:var(--lift)}
 .quick-lead::before{content:"";position:absolute;inset-block:18px;inset-inline-start:0;width:3px;border-radius:3px;background:var(--muted)}
 .ql-title{font-weight:700;font-size:var(--step-1);color:#fff;line-height:1.25}
 .ql-sub{margin-top:4px;color:var(--muted);font-size:.95rem;line-height:1.5}
-.ql-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:12px}
+.ql-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr) auto;align-items:end;gap:12px}
 .ql-fields .field span{font-size:.85rem;color:var(--muted);font-weight:600}
 .ql-fields .btn{min-height:48px;white-space:nowrap}
 .ql-status{grid-column:1/-1;min-height:0;font-size:.95rem;color:#D7DDE6}
 .ql-status:empty{display:none}
 .ql-status.is-ok{color:#fff;font-weight:600}
 .quick-lead.is-sent .ql-fields{display:none}
-@media (max-width:860px){
+@media (max-width:1100px){
  .quick-lead{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+ .ql-fields{grid-template-columns:1fr 1fr}
+ .ql-fields .f-name,.ql-fields .btn{grid-column:1/-1}
+ .ql-fields .btn{width:100%}
 }
 @media (max-width:520px){
  .ql-fields{grid-template-columns:1fr}
@@ -1029,6 +1034,7 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 .result .quick-lead::before{display:none}
 .result .ql-title{font-size:1.15rem}
 .result .ql-fields{grid-template-columns:1fr 1fr}
+.result .ql-fields .f-name{grid-column:1/-1}
 .result .ql-fields .btn{grid-column:1/-1;width:100%}
 .result .result-fine{margin-top:14px}
 @media (max-width:420px){.result .ql-fields{grid-template-columns:1fr}}

@@ -220,7 +220,7 @@ if ($q === null && $lead === null && isset($_GET['form'])) {
 }
 $init = $q ? (($q['ui'] ?? null) ?: null) : null;
 $prefill = $formRec ? ['name' => $formRec['contact']['name'], 'phone' => $formRec['contact']['phone'], 'business' => $formRec['contact']['business'], 'email' => $formRec['contact']['email'],
-    'plan' => '', 'lead_id' => '', 'auto' => intake_to_quote($formRec)] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
+    'plan' => '', 'lead_id' => '', 'auto' => intake_to_quote($formRec)] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'email' => $lead['email'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
 $totals = $q ? quote_totals($q) : null;
 
 ob_start(); ?>

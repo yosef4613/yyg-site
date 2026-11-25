@@ -84,6 +84,8 @@ function form_files_remove(string $id): void {
 function leads_load(): array {
     $leads = [];
     foreach ((@file(data_dir() . '/leads.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && !empty($r['id'])) $leads[(string) $r['id']] = $r; }
+    /* מי אישר את המייל שלו (מהקישור במייל ששלחנו לו) */
+    foreach (json_load('lead-confirm.json') as $id => $c) if (isset($leads[(string) $id])) $leads[(string) $id]['email_ok'] = (int) ($c['t'] ?? 0);
     return $leads;
 }
 
@@ -134,13 +136,13 @@ function notify_me(string $subject, string $html, string $text): bool {
     return mail_send((string) (private_config()['to'] ?? ''), $subject, $html, $text, 'האתר של YYG');
 }
 /* מסגרת אחידה למיילים שיוצאים ללקוחות ולמנויים */
-function mail_wrap(string $title, string $body, string $footer = '', bool $en = false): string {
+function mail_wrap(string $title, string $body, string $footer = '', bool $en = false, bool $phone = true): string {
     return '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><body style="margin:0;padding:24px 12px;background:#F4F5F7;font-family:Arial,sans-serif;color:#151920">'
         . '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #DCE0E6">'
         . '<div style="padding:16px 22px;background:#151920;color:#fff;font-size:17px;font-weight:700">YYG · ' . ($en ? 'Web design &amp; development' : 'עיצוב ובניית אתרים') . '</div>'
         . '<div style="padding:22px;font-size:16px;line-height:1.65"><h1 style="font-size:21px;margin:0 0 12px">' . h($title) . '</h1>' . $body . '</div>'
         . '<div style="padding:14px 22px;background:#F4F5F7;color:#5A6472;font-size:13px;line-height:1.6">' . ($footer !== '' ? $footer . '<br>' : '')
-        . ($en ? 'YYG, Yehuda Gordon · 054-854-0700 · yehuda@yygweb.com · yygweb.com' : 'YYG, יהודה גורדון · 054-854-0700 · yehuda@yygweb.com · yygweb.com') . '</div></div></body></html>';
+        . ($en ? 'YYG, Yehuda Gordon · ' : 'YYG, יהודה גורדון · ') . ($phone ? '054-854-0700 · ' : '') . 'yehuda@yygweb.com · yygweb.com</div></div></body></html>';
 }
 function mail_button(string $url, string $label): string {
     return '<p style="margin:20px 0"><a href="' . h($url) . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:10px">' . h($label) . '</a></p>';
