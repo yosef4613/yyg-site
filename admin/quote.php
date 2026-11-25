@@ -91,6 +91,8 @@ function intake_to_quote(array $rec): array {
     if ($any($feats, '/מחשבון|calculator/u')) $todo('מחשבון או שאלון באתר');
     if (in_array('__other', $feats, true) && $val('features__other') !== '') $todo('יכולת נוספת: ' . $val('features__other'));
     if (in_array('__other', $pages, true) && $val('pages__other') !== '') $note('עמוד נוסף שהלקוח ביקש: ' . $val('pages__other'));
+    /* דף נחיתה, והלקוח רוצה לעדכן בעצמו (שעות, מבצעים): בדף נחיתה אין אזור ניהול, אז מסך עדכון קטן */
+    if (in_array($core, ['landing', 'landing_basic'], true) && preg_match('/אני או מישהו|Me or someone/u', $val('update_who'))) $todo('מסך עדכון קטן לבעל העסק' . ($val('update_what') !== '' ? ': ' . mb_substr($val('update_what'), 0, 60, 'UTF-8') . (mb_strlen($val('update_what'), 'UTF-8') > 60 ? '…' : '') : ''));
     /* תשלומים קבועים */
     if (preg_match('/שאתה תעדכן|like you to do/u', $val('update_who'))) { $recurring['maint'] = true; $added('תחזוקה חודשית (הלקוח רוצה שאתה תעדכן)'); }
     /* הערות לשיחה */

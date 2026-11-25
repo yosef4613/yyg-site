@@ -26,6 +26,24 @@ $qLink = 'https://yygweb.com/' . ($EN ? 'en/' : '') . 'questionnaire/?' . http_b
 $phone = '054-854-0700';
 $hours = T('בימים א׳ עד ד׳, בין 10:00 ל־13:30', 'Sunday to Wednesday, 10:00 to 13:30');
 
+/* קישור לשאלון מהמייל: הלחיצה עצמה מאשרת שהמייל אמיתי, ומשם ישר לשאלון עם הפרטים שכבר יש */
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && ($in['go'] ?? '') === 'q') {
+    $first = data_update('lead-confirm.json', static function (array &$all) use ($id): bool {
+        if (isset($all[$id])) { $all[$id]['q'] = $all[$id]['q'] ?? time(); return false; }
+        $all[$id] = ['t' => time(), 'q' => time()];
+        return true;
+    });
+    if ($first) {
+        $admin = 'https://yygweb.com/admin/#lead-' . $id;
+        notify_me('✓ פתח/ה את השאלון מהמייל: ' . $name,
+            '<div dir="rtl" style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6"><p><b>' . h($name) . '</b>' . (!empty($lead['business']) ? ' (' . h($lead['business']) . ')' : '') . ' לחץ/ה על הקישור לשאלון האפיון במייל. המייל <bdi>' . h($lead['email'] ?? '') . '</bdi> אמיתי.</p>'
+            . '<p>כשהשאלון יישלח, תקבל אותו במייל נפרד.</p><p><a href="' . h($admin) . '">לפנייה בדף הניהול</a></p></div>',
+            "$name פתח/ה את השאלון מהמייל.\n$admin");
+    }
+    header('Location: ' . $qLink, true, 302);
+    exit;
+}
+
 /* האישור עצמו */
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($in['do'] ?? '') === 'confirm') {
     $first = data_update('lead-confirm.json', static function (array &$all) use ($id): bool {

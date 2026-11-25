@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YYG: בונה את העמוד "ככה זה עובד, על פרויקט לדוגמה" (/demo/ ו־/en/demo/).
+"""YYG: בונה את עמודי "ככה זה עובד" של הפרויקטים לדוגמה: הנגריה (/demo/) וחנות המשקפיים (/demo/optika/), בעברית ובאנגלית.
 הנתונים: tools/demo-data.json (התשובות של הלקוח לדוגמה) ו־assets/q-defs.js (נוסח השאלות, בעברית ובאנגלית).
 העיצובים עצמם: demo/design-1..3/index.html. צילומי המסך שלהם: demo/shots/ (נוצרים בסקריפט צילום נפרד).
 הרצה: python3 tools/demo.py"""
@@ -225,20 +225,25 @@ STYLE = '''<style>
  .d-cta h2{font-size:var(--step-2)}
  .d-cta p{margin-top:10px;color:#C9D1DD;max-width:60ch}
  .d-cta .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
- @media (max-width:960px){.d-designs{grid-template-columns:1fr;max-width:620px}.d-fb,.d-took{grid-template-columns:1fr}}
+ .d-hours{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:center;margin-top:24px}
+ .d-hours img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line-2);box-shadow:0 24px 60px -28px rgba(0,0,0,.6)}
+ .d-hours ul{margin-top:10px;padding-inline-start:20px;list-style:disc;color:#C9D1DD;line-height:1.85}
+ .d-hours .btn{margin-top:16px}
+ .d-hours small{display:block;margin-top:10px;color:var(--muted)}
+ .d-other{display:block;margin-top:clamp(48px,7vw,80px);padding:20px 22px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(135deg,#262D3A,#1B212B);color:var(--text);text-decoration:none}
+ .d-other:hover,.d-other:focus-visible{border-color:var(--gold)}
+ .d-other small{display:block;color:var(--gold);font-weight:700;font-size:.85rem}
+ .d-other b{display:block;margin-top:4px;font-size:var(--step-1)}
+ .d-other span{display:block;margin-top:4px;color:var(--muted)}
+ @media (max-width:960px){.d-designs{grid-template-columns:1fr;max-width:620px}.d-fb,.d-took,.d-hours{grid-template-columns:1fr}}
  @media (max-width:520px){.d-bar{grid-template-columns:4.6em 1fr auto}.d-scale{grid-template-columns:5em 1fr 5em}}
 </style>'''
 
 
 def nis(n): return f'{n:,} ₪'
 
-def build(lang):
-    t = T[lang]; he = lang == 'he'
-    path = 'demo/index.html' if he else 'en/demo/index.html'
-    url = f'{SITE}/demo/' if he else f'{SITE}/en/demo/'
-    ans = lambda f, q: answer(f, lang, q, get(f, q))
-    # שלב 1: תשובות מרכזיות
-    hi = [
+def hi_anaf(ans, he):
+    return [
      ('העסק' if he else 'The business', ans('intake', 'biz_what')),
      ('מה מייחד אותם' if he else 'What sets them apart', ans('intake', 'biz_unique')),
      ('הלקוחות' if he else 'The customers', ans('intake', 'cust_who') + '. ' + ans('intake', 'cust_sensitive')),
@@ -248,17 +253,30 @@ def build(lang):
      ('עמודים' if he else 'Pages', ans('intake', 'pages')),
      ('מסלול, תקציב וזמנים' if he else 'Package, budget and timing', ('מסלול: ' if he else 'Package: ') + ans('intake', 'package') + '\n' + ('תקציב: ' if he else 'Budget: ') + ans('intake', 'budget') + '\n' + ('מתי: ' if he else 'When: ') + ans('intake', 'deadline')),
     ]
+
+def files_anaf(he):
+    return [('anaf-logo-sm.webp', 'הלוגו של ענף' if he else 'The Anaf logo', 184), ('kitchen-drawer-560.webp', 'מגירת מטבח מעץ' if he else 'A wooden kitchen drawer', 126),
+            ('table-bench-560.webp', 'שולחן וספסל מעץ' if he else 'A wooden table and bench', 126), ('library-560.webp', 'ספריות בסלון' if he else 'Living room bookcases', 149), ('wardrobe-560.webp', 'ארון קיר' if he else 'A built-in wardrobe', 63)]
+
+def build(lang):
+    t = T[lang]; he = lang == 'he'; pfx = P['prefix']
+    path = f'{pfx}index.html' if he else f'en/{pfx}index.html'
+    url = f'{SITE}/{pfx}' if he else f'{SITE}/en/{pfx}'
+    ans = lambda f, q: answer(f, lang, q, get(f, q))
+    # שלב 1: תשובות מרכזיות
+    hi = P['hi'](ans, he)
     cards1 = ''.join(f'<div class="d-card"><small>{E(k)}</small><p>{E(v).replace(chr(10), "<br>")}</p></div>' for k, v in hi)
-    files = ''.join(f'<img src="/demo/img/{f}" alt="{E(a)}" loading="lazy" width="{w}" height="84">' for f, a, w in [
-        ('anaf-logo-sm.webp', 'הלוגו של ענף' if he else 'The Anaf logo', 184), ('kitchen-drawer-560.webp', 'מגירת מטבח מעץ' if he else 'A wooden kitchen drawer', 126),
-        ('table-bench-560.webp', 'שולחן וספסל מעץ' if he else 'A wooden table and bench', 126), ('library-560.webp', 'ספריות בסלון' if he else 'Living room bookcases', 149), ('wardrobe-560.webp', 'ארון קיר' if he else 'A built-in wardrobe', 63)])
+    files = ''.join(f'<img src="/{pfx}img/{f}" alt="{E(a)}" loading="lazy" width="{w}" height="84">' for f, a, w in P['files'](he))
     all1, n1 = all_answers('intake', lang)
     # שלב 2: ההצעה
     Q = QUOTE[lang]
-    pay = ''.join(f'<li><b>{p}%</b> {nis(Q["price"] * p // 100)} · {E(w)}</li>' for p, w in Q['pay'])
+    items = Q.get('items') or [(Q['base'], Q['price'])]
+    total = sum(pr for _, pr in items)
+    pay = ''.join(f'<li><b>{p}%</b> {nis(total * p // 100)} · {E(w)}</li>' for p, w in Q['pay'])
+    rows = ''.join(f'<tr><td>{E(n)}</td><td>{nis(pr)}</td></tr>' for n, pr in items)
     quote = f'''<div class="d-quote" role="figure" aria-label="{E(t['quote_h'])}">
    <h3>{E(t['quote_h'])} {E(DATA['quote'])}</h3><p class="q-sub">{E(t['quote_for'])} {E(ans('intake', 'business'))}</p>
-   <table><thead><tr><th>{E(t['item'])}</th><th>{E(t['price'])}</th></tr></thead><tbody><tr><td>{E(Q['base'])}</td><td>{nis(Q['price'])}</td></tr><tr class="tot"><td>{E(t['total'])}</td><td>{nis(Q['price'])}</td></tr></tbody></table>
+   <table><thead><tr><th>{E(t['item'])}</th><th>{E(t['price'])}</th></tr></thead><tbody>{rows}<tr class="tot"><td>{E(t['total'])}</td><td>{nis(total)}</td></tr></tbody></table>
    <p class="q-fine">{E(t['final'])}</p>
    <h4>{E(t['incl'])}</h4><ul>{''.join(f'<li>{E(x)}</li>' for x in Q['incl'])}</ul>
    <h4>{E(t['terms'])}</h4><ul>{''.join(f'<li>{E(x)}</li>' for x in Q['terms'])}</ul>
@@ -272,11 +290,11 @@ def build(lang):
     for d in DESIGNS:
         L = d[lang]; n = d['n']
         designs += f'''<article class="d-design">
-   <a class="d-shot" href="/demo/design-{n}/" aria-label="{E(t['open'].format(n=n))}"><img class="dk" src="/demo/shots/design-{n}-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/demo/shots/design-{n}-m.webp" width="240" height="520" alt="" loading="lazy"></a>
+   <a class="d-shot" href="/{pfx}design-{n}/" aria-label="{E(t['open'].format(n=n))}"><img class="dk" src="/{pfx}shots/design-{n}-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/design-{n}-m.webp" width="240" height="520" alt="" loading="lazy"></a>
    <div class="d-design-b"><h3><small>{'עיצוב' if he else 'Design'} {n}</small>{E(L['name'])}</h3><p>{E(L['text'])}</p>
     <p class="d-meta">{E(t['fonts'])}: {E(L['fonts'])}</p>
     <div class="d-sw" aria-label="{E(t['palette'])}"><span class="d-meta">{E(t['palette'])}:</span>{''.join(f'<i style="background:{c}"></i>' for c in d['colors'])}</div>
-    <a class="btn btn-line" href="/demo/design-{n}/">{E(t['open'].format(n=n))}</a></div>
+    <a class="btn btn-line" href="/{pfx}design-{n}/">{E(t['open'].format(n=n))}</a></div>
   </article>'''
     # שלב 4: המשוב
     fb = dict(DATA['feedback'])
@@ -296,11 +314,18 @@ def build(lang):
     all2, n2 = all_answers('feedback', lang)
     ld = [{'@context': 'https://schema.org', '@type': 'Article', 'headline': t['h1'], 'description': t['desc'], 'inLanguage': lang, 'datePublished': TODAY, 'dateModified': TODAY,
            'mainEntityOfPage': url, 'author': {'@type': 'Person', 'name': 'יהודה גורדון' if he else 'Yehuda Gordon', 'url': SITE + '/'},
-           'publisher': {'@type': 'Organization', 'name': 'YYG', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}}, 'image': SITE + '/demo/shots/design-1-d.webp'},
+           'publisher': {'@type': 'Organization', 'name': 'YYG', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}}, 'image': f'{SITE}/{pfx}shots/design-1-d.webp'},
           {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
            {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + ('/' if he else '/en/')}, {'@type': 'ListItem', 'position': 2, 'name': t['h1'], 'item': url}]}]
     home = '/' if he else '/en/'
-    nav = ''.join(f'<a href="#s{i + 1}">{E(x)}</a>' for i, x in enumerate(t['nav']))
+    ex = P.get('extra')
+    anchors = ['s1', 's2', 's3'] + (['sx'] if ex else []) + ['s4', 's5']
+    nav = ''.join(f'<a href="#{a}">{E(x)}</a>' for a, x in zip(anchors, t['nav']))
+    n4, n5 = (5, 6) if ex else (4, 5)
+    extra_html = ex(lang, pfx) if ex else ''
+    o = P['other'][lang]
+    other_html = f'<a class="d-other" href="{o[0]}"><small>{E(o[1])}</small><b>{E(o[2])}</b><span>{E(o[3])}</span></a>'
+    other_href = ('/en/' + pfx) if he else ('/' + pfx)
     page = f'''<!doctype html>
 <html lang="{lang}" dir="{t['dir']}">
 <head>
@@ -310,15 +335,15 @@ def build(lang):
 <title>{E(t['title'])}</title>
 <meta name="description" content="{E(t['desc'])}">
 <link rel="canonical" href="{url}">
-<link rel="alternate" hreflang="he" href="{SITE}/demo/">
-<link rel="alternate" hreflang="en" href="{SITE}/en/demo/">
-<link rel="alternate" hreflang="x-default" href="{SITE}/demo/">
+<link rel="alternate" hreflang="he" href="{SITE}/{pfx}">
+<link rel="alternate" hreflang="en" href="{SITE}/en/{pfx}">
+<link rel="alternate" hreflang="x-default" href="{SITE}/{pfx}">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="{'he_IL' if he else 'en_US'}">
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{E(t['h1'])}">
 <meta property="og:description" content="{E(t['desc'])}">
-<meta property="og:image" content="{SITE}/demo/shots/design-1-d.webp">
+<meta property="og:image" content="{SITE}/{pfx}shots/design-1-d.webp">
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
@@ -335,7 +360,7 @@ def build(lang):
    <a class="text-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a>
    <a class="text-link" href="{home}#plan">{'מחשבון מחיר' if he else 'Price calculator'}</a>
    <a class="text-link" href="{home}#contact">{E(t['contact'])}</a>
-   <a class="text-link" href="{t['other_href']}" hreflang="{'en' if he else 'he'}" lang="{'en' if he else 'he'}">{E(t['other_lang'])}</a>
+   <a class="text-link" href="{other_href}" hreflang="{'en' if he else 'he'}" lang="{'en' if he else 'he'}">{E(t['other_lang'])}</a>
   </nav>
  </div>
 </header>
@@ -368,8 +393,9 @@ def build(lang):
    <div class="d-designs">{designs}</div>
   </section>
 
+{extra_html}
   <section class="d-step" id="s4" aria-labelledby="s4-t">
-   <div class="d-step-h"><span class="d-num" aria-hidden="true">4</span><h2 id="s4-t">{E(t['s4'])}</h2></div>
+   <div class="d-step-h"><span class="d-num" aria-hidden="true">{n4}</span><h2 id="s4-t">{E(t['s4'])}</h2></div>
    <p>{E(t['s4p'])}</p>
    <div class="d-fb">
     <div class="d-card"><div class="d-choice"><span>{E(t['chose'])}:</span><b>{E(ans('feedback', 'choice'))}</b></div><p style="margin-top:12px">{E(ans('feedback', 'first'))}</p></div>
@@ -386,9 +412,11 @@ def build(lang):
   </section>
 
   <section class="d-step" id="s5" aria-labelledby="s5-t">
-   <div class="d-step-h"><span class="d-num" aria-hidden="true">5</span><h2 id="s5-t">{E(t['s5'])}</h2></div>
+   <div class="d-step-h"><span class="d-num" aria-hidden="true">{n5}</span><h2 id="s5-t">{E(t['s5'])}</h2></div>
    <p>{E(t['s5p'])}</p>
   </section>
+
+  {other_html}
 
   <section class="d-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">{E(t['cta'])}</h2>
@@ -412,5 +440,10 @@ def build(lang):
     out.write_text(page)
     return path
 
+exec(open(ROOT / 'tools/demo_projects.py').read())
+
 if __name__ == '__main__':
-    print([build('he'), build('en')])
+    out = []
+    for key in PROJECTS:
+        use(key); out += [build('he'), build('en')]
+    print(out)

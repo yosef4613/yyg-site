@@ -1,5 +1,9 @@
 # YYG: כתובת מאובטחת, בלי www, ושמירה בזיכרון של קבצים שלא משתנים
 Options -Indexes
+# חבילות העלאה וגיבויים אף פעם לא נגישים מהרשת (יש בהן קבצי הגדרות פרטיים)
+<FilesMatch "\.(zip|tar|gz|tgz|bak|sql|env)$">
+  Require all denied
+</FilesMatch>
 AddDefaultCharset UTF-8
 RewriteEngine On
 RewriteCond %{HTTPS} off

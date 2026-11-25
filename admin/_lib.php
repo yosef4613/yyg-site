@@ -85,7 +85,7 @@ function leads_load(): array {
     $leads = [];
     foreach ((@file(data_dir() . '/leads.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && !empty($r['id'])) $leads[(string) $r['id']] = $r; }
     /* מי אישר את המייל שלו (מהקישור במייל ששלחנו לו) */
-    foreach (json_load('lead-confirm.json') as $id => $c) if (isset($leads[(string) $id])) $leads[(string) $id]['email_ok'] = (int) ($c['t'] ?? 0);
+    foreach (json_load('lead-confirm.json') as $id => $c) if (isset($leads[(string) $id])) { $leads[(string) $id]['email_ok'] = (int) ($c['t'] ?? 0); $leads[(string) $id]['q_opened'] = (int) ($c['q'] ?? 0); }
     return $leads;
 }
 

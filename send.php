@@ -19,8 +19,8 @@ function out(bool $ok, string $msg = '', int $code = 200): void {
         /* טופס שנשלח בלי הסקריפט של האתר: מחזירים דף תודה קצר במקום JSON */
         $en = strpos($_SERVER['HTTP_REFERER'] ?? '', '/en/') !== false;
         header('Content-Type: text/html; charset=utf-8');
-        $t = $ok ? ($en ? 'Thank you, got it. I just sent you an email: one click to confirm your address, and you\'ll get my details and the next step.' : 'תודה, הפרטים התקבלו. שלחתי לכם עכשיו מייל: לחיצה אחת לאישור הכתובת, ותקבלו את הפרטים שלי ואת הצעד הבא.')
-                 : (in_array($msg, ['missing', 'email'], true) ? ($en ? 'Some details are missing. Please go back and fill in your name, email and phone.' : 'חסרים פרטים. נא לחזור ולמלא שם, מייל וטלפון.')
+        $t = $ok ? ($en ? 'Thank you, got it. I just emailed you the next step: a short questionnaire, then a formal quote.' : 'תודה, הפרטים התקבלו. שלחתי לכם עכשיו מייל עם הצעד הבא: שאלון קצר, ואחריו הצעת מחיר מסודרת.')
+                 : (in_array($msg, ['missing', 'email', 'phone'], true) ? ($en ? 'Some details are missing. Please go back and fill in your name and email.' : 'חסרים פרטים. נא לחזור ולמלא שם ומייל.')
                  : ($en ? 'Something went wrong, and the details were not sent. Please email yehuda@yygweb.com.' : 'משהו השתבש, והפרטים לא נשלחו. אפשר לכתוב ל־yehuda@yygweb.com.'));
         echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>YYG</title></head>'
            . '<body style="margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#151920;color:#E9EDF3;font:18px/1.6 Arial,sans-serif;text-align:center"><main><p>' . $t . '</p>'
@@ -95,8 +95,10 @@ $f = [
     'ready'    => $clean($in['ready'] ?? '', 1500),
     'plan'     => $clean($in['plan'] ?? '', 4000),
 ];
-if ($f['name'] === '' || strlen(preg_replace('/\D/', '', $f['phone'])) < 9) out(false, 'missing', 422);
+/* חובה: שם ומייל. הטלפון רשות, אבל אם נכתב, צריך מספר מלא */
+if ($f['name'] === '') out(false, 'missing', 422);
 if (!filter_var($f['email'], FILTER_VALIDATE_EMAIL)) out(false, 'email', 422);
+if ($f['phone'] !== '' && strlen(preg_replace('/\D/', '', $f['phone'])) < 9) out(false, 'phone', 422);
 
 /* ---------- סינון ספאם ----------
    מלכודת זמן: מי ששולח פחות מ־3 שניות אחרי שהטופס נטען הוא רובוט, ונענה "בהצלחה" בלי שליחה.
@@ -111,7 +113,7 @@ if (preg_match_all('~https?://|www\.~i', $free) > 2) { $score += 2; $why[] = 'ה
 if (preg_match('~https?://|www\.~i', $f['name'])) { $score += 2; $why[] = 'קישור בשם'; }
 if (preg_match('/[\p{Cyrillic}\p{Han}\p{Hiragana}\p{Katakana}\p{Thai}]/u', $free)) { $score += 2; $why[] = 'כתב זר'; }
 $digits = preg_replace('/\D/', '', $f['phone']);
-if (!preg_match('/^(0\d{8,9}|972\d{8,9})$/', $digits)) { $score += 1; $why[] = 'טלפון לא ישראלי'; }
+if ($digits !== '' && !preg_match('/^(0\d{8,9}|972\d{8,9})$/', $digits)) { $score += 1; $why[] = 'טלפון לא ישראלי'; }
 if ($score >= 3) {
     @file_put_contents(data_dir() . '/spam.log', date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
     out(true);
@@ -162,7 +164,7 @@ foreach ($labels as $k => $label) {
 $html = '<!doctype html><html lang="he" dir="rtl"><body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;color:#111827">'
       . '<div style="max-width:640px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">'
       . '<div style="padding:16px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700">פנייה חדשה מהאתר yygweb.com</div>'
-      . '<div style="padding:14px 20px;background:#FBF0DE;font-size:15px;line-height:1.5">הלקוח קיבל מייל לאישור הכתובת. כשיאשר, תקבל מייל קצר, והוא יקבל את הטלפון שלך ואת הקישור לשאלון האפיון.</div>'
+      . '<div style="padding:14px 20px;background:#FBF0DE;font-size:15px;line-height:1.5">הלקוח קיבל מייל אישי עם קישור לשאלון האפיון. כשיפתח אותו (וזה גם מאשר שהמייל אמיתי), תקבל מייל קצר. הטלפון שלך נשלח אליו רק אם יבקש לדבר.</div>'
       . '<div style="padding:14px 20px"><a href="mailto:' . htmlspecialchars($f['email'], ENT_QUOTES) . '?subject=' . rawurlencode('הפנייה שלך ל־YYG') . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:10px">השבה ללקוח במייל</a></div>'
       . '<table dir="rtl" style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">' . $rows . '</table>'
       . '<div style="padding:14px 20px;color:#6b7280;font-size:13px">נשלח מהטופס באתר, ' . date('d/m/Y H:i') . '. כל הפניות, עם סטטוס לכל אחת: <a href="https://yygweb.com/admin/#leads" style="color:#1a56db">דף הניהול</a></div></div></body></html>';
@@ -180,19 +182,27 @@ if (!$sent) out(false, 'send', 502);
 lead_confirm_request($lead, $ctok);
 out(true);
 
-/* ---------- מייל ללקוח: לאישור הכתובת. הטלפון שלי נשלח רק אחרי האישור ---------- */
+/* ---------- מייל ללקוח מיד אחרי הפנייה: הצעד הבא, שאלון האפיון ----------
+   הקישור לשאלון עובר דרך account/confirm.php, שמסמן שהמייל אמיתי וממלא בשאלון את הפרטים שכבר יש.
+   מי שמעדיף לדבר קודם, מאשר בקישור השני ומקבל את הטלפון. */
 function lead_confirm_request(array $lead, string $ctok): bool {
     $en = ($lead['lang'] ?? 'he') === 'en';
-    $url = 'https://yygweb.com/account/confirm.php?' . http_build_query(['l' => $lead['id'], 't' => $ctok] + ($en ? ['lang' => 'en'] : []));
+    $base = ['l' => $lead['id'], 't' => $ctok] + ($en ? ['lang' => 'en'] : []);
+    $q = 'https://yygweb.com/account/confirm.php?' . http_build_query($base + ['go' => 'q']);
+    $talk = 'https://yygweb.com/account/confirm.php?' . http_build_query($base);
     $name = (string) $lead['name'];
     $body = $en
-        ? '<p>Thank you for reaching out through yygweb.com. To make sure the address is right and the message is really from you, please confirm with one click:</p>' . mail_button($url, 'Confirm my inquiry')
-          . '<p>Once you confirm, you\'ll get my phone number and the next step, and I\'ll get back to you within one business day.</p><p style="color:#5A6472;font-size:14px">Didn\'t leave your details on the site? Just ignore this email.</p>'
-        : '<p>תודה שפניתם דרך האתר yygweb.com. כדי לוודא שהכתובת נכונה ושהפנייה באמת מכם, נא לאשר בלחיצה אחת:</p>' . mail_button($url, 'אישור הפנייה')
-          . '<p>אחרי האישור תקבלו את מספר הטלפון שלי ואת הצעד הבא, ואחזור אליכם תוך יום עבודה.</p><p style="color:#5A6472;font-size:14px">לא אתם השארתם פרטים באתר? פשוט התעלמו מהמייל הזה.</p>';
-    return mail_send((string) $lead['email'], $en ? 'Please confirm your inquiry to YYG' : 'נא לאשר את הפנייה שלכם ל־YYG',
-        mail_wrap($en ? "One more click, $name" : "עוד לחיצה אחת, $name", $body, '', $en, false),
-        ($en ? "Hi $name,\n\nPlease confirm your inquiry: " : "שלום $name,\n\nלאישור הפנייה: ") . $url);
+        ? '<p>Thank you for reaching out through yygweb.com. So I can send you a precise quote, the next step is a short discovery questionnaire: about 10 minutes, you can stop and continue later, and the details you already gave are filled in.</p>'
+          . mail_button($q, 'To the questionnaire')
+          . '<p>After the questionnaire you get a formal quote by email, and you can approve it with one click. No required calls.</p>'
+          . '<p style="color:#5A6472;font-size:14px">Prefer to talk first? <a href="' . h($talk) . '" style="color:#1a56db">Confirm your inquiry and get my phone number</a>. Didn\'t leave your details on the site? Just ignore this email.</p>'
+        : '<p>תודה שפניתם דרך האתר yygweb.com. כדי שאוכל לשלוח לכם הצעת מחיר מדויקת, הצעד הבא הוא שאלון אפיון קצר: כ־10 דקות, אפשר לעצור ולהמשיך אחר כך, והפרטים שכבר נתתם ממולאים בו.</p>'
+          . mail_button($q, 'לשאלון האפיון')
+          . '<p>אחרי השאלון תקבלו במייל הצעת מחיר מסודרת, ותוכלו לאשר אותה בלחיצה. בלי שיחות חובה.</p>'
+          . '<p style="color:#5A6472;font-size:14px">מעדיפים לדבר קודם? <a href="' . h($talk) . '" style="color:#1a56db">לאישור הפנייה ולקבלת מספר הטלפון שלי</a>. לא אתם השארתם פרטים באתר? פשוט התעלמו מהמייל הזה.</p>';
+    return mail_send((string) $lead['email'], $en ? "$name, here's the next step | YYG" : "$name, הצעד הבא לאתר שלכם | YYG",
+        mail_wrap($en ? "Hi $name" : "שלום $name", $body, '', $en, false),
+        ($en ? "Hi $name,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "שלום $name,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"));
 }
 
 /* ---------- שליחה ---------- */
