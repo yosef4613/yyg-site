@@ -32,7 +32,7 @@ PY
 cd "$SRC"
 WT=$(mktemp -d)
 git -C /home/user/yyg-site fetch -q origin gh-pages
-git -C /home/user/yyg-site worktree add -q -B gh-pages "$WT" origin/gh-pages
+git -C /home/user/yyg-site worktree add -q -B gh-pages "$WT" FETCH_HEAD
 find "$WT" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 cp -a "$OUT"/. "$WT"/
 touch "$WT/.nojekyll"
