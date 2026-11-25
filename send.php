@@ -89,6 +89,7 @@ $f = [
     'phone'    => $clean($in['phone'] ?? '', 40),
     'business' => $clean($in['business'] ?? '', 160),
     'when'     => $clean($in['when'] ?? '', 120),
+    'style'    => $clean($in['style'] ?? '', 60),
     'likes'    => $clean($in['likes'] ?? '', 1500),
     'notes'    => $clean($in['notes'] ?? '', 3000),
     'ready'    => $clean($in['ready'] ?? '', 1500),
@@ -143,7 +144,7 @@ $cfg = array_merge($cfg, private_config());
 // תוכן המייל
 $labels = [
     'name' => 'שם', 'phone' => 'טלפון', 'business' => 'שם העסק', 'when' => 'מתי נוח שתתקשר',
-    'likes' => 'אתרים שהוא אוהב', 'notes' => 'הערות', 'ready' => 'רשימת ההכנה', 'plan' => 'המסלול והתכנית',
+    'style' => 'רקע מועדף', 'likes' => 'אתרים שהוא אוהב', 'notes' => 'הערות', 'ready' => 'רשימת ההכנה', 'plan' => 'המסלול והתכנית',
 ];
 $e = static fn(string $s): string => nl2br(htmlspecialchars($s, ENT_QUOTES, 'UTF-8'));
 $tel = preg_replace('/[^\d+]/', '', $f['phone']);
