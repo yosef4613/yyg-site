@@ -561,6 +561,32 @@ const Planner = (() => {
   small.addEventListener('change', syncGrid);
 })();
 
+/* ===== מה כדאי להכין: רשימה שנשמרת אצל הגולש ומצורפת לפנייה ===== */
+(() => {
+  const boxes = [...document.querySelectorAll('.prep-item input')];
+  if (!boxes.length) return;
+  const KEY = 'yyg-prep';
+  const count = $('prep-count'), bar = $('prep-bar'), ready = $('lead-ready'), attached = $('prep-attached');
+  const words = (n, all) => n === 0 ? 'אפשר להתחיל גם מאפס.' : n === all ? 'מוכנים מצוין לשיחה.' : n >= all / 2 ? 'אתם כבר בדרך.' : 'התחלה טובה.';
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { saved = []; }
+  boxes.forEach((b) => { b.checked = saved.includes(b.value); });
+  const sync = (store) => {
+    const on = boxes.filter((b) => b.checked);
+    const n = on.length, all = boxes.length;
+    count.textContent = `סימנתם ${n} מתוך ${all}. ${words(n, all)}`;
+    bar.style.width = `${(n / all) * 100}%`;
+    const list = on.map((b) => b.dataset.label);
+    const missing = boxes.filter((b) => !b.checked).map((b) => b.dataset.label);
+    ready.value = n ? `מה כבר מוכן אצלם (${n} מתוך ${all}):\n• ${list.join('\n• ')}` + (missing.length ? `\nעוד לא:\n• ${missing.join('\n• ')}` : '') : '';
+    attached.hidden = !n;
+    attached.textContent = n ? `יצורף לפנייה: מה כבר מוכן אצלכם (${n} מתוך ${all})` : '';
+    if (store) { try { localStorage.setItem(KEY, JSON.stringify(on.map((b) => b.value))); } catch (e) { /* בלי שמירה */ } }
+  };
+  boxes.forEach((b) => b.addEventListener('change', () => sync(true)));
+  sync(false);
+})();
+
 /* ===== יצירת קשר: טופס שחוזר אליכם ===== */
 (() => {
   const form = $('lead-form');
@@ -575,7 +601,7 @@ const Planner = (() => {
     $('err-' + name).textContent = msg || '';
   };
   const fallback = (data) => {
-    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nהערות: ${data.notes}\n\n${data.plan}`;
+    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`;
     status.textContent = '';
     status.append('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
       ', או ', Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(`פנייה מהאתר: ${data.name}`, body), textContent: 'לשלוח את הפרטים במייל' }),
@@ -594,7 +620,9 @@ const Planner = (() => {
       name, phone,
       business: form.elements.business.value.trim(),
       when: form.elements.when.value,
+      likes: form.elements.likes.value.trim(),
       notes: form.elements.notes.value.trim(),
+      ready: $('lead-ready').value || 'לא סימנו ברשימת ההכנה',
       plan: $('lead-plan').value || 'לא נבחר מסלול',
       _subject: `פנייה חדשה מהאתר: ${name}`,
       _template: 'table',
@@ -607,7 +635,9 @@ const Planner = (() => {
       const res = await fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || res.status);
+      const keepReady = $('lead-ready').value;
       form.reset();
+      $('lead-ready').value = keepReady;
       status.className = 'lead-status is-ok';
       status.textContent = `תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`;
     } catch (err) {
