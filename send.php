@@ -108,7 +108,7 @@ $all[] = $now;
 
 // הגדרות שליחה
 $cfg = [
-    'to'        => 'yyrkg22@gmail.com',
+    'to'        => 'yehuda@yygweb.com',   // התיבה מעבירה עותק לג׳ימייל
     'from'      => 'site@yygweb.com',
     'from_name' => 'האתר של YYG',
     'smtp'      => null, // ['host' => 'smtp.hostinger.com', 'port' => 465, 'user' => '...', 'pass' => '...']
