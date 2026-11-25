@@ -65,7 +65,9 @@ function intake_to_quote(array $rec): array {
     }
     /* עמודים מעבר למכסה */
     $quota = ['site' => 6, 'club' => 8];
-    if (isset($quota[$core]) && $pageCount > $quota[$core]) { $addons['page'] = $pageCount - $quota[$core]; $added(($pageCount - $quota[$core]) . ' עמודים נוספים (סימן ' . $pageCount . ' עמודים)'); }
+    $sectionsNote = $any($pages, '/המלצות|Testimonials|שאלות נפוצות|FAQ/u') ? ' (שאלות נפוצות והמלצות נספרו כחלקים בעמוד הבית, לא כעמודים נפרדים)' : '';
+    if (isset($quota[$core]) && $pageCount > $quota[$core]) { $addons['page'] = $pageCount - $quota[$core]; $added(($pageCount - $quota[$core]) . ' עמודים נוספים: סימן ' . $pageCount . ' עמודים, ובמסלול כלולים עד ' . $quota[$core] . $sectionsNote); }
+    elseif (isset($quota[$core]) && $pageCount > 0) $note('סימן ' . $pageCount . ' עמודים, ובמסלול כלולים עד ' . $quota[$core] . '. אין תוספת עמודים' . $sectionsNote . '.');
     if (in_array($core, ['landing', 'landing_basic'], true) && $pageCount > 3) $note('סימן ' . $pageCount . ' עמודים, אבל המסלול הוא דף נחיתה. אולי מתאים אתר.');
     /* שפות */
     $langList = array_values(array_filter($langs, static fn($l) => $l !== '__other'));
@@ -398,6 +400,7 @@ const subtotal = () => items().reduce((s, i) => s + i.price * i.qty, 0);
 const payRows = () => [...document.querySelectorAll('#pay .line')].map((l) => ({ pct: Number(l.querySelector('[data-pct]').value) || 0, when: l.querySelector('[data-when]').value.trim() }));
 const recRows = () => [...document.querySelectorAll('#recurring .line')].filter((l) => l.querySelector('[data-on]').checked).map((l) => { const r = RECURRING.find((x) => x.k === l.dataset.k); return { label: r.label, price: Number(l.querySelector('[data-price]').value) || 0, per: r.per, note: r.note }; });
 function calc() {
+  document.querySelectorAll('#addons .line, #recurring .line').forEach((l) => l.classList.toggle('off', !l.querySelector('[data-on]').checked));
   const its = items();
   const sub = its.reduce((s, i) => s + i.price * i.qty, 0);
   const disc = Math.min(sub, Number($('disc-amount').value) || 0);
@@ -411,6 +414,8 @@ function calc() {
   $('sum-pay').innerHTML = pr.map((p) => `<div class="row"><span>${p.pct}% ${esc(p.when)}</span><b>${nis(total * p.pct / 100)}</b></div>`).join('');
   $('sum-rec').innerHTML = recRows().map((r) => `<div class="row"><span>${esc(r.label.split(':')[0])}</span><b>${r.price ? nis(r.price) + (r.per === 'year' ? ' לשנה' : ' לחודש') : 'לפי הצעה'}</b></div>`).join('');
 }
+/* שינוי כמות או מחיר בתוספת מסמן אותה, כדי שלא ייראה כאילו נוספה כשהיא לא */
+document.getElementById('qform').addEventListener('input', (e) => { const l = e.target.closest('#addons .line, #recurring .line'); if (l && e.target.matches('[data-qty], [data-price]')) l.querySelector('[data-on]').checked = true; });
 document.getElementById('qform').addEventListener('input', calc);
 document.getElementById('qform').addEventListener('change', calc);
 
@@ -495,6 +500,7 @@ label{display:grid;gap:4px;font-size:.92rem;color:var(--muted);margin-bottom:10p
 .line.custom{grid-template-columns:minmax(0,1fr) 70px 110px 40px}.line.pay{grid-template-columns:80px 16px minmax(0,1fr) 40px}.line.rec{grid-template-columns:minmax(0,1fr) 90px 150px}
 .chk{display:flex;align-items:center;gap:8px;margin:0;color:var(--text);font-size:.95rem}.chk input{width:18px;height:18px;min-height:0;flex:none;accent-color:var(--gold)}
 .btn.x{min-height:36px;padding:4px 10px}
+.line.off [data-qty],.line.off [data-price],.line.off small{opacity:.4}.line.off .chk span{color:var(--muted)}
 .line.custom input[data-price]:placeholder-shown{border-color:var(--warn);box-shadow:0 0 0 2px rgba(242,201,90,.2)}
 .qhints{margin-top:14px}.qhints h3{color:#fff;font-size:1.05rem;margin:0 0 8px}.qhints ul{margin:0;padding-inline-start:18px;display:grid;gap:4px}.qhints .h-ok b{color:var(--ok)}.qhints .h-todo b{color:var(--warn)}.qhints .h-note b{color:var(--cyan)}.sub{font-size:.95rem;margin:14px 0 6px}.small{font-size:.88rem}
 .qlink{margin-top:12px}.qlink .row b{overflow-wrap:anywhere;text-align:left}
