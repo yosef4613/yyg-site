@@ -935,3 +935,11 @@ p{text-wrap:pretty}
 .bp-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:22px}
 .bp-foot p{color:var(--muted);max-width:56ch}
 .bp-foot b{color:#fff}
+
+/* ===== גרסה 26: המלצה של לקוח ===== */
+.quote{position:relative;margin:22px 0 0;padding:18px 20px 16px;border-right:3px solid rgba(255,255,255,.35);border-radius:12px;background:rgba(255,255,255,.035)}
+.quote::before{content:"״";position:absolute;top:-6px;left:14px;font-family:var(--display);font-size:4.2rem;line-height:1;color:rgba(255,255,255,.12)}
+.quote blockquote{margin:0}
+.quote blockquote p{color:#D7DDE6;line-height:1.75}
+.quote figcaption{margin-top:10px;color:var(--muted);font-size:.95rem}
+.quote figcaption b{color:#fff}
