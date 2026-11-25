@@ -1060,3 +1060,10 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 .acc-link{white-space:nowrap}
 @media (max-width:860px){.news-in{grid-template-columns:1fr}}
 @media (max-width:480px){.news-form{grid-template-columns:1fr}.news-form .btn{grid-column:1;grid-row:auto;width:100%}}
+
+/* ===== מתחת למסלולים: דף נחיתה בסיסי ומחיר השקה ===== */
+.pkgs-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.pkgs-extra p{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:.95rem;line-height:1.55}
+.pkgs-extra b{color:#fff}
+.pkgs-extra .text-link{white-space:nowrap}
+@media (max-width:860px){.pkgs-extra{grid-template-columns:1fr}}

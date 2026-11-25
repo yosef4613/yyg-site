@@ -398,7 +398,8 @@ const Planner = (() => {
   const KIND = {
     products: T({ label: 'מוצרים או תפריט', pages: ['קטלוג', 'עמוד לכל מוצר'] }, { label: 'Products or a menu', pages: ['Catalog', 'A page per product'] }),
     org: T({ label: 'חוגים, מוסד או ארגון', pages: ['חוגים ופעילויות', 'מידע להורים ולמשתתפים'] }, { label: 'Classes, an institution or an organization', pages: ['Classes & activities', 'Info for parents & participants'] }),
-    service: T({ label: 'שירות מקצועי', pages: ['שירותים', 'לקוחות ועבודות'] }, { label: 'A professional service', pages: ['Services', 'Clients & work'] })
+    service: T({ label: 'שירות מקצועי', pages: ['שירותים', 'לקוחות ועבודות'] }, { label: 'A professional service', pages: ['Services', 'Clients & work'] }),
+    store: T({ label: 'חנות אונליין', pages: ['קטגוריות', 'עמוד לכל מוצר'] }, { label: 'An online store', pages: ['Categories', 'A page per product'] })
   };
   const ACT = {
     order: T({ label: 'להזמין או לבקש הצעת מחיר', feat: 'טופס הזמנה שמגיע עם כל הפרטים' }, { label: 'Order or request a quote', feat: 'An order form that arrives with all the details' }),
@@ -422,7 +423,7 @@ const Planner = (() => {
 
   const plan = ({ kind, acts, upd, en }) => {
     let track = 'site';
-    if (acts.includes('pay')) track = 'store';
+    if (kind === 'store' || acts.includes('pay')) track = 'store';
     else if (upd === 'team') track = 'club';
     else if (upd === 'none' && !acts.includes('register') && !acts.includes('read')) track = 'landing';
 
@@ -526,7 +527,10 @@ const Planner = (() => {
     bar.addEventListener('click', (e) => { e.preventDefault(); $('result').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'start' }); $('result').focus({ preventScroll: true }); });
   }
 
-  form.addEventListener('change', () => { if (!touched) countHit('planner'); touched = true; render(); });
+  form.addEventListener('change', (e) => {
+    if (e.target.name === 'kind' && e.target.value === 'store') { const pay = form.querySelector('input[name="act"][value="pay"]'); if (pay) pay.checked = true; }
+    if (!touched) countHit('planner'); touched = true; render();
+  });
   render();
   return { touched: () => touched, en: () => last.ans.en };
 })();
@@ -611,6 +615,21 @@ const Planner = (() => {
   };
   boxes.forEach((b) => b.addEventListener('change', () => sync(true)));
   sync(false);
+})();
+
+/* ===== דף נחיתה בסיסי ומחיר השקה: הכפתורים מסמנים את הבקשה בטופס ===== */
+(() => {
+  const basic = $('basic-cta');
+  if (basic) basic.addEventListener('click', () => {
+    $('lead-plan').value = T('בקשה: דף נחיתה בסיסי, 1,290 ₪ (עיצוב אחד, סבב תיקונים אחד, הטקסטים מהלקוח, חודש ליווי, 50% בהתחלה ו־50% בסיום)', 'Request: Basic landing page, ₪1,290 (one design, one revision round, client provides the text, one month of support, 50% upfront and 50% at launch)');
+    countHit('pick');
+  });
+  const launch = $('launch-cta');
+  if (launch) launch.addEventListener('click', () => {
+    const notes = document.querySelector('#lead-form [name=notes]');
+    const line = T('אני מעוניין/ת במחיר ההשקה (10% הנחה תמורת הצגת האתר בעבודות והמלצה כתובה). ', 'I’m interested in the launch price (10% off in return for showing the site in your work with a written testimonial). ');
+    if (notes && !notes.value.includes(line.trim())) notes.value = line + notes.value;
+  });
 })();
 
 /* ===== מותג מ־0: הכפתור מסמן את הבקשה בטופס ===== */
