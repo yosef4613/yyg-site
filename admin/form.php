@@ -44,6 +44,7 @@ ob_start(); ?>
  <?php if ($c['email']): ?><a class="btn" href="mailto:<?= h($c['email']) ?>"><bdi><?= h($c['email']) ?></bdi></a><?php endif; ?>
  <?php if ($rec['form'] === 'intake'): ?><a class="btn" href="/admin/quote.php?form=<?= h(rawurlencode($id)) ?>">הצעת מחיר מהשאלון</a><?php endif; ?>
  <button class="btn" type="button" onclick="window.print()">הדפסה</button>
+ <form method="post" action="/admin/" style="display:inline" onsubmit="return confirm('למחוק את השאלון ואת הקבצים שצורפו אליו? אי אפשר לשחזר.')"><input type="hidden" name="do" value="form_delete"><input type="hidden" name="csrf" value="<?= h(adm_csrf()) ?>"><input type="hidden" name="id" value="<?= h($id) ?>"><button class="btn" type="submit" style="color:var(--bad)">מחיקת השאלון</button></form>
 </div>
 <div class="acts copy-acts">
  <button class="btn gold" type="button" data-copy="plain">העתקת השאלון</button>

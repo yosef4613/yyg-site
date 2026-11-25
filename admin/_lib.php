@@ -63,6 +63,24 @@ function json_save(string $name, array $data): bool {
     if (@file_put_contents($tmp, json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX) === false) return false;
     return @rename($tmp, $f);
 }
+/* מוחק רשומה אחת מקובץ שורות JSON (פניות או שאלונים), תחת נעילה */
+function jsonl_remove(string $name, string $id): bool {
+    $f = data_dir() . '/' . $name;
+    $lock = fopen($f . '.lock', 'c');
+    if ($lock) flock($lock, LOCK_EX);
+    $keep = []; $found = false;
+    foreach ((@file($f, FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && (string) ($r['id'] ?? '') === $id) { $found = true; continue; } if (trim($l) !== '') $keep[] = $l; }
+    if ($found) @file_put_contents($f, $keep ? implode("\n", $keep) . "\n" : '', LOCK_EX);
+    if ($lock) { flock($lock, LOCK_UN); fclose($lock); }
+    return $found;
+}
+/* מוחק את הקבצים שצורפו לשאלון */
+function form_files_remove(string $id): void {
+    if (!preg_match('/^[a-f0-9]{12}$/', $id)) return;
+    $dir = data_dir() . '/uploads/' . $id;
+    foreach (glob($dir . '/*') ?: [] as $f) @unlink($f);
+    @rmdir($dir);
+}
 function leads_load(): array {
     $leads = [];
     foreach ((@file(data_dir() . '/leads.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && !empty($r['id'])) $leads[(string) $r['id']] = $r; }
@@ -200,6 +218,7 @@ textarea{min-height:40px;resize:vertical}
 .links{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.links a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-decoration:none}.links a small{display:block}
 .spam{font-size:.88rem}.spam div{padding:8px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
 .login{max-width:380px;margin:12vh auto;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.login form{display:grid;gap:10px;margin-top:14px}
+.del{display:inline}.del .btn{color:var(--bad)}
 .flash{padding:10px 14px;border-radius:10px;background:#1f3a2a;border:1px solid #2f6b45;margin:12px 0}
 table.list{width:100%;border-collapse:collapse;font-size:.95rem}table.list th,table.list td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}table.list th{color:var(--muted);font-weight:600;font-size:.85rem}
 .tscroll{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 10px}

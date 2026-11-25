@@ -93,6 +93,17 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 's
 }
 $stOf = static fn(string $id): string => $status[$id]['st'] ?? 'new';
 
+/* מחיקת פנייה, שאלון או הצעת מחיר (למשל בדיקות) */
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && in_array($_POST['do'] ?? '', ['lead_delete', 'form_delete', 'quote_delete'], true)) {
+    if (!hash_equals($csrf, (string) ($_POST['csrf'] ?? ''))) { http_response_code(400); exit('הטופס פג תוקף. רעננו את הדף ונסו שוב.'); }
+    $did = (string) ($_POST['id'] ?? '');
+    $where = '';
+    if ($_POST['do'] === 'lead_delete') { jsonl_remove('leads.jsonl', $did); unset($status[$did]); @file_put_contents($statusFile, json_encode($status, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX); $where = 'leads'; }
+    if ($_POST['do'] === 'form_delete') { jsonl_remove('forms.jsonl', $did); form_files_remove($did); $where = 'forms'; }
+    if ($_POST['do'] === 'quote_delete') { $qq = quotes_load(); unset($qq[$did]); quotes_save($qq); $where = 'quotes'; }
+    header('Location: /admin/?deleted=1#' . $where, true, 303); exit;
+}
+
 /* רשימת התפוצה: הסרה ידנית, וייצוא משתמשים ומנויים */
 $users = users_load();
 $subs = subs_load();
@@ -186,6 +197,7 @@ ob_start(); ?>
 <h1>שלום יהודה</h1>
 <p class="muted">עודכן <?= $e((new DateTime('now', $tz))->format('d/m/Y H:i')) ?>. נספרים רק אנשים אמיתיים, בלי רובוטים ובלי עוגיות.</p>
 <?php if (isset($_GET['saved'])): ?><p class="flash">נשמר.</p><?php endif; ?>
+<?php if (isset($_GET['deleted'])): ?><p class="flash">נמחק.</p><?php endif; ?>
 
 <div class="kpis">
  <a class="card" href="#leads"><h3>פניות חדשות</h3><div class="big"><?= $new ?></div><small>מחכות לטיפול</small></a>
@@ -210,7 +222,7 @@ ob_start(); ?>
    <?php if (!empty($r['score'])): ?><span class="tag warn">חשד לספאם: <?= $e(implode(', ', (array) ($r['why'] ?? []))) ?></span><?php endif; ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
    <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?></div>
-  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><a class="btn" href="sms:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>?&amp;body=<?= $e(rawurlencode('שלום ' . ($r['name'] ?? '') . ', כאן יהודה מ־YYG. כדי שאכין לך הצעה מדויקת, אשמח שתמלא/י שאלון קצר (כ־10 דקות): ' . 'https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? '']))) ?>">שאלון אפיון ב־SMS</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? ''])) ?>">העתקת קישור לשאלון</button></div>
+  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? ''])) ?>">העתקת קישור לשאלון</button><form method="post" class="del" onsubmit="return confirm('למחוק את הפנייה? אי אפשר לשחזר.')"><input type="hidden" name="do" value="lead_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $id) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>
@@ -229,18 +241,18 @@ ob_start(); ?>
 <h2 id="forms">שאלונים</h2>
 <div class="acts" style="margin:0 0 12px"><a class="btn" href="https://yygweb.com/questionnaire/" target="_blank" rel="noopener">שאלון האפיון באתר</a><a class="btn" href="https://yygweb.com/feedback/" target="_blank" rel="noopener">שאלון המשוב באתר</a></div>
 <?php if (!$forms): ?><p class="muted">עוד לא מולאו שאלונים. כל שאלון שלקוח שולח מגיע אליך במייל ומופיע כאן.</p><?php else: ?>
-<div class="tscroll"><table class="list"><thead><tr><th>תאריך</th><th>שאלון</th><th>לקוח</th><th>טלפון</th></tr></thead><tbody>
-<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?><?= !empty($fr['files']) ? ' <span class="tag">' . count($fr['files']) . ' קבצים</span>' : '' ?><?= !empty($fr['flags']) ? ' <span class="tag warn">לבדיקה</span>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td></tr><?php endforeach; ?>
+<div class="tscroll"><table class="list"><thead><tr><th>תאריך</th><th>שאלון</th><th>לקוח</th><th>טלפון</th><th></th></tr></thead><tbody>
+<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?><?= !empty($fr['files']) ? ' <span class="tag">' . count($fr['files']) . ' קבצים</span>' : '' ?><?= !empty($fr['flags']) ? ' <span class="tag warn">לבדיקה</span>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td><td><form method="post" class="del" onsubmit="return confirm('למחוק את השאלון ואת הקבצים שצורפו אליו? אי אפשר לשחזר.')"><input type="hidden" name="do" value="form_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $fid) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></td></tr><?php endforeach; ?>
 </tbody></table></div>
 <?php endif; ?>
 
 <h2 id="quotes">הצעות מחיר</h2>
 <div class="acts" style="margin:0 0 12px"><a class="btn gold" href="/admin/quote.php">הצעה חדשה</a></div>
 <?php if (!$quotes): ?><p class="muted">עוד אין הצעות. אפשר להתחיל מהכפתור "הצעת מחיר" ליד כל פנייה, או מהצעה חדשה.</p><?php else: ?>
-<div class="tscroll"><table class="list"><thead><tr><th>מספר</th><th>לקוח</th><th>סכום</th><th>סטטוס</th><th>צפיות</th><th>עודכנה</th></tr></thead><tbody>
+<div class="tscroll"><table class="list"><thead><tr><th>מספר</th><th>לקוח</th><th>סכום</th><th>סטטוס</th><th>צפיות</th><th>עודכנה</th><th></th></tr></thead><tbody>
 <?php foreach (array_reverse($quotes, true) as $num => $q): $tq = quote_totals($q); $qs = (string) ($q['status'] ?? 'draft'); ?>
  <tr><td><a href="/admin/quote.php?id=<?= $e(rawurlencode((string) $num)) ?>"><?= $e($num) ?></a></td><td><?= $e($q['client']['name'] ?? '') ?><?= !empty($q['client']['business']) ? ' <small>· ' . $e($q['client']['business']) . '</small>' : '' ?></td><td><?= $e(nis($tq['total'])) ?></td>
- <td><span class="tag<?= $qs === 'approved' ? ' ok' : ($qs === 'declined' ? ' bad' : '') ?>"><?= $e(Q_STATUSES[$qs] ?? $qs) ?></span></td><td><?= (int) ($q['views'] ?? 0) ?></td><td><small><?= $e($fmt((int) ($q['updated'] ?? $q['created'] ?? time()), 'd/m H:i')) ?></small></td></tr>
+ <td><span class="tag<?= $qs === 'approved' ? ' ok' : ($qs === 'declined' ? ' bad' : '') ?>"><?= $e(Q_STATUSES[$qs] ?? $qs) ?></span></td><td><?= (int) ($q['views'] ?? 0) ?></td><td><small><?= $e($fmt((int) ($q['updated'] ?? $q['created'] ?? time()), 'd/m H:i')) ?></small></td><td><form method="post" class="del" onsubmit="return confirm('למחוק את ההצעה? הקישור שנשלח ללקוח יפסיק לעבוד? אי אפשר לשחזר.')"><input type="hidden" name="do" value="quote_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $num) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></td></tr>
 <?php endforeach; ?>
 </tbody></table></div>
 <?php endif; ?>

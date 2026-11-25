@@ -252,7 +252,6 @@ ob_start(); ?>
  <div class="acts">
   <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את ההצעה במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_quote"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn gold" type="submit">שליחת ההצעה במייל ללקוח</button></form>
   <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את שאלון המשוב במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_feedback"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn" type="submit">שליחת שאלון המשוב במייל</button></form>
-  <?php if ($phone !== ''): ?><a class="btn" href="sms:<?= h($phone) ?>?&amp;body=<?= h(rawurlencode($smsQuote)) ?>">ההצעה ב־SMS</a><a class="btn" href="sms:<?= h($phone) ?>?&amp;body=<?= h(rawurlencode($smsFb)) ?>">שאלון המשוב ב־SMS</a><?php endif; ?>
  </div>
  <?php if (!$hasMail): ?><p class="small muted" style="margin-top:6px">כדי לשלוח במייל, מכניסים את המייל של הלקוח בפרטים למטה ושומרים.</p><?php endif; ?>
  <?php if (!empty($q['sent_log'])): ?><p class="small muted" style="margin-top:6px">נשלח: <?= h(implode(' · ', array_map(static fn($l) => $l['what'] . ' ל־' . $l['to'] . ' ב־' . fmt_time((int) $l['t'], 'd/m H:i'), array_slice($q['sent_log'], -4)))) ?></p><?php endif; ?>
