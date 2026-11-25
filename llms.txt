@@ -1,4 +1,4 @@
-# YYG — עיצוב ובניית אתרים / Web design & development (Israel)
+# YYG: עיצוב ובניית אתרים / Web design & development (Israel)
 
 > YYG is the web design studio of Yehuda Gordon in Israel. It builds landing pages, small business websites with an admin panel, websites with sign-ups and mailing lists for institutions, nonprofits and classes, and online stores, plus logo design and branding. Payment: 10% to start, then clients see 3 complete design directions of their own site; 40% when they pick one; the remaining 50% at launch, after approval. Prices are final, and no VAT is added. Sites are fast, mobile-first, accessible and set up for Google. The first year of domain, hosting and business email is included.
 
@@ -24,6 +24,12 @@
 - [Online store](https://yygweb.com/services/online-store.html)
 - [Websites for institutions, nonprofits and classes](https://yygweb.com/services/institutions.html)
 - [Logo design and branding](https://yygweb.com/services/logo-branding.html)
+- [Websites for catering and food businesses](https://yygweb.com/services/catering.html)
+- [Websites for trades and service providers](https://yygweb.com/services/professionals.html)
 - [How much does a website cost (guide)](https://yygweb.com/guides/website-cost.html)
 - [What to prepare before building a website (guide)](https://yygweb.com/guides/before-you-build.html)
 - [Landing page or full website (guide)](https://yygweb.com/guides/landing-or-website.html)
+- [How to choose who builds your website: 10 questions (guide)](https://yygweb.com/guides/choose-web-designer.html)
+- [How long it takes to build a website (guide)](https://yygweb.com/guides/how-long-to-build.html)
+- [Services in English](https://yygweb.com/en/services/)
+- [Guides in English](https://yygweb.com/en/guides/)

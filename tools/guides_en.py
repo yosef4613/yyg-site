@@ -50,6 +50,8 @@ STYLE = '''<style>
  .g-card span{display:block;margin-top:6px;color:var(--muted)}
 </style>'''
 
+FOOT_SV = ' · '.join(f'<a class="foot-link" href="/en/services/{k}.html">{v}</a>' for k, v in [('landing-page', 'Landing pages'), ('business-website', 'Business websites'), ('online-store', 'Online stores'), ('institutions', 'Institutions and classes'), ('catering', 'Catering and food'), ('professionals', 'Trades and services'), ('logo-branding', 'Logo and branding')])
+
 
 def page(slug, title, desc, h1, lead, body, faq=None, related=()):
     if slug != 'index':
@@ -103,7 +105,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=34">
+<link rel="stylesheet" href="/assets/site.css?v=35">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -136,10 +138,23 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 {rel}
  </div>
 </main>
+<section class="news" aria-labelledby="news-title">
+ <div class="wrap news-in">
+  <div class="news-copy"><h2 id="news-title" class="news-t">A new guide once a month, straight to your inbox</h2><p class="news-s">Short tips for business owners, like this guide. No spam, and you can unsubscribe in one click.</p></div>
+  <form class="news-form" method="post" action="/account/list.php">
+   <input type="hidden" name="source" value="guide-en-{slug}"><input type="hidden" name="lang" value="en">
+   <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" dir="ltr" required></label>
+   <label class="news-consent"><input type="checkbox" name="consent" value="1" required><span>I agree to receive guides, tips and updates from YYG by email, including service offers. I can unsubscribe at any time.</span></label>
+   <button class="btn btn-line" type="submit">Join</button>
+  </form>
+ </div>
+</section>
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, Yehuda Gordon. Web design and development</p>
-  <p><a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a></p>
+  <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
+  <p>{FOOT_SV}</p>
  </div>
 </footer>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
@@ -287,6 +302,148 @@ lp_faq = [
     ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. Prices are final, and no VAT is added.'),
 ]
 
+# ---------- Guide 4: how to choose who builds your website ----------
+choose_body = '''
+<h2>Why ask before you pay</h2>
+<p>Most website disappointments don't start with the design. They start with a different understanding of what exactly you're buying: who writes the copy, how many revisions are included, and what it costs after the first year. A fifteen-minute call with these questions saves months of misunderstandings. You can ask them of any web designer, even if you don't end up choosing me.</p>
+
+<h2>The 10 questions</h2>
+<h3>1. What exactly is included in the price?</h3>
+<p>How many pages, who writes the copy, whether there's a form, mobile optimization, Google readiness and an accessibility statement. A good answer is a written list in the quote, not "everything is included".</p>
+<h3>2. Does the price include VAT?</h3>
+<p>"From ₪3,000" can become ₪3,540 once VAT is added. Ask for the final price, as one number. My prices are final, and no VAT is added.</p>
+<h3>3. Will I see a design before I pay most of the price?</h3>
+<p>In the market, people often pay 30% to 50% before they see anything. Ask how many designs you'll see, and what you pay at each stage. With me, you start with 10%, see 3 complete designs with your own content, and only after you choose do you pay another 40%.</p>
+<h3>4. How many revision rounds are included, and what counts as a revision?</h3>
+<p>Changing a color, a photo or some text is a revision. Changing the whole structure after you've approved it is new work. A good answer defines the number of rounds, and what goes into them.</p>
+<h3>5. Whose name will the domain and website be in?</h3>
+<p>The domain should be registered in your name, and the website should be yours, so you can move to another company without losing it. This is one of the most important questions, because it's hard to fix later.</p>
+<h3>6. What does it cost after the first year?</h3>
+<p>Domain, hosting, business email, plugin licenses and maintenance. Ask for one yearly number. With me, the first year is included, and after that it's ₪590 a year with All-in Care, or with your own hosting company.</p>
+<h3>7. Can I update it myself, and who teaches me?</h3>
+<p>Ask exactly what you'll be able to change yourself: prices, photos, promotions. And ask whether there's training and a written guide, or whether every change will cost you money.</p>
+<h3>8. How long will it take, and from which day do you count?</h3>
+<p>"Two weeks" can mean two weeks from the day you pay, or from the day the designer has all the materials. It's worth knowing up front. More on this in the guide <a class="text-link" href="/en/guides/how-long-to-build.html">how long it takes to build a website</a>.</p>
+<h3>9. What happens after launch?</h3>
+<p>How long support and bug fixes last, who backs up the site, and who you contact if something stops working. With me, there are 4 months of support after launch.</p>
+<h3>10. Can I see live websites you've built?</h3>
+<p>Not just screenshots: the address of a working site that you can open on your phone and check how fast it loads. And if possible, talk to a client.</p>
+
+<h2>Signs to stop and check</h2>
+<ul>
+<li>A price without a list of what's included.</li>
+<li>A domain registered in the designer's name.</li>
+<li>"We'll do the copy later", without saying who will write it.</li>
+<li>Pressure to sign today, "because the offer ends".</li>
+<li>No live website to show.</li>
+</ul>
+
+<h2>How to compare quotes</h2>
+<div class="g-scroll"><table class="g-table">
+<thead><tr><th>What to check</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td>A final price as one number</td><td>To compare like with like, including VAT</td></tr>
+<tr><td>What's included</td><td>Pages, copy, forms, Google and accessibility</td></tr>
+<tr><td>Designs and revisions</td><td>How many directions you'll see, and how many times you can revise</td></tr>
+<tr><td>Delivery time</td><td>And from which day it's counted</td></tr>
+<tr><td>The second year</td><td>What it costs to continue, and what that includes</td></tr>
+<tr><td>Ownership</td><td>Whose name the domain and website are in</td></tr>
+</tbody></table></div>
+<p>The cheapest quote isn't always the cheapest in the end, if you pay for everything separately in the second year. And the most expensive isn't always the best, if it has no clear list of what you get.</p>
+
+<h2>What to ask yourself before you reach out</h2>
+<ul>
+<li><b>What should the website achieve?</b> Calls, sign-ups, orders, or getting to know you.</li>
+<li><b>Who are your customers?</b> Age, area, and which device they use, usually a phone.</li>
+<li><b>Roughly how many pages?</b> One service or many, and whether there's content that changes.</li>
+<li><b>Who will update the site?</b> You, someone on your team, or the designer.</li>
+<li><b>What's the budget and the deadline?</b> Even a rough range helps you get an accurate quote.</li>
+</ul>
+
+<h2>And what about me?</h2>
+<p>You'll find my answers to all 10 questions on my website: what each package includes, the final price, the 3 designs, the 3 revision rounds, delivery times and the second year. Want an exact number? The calculator on my site gives you a recommended package, a list of pages and an estimated price, without leaving your details. You can also read <a class="text-link" href="/en/guides/website-cost.html">how much a business website costs</a> and <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>, or browse my <a class="text-link" href="/en/services/">services</a>.</p>
+'''
+choose_faq = [
+    ('What is the most important thing to check before choosing a web designer?', "That the domain and website will be in your name, and that there's a written list of what the price includes. Everything else can be fixed later; that's hard to fix."),
+    ('Is it OK to pay a deposit?', "Yes, a deposit is normal. It's worth knowing up front what it pays for and when you'll see a design. With me, you start with 10%, and for that you get 3 complete designs."),
+    ('How can I tell if a website someone built is fast?', "Open it on your phone, ideally not on fast Wi-Fi, and see how long it takes until the content appears. You can also check it with Google's free PageSpeed Insights tool."),
+    ('Is a low price a bad sign?', "Not necessarily. But check what's included, who writes the copy, and what the second year costs. Sometimes that's where the difference is."),
+    ('How many quotes should I ask for?', 'Two or three are enough to understand the market. More than that usually just confuses.'),
+]
+
+# ---------- Guide 5: how long it takes to build a website ----------
+time_body = '''
+<h2>The short answer</h2>
+<p>The build itself takes days, not months. These are my delivery times, in business days, from the day I have all the materials:</p>
+<div class="g-scroll"><table class="g-table">
+<thead><tr><th>Type of site</th><th>Delivery time</th><th>Starting price</th></tr></thead>
+<tbody>
+<tr><td><a class="text-link" href="/en/services/landing-page.html">Landing page</a></td><td>Up to 4 business days</td><td>₪2,000</td></tr>
+<tr><td><a class="text-link" href="/en/services/business-website.html">Website with admin panel</a></td><td>Up to 10 business days</td><td>₪4,000</td></tr>
+<tr><td><a class="text-link" href="/en/services/institutions.html">Website with sign-ups and a mailing list</a></td><td>Up to 15 business days</td><td>₪6,000</td></tr>
+<tr><td><a class="text-link" href="/en/services/online-store.html">Online store</a></td><td>Up to 20 business days</td><td>₪7,000</td></tr>
+</tbody></table></div>
+<p>Prices are final, and no VAT is added. Days spent waiting for your reply aren't counted. So what really decides how long it takes is mostly how quickly the materials and approvals come in.</p>
+
+<h2>The stages, one after another</h2>
+<ol>
+<li><b>A call and a quote</b>: what the business needs, and which package fits.</li>
+<li><b>Materials</b>: logo, key points for the copy, photos, and sites you like.</li>
+<li><b>3 designs</b> with your own content, and choosing a direction.</li>
+<li><b>The build</b>: all the pages, forms and the admin panel.</li>
+<li><b>Revisions and testing</b> on phone and computer.</li>
+<li><b>Connecting the domain, going live, and training</b>.</li>
+</ol>
+
+<h2>What slows things down</h2>
+<ul>
+<li><b>Materials that trickle in</b>: the logo today, photos next week, and text for one page two weeks later.</li>
+<li><b>Copy nobody writes</b>: one of the most common delays. With me, I write it, and you just give key points and approve.</li>
+<li><b>Too many decision makers</b>: when every change needs three people's approval, each round takes longer. It's worth choosing one person to approve.</li>
+<li><b>Changing direction midway</b>: after you've chosen a design and the build has started, changing the whole structure sets the process back.</li>
+<li><b>For a store: payment provider approval</b>, which takes a few days, and a product list that isn't ready yet.</li>
+<li><b>A domain stuck with a previous provider</b>: transferring a domain can take a few days, and sometimes needs a transfer code from the old provider.</li>
+</ul>
+
+<h2>How to speed things up</h2>
+<ul>
+<li>Prepare the list from the guide <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a> before the first call.</li>
+<li>Send all the materials at once, even if they're not perfect.</li>
+<li>Reply to each round within a day or two.</li>
+<li>If there's a deadline, like a business opening or an event, mention it in the first call.</li>
+<li>For a store: open an account with a payment provider on day one.</li>
+</ul>
+
+<h2>What gets checked before launch</h2>
+<ul>
+<li>Every form sends, and inquiries reach the right inbox.</li>
+<li>The site opens fast on a phone, and every button works with a finger.</li>
+<li>The copy is approved, with no mistakes in phone numbers, addresses or prices.</li>
+<li>The domain is connected, and the site runs on a secure connection.</li>
+<li>There's an accessibility statement and a privacy policy.</li>
+</ul>
+<p>After launch, 4 months of support begin: bug fixes, questions, and small changes.</p>
+
+<h2>What you can do while I build</h2>
+<ul>
+<li><b>Open a Google Business Profile</b>, so you can link it to the website on launch day.</li>
+<li><b>Ask 2 or 3 happy clients for testimonials</b>, with their permission, so they're on the site from day one.</li>
+<li><b>Make a list of who to tell</b> when the site goes live: existing clients, groups and suppliers.</li>
+<li><b>Plan the next step</b>: a flyer with a QR code, an ad, or a link in your email signature.</li>
+</ul>
+
+<h2>And what about Google?</h2>
+<p>A new website doesn't appear on Google the day it goes live. Google needs to find it, crawl it and understand what it's about. On launch day I register the site in Google's tools and submit a sitemap, which shortens that time. Showing up in the results usually takes days to weeks, and climbing in the rankings takes longer and depends on content, competition and reviews. That's why it's worth opening a Google Business Profile and asking happy clients for reviews.</p>
+<p>Want to know how long your website will take, and which package fits? Answer 3 questions in the calculator, or read <a class="text-link" href="/en/guides/landing-or-website.html">landing page or full website</a> and <a class="text-link" href="/en/guides/choose-web-designer.html">how to choose who builds your website</a>.</p>
+'''
+time_faq = [
+    ('How long does it take to build a landing page?', 'With me, up to 4 business days from the day I have all the materials.'),
+    ('Can a website be built in a week?', 'A landing page, yes. A multi-page website takes me up to 10 business days, about two weeks, if the materials and replies come quickly.'),
+    ('From which day is the delivery time counted?', "From the day I have all the materials: logo, key points for the copy and photos. Days spent waiting for your reply aren't counted."),
+    ('When will the website show up on Google?', 'On launch day the site is registered in Google’s tools. Showing up in the results usually takes days to weeks, and rankings improve over time with good content.'),
+    ('What delays a website build the most?', 'Usually not the build itself, but materials that come in slowly, copy nobody writes, and approvals from several people.'),
+]
+
 G = [
     ('website-cost', 'How much does a business website cost? Prices and what drives them',
      'What a business website costs in Israel: prices for a landing page, a website with admin panel, a website with sign-ups & mailing list, and an online store, plus what makes a site more expensive and the ongoing costs.',
@@ -297,6 +454,12 @@ G = [
     ('landing-or-website', 'Landing page or full website: which is right for your business?',
      'The difference between a landing page and a full website: who each one suits, prices, delivery times, and a quick comparison. Plus when you need a website with sign-ups & mailing list or an online store.',
      'Landing page or full website?', 'What sets them apart, who each one is for, and how to decide without paying for what you don’t need.', lp_body, lp_faq),
+    ('choose-web-designer', 'How to choose a web designer: 10 questions to ask first',
+     '10 questions to ask a web designer before you pay: what is included, VAT, whose name the domain is in, revisions, and the second-year cost.',
+     'How to choose who builds your website', '10 questions worth asking before you pay, and what a good answer looks like. Even if you don’t end up choosing me.', choose_body, choose_faq),
+    ('how-long-to-build', 'How long does it take to build a business website?',
+     'How long it takes to build a business website: landing page, admin panel, sign-ups or store. The stages, and what speeds it up or slows it down.',
+     'How long does it take to build a business website?', 'Real delivery times, the stages, and what usually slows things down. Most delays have nothing to do with the build itself.', time_body, time_faq),
 ]
 
 for slug, title, desc, h1, lead, body, faq in G:
@@ -307,7 +470,7 @@ for slug, title, desc, h1, lead, body, faq in G:
 cards = '\n'.join(f'<a class="g-card" href="/en/guides/{s}.html"><b>{h}</b><span>{l}</span></a>' for s, _, _, h, l, *_ in G)
 with open(f'{OUT}/index.html', 'w', encoding='utf-8') as f:
     f.write(page('index', 'Guides to building a business website | YYG',
-        'Short guides for business owners and institutions: what a website costs, what to prepare before you build, and whether you need a landing page or a full website.',
+        'Guides for business owners and institutions: what a website costs, what to prepare, landing page or full site, choosing a web designer, and how long it takes.',
         'Guides to building a website', 'Short, clear answers to the questions business owners ask before they build a website.',
         f'<div class="g-cards">\n{cards}\n</div>'))
 

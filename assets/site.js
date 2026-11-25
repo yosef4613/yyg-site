@@ -625,6 +625,30 @@ const Planner = (() => {
   });
 })();
 
+/* ===== רשימת תפוצה: הצטרפות בלי לעזוב את הדף. אחרי זה מגיע מייל עם קישור אישור ===== */
+(() => {
+  const form = $('news-form');
+  if (!form) return;
+  const status = form.querySelector('.news-status');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.elements.email.value.trim();
+    status.className = 'news-status';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = T('נא לכתוב כתובת מייל תקינה.', 'Please enter a valid email address.'); form.elements.email.focus(); return; }
+    if (!form.elements.consent.checked) { status.textContent = T('כדי להצטרף צריך לסמן את ההסכמה לקבל מיילים.', 'Please tick the consent box to join.'); form.elements.consent.focus(); return; }
+    const btn = form.querySelector('button'); btn.disabled = true;
+    status.textContent = T('שולח…', 'Sending…');
+    try {
+      const res = await fetch('/account/list.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, consent: 1, source: form.elements.source.value, lang: EN ? 'en' : 'he', website: form.elements.website.value }) });
+      const j = await res.json();
+      status.textContent = j.message || '';
+      if (String(j.success) === 'true') { status.className = 'news-status is-ok'; form.classList.add('is-sent'); }
+    } catch (err) {
+      status.textContent = T('לא הצלחנו לשלוח מכאן. אפשר לנסות שוב בעוד רגע.', 'We couldn’t send this. Please try again in a moment.');
+    } finally { btn.disabled = false; }
+  });
+})();
+
 /* ===== פנייה מהירה: שם וטלפון בלבד, למי שכבר השתכנע ולא רוצה לגלול עד הסוף ===== */
 (() => {
   document.querySelectorAll('form.quick-lead').forEach((form) => {
@@ -666,7 +690,7 @@ const Planner = (() => {
         form.reset();
         form.classList.add('is-sent');
         status.className = 'ql-status is-ok';
-        status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בימים א׳ עד ד׳, בין 10:00 ל־13:30.`, `Thank you, ${name}. Got it. I’ll call you back Sunday to Wednesday, between 10:00 and 13:30.`);
+        status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם תוך יום עבודה.`, `Thank you, ${name}. Got it. I’ll call you back within one business day.`);
         countHit('lead');
       } catch (err) {
         status.textContent = '';

@@ -2,114 +2,43 @@
 /*
  * YYG: דף הניהול של יהודה. https://yygweb.com/admin/
  * כניסה: הקישור האישי (?k=המפתח) או הקלדת המפתח. אחרי הכניסה נשמרת עוגייה חתומה ל־30 יום, והמפתח יורד מהכתובת.
- * מה יש כאן: פניות עם סטטוס והערה, נתוני כניסות, ספאם שנחסם, וקישורים מהירים.
- * הנתונים נשמרים מחוץ לתיקיית האתר (yyg-data), כך שעדכון של האתר לא מוחק אותם.
+ * מה יש כאן: פניות עם סטטוס והערה, הצעות מחיר, נתוני כניסות, ספאם שנחסם, וקישורים מהירים.
  */
 declare(strict_types=1);
-
-function data_dir(): string {
-    $d = dirname(__DIR__, 2) . '/yyg-data';
-    if (!is_dir($d)) @mkdir($d, 0700, true);
-    return is_dir($d) && is_writable($d) ? $d : dirname(__DIR__) . '/_private';
-}
-function private_config(): array {
-    $safe = data_dir() . '/mail-config.php';
-    $fresh = dirname(__DIR__) . '/_private/mail-config.php';
-    if (is_file($fresh) && (!is_file($safe) || filemtime($fresh) > filemtime($safe))) @copy($fresh, $safe);
-    $f = is_file($safe) ? $safe : $fresh;
-    return is_file($f) ? (array) require $f : [];
-}
-
-header('Cache-Control: no-store');
-header('X-Robots-Tag: noindex, nofollow');
-header('X-Frame-Options: DENY');
-header('Referrer-Policy: no-referrer');
-
-$cfg = private_config();
-$key = (string) ($cfg['stats_key'] ?? '');
-if ($key === '') { http_response_code(503); exit('חסר מפתח בהגדרות'); }
+require __DIR__ . '/_lib.php';
+require dirname(__DIR__) . '/account/_acc.php';
+adm_headers();
+if (adm_key() === '') { http_response_code(503); exit('חסר מפתח בהגדרות'); }
 
 /* ---------- כניסה ---------- */
-const COOKIE = 'yyg_admin';
-$sign = static fn(string $v): string => hash_hmac('sha256', $v, $key);
-$authed = static function () use ($sign): bool {
-    $c = (string) ($_COOKIE[COOKIE] ?? '');
-    if (!preg_match('/^(\d{10})\.([a-f0-9]{64})$/', $c, $m)) return false;
-    return (int) $m[1] > time() && hash_equals($sign($m[1]), $m[2]);
-};
-$login = static function () use ($sign): void {
-    $exp = (string) (time() + 30 * 86400);
-    setcookie(COOKIE, $exp . '.' . $sign($exp), ['expires' => (int) $exp, 'path' => '/admin/', 'secure' => true, 'httponly' => true, 'samesite' => 'Strict']);
-};
 $ip = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? ''))[0]);
 $failFile = data_dir() . '/admin-fail-' . substr(hash('sha256', $ip), 0, 16);
 $fails = array_filter(array_map('intval', @file($failFile, FILE_IGNORE_NEW_LINES) ?: []), static fn($t) => $t > time() - 3600);
-$tryKey = (string) ($_GET['k'] ?? ($_POST['k'] ?? ''));
+$tryKey = trim((string) ($_GET['k'] ?? ($_POST['k'] ?? '')));
 if ($tryKey !== '') {
     if (count($fails) >= 10) { http_response_code(429); exit('יותר מדי ניסיונות. נסו שוב בעוד שעה.'); }
-    if (hash_equals($key, $tryKey)) { $login(); @unlink($failFile); header('Location: /admin/', true, 303); exit; }
+    if (hash_equals(adm_key(), $tryKey)) { adm_login(); @unlink($failFile); header('Location: /admin/', true, 303); exit; }
     $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails));
 }
-if (isset($_GET['logout'])) { setcookie(COOKIE, '', ['expires' => 1, 'path' => '/admin/', 'secure' => true, 'httponly' => true, 'samesite' => 'Strict']); header('Location: /admin/', true, 303); exit; }
-
-$e = static fn($s): string => htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
-$page = static function (string $title, string $body) use ($e): void {
-    header('Content-Type: text/html; charset=utf-8');
-    echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>' . $e($title) . '</title><style>' . ADMIN_CSS . '</style></head><body>' . $body . '</body></html>';
-    exit;
-};
-const ADMIN_CSS = ':root{--bg:#151920;--bg2:#1B212B;--panel:#262D3A;--line:#343C4B;--text:#E9EDF3;--muted:#A3ADBD;--gold:#E3B341;--cyan:#3FD8E6;--ok:#7BD88F;--warn:#F2C95A;--bad:#F08A8A}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,"Segoe UI",Arial,sans-serif}
-a{color:#fff}.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 64px}
-.top{position:sticky;top:0;z-index:5;background:rgba(21,25,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;padding-block:12px}
-.top b{font-size:1.05rem;margin-inline-end:auto}.top a{color:var(--muted);text-decoration:none;font-weight:600;font-size:.95rem;padding:6px 2px}.top a:hover{color:#fff}
-h1{font-size:1.5rem;margin:8px 0 2px}h2{font-size:1.2rem;margin:36px 0 12px}.muted{color:var(--muted)}small{color:var(--muted)}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.kpis{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px}.kpis .card{text-decoration:none;padding:12px 14px}.kpis .big{font-size:1.8rem}
-@media (max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}.card h3{font-size:.95rem;margin:0 0 8px;color:var(--muted)}
-.big{font-size:2.1rem;font-weight:800;line-height:1.1}.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line)}.row:first-of-type{border-top:0}
-.bars{display:grid;gap:6px}.bar{display:grid;grid-template-columns:64px 1fr 40px;align-items:center;gap:8px;font-size:.9rem}
-.bar i{display:block;height:12px;border-radius:99px;background:linear-gradient(270deg,#fff,var(--cyan))}
-.pages .bar{grid-template-columns:minmax(0,1fr) 120px 40px}.pages .bar span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr;text-align:right}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.chips a{display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border:1px solid var(--line);border-radius:99px;text-decoration:none;color:var(--text);font-size:.92rem}
-.chips a.on{background:var(--text);color:var(--bg);border-color:var(--text)}
-.lead{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
-.lead.st-new{border-color:#5b6578;box-shadow:inset 3px 0 0 var(--cyan)}
-.lead-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}.lead-h b{font-size:1.1rem}
-.tag{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.8rem;font-weight:700;background:var(--bg2);border:1px solid var(--line)}
-.tag.warn{color:var(--warn);border-color:#6b5a26}.tag.bad{color:var(--bad);border-color:#6b3434}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--text);text-decoration:none;font:600 .95rem system-ui,Arial,sans-serif;cursor:pointer}
-.btn.gold{background:var(--gold);border-color:var(--gold);color:#1A1404}
-.kv{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:10px 0 0;font-size:.95rem}.kv dt{color:var(--muted)}.kv dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
-details{margin-top:8px}summary{cursor:pointer;color:var(--muted);font-weight:600}
-form.st{display:grid;grid-template-columns:180px 1fr auto;gap:8px;margin-top:10px;align-items:start}
-select,textarea,input[type=password]{width:100%;min-height:40px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:400 .95rem system-ui,Arial,sans-serif}
-textarea{min-height:40px;resize:vertical}
-.links{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.links a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-decoration:none}.links a small{display:block}
-.spam{font-size:.88rem;direction:rtl}.spam div{padding:8px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
-.login{max-width:380px;margin:12vh auto;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.login form{display:grid;gap:10px;margin-top:14px}
-.flash{padding:10px 14px;border-radius:10px;background:#1f3a2a;border:1px solid #2f6b45;margin:12px 0}
-@media (max-width:640px){form.st{grid-template-columns:1fr}.pages .bar{grid-template-columns:minmax(0,1fr) 70px 34px}}';
-
-if (!$authed()) {
-    $page('כניסה לניהול | YYG', '<div class="login"><h1>דף הניהול של YYG</h1><p class="muted">נכנסים עם הקישור האישי, או מקלידים כאן את המפתח.</p>'
+if (isset($_GET['logout'])) { adm_logout(); header('Location: /admin/', true, 303); exit; }
+if (!adm_authed()) {
+    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>דף הניהול של YYG</h1><p class="muted">נכנסים עם הקישור האישי, או מקלידים כאן את המפתח: הקוד שמופיע בקישור אחרי <bdi>k=</bdi>. אחרי הכניסה הדפדפן זוכר אתכם ל־30 יום.</p>'
         . ($tryKey !== '' ? '<p style="color:var(--bad)">המפתח לא נכון.</p>' : '')
         . '<form method="post" action="/admin/"><label>מפתח<input type="password" name="k" autocomplete="current-password" required></label><button class="btn gold" type="submit">כניסה</button></form></div>');
 }
 
 /* ---------- נתונים ---------- */
-$tz = new DateTimeZone('Asia/Jerusalem');
+$tz = tz();
 $dir = data_dir();
-$fmt = static fn(int $t, string $f = 'd/m H:i'): string => (new DateTime('@' . $t))->setTimezone($tz)->format($f);
-$csrf = $sign('csrf' . substr((string) ($_COOKIE[COOKIE] ?? ''), 0, 10));
+$e = static fn($s): string => h($s);
+$fmt = static fn(int $t, string $f = 'd/m H:i'): string => fmt_time($t, $f);
+$csrf = adm_csrf();
 const STATUSES = ['new' => 'חדש', 'called' => 'דיברנו', 'quote' => 'נשלחה הצעה', 'won' => 'לקוח', 'lost' => 'לא רלוונטי'];
 
-$leads = [];
-foreach ((@file("$dir/leads.jsonl", FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && !empty($r['id'])) $leads[$r['id']] = $r; }
+$leads = leads_load();
 $statusFile = "$dir/lead-status.json";
 $status = json_decode((string) @file_get_contents($statusFile), true) ?: [];
+$quotes = quotes_load();
 
 /* שמירת סטטוס והערה */
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'status') {
@@ -125,8 +54,33 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 's
 }
 $stOf = static fn(string $id): string => $status[$id]['st'] ?? 'new';
 
+/* רשימת התפוצה: הסרה ידנית, וייצוא משתמשים ומנויים */
+$users = users_load();
+$subs = subs_load();
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'sub_off') {
+    if (!hash_equals($csrf, (string) ($_POST['csrf'] ?? ''))) { http_response_code(400); exit('הטופס פג תוקף.'); }
+    sub_set_status((string) ($_POST['email'] ?? ''), 'unsubscribed');
+    header('Location: /admin/?saved=1#users', true, 303); exit;
+}
+if (in_array($_GET['export'] ?? '', ['subs', 'users'], true)) {
+    $which = $_GET['export'];
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="yyg-' . $which . '-' . date('Y-m-d') . '.csv"');
+    $out = fopen('php://output', 'w');
+    fwrite($out, "\xEF\xBB\xBF");
+    $cell = static fn($v): string => preg_match('/^[=+\-@\t\r]/', (string) $v) ? "'" . $v : (string) $v;
+    if ($which === 'subs') {
+        fputcsv($out, ['מייל', 'שם', 'סטטוס', 'שפה', 'מקור', 'הצטרף', 'אישר', 'נוסח ההסכמה']);
+        foreach ($subs as $sb) fputcsv($out, array_map($cell, [$sb['email'], $sb['name'] ?? '', $sb['status'] ?? '', $sb['lang'] ?? '', $sb['source'] ?? '', fmt_time((int) ($sb['created'] ?? 0)), !empty($sb['confirmed']) ? fmt_time((int) $sb['confirmed']) : '', $sb['consent'] ?? '']));
+    } else {
+        fputcsv($out, ['שם', 'מייל', 'טלפון', 'נרשם', 'מייל מאומת', 'כניסה אחרונה', 'רשימת תפוצה']);
+        foreach ($users as $u) fputcsv($out, array_map($cell, [$u['name'] ?? '', $u['email'] ?? '', $u['phone'] ?? '', fmt_time((int) ($u['created'] ?? 0)), !empty($u['verified']) ? 'כן' : 'לא', !empty($u['last_login']) ? fmt_time((int) $u['last_login']) : '', !empty($u['newsletter']) ? 'כן' : 'לא']));
+    }
+    exit;
+}
+
 /* ייצוא הפניות לאקסל */
-if (isset($_GET['export'])) {
+if (($_GET['export'] ?? '') === '1') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="yyg-leads-' . date('Y-m-d') . '.csv"');
     $out = fopen('php://output', 'w');
@@ -188,7 +142,7 @@ $new = $counts['new'];
 $max = max(1, ...array_values($byDay));
 $maxP = max(1, ...array_values($pages ?: [0]));
 ob_start(); ?>
-<header class="top"><div class="wrap"><b>ניהול YYG</b><a href="#leads">פניות<?= $new ? ($new === 1 ? ' (חדשה אחת)' : " ($new חדשות)") : '' ?></a><a href="#stats">כניסות</a><a href="#spam">ספאם</a><a href="#links">קישורים</a><a href="?logout=1">יציאה</a></div></header>
+<?= adm_nav($new) ?>
 <main class="wrap">
 <h1>שלום יהודה</h1>
 <p class="muted">עודכן <?= $e((new DateTime('now', $tz))->format('d/m/Y H:i')) ?>. נספרים רק אנשים אמיתיים, בלי רובוטים ובלי עוגיות.</p>
@@ -217,7 +171,7 @@ ob_start(); ?>
    <?php if (!empty($r['score'])): ?><span class="tag warn">חשד לספאם: <?= $e(implode(', ', (array) ($r['why'] ?? []))) ?></span><?php endif; ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
    <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?></div>
-  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="https://wa.me/<?= $e($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a></div>
+  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="https://wa.me/<?= $e($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>
@@ -232,6 +186,35 @@ ob_start(); ?>
   </form>
  </article>
 <?php endforeach; ?>
+
+<h2 id="quotes">הצעות מחיר</h2>
+<div class="acts" style="margin:0 0 12px"><a class="btn gold" href="/admin/quote.php">הצעה חדשה</a></div>
+<?php if (!$quotes): ?><p class="muted">עוד אין הצעות. אפשר להתחיל מהכפתור "הצעת מחיר" ליד כל פנייה, או מהצעה חדשה.</p><?php else: ?>
+<div class="tscroll"><table class="list"><thead><tr><th>מספר</th><th>לקוח</th><th>סכום</th><th>סטטוס</th><th>צפיות</th><th>עודכנה</th></tr></thead><tbody>
+<?php foreach (array_reverse($quotes, true) as $num => $q): $tq = quote_totals($q); $qs = (string) ($q['status'] ?? 'draft'); ?>
+ <tr><td><a href="/admin/quote.php?id=<?= $e(rawurlencode((string) $num)) ?>"><?= $e($num) ?></a></td><td><?= $e($q['client']['name'] ?? '') ?><?= !empty($q['client']['business']) ? ' <small>· ' . $e($q['client']['business']) . '</small>' : '' ?></td><td><?= $e(nis($tq['total'])) ?></td>
+ <td><span class="tag<?= $qs === 'approved' ? ' ok' : ($qs === 'declined' ? ' bad' : '') ?>"><?= $e(Q_STATUSES[$qs] ?? $qs) ?></span></td><td><?= (int) ($q['views'] ?? 0) ?></td><td><small><?= $e($fmt((int) ($q['updated'] ?? $q['created'] ?? time()), 'd/m H:i')) ?></small></td></tr>
+<?php endforeach; ?>
+</tbody></table></div>
+<?php endif; ?>
+
+<h2 id="users">משתמשים ורשימת תפוצה</h2>
+<?php $subCount = ['active' => 0, 'pending' => 0, 'unsubscribed' => 0]; foreach ($subs as $sb) { $k = (string) ($sb['status'] ?? 'pending'); if (isset($subCount[$k])) $subCount[$k]++; }
+      $verified = count(array_filter($users, static fn($u) => !empty($u['verified']))); ?>
+<div class="kpis">
+ <div class="card"><h3>משתמשים רשומים</h3><div class="big"><?= count($users) ?></div><small><?= $verified ?> אישרו מייל</small></div>
+ <div class="card"><h3>ברשימת התפוצה</h3><div class="big"><?= $subCount['active'] ?></div><small>מנויים פעילים</small></div>
+ <div class="card"><h3>ממתינים לאישור</h3><div class="big"><?= $subCount['pending'] ?></div><small>עוד לא לחצו על הקישור</small></div>
+ <div class="card"><h3>הוסרו</h3><div class="big"><?= $subCount['unsubscribed'] ?></div><small>ביקשו להסיר</small></div>
+</div>
+<div class="acts" style="margin:12px 0"><a class="btn gold" href="/admin/mail.php">שליחת עדכון לרשימה</a><a class="btn" href="?export=subs">המנויים לאקסל</a><a class="btn" href="?export=users">המשתמשים לאקסל</a><a class="btn" href="https://yygweb.com/account/" target="_blank" rel="noopener">האזור האישי באתר</a></div>
+<?php if ($users): ?><details><summary>משתמשים רשומים (<?= count($users) ?>)</summary><div class="tscroll"><table class="list"><thead><tr><th>שם</th><th>מייל</th><th>טלפון</th><th>נרשם</th><th>מאומת</th><th>רשימה</th></tr></thead><tbody>
+<?php foreach (array_reverse($users, true) as $u): ?><tr><td><?= $e($u['name'] ?? '') ?></td><td><bdi><?= $e($u['email'] ?? '') ?></bdi></td><td><bdi><?= $e($u['phone'] ?? '') ?></bdi></td><td><small><?= $e(fmt_time((int) ($u['created'] ?? 0), 'd/m/Y')) ?></small></td><td><?= !empty($u['verified']) ? 'כן' : 'לא' ?></td><td><?= ($subs[$u['email'] ?? '']['status'] ?? '') === 'active' ? 'כן' : 'לא' ?></td></tr><?php endforeach; ?>
+</tbody></table></div></details><?php endif; ?>
+<?php if ($subs): ?><details><summary>רשימת התפוצה (<?= count($subs) ?>)</summary><div class="tscroll"><table class="list"><thead><tr><th>מייל</th><th>שם</th><th>סטטוס</th><th>מקור</th><th>הצטרף</th><th></th></tr></thead><tbody>
+<?php foreach (array_reverse($subs, true) as $sb): $sst = (string) ($sb['status'] ?? 'pending'); ?><tr><td><bdi><?= $e($sb['email']) ?></bdi></td><td><?= $e($sb['name'] ?? '') ?></td><td><span class="tag<?= $sst === 'active' ? ' ok' : ($sst === 'unsubscribed' ? ' bad' : '') ?>"><?= ['active' => 'פעיל', 'pending' => 'ממתין', 'unsubscribed' => 'הוסר'][$sst] ?? $e($sst) ?></span></td><td><small><?= $e($sb['source'] ?? '') ?></small></td><td><small><?= $e(fmt_time((int) ($sb['created'] ?? 0), 'd/m/Y')) ?></small></td>
+<td><?php if ($sst !== 'unsubscribed'): ?><form method="post" onsubmit="return confirm('להסיר את הכתובת מהרשימה?')"><input type="hidden" name="do" value="sub_off"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="email" value="<?= $e($sb['email']) ?>"><button class="btn" type="submit">הסרה</button></form><?php endif; ?></td></tr><?php endforeach; ?>
+</tbody></table></div></details><?php endif; ?>
 
 <h2 id="stats">כניסות</h2>
 <div class="grid" style="margin-bottom:12px">
@@ -272,4 +255,4 @@ ob_start(); ?>
  <a href="https://hakef.com/wp-admin/" target="_blank" rel="noopener">ניהול הכיף שבאפיה<small>מתכונים ורשימת תפוצה</small></a>
 </div>
 </main>
-<?php $page('ניהול | YYG', (string) ob_get_clean());
+<?php adm_page('ניהול | YYG', (string) ob_get_clean());
