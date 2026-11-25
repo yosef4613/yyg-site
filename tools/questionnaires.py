@@ -43,6 +43,7 @@ for (form, lang), p in PAGES.items():
 <title>{p['title']}</title>
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
+<script defer src="/assets/hit.js"></script>
 </head>
 <body>
 <main class="qf-page">
