@@ -93,8 +93,13 @@ if ($q === null && isset($_GET['dup'], $quotes[(string) $_GET['dup']])) {
 }
 $lead = null;
 if ($q === null && isset($_GET['lead'], $leads[(string) $_GET['lead']])) $lead = $leads[(string) $_GET['lead']];
+$formRec = null;
+if ($q === null && $lead === null && isset($_GET['form'])) {
+    foreach ((@file(data_dir() . '/forms.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && ($r['id'] ?? '') === (string) $_GET['form']) $formRec = $r; }
+}
 $init = $q ? (($q['ui'] ?? null) ?: null) : null;
-$prefill = $lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null;
+$prefill = $formRec ? ['name' => $formRec['contact']['name'], 'phone' => $formRec['contact']['phone'], 'business' => $formRec['contact']['business'], 'email' => $formRec['contact']['email'],
+    'plan' => implode("\n", array_map(static fn($it) => $it['a'], array_filter($formRec['items'], static fn($it) => preg_match('/מסלול|package|שפות|languages/iu', $it['q'])))), 'lead_id' => ''] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
 $totals = $q ? quote_totals($q) : null;
 
 ob_start(); ?>
@@ -116,6 +121,7 @@ ob_start(); ?>
   <a class="btn gold" href="<?= h($url) ?>" target="_blank" rel="noopener">פתיחת ההצעה</a>
   <button class="btn" type="button" id="copy-url">העתקת הקישור</button>
   <?php if ($wa !== ''): ?><a class="btn" href="https://wa.me/<?= h($wa) ?>?text=<?= h(rawurlencode($waText)) ?>" target="_blank" rel="noopener">שליחה בוואטסאפ</a><?php endif; ?>
+  <?php if ($wa !== ''): ?><a class="btn" href="https://wa.me/<?= h($wa) ?>?text=<?= h(rawurlencode('שלום ' . ($q['client']['name'] ?? '') . ', אחרי שתעבור/י על 3 העיצובים, אשמח למשוב כאן (כ־5 דקות): https://yygweb.com/feedback/?' . http_build_query(['name' => $q['client']['name'] ?? '', 'phone' => $q['client']['phone'] ?? '', 'business' => $q['client']['business'] ?? '', 'quote' => $num, 'src' => 'wa']))) ?>" target="_blank" rel="noopener">שאלון משוב בוואטסאפ</a><?php endif; ?>
   <a class="btn" href="/admin/quote.php?dup=<?= h(rawurlencode($num)) ?>">שכפול להצעה חדשה</a>
  </div>
  <form class="acts" method="post" style="margin-top:8px">
@@ -362,9 +368,9 @@ if (INIT) {
 } else {
   let guess = 'site';
   if (PREFILL) {
-    $('c-name').value = PREFILL.name; $('c-phone').value = PREFILL.phone; $('c-business').value = PREFILL.business;
+    $('c-name').value = PREFILL.name; $('c-phone').value = PREFILL.phone; $('c-business').value = PREFILL.business; if (PREFILL.email) $('c-email').value = PREFILL.email;
     const p = PREFILL.plan || '';
-    guess = /מותג/.test(p) ? 'brand_site' : /חנות|store/i.test(p) ? 'store' : /הרשמה|sign-?ups/i.test(p) ? 'club' : /דף נחיתה|landing/i.test(p) ? 'landing' : 'site';
+    guess = /מותג|Brand/.test(p) ? 'brand_site' : /בסיסי|Basic landing/.test(p) ? 'landing_basic' : /חנות|store/i.test(p) ? 'store' : /הרשמה|sign-?ups/i.test(p) ? 'club' : /דף נחיתה|landing/i.test(p) ? 'landing' : 'site';
   }
   $('base').value = guess;
   applyBase(guess, false);

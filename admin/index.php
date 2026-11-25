@@ -39,6 +39,8 @@ $leads = leads_load();
 $statusFile = "$dir/lead-status.json";
 $status = json_decode((string) @file_get_contents($statusFile), true) ?: [];
 $quotes = quotes_load();
+$forms = [];
+foreach ((@file("$dir/forms.jsonl", FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && !empty($r['id'])) $forms[$r['id']] = $r; }
 
 /* שמירת סטטוס והערה */
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'status') {
@@ -171,7 +173,7 @@ ob_start(); ?>
    <?php if (!empty($r['score'])): ?><span class="tag warn">חשד לספאם: <?= $e(implode(', ', (array) ($r['why'] ?? []))) ?></span><?php endif; ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
    <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?></div>
-  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="https://wa.me/<?= $e($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a></div>
+  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="https://wa.me/<?= $e($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><a class="btn" href="https://wa.me/<?= $e($wa) ?>?text=<?= $e(rawurlencode('שלום ' . ($r['name'] ?? '') . ', כאן יהודה מ־YYG. כדי שאכין לך הצעה מדויקת, אשמח שתמלא/י שאלון קצר (כ־10 דקות): https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? '', 'src' => 'wa']))) ?>" target="_blank" rel="noopener">שאלון אפיון בוואטסאפ</a></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>
@@ -186,6 +188,14 @@ ob_start(); ?>
   </form>
  </article>
 <?php endforeach; ?>
+
+<h2 id="forms">שאלונים</h2>
+<div class="acts" style="margin:0 0 12px"><a class="btn" href="https://yygweb.com/questionnaire/" target="_blank" rel="noopener">שאלון האפיון באתר</a><a class="btn" href="https://yygweb.com/feedback/" target="_blank" rel="noopener">שאלון המשוב באתר</a></div>
+<?php if (!$forms): ?><p class="muted">עוד לא מולאו שאלונים. כל שאלון שלקוח שולח מגיע אליך במייל ומופיע כאן.</p><?php else: ?>
+<div class="tscroll"><table class="list"><thead><tr><th>תאריך</th><th>שאלון</th><th>לקוח</th><th>טלפון</th></tr></thead><tbody>
+<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td></tr><?php endforeach; ?>
+</tbody></table></div>
+<?php endif; ?>
 
 <h2 id="quotes">הצעות מחיר</h2>
 <div class="acts" style="margin:0 0 12px"><a class="btn gold" href="/admin/quote.php">הצעה חדשה</a></div>

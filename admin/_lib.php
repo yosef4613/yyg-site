@@ -211,5 +211,5 @@ function adm_page(string $title, string $body, string $extraCss = ''): void {
     exit;
 }
 function adm_nav(int $newLeads = 0): string {
-    return '<header class="top"><div class="wrap"><b>ניהול YYG</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
+    return '<header class="top"><div class="wrap"><b>ניהול YYG</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#forms">שאלונים</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
 }
