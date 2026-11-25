@@ -1,8 +1,9 @@
 <?php
 /*
  * YYG: קבלת פנייה מהטופס באתר ושליחתה במייל, ישירות מהשרת בהוסטינגר.
- * - אם יש קובץ הגדרות (_private/mail-config.php) שולחים דרך תיבת מייל של הדומיין (SMTP), שזו הדרך שמגיעה הכי טוב לתיבה.
- * - אחרת שולחים בפונקציית המייל של השרת.
+ * - הדרך הראשית: שירות המייל של הוסטינגר, עם מפתח שמוגבל לתיבה yehuda@yygweb.com (בלי סיסמת התיבה).
+ *   המפתח שמור ב־_private/mail-config.php, שלא נשמר ב־Git ונמצא בתיקייה חסומה.
+ * - גיבוי: SMTP, אם הוגדר, ואחריו פונקציית המייל של השרת.
  * מחזיר JSON: {"success":"true"} או {"success":"false","message":"..."}
  */
 declare(strict_types=1);
@@ -161,7 +162,27 @@ function build_message(array $cfg, string $subject, string $html, string $text, 
          . "--$b--\r\n";
 }
 
+function send_mail_api(array $cfg, string $subject, string $html, string $text): bool {
+    $api = $cfg['mail_api'];
+    $url = 'https://api.mail.hostinger.com/api/v1/mailboxes/' . rawurlencode($api['mailbox']) . '/send';
+    $payload = json_encode(['to' => [$cfg['to']], 'subject' => $subject, 'html' => $html, 'text' => $text, 'displayName' => $cfg['from_name']], JSON_UNESCAPED_UNICODE);
+    $headers = ['Authorization: Bearer ' . $api['token'], 'Content-Type: application/json', 'Accept: application/json'];
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_POSTFIELDS => $payload, CURLOPT_HTTPHEADER => $headers, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 20]);
+        curl_exec($ch);
+        $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+    } else {
+        $ctx = stream_context_create(['http' => ['method' => 'POST', 'header' => implode("\r\n", $headers), 'content' => $payload, 'timeout' => 20, 'ignore_errors' => true]]);
+        @file_get_contents($url, false, $ctx);
+        $code = isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $m) ? (int) $m[1] : 0;
+    }
+    return $code >= 200 && $code < 300;
+}
+
 function send_mail(array $cfg, string $subject, string $html, string $text): bool {
+    if (!empty($cfg['mail_api']['token']) && send_mail_api($cfg, $subject, $html, $text)) return true;
     $headers = '';
     $body = build_message($cfg, $subject, $html, $text, $headers);
     if (!empty($cfg['smtp']['user'])) {
