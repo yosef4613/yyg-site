@@ -5,5 +5,7 @@ Disallow: /hit.php
 Disallow: /send.php
 Disallow: /_private/
 Disallow: /admin/
+Disallow: /q/
+Disallow: /account/
 
 Sitemap: https://yygweb.com/sitemap.xml
