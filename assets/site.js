@@ -629,7 +629,7 @@ const Planner = (() => {
     $('err-' + name).textContent = msg || '';
   };
   const fallback = (data) => {
-    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`;
+    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nרקע מועדף: ${data.style}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`;
     status.textContent = '';
     status.append('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
       ', או ', Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(`פנייה מהאתר: ${data.name}`, body), textContent: 'לשלוח את הפרטים במייל' }),
@@ -648,6 +648,7 @@ const Planner = (() => {
       name, phone,
       business: form.elements.business.value.trim(),
       when: form.elements.when.value,
+      style: form.elements.style.value,
       likes: form.elements.likes.value.trim(),
       notes: form.elements.notes.value.trim(),
       ready: $('lead-ready').value || 'לא סימנו ברשימת ההכנה',
