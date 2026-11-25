@@ -12,6 +12,93 @@ adm_require();
 
 $quotes = quotes_load();
 $leads = leads_load();
+
+/* שאלון אפיון → מסלול, תוספות, שורות לתמחור ותשלומים קבועים. price=null פירושו "לתמחר": השורה נכנסת בלי מחיר ומסומנת */
+/* לשאלונים ישנים בלי תשובות לפי מזהה: משחזרים מהטקסט של השאלות */
+function raw_from_items(array $items): array {
+    $map = ['package' => '/איזה מסלול|Which package/u', 'pages' => '/אילו עמודים|Which pages/u', 'features' => '/אילו יכולות|Which features/u', 'languages' => '/באילו שפות|Which languages/u',
+        'logo' => '/^(לוגו|Logo)$/u', 'photos' => '/^(תמונות|Photos)$/u', 'texts' => '/הטקסטים לאתר|טקסטים לאתר|website text/iu', 'update_who' => '/מי יעדכן|Who will update/u',
+        'goal_action' => '/הדבר הכי חשוב|most important thing/u', 'site_now' => '/יש אתר קיים|have a site now/u', 'site_url' => '/הכתובת של האתר הקיים|current site/u',
+        'deadline' => '/מתי האתר צריך|need to be live/u', 'budget' => '/תקציב משוער|Rough budget/u', 'domain' => '/הדומיין|domain\)/iu', 'site_name' => '/השם שיופיע|name shown/u'];
+    $multi = ['pages', 'features', 'languages'];
+    $r = [];
+    foreach ($items as $it) foreach ($map as $id => $re) {
+        if (isset($r[$id]) || !preg_match($re, (string) $it['q'])) continue;
+        $a = (string) $it['a'];
+        if (in_array($id, $multi, true)) {
+            $vals = array_map('trim', explode(', ', $a));
+            foreach ($vals as $i => $v) if (preg_match('/^(אחר|Other): (.*)$/u', $v, $m)) { $vals[$i] = '__other'; $r[$id . '__other'] = $m[2]; }
+            $r[$id] = $vals;
+        } else $r[$id] = $a;
+    }
+    return $r;
+}
+function intake_to_quote(array $rec): array {
+    $r = !empty($rec['raw']) ? (array) $rec['raw'] : raw_from_items((array) ($rec['items'] ?? []));
+    $val = static fn(string $k): string => is_string($r[$k] ?? null) ? $r[$k] : '';
+    $arr = static fn(string $k): array => is_array($r[$k] ?? null) ? $r[$k] : [];
+    $any = static function (array $list, string $re): bool { foreach ($list as $x) if (preg_match($re, (string) $x)) return true; return false; };
+    $pages = $arr('pages'); $feats = $arr('features'); $langs = $arr('languages');
+    $needStore = $any($feats, '/אשראי|Card payments/u') || $any($pages, '/^(חנות|Store)$/u') || preg_match('/לקנות ולשלם|Buy and pay/u', $val('goal_action'));
+    $needClub = $any($feats, '/הרשמה עם אישור|Sign-up with|רשימת תפוצה|Mailing list/u') || $any($pages, '/^(הרשמה|Sign-up)$|אזור אישי|Customer accounts/u');
+    $pageCount = count(array_filter($pages, static fn($p) => $p !== '__other' && !preg_match('/המלצות|Testimonials|שאלות נפוצות|FAQ/u', $p))) + (in_array('__other', $pages, true) ? 1 : 0);
+    $kind = $needStore ? 'store' : ($needClub ? 'club' : ($pageCount > 0 && $pageCount <= 2 ? 'landing' : 'site'));
+    $pkg = $val('package');
+    $hints = []; $custom = []; $addons = []; $recurring = [];
+    $added = static function (string $t) use (&$hints): void { $hints[] = ['ok', $t]; };
+    $todo = static function (string $label) use (&$custom, &$hints): void { $custom[] = ['label' => $label, 'qty' => 1, 'price' => null]; $hints[] = ['todo', $label]; };
+    $note = static function (string $t) use (&$hints): void { $hints[] = ['note', $t]; };
+    if (preg_match('/מותג|Brand/u', $pkg)) $base = 'brand_' . $kind;
+    elseif (preg_match('/בסיסי|Basic/u', $pkg)) $base = 'landing_basic';
+    elseif (preg_match('/חנות|store/iu', $pkg)) $base = 'store';
+    elseif (preg_match('/הרשמה|sign-ups/iu', $pkg)) $base = 'club';
+    elseif (preg_match('/אזור ניהול|admin panel/iu', $pkg)) $base = 'site';
+    elseif (preg_match('/דף נחיתה|Landing/iu', $pkg)) $base = 'landing';
+    else { $base = $kind; $note('הלקוח לא בחר מסלול. המסלול נבחר לפי מה שסימן בעמודים וביכולות.'); }
+    $core = preg_replace('/^brand_/', '', $base);
+    if ($pkg !== '' && $base !== $kind && !str_starts_with($base, 'brand_') && !($kind === 'landing' && $core === 'landing_basic')) $note('הלקוח בחר "' . $pkg . '", אבל לפי מה שסימן מתאים יותר מסלול אחר. כדאי לבדוק.');
+    /* יכולות שלא כלולות במסלול שנבחר */
+    if ($needStore && $core !== 'store') $todo('סליקה ותשלום באשראי באתר');
+    if ($needClub && !in_array($core, ['club', 'store'], true)) {
+        if ($core === 'site') { $custom[] = ['label' => 'הרשמה, חשבונות משתמש ורשימת תפוצה', 'qty' => 1, 'price' => 2000]; $added('הרשמה ורשימת תפוצה (ההפרש למסלול עם הרשמה, 2,000 ₪)'); }
+        else $todo('הרשמה ורשימת תפוצה');
+    }
+    /* עמודים מעבר למכסה */
+    $quota = ['site' => 6, 'club' => 8];
+    if (isset($quota[$core]) && $pageCount > $quota[$core]) { $addons['page'] = $pageCount - $quota[$core]; $added(($pageCount - $quota[$core]) . ' עמודים נוספים (סימן ' . $pageCount . ' עמודים)'); }
+    if (in_array($core, ['landing', 'landing_basic'], true) && $pageCount > 3) $note('סימן ' . $pageCount . ' עמודים, אבל המסלול הוא דף נחיתה. אולי מתאים אתר.');
+    /* שפות */
+    $langList = array_values(array_filter($langs, static fn($l) => $l !== '__other'));
+    if (in_array('__other', $langs, true) && $val('languages__other') !== '') $langList[] = $val('languages__other');
+    if (count($langList) >= 2) {
+        $addons['en'] = true; $added('שפה שנייה: ' . implode(' ו', array_slice($langList, 0, 2)));
+        foreach (array_slice($langList, 2) as $l) $todo('שפה נוספת: ' . $l);
+    }
+    /* לוגו */
+    $logo = $val('logo');
+    if (!str_starts_with($base, 'brand_')) {
+        if (preg_match('/אין, צריך|None, I need|לחדש|want a new/u', $logo)) { $addons['logo2'] = true; $added('לוגו מקצועי, 1,500 ₪ (אפשר להחליף ללוגו בסיסי ב־590 ₪)'); }
+        elseif (preg_match('/רק תמונה|only have a picture/u', $logo)) $todo('שחזור הלוגו לקובץ איכותי');
+    }
+    /* תוכן ותמונות */
+    if ($core === 'landing_basic' && preg_match('/שתכתוב|write it/u', $val('texts'))) $todo('כתיבת טקסטים (לא כלולה בבסיסי)');
+    if (preg_match('/אין, צריך|None, I need/u', $val('photos'))) $todo('תמונות מתאימות מהמאגר');
+    /* יכולות מיוחדות */
+    if ($any($feats, '/זימון תורים|Appointment/u')) $todo('זימון תורים ביומן');
+    if ($any($feats, '/נגן|player/u')) $todo('נגן מוזיקה או וידאו');
+    if ($any($feats, '/מחשבון|calculator/u')) $todo('מחשבון או שאלון באתר');
+    if (in_array('__other', $feats, true) && $val('features__other') !== '') $todo('יכולת נוספת: ' . $val('features__other'));
+    if (in_array('__other', $pages, true) && $val('pages__other') !== '') $note('עמוד נוסף שהלקוח ביקש: ' . $val('pages__other'));
+    /* תשלומים קבועים */
+    if (preg_match('/שאתה תעדכן|like you to do/u', $val('update_who'))) { $recurring['maint'] = true; $added('תחזוקה חודשית (הלקוח רוצה שאתה תעדכן)'); }
+    /* הערות לשיחה */
+    if (preg_match('/^(כן|Yes)$/u', $val('site_now'))) $note('יש אתר קיים' . ($val('site_url') ? ' (' . $val('site_url') . ')' : '') . ': לתכנן הפניות כדי לשמור על הדירוג בגוגל.');
+    if ($val('deadline') !== '' && !preg_match('/אין לחץ|No rush/u', $val('deadline'))) $note('לוח זמנים: ' . $val('deadline') . ($val('deadline_date') ? ', ' . $val('deadline_date') : '') . ($val('deadline_why') ? ' (' . $val('deadline_why') . ')' : '') . '.');
+    if ($val('budget') !== '') $note('התקציב שהלקוח ציין: ' . $val('budget') . '.');
+    if (preg_match('/צריך לרשום|needs registering/u', $val('domain'))) $note('צריך לרשום דומיין' . ($val('domain_wish') ? ': ' . $val('domain_wish') : '') . '. כלול בשנה הראשונה.');
+    $who = $val('site_name') ?: ($rec['contact']['business'] ?? '') ?: ($rec['contact']['name'] ?? '');
+    return ['base' => $base, 'addons' => $addons, 'custom' => $custom, 'recurring' => $recurring, 'hints' => $hints, 'who' => $who];
+}
 $csrf = adm_csrf();
 $JS = JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
 
@@ -99,7 +186,7 @@ if ($q === null && $lead === null && isset($_GET['form'])) {
 }
 $init = $q ? (($q['ui'] ?? null) ?: null) : null;
 $prefill = $formRec ? ['name' => $formRec['contact']['name'], 'phone' => $formRec['contact']['phone'], 'business' => $formRec['contact']['business'], 'email' => $formRec['contact']['email'],
-    'plan' => implode("\n", array_map(static fn($it) => $it['a'], array_filter($formRec['items'], static fn($it) => preg_match('/מסלול|package|שפות|languages/iu', $it['q'])))), 'lead_id' => ''] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
+    'plan' => '', 'lead_id' => '', 'auto' => intake_to_quote($formRec)] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
 $totals = $q ? quote_totals($q) : null;
 
 ob_start(); ?>
@@ -342,6 +429,8 @@ $('qform').addEventListener('submit', (e) => {
   if (!$('c-name').value.trim()) { e.preventDefault(); err.textContent = 'חסר שם לקוח.'; $('c-name').focus(); return; }
   if (!items().length) { e.preventDefault(); err.textContent = 'אין בהצעה אף שורה.'; return; }
   if (payRows().reduce((s, p) => s + p.pct, 0) !== 100) { e.preventDefault(); err.textContent = 'שלבי התשלום צריכים להסתכם ב־100%.'; return; }
+  const unpriced = [...document.querySelectorAll('#custom .line')].filter((l) => l.querySelector('[data-label]').value.trim() && l.querySelector('[data-price]').value === '');
+  if (unpriced.length && !confirm(`יש ${unpriced.length} שורות בלי מחיר. לשמור בכל זאת? הן יופיעו ללקוח ב־0 ₪.`)) { e.preventDefault(); return; }
   const u = uiState();
   $('qdata').value = JSON.stringify({
     client: u.client, title: u.title, items: items(), recurring: recRows(),
@@ -370,13 +459,25 @@ if (INIT) {
   if (PREFILL) {
     $('c-name').value = PREFILL.name; $('c-phone').value = PREFILL.phone; $('c-business').value = PREFILL.business; if (PREFILL.email) $('c-email').value = PREFILL.email;
     const p = PREFILL.plan || '';
-    guess = /מותג|Brand/.test(p) ? 'brand_site' : /בסיסי|Basic landing/.test(p) ? 'landing_basic' : /חנות|store/i.test(p) ? 'store' : /הרשמה|sign-?ups/i.test(p) ? 'club' : /דף נחיתה|landing/i.test(p) ? 'landing' : 'site';
+    if (PREFILL.auto) guess = PREFILL.auto.base; else guess = /מותג|Brand/.test(p) ? 'brand_site' : /בסיסי|Basic landing/.test(p) ? 'landing_basic' : /חנות|store/i.test(p) ? 'store' : /הרשמה|sign-?ups/i.test(p) ? 'club' : /דף נחיתה|landing/i.test(p) ? 'landing' : 'site';
   }
   $('base').value = guess;
   applyBase(guess, false);
   if (PREFILL && /אנגלית|English/.test(PREFILL.plan || '')) document.querySelector('#addons [data-k="en"] [data-on]').checked = true;
   const extra = (PREFILL?.plan || '').match(/כולל (\d+) עמודים נוספים|כולל עמוד אחד נוסף/);
   if (extra) { const l = document.querySelector('#addons [data-k="page"]'); l.querySelector('[data-on]').checked = true; l.querySelector('[data-qty]').value = extra[1] || 1; }
+  const A = PREFILL && PREFILL.auto;
+  if (A) {
+    Object.entries(A.addons || {}).forEach(([k, v]) => { const l = document.querySelector(`#addons [data-k="${k}"]`); if (!l || !v) return; l.querySelector('[data-on]').checked = true; if (typeof v === 'number' && l.querySelector('[data-qty]')) l.querySelector('[data-qty]').value = v; });
+    (A.custom || []).forEach(customRow);
+    Object.entries(A.recurring || {}).forEach(([k, v]) => { const l = document.querySelector(`#recurring [data-k="${k}"]`); if (l) l.querySelector('[data-on]').checked = !!v; });
+    if (A.who && guess !== 'none') $('title').value = BASES[guess].label + ' עבור ' + A.who;
+    const icon = { ok: '✓ נוסף', todo: '⚠ לתמחר', note: 'ℹ לשיחה' };
+    const box = document.createElement('div');
+    box.className = 'card qhints';
+    box.innerHTML = '<h3>מה נלקח משאלון האפיון</h3><ul>' + (A.hints || []).map(([k, t]) => `<li class="h-${k}"><b>${icon[k]}:</b> ${esc(t)}</li>`).join('') + '</ul><p class="small">שורות "לתמחר" נכנסו להצעה בלי מחיר. צריך להשלים מחיר או למחוק אותן לפני השליחה.</p>';
+    $('qform').before(box);
+  }
 }
 calc();
 const cp = $('copy-url');
@@ -393,7 +494,9 @@ label{display:grid;gap:4px;font-size:.92rem;color:var(--muted);margin-bottom:10p
 .line{display:grid;grid-template-columns:minmax(0,1fr) 70px 110px;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}.line:first-child{border-top:0}
 .line.custom{grid-template-columns:minmax(0,1fr) 70px 110px 40px}.line.pay{grid-template-columns:80px 16px minmax(0,1fr) 40px}.line.rec{grid-template-columns:minmax(0,1fr) 90px 150px}
 .chk{display:flex;align-items:center;gap:8px;margin:0;color:var(--text);font-size:.95rem}.chk input{width:18px;height:18px;min-height:0;flex:none;accent-color:var(--gold)}
-.btn.x{min-height:36px;padding:4px 10px}.sub{font-size:.95rem;margin:14px 0 6px}.small{font-size:.88rem}
+.btn.x{min-height:36px;padding:4px 10px}
+.line.custom input[data-price]:placeholder-shown{border-color:var(--warn);box-shadow:0 0 0 2px rgba(242,201,90,.2)}
+.qhints{margin-top:14px}.qhints h3{color:#fff;font-size:1.05rem;margin:0 0 8px}.qhints ul{margin:0;padding-inline-start:18px;display:grid;gap:4px}.qhints .h-ok b{color:var(--ok)}.qhints .h-todo b{color:var(--warn)}.qhints .h-note b{color:var(--cyan)}.sub{font-size:.95rem;margin:14px 0 6px}.small{font-size:.88rem}
 .qlink{margin-top:12px}.qlink .row b{overflow-wrap:anywhere;text-align:left}
 @media (max-width:860px){.qgrid{grid-template-columns:1fr}.qside{position:static}.four{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}}
 @media (max-width:520px){.two{grid-template-columns:1fr}.line,.line.rec{grid-template-columns:minmax(0,1fr) 64px 96px}.line.rec small{grid-column:1/-1}}');

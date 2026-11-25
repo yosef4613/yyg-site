@@ -43,6 +43,13 @@ foreach (array_slice((array) ($in['items'] ?? []), 0, 200) as $it) {
     if ($a === '') continue;
     $items[] = ['s' => $s($it['s'] ?? '', 120), 'q' => $s($it['q'] ?? '', 300), 'a' => $a];
 }
+/* התשובות לפי מזהה שאלה (בשביל בונה ההצעות) */
+$raw = [];
+foreach ((array) ($in['raw'] ?? []) as $k => $v) {
+    if (!preg_match('/^[a-z0-9_]{1,40}$/', (string) $k) || count($raw) >= 150) continue;
+    if (is_array($v)) $raw[$k] = array_slice(array_values(array_map(static fn($x) => $s($x, 300), array_filter($v, 'is_scalar'))), 0, 40);
+    elseif (is_scalar($v)) $raw[$k] = $s($v, 6000);
+}
 $flags = [];
 if ((int) ($in['t'] ?? 0) < 10000) $flags[] = 'נשלח מהר מאוד';
 $lang = ($in['lang'] ?? '') === 'en' ? 'en' : 'he';
@@ -80,7 +87,7 @@ if (!empty($_FILES['files']['name']) && is_array($_FILES['files']['name'])) {
 }
 if ($skipped) $flags[] = 'קבצים שלא התקבלו: ' . implode(', ', $skipped);
 
-$rec = ['id' => $id, 't' => time(), 'form' => $form, 'lang' => $lang, 'contact' => $contact, 'items' => $items, 'files' => $files, 'flags' => $flags];
+$rec = ['id' => $id, 't' => time(), 'form' => $form, 'lang' => $lang, 'contact' => $contact, 'items' => $items, 'raw' => $raw, 'files' => $files, 'flags' => $flags];
 if (@file_put_contents(data_dir() . '/forms.jsonl', json_encode($rec, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX) === false) $out(false, 'store', 500);
 
 /* ---------- מייל אליי, מסודר לפי חלקים ---------- */

@@ -194,7 +194,8 @@
     btn.disabled = true;
     const payload = {
       form: FORM, lang: EN ? 'en' : 'he', t: Date.now() - Number(state.__t0 || Date.now()), hp: root.querySelector('[name=_hpq]')?.value || '',
-      contact: { name: state.name || '', phone: state.phone || '', email: state.email || '', business: state.business || '', quote: state.quote || '' }, items };
+      contact: { name: state.name || '', phone: state.phone || '', email: state.email || '', business: state.business || '', quote: state.quote || '' }, items,
+      raw: Object.fromEntries(Object.entries(state).filter(([k]) => !k.startsWith('__'))) };
     const fd = new FormData();
     fd.append('payload', JSON.stringify(payload));
     let total = 0;
