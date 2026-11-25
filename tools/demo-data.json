@@ -1,0 +1,559 @@
+{
+ "_note": "הפרויקט לדוגמה (נגריית ענף, עסק דמיוני): התשובות לשאלון האפיון ולשאלון המשוב. משמש גם למילוי השאלונים באתר וגם לבניית העמוד /demo/. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום.",
+ "intake": [
+  [
+   "name",
+   {
+    "he": "שמואל, נגריית ענף (לקוח לדוגמה)",
+    "en": "Shmuel, Anaf Carpentry (example client)"
+   }
+  ],
+  [
+   "phone",
+   "050-0000000"
+  ],
+  [
+   "email",
+   "office@anaf-example.co.il"
+  ],
+  [
+   "business",
+   {
+    "he": "ענף · נגריה לרהיטים בהתאמה",
+    "en": "Anaf · custom furniture carpentry"
+   }
+  ],
+  [
+   "when",
+   "לא משנה"
+  ],
+  [
+   "biz_what",
+   {
+    "he": "נגריה משפחתית שבונה רהיטים בהתאמה אישית מעץ מלא: מטבחים, ארונות, ספריות ושולחנות, לבתים ולבתי כנסת.",
+    "en": "A family carpentry shop building custom solid-wood furniture: kitchens, wardrobes, bookcases and tables, for homes and synagogues."
+   }
+  ],
+  [
+   "biz_field",
+   "שירות מקצועי"
+  ],
+  [
+   "biz_area",
+   "בעיר או באזור מסוים"
+  ],
+  [
+   "biz_area_where",
+   {
+    "he": "ירושלים, בית שמש, מודיעין עילית והסביבה",
+    "en": "Jerusalem, Beit Shemesh, Modiin Illit and the surrounding area"
+   }
+  ],
+  [
+   "biz_age",
+   "יותר מ־5 שנים"
+  ],
+  [
+   "biz_unique",
+   {
+    "he": "מודדים אצל הלקוח בבית ומראים הדמיה לפני שמתחילים. בונים הכול בעצמנו מעץ מלא, ומי שבונה הוא גם מי שמתקין. אחריות ל־10 שנים.",
+    "en": "We measure at the client's home and show a visualization before we start. We build everything ourselves from solid wood, and whoever builds it also installs it. A 10-year warranty."
+   }
+  ],
+  [
+   "competitors",
+   {
+    "he": "נגריות גדולות שמוכרות מקטלוג, ורשתות רהיטים. הן זולות יותר, אבל לא במידה המדויקת ולא מעץ מלא.",
+    "en": "Large carpentry firms that sell from a catalog, and furniture chains. They're cheaper, but not made to measure and not solid wood."
+   }
+  ],
+  [
+   "site_name",
+   {
+    "he": "ענף",
+    "en": "Anaf"
+   }
+  ],
+  [
+   "slogan",
+   {
+    "he": "רהיטים מעץ מלא, במידה המדויקת לבית שלכם",
+    "en": "Solid-wood furniture, made to the exact size of your home"
+   }
+  ],
+  [
+   "domain_wish",
+   {
+    "he": "משהו קצר עם המילה ענף. אשמח להמלצה.",
+    "en": "Something short with the word Anaf. I'd love a recommendation."
+   }
+  ],
+  [
+   "site_phone",
+   "050-0000000"
+  ],
+  [
+   "site_email",
+   "office@anaf-example.co.il"
+  ],
+  [
+   "site_address",
+   {
+    "he": "אזור התעשייה הצפוני, בית שמש",
+    "en": "Northern industrial zone, Beit Shemesh"
+   }
+  ],
+  [
+   "site_hours",
+   {
+    "he": "א׳ עד ה׳ 8:00 עד 17:00, ו׳ עד 12:00",
+    "en": "Sun to Thu 8:00 to 17:00, Fri until 12:00"
+   }
+  ],
+  [
+   "social",
+   {
+    "he": "יש פרופיל עסק בגוגל עם ביקורות. אין רשתות חברתיות.",
+    "en": "There's a Google Business profile with reviews. No social networks."
+   }
+  ],
+  [
+   "cust_who",
+   [
+    "לקוחות פרטיים",
+    "מוסדות וארגונים",
+    "ציבור דתי וחרדי"
+   ]
+  ],
+  [
+   "cust_need",
+   {
+    "he": "רהיט שנכנס בדיוק למקום, מחזיק שנים, ומתאים למשפחה גדולה. רובם כבר ניסו רהיט מוכן שלא התאים.",
+    "en": "A piece that fits the space exactly, lasts for years and suits a large family. Most have already tried ready-made furniture that didn't fit."
+   }
+  ],
+  [
+   "cust_questions",
+   {
+    "he": "כמה זה עולה, כמה זמן זה לוקח, אם זה עץ מלא, ואם אפשר לראות איך זה ייראה לפני שמתחילים.",
+    "en": "How much it costs, how long it takes, whether it's solid wood, and whether they can see how it will look before we start."
+   }
+  ],
+  [
+   "cust_from",
+   [
+    "המלצות מפה לאוזן",
+    "קבוצות וואטסאפ",
+    "גוגל"
+   ]
+  ],
+  [
+   "cust_sensitive",
+   {
+    "he": "קהל דתי וחרדי ברובו: תמונות בלי אנשים, שפה נקייה, ולהדגיש פתרונות לשבת ולחגים, כמו שולחנות נפתחים ומקום לכלים.",
+    "en": "Mostly a religious and Haredi audience: photos without people, clean language, and an emphasis on solutions for Shabbat and holidays, such as extending tables and room for dishes."
+   }
+  ],
+  [
+   "goal_action",
+   "להזמין או לבקש הצעת מחיר"
+  ],
+  [
+   "goal_success",
+   {
+    "he": "שיגיעו 5 עד 10 פניות בחודש לתיאום מדידה, ושאפסיק להסביר בטלפון שוב ושוב את אותם דברים.",
+    "en": "5 to 10 requests a month to book a measurement, and no more explaining the same things over and over on the phone."
+   }
+  ],
+  [
+   "goal_channels",
+   [
+    "טלפון",
+    "וואטסאפ",
+    "טופס עם כל הפרטים"
+   ]
+  ],
+  [
+   "pages",
+   [
+    "עמוד בית",
+    "אודות",
+    "שירותים",
+    "עבודות וגלריה",
+    "המלצות",
+    "שאלות נפוצות",
+    "צור קשר"
+   ]
+  ],
+  [
+   "features",
+   [
+    "טופס פנייה",
+    "כפתור וואטסאפ",
+    "כפתור חיוג",
+    "גלריה עם הגדלה",
+    "מפה והוראות הגעה"
+   ]
+  ],
+  [
+   "prices_show",
+   "לא, רק אחרי פנייה"
+  ],
+  [
+   "update_who",
+   "אני או מישהו מהעסק"
+  ],
+  [
+   "update_what",
+   {
+    "he": "להוסיף עבודות חדשות לגלריה, בערך פעם בחודש.",
+    "en": "Adding new projects to the gallery, about once a month."
+   }
+  ],
+  [
+   "logo",
+   "יש לוגו בקובץ איכותי"
+  ],
+  [
+   "logo_file",
+   {
+    "files": [
+     "anaf-logo.png"
+    ]
+   }
+  ],
+  [
+   "about_text",
+   {
+    "he": "\"ענף\" היא נגריה משפחתית בבית שמש. כבר 12 שנה אנחנו בונים רהיטים לבתים, לבתי כנסת ולמוסדות. כל רהיט נמדד, משורטט ונבנה אצלנו, ומי שבנה אותו הוא גם מי שמגיע להתקין.",
+    "en": "Anaf is a family carpentry shop in Beit Shemesh. For 12 years we've built furniture for homes, synagogues and institutions. Every piece is measured, drawn and built in our shop, and whoever built it also comes to install it."
+   }
+  ],
+  [
+   "services_text",
+   {
+    "he": "מטבחים\nארונות קיר וחדרי ארונות\nספריות לספרי קודש\nשולחנות אוכל\nחדרי ילדים\nריהוט לבתי כנסת ומוסדות",
+    "en": "Kitchens\nBuilt-in wardrobes and walk-in closets\nBookcases for holy books\nDining tables\nChildren's rooms\nFurniture for synagogues and institutions"
+   }
+  ],
+  [
+   "texts",
+   "יש חלק"
+  ],
+  [
+   "photos",
+   "יש תמונות מהטלפון"
+  ],
+  [
+   "photo_files",
+   {
+    "files": [
+     "kitchen-drawer-960.webp",
+     "table-bench-960.webp",
+     "library-960.webp",
+     "wardrobe-960.webp"
+    ]
+   }
+  ],
+  [
+   "reviews",
+   "יש"
+  ],
+  [
+   "reviews_text",
+   {
+    "he": "\"השולחן נפתח ל־16 סועדים, ועדיין נראה כמו רהיט אחד.\" (משפחה מבית שמש)\n\"מדדו, שרטטו ושלחו הדמיה לפני שהתחילו. הארון נכנס בדיוק.\" (לקוח מירושלים)\n\"עברו שלוש שנים, והמדפים בבית הכנסת ישרים כמו ביום הראשון.\" (גבאי, רמות)",
+    "en": "\"The table extends to seat 16, and still looks like one piece.\" (a family in Beit Shemesh)\n\"They measured, drew and sent a visualization before starting. The wardrobe fit exactly.\" (a client in Jerusalem)\n\"Three years on, the synagogue shelves are as straight as on day one.\" (a gabbai, Ramot)"
+   }
+  ],
+  [
+   "brand_colors",
+   {
+    "he": "חום של עץ ולבן. פתוח להצעות.",
+    "en": "Wood brown and white. Open to suggestions."
+   }
+  ],
+  [
+   "feel",
+   [
+    "טבעי",
+    "חם ומשפחתי",
+    "מקצועי ואמין"
+   ]
+  ],
+  [
+   "bg",
+   "אשמח לראות את שניהם"
+  ],
+  [
+   "sc_formal",
+   "3"
+  ],
+  [
+   "sc_rich",
+   "2"
+  ],
+  [
+   "sc_bold",
+   "2"
+  ],
+  [
+   "likes",
+   {
+    "he": "אתרים של נגריות מחו״ל עם תמונות גדולות ומעט טקסט. אני אוהב כשרואים את העץ מקרוב.",
+    "en": "Carpentry sites from abroad with big photos and little text. I like it when you can see the wood up close."
+   }
+  ],
+  [
+   "dislikes",
+   {
+    "he": "אתרים עמוסים, חלונות קופצים, ותמונות סטוק של אנשים מחייכים.",
+    "en": "Cluttered sites, pop-ups, and stock photos of smiling people."
+   }
+  ],
+  [
+   "motion",
+   "מעט ועדין"
+  ],
+  [
+   "domain",
+   "לא, צריך לרשום"
+  ],
+  [
+   "site_now",
+   "לא"
+  ],
+  [
+   "biz_email",
+   "אין, רוצה"
+  ],
+  [
+   "languages",
+   [
+    "עברית"
+   ]
+  ],
+  [
+   "deadline",
+   "תוך חודש"
+  ],
+  [
+   "package",
+   "אתר עם אזור ניהול (מ־4,000 ₪)"
+  ],
+  [
+   "budget",
+   "4,000 עד 7,000 ₪"
+  ],
+  [
+   "deciders",
+   {
+    "he": "אני והשותף שלי בנגריה.",
+    "en": "Me and my partner in the shop."
+   }
+  ],
+  [
+   "extra",
+   {
+    "he": "חשוב לי שהאתר ייראה כמו הרהיטים שלנו: נקי, מדויק, ומחזיק שנים.",
+    "en": "It matters to me that the site looks like our furniture: clean, precise, and built to last."
+   }
+  ]
+ ],
+ "quote": "YYG-2026-003",
+ "feedback": [
+  [
+   "name",
+   {
+    "he": "שמואל, נגריית ענף (לקוח לדוגמה)",
+    "en": "Shmuel, Anaf Carpentry (example client)"
+   }
+  ],
+  [
+   "phone",
+   "050-0000000"
+  ],
+  [
+   "email",
+   "office@anaf-example.co.il"
+  ],
+  [
+   "business",
+   {
+    "he": "ענף · נגריה לרהיטים בהתאמה",
+    "en": "Anaf · custom furniture carpentry"
+   }
+  ],
+  [
+   "quote",
+   "YYG-2026-003"
+  ],
+  [
+   "choice",
+   "עיצוב 1"
+  ],
+  [
+   "rate1",
+   "5"
+  ],
+  [
+   "rate2",
+   "3"
+  ],
+  [
+   "rate3",
+   "4"
+  ],
+  [
+   "first",
+   {
+    "he": "שקט ונקי, והעץ נראה כמו אצלנו בנגריה. זה מרגיש כמו הרהיטים שלנו.",
+    "en": "Calm and clean, and the wood looks like it does in our shop. It feels like our furniture."
+   }
+  ],
+  [
+   "d1_like",
+   [
+    "פונטים",
+    "תמונות",
+    "מבנה ופריסה",
+    "התחושה הכללית"
+   ]
+  ],
+  [
+   "d1_dislike",
+   [
+    "כפתורים"
+   ]
+  ],
+  [
+   "d1_note",
+   {
+    "he": "הכפתורים קצת חלשים. לא רואים מיד איפה מתאמים מדידה.",
+    "en": "The buttons are a bit weak. You don't see right away where to book a measurement."
+   }
+  ],
+  [
+   "d2_like",
+   [
+    "כפתורים",
+    "הכותרת הראשית"
+   ]
+  ],
+  [
+   "d2_dislike",
+   [
+    "צבעים",
+    "התחושה הכללית"
+   ]
+  ],
+  [
+   "d2_note",
+   {
+    "he": "סרגל המידות מעולה, הוא ממש אנחנו. אבל הירוק הכהה כבד מדי בשבילנו.",
+    "en": "The measuring-tape ruler is great, it's really us. But the dark green is too heavy for us."
+   }
+  ],
+  [
+   "d3_like",
+   [
+    "צבעים",
+    "התחושה הכללית"
+   ]
+  ],
+  [
+   "d3_dislike",
+   [
+    "פונטים"
+   ]
+  ],
+  [
+   "d3_note",
+   {
+    "he": "חמים ונעים, אבל הפונט עגול מדי לנגריה.",
+    "en": "Warm and pleasant, but the font is too round for a carpentry shop."
+   }
+  ],
+  [
+   "colors",
+   "להשאיר כמו שהם"
+  ],
+  [
+   "dir_warm",
+   "4"
+  ],
+  [
+   "dir_detail",
+   "3"
+  ],
+  [
+   "dir_bold",
+   "3"
+  ],
+  [
+   "dir_modern",
+   "3"
+  ],
+  [
+   "fonts",
+   "מתאימים"
+  ],
+  [
+   "images",
+   "להחליף לתמונות שלנו"
+  ],
+  [
+   "images_note",
+   {
+    "he": "יש לנו צילומים של 6 עבודות מהשנה האחרונה. נשלח בתיקייה.",
+    "en": "We have photos of 6 projects from the past year. We'll send a folder."
+   }
+  ],
+  [
+   "texts_ok",
+   "צריך תיקונים"
+  ],
+  [
+   "texts_fix",
+   {
+    "he": "בסוגי העץ להוסיף גם טיק, לרהיטי מרפסת וגינה.",
+    "en": "Add teak to the wood types, for balcony and garden furniture."
+   }
+  ],
+  [
+   "missing",
+   {
+    "he": "אין הסבר על ביקור בנגריה. לקוחות אוהבים לבוא לראות את העץ לפני שמחליטים.",
+    "en": "There's nothing about visiting the shop. Clients like to come and see the wood before deciding."
+   }
+  ],
+  [
+   "mobile",
+   "כן, והכול נוח"
+  ],
+  [
+   "top3",
+   {
+    "he": "1. כפתור ראשי בולט יותר, בכתום של עיצוב 2.\n2. סרגל המידות מעיצוב 2, כקו מפריד בין החלקים.\n3. להחליף לתמונות שלנו.",
+    "en": "1. A stronger main button, in the orange from design 2.\n2. The measuring-tape ruler from design 2, as a divider between sections.\n3. Swap in our own photos."
+   }
+  ],
+  [
+   "call",
+   "אפשר להמשיך בלי שיחה"
+  ],
+  [
+   "ready",
+   [
+    "אני מאשר/ת להתקדם עם הכיוון שבחרתי. אחרי זה משלמים 40% ומתחילים לבנות."
+   ]
+  ],
+  [
+   "extra",
+   {
+    "he": "תודה. רואים שהקשבת לשאלון.",
+    "en": "Thank you. You can tell you listened to the questionnaire."
+   }
+  ]
+ ]
+}

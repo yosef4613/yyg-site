@@ -28,6 +28,8 @@
 - [Logo design and branding](https://yygweb.com/services/logo-branding.html)
 - [Websites for catering and food businesses](https://yygweb.com/services/catering.html)
 - [Websites for trades and service providers](https://yygweb.com/services/professionals.html)
+- [How it works: an example project, from the discovery questionnaire to 3 designs and feedback (Hebrew)](https://yygweb.com/demo/)
+- [How it works: an example project (English)](https://yygweb.com/en/demo/)
 - [How much does a website cost (guide)](https://yygweb.com/guides/website-cost.html)
 - [What to prepare before building a website (guide)](https://yygweb.com/guides/before-you-build.html)
 - [Landing page or full website (guide)](https://yygweb.com/guides/landing-or-website.html)

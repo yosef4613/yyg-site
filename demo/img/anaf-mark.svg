@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ענף">
+ <g fill="currentColor">
+  <path d="M15 55 C 24 47 33 37 40 27 C 43 22 46 16 48 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M25 46 C 17 45 11 40 9 32 C 17 32 23 37 25 46 Z"/>
+  <path d="M33 37 C 35 29 41 24 49 24 C 47 32 41 37 33 37 Z"/>
+  <path d="M39 28 C 32 25 28 19 29 11 C 36 14 40 20 39 28 Z"/>
+  <path d="M47 11 C 46 6 49 2 54 1 C 55 6 52 10 47 11 Z"/>
+ </g>
+</svg>
