@@ -120,7 +120,8 @@ function send_mail(array $cfg, string $subject, string $html, string $text): boo
         $ok = smtp_send($cfg, $subject, $headers, $body);
         if ($ok) return true;
     }
-    return @mail($cfg['to'], enc($subject), $body, $headers, '-f' . $cfg['from']);
+    if (@mail($cfg['to'], enc($subject), $body, $headers, '-f' . $cfg['from'])) return true;
+    return @mail($cfg['to'], enc($subject), $body, $headers);
 }
 
 function smtp_send(array $cfg, string $subject, string $headers, string $body): bool {
