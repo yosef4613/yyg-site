@@ -346,7 +346,7 @@ const Selection = (() => {
     const p = PKG[s.track];
     return [
       `${s.source === 'planner' ? T('התכנית מהמתכנן', 'Plan from the calculator') : T('המסלול שנבחר', 'Chosen package')}: ${p.name}`,
-      T(`מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ`, `Price: ${s.source === 'planner' ? 'estimated ' : 'from '}${nis(priceOf())}, final, no VAT added`) + (en.checked ? T(' (כולל גרסה באנגלית)', ' (including an English version)') : ''),
+      T(`מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, לא מוסיפים מע״מ`, `Price: ${s.source === 'planner' ? 'estimated ' : 'from '}${nis(priceOf())}, final, no VAT is added`) + (en.checked ? T(' (כולל גרסה באנגלית)', ' (including an English version)') : ''),
       s.extraPages ? extraText(s.extraPages) : null,
       ...p.incl.map((r) => `${r.label}: ${r.value}`),
       s.answers ? T(`\nתשובות במתכנן:\n${s.answers}`, `\nCalculator answers:\n${s.answers}`) : null,
@@ -360,7 +360,7 @@ const Selection = (() => {
     box.hidden = false;
     $('picked-k').textContent = s.source === 'planner' ? T('התכנית שלכם', 'Your plan') : T('המסלול שבחרתם', 'Your package');
     $('picked-name').textContent = p.name;
-    $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, final, no VAT added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
+    $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, לא מוסיפים מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, final, no VAT is added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = r.label;
