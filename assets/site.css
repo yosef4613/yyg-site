@@ -345,8 +345,8 @@ legend small{font-weight:400;font-size:.9rem;color:var(--muted);margin-inline-st
 
 /* מסלולים: מה מקבלים בכל הצעה */
 .pkgs-sec{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
-.pkgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(12,auto);gap:0 14px;margin-top:clamp(28px,4vw,48px)}
-.pkg{position:relative;display:grid;grid-row:span 12;cursor:pointer;grid-template-rows:subgrid;align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px 8px}
+.pkgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(14,auto);gap:0 14px;margin-top:clamp(28px,4vw,48px)}
+.pkg{position:relative;display:grid;grid-row:span 14;cursor:pointer;grid-template-rows:subgrid;align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px 8px}
 .pkg.is-rec{background:linear-gradient(180deg,#283041,var(--panel) 60%);border-color:var(--muted);box-shadow:var(--lift);transform:translateY(-8px)}
 .pkg h3{font-size:var(--step-1);padding-inline-end:4.5em}
 .pkg-badge{position:absolute;top:20px;inset-inline-end:16px;font-size:.78rem;font-weight:700;color:var(--base);background:var(--text);border-radius:999px;padding:3px 10px}
@@ -987,3 +987,56 @@ html[dir="ltr"] .bp-notes text[text-anchor="start"]{text-anchor:end}
 .hero-grid>*{min-width:0}
 html[dir="ltr"] .hero .hero-note{white-space:normal;height:auto}
 html[dir="ltr"] .hero h1{max-width:21ch}
+
+/* ===== גרסה 32: כפתור שפה שתמיד נראה בפס העליון, גם כשהתפריט מקופל ===== */
+.lang-pill{display:none}
+@media (max-width:1100px){
+ .lang-pill{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;margin-inline-start:auto;margin-inline-end:8px;padding:0 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--text);font-weight:700;font-size:.95rem;text-decoration:none}
+ .lang-pill:hover,.lang-pill:focus-visible{border-color:var(--text)}
+ .lang-pill+.menu-btn{margin-inline-start:0}
+}
+
+/* ===== פנייה מהירה: שם וטלפון, מתחת לעבודות וליד המסלולים ===== */
+.quick-lead{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:14px clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,44px);padding:clamp(18px,2.6vw,26px) clamp(18px,3vw,30px);background:linear-gradient(180deg,#262D3A,var(--panel));border:1px solid var(--line-2);border-radius:16px;box-shadow:var(--lift)}
+.quick-lead::before{content:"";position:absolute;inset-block:18px;inset-inline-start:0;width:3px;border-radius:3px;background:var(--muted)}
+.ql-title{font-weight:700;font-size:var(--step-1);color:#fff;line-height:1.25}
+.ql-sub{margin-top:4px;color:var(--muted);font-size:.95rem;line-height:1.5}
+.ql-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:12px}
+.ql-fields .field span{font-size:.85rem;color:var(--muted);font-weight:600}
+.ql-fields .btn{min-height:48px;white-space:nowrap}
+.ql-status{grid-column:1/-1;min-height:0;font-size:.95rem;color:#D7DDE6}
+.ql-status:empty{display:none}
+.ql-status.is-ok{color:#fff;font-weight:600}
+.quick-lead.is-sent .ql-fields{display:none}
+@media (max-width:860px){
+ .quick-lead{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+ .ql-fields{grid-template-columns:1fr}
+ .ql-fields .btn{width:100%}
+}
+
+/* ===== הפאנל ליד המחשבון: מסלול, מחיר, ומיד טופס קצר ===== */
+.result-details{margin-top:14px;border-block:1px solid var(--line)}
+.result-details summary{display:flex;align-items:center;gap:8px;min-height:46px;cursor:pointer;font-weight:600;font-size:.95rem;color:var(--text);list-style:none}
+.result-details summary::-webkit-details-marker{display:none}
+.result-details summary::after{content:"";margin-inline-start:auto;width:8px;height:8px;border:solid var(--muted);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .2s}
+.result-details[open] summary::after{transform:rotate(-135deg)}
+.result-details summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.result-details .result-cols{margin:4px 0 8px;padding-top:0;border-top:0}
+.result-details .result-more{margin:0 0 14px}
+.result .quick-lead{grid-template-columns:1fr;gap:12px;margin-top:18px;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
+.result .quick-lead::before{display:none}
+.result .ql-title{font-size:1.15rem}
+.result .ql-fields{grid-template-columns:1fr 1fr}
+.result .ql-fields .btn{grid-column:1/-1;width:100%}
+.result .result-fine{margin-top:14px}
+@media (max-width:420px){.result .ql-fields{grid-template-columns:1fr}}
+/* במחשב: הפאנל מתחיל בראש החלק, ליד הכותרת, כדי שהטופס ייראה מיד כשמגיעים מהכפתור בפתיחה */
+@media (min-width:961px){
+ .plan-intro{grid-column:1}
+ .plan-grid>.planner{grid-column:1}
+ .plan-grid>.result{grid-column:2;grid-row:1/span 2}
+}
+.pkg.is-match::before{content:attr(data-match);position:absolute;z-index:1;top:-12px;inset-inline-end:16px;padding:3px 12px;border-radius:999px;background:#fff;color:var(--base);font-size:.8rem;font-weight:700;line-height:1.5;box-shadow:0 0 0 4px rgba(255,255,255,.15)}
+.result-details summary b{color:#fff}
