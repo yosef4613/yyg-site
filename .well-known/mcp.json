@@ -1,0 +1,61 @@
+{
+ "name": "com.yygweb/studio",
+ "title": "YYG web design studio",
+ "version": "1.0.0",
+ "description": "Read-only MCP server for YYG, a web design and development studio in Israel: packages and prices, process and payment, examples, and contact options.",
+ "serverInfo": {
+  "name": "yygweb",
+  "title": "YYG web design studio",
+  "version": "1.0.0"
+ },
+ "protocolVersion": "2025-06-18",
+ "transport": {
+  "type": "streamable-http",
+  "endpoint": "https://yygweb.com/mcp"
+ },
+ "endpoint": "https://yygweb.com/mcp",
+ "remotes": [
+  {
+   "type": "streamable-http",
+   "url": "https://yygweb.com/mcp"
+  }
+ ],
+ "capabilities": {
+  "tools": {
+   "listChanged": false
+  },
+  "resources": {},
+  "prompts": {}
+ },
+ "authentication": {
+  "required": false
+ },
+ "tools": [
+  {
+   "name": "get_packages_and_prices",
+   "description": "All YYG packages, add-ons and recurring costs, with prices in ILS (final, no VAT added)."
+  },
+  {
+   "name": "get_process_and_payment",
+   "description": "How a project works step by step, and how payment works (10% / 40% / 50%)."
+  },
+  {
+   "name": "estimate_price",
+   "description": "A rough starting estimate for a website by type, page count, English version and logo."
+  },
+  {
+   "name": "list_examples",
+   "description": "Live client sites and complete example projects, with links."
+  },
+  {
+   "name": "get_contact",
+   "description": "How to reach YYG: phone, hours, the contact form and the discovery questionnaire."
+  }
+ ],
+ "documentation": "https://yygweb.com/llms.txt",
+ "homepage": "https://yygweb.com/",
+ "languages": [
+  "he",
+  "en"
+ ]
+}

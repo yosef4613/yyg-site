@@ -18,6 +18,11 @@
 - Website: https://yygweb.com (Hebrew), https://yygweb.com/en/ (English)
 
 ## Pages
+- [Pricing (Hebrew)](https://yygweb.com/pricing/) · [Pricing (English)](https://yygweb.com/en/pricing/)
+- [About](https://yygweb.com/about/) · [Contact](https://yygweb.com/contact/)
+- Markdown versions: send `Accept: text/markdown` to any of these pages, or open [index.md](https://yygweb.com/index.md)
+- MCP server (read-only, Streamable HTTP): https://yygweb.com/mcp · [server card](https://yygweb.com/.well-known/mcp/server-card.json)
+- Machine-readable packages and prices: [offer.json](https://yygweb.com/assets/offer.json)
 - [Home (Hebrew)](https://yygweb.com/)
 - [Home (English)](https://yygweb.com/en/)
 - [Services](https://yygweb.com/services/)
