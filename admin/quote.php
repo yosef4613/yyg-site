@@ -97,7 +97,7 @@ function intake_to_quote(array $rec): array {
     if (preg_match('/^(כן|Yes)$/u', $val('site_now'))) $note('יש אתר קיים' . ($val('site_url') ? ' (' . $val('site_url') . ')' : '') . ': לתכנן הפניות כדי לשמור על הדירוג בגוגל.');
     if ($val('deadline') !== '' && !preg_match('/אין לחץ|No rush/u', $val('deadline'))) $note('לוח זמנים: ' . $val('deadline') . ($val('deadline_date') ? ', ' . $val('deadline_date') : '') . ($val('deadline_why') ? ' (' . $val('deadline_why') . ')' : '') . '.');
     if ($val('budget') !== '') $note('התקציב שהלקוח ציין: ' . $val('budget') . '.');
-    if (preg_match('/צריך לרשום|needs registering/u', $val('domain'))) $note('צריך לרשום דומיין' . ($val('domain_wish') ? ': ' . $val('domain_wish') : '') . '. כלול בשנה הראשונה.');
+    if (preg_match('/צריך לרשום|needs registering/u', $val('domain'))) $note('צריך לרשום דומיין' . ($val('domain_wish') ? ': ' . rtrim($val('domain_wish'), '. ') : '') . '. כלול בשנה הראשונה.');
     $who = $val('site_name') ?: ($rec['contact']['business'] ?? '') ?: ($rec['contact']['name'] ?? '');
     return ['base' => $base, 'addons' => $addons, 'custom' => $custom, 'recurring' => $recurring, 'hints' => $hints, 'who' => $who];
 }
