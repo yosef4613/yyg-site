@@ -897,3 +897,8 @@ p{text-wrap:pretty}
 .motion-off .prep-item,.motion-off .prep-box,.motion-off .prep-box::after,.motion-off .prep-meter i{transition:none}
 .motion-off .prep-item:hover{transform:none}
 @media (min-width:1000px){.prep-tips{position:sticky;top:96px}}
+
+/* ===== גרסה 18: שורת התחייבויות מעל המסלולים ===== */
+.promises{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;padding:0;list-style:none}
+.promises li{padding:8px 14px;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);font-size:.95rem;color:#D7DDE6}
+.promises b{color:#fff}
