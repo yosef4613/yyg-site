@@ -6,6 +6,15 @@
  */
 declare(strict_types=1);
 /* הנתונים נשמרים מחוץ לתיקיית האתר, כדי שעדכון של האתר לא ימחק אותם */
+/* קובץ ההגדרות הפרטי: נשמר גם בתיקיית הנתונים שמחוץ לאתר, כך שעדכון של האתר בלי הקובץ לא יפגע בטופס */
+function private_config(): array {
+    $safe = data_dir() . '/mail-config.php';
+    $fresh = __DIR__ . '/_private/mail-config.php';
+    if (is_file($fresh) && (!is_file($safe) || filemtime($fresh) > filemtime($safe))) @copy($fresh, $safe);
+    $f = is_file($safe) ? $safe : $fresh;
+    return is_file($f) ? (array) require $f : [];
+}
+
 function data_dir(): string {
     $d = dirname(__DIR__) . '/yyg-data';
     if (!is_dir($d)) @mkdir($d, 0700, true);
@@ -14,7 +23,7 @@ function data_dir(): string {
 
 header('Cache-Control: no-store');
 header('X-Robots-Tag: noindex, nofollow');
-$cfg = is_file(__DIR__ . '/_private/mail-config.php') ? (array) require __DIR__ . '/_private/mail-config.php' : [];
+$cfg = private_config();
 $key = (string) ($cfg['stats_key'] ?? '');
 if ($key === '' || !hash_equals($key, (string) ($_GET['k'] ?? ''))) { http_response_code(404); exit('Not found'); }
 
