@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>עדכון שעות פתיחה · צלול | מסך ניהול לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="מסך לדוגמה: כך בעל חנות משקפיים מעדכן בעצמו שעות פתיחה והודעה זמנית, מהטלפון, והאתר מתעדכן מיד.">
+<link rel="icon" href="/yyg-site/assets/img/icon-64.png" type="image/png">
+<style>
+@font-face{font-family:Rubik;font-weight:500;font-display:swap;src:url(/demo/fonts/rubik-500-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Rubik;font-weight:500;font-display:swap;src:url(/demo/fonts/rubik-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Rubik;font-weight:700;font-display:swap;src:url(/demo/fonts/rubik-700-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Assistant;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Assistant;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Assistant;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+:root{--ink:#13202B;--muted:#5B6770;--line:#DDE3EA;--bg:#F2F5F8;--card:#fff;--blue:#2F6F8F;--blue-d:#245A75;--ok:#1F8A5B;--warn:#B4542F}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Assistant,system-ui,sans-serif}
+a{color:var(--blue-d)}
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.demo-bar b{color:#F2C95A}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.brand svg{width:58px;height:29px;color:var(--blue)}
+.brand b{font:700 1.35rem/1 Rubik,sans-serif;letter-spacing:.03em}
+.brand small{display:block;font-size:.78rem;color:var(--muted);letter-spacing:.12em}
+.who{font-size:.9rem;color:var(--muted)}
+h1{margin:18px 0 4px;font:700 clamp(1.6rem,1.2rem + 1.6vw,2.2rem)/1.15 Rubik,sans-serif}
+.lead{margin:0;color:var(--muted)}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:#FFF6E0;border:1px solid #F1DDA7;font-size:.95rem}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;margin:20px 0 48px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.card h2{margin:0 0 12px;font:700 1.15rem/1.2 Rubik,sans-serif}
+.day{display:grid;grid-template-columns:5.2rem auto 1fr;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.day:first-of-type{border-top:0}
+.day .n{font-weight:600}
+.day .n small{display:block;font-weight:400;font-size:.78rem;color:var(--muted)}
+.sw{position:relative;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.9rem;color:var(--muted);min-height:44px}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw i{width:44px;height:26px;border-radius:13px;background:#C9D2DB;position:relative;transition:background .2s;flex:none}
+.sw i::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:inset-inline-start .2s}
+.sw input:checked+i{background:var(--ok)}
+.sw input:checked+i::after{inset-inline-start:21px}
+.sw input:focus-visible+i{outline:3px solid var(--blue);outline-offset:2px}
+.times{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.times label{display:flex;align-items:center;gap:6px;font-size:.88rem;color:var(--muted)}
+input[type=time],input[type=date],textarea{font:inherit;color:var(--ink);background:#fff;border:1px solid #C9D2DB;border-radius:10px;padding:8px 10px;min-height:44px}
+input[type=time]{width:7.2rem;direction:ltr;text-align:center}
+input:focus-visible,textarea:focus-visible{outline:3px solid rgba(47,111,143,.35);border-color:var(--blue)}
+.day.off .times{opacity:.35;pointer-events:none}
+.day .err{grid-column:1/-1;margin:0;color:var(--warn);font-size:.88rem}
+.notice{display:grid;gap:10px;margin-top:6px}
+.notice textarea{width:100%;min-height:76px;resize:vertical}
+.notice .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:.92rem;color:var(--muted)}
+.quick{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.88rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;min-height:36px}
+.chip:hover{border-color:var(--blue)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{font:600 1rem/1 Assistant,sans-serif;border-radius:10px;padding:13px 20px;min-height:48px;cursor:pointer;border:1px solid transparent}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue-d)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:#C9D2DB}
+.btn:focus-visible,.chip:focus-visible{outline:3px solid rgba(47,111,143,.45);outline-offset:2px}
+#saved{min-height:1.4em;margin:10px 0 0;font-weight:600;color:var(--ok)}
+.preview{position:sticky;top:16px}
+.status{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--bg);font-weight:600}
+.status::before{content:"";width:12px;height:12px;border-radius:50%;background:#9AA6B2;flex:none}
+.status[data-open="true"]::before{background:#21A366;box-shadow:0 0 0 4px rgba(33,163,102,.18)}
+.pv-notice{margin:10px 0 0;padding:10px 12px;border-radius:10px;background:#E8F3EF;color:#14543C;font-size:.95rem}
+.hours{list-style:none;margin:12px 0 0;padding:0}
+.hours li{display:flex;justify-content:space-between;gap:10px;padding:8px 2px;border-top:1px solid var(--line);font-size:.97rem}
+.hours li:first-child{border-top:0}
+.hours li.is-today{font-weight:700;color:var(--blue-d)}
+.hours .h-time{direction:rtl;text-align:end}
+.see{margin-top:14px;font-size:.95rem}
+.see a{display:inline-block;margin:4px 0 0 10px}
+.how{margin-top:18px;font-size:.92rem;color:var(--muted)}
+.how b{color:var(--ink)}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.preview{position:static}}
+@media (max-width:460px){.day{grid-template-columns:4.6rem 1fr}.day .times{grid-column:1/-1}.demo-bar>span{display:none}.demo-bar{justify-content:center}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="0 0 64 32"><g fill="none" stroke="currentColor" stroke-linecap="round">
+  <circle cx="32" cy="16" r="14.6" stroke-width="1.5"/>
+  <circle cx="32" cy="16" r="12.4" stroke-width=".55" opacity=".7"/>
+  <path d="M1.2 14.6 H14.4 M49.6 14.6 H62.8" stroke-width="1.1"/>
+  <path d="M22.6 7.6 A12.4 12.4 0 0 1 28.4 4.1" stroke-width="1.3" opacity=".9"/>
+ </g>
+ <path fill="currentColor" d="M26.798994974874375 23.9 27.804020100502516 19.930150753768842H33.70854271356784Q33.75879396984925 19.754271356783917 33.595477386934675 19.55326633165829Q33.4321608040201 19.35226130653266 33.08040201005025 19.151256281407033L30.467336683417088 17.4678391959799Q30.090452261306535 17.191457286432158 29.96482412060302 16.85226130653266Q29.8391959798995 16.513065326633164 29.8391959798995 15.960301507537686V14.854773869346731Q29.8391959798995 14.528140703517586 29.71356783919598 14.389949748743717Q29.587939698492463 14.251758793969847 29.286432160804022 14.251758793969847H28.432160804020103Q27.502512562814072 14.251758793969847 27.062814070351763 13.83718592964824Q26.62311557788945 13.422613065326631 26.62311557788945 12.291959798994974Q26.62311557788945 11.462814070351756 26.798994974874375 10.746733668341706Q26.974874371859297 10.030653266331656 27.163316582914575 9.540703517587938Q27.35175879396985 9.050753768844219 27.40201005025126 8.899999999999999H27.879396984924625V9.176381909547736Q27.879396984924625 9.704020100502511 28.030150753768847 9.892462311557786Q28.18090452261307 10.080904522613062 28.60804020100503 10.080904522613062H29.61306532663317Q30.291457286432163 10.080904522613062 30.63065326633166 10.420100502512561Q30.969849246231156 10.759296482412058 30.969849246231156 11.663819095477384V14.377386934673366Q30.969849246231156 15.005527638190953 31.095477386934675 15.332160804020099Q31.221105527638194 15.658793969849244 31.673366834170857 15.91005025125628L35.91959798994975 18.54824120603015Q36.62311557788945 18.975376884422108 36.786432160804026 19.70402010050251Q36.949748743718594 20.432663316582914 36.69849246231156 21.41256281407035L36.070351758793976 23.9ZM33.934673366834176 17.4929648241206 32.653266331658294 16.7894472361809Q32.72864321608041 16.538190954773867 32.97989949748744 16.0356783919598Q33.231155778894475 15.533165829145727 33.68341708542714 15.106030150753767L34.76381909547739 14.050753768844219L35.79396984924623 14.20150753768844L34.41206030150754 15.91005025125628Q34.06030150753769 16.33718592964824 33.972361809045225 16.827135678391958Q33.88442211055276 17.317085427135677 33.934673366834176 17.4929648241206ZM36.64824120603015 14.804522613065325Q36.597989949748744 14.704020100502511 36.49748743718593 14.565829145728642Q36.39698492462312 14.427638190954772 36.14572864321608 14.402512562814069L34.06030150753769 14.101005025125627Q33.4321608040201 14.025628140703516 33.10552763819096 13.724120603015074Q32.77889447236181 13.422613065326631 32.66582914572865 12.99547738693467Q32.55276381909548 12.568341708542711 32.55276381909548 12.116080402010049Q32.55276381909548 11.010552763819094 32.891959798994975 10.143718592964822Q33.231155778894475 9.27688442211055 33.381909547738694 8.899999999999999H33.85929648241206V9.251758793969847Q33.85929648241206 9.578391959798992 34.01005025125629 9.804522613065323Q34.16080402010051 10.030653266331656 34.638190954773876 10.080904522613062L36.02010050251256 10.256783919597988Q36.824120603015075 10.332160804020099 37.10050251256281 10.947738693467334Q37.37688442211056 11.56331658291457 37.37688442211056 12.317085427135677Q37.37688442211056 12.970351758793967 37.22613065326634 13.598492462311555Q37.07537688442211 14.226633165829144 36.87437185929649 14.804522613065325Z"/></symbol></svg>
+<div class="demo-bar" role="note">
+ <span><b>מסך ניהול לדוגמה</b> · השינויים נשמרים רק אצלכם בדפדפן</span>
+ <a href="/yyg-site/demo/optika/">לסיפור הפרויקט</a>
+</div>
+<header class="wrap top">
+ <a class="brand" href="/yyg-site/demo/optika/design-1/" aria-label="צלול, לדף הנחיתה">
+  <svg viewBox="0 0 64 32" aria-hidden="true"><use href="#mark"/></svg>
+  <span><b>צלול</b><small>אזור ניהול</small></span>
+ </a>
+ <span class="who">מחובר: בעל העסק (לדוגמה)</span>
+</header>
+<main class="wrap">
+ <h1>שעות פתיחה</h1>
+ <p class="lead">משנים, שומרים, והאתר מתעדכן מיד. אפשר לעשות את זה מהטלפון, בחצי דקה.</p>
+ <p class="note"><b>זה מסך לדוגמה:</b> כל אחד יכול לנסות כאן, והשינוי נשמר רק בדפדפן שלכם. פתחו את אחד העיצובים בלשונית אחרת, שנו כאן שעה ולחצו "שמירה", ותראו אותו מתעדכן. באתר אמיתי נכנסים עם סיסמה או קישור במייל, והשינוי מופיע לכל הגולשים.</p>
+ <div class="grid">
+  <form class="card" id="f" novalidate>
+   <h2>ימים ושעות</h2>
+   <div id="days"></div>
+   <h2 style="margin-top:22px">הודעה זמנית</h2>
+   <div class="notice">
+    <label for="nt" style="font-size:.92rem;color:var(--muted)">מופיעה בראש האתר, למשל לפני חג. משאירים ריק כשאין הודעה.</label>
+    <textarea id="nt" maxlength="140" placeholder="לדוגמה: בערב החג פתוח עד 13:00"></textarea>
+    <div class="quick" aria-label="הודעות מוכנות">
+     <button type="button" class="chip" data-q="בערב החג פתוח עד 13:00">ערב חג</button>
+     <button type="button" class="chip" data-q="בחול המועד פתוח 10:00 עד 14:00">חול המועד</button>
+     <button type="button" class="chip" data-q="סגור היום בשל אירוע משפחתי. נשמח לראותכם מחר.">סגור היום</button>
+     <button type="button" class="chip" data-q="מבצע: זוג שני ב־50% עד סוף החודש">מבצע</button>
+    </div>
+    <div class="row"><label for="until">להציג עד תאריך (לא חובה)</label><input type="date" id="until"></div>
+   </div>
+   <div class="acts"><button class="btn primary" type="submit">שמירה</button><button class="btn ghost" type="button" id="reset">חזרה לשעות הקבועות</button></div>
+   <p id="saved" role="status" aria-live="polite"></p>
+  </form>
+  <aside class="card preview" aria-labelledby="pv-t">
+   <h2 id="pv-t">ככה זה נראה באתר</h2>
+   <p class="status" data-hours-status></p>
+   <p class="pv-notice" data-hours-notice hidden></p>
+   <ul class="hours" data-hours-list></ul>
+   <p class="see">לצפייה בדף הנחיתה:<br><a href="/yyg-site/demo/optika/design-1/" target="_blank" rel="noopener">עיצוב 1</a><a href="/yyg-site/demo/optika/design-2/" target="_blank" rel="noopener">עיצוב 2</a><a href="/yyg-site/demo/optika/design-3/" target="_blank" rel="noopener">עיצוב 3</a></p>
+   <p class="how"><b>למה זה חשוב לחנות?</b> לקוח שרואה "פתוח עכשיו" מגיע. לקוח שמגיע לדלת סגורה בגלל שעה לא מעודכנת, לא חוזר.</p>
+  </aside>
+ </div>
+</main>
+<script src="/yyg-site/demo/optika/hours.js"></script>
+<script>
+(() => {
+  const H = window.TzalulHours, box = document.getElementById('days'), f = document.getElementById('f'), saved = document.getElementById('saved');
+  const nt = document.getElementById('nt'), until = document.getElementById('until');
+  const fill = () => {
+    const d = H.load();
+    box.innerHTML = d.days.map((x, i) => `
+     <div class="day${x.closed ? ' off' : ''}" data-i="${i}">
+      <span class="n">${H.DAYS[i]}${i === 6 ? '<small>מוצאי שבת</small>' : ''}</span>
+      <label class="sw"><input type="checkbox" ${x.closed ? '' : 'checked'} aria-label="יום ${H.DAYS[i]}: פתוח"><i></i><span>${x.closed ? 'סגור' : 'פתוח'}</span></label>
+      <span class="times"><label>מ־<input type="time" value="${x.open || '10:00'}" aria-label="יום ${H.DAYS[i]}: שעת פתיחה"></label><label>עד<input type="time" value="${x.close || '20:00'}" aria-label="יום ${H.DAYS[i]}: שעת סגירה"></label></span>
+     </div>`).join('');
+    nt.value = (d.notice && d.notice.text) || ''; until.value = (d.notice && d.notice.until) || '';
+  };
+  box.addEventListener('change', (e) => {
+    const row = e.target.closest('.day'); if (!row || e.target.type !== 'checkbox') return;
+    row.classList.toggle('off', !e.target.checked);
+    row.querySelector('.sw span').textContent = e.target.checked ? 'פתוח' : 'סגור';
+  });
+  document.querySelectorAll('[data-q]').forEach((b) => b.addEventListener('click', () => { nt.value = b.dataset.q; nt.focus(); }));
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const cur = H.load(); let bad = null;
+    box.querySelectorAll('.err').forEach((x) => x.remove());
+    const days = [...box.querySelectorAll('.day')].map((row, i) => {
+      const on = row.querySelector('input[type=checkbox]').checked;
+      const [o, c] = [...row.querySelectorAll('input[type=time]')].map((x) => x.value);
+      const base = { label: cur.days[i] && cur.days[i].label };
+      if (!on) return Object.assign(base, { closed: true, open: o, close: c });
+      if (!o || !c || o >= c) { bad = bad || row; row.insertAdjacentHTML('beforeend', '<p class="err">שעת הסגירה צריכה להיות אחרי שעת הפתיחה.</p>'); }
+      return Object.assign(base, { open: o, close: c });
+    });
+    if (bad) { saved.textContent = ''; bad.querySelector('input[type=time]').focus(); return; }
+    const ok = H.save({ days, notice: { text: nt.value.trim(), until: until.value } });
+    saved.textContent = ok ? 'נשמר ✓ האתר כבר מציג את השעות החדשות.' : 'לא הצלחנו לשמור בדפדפן הזה.';
+  });
+  document.getElementById('reset').addEventListener('click', () => { H.reset(); fill(); saved.textContent = 'חזרנו לשעות הקבועות.'; });
+  fill();
+})();
+</script>
+</body>
+</html>

@@ -671,7 +671,11 @@ const Planner = (() => {
 /* ===== פנייה מהירה: שם, מייל וטלפון, למי שכבר השתכנע ולא רוצה לגלול עד הסוף =====
    אחרי השליחה הלקוח מקבל מייל לאישור הכתובת, ורק אחרי האישור את הטלפון שלי ואת הקישור לשאלון */
 const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מייל: לחיצה אחת לאישור הכתובת, ותקבלו את הפרטים שלי ואת הצעד הבא. אחזור אליכם תוך יום עבודה.`, `Thank you, ${name}. I just sent you an email: one click to confirm your address, and you’ll get my details and the next step. I’ll get back to you within one business day.`);
+const qLink = (d) => (EN ? '/en/questionnaire/?' : '/questionnaire/?') + new URLSearchParams({ name: d.name, email: d.email, phone: d.phone || '', business: d.business || '' }).toString();
+const sentMsg = (status, d) => {
+  status.textContent = T(`תודה, ${d.name}. שלחתי לכם עכשיו מייל עם הצעד הבא: שאלון קצר, ואחריו הצעת מחיר מסודרת. `, `Thank you, ${d.name}. I just emailed you the next step: a short questionnaire, then a formal quote. `);
+  status.append(Object.assign(document.createElement('a'), { className: 'text-link', href: qLink(d), textContent: T('אפשר גם להתחיל את השאלון כבר עכשיו', 'You can also start the questionnaire right now') }));
+};
 (() => {
   document.querySelectorAll('form.quick-lead').forEach((form) => {
     const status = form.querySelector('.ql-status');
@@ -690,14 +694,14 @@ const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מ�
       const email = fEmail.value.trim();
       const phone = fPhone.value.trim();
       const okEmail = validEmail(email);
-      const okPhone = phone.replace(/\D/g, '').length >= 9;
+      const okPhone = !phone || phone.replace(/\D/g, '').length >= 9;
       fName.setAttribute('aria-invalid', String(!name));
       fEmail.setAttribute('aria-invalid', String(!okEmail));
       fPhone.setAttribute('aria-invalid', String(!okPhone));
       status.className = 'ql-status';
       if (!name) { status.textContent = T('נא לכתוב שם.', 'Please enter your name.'); fName.focus(); return; }
       if (!okEmail) { status.textContent = T('נא לכתוב כתובת מייל תקינה, למשל name@gmail.com.', 'Please enter a valid email address, e.g. name@gmail.com.'); fEmail.focus(); return; }
-      if (!okPhone) { status.textContent = T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'); fPhone.focus(); return; }
+      if (!okPhone) { status.textContent = T('הטלפון לא חובה, אבל אם כותבים, צריך מספר מלא, למשל 050-1234567.', 'Phone is optional, but if you add one, it needs to be a full number, e.g. 050-1234567.'); fPhone.focus(); return; }
       if (form.elements._honey.value) return;
       const picked = $('lead-plan') ? $('lead-plan').value : '';
       const data = {
@@ -716,7 +720,7 @@ const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מ�
         form.reset();
         form.classList.add('is-sent');
         status.className = 'ql-status is-ok';
-        status.textContent = sentMsg(name);
+        sentMsg(status, data);
         countHit('lead');
       } catch (err) {
         status.textContent = '';
@@ -743,7 +747,7 @@ const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מ�
     tio.observe(form);
   } else getToken();
   form.addEventListener('focusin', () => { if (!token) getToken(); }, { once: true });
-  const validPhone = (v) => v.replace(/\D/g, '').length >= 9;
+  const validPhone = (v) => !v || v.replace(/\D/g, '').length >= 9;
   const setErr = (name, msg) => {
     const f = fields[name];
     f.setAttribute('aria-invalid', String(!!msg));
@@ -764,7 +768,7 @@ const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מ�
     const phone = fields.phone.value.trim();
     setErr('name', name ? '' : T('נא לכתוב שם.', 'Please enter your name.'));
     setErr('email', validEmail(email) ? '' : T('נא לכתוב כתובת מייל תקינה, למשל name@gmail.com.', 'Please enter a valid email address, e.g. name@gmail.com.'));
-    setErr('phone', validPhone(phone) ? '' : T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'));
+    setErr('phone', validPhone(phone) ? '' : T('הטלפון לא חובה, אבל אם כותבים, צריך מספר מלא, למשל 050-1234567.', 'Phone is optional, but if you add one, it needs to be a full number, e.g. 050-1234567.'));
     if (!name) { status.textContent = ''; fields.name.focus(); return; }
     if (!validEmail(email)) { status.textContent = ''; fields.email.focus(); return; }
     if (!validPhone(phone)) { status.textContent = ''; fields.phone.focus(); return; }
@@ -793,7 +797,7 @@ const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מ�
       $('lead-ready').value = keepReady;
       countHit('lead');
       status.className = 'lead-status is-ok';
-      status.textContent = sentMsg(name);
+      sentMsg(status, data);
     } catch (err) {
       fallback(data);
     } finally {
