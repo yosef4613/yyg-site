@@ -50,6 +50,14 @@ function token_age(string $tok): int {
     $age = time() - (int) $m[1];
     return ($age < 0 || $age > 6 * 3600) ? -1 : $age;
 }
+$o = $_SERVER['HTTP_ORIGIN'] ?? '';
+if ($o === 'https://yosef4613.github.io') {
+    header('Access-Control-Allow-Origin: ' . $o);
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Accept');
+    header('Vary: Origin');
+}
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') { http_response_code(204); exit; }
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && isset($_GET['token'])) {
     echo json_encode(['token' => make_token()]);
     exit;
@@ -57,10 +65,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && isset($_GET['token'])) {
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') out(false, 'method', 405);
 
-// רק מהאתר שלנו
+// רק מהאתר שלנו (או מהעותק שלו בגיטהאב)
 $origin = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
 $host = parse_url($origin, PHP_URL_HOST) ?: '';
-if ($host !== '' && !preg_match('/(^|\.)yygweb\.com$/i', $host) && $host !== 'localhost') out(false, 'origin', 403);
+if ($host !== '' && !preg_match('/(^|\.)yygweb\.com$/i', $host) && $host !== 'yosef4613.github.io' && $host !== 'localhost') out(false, 'origin', 403);
 
 // קריאת הנתונים: JSON או טופס רגיל
 $raw = file_get_contents('php://input') ?: '';
