@@ -1,6 +1,6 @@
 /* ===== פרטי קשר: להחליף כאן לפני העלייה לאוויר ===== */
 const CONFIG = {
-  email: 'yyrkg22@gmail.com',
+  email: ['yyrkg22', 'gmail.com'].join('@'),   // שמור בחלקים, כדי שרובוטים שאוספים כתובות לא ימצאו אותו
   phone: '054-854-0700',                     // לשיחות בלבד
   formEndpoint: '/send.php',                 // שולח מהשרת בהוסטינגר, בלי שירות חיצוני
   extraPagePrice: 350,                       // עמוד מעבר למכסה של המסלול
@@ -594,6 +594,14 @@ const Planner = (() => {
   const status = $('lead-status');
   const submit = $('lead-submit');
   const fields = { name: form.elements.name, phone: form.elements.phone };
+  /* הגנה מרובוטים: חותמת זמן חתומה מהשרת. רובוט ששולח ישר לשרת, בלי לטעון את הדף, לא מקבל אותה */
+  let token = '';
+  const getToken = () => fetch(CONFIG.formEndpoint + '?token=1', { cache: 'no-store' }).then((r) => r.json()).then((t) => { token = t.token || ''; }).catch(() => {});
+  if ('IntersectionObserver' in window) {
+    const tio = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { getToken(); tio.disconnect(); } }, { rootMargin: '600px 0px' });
+    tio.observe(form);
+  } else getToken();
+  form.addEventListener('focusin', () => { if (!token) getToken(); }, { once: true });
   const validPhone = (v) => v.replace(/\D/g, '').length >= 9;
   const setErr = (name, msg) => {
     const f = fields[name];
@@ -623,8 +631,10 @@ const Planner = (() => {
       likes: form.elements.likes.value.trim(),
       notes: form.elements.notes.value.trim(),
       ready: $('lead-ready').value || 'לא סימנו ברשימת ההכנה',
-      plan: $('lead-plan').value || 'לא נבחר מסלול'
+      plan: $('lead-plan').value || 'לא נבחר מסלול',
+      _token: token
     };
+    if (!token) { await getToken(); data._token = token; }
     submit.disabled = true;
     status.className = 'lead-status';
     status.textContent = 'שולח…';

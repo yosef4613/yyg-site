@@ -15,6 +15,29 @@ function out(bool $ok, string $msg = '', int $code = 200): void {
     exit;
 }
 
+/* ---------- אסימון: חותמת זמן חתומה. הדפדפן מבקש אותה כשהגולש מגיע לטופס ---------- */
+function secret_key(): string {
+    $f = __DIR__ . '/_private/secret.txt';
+    $k = is_file($f) ? trim((string) @file_get_contents($f)) : '';
+    if (strlen($k) < 32) {
+        $k = bin2hex(random_bytes(32));
+        if (!@file_put_contents($f, $k)) $k = hash('sha256', __FILE__ . php_uname());
+    }
+    return $k;
+}
+function make_token(): string { $t = (string) time(); return $t . '.' . hash_hmac('sha256', $t, secret_key()); }
+/** מחזיר את גיל האסימון בשניות, או -1 אם הוא לא תקין */
+function token_age(string $tok): int {
+    if (!preg_match('/^(\d{9,11})\.([0-9a-f]{64})$/', $tok, $m)) return -1;
+    if (!hash_equals(hash_hmac('sha256', $m[1], secret_key()), $m[2])) return -1;
+    $age = time() - (int) $m[1];
+    return ($age < 0 || $age > 6 * 3600) ? -1 : $age;
+}
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && isset($_GET['token'])) {
+    echo json_encode(['token' => make_token()]);
+    exit;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') out(false, 'method', 405);
 
 // רק מהאתר שלנו
@@ -48,6 +71,25 @@ $f = [
 ];
 if ($f['name'] === '' || strlen(preg_replace('/\D/', '', $f['phone'])) < 9) out(false, 'missing', 422);
 
+/* ---------- סינון ספאם ----------
+   מלכודת זמן: מי ששולח פחות מ־3 שניות אחרי שהטופס נטען הוא רובוט, ונענה "בהצלחה" בלי שליחה.
+   ניקוד חשד: ציון 3 ומעלה לא נשלח, ונשמר ביומן _private/spam.log. ציון 1 עד 2 נשלח עם סימון בנושא. */
+$age = token_age(is_string($in['_token'] ?? null) ? $in['_token'] : '');
+if ($age >= 0 && $age < 3) out(true);
+$score = 0; $why = [];
+if ($age < 0) { $score += 2; $why[] = 'בלי אסימון מהדף'; }
+$free = $f['name'] . ' ' . $f['business'] . ' ' . $f['notes'];
+if (!preg_match('/\p{Hebrew}/u', $free . $f['likes'])) { $score += 1; $why[] = 'בלי עברית'; }
+if (preg_match_all('~https?://|www\.~i', $free) > 2) { $score += 2; $why[] = 'הרבה קישורים'; }
+if (preg_match('~https?://|www\.~i', $f['name'])) { $score += 2; $why[] = 'קישור בשם'; }
+if (preg_match('/[\p{Cyrillic}\p{Han}\p{Hiragana}\p{Katakana}\p{Thai}]/u', $free)) { $score += 2; $why[] = 'כתב זר'; }
+$digits = preg_replace('/\D/', '', $f['phone']);
+if (!preg_match('/^(0\d{8,9}|972\d{8,9})$/', $digits)) { $score += 1; $why[] = 'טלפון לא ישראלי'; }
+if ($score >= 3) {
+    @file_put_contents(__DIR__ . '/_private/spam.log', date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+    out(true);
+}
+
 // הגבלה פשוטה: עד 5 פניות ב־10 דקות מאותה כתובת
 $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? '0');
 $ip = trim(explode(',', $ip)[0]);
@@ -57,6 +99,12 @@ $hits = array_filter(array_map('intval', @file($rl, FILE_IGNORE_NEW_LINES) ?: []
 if (count($hits) >= 5) out(false, 'rate', 429);
 $hits[] = $now;
 @file_put_contents($rl, implode("\n", $hits));
+// תקרה כללית: עד 40 פניות בשעה מכל הכתובות יחד, כדי ששטף של רובוטים לא יציף את התיבה
+$gl = sys_get_temp_dir() . '/yyg-rl-all';
+$all = array_filter(array_map('intval', @file($gl, FILE_IGNORE_NEW_LINES) ?: []), static fn($t) => $t > $now - 3600);
+if (count($all) >= 40) out(false, 'busy', 429);
+$all[] = $now;
+@file_put_contents($gl, implode("\n", $all));
 
 // הגדרות שליחה
 $cfg = [
@@ -89,7 +137,7 @@ $html = '<!doctype html><html lang="he" dir="rtl"><body style="margin:0;padding:
       . '<div style="padding:16px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700">פנייה חדשה מהאתר yygweb.com</div>'
       . '<table dir="rtl" style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">' . $rows . '</table>'
       . '<div style="padding:14px 20px;color:#6b7280;font-size:13px">נשלח מהטופס באתר, ' . date('d/m/Y H:i') . '</div></div></body></html>';
-$subject = 'פנייה חדשה מהאתר: ' . preg_replace('/[\r\n]+/', ' ', $f['name']);
+$subject = ($score > 0 ? '[לבדיקה: ' . implode(', ', $why) . '] ' : '') . 'פנייה חדשה מהאתר: ' . preg_replace('/[\r\n]+/', ' ', $f['name']);
 
 $sent = send_mail($cfg, $subject, $html, $text);
 if (!$sent) out(false, 'send', 502);
