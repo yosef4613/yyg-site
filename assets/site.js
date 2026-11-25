@@ -2,7 +2,7 @@
 const CONFIG = {
   email: 'yyrkg22@gmail.com',
   phone: '054-854-0700',                     // לשיחות בלבד
-  formEndpoint: 'https://formsubmit.co/ajax/yyrkg22@gmail.com',
+  formEndpoint: '/send.php',                 // שולח מהשרת בהוסטינגר, בלי שירות חיצוני
   extraPagePrice: 350,                       // עמוד מעבר למכסה של המסלול
   showPrice: true                            // false מסתיר את המחיר המשוער במתכנן
 };
@@ -623,10 +623,7 @@ const Planner = (() => {
       likes: form.elements.likes.value.trim(),
       notes: form.elements.notes.value.trim(),
       ready: $('lead-ready').value || 'לא סימנו ברשימת ההכנה',
-      plan: $('lead-plan').value || 'לא נבחר מסלול',
-      _subject: `פנייה חדשה מהאתר: ${name}`,
-      _template: 'table',
-      _captcha: 'false'
+      plan: $('lead-plan').value || 'לא נבחר מסלול'
     };
     submit.disabled = true;
     status.className = 'lead-status';
