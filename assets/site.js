@@ -2,7 +2,7 @@
 const CONFIG = {
   email: ['yehuda', 'yygweb.com'].join('@'),   // שמור בחלקים, כדי שרובוטים שאוספים כתובות לא ימצאו אותו
   phone: '054-854-0700',                     // לשיחות בלבד
-  formEndpoint: '/send.php',                 // שולח מהשרת בהוסטינגר, בלי שירות חיצוני
+  formEndpoint: 'https://yygweb.com/send.php',                 // שולח מהשרת בהוסטינגר, בלי שירות חיצוני
   extraPagePrice: 350,                       // עמוד מעבר למכסה של המסלול
   showPrice: true                            // false מסתיר את המחיר המשוער במתכנן
 };
