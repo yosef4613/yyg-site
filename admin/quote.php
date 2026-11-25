@@ -153,6 +153,7 @@ ob_start(); ?>
  </fieldset>
 
  <fieldset><legend>הנחה</legend>
+  <div class="acts" style="margin:0 0 10px"><button class="btn" type="button" id="launch-10">מחיר השקה: 10%</button></div>
   <div class="three"><label>תיאור<input type="text" id="disc-label" placeholder="למשל: הנחת השקה"></label><label>סכום ב־₪<input type="number" id="disc-amount" min="0" step="10" inputmode="numeric"></label><label>או באחוזים<input type="number" id="disc-pct" min="0" max="100" step="1" inputmode="numeric"></label></div>
  </fieldset>
 
@@ -281,6 +282,7 @@ $('pay-50').addEventListener('click', () => setPay(P50));
 $('pay-add').addEventListener('click', () => { payRow([0, '']); calc(); });
 $('disc-pct').addEventListener('input', () => { const pct = Number($('disc-pct').value) || 0; $('disc-amount').value = Math.round(subtotal() * pct / 100); calc(); });
 $('disc-amount').addEventListener('input', () => { $('disc-pct').value = ''; });
+$('launch-10').addEventListener('click', () => { $('disc-label').value = 'מחיר השקה (תמורת הצגת האתר בעבודות והמלצה כתובה)'; $('disc-pct').value = 10; $('disc-pct').dispatchEvent(new Event('input')); });
 
 /* חישוב */
 const items = () => {

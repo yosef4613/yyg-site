@@ -74,7 +74,8 @@ PAGES = [
 <h2>Price</h2>
 <p><b>From ₪2,000</b>, final price, no VAT is added. The final price depends on what the page needs, and it appears in a formal quote before we start. A second language (Hebrew or English): ₪500.</p>
 {how}''',
-        faq=[('How long does it take to build a landing page?', 'Up to 4 business days from the day I receive all the materials, not counting days spent waiting for your reply.'),
+        faq=[('Is there a cheaper option?', 'Yes. A basic landing page costs ₪1,290: one design, one revision round, you provide the text, and one month of support. You pay 50% at the start and 50% at the end. My next 5 clients also get a launch price of 10% off, in return for letting me show their site in my work with a written testimonial.'),
+             ('How long does it take to build a landing page?', 'Up to 4 business days from the day I receive all the materials, not counting days spent waiting for your reply.'),
              ('Can I expand the landing page into a full website later?', "Yes. The landing page becomes the home page or one of the pages of the website, so we don't start from scratch."),
              ('Does a landing page show up on Google?', "Yes. It's built ready for Google, but it usually shows up for fewer searches than a full website, because it has fewer pages."),
              ('What do I need to prepare?', 'Your logo, a sentence about your business, the service you want to promote, and photos if you have them. I write the full copy.')],
@@ -510,7 +511,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=35">
+<link rel="stylesheet" href="/assets/site.css?v=36">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
