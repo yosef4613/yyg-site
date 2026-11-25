@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /stats.php
+Disallow: /hit.php
+Disallow: /send.php
+Disallow: /_private/
 
 Sitemap: https://yygweb.com/sitemap.xml

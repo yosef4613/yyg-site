@@ -7,6 +7,13 @@
  * מחזיר JSON: {"success":"true"} או {"success":"false","message":"..."}
  */
 declare(strict_types=1);
+/* הנתונים נשמרים מחוץ לתיקיית האתר, כדי שעדכון של האתר לא ימחק אותם */
+function data_dir(): string {
+    $d = dirname(__DIR__) . '/yyg-data';
+    if (!is_dir($d)) @mkdir($d, 0700, true);
+    return is_dir($d) && is_writable($d) ? $d : __DIR__ . '/_private';
+}
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 
@@ -18,7 +25,7 @@ function out(bool $ok, string $msg = '', int $code = 200): void {
 
 /* ---------- אסימון: חותמת זמן חתומה. הדפדפן מבקש אותה כשהגולש מגיע לטופס ---------- */
 function secret_key(): string {
-    $f = __DIR__ . '/_private/secret.txt';
+    $f = data_dir() . '/secret.txt';
     $k = is_file($f) ? trim((string) @file_get_contents($f)) : '';
     if (strlen($k) < 32) {
         $k = bin2hex(random_bytes(32));
@@ -74,7 +81,7 @@ if ($f['name'] === '' || strlen(preg_replace('/\D/', '', $f['phone'])) < 9) out(
 
 /* ---------- סינון ספאם ----------
    מלכודת זמן: מי ששולח פחות מ־3 שניות אחרי שהטופס נטען הוא רובוט, ונענה "בהצלחה" בלי שליחה.
-   ניקוד חשד: ציון 3 ומעלה לא נשלח, ונשמר ביומן _private/spam.log. ציון 1 עד 2 נשלח עם סימון בנושא. */
+   ניקוד חשד: ציון 3 ומעלה לא נשלח, ונשמר ביומן spam.log בתיקיית הנתונים שמחוץ לאתר. ציון 1 עד 2 נשלח עם סימון בנושא. */
 $age = token_age(is_string($in['_token'] ?? null) ? $in['_token'] : '');
 if ($age >= 0 && $age < 3) out(true);
 $score = 0; $why = [];
@@ -87,7 +94,7 @@ if (preg_match('/[\p{Cyrillic}\p{Han}\p{Hiragana}\p{Katakana}\p{Thai}]/u', $free
 $digits = preg_replace('/\D/', '', $f['phone']);
 if (!preg_match('/^(0\d{8,9}|972\d{8,9})$/', $digits)) { $score += 1; $why[] = 'טלפון לא ישראלי'; }
 if ($score >= 3) {
-    @file_put_contents(__DIR__ . '/_private/spam.log', date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+    @file_put_contents(data_dir() . '/spam.log', date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
     out(true);
 }
 
@@ -142,6 +149,7 @@ $subject = ($score > 0 ? '[לבדיקה: ' . implode(', ', $why) . '] ' : '') . 
 
 $sent = send_mail($cfg, $subject, $html, $text);
 if (!$sent) out(false, 'send', 502);
+@file_put_contents(data_dir() . '/leads.log', time() . "\n", FILE_APPEND | LOCK_EX);
 out(true);
 
 /* ---------- שליחה ---------- */

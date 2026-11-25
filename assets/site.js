@@ -114,6 +114,24 @@ window.addEventListener('scroll', requestMovers, { passive: true });
 window.addEventListener('resize', requestMovers);
 motionListeners.push(requestMovers);
 
+/* ===== מונה כניסות פרטי: רק באתר האמיתי, בלי עוגיות ובלי פרטים אישיים ===== */
+const countHit = (() => {
+  if (location.hostname !== 'yygweb.com' || !navigator.sendBeacon) return () => {};
+  const q = new URLSearchParams(location.search);
+  const src = q.get('src') || q.get('utm_source') || '';
+  const sent = new Set();
+  return (e) => {
+    if (sent.has(e)) return;
+    sent.add(e);
+    try { navigator.sendBeacon('/hit.php', new Blob([JSON.stringify({ e, p: location.pathname, r: e === 'view' ? document.referrer : '', s: src })], { type: 'application/json' })); } catch (err) { /* בלי מונה */ }
+  };
+})();
+countHit('view');
+if ('IntersectionObserver' in window) {
+  const seen = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { countHit(en.target.id); seen.unobserve(en.target); } }), { threshold: 0.25 });
+  ['plan', 'packages', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
+}
+
 /* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) =====
    קו אור עובר על האתר מימין לשמאל, ומאחוריו כבר מופיע העיצוב החדש. הכול בתוך המסגרת. */
 (() => {
@@ -484,6 +502,7 @@ const Planner = (() => {
   const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)}, סופי, בלי מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
 
   $('r-send').addEventListener('click', (e) => {
+    countHit('planner');
     e.preventDefault();
     Selection.set({ source: 'planner', track: last.p.track, en: last.ans.en, extraPages: last.p.extraPages, answers: answersText(last.ans), pages: last.p.pages, feats: last.p.feats });
   });
@@ -521,6 +540,7 @@ const Planner = (() => {
 (() => {
   const cards = Object.values(PKG).map((p) => p.el);
   const pick = (track) => {
+    countHit('pick');
     cards.forEach((c) => {
       const on = c.dataset.track === track;
       const btn = c.querySelector('.pkg-pick');

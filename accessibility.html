@@ -48,5 +48,6 @@
  </div>
 </main>
 <script>(function(){var u=["yehuda","yygweb.com"].join("@");document.querySelectorAll("[data-mail]").forEach(function(l){l.href="mailto:"+u;l.textContent=u;});})();</script>
+<script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){try{navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({e:"view",p:location.pathname,r:document.referrer,s:""})],{type:"application/json"}))}catch(e){}}</script>
 </body>
 </html>
