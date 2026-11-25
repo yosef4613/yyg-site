@@ -607,6 +607,18 @@ const Planner = (() => {
   sync(false);
 })();
 
+/* ===== מותג מ־0: הכפתור מסמן את הבקשה בטופס ===== */
+(() => {
+  const cta = $('brand-cta');
+  if (!cta) return;
+  cta.addEventListener('click', () => {
+    $('lead-plan').value = 'בקשה: מותג מ־0 עד 100% (אפיון, לוגו, שפה עיצובית, אתר, כל התוכן, דפוס, רשתות וגוגל)';
+    const notes = document.querySelector('#lead-form [name=notes]');
+    if (notes && !notes.value.trim()) notes.value = 'אני מעוניין/ת במותג מלא מ־0. ';
+    countHit('pick');
+  });
+})();
+
 /* ===== יצירת קשר: טופס שחוזר אליכם ===== */
 (() => {
   const form = $('lead-form');
