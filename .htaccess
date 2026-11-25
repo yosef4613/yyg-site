@@ -12,6 +12,18 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
+# סוכני בינה מלאכותית (ראו tools/agent_ready.py):
+# 1. מי שמבקש Accept: text/markdown מקבל את גרסת ה־Markdown של העמוד, אם יש כזו
+RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+RewriteCond %{REQUEST_FILENAME}/index.md -f [OR]
+RewriteCond %{REQUEST_FILENAME}index.md -f
+RewriteRule ^(.*/)?$ $1index.md [L]
+# 2. שרת MCP לקריאה בלבד
+RewriteRule ^mcp/?$ mcp.php [L,QSA]
+# 3. עמוד הבית מפנה בכותרת Link למשאבים לסוכנים
+SetEnvIf Request_URI "^/(index\.html)?$" YYG_HOME_HE
+SetEnvIf Request_URI "^/en/(index\.html)?$" YYG_HOME_EN
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(woff2|webp|png|jpg|svg)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
@@ -22,10 +34,20 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
   <FilesMatch "\.(html|xml|txt)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  <FilesMatch "\.(html|md)$">
+    Header merge Vary Accept
+  </FilesMatch>
+  <FilesMatch "\.md$">
+    Header set Cache-Control "no-cache"
+    Header set X-Robots-Tag "noindex, follow"
+  </FilesMatch>
+  Header always set Link '</llms.txt>; rel="describedby"; type="text/plain", </index.md>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json", </pricing/>; rel="service-doc"' env=YYG_HOME_HE
+  Header always set Link '</llms.txt>; rel="describedby"; type="text/plain", </en/index.md>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json", </en/pricing/>; rel="service-doc"' env=YYG_HOME_EN
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 <IfModule mod_mime.c>
   AddType font/woff2 .woff2
   AddType image/webp .webp
+  AddType text/markdown .md
 </IfModule>

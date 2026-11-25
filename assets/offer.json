@@ -1,0 +1,66 @@
+{
+ "_about": "YYG: the studio's packages, prices and process, for people and AI agents. Single source for /pricing/, the Markdown versions, the WebMCP tools and the MCP server (/mcp). Prices are in ILS, final, and no VAT is added.",
+ "updated": "2026-11-26",
+ "business": {
+  "name": "YYG",
+  "owner": {"he": "יהודה גורדון", "en": "Yehuda Gordon"},
+  "description": {"he": "סטודיו לעיצוב ובניית אתרים לעסקים קטנים ולמוסדות: דפי נחיתה, אתרים עם אזור ניהול, אתרים עם הרשמה ורשימת תפוצה, חנויות אונליין, לוגו ומיתוג.", "en": "A web design and development studio for small businesses and institutions: landing pages, websites with an admin area, websites with sign-ups and a mailing list, online stores, logos and branding."},
+  "url": "https://yygweb.com/",
+  "phone": "054-854-0700",
+  "phone_note": {"he": "לשיחות בלבד", "en": "calls only"},
+  "hours": {"he": "ימים א׳ עד ד׳, 10:00 עד 13:30 (שעון ישראל), או בתיאום מראש", "en": "Sunday to Wednesday, 10:00 to 13:30 (Israel time), or by appointment"},
+  "area": {"he": "כל הארץ, בזום ובטלפון", "en": "All of Israel, by Zoom and phone"},
+  "languages": ["he", "en"],
+  "contact_page": {"he": "https://yygweb.com/contact/", "en": "https://yygweb.com/en/contact/"},
+  "questionnaire": {"he": "https://yygweb.com/questionnaire/", "en": "https://yygweb.com/en/questionnaire/"}
+ },
+ "currency": "ILS",
+ "vat_note": {"he": "המחירים סופיים, לא מוסיפים מע״מ.", "en": "Prices are final, and no VAT is added."},
+ "packages": [
+  {"id": "landing_basic", "price": 1290, "from": false, "days": 3,
+   "name": {"he": "דף נחיתה בסיסי", "en": "Basic landing page"},
+   "summary": {"he": "עמוד אחד עד 5 חלקים, עיצוב אחד וסבב תיקונים אחד. הטקסטים מגיעים מכם. 50% בהתחלה ו־50% בסיום.", "en": "One page with up to 5 sections, one design and one revision round. You provide the text. 50% upfront and 50% at launch."}},
+  {"id": "landing", "price": 2000, "from": true, "days": 4,
+   "name": {"he": "דף נחיתה", "en": "Landing page"},
+   "summary": {"he": "עמוד אחד עד 7 חלקים, 3 כיווני עיצוב ו־3 סבבי תיקונים, טקסטים, טופס פנייה, ודומיין, אחסון ומייל עסקי לשנה הראשונה.", "en": "One page with up to 7 sections, 3 design directions and 3 revision rounds, copywriting, a contact form, and domain, hosting and business email for the first year."}},
+  {"id": "site", "price": 4000, "from": true, "days": 10,
+   "name": {"he": "אתר עם אזור ניהול", "en": "Website with an admin area"},
+   "summary": {"he": "עד 6 עמודים, אזור ניהול לעדכון התוכן שמשתנה, טפסים ומדור תוכן, הדרכה, ודומיין, אחסון ומייל עסקי לשנה הראשונה.", "en": "Up to 6 pages, an admin area to update changing content, forms and a content section, training, and domain, hosting and business email for the first year."}},
+  {"id": "club", "price": 6000, "from": true, "days": 15,
+   "name": {"he": "אתר עם הרשמה ורשימת תפוצה", "en": "Website with sign-ups and a mailing list"},
+   "summary": {"he": "עד 8 עמודים, הרשמה וחשבונות משתמש, רשימת תפוצה ו־3 תבניות מייל, ואזור ניהול לתוכן, לפניות ולמנויים. מתאים למוסדות, עמותות וחוגים.", "en": "Up to 8 pages, sign-ups and user accounts, a mailing list with 3 email templates, and an admin area for content, inquiries and subscribers. Suited to institutions, nonprofits and classes."}},
+  {"id": "store", "price": 7000, "from": true, "days": 20,
+   "name": {"he": "חנות אונליין", "en": "Online store"},
+   "summary": {"he": "חנות מלאה עד 30 מוצרים (ואני מכניס אותם), עגלה, סליקה באשראי ומשלוחים, ואזור ניהול למוצרים, למלאי ולהזמנות.", "en": "A full store with up to 30 products (I upload them), a cart, card payments and shipping, and an admin area for products, stock and orders."}},
+  {"id": "brand", "price": 5900, "from": true, "days": 14,
+   "name": {"he": "מותג מ־0 עד 100%", "en": "Brand from 0 to 100%"},
+   "summary": {"he": "לוגו, שפה עיצובית, כל התוכן, דפוס ורשתות, וגוגל, יחד עם האתר: 5,900 ₪ עם דף נחיתה, 7,900 ₪ עם אתר, 9,900 ₪ עם הרשמה, 10,900 ₪ עם חנות.", "en": "Logo, visual language, all the content, print and social, and Google, together with the website: 5,900 with a landing page, 7,900 with a website, 9,900 with sign-ups, 10,900 with a store."}}
+ ],
+ "addons": [
+  {"id": "page", "price": 350, "name": {"he": "עמוד נוסף", "en": "Extra page"}},
+  {"id": "english", "price": 500, "from": true, "name": {"he": "גרסה באנגלית (500 ₪ לדף נחיתה, 1,000 ₪ לאתר, 1,500 ₪ לאתר עם הרשמה, 1,800 ₪ לחנות)", "en": "English version (500 for a landing page, 1,000 for a website, 1,500 with sign-ups, 1,800 for a store)"}},
+  {"id": "revision", "price": 150, "name": {"he": "סבב תיקונים נוסף", "en": "Extra revision round"}},
+  {"id": "design", "price": 400, "name": {"he": "כיוון עיצוב נוסף", "en": "Extra design direction"}},
+  {"id": "logo_basic", "price": 590, "name": {"he": "לוגו בסיסי", "en": "Basic logo"}},
+  {"id": "logo_pro", "price": 1500, "name": {"he": "לוגו מקצועי עם 3 סקיצות", "en": "Professional logo with 3 sketches"}},
+  {"id": "branding", "price": 2500, "name": {"he": "מיתוג בסיסי: לוגו, צבעים, פונטים וכרטיס ביקור", "en": "Basic branding: logo, colors, fonts and a business card"}}
+ ],
+ "recurring": [
+  {"id": "care", "price": 590, "per": "year", "name": {"he": "\"הכול עליי\": דומיין, אחסון, מייל עסקי, אבטחה וגיבויים, מהשנה השנייה", "en": "\"All-in Care\": domain, hosting, business email, security and backups, from the second year"}},
+  {"id": "maintenance", "price": 199, "per": "month", "name": {"he": "תחזוקה: עדכונים ושינויים קטנים, עד חצי שעה בחודש (לא חובה)", "en": "Maintenance: updates and small changes, up to half an hour a month (optional)"}}
+ ],
+ "launch_offer": {"he": "ל־5 הלקוחות הבאים: 10% הנחה, תמורת הצגת האתר בעבודות שלי עם המלצה כתובה.", "en": "For the next 5 clients: 10% off, in return for showing the site in my work with a written testimonial."},
+ "payment": {"he": "10% כדי להתחיל ולקבל 3 עיצובים של האתר, 40% אחרי שבוחרים עיצוב, ו־50% בסיום, אחרי האישור שלכם ולפני העלייה לאוויר.", "en": "10% to start and get 3 designs of your site, 40% after you choose a design, and 50% at the end, after your approval and before going live."},
+ "included_everywhere": {"he": "בכל המסלולים: 3 כיווני עיצוב, 3 סבבי תיקונים, התאמה לטלפון, לגוגל ולנגישות.", "en": "In every package: 3 design directions, 3 revision rounds, and mobile, Google and accessibility readiness."},
+ "process": [
+  {"he": "שאלון קצר או שיחה, ואחר כך הצעת מחיר מסודרת", "en": "A short questionnaire or call, then a formal quote"},
+  {"he": "10%, ו־3 עיצובים מלאים עם התוכן שלכם", "en": "10%, and 3 complete designs with your content"},
+  {"he": "משוב ובחירה, ועוד 40%", "en": "Feedback and choice, and another 40%"},
+  {"he": "בנייה, בדיקה ואישור שלכם, ו־50% האחרונים", "en": "Build, your review and approval, and the final 50%"},
+  {"he": "עלייה לאוויר והדרכה", "en": "Launch and training"}
+ ],
+ "examples": [
+  {"url": "https://yygweb.com/demo/", "name": {"he": "פרויקט לדוגמה: אתר לנגריה, 3 עיצובים", "en": "Example project: a carpentry website, 3 designs"}},
+  {"url": "https://yygweb.com/demo/optika/", "name": {"he": "דף נחיתה לדוגמה: חנות משקפיים עם עדכון שעות עצמי", "en": "Example landing page: an eyewear shop with self-updated hours"}}
+ ]
+}
