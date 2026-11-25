@@ -21,6 +21,8 @@ for f in root.rglob('*.html'):
         s = s.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
     # קישורים שמתחילים ב־/ מקבלים את תחילית המאגר
     s = re.sub(r'(href|src)="/(?!/)', lambda m: f'{m.group(1)}="{BASE}/', s)
+    # טופס שנשלח בלי סקריפט הולך לשרת בהוסטינגר
+    s = s.replace('action="/send.php"', 'action="https://yygweb.com/send.php"')
     # המונה לא רץ בעותק
     f.write_text(s)
 # הטופס שולח לשרת בהוסטינגר

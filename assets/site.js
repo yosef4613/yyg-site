@@ -375,10 +375,11 @@ const Selection = (() => {
   en.addEventListener('change', render);
   $('picked-change').addEventListener('click', () => { const h = $('pkgs-title'); h.setAttribute('tabindex', '-1'); $('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' }); h.focus({ preventScroll: true }); });
   return {
-    set(next) {
+    set(next, quiet) {
       s = next;
       en.checked = !!next.en;
       render();
+      if (quiet) return;     // מהמחשבון: מעדכנים את הפנייה בשקט, בלי לקפוץ למטה
       box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
       $('contact').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'start' });
       setTimeout(() => box.focus({ preventScroll: true }), motionOn() ? 700 : 0);
@@ -491,33 +492,19 @@ const Planner = (() => {
     const extra = $('r-extra');
     extra.hidden = !p.extraPages;
     extra.textContent = p.extraPages ? extraText(p.extraPages) : '';
-    $('r-incl').replaceChildren(...PKG[p.track].incl.map(({ label, value }) => {
-      const li = document.createElement('li');
-      const sp = document.createElement('span'); sp.textContent = label;
-      const b = document.createElement('b'); b.textContent = value;
-      li.append(sp, b); return li;
-    }));
     $('r-count').textContent = p.track === 'landing' ? T('עמוד אחד', '1 page') : T(`${p.pages.length} עמודים`, `${p.pages.length} pages`);
     fill($('r-pages'), p.pages, 'pages');
     fill($('r-feats'), p.feats, 'feats');
     $('r-live').textContent = T(`המסלול שמתאים לכם: ${PKG[p.track].name}. מחיר משוער ${nis(p.price)}.`, `Your best fit: ${PKG[p.track].name}. Estimated price ${nis(p.price)}.`);
     $('pb-track').textContent = PKG[p.track].name;
     $('pb-price').textContent = nis(p.price);
-    $('r-status').textContent = '';
+    if (touched) {
+      /* אחרי שענו: התכנית מצטרפת לכל טופס באתר, והמסלול המומלץ מסומן ברשימת המסלולים */
+      Selection.set({ source: 'planner', track: p.track, en: ans.en, extraPages: p.extraPages, answers: answersText(ans), pages: p.pages, feats: p.feats }, true);
+      document.dispatchEvent(new CustomEvent('yyg:recommend', { detail: { track: p.track } }));
+    }
   };
 
-  const planText = () => T(`${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)}, סופי, בלי מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`,
-    `${answersText(last.ans)}\n\nRecommended package: ${PKG[last.p.track].name}\nEstimated price: ${nis(last.p.price)}, final, no VAT added\nPages: ${last.p.pages.join(', ')}\nFeatures: ${last.p.feats.join(', ')}`);
-
-  $('r-send').addEventListener('click', (e) => {
-    countHit('planner');
-    e.preventDefault();
-    Selection.set({ source: 'planner', track: last.p.track, en: last.ans.en, extraPages: last.p.extraPages, answers: answersText(last.ans), pages: last.p.pages, feats: last.p.feats });
-  });
-  $('r-copy').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(planText()); $('r-status').textContent = T('התכנית הועתקה.', 'Plan copied.'); }
-    catch (e) { $('r-status').textContent = T(`לא הצלחנו להעתיק. אפשר לכתוב אל ${CONFIG.email}`, `Couldn't copy. You can write to ${CONFIG.email}`); }
-  });
   $('r-more').addEventListener('click', (e) => {
     e.preventDefault();
     const card = PKG[last.p.track].el;
@@ -539,7 +526,7 @@ const Planner = (() => {
     bar.addEventListener('click', (e) => { e.preventDefault(); $('result').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'start' }); $('result').focus({ preventScroll: true }); });
   }
 
-  form.addEventListener('change', () => { touched = true; render(); });
+  form.addEventListener('change', () => { if (!touched) countHit('planner'); touched = true; render(); });
   render();
   return { touched: () => touched, en: () => last.ans.en };
 })();
@@ -547,19 +534,31 @@ const Planner = (() => {
 /* ===== מסלולים: בחירה מכפתור או מהכרטיס, וממשיכים ליצירת קשר ===== */
 (() => {
   const cards = Object.values(PKG).map((p) => p.el);
-  const pick = (track) => {
-    countHit('pick');
+  const grid = document.querySelector('.pkgs');
+  const mark = (track, fromPlanner) => {
     cards.forEach((c) => {
       const on = c.dataset.track === track;
       const btn = c.querySelector('.pkg-pick');
       c.classList.toggle('is-selected', on);
+      c.classList.toggle('is-match', on && fromPlanner);
+      c.dataset.match = on && fromPlanner ? T('מתאים לכם לפי המחשבון', 'Your match from the calculator') : '';
       btn.setAttribute('aria-pressed', String(on));
       btn.classList.toggle('btn-gold', on);          // הזהב עובר לכפתור של מה שנבחר
       btn.classList.toggle('btn-line', !on);
-      btn.firstChild.textContent = on ? T('נבחר, ממשיכים ✓', 'Selected, continue ✓') : T('לבחור במסלול הזה', 'Choose this package');
+      btn.firstChild.textContent = !on ? T('לבחור במסלול הזה', 'Choose this package') : fromPlanner ? T('להמשיך עם המסלול הזה', 'Continue with this package') : T('נבחר, ממשיכים ✓', 'Selected, continue ✓');
     });
+  };
+  const pick = (track) => {
+    countHit('pick');
+    mark(track, false);
     Selection.set({ source: 'package', track, en: Planner && Planner.touched() ? Planner.en() : false });
   };
+  document.addEventListener('yyg:recommend', (e) => {
+    mark(e.detail.track, true);
+    /* בטלפון המסלולים נגללים לצדדים: מזיזים את הרשימה (לא את הדף) אל המסלול שהומלץ */
+    const card = PKG[e.detail.track].el;
+    if (grid.scrollWidth > grid.clientWidth) grid.scrollLeft = card.offsetLeft - (grid.clientWidth - card.offsetWidth) / 2;
+  });
   cards.forEach((c) => {
     c.addEventListener('click', (e) => {
       if (e.target.closest('a, .pkg-toggle')) return;
@@ -576,7 +575,6 @@ const Planner = (() => {
     });
   });
   /* בטלפון המסלולים נגללים לצדדים: נפתחים על המסלול המומלץ, ואפשר לגלול אותם במקלדת */
-  const grid = document.querySelector('.pkgs');
   const small = window.matchMedia('(max-width: 700px)');
   const syncGrid = () => {
     if (small.matches) {
@@ -624,6 +622,59 @@ const Planner = (() => {
     const notes = document.querySelector('#lead-form [name=notes]');
     if (notes && !notes.value.trim()) notes.value = T('אני מעוניין/ת במותג מלא מ־0. ', 'I’m interested in a full brand from scratch. ');
     countHit('pick');
+  });
+})();
+
+/* ===== פנייה מהירה: שם וטלפון בלבד, למי שכבר השתכנע ולא רוצה לגלול עד הסוף ===== */
+(() => {
+  document.querySelectorAll('form.quick-lead').forEach((form) => {
+    const status = form.querySelector('.ql-status');
+    const btn = form.querySelector('button[type=submit]');
+    const { name: fName, phone: fPhone } = form.elements;
+    let token = '';
+    const getToken = () => fetch(CONFIG.formEndpoint + '?token=1', { cache: 'no-store' }).then((r) => r.json()).then((t) => { token = t.token || ''; }).catch(() => {});
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { getToken(); io.disconnect(); } }, { rootMargin: '600px 0px' });
+      io.observe(form);
+    } else getToken();
+    form.addEventListener('focusin', () => { if (!token) getToken(); }, { once: true });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = fName.value.trim();
+      const phone = fPhone.value.trim();
+      const okPhone = phone.replace(/\D/g, '').length >= 9;
+      fName.setAttribute('aria-invalid', String(!name));
+      fPhone.setAttribute('aria-invalid', String(!okPhone));
+      status.className = 'ql-status';
+      if (!name) { status.textContent = T('נא לכתוב שם.', 'Please enter your name.'); fName.focus(); return; }
+      if (!okPhone) { status.textContent = T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'); fPhone.focus(); return; }
+      if (form.elements._honey.value) return;
+      const picked = $('lead-plan') ? $('lead-plan').value : '';
+      const data = {
+        name, phone,
+        when: T('בימים א׳ עד ד׳, בין 10:00 ל־13:30', 'Sun to Wed, 10:00 to 13:30'),
+        plan: form.elements.plan.value + '\n' + (picked || T('לא נבחר מסלול', 'No package chosen')) + (EN ? '\n(Sent from the English site)' : ''),
+        _token: token
+      };
+      if (!token) { await getToken(); data._token = token; }
+      btn.disabled = true;
+      status.textContent = T('שולח…', 'Sending…');
+      try {
+        const res = await fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || res.status);
+        form.reset();
+        form.classList.add('is-sent');
+        status.className = 'ql-status is-ok';
+        status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בימים א׳ עד ד׳, בין 10:00 ל־13:30.`, `Thank you, ${name}. Got it. I’ll call you back Sunday to Wednesday, between 10:00 and 13:30.`);
+        countHit('lead');
+      } catch (err) {
+        status.textContent = '';
+        status.append(T('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', 'We couldn’t send this from here. You can call '), Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }), '.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
   });
 })();
 
@@ -687,6 +738,7 @@ const Planner = (() => {
       const keepReady = $('lead-ready').value;
       form.reset();
       $('lead-ready').value = keepReady;
+      countHit('lead');
       status.className = 'lead-status is-ok';
       status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`, `Thank you, ${name}. Got it, and I’ll call you back at the time you chose.`);
     } catch (err) {

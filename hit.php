@@ -23,7 +23,7 @@ if (!preg_match('~^https://(www\.)?yygweb\.com(/|$)~i', $origin)) exit;
 
 $in = json_decode(file_get_contents('php://input') ?: '', true);
 if (!is_array($in)) exit;
-$type = in_array($in['e'] ?? '', ['view', 'plan', 'packages', 'contact', 'planner', 'pick'], true) ? $in['e'] : '';
+$type = in_array($in['e'] ?? '', ['view', 'plan', 'packages', 'contact', 'planner', 'pick', 'lead'], true) ? $in['e'] : '';
 if ($type === '') exit;
 $page = preg_replace('~[^a-z0-9/._-]~i', '', substr((string) ($in['p'] ?? '/'), 0, 60)) ?: '/';
 $ref = '';

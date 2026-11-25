@@ -1,0 +1,29 @@
+# YYG — עיצוב ובניית אתרים / Web design & development (Israel)
+
+> YYG is the web design studio of Yehuda Gordon in Israel. It builds landing pages, small business websites with an admin panel, websites with sign-ups and mailing lists for institutions, nonprofits and classes, and online stores, plus logo design and branding. Clients see 3 complete design directions of their own site before paying. Prices are final with no VAT added. Sites are fast, mobile-first, accessible and set up for Google. The first year of domain, hosting and business email is included.
+
+## Prices (ILS, final, no VAT added)
+- Landing page: from ₪2,000 (3 design directions, 3 revision rounds, up to 4 business days)
+- Website with admin panel: from ₪4,000 (up to 6 pages, up to 10 business days)
+- Website with sign-ups & mailing list: from ₪6,000 (up to 15 business days)
+- Online store: from ₪7,000 (up to 30 products uploaded, up to 20 business days)
+- Basic logo ₪590; professional logo ₪1,500; basic brand identity ₪2,500
+- Brand from 0 to 100% (branding + website + content + print + social + Google): from ₪5,900 / ₪7,900 / ₪9,900 / ₪10,900
+- All-in Care (domain, hosting, business email, security, backups) from year 2: ₪590 per year
+
+## Contact
+- Phone: 054-854-0700 (calls only), Sunday to Wednesday, 10:00–13:30 (Israel time)
+- Website: https://yygweb.com (Hebrew), https://yygweb.com/en/ (English)
+
+## Pages
+- [Home (Hebrew)](https://yygweb.com/)
+- [Home (English)](https://yygweb.com/en/)
+- [Services](https://yygweb.com/services/)
+- [Landing page design](https://yygweb.com/services/landing-page.html)
+- [Small business website](https://yygweb.com/services/business-website.html)
+- [Online store](https://yygweb.com/services/online-store.html)
+- [Websites for institutions, nonprofits and classes](https://yygweb.com/services/institutions.html)
+- [Logo design and branding](https://yygweb.com/services/logo-branding.html)
+- [How much does a website cost (guide)](https://yygweb.com/guides/website-cost.html)
+- [What to prepare before building a website (guide)](https://yygweb.com/guides/before-you-build.html)
+- [Landing page or full website (guide)](https://yygweb.com/guides/landing-or-website.html)

@@ -40,7 +40,7 @@ $today = (new DateTime('now', $tz))->format('Y-m-d');
 $since = static fn(int $days): string => (new DateTime('now', $tz))->modify('-' . ($days - 1) . ' days')->format('Y-m-d');
 
 $sum = static function (array $rows, string $from) use ($dayOf): array {
-    $v = []; $views = 0; $ev = ['plan' => [], 'packages' => [], 'contact' => [], 'planner' => [], 'pick' => []];
+    $v = []; $views = 0; $ev = ['plan' => [], 'packages' => [], 'contact' => [], 'planner' => [], 'pick' => [], 'lead' => []];
     foreach ($rows as $r) {
         if ($dayOf($r['t']) < $from) continue;
         $id = $dayOf($r['t']) . $r['v'];
@@ -106,6 +106,7 @@ header('Content-Type: text/html; charset=utf-8');
    <div class="row"><span>הגיעו למסלולים</span><b><?= (int) $p['packages'] ?></b></div>
    <div class="row"><span>בחרו מסלול</span><b><?= (int) $p['pick'] ?></b></div>
    <div class="row"><span>הגיעו ליצירת קשר</span><b><?= (int) $p['contact'] ?></b></div>
+   <div class="row"><span>השאירו פרטים</span><b><?= (int) $p['lead'] ?></b></div>
   </div>
  </div>
 <?php endforeach; ?>

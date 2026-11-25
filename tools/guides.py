@@ -89,7 +89,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=18">
+<link rel="stylesheet" href="/assets/site.css?v=34">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -297,6 +297,8 @@ open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לב�
 
 # מפת האתר
 urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3')]
+SV = ['landing-page', 'business-website', 'online-store', 'institutions', 'logo-branding']
+urls += [('services/', '0.8')] + [(f'services/{s}.html', '0.8') for s in SV] + [('en/services/', '0.6')] + [(f'en/services/{s}.html', '0.6') for s in SV]
 urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2')]
 open(f'{root}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n' for u, p in urls) + '</urlset>\n')

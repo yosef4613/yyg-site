@@ -28,6 +28,17 @@ header('Cache-Control: no-store');
 
 function out(bool $ok, string $msg = '', int $code = 200): void {
     http_response_code($code);
+    if (!empty($GLOBALS['plain'])) {
+        /* טופס שנשלח בלי הסקריפט של האתר: מחזירים דף תודה קצר במקום JSON */
+        $en = strpos($_SERVER['HTTP_REFERER'] ?? '', '/en/') !== false;
+        header('Content-Type: text/html; charset=utf-8');
+        $t = $ok ? ($en ? 'Thank you, got it. I will call you back Sunday to Wednesday, between 10:00 and 13:30.' : 'תודה, הפרטים התקבלו. אחזור אליכם בימים א׳ עד ד׳, בין 10:00 ל־13:30.')
+                 : ($en ? 'Something went wrong, and the details were not sent. Please call 054-854-0700.' : 'משהו השתבש, והפרטים לא נשלחו. אפשר להתקשר ל־054-854-0700.');
+        echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>YYG</title></head>'
+           . '<body style="margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#151920;color:#E9EDF3;font:18px/1.6 Arial,sans-serif;text-align:center"><main><p>' . $t . '</p>'
+           . '<p><a style="color:#F2C95A" href="' . ($en ? '/en/' : '/') . '">' . ($en ? 'Back to the site' : 'חזרה לאתר') . '</a></p></main></body></html>';
+        exit;
+    }
     echo json_encode(['success' => $ok ? 'true' : 'false', 'message' => $msg], JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -73,7 +84,7 @@ if ($host !== '' && !preg_match('/(^|\.)yygweb\.com$/i', $host) && $host !== 'yo
 // קריאת הנתונים: JSON או טופס רגיל
 $raw = file_get_contents('php://input') ?: '';
 $in = json_decode($raw, true);
-if (!is_array($in)) $in = $_POST;
+if (!is_array($in)) { $in = $_POST; $GLOBALS['plain'] = stripos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') === false; }
 
 // מלכודת לרובוטים: שדה נסתר שאנשים לא ממלאים
 if (!empty($in['_honey'])) out(true);
