@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ענף · עיצוב 2 מתוך 3 | פרויקט לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="ענף, נגריה לרהיטים בהתאמה בבית שמש: מטבחים, ארונות, ספריות ושולחנות מעץ מלא, במידה המדויקת לבית שלכם. אתר לדוגמה של YYG.">
+<meta name="theme-color" content="#1D3A2E">
+<link rel="icon" href="/yyg-site/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/yyg-site/demo/fonts/heebo-900-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ---------- demo bar (shared, unchanged) ---------- */
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100}
+.demo-bar b{color:#F2C95A}
+.demo-bar nav{display:flex;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+@media (max-width:560px){.demo-bar{justify-content:center}.demo-bar>span{display:none}}
+
+/* ---------- tokens ---------- */
+:root{
+  --paper:#F1EEE8;
+  --paper-2:#E7E2D8;
+  --white:#FFFFFF;
+  --green:#1D3A2E;
+  --green-2:#24463A;
+  --orange:#E5652A;
+  --orange-hi:#EF7A43;
+  --ink:#1A1A1A;
+  --ink-2:#4A4741;
+  --line:#D9D3C7;
+  --field:#8F887B;
+  --on-dark:#F1EEE8;
+  --on-dark-2:rgba(241,238,232,.78);
+  --on-dark-line:rgba(241,238,232,.16);
+  --wrap:1280px;
+  --gut:clamp(16px,4vw,48px);
+  --header-h:76px;
+  --focus:#1A1A1A;
+  --mbar-h:64px;
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-weight:400;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p,ol,ul,dl,dd,figure,blockquote{margin:0}
+ol,ul{padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.dark{--focus:var(--orange)}
+[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;top:8px;right:8px;z-index:200;background:var(--orange);color:var(--ink);font-weight:700;padding:12px 18px;border-radius:4px;text-decoration:none;transform:translateY(-200%)}
+.skip:focus{transform:none}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:2px solid transparent;border-radius:4px;font-weight:700;font-size:17px;line-height:1.2;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:var(--orange);color:var(--ink);box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+.btn-primary:hover{background:var(--orange-hi);transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0);box-shadow:inset 0 -2px 0 rgba(0,0,0,.16)}
+.btn-ghost{border-color:rgba(241,238,232,.55);color:var(--on-dark);background:transparent}
+.btn-ghost:hover{background:var(--on-dark);border-color:var(--on-dark);color:var(--ink)}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:#000;transform:translateY(-2px)}
+.btn-lg{min-height:60px;padding:0 32px;font-size:18px}
+.btn-sm{min-height:44px;padding:0 18px;font-size:16px}
+.btn:hover svg{transform:translateX(-3px)}
+.btn svg{transition:transform .2s}
+
+/* ---------- ruler motif ---------- */
+.ruler{--t:rgba(26,26,26,.42);position:relative;display:block;height:26px;overflow:hidden;background:linear-gradient(var(--t),var(--t)) top/100% 1px no-repeat}
+.ruler::before{content:"";position:absolute;top:0;bottom:0;right:0;width:calc(100% + 200px);background:
+  repeating-linear-gradient(to left,var(--t) 0 2px,transparent 2px 100px) top right/100% 24px no-repeat,
+  repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 50px) top right/100% 15px no-repeat,
+  repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 10px) top right/100% 9px no-repeat}
+.dark .ruler{--t:rgba(241,238,232,.42)}
+/* ticks slide in from the right when visible; the pattern repeats every 100px so the resting state is identical */
+.anim .rv::before{transform:translateX(200px);transition:transform 1.8s cubic-bezier(.16,.8,.24,1)}
+.anim .rv.is-in::before{transform:none}
+
+.kicker{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--ink-2);margin-bottom:18px}
+.kicker::before{content:"";width:28px;height:3px;background:var(--orange);flex:none}
+.dark .kicker{color:var(--on-dark-2)}
+.kicker .k-label{letter-spacing:0;font-size:15px}
+.kicker .k-sep{width:1px;height:14px;background:currentColor;opacity:.4}
+
+/* ---------- header ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:var(--green);color:var(--on-dark);border-bottom:1px solid var(--on-dark-line)}
+.header-in{display:flex;align-items:center;gap:24px;min-height:var(--header-h)}
+.brand{display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none;flex:none;padding-block:6px}
+.brand svg{width:42px;height:42px;color:var(--orange);flex:none}
+.brand-name{display:block;font-weight:900;font-size:30px;line-height:1;letter-spacing:-.01em}
+.brand-sub{display:block;font-size:12.5px;line-height:1.2;margin-top:4px;color:var(--on-dark-2)}
+.nav{display:flex;align-items:center;margin-inline-start:auto}
+.nav-list{display:flex;align-items:center;gap:clamp(18px,2.2vw,34px)}
+.nav-list a{position:relative;display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:16px;color:var(--on-dark)}
+.nav-list a::after{content:"";position:absolute;inset-inline:0;bottom:6px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:right;transition:transform .25s}
+.nav-list a:hover::after{transform:scaleX(1)}
+.nav-cta{display:none}
+.head-cta{flex:none}
+.nav-toggle{display:none;align-items:center;gap:10px;min-height:48px;padding:0 14px;background:transparent;border:2px solid rgba(241,238,232,.4);border-radius:4px;color:var(--on-dark);font-weight:700;font-size:16px;cursor:pointer}
+.nt-ico{display:grid;gap:4px;width:20px}
+.nt-ico i{display:block;height:2px;background:currentColor;transition:transform .25s,opacity .25s}
+.nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{background-color:var(--green);color:var(--on-dark);overflow:hidden;background-image:linear-gradient(rgba(241,238,232,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(241,238,232,.04) 1px,transparent 1px);background-size:64px 64px;background-position:center -1px}
+.hero-top{padding-top:clamp(40px,5.5vw,80px)}
+.hero-kicker{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;color:var(--on-dark-2);margin-bottom:24px}
+.hero-kicker::before{content:"";width:28px;height:3px;background:var(--orange);flex:none}
+.hero h1{font-weight:900;font-size:clamp(40px,7vw,98px);line-height:1.02;letter-spacing:-.025em;max-width:13.5em;text-wrap:balance}
+.hero h1 .hl{color:var(--orange)}
+.hero-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start;padding-top:clamp(32px,3.5vw,48px);padding-bottom:clamp(56px,6vw,88px)}
+.hero-copy{padding-top:46px}
+.hero-lead{font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:var(--on-dark-2);max-width:30em;margin-bottom:36px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.hero-fig{position:relative;padding-top:46px;padding-left:46px}
+.dim-box{position:relative}
+.dim-box img{width:100%;aspect-ratio:8/5;object-fit:cover;border-radius:2px;background:var(--green-2)}
+.dim{position:absolute;display:flex;align-items:center;justify-content:center;color:var(--orange);pointer-events:none}
+.dim::before{content:"";position:absolute;background:currentColor}
+.dim .ar{position:absolute;background:currentColor;display:block}
+.dim-h{left:0;right:0;top:-42px;height:24px;border-left:1px solid rgba(241,238,232,.6);border-right:1px solid rgba(241,238,232,.6)}
+.dim-h::before{left:0;right:0;top:50%;height:2px;margin-top:-1px}
+.dim-h .ar{top:50%;width:12px;height:10px;margin-top:-5px}
+.dim-h .ar-r{right:0;clip-path:polygon(100% 50%,0 0,0 100%)}
+.dim-h .ar-l{left:0;clip-path:polygon(0 50%,100% 0,100% 100%)}
+.dim-v{top:0;bottom:0;left:-42px;width:24px;border-top:1px solid rgba(241,238,232,.6);border-bottom:1px solid rgba(241,238,232,.6)}
+.dim-v::before{top:0;bottom:0;left:50%;width:2px;margin-left:-1px}
+.dim-v .ar{left:50%;width:10px;height:12px;margin-left:-5px}
+.dim-v .ar-t{top:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.dim-v .ar-b{bottom:0;clip-path:polygon(0 0,100% 0,50% 100%)}
+.dim-label{position:relative;z-index:1;background:var(--orange);color:var(--ink);font-weight:700;font-size:13px;line-height:1;padding:6px 9px;border-radius:2px;white-space:nowrap;box-shadow:0 0 0 6px var(--green)}
+.dim-v .dim-label{transform:rotate(-90deg)}
+.corner{position:absolute;width:18px;height:18px;border-color:var(--paper);border-style:solid;border-width:0}
+.corner-tr{top:10px;right:10px;border-top-width:2px;border-right-width:2px}
+.corner-bl{bottom:10px;left:10px;border-bottom-width:2px;border-left-width:2px}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat{padding:30px clamp(16px,2.4vw,32px) clamp(44px,5vw,64px);border-inline-start:1px solid var(--on-dark-line)}
+.stat:first-child{border-inline-start:0;padding-inline-start:0}
+.stat-num{display:flex;align-items:flex-start;gap:2px;font-weight:900;font-size:clamp(52px,6.4vw,96px);line-height:.92;letter-spacing:-.035em;font-variant-numeric:tabular-nums;min-height:.92em}
+.stat-num .plus{color:var(--orange);font-size:.6em;line-height:1;margin-top:.04em}
+.stat-num svg{width:.82em;height:.82em;color:var(--orange);margin-top:.05em}
+.stat-label{margin-top:14px;font-size:17px;font-weight:700;color:var(--on-dark)}
+
+/* ---------- sections ---------- */
+.section{padding-block:clamp(72px,9vw,136px)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 48px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.h2{font-weight:900;font-size:clamp(42px,6.8vw,100px);line-height:.98;letter-spacing:-.03em}
+.sec-aside{font-size:16px;color:var(--ink-2);max-width:26em;padding-bottom:10px}
+.sec-aside b{color:var(--ink)}
+.ruler-sep{margin-bottom:clamp(64px,8vw,112px)}
+.works{padding-bottom:clamp(64px,8vw,112px)}
+
+/* works */
+.works-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(92px,9.6vw,136px);gap:20px}
+.work{position:relative;grid-column:span 4;grid-row:span 2}
+.work .ph{position:relative;height:100%;overflow:hidden;background:var(--paper-2);border-radius:2px}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.work:hover img{transform:scale(1.035)}
+.work figcaption{position:absolute;bottom:12px;right:12px;max-width:calc(100% - 24px);display:flex;gap:10px;align-items:baseline;background:var(--paper);color:var(--ink);font-size:14px;font-weight:700;line-height:1.35;padding:8px 12px;border-radius:2px}
+.work figcaption .n{color:var(--green);font-weight:900;font-variant-numeric:tabular-nums;flex:none}
+.w-kd{grid-column:span 6;grid-row:span 3}
+.w-wardrobe,.w-dining{grid-column:span 3;grid-row:span 3}
+.w-shelves{grid-column:span 8;grid-row:span 3}
+.w-chair{grid-column:span 4;grid-row:span 3}
+.w-chair img{object-position:50% 70%}
+.w-wardrobe img{object-position:50% 40%}
+
+/* services */
+.services{padding-top:0}
+.svc-list{border-top:2px solid var(--ink)}
+.svc{position:relative;display:grid;grid-template-columns:clamp(76px,11vw,160px) minmax(0,1fr) minmax(0,1.3fr);gap:10px clamp(24px,4vw,56px);align-items:baseline;padding:30px 0 32px;border-bottom:1px solid var(--line)}
+.svc::before{content:"";position:absolute;top:-2px;right:0;height:3px;width:0;background:var(--orange);transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.svc:hover::before{width:100%}
+.svc-n{font-weight:900;font-size:clamp(40px,4.6vw,68px);line-height:.9;letter-spacing:-.04em;color:var(--green);font-variant-numeric:tabular-nums}
+.svc h3{font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.2;letter-spacing:-.01em}
+.svc p{color:var(--ink-2);max-width:46ch}
+.svc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:44px}
+.tel-link{font-weight:700;text-decoration:none;border-bottom:2px solid var(--orange);padding-block:8px 2px}
+.tel-link:hover{border-bottom-color:var(--ink)}
+
+/* process */
+.process{background:var(--ink);color:var(--on-dark);overflow:hidden}
+.process .h2{color:var(--on-dark)}
+.steps-wrap{--tape-h:76px;--pt:132px;position:relative;padding-top:var(--pt)}
+.tape{position:absolute;top:0;height:var(--tape-h);left:calc(50% - 50vw);right:calc(50% - 50vw);overflow:hidden;--t:rgba(26,26,26,.85);background:var(--orange)}
+.tape::before{content:"";position:absolute;top:0;bottom:0;right:0;width:calc(100% + 200px);background:
+  repeating-linear-gradient(to left,var(--t) 0 2px,transparent 2px 100px) top right/100% 30px no-repeat,
+  repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 50px) top right/100% 20px no-repeat,
+  repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 10px) top right/100% 12px no-repeat}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(24px,3vw,40px)}
+.step{position:relative}
+.step-mark{position:absolute;top:calc(-1 * var(--pt));right:0;height:var(--tape-h);display:flex;align-items:flex-end;padding:0 14px 10px 0;color:var(--ink);white-space:nowrap}
+.step-mark::before{content:"";position:absolute;right:0;top:0;width:4px;height:100%;background:var(--ink)}
+.step-mark::after{content:"";position:absolute;right:1px;top:100%;width:2px;height:calc(var(--pt) - var(--tape-h) - 14px);background:var(--orange)}
+.step-mark .sm{font-size:15px;font-weight:700;line-height:1}
+.step-mark .sm b{font-size:34px;font-weight:900;letter-spacing:-.03em;margin-right:6px}
+.step h3{font-weight:700;font-size:clamp(21px,1.9vw,26px);line-height:1.25;margin-bottom:12px}
+.step p{color:var(--on-dark-2);font-size:16.5px}
+
+/* about */
+.about{overflow:hidden}
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:stretch}
+.about-body{padding-block:clamp(72px,9vw,136px);align-self:center}
+.about h2{font-weight:900;font-size:clamp(36px,4.6vw,66px);line-height:1.02;letter-spacing:-.025em;margin-bottom:28px;text-wrap:balance}
+.about-text{font-size:clamp(17px,1.4vw,19px);line-height:1.8;color:var(--ink-2);max-width:34em}
+.pull{margin-top:36px;padding-inline-start:22px;border-inline-start:5px solid var(--orange);font-weight:900;font-size:clamp(22px,2.2vw,30px);line-height:1.25;letter-spacing:-.015em;color:var(--green);max-width:18em}
+.about-media{position:relative;min-height:520px;margin-left:calc(-1 * ((100vw - min(100vw, var(--wrap))) / 2 + var(--gut)))}
+.about-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%}
+.title-block{position:absolute;right:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,40px);display:grid;grid-template-columns:repeat(3,auto);background:var(--paper);color:var(--ink);border:2px solid var(--ink);font-size:14px;font-weight:700;line-height:1.2}
+.title-block span{padding:10px 14px;border-inline-start:1px solid var(--ink)}
+.title-block span:first-child{border-inline-start:0}
+.title-block small{display:block;font-size:11px;font-weight:400;color:var(--ink-2);margin-bottom:3px;letter-spacing:.04em}
+
+/* woods */
+.woods-sec{padding-top:0}
+.woods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.wood{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;background:var(--white);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.wood-chip{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1;padding:18px 20px 20px;background:var(--sw);color:var(--sw-ink)}
+.wood-code{font-size:13px;font-weight:700;letter-spacing:.06em;display:flex;justify-content:space-between;gap:8px}
+.wood-name{margin:0;font-weight:900;font-size:clamp(44px,5vw,72px);line-height:.95;letter-spacing:-.03em}
+.wood-desc{padding:20px 20px 16px;font-size:16.5px;color:var(--ink-2);line-height:1.6}
+.wood-use{margin:0 20px;padding:14px 0 22px;border-top:1px solid var(--line);font-weight:700;font-size:16px;line-height:1.45}
+
+/* testimonials */
+.testi{background:var(--orange);color:var(--ink);padding-top:0}
+.testi .ruler{--t:rgba(26,26,26,.6);margin-bottom:clamp(72px,9vw,136px)}
+.testi .kicker{color:var(--ink)}
+.testi .kicker::before{background:var(--ink)}
+.tag{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:2px solid var(--ink);border-radius:4px;font-weight:700;font-size:15px;margin-bottom:10px}
+.tag::before{content:"";width:8px;height:8px;background:var(--ink);border-radius:1px}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px)}
+.quote{display:flex;flex-direction:column;border-top:3px solid var(--ink);padding-top:26px}
+.quote svg{width:44px;height:34px;margin-bottom:20px;color:var(--ink)}
+.quote blockquote p{font-weight:700;font-size:clamp(20px,1.85vw,25px);line-height:1.45;letter-spacing:-.01em}
+.quote figcaption{margin-top:auto;padding-top:24px;font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:10px}
+.quote figcaption::before{content:"";width:22px;height:2px;background:var(--ink)}
+
+/* faq */
+.faq{background:var(--green);color:var(--on-dark)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,7vw,112px);align-items:start}
+.faq-side p{color:var(--on-dark-2);margin-top:24px;max-width:22em}
+.faq-side p a{color:var(--on-dark);font-weight:700;text-decoration:none;border-bottom:2px solid var(--orange)}
+.faq-side p a:hover{border-bottom-color:var(--on-dark)}
+.faq-side .btn{margin-top:28px}
+.faq-list{border-top:2px solid var(--on-dark)}
+.faq-item{border-bottom:1px solid rgba(241,238,232,.2)}
+.faq-item summary{display:flex;align-items:center;gap:20px;min-height:44px;padding:24px 0;cursor:pointer;list-style:none;font-weight:700;font-size:clamp(19px,1.75vw,23px);line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .q-n{flex:none;width:2.2em;font-size:15px;color:var(--on-dark-2);font-variant-numeric:tabular-nums}
+.faq-item summary .q-t{flex:1}
+.faq-item summary:hover .q-t{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:6px}
+.pm{position:relative;flex:none;width:40px;height:40px;border-radius:4px;background:var(--orange)}
+.pm::before,.pm::after{content:"";position:absolute;top:50%;left:50%;width:16px;height:2.5px;margin:-1.25px 0 0 -8px;background:var(--ink);transition:transform .25s}
+.pm::after{transform:rotate(90deg)}
+.faq-item[open] .pm::after{transform:rotate(0)}
+.faq-a{padding:0 53px 28px 60px;color:var(--on-dark-2);max-width:62ch}
+.faq-a p{font-size:17px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-areas:"intro form" "info form";gap:0 clamp(40px,7vw,112px);align-items:start}
+.c-intro{grid-area:intro}
+.c-intro .h2{font-size:clamp(42px,5.8vw,84px)}
+.c-sub{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);margin-top:22px;max-width:24em}
+.c-info{grid-area:info;margin-top:44px;border-top:2px solid var(--ink)}
+.c-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.c-row dt{font-size:14px;font-weight:700;color:var(--ink-2)}
+.c-row dd{font-size:18px;font-weight:700;line-height:1.45}
+.c-row dd a{text-decoration:none;border-bottom:2px solid var(--orange)}
+.c-row dd a:hover{border-bottom-color:var(--ink)}
+.c-row dd span.light{font-weight:400}
+.c-form{grid-area:form;background:var(--white);border:1px solid var(--line);border-top:8px solid var(--green);border-radius:4px;padding:clamp(24px,3.4vw,44px)}
+.c-form-title{font-weight:900;font-size:24px;line-height:1.2;margin-bottom:6px}
+.c-form-note{font-size:15px;color:var(--ink-2);margin-bottom:26px}
+.field{margin-bottom:20px}
+.field label{display:block;font-weight:700;font-size:15.5px;margin-bottom:8px}
+.field label .opt{font-weight:400;color:var(--ink-2)}
+.field input,.field select,.field textarea{display:block;width:100%;min-height:54px;padding:12px 14px;border:1.5px solid var(--field);border-radius:4px;background:var(--white);font-size:17px;line-height:1.4;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:120px;resize:vertical}
+.field select{appearance:none;-webkit-appearance:none;padding-left:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A1A1A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;background-size:20px}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ink)}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.c-form .btn{width:100%;margin-top:6px}
+.form-status{margin-top:18px;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:4px;background:#E3ECE6;color:var(--green);font-weight:700;border-inline-start:5px solid var(--green)}
+.form-status:empty{display:none}
+
+/* footer */
+.site-footer{background:var(--ink);color:var(--on-dark)}
+.site-footer .ruler{--t:rgba(241,238,232,.32)}
+.f-slogan{font-weight:900;font-size:clamp(34px,5.2vw,76px);line-height:1.02;letter-spacing:-.03em;padding-block:clamp(56px,7vw,96px) clamp(44px,5vw,64px);max-width:15em;text-wrap:balance}
+.f-slogan span{color:var(--orange);white-space:nowrap}
+.f-slogan .nw{color:inherit}
+.f-cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1.2fr);gap:36px clamp(32px,5vw,72px);padding-block:40px 48px;border-top:1px solid rgba(241,238,232,.14)}
+.f-title{font-size:13px;font-weight:700;letter-spacing:.08em;color:rgba(241,238,232,.62);margin-bottom:14px}
+.f-brand .brand{padding:0}
+.f-brand p{margin-top:16px;color:var(--on-dark-2);font-size:16px}
+.f-links{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+.f-links a,.f-contact a{display:inline-flex;align-items:center;min-height:40px;text-decoration:none;color:var(--on-dark)}
+.f-links a:hover,.f-contact a:hover{color:var(--orange)}
+.f-contact li{color:var(--on-dark-2);font-size:16px;line-height:1.5;padding-block:4px}
+.f-contact a{min-height:36px;color:var(--on-dark);font-weight:700}
+.f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 32px;padding-block:22px 28px;border-top:1px solid rgba(241,238,232,.14);font-size:14px;color:rgba(241,238,232,.7)}
+.f-bottom a{color:var(--orange);font-weight:700}
+.f-bottom strong{color:var(--on-dark);font-weight:700}
+
+/* mobile contact bar */
+.mbar{display:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .nav-list{gap:18px}
+  .nav-list a{font-size:15px}
+}
+@media (max-width:1080px){
+  :root{--header-h:68px}
+  .nav-toggle{display:inline-flex}
+  .head-cta{margin-inline-start:auto}
+  .nav{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;align-items:stretch;background:var(--green);border-top:1px solid var(--on-dark-line);padding:8px var(--gut) 28px;max-height:calc(100vh - var(--header-h));overflow-y:auto;border-bottom:4px solid var(--orange);box-shadow:0 24px 40px rgba(0,0,0,.3)}
+  .nav.is-open{display:flex}
+  .nav-list{flex-direction:column;align-items:stretch;gap:0}
+  .nav-list a{display:flex;min-height:58px;font-size:22px;font-weight:700;border-bottom:1px solid var(--on-dark-line)}
+  .nav-list a::after{display:none}
+  .nav-list a:hover{color:var(--orange-hi)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(odd){border-inline-start:0;padding-inline-start:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--on-dark-line)}
+  .stat{padding-block:26px 30px}
+  .stat:nth-child(n+3){padding-bottom:clamp(44px,5vw,64px)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}
+  .step:nth-child(n+3){margin-top:56px}
+  .steps-wrap{padding-top:0}
+  .tape{display:none}
+  .step{padding-top:var(--pt)}
+  .step::before{content:"";position:absolute;top:0;height:var(--tape-h);right:calc(-1 * clamp(24px,3vw,40px));left:calc(-1 * clamp(24px,3vw,40px));--t:rgba(26,26,26,.85);background:
+    repeating-linear-gradient(to left,var(--t) 0 2px,transparent 2px 100px) top right/100% 30px no-repeat,
+    repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 50px) top right/100% 20px no-repeat,
+    repeating-linear-gradient(to left,var(--t) 0 1px,transparent 1px 10px) top right/100% 12px no-repeat,
+    var(--orange)}
+  .step-mark{top:0}
+  .quotes{grid-template-columns:1fr;gap:40px}
+  .quote{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px}
+  .quote svg{grid-row:span 2}
+  .quote figcaption{padding-top:18px}
+}
+@media (max-width:899px){
+  .hero-row{grid-template-columns:1fr;gap:44px}
+  .hero-copy{padding-top:0}
+  .hero-fig{max-width:620px;padding-top:42px;padding-left:38px}
+  .dim-h{top:-38px;height:22px}
+  .dim-v{left:-38px;width:22px}
+  .works-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;gap:28px 14px}
+  .work,.w-kd,.w-wardrobe,.w-dining,.w-shelves,.w-chair{grid-column:auto;grid-row:auto}
+  .work .ph{height:auto;aspect-ratio:var(--arm,1)}
+  .work figcaption{position:static;max-width:none;background:none;padding:10px 0 0;font-size:14.5px;font-weight:400;gap:8px}
+  .work figcaption .n{font-weight:700}
+  .w-wide{grid-column:span 2}
+  .svc{grid-template-columns:clamp(60px,12vw,96px) minmax(0,1fr);row-gap:8px}
+  .svc p{grid-column:2}
+  .about-grid{grid-template-columns:1fr;gap:0}
+  .about-body{padding-bottom:48px}
+  .about-media{min-height:0;aspect-ratio:3/2;margin-left:calc(-1 * var(--gut));margin-right:calc(-1 * var(--gut))}
+  .faq-grid{grid-template-columns:1fr;gap:40px}
+  .woods{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wood-chip{aspect-ratio:4/3}
+  .contact-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "info"}
+  .c-form{margin-top:36px}
+  .f-cols{grid-template-columns:1fr 1fr}
+  .f-brand{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  .head-cta{display:none}
+  .nav-toggle{margin-inline-start:auto}
+  .nav-cta{display:flex;margin-top:20px}
+  .brand svg{width:36px;height:36px}
+  .brand-name{font-size:26px}
+  .brand-sub{font-size:12px}
+  .hero-kicker{font-size:14px;margin-bottom:18px}
+  .hero-actions .btn{flex:1 1 auto}
+  .stat-label{font-size:15.5px}
+  .sec-head{margin-bottom:32px}
+  .sec-aside{padding-bottom:0}
+  .steps{grid-template-columns:1fr}
+  .steps-wrap{--tape-w:60px;padding-top:0}
+  .step{padding:0 0 44px;padding-right:calc(var(--tape-w) + 22px)}
+  .step:nth-child(n+3){margin-top:0}
+  .step:last-child{padding-bottom:0}
+  .step::before{top:0;bottom:0;height:auto;right:calc(-1 * var(--gut));left:auto;width:calc(var(--tape-w) + var(--gut));background:
+    repeating-linear-gradient(to bottom,var(--t) 0 2px,transparent 2px 100px) top right/26px 100% no-repeat,
+    repeating-linear-gradient(to bottom,var(--t) 0 1px,transparent 1px 50px) top right/17px 100% no-repeat,
+    repeating-linear-gradient(to bottom,var(--t) 0 1px,transparent 1px 10px) top right/10px 100% no-repeat,
+    var(--orange)}
+  .step-mark{top:0;right:0;width:var(--tape-w);height:auto;flex-direction:column;align-items:flex-start;padding:12px 10px 0 0}
+  .step-mark::before{width:calc(var(--tape-w) + var(--gut));height:4px;top:0;right:calc(-1 * var(--gut))}
+  .step-mark::after{display:none}
+  .step-mark .sm{display:flex;flex-direction:column;align-items:flex-start;font-size:12px}
+  .step-mark .sm b{font-size:28px;margin:0 0 2px}
+  .step h3{padding-top:8px}
+  .woods{gap:12px}
+  .wood-chip{padding:14px}
+  .wood-desc{padding:14px 14px 12px;font-size:15px}
+  .wood-use{margin:0 14px;font-size:14.5px;padding:10px 0 16px}
+  .wood-name{font-size:40px}
+  .wood-chip{aspect-ratio:1/1}
+  .wood-code{font-size:12px}
+  .quote{grid-template-columns:1fr}
+  .quote svg{grid-row:auto;width:36px;height:28px;margin-bottom:14px}
+  .faq-item summary{gap:14px;padding:20px 0}
+  .faq-item summary .q-n{width:1.8em;font-size:14px}
+  .faq-a{padding:0 0 24px}
+  .field-row{grid-template-columns:1fr}
+  .c-row{grid-template-columns:96px minmax(0,1fr)}
+  .c-row dd{font-size:17px}
+  .f-links{grid-template-columns:1fr 1fr}
+  .f-cols{grid-template-columns:1fr}
+  .f-bottom{flex-direction:column}
+  .mbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;inset-inline:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--ink);border-top:1px solid rgba(241,238,232,.14)}
+  .mbar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:4px;font-weight:700;font-size:16px;text-decoration:none}
+  .mbar svg{width:20px;height:20px;flex:none}
+  .mbar-call{background:var(--orange);color:var(--ink)}
+  .mbar-wa{background:var(--paper);color:var(--ink)}
+  .mbar a:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+  .site-footer{padding-bottom:calc(var(--mbar-h) + env(safe-area-inset-bottom))}
+}
+@media (max-width:400px){
+  .hero-actions .btn{width:100%}
+  .title-block{font-size:12.5px}
+  .title-block span{padding:8px 10px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .anim .rv::before{transform:none!important;transition:none!important}
+  .work:hover img{transform:none}
+  .btn:hover,.btn-primary:hover,.btn-dark:hover{transform:none}
+}
+</style>
+</head>
+<body id="top">
+<div class="demo-bar" role="note">
+ <span><b>אתר לדוגמה</b> · עסק דמיוני, שלושה כיוונים עיצוביים לאותו תוכן</span>
+ <nav aria-label="העיצובים לדוגמה"><a href="/yyg-site/demo/design-1/">עיצוב 1</a><a href="/yyg-site/demo/design-2/" aria-current="page">עיצוב 2</a><a href="/yyg-site/demo/design-3/">עיצוב 3</a></nav>
+ <a class="demo-back" href="/yyg-site/demo/">לסיפור הפרויקט</a>
+</div>
+<a class="skip" href="#main">דלגו לתוכן</a>
+
+<header class="site-header dark">
+  <div class="wrap header-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15 55 C 24 47 33 37 40 27 C 43 22 46 16 48 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M25 46 C 17 45 11 40 9 32 C 17 32 23 37 25 46 Z"/><path d="M33 37 C 35 29 41 24 49 24 C 47 32 41 37 33 37 Z"/><path d="M39 28 C 32 25 28 19 29 11 C 36 14 40 20 39 28 Z"/><path d="M47 11 C 46 6 49 2 54 1 C 55 6 52 10 47 11 Z"/></g></svg>
+      <span><span class="brand-name">ענף</span><span class="brand-sub">נגריה לרהיטים בהתאמה</span></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="ניווט ראשי">
+      <ul class="nav-list">
+        <li><a href="#works">עבודות</a></li>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#process">איך זה עובד</a></li>
+        <li><a href="#woods">סוגי עץ</a></li>
+        <li><a href="#faq">שאלות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+      <a class="btn btn-primary nav-cta" href="#contact">לתיאום מדידה</a>
+    </nav>
+    <a class="btn btn-primary btn-sm head-cta" href="#contact">לתיאום מדידה</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nt-ico" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="nt-label">תפריט</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero dark" aria-labelledby="hero-title">
+  <div class="wrap hero-top">
+    <p class="hero-kicker">נגריה לרהיטים בהתאמה · בית שמש</p>
+    <h1 id="hero-title">רהיטים מעץ מלא, שנבנים <span class="hl">במידה המדויקת</span> לבית שלכם</h1>
+  </div>
+  <div class="wrap hero-row">
+    <div class="hero-copy">
+      <p class="hero-lead">מטבחים, ארונות, ספריות ושולחנות. מודדים אצלכם בבית, מראים הדמיה לפני שמתחילים, ובונים הכול בנגריה שלנו בבית שמש.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#contact">לתיאום מדידה בבית
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+        <a class="btn btn-ghost btn-lg" href="#works">לראות עבודות</a>
+      </div>
+    </div>
+    <div class="hero-fig">
+      <div class="dim-box">
+        <img src="/yyg-site/demo/img/plane-960.webp" srcset="/demo/img/plane-560.webp 560w, /demo/img/plane-960.webp 960w" sizes="(max-width: 899px) calc(100vw - 80px), (max-width: 1280px) 52vw, 640px" width="960" height="583" alt="מקצועה ידנית ושבבי עץ מסולסלים על משטח עבודה מעץ" fetchpriority="high">
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <div class="dim dim-h" aria-hidden="true"><i class="ar ar-r"></i><i class="ar ar-l"></i><span class="dim-label">240 ס״מ</span></div>
+        <div class="dim dim-v" aria-hidden="true"><i class="ar ar-t"></i><i class="ar ar-b"></i><span class="dim-label">150 ס״מ</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ruler rv" aria-hidden="true"></div>
+  <div class="wrap">
+    <ul class="stats">
+      <li class="stat">
+        <p class="stat-num"><span class="count" data-to="12">12</span></p>
+        <p class="stat-label">שנות ניסיון</p>
+      </li>
+      <li class="stat">
+        <p class="stat-num"><span class="sr-only">מעל</span><span class="count" data-to="400">400</span><span class="plus" aria-hidden="true">+</span></p>
+        <p class="stat-label">בתים</p>
+      </li>
+      <li class="stat">
+        <p class="stat-num"><span class="count" data-to="10">10</span></p>
+        <p class="stat-label">שנות אחריות</p>
+      </li>
+      <li class="stat">
+        <p class="stat-num" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"><path d="M4 4h40v40H4z"/><path d="M13 25l8 8 14-17"/></svg></p>
+        <p class="stat-label">מתקינים בעצמנו</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WORKS ============ -->
+<section class="section works" id="works" aria-labelledby="works-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker" aria-hidden="true"><span class="ltr">01 / 08</span></p>
+        <h2 class="h2" id="works-title">עבודות אחרונות</h2>
+      </div>
+      <p class="sec-aside"><b>אזורי שירות:</b> ירושלים, בית שמש, מודיעין עילית והסביבה</p>
+    </div>
+    <div class="works-grid">
+      <figure class="work w-kd w-wide" style="--arm:3/2">
+        <div class="ph"><img src="/yyg-site/demo/img/kitchen-drawer-960.webp" srcset="/demo/img/kitchen-drawer-560.webp 560w, /demo/img/kitchen-drawer-960.webp 960w" sizes="(max-width: 899px) 100vw, (max-width: 1280px) 47vw, 600px" width="960" height="641" loading="lazy" alt="מגירת סכו״ם פתוחה מעץ אלון בהיר, עם מחיצות לכפות, מזלגות וסכינים"></div>
+        <figcaption><span class="n">01</span>מגירת סכו״ם מאלון, מטבח ברמת בית שמש</figcaption>
+      </figure>
+      <figure class="work w-wardrobe" style="--arm:3/4">
+        <div class="ph"><img src="/yyg-site/demo/img/wardrobe-960.webp" srcset="/demo/img/wardrobe-560.webp 560w, /demo/img/wardrobe-960.webp 960w" sizes="(max-width: 899px) 50vw, 300px" width="960" height="1280" loading="lazy" alt="ארון קיר בהיר פתוח עם בגדים תלויים ומדפים לנעליים"></div>
+        <figcaption><span class="n">02</span>ארון קיר עד התקרה, מודיעין עילית</figcaption>
+      </figure>
+      <figure class="work w-dining" style="--arm:3/4">
+        <div class="ph"><img src="/yyg-site/demo/img/dining-room-960.webp" srcset="/demo/img/dining-room-560.webp 560w, /demo/img/dining-room-960.webp 960w" sizes="(max-width: 899px) 50vw, 300px" width="960" height="1440" loading="lazy" alt="פינת אוכל ומטבח בהירים עם רצפת עץ, שולחן מעץ וחלונות גדולים"></div>
+        <figcaption><span class="n">03</span>פינת אוכל ומטבח בהיר, בית שמש</figcaption>
+      </figure>
+      <figure class="work w-library w-wide" style="--arm:16/9">
+        <div class="ph"><img src="/yyg-site/demo/img/library-960.webp" srcset="/demo/img/library-560.webp 560w, /demo/img/library-960.webp 960w" sizes="(max-width: 899px) 100vw, 400px" width="960" height="540" loading="lazy" alt="סלון עם ספריות לבנות מקיר לקיר משני צדי האח"></div>
+        <figcaption><span class="n">04</span>ספריות מקיר לקיר בסלון, ירושלים</figcaption>
+      </figure>
+      <figure class="work w-bench" style="--arm:1/1">
+        <div class="ph"><img src="/yyg-site/demo/img/table-bench-960.webp" srcset="/demo/img/table-bench-560.webp 560w, /demo/img/table-bench-960.webp 960w" sizes="(max-width: 899px) 50vw, 400px" width="960" height="640" loading="lazy" alt="שולחן אוכל מעץ מלא וספסל עץ עם משענת, ליד קיר ירוק"></div>
+        <figcaption><span class="n">05</span>שולחן אוכל וספסל מעץ מלא, בית שמש</figcaption>
+      </figure>
+      <figure class="work w-kids" style="--arm:1/1">
+        <div class="ph"><img src="/yyg-site/demo/img/kids-room-960.webp" srcset="/demo/img/kids-room-560.webp 560w, /demo/img/kids-room-960.webp 960w" sizes="(max-width: 899px) 50vw, 400px" width="960" height="540" loading="lazy" alt="חדר ילדים עם מיטה, מגירות מתחת למיטה ושולחן כתיבה לאורך הקיר"></div>
+        <figcaption><span class="n">06</span>חדר ילדים עם מיטה ושולחן כתיבה, ירושלים</figcaption>
+      </figure>
+      <figure class="work w-shelves" style="--arm:3/4">
+        <div class="ph"><img src="/yyg-site/demo/img/shelves-960.webp" srcset="/demo/img/shelves-560.webp 560w, /demo/img/shelves-960.webp 960w" sizes="(max-width: 899px) 50vw, 800px" width="960" height="569" loading="lazy" alt="מדפי ספרייה עמוסים בספרים, באור חם"></div>
+        <figcaption><span class="n">07</span>ספרייה לבית כנסת, רמות</figcaption>
+      </figure>
+      <figure class="work w-chair" style="--arm:3/4">
+        <div class="ph"><img src="/yyg-site/demo/img/chair-960.webp" srcset="/demo/img/chair-560.webp 560w, /demo/img/chair-960.webp 960w" sizes="(max-width: 899px) 50vw, 400px" width="960" height="1449" loading="lazy" alt="כיסא עץ אגוז ליד שולחן עגול מעץ, ועליו ספל קפה"></div>
+        <figcaption><span class="n">08</span>כיסא אגוז ושולחן עגול לפינת קפה</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services" aria-labelledby="services-title">
+  <div class="ruler rv ruler-sep" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker" aria-hidden="true"><span class="ltr">02 / 08</span></p>
+        <h2 class="h2" id="services-title">שירותים</h2>
+      </div>
+    </div>
+    <ol class="svc-list">
+      <li class="svc"><span class="svc-n" aria-hidden="true">01</span><h3>מטבחים</h3><p>מטבח שמתאים לאופן שבו אתם מבשלים: מגירות עמוקות, פינת אפייה, ומקום מסודר לכלים של שבת וחג.</p></li>
+      <li class="svc"><span class="svc-n" aria-hidden="true">02</span><h3>ארונות קיר וחדרי ארונות</h3><p>מנצלים כל סנטימטר, עד התקרה. דלתות הזזה או ציר, וחלוקה פנימית לפי מה שיש לכם באמת.</p></li>
+      <li class="svc"><span class="svc-n" aria-hidden="true">03</span><h3>ספריות לספרי קודש</h3><p>ספריות עמוקות וחזקות שלא מתכופפות עם השנים, במידה שמתאימה בדיוק לקיר.</p></li>
+      <li class="svc"><span class="svc-n" aria-hidden="true">04</span><h3>שולחנות אוכל</h3><p>שולחנות נפתחים למשפחה גדולה ולאורחים בשבת. מעץ מלא, עם ספסלים או כיסאות תואמים.</p></li>
+      <li class="svc"><span class="svc-n" aria-hidden="true">05</span><h3>חדרי ילדים</h3><p>מיטות יציבות, מגירות מתחת למיטה ושולחן כתיבה, בגובה שגדל עם הילדים.</p></li>
+      <li class="svc"><span class="svc-n" aria-hidden="true">06</span><h3>ריהוט לבתי כנסת ומוסדות</h3><p>סטנדרים, שולחנות, ספסלים וארונות ספרים לבתי כנסת, כוללים ומשרדים.</p></li>
+    </ol>
+    <div class="svc-cta">
+      <a class="btn btn-primary btn-lg" href="#contact">לתיאום מדידה בבית
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+      <a class="tel-link" href="tel:0500000000">טלפון: <span class="ltr">050-000-0000</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section process dark" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker" aria-hidden="true"><span class="ltr">03 / 08</span></p>
+        <h2 class="h2" id="process-title">איך זה עובד</h2>
+      </div>
+    </div>
+    <div class="steps-wrap">
+      <div class="tape rv" aria-hidden="true"></div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-mark" aria-hidden="true"><span class="sm ltr"><b>01</b>/ 04</span></div>
+          <h3>שיחה ומדידה בבית</h3>
+          <p>מגיעים אליכם, מודדים ושומעים מה אתם צריכים. בלי עלות באזור ירושלים ובית שמש.</p>
+        </li>
+        <li class="step">
+          <div class="step-mark" aria-hidden="true"><span class="sm ltr"><b>02</b>/ 04</span></div>
+          <h3>הדמיה והצעת מחיר</h3>
+          <p>תוך שבוע מקבלים הדמיה של הרהיט והצעת מחיר מפורטת, בלי הפתעות.</p>
+        </li>
+        <li class="step">
+          <div class="step-mark" aria-hidden="true"><span class="sm ltr"><b>03</b>/ 04</span></div>
+          <h3>בנייה בנגריה</h3>
+          <p>אחרי האישור בונים הכול אצלנו, בדרך כלל תוך 4 עד 6 שבועות.</p>
+        </li>
+        <li class="step">
+          <div class="step-mark" aria-hidden="true"><span class="sm ltr"><b>04</b>/ 04</span></div>
+          <h3>התקנה ואחריות</h3>
+          <p>מתקינים בעצמנו, משאירים נקי, ונותנים אחריות ל־10 שנים.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about" aria-labelledby="about-title">
+  <div class="wrap about-grid">
+    <div class="about-body">
+      <p class="kicker"><span class="ltr" aria-hidden="true">04 / 08</span><span class="k-sep" aria-hidden="true"></span><span class="k-label">עלינו</span></p>
+      <h2 id="about-title">נגריה קטנה, שעובדת לאט ונכון</h2>
+      <p class="about-text">"ענף" היא נגריה משפחתית בבית שמש. כבר 12 שנה אנחנו בונים רהיטים לבתים, לבתי כנסת ולמוסדות, כל רהיט נמדד, משורטט ונבנה אצלנו, ומי שבנה אותו הוא גם מי שמגיע להתקין. אנחנו לא מוכרים מקטלוג: כל עבודה מתחילה במדידה אצלכם בבית, ומסתיימת רק כשהדלת נסגרת בדיוק כמו שצריך.</p>
+      <p class="pull" aria-hidden="true">מי שבנה אותו הוא גם מי שמגיע להתקין.</p>
+    </div>
+    <div class="about-media">
+      <img src="/yyg-site/demo/img/plans-960.webp" srcset="/demo/img/plans-560.webp 560w, /demo/img/plans-960.webp 960w" sizes="(max-width: 899px) 100vw, 50vw" width="960" height="640" loading="lazy" alt="שרטוט של תוכנית דירה, סרט מדידה, פלס, מקדחה וברגים על שולחן עץ">
+      <div class="title-block" aria-hidden="true">
+        <span><small>01</small>נמדד</span>
+        <span><small>02</small>משורטט</span>
+        <span><small>03</small>נבנה אצלנו</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WOODS ============ -->
+<section class="section woods-sec" id="woods" aria-labelledby="woods-title">
+  <div class="ruler rv ruler-sep" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker" aria-hidden="true"><span class="ltr">05 / 08</span></p>
+        <h2 class="h2" id="woods-title">סוגי עץ</h2>
+      </div>
+    </div>
+    <ul class="woods">
+      <li class="wood" style="--sw:#C99555;--sw-ink:#1A1A1A">
+        <div class="wood-chip"><span class="wood-code" aria-hidden="true"><span class="ltr">01 / 04</span><span>דבש בהיר</span></span><h3 class="wood-name">אלון</h3></div>
+        <p class="wood-desc">חזק ועמיד, בגוון דבש בהיר.</p><p class="wood-use">מתאים למטבחים ולשולחנות.</p>
+      </li>
+      <li class="wood" style="--sw:#4E3324;--sw-ink:#F7F1E8">
+        <div class="wood-chip"><span class="wood-code" aria-hidden="true"><span class="ltr">02 / 04</span><span>כהה</span></span><h3 class="wood-name">אגוז</h3></div>
+        <p class="wood-desc">כהה ויוקרתי, עם עורקים יפים.</p><p class="wood-use">מתאים לספריות ולרהיטים מרכזיים.</p>
+      </li>
+      <li class="wood" style="--sw:#E4CBAE;--sw-ink:#1A1A1A">
+        <div class="wood-chip"><span class="wood-code" aria-hidden="true"><span class="ltr">03 / 04</span><span>בהיר</span></span><h3 class="wood-name">אשור</h3></div>
+        <p class="wood-desc">בהיר, חלק ואחיד, במחיר נוח יותר.</p><p class="wood-use">מתאים לארונות.</p>
+      </li>
+      <li class="wood" style="--sw:#EBC98A;--sw-ink:#1A1A1A">
+        <div class="wood-chip"><span class="wood-code" aria-hidden="true"><span class="ltr">04 / 04</span><span>חם</span></span><h3 class="wood-name">אורן</h3></div>
+        <p class="wood-desc">קליל וחם, נעים למגע.</p><p class="wood-use">מתאים לחדרי ילדים.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section testi" aria-labelledby="testi-title">
+  <div class="ruler rv" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker" aria-hidden="true"><span class="ltr">06 / 08</span></p>
+        <h2 class="h2" id="testi-title">המלצות</h2>
+      </div>
+      <p class="tag">המלצות לדוגמה</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <svg viewBox="0 0 44 34" fill="currentColor" aria-hidden="true"><path d="M0 34V20C0 9 6 2 17 0l2 5c-6 2-9 6-9 11h8v18H0zm25 0V20c0-11 6-18 17-20l2 5c-6 2-9 6-9 11h8v18H25z"/></svg>
+        <blockquote><p>השולחן נפתח ל־16 סועדים, ועדיין נראה כמו רהיט אחד. בשבת הראשונה כולם שאלו מאיפה.</p></blockquote>
+        <figcaption>משפחה מבית שמש</figcaption>
+      </figure>
+      <figure class="quote">
+        <svg viewBox="0 0 44 34" fill="currentColor" aria-hidden="true"><path d="M0 34V20C0 9 6 2 17 0l2 5c-6 2-9 6-9 11h8v18H0zm25 0V20c0-11 6-18 17-20l2 5c-6 2-9 6-9 11h8v18H25z"/></svg>
+        <blockquote><p>מדדו, שרטטו ושלחו הדמיה לפני שהתחילו. הארון נכנס בדיוק, עד המילימטר.</p></blockquote>
+        <figcaption>לקוח מירושלים</figcaption>
+      </figure>
+      <figure class="quote">
+        <svg viewBox="0 0 44 34" fill="currentColor" aria-hidden="true"><path d="M0 34V20C0 9 6 2 17 0l2 5c-6 2-9 6-9 11h8v18H0zm25 0V20c0-11 6-18 17-20l2 5c-6 2-9 6-9 11h8v18H25z"/></svg>
+        <blockquote><p>הזמנו ספריות לבית הכנסת. עברו שלוש שנים, והמדפים ישרים כמו ביום הראשון.</p></blockquote>
+        <figcaption>גבאי בית כנסת, רמות</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq dark" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <p class="kicker" aria-hidden="true"><span class="ltr">07 / 08</span></p>
+      <h2 class="h2" id="faq-title">שאלות נפוצות</h2>
+      <p>טלפון: <a href="tel:0500000000" class="ltr">050-000-0000</a><br>א׳ עד ה׳ 8:00 עד 17:00, ו׳ עד 12:00</p>
+      <a class="btn btn-primary" href="#contact">לתיאום מדידה בבית</a>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><span class="q-n" aria-hidden="true">01</span><span class="q-t">כמה עולה מטבח או ארון?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>כל עבודה שונה. אחרי המדידה מקבלים הצעת מחיר מפורטת, וכדי לקבל הערכה ראשונית אפשר לשלוח מידות וצילום של החדר.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-n" aria-hidden="true">02</span><span class="q-t">כמה זמן זה לוקח?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>בדרך כלל 4 עד 6 שבועות מאישור ההדמיה. לפני החגים כדאי לפנות מוקדם.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-n" aria-hidden="true">03</span><span class="q-t">הכול מעץ מלא?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>רוב העבודות מעץ מלא. בגב ארונות ובתוך מגירות משתמשים בלוח איכותי, ותמיד אומרים מראש מה נמצא איפה.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-n" aria-hidden="true">04</span><span class="q-t">יש אחריות?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>10 שנים על המבנה, ושנתיים על צירים, מסילות ופרזול.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-n" aria-hidden="true">05</span><span class="q-t">לאיזה אזורים אתם מגיעים?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>ירושלים, בית שמש, מודיעין עילית והסביבה. לשאר הארץ בתיאום מראש.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="c-intro">
+      <p class="kicker"><span class="ltr" aria-hidden="true">08 / 08</span><span class="k-sep" aria-hidden="true"></span><span class="k-label">צור קשר</span></p>
+      <h2 class="h2" id="contact-title">נתאם מדידה?</h2>
+      <p class="c-sub">השאירו פרטים, ונחזור אליכם עוד היום כדי לקבוע מועד.</p>
+    </div>
+    <dl class="c-info">
+      <div class="c-row"><dt>טלפון</dt><dd><a href="tel:0500000000"><span class="ltr">050-000-0000</span></a></dd></div>
+      <div class="c-row"><dt>וואטסאפ</dt><dd><a href="https://wa.me/972500000000"><span class="ltr">050-000-0000</span></a></dd></div>
+      <div class="c-row"><dt>מייל</dt><dd><a href="mailto:office@anaf-example.co.il"><span class="ltr">office@anaf-example.co.il</span></a></dd></div>
+      <div class="c-row"><dt>כתובת</dt><dd>אזור התעשייה הצפוני, בית שמש</dd></div>
+      <div class="c-row"><dt>שעות</dt><dd>א׳ עד ה׳ 8:00 עד 17:00<br><span class="light">ו׳ עד 12:00</span></dd></div>
+      <div class="c-row"><dt>אזורי שירות</dt><dd>ירושלים, בית שמש, מודיעין עילית והסביבה</dd></div>
+    </dl>
+    <form class="c-form" novalidate aria-labelledby="form-title">
+      <p class="c-form-title" id="form-title">לתיאום מדידה בבית</p>
+      <p class="c-form-note">השאירו פרטים, ונחזור אליכם עוד היום כדי לקבוע מועד.</p>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">שם</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">טלפון</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-type">מה תרצו לבנות?</label>
+        <select id="f-type" name="type">
+          <option value="" selected disabled>בחרו מהרשימה</option>
+          <option>מטבח</option>
+          <option>ארון</option>
+          <option>ספרייה</option>
+          <option>שולחן</option>
+          <option>חדר ילדים</option>
+          <option>משהו אחר</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-notes">הערות <span class="opt">(לא חובה)</span></label>
+        <textarea id="f-notes" name="notes" rows="4"></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">שליחה
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <p class="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer dark">
+  <div class="ruler rv" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="f-slogan">רהיטים מעץ מלא, <span>במידה המדויקת</span> <span class="nw">לבית שלכם</span></p>
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15 55 C 24 47 33 37 40 27 C 43 22 46 16 48 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M25 46 C 17 45 11 40 9 32 C 17 32 23 37 25 46 Z"/><path d="M33 37 C 35 29 41 24 49 24 C 47 32 41 37 33 37 Z"/><path d="M39 28 C 32 25 28 19 29 11 C 36 14 40 20 39 28 Z"/><path d="M47 11 C 46 6 49 2 54 1 C 55 6 52 10 47 11 Z"/></g></svg>
+          <span><span class="brand-name">ענף</span><span class="brand-sub">נגריה לרהיטים בהתאמה</span></span>
+        </a>
+        <p>אזור התעשייה הצפוני, בית שמש<br>א׳ עד ה׳ 8:00 עד 17:00, ו׳ עד 12:00</p>
+      </div>
+      <nav aria-label="ניווט בפוטר">
+        <p class="f-title">ניווט</p>
+        <ul class="f-links">
+          <li><a href="#works">עבודות</a></li>
+          <li><a href="#services">שירותים</a></li>
+          <li><a href="#process">איך זה עובד</a></li>
+          <li><a href="#woods">סוגי עץ</a></li>
+          <li><a href="#faq">שאלות</a></li>
+          <li><a href="#contact">צור קשר</a></li>
+        </ul>
+      </nav>
+      <div class="f-contact">
+        <p class="f-title">יצירת קשר</p>
+        <ul>
+          <li>טלפון: <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a></li>
+          <li>וואטסאפ: <a href="https://wa.me/972500000000"><span class="ltr">050-000-0000</span></a></li>
+          <li>מייל: <a href="mailto:office@anaf-example.co.il"><span class="ltr">office@anaf-example.co.il</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p><strong>ענף · נגריה לרהיטים בהתאמה · בית שמש</strong></p>
+      <p>אתר לדוגמה שעיצב <a href="https://yygweb.com/demo/">YYG</a>. העסק, הפרטים וההמלצות דמיוניים. התמונות: StockSnap, ברישיון CC0.</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="יצירת קשר מהירה">
+  <a class="mbar-call" href="tel:0500000000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>התקשרו</a>
+  <a class="mbar-wa" href="https://wa.me/972500000000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4L3 21z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2L9 9.5z"/></svg>וואטסאפ</a>
+</nav>
+
+<script>
+(function(){
+  var d=document,root=d.documentElement;
+  var reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var hasIO='IntersectionObserver' in window;
+
+  /* mobile menu */
+  var btn=d.querySelector('.nav-toggle'),nav=d.getElementById('site-nav'),lbl=btn.querySelector('.nt-label');
+  function setMenu(open){
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    nav.classList.toggle('is-open',open);
+    lbl.textContent=open?'סגירה':'תפריט';
+  }
+  btn.addEventListener('click',function(){setMenu(btn.getAttribute('aria-expanded')!=='true');});
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+  d.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&btn.getAttribute('aria-expanded')==='true'){setMenu(false);btn.focus();}
+  });
+  var wide=window.matchMedia?matchMedia('(min-width: 1081px)'):null;
+  if(wide){var onWide=function(){if(wide.matches)setMenu(false);};
+    if(wide.addEventListener)wide.addEventListener('change',onWide);else if(wide.addListener)wide.addListener(onWide);}
+
+  /* count-up numbers */
+  if(!reduce&&hasIO){
+    var counts=[].slice.call(d.querySelectorAll('.count'));
+    var run=function(el){
+      var to=+el.getAttribute('data-to'),t0=null,dur=1500;
+      var step=function(t){
+        if(t0===null)t0=t;
+        var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+        el.textContent=String(Math.round(to*e));
+        if(p<1)requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    /* values stay final in the markup; each one restarts from 0 the moment it scrolls into view */
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.textContent='0';run(en.target);io.unobserve(en.target);}});
+    },{rootMargin:'0px 0px -4% 0px'});
+    counts.forEach(function(el){io.observe(el);});
+  }
+
+  /* ruler ticks slide in */
+  if(!reduce&&hasIO){
+    root.classList.add('anim');
+    var io2=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io2.unobserve(en.target);}});
+    },{rootMargin:'0px 0px -6% 0px'});
+    [].slice.call(d.querySelectorAll('.rv')).forEach(function(r){io2.observe(r);});
+  }
+
+  /* demo form */
+  var form=d.querySelector('.c-form'),status=form.querySelector('.form-status');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    status.textContent='';
+    setTimeout(function(){status.textContent='זה אתר לדוגמה, הטופס לא נשלח.';},30);
+  });
+})();
+</script>
+</body>
+</html>
