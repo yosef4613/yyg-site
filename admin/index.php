@@ -21,10 +21,47 @@ if ($tryKey !== '') {
     $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails));
 }
 if (isset($_GET['logout'])) { adm_logout(); header('Location: /admin/', true, 303); exit; }
+
+/* כניסה עם קישור במייל: לוחצים, מקבלים מייל לתיבה של העסק (שמעבירה עותק לג׳ימייל), ולוחצים על הקישור.
+   הקישור חד־פעמי ובתוקף ל־15 דקות. הוא פותח דף עם כפתור (ולא נכנס מיד), כדי שסורקי קישורים במייל לא ינצלו אותו. */
+$adminMail = (string) (private_config()['to'] ?? '');
+$maskMail = static fn(string $m): string => preg_replace('/^(.).*?(@.*)$/u', '$1•••$2', $m);
+$magicFile = 'admin-magic.json';
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'magic_send') {
+    $msg = 'שלחנו קישור כניסה ל־<bdi>' . h($maskMail($adminMail)) . '</bdi>. הוא מגיע גם לג׳ימייל שלך. הקישור בתוקף ל־15 דקות.';
+    if (!rate_ok('admin-magic-ip-' . $ip, 4, 900) || !rate_ok('admin-magic-all', 10, 3600)) $msg = 'כבר שלחנו כמה קישורים. כדאי לבדוק את המייל (גם בספאם), או לנסות שוב בעוד רבע שעה.';
+    else {
+        $tok = bin2hex(random_bytes(20));
+        data_update($magicFile, static function (array &$m) use ($tok): void {
+            $m = array_filter($m, static fn($x) => (int) ($x['exp'] ?? 0) > time() && empty($x['used']));
+            $m[] = ['h' => hash('sha256', $tok), 'exp' => time() + 900];
+            $m = array_slice(array_values($m), -5);
+        });
+        $link = 'https://yygweb.com/admin/?magic=' . $tok;
+        mail_send($adminMail, 'כניסה לדף הניהול של YYG', mail_wrap('כניסה לדף הניהול', '<p>לחצו על הכפתור כדי להיכנס. הקישור בתוקף ל־15 דקות, ועובד פעם אחת.</p>' . mail_button($link, 'כניסה לדף הניהול') . '<p style="color:#5A6472;font-size:14px">לא ביקשתם להיכנס? אפשר להתעלם מהמייל. בלי הקישור אי אפשר להיכנס.</p>'), "כניסה לדף הניהול: $link");
+    }
+    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>בדקו את המייל</h1><p>' . $msg . '</p><p class="muted">לא הגיע תוך דקה? כדאי לבדוק בתיקיית הספאם.</p><p><a class="btn" href="/admin/">חזרה</a></p></div>');
+}
+$magic = (string) ($_POST['magic'] ?? $_GET['magic'] ?? '');
+if ($magic !== '' && preg_match('/^[a-f0-9]{40}$/', $magic)) {
+    if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+        adm_page('כניסה לניהול | YYG', '<div class="login"><h1>כניסה לדף הניהול</h1><p class="muted">לחצו כדי להיכנס. הדפדפן הזה יזכור אתכם ל־30 יום.</p><form method="post" action="/admin/"><input type="hidden" name="magic" value="' . h($magic) . '"><button class="btn gold" type="submit">כניסה</button></form></div>');
+    }
+    $ok = data_update($magicFile, static function (array &$m) use ($magic): bool {
+        foreach ($m as $i => $x) if (empty($x['used']) && (int) $x['exp'] > time() && hash_equals((string) $x['h'], hash('sha256', $magic))) { $m[$i]['used'] = time(); return true; }
+        return false;
+    });
+    if ($ok) { adm_login(); header('Location: /admin/', true, 303); exit; }
+    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>הקישור כבר לא בתוקף</h1><p class="muted">הקישור עובד פעם אחת ובמשך 15 דקות. אפשר לבקש קישור חדש.</p><form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור חדש</button></form></div>');
+}
+
 if (!adm_authed()) {
-    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>דף הניהול של YYG</h1><p class="muted">נכנסים עם הקישור האישי, או מקלידים כאן את המפתח: הקוד שמופיע בקישור אחרי <bdi>k=</bdi>. אחרי הכניסה הדפדפן זוכר אתכם ל־30 יום.</p>'
+    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>דף הניהול של YYG</h1>'
+        . '<p class="muted">נשלח לך קישור כניסה למייל <bdi>' . h($maskMail($adminMail)) . '</bdi>, שמגיע גם לג׳ימייל שלך. לוחצים עליו ונכנסים. הדפדפן יזכור אותך ל־30 יום.</p>'
+        . '<form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור כניסה למייל</button></form>'
+        . '<details' . ($tryKey !== '' ? ' open' : '') . ' style="margin-top:18px"><summary>כניסה עם מפתח</summary>'
         . ($tryKey !== '' ? '<p style="color:var(--bad)">המפתח לא נכון.</p>' : '')
-        . '<form method="post" action="/admin/"><label>מפתח<input type="password" name="k" autocomplete="current-password" required></label><button class="btn gold" type="submit">כניסה</button></form></div>');
+        . '<form method="post" action="/admin/"><label>מפתח<input type="password" name="k" autocomplete="current-password" required></label><button class="btn" type="submit">כניסה</button></form></details></div>');
 }
 
 /* ---------- נתונים ---------- */
