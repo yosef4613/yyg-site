@@ -115,6 +115,38 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         quotes_save($quotes);
         header('Location: /admin/quote.php?id=' . rawurlencode($num) . '&saved=1', true, 303); exit;
     }
+    if (in_array($do, ['email_quote', 'email_feedback'], true) && isset($quotes[$num])) {
+        $q = $quotes[$num];
+        $to = (string) ($q['client']['email'] ?? '');
+        $name = (string) ($q['client']['name'] ?? '');
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) { header('Location: /admin/quote.php?id=' . rawurlencode($num) . '&mailerr=1', true, 303); exit; }
+        if ($do === 'email_quote') {
+            $valid = (new DateTime((string) ($q['valid_until'] ?? 'now')))->format('d/m/Y');
+            $t = quote_totals($q);
+            $body = '<p>שלום ' . h($name) . ',</p><p>מצורפת הצעת המחיר' . ($q['title'] ? ': <b>' . h($q['title']) . '</b>' : '') . ', על סך ' . h(nis($t['total'])) . '. המחיר סופי, לא מוסיפים מע״מ.</p>'
+                . '<p>בקישור אפשר לראות את כל הפרטים, להדפיס או לשמור כ־PDF, ולאשר בלחיצה.</p>' . mail_button(quote_url($q), 'לצפייה בהצעה')
+                . '<p style="color:#5A6472;font-size:14px">ההצעה בתוקף עד ' . h($valid) . '. שאלות? אפשר להשיב למייל הזה או להתקשר ל־054-854-0700.</p><p>יהודה</p>';
+            $ok = mail_send($to, 'הצעת מחיר מ־YYG' . ($q['title'] ? ': ' . $q['title'] : ''), mail_wrap('הצעת מחיר ' . $num, $body), "שלום $name,
+הצעת המחיר: " . quote_url($q) . "
+יהודה, 054-854-0700");
+            $what = 'ההצעה';
+        } else {
+            $link = 'https://yygweb.com/feedback/?' . http_build_query(['name' => $name, 'phone' => $q['client']['phone'] ?? '', 'email' => $to, 'business' => $q['client']['business'] ?? '', 'quote' => $num]);
+            $body = '<p>שלום ' . h($name) . ',</p><p>אחרי שתעברו על 3 העיצובים, אשמח למשוב קצר: מה אהבתם, מה פחות, ובאיזה כיוון ממשיכים. זה לוקח כ־5 דקות, והפרטים שלכם כבר ממולאים.</p>'
+                . mail_button($link, 'לשאלון המשוב') . '<p style="color:#5A6472;font-size:14px">מעדיפים לדבר? 054-854-0700.</p><p>יהודה</p>';
+            $ok = mail_send($to, 'משוב על העיצובים של האתר שלכם', mail_wrap('משוב על העיצובים', $body), "שלום $name,
+שאלון המשוב: $link
+יהודה, 054-854-0700");
+            $what = 'שאלון המשוב';
+        }
+        if ($ok) {
+            $quotes = quotes_load();
+            $quotes[$num]['sent_log'][] = ['t' => time(), 'what' => $what, 'to' => $to];
+            if (($quotes[$num]['status'] ?? 'draft') === 'draft' && $do === 'email_quote') $quotes[$num]['status'] = 'sent';
+            quotes_save($quotes);
+        }
+        header('Location: /admin/quote.php?id=' . rawurlencode($num) . '&' . ($ok ? 'mailed=' . rawurlencode($what) : 'mailerr=2'), true, 303); exit;
+    }
     if ($do === 'delete' && isset($quotes[$num])) {
         unset($quotes[$num]);
         quotes_save($quotes);
@@ -198,8 +230,13 @@ ob_start(); ?>
 <h1><?= $q && $num ? 'הצעת מחיר ' . h($num) : 'הצעת מחיר חדשה' ?></h1>
 <?php if (isset($_GET['saved'])): ?><p class="flash">נשמר.</p><?php endif; ?>
 <?php if ($q && $num): $st = (string) ($q['status'] ?? 'draft'); $url = quote_url($q);
-      $digits = preg_replace('/\D/', '', (string) ($q['client']['phone'] ?? '')); $wa = preg_replace('/^0/', '972', $digits);
-      $waText = 'שלום ' . ($q['client']['name'] ?? '') . ', כאן יהודה מ־YYG. מצורפת הצעת המחיר שלך: ' . $url . "\nאפשר לאשר אותה ישירות מהקישור. אשמח לענות על כל שאלה."; ?>
+      $phone = preg_replace('/[^\d+]/', '', (string) ($q['client']['phone'] ?? ''));
+      $hasMail = (bool) filter_var((string) ($q['client']['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+      $smsQuote = 'שלום ' . ($q['client']['name'] ?? '') . ', כאן יהודה מ־YYG. הצעת המחיר שלך: ' . $url . ' אפשר לאשר אותה ישירות מהקישור.';
+      $fbLink = 'https://yygweb.com/feedback/?' . http_build_query(['name' => $q['client']['name'] ?? '', 'phone' => $q['client']['phone'] ?? '', 'business' => $q['client']['business'] ?? '', 'quote' => $num]);
+      $smsFb = 'שלום ' . ($q['client']['name'] ?? '') . ', אחרי שתעבור/י על 3 העיצובים, אשמח למשוב קצר כאן: ' . $fbLink; ?>
+<?php if (isset($_GET['mailed'])): ?><p class="flash"><?= h((string) $_GET['mailed']) ?> <?= $_GET['mailed'] === 'ההצעה' ? 'נשלחה' : 'נשלח' ?> במייל ל־<bdi><?= h($q['client']['email'] ?? '') ?></bdi>.</p><?php endif; ?>
+<?php if (isset($_GET['mailerr'])): ?><p class="flash" style="background:#3a1f1f;border-color:#6b3434"><?= $_GET['mailerr'] === '1' ? 'כדי לשלוח במייל, צריך להכניס את המייל של הלקוח בפרטים למטה ולשמור.' : 'השליחה במייל נכשלה. אפשר לנסות שוב בעוד רגע, או להעתיק את הקישור.' ?></p><?php endif; ?>
 <div class="card qlink">
  <div class="row"><span>סטטוס</span><b><span class="tag<?= $st === 'approved' ? ' ok' : '' ?>"><?= h(Q_STATUSES[$st] ?? $st) ?></span></b></div>
  <div class="row"><span>צפיות של הלקוח</span><b><?= (int) ($q['views'] ?? 0) ?><?= !empty($q['last_view']) ? ' <small>· אחרונה ' . h(fmt_time((int) $q['last_view'], 'd/m H:i')) . '</small>' : '' ?></b></div>
@@ -209,10 +246,16 @@ ob_start(); ?>
  <div class="acts">
   <a class="btn gold" href="<?= h($url) ?>" target="_blank" rel="noopener">פתיחת ההצעה</a>
   <button class="btn" type="button" id="copy-url">העתקת הקישור</button>
-  <?php if ($wa !== ''): ?><a class="btn" href="https://wa.me/<?= h($wa) ?>?text=<?= h(rawurlencode($waText)) ?>" target="_blank" rel="noopener">שליחה בוואטסאפ</a><?php endif; ?>
-  <?php if ($wa !== ''): ?><a class="btn" href="https://wa.me/<?= h($wa) ?>?text=<?= h(rawurlencode('שלום ' . ($q['client']['name'] ?? '') . ', אחרי שתעבור/י על 3 העיצובים, אשמח למשוב כאן (כ־5 דקות): https://yygweb.com/feedback/?' . http_build_query(['name' => $q['client']['name'] ?? '', 'phone' => $q['client']['phone'] ?? '', 'business' => $q['client']['business'] ?? '', 'quote' => $num, 'src' => 'wa']))) ?>" target="_blank" rel="noopener">שאלון משוב בוואטסאפ</a><?php endif; ?>
   <a class="btn" href="/admin/quote.php?dup=<?= h(rawurlencode($num)) ?>">שכפול להצעה חדשה</a>
  </div>
+ <h3 style="margin:16px 0 6px;font-size:1rem;color:#fff">שליחה ללקוח</h3>
+ <div class="acts">
+  <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את ההצעה במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_quote"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn gold" type="submit">שליחת ההצעה במייל ללקוח</button></form>
+  <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את שאלון המשוב במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_feedback"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn" type="submit">שליחת שאלון המשוב במייל</button></form>
+  <?php if ($phone !== ''): ?><a class="btn" href="sms:<?= h($phone) ?>?&amp;body=<?= h(rawurlencode($smsQuote)) ?>">ההצעה ב־SMS</a><a class="btn" href="sms:<?= h($phone) ?>?&amp;body=<?= h(rawurlencode($smsFb)) ?>">שאלון המשוב ב־SMS</a><?php endif; ?>
+ </div>
+ <?php if (!$hasMail): ?><p class="small muted" style="margin-top:6px">כדי לשלוח במייל, מכניסים את המייל של הלקוח בפרטים למטה ושומרים.</p><?php endif; ?>
+ <?php if (!empty($q['sent_log'])): ?><p class="small muted" style="margin-top:6px">נשלח: <?= h(implode(' · ', array_map(static fn($l) => $l['what'] . ' ל־' . $l['to'] . ' ב־' . fmt_time((int) $l['t'], 'd/m H:i'), array_slice($q['sent_log'], -4)))) ?></p><?php endif; ?>
  <form class="acts" method="post" style="margin-top:8px">
   <input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="status"><input type="hidden" name="num" value="<?= h($num) ?>">
   <select name="st" aria-label="סטטוס" style="width:auto"><?php foreach (Q_STATUSES as $k => $label): ?><option value="<?= $k ?>"<?= $k === $st ? ' selected' : '' ?>><?= h($label) ?></option><?php endforeach; ?></select>

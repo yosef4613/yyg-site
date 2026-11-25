@@ -210,7 +210,7 @@ ob_start(); ?>
    <?php if (!empty($r['score'])): ?><span class="tag warn">חשד לספאם: <?= $e(implode(', ', (array) ($r['why'] ?? []))) ?></span><?php endif; ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
    <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?></div>
-  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="https://wa.me/<?= $e($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><a class="btn" href="https://wa.me/<?= $e($wa) ?>?text=<?= $e(rawurlencode('שלום ' . ($r['name'] ?? '') . ', כאן יהודה מ־YYG. כדי שאכין לך הצעה מדויקת, אשמח שתמלא/י שאלון קצר (כ־10 דקות): https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? '', 'src' => 'wa']))) ?>" target="_blank" rel="noopener">שאלון אפיון בוואטסאפ</a></div>
+  <div class="acts"><a class="btn gold" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone'] ?? '') ?></bdi></a><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><a class="btn" href="sms:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>?&amp;body=<?= $e(rawurlencode('שלום ' . ($r['name'] ?? '') . ', כאן יהודה מ־YYG. כדי שאכין לך הצעה מדויקת, אשמח שתמלא/י שאלון קצר (כ־10 דקות): ' . 'https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? '']))) ?>">שאלון אפיון ב־SMS</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'phone' => $r['phone'] ?? ''])) ?>">העתקת קישור לשאלון</button></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>
@@ -280,7 +280,7 @@ ob_start(); ?>
   <div class="bars"><?php foreach (array_slice($pages, 0, 15, true) as $p => $n): ?><div class="bar"><span title="<?= $e($p) ?>"><?= $e($PAGE_NAMES[$p] ?? $p) ?></span><span><i style="width:<?= max(2, round($n / $maxP * 100)) ?>%"></i></span><b><?= $n ?></b></div><?php endforeach; ?></div>
 </div>
  <div class="card"><h3>מאיפה הגיעו (30 יום)</h3>
-  <?php if (!$refs && !$src): ?><small>עוד אין נתונים. כניסה ישירה, מוואטסאפ או מקוד QR לא מופיעה כאן.</small><?php endif; ?>
+  <?php if (!$refs && !$src): ?><small>עוד אין נתונים. כניסה ישירה, מהודעה או מקוד QR לא מופיעה כאן.</small><?php endif; ?>
   <?php foreach ($src as $s => $n): ?><div class="row"><span><?= $e($SRC_NAMES[$s] ?? ('קמפיין: ' . $s)) ?></span><b><?= $n ?></b></div><?php endforeach; ?>
   <?php foreach ($refs as $r => $n): ?><div class="row"><span><bdi><?= $e($r) ?></bdi></span><b><?= $n ?></b></div><?php endforeach; ?></div>
  <div class="card"><h3>מכשירים (30 יום)</h3><div class="row"><span>טלפון</span><b><?= count($dev['m']) ?></b></div><div class="row"><span>מחשב</span><b><?= count($dev['d']) ?></b></div></div>
@@ -302,4 +302,5 @@ ob_start(); ?>
  <a href="https://hakef.com/wp-admin/" target="_blank" rel="noopener">ניהול הכיף שבאפיה<small>מתכונים ורשימת תפוצה</small></a>
 </div>
 </main>
+<script>document.querySelectorAll('[data-copy-link]').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.copyLink); b.textContent = 'הועתק'; } catch (e) { prompt('העתיקו את הקישור:', b.dataset.copyLink); } }));</script>
 <?php adm_page('ניהול | YYG', (string) ob_get_clean());

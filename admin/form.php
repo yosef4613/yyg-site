@@ -40,7 +40,7 @@ ob_start(); ?>
 <h1><?= h($title) ?>: <?= h($c['name']) ?></h1>
 <p class="muted"><?= h(fmt_time((int) $rec['t'])) ?><?= $c['business'] ? ' · ' . h($c['business']) : '' ?><?= ($rec['lang'] ?? '') === 'en' ? ' · מהאתר באנגלית' : '' ?><?= $c['quote'] ? ' · הצעה ' . h($c['quote']) : '' ?></p>
 <div class="acts">
- <?php if ($digits !== ''): ?><a class="btn gold" href="tel:<?= h(preg_replace('/[^\d+]/', '', (string) $c['phone'])) ?>"><bdi><?= h($c['phone']) ?></bdi></a><a class="btn" href="https://wa.me/<?= h($wa) ?>" target="_blank" rel="noopener">וואטסאפ</a><?php endif; ?>
+ <?php if ($digits !== ''): ?><a class="btn gold" href="tel:<?= h(preg_replace('/[^\d+]/', '', (string) $c['phone'])) ?>"><bdi><?= h($c['phone']) ?></bdi></a><?php endif; ?>
  <?php if ($c['email']): ?><a class="btn" href="mailto:<?= h($c['email']) ?>"><bdi><?= h($c['email']) ?></bdi></a><?php endif; ?>
  <?php if ($rec['form'] === 'intake'): ?><a class="btn" href="/admin/quote.php?form=<?= h(rawurlencode($id)) ?>">הצעת מחיר מהשאלון</a><?php endif; ?>
  <button class="btn" type="button" onclick="window.print()">הדפסה</button>
