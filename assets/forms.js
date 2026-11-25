@@ -23,8 +23,29 @@
   let visited = Math.max(step, Number(state.__visited) || 0);
   const save = () => { state.__step = step; state.__visited = visited; try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* בלי שמירה */ } };
 
+  /* קבצים מצורפים: נשמרים בזיכרון עד השליחה (אי אפשר לשמור קבצים בדפדפן) */
+  const FILES = {};
+  const MAX_MB = 25;
+  const kb = (n) => (n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB');
+  const shrink = (file) => new Promise((resolve) => {
+    if (!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size < 700 * 1024) return resolve(file);
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, 2200 / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      c.toBlob((b) => resolve(b && b.size < file.size ? new File([b], file.name.replace(/\.(png|webp)$/i, '.jpg'), { type: 'image/jpeg' }) : file), 'image/jpeg', 0.86);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+  const fileList = (q) => (FILES[q.id] || []).map((f, i) => `<li><span>${esc(f.name)}</span> <small>${kb(f.size)}</small> <button type="button" class="qf-x" data-rm="${esc(q.id)}" data-i="${i}" aria-label="${t('הסרת', 'Remove')} ${esc(f.name)}">✕</button></li>`).join('');
+
   const visible = (q) => !q.show || (q.show.in || []).includes(state[q.show.id]);
-  const hasAnswer = (q) => { const v = state[q.id]; return Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== ''; };
+  const hasAnswer = (q) => { if (q.type === 'file') return (FILES[q.id] || []).length > 0; const v = state[q.id]; return Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== ''; };
   const qTitle = (q) => q.label || [q.prefix, q.from && q.to ? `${q.from} / ${q.to}` : ''].filter(Boolean).join(': ');
   const answerText = (q) => {
     const v = state[q.id];
@@ -32,6 +53,7 @@
     if (q.type === 'checks') return (v || []).map((x) => (x === OTHER ? t('אחר: ', 'Other: ') + other : x)).join(', ');
     if (q.type === 'radio') return v === OTHER ? t('אחר: ', 'Other: ') + other : v;
     if (q.type === 'scale') return `${q.prefix ? q.prefix + ': ' : ''}${v} ${t('מתוך 5', 'of 5')} (1 = ${q.from}, 5 = ${q.to})`;
+    if (q.type === 'file') return (FILES[q.id] || []).map((f) => f.name).join(', ');
     return String(v).trim();
   };
 
@@ -47,7 +69,10 @@
       return `<div class="qf-q"${showAttr}><label class="field" for="${id}"><span>${esc(q.label)}${q.required ? ' <b class="qf-req" aria-hidden="true">*</b>' : ''}</span>${hint}<input id="${id}" name="${esc(q.id)}" type="${q.type}"${ltr}${im}${q.auto ? ` autocomplete="${q.auto}"` : ''}${q.required ? ' required' : ''}${q.hint ? ` aria-describedby="${id}-h"` : ''} value="${esc(v)}"></label><small class="qf-err" id="${id}-e" aria-live="polite"></small></div>`;
     }
     if (q.type === 'textarea') {
-      return `<div class="qf-q"${showAttr}><label class="field" for="${id}"><span>${esc(q.label)}</span>${hint}<textarea id="${id}" name="${esc(q.id)}" rows="3" dir="auto"${q.hint ? ` aria-describedby="${id}-h"` : ''}>${esc(v)}</textarea></label></div>`;
+      return `<div class="qf-q"${showAttr}><label class="field" for="${id}"><span>${esc(q.label)}</span>${hint}<textarea id="${id}" name="${esc(q.id)}" rows="${q.rows || 3}" dir="auto"${q.hint ? ` aria-describedby="${id}-h"` : ''}>${esc(v)}</textarea></label></div>`;
+    }
+    if (q.type === 'file') {
+      return `<div class="qf-q"${showAttr}><label class="field qf-file" for="${id}"><span>${esc(q.label)}</span>${hint}<input id="${id}" type="file" data-file="${esc(q.id)}" accept="${esc(q.accept || '')}"${(q.max || 1) > 1 ? ' multiple' : ''}${q.hint ? ` aria-describedby="${id}-h"` : ''}></label><ul class="qf-files" id="${id}-list">${fileList(q)}</ul><small class="qf-err" id="${id}-e" aria-live="polite"></small></div>`;
     }
     if (q.type === 'radio' || q.type === 'checks') {
       const type = q.type === 'radio' ? 'radio' : 'checkbox';
@@ -92,7 +117,7 @@
       return `<section class="qf-sum"><div class="qf-sum-h"><h3>${esc(s.title)}</h3><button type="button" class="text-link as-button" data-go="${i}">${t('עריכה', 'Edit')}</button></div>${rows ? `<dl>${rows}</dl>` : `<p class="qf-empty">${t('לא מולא. זה בסדר.', 'Skipped. That\'s fine.')}</p>`}</section>`;
     }).join('');
     root.innerHTML = head() + `<div class="qf-step"><h2 class="qf-title" tabindex="-1">${t('סיכום ושליחה', 'Review and send')}</h2><p class="qf-intro">${t('כך התשובות יגיעו אליי. אפשר לחזור ולערוך כל חלק.', 'This is how your answers will reach me. You can go back and edit any part.')}</p>${blocks}`
-      + `<input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">`
+      + `<input type="text" name="_hpq" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">`
       + `<p class="qf-privacy">${t('הפרטים משמשים רק כדי להכין לכם הצעה ולבנות את האתר.', 'Your details are used only to prepare your quote and build your site.')} <a class="text-link" href="${t('/privacy.html', '/en/privacy.html')}">${t('מדיניות פרטיות', 'Privacy policy')}</a></p>`
       + `<div class="qf-nav"><button type="button" class="btn btn-line" data-prev>${t('הקודם', 'Back')}</button><button type="button" class="btn btn-gold" data-send>${t('שליחה', 'Send')}</button></div><p class="qf-status" role="status" aria-live="polite"></p></div>`;
   };
@@ -116,9 +141,28 @@
   };
 
   /* ---------- אירועים ---------- */
+  root.addEventListener('change', async (e) => {
+    const el = e.target;
+    if (el.type !== 'file' || !el.dataset.file) return;
+    const q = steps[step].qs.find((x) => x.id === el.dataset.file);
+    const errEl = document.getElementById('q-' + q.id + '-e');
+    const allowed = (q.accept || '').split(',').map((x) => x.trim().toLowerCase()).filter(Boolean);
+    const list = FILES[q.id] || (FILES[q.id] = []);
+    errEl.textContent = '';
+    for (const f of [...el.files]) {
+      const ext = '.' + (f.name.split('.').pop() || '').toLowerCase();
+      if (allowed.length && !allowed.includes(ext)) { errEl.textContent = t(`הקובץ ${f.name} מסוג שלא מתאים כאן.`, `${f.name} isn't a supported file type here.`); continue; }
+      if (list.length >= (q.max || 1)) { errEl.textContent = t(`אפשר לצרף עד ${q.max || 1} קבצים כאן.`, `You can attach up to ${q.max || 1} files here.`); break; }
+      const ready = q.resize ? await shrink(f) : f;
+      if (ready.size > MAX_MB * 1048576) { errEl.textContent = t(`הקובץ ${f.name} גדול מדי (עד ${MAX_MB} MB). אפשר לשלוח קישור לתיקייה.`, `${f.name} is too large (up to ${MAX_MB} MB). You can share a folder link instead.`); continue; }
+      list.push(ready);
+    }
+    el.value = '';
+    document.getElementById('q-' + q.id + '-list').innerHTML = fileList(q);
+  });
   root.addEventListener('input', (e) => {
     const el = e.target;
-    if (!el.name) return;
+    if (!el.name || el.type === 'file') return;
     const q = steps[step]?.qs.find((x) => x.id === el.name);
     if (el.type === 'checkbox' && q) {
       const cur = new Set(state[q.id] || []);
@@ -138,6 +182,7 @@
     else if (b.dataset.go != null) go(Number(b.dataset.go));
     else if (b.hasAttribute('data-reset')) { if (confirm(t('למחוק את כל התשובות ולהתחיל מחדש?', 'Clear all your answers and start over?'))) { state = { __t0: Date.now() }; step = 0; visited = 0; save(); render(); } }
     else if (b.hasAttribute('data-send')) send(b);
+    else if (b.dataset.rm) { const q = steps[step].qs.find((x) => x.id === b.dataset.rm); FILES[q.id].splice(Number(b.dataset.i), 1); document.getElementById('q-' + q.id + '-list').innerHTML = fileList(q); }
   });
 
   /* ---------- שליחה ---------- */
@@ -147,13 +192,24 @@
     const items = [];
     steps.forEach((s) => s.qs.forEach((q) => { if (['name', 'phone', 'email', 'business', 'quote'].includes(q.id)) return; if (visible(q) && hasAnswer(q)) items.push({ s: s.title, q: qTitle(q), a: answerText(q) }); }));
     btn.disabled = true;
-    status.textContent = t('שולח…', 'Sending…');
+    const payload = {
+      form: FORM, lang: EN ? 'en' : 'he', t: Date.now() - Number(state.__t0 || Date.now()), hp: root.querySelector('[name=_hpq]')?.value || '',
+      contact: { name: state.name || '', phone: state.phone || '', email: state.email || '', business: state.business || '', quote: state.quote || '' }, items };
+    const fd = new FormData();
+    fd.append('payload', JSON.stringify(payload));
+    let total = 0;
+    Object.entries(FILES).forEach(([qid, arr]) => { const q = steps.flatMap((s) => s.qs).find((x) => x.id === qid); if (!q || !visible(q)) return; arr.forEach((f) => { fd.append('files[]', f, f.name); fd.append('fileq[]', qid); total += f.size; }); });
+    status.textContent = total ? t('שולח את התשובות והקבצים…', 'Sending your answers and files…') : t('שולח…', 'Sending…');
     try {
-      const res = await fetch('/forms/submit.php', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({
-        form: FORM, lang: EN ? 'en' : 'he', t: Date.now() - Number(state.__t0 || Date.now()), website: root.querySelector('[name=website]')?.value || '',
-        contact: { name: state.name || '', phone: state.phone || '', email: state.email || '', business: state.business || '', quote: state.quote || '' }, items }) });
-      const j = await res.json().catch(() => ({}));
-      if (!res.ok || String(j.success) !== 'true') throw new Error(j.message || res.status);
+      const j = await new Promise((resolve, reject) => {
+        const x = new XMLHttpRequest();
+        x.open('POST', '/forms/submit.php');
+        x.setRequestHeader('Accept', 'application/json');
+        x.upload.onprogress = (ev) => { if (total > 200000 && ev.lengthComputable) status.textContent = t(`שולח… ${Math.round((ev.loaded / ev.total) * 100)}%`, `Sending… ${Math.round((ev.loaded / ev.total) * 100)}%`); };
+        x.onload = () => { let r = {}; try { r = JSON.parse(x.responseText); } catch (e) { /* תשובה לא תקינה */ } if (x.status >= 200 && x.status < 300 && String(r.success) === 'true') resolve(r); else reject(new Error(r.message || x.status)); };
+        x.onerror = () => reject(new Error('network'));
+        x.send(fd);
+      });
       try { localStorage.removeItem(KEY); } catch (e) { /* לא קריטי */ }
       try { if (location.hostname === 'yygweb.com' && navigator.sendBeacon) navigator.sendBeacon('/hit.php', new Blob([JSON.stringify({ e: 'lead', p: location.pathname, r: '', s: '' })], { type: 'application/json' })); } catch (e) { /* בלי מונה */ }
       root.innerHTML = `<div class="qf-step qf-done"><h2 class="qf-title" tabindex="-1">${t('נשלח', 'Sent')}</h2><p class="qf-intro">${esc(def.done)}</p><p><a class="btn btn-line" href="${t('/', '/en/')}">${t('חזרה לאתר', 'Back to the site')}</a></p></div>`;

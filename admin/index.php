@@ -193,7 +193,7 @@ ob_start(); ?>
 <div class="acts" style="margin:0 0 12px"><a class="btn" href="https://yygweb.com/questionnaire/" target="_blank" rel="noopener">שאלון האפיון באתר</a><a class="btn" href="https://yygweb.com/feedback/" target="_blank" rel="noopener">שאלון המשוב באתר</a></div>
 <?php if (!$forms): ?><p class="muted">עוד לא מולאו שאלונים. כל שאלון שלקוח שולח מגיע אליך במייל ומופיע כאן.</p><?php else: ?>
 <div class="tscroll"><table class="list"><thead><tr><th>תאריך</th><th>שאלון</th><th>לקוח</th><th>טלפון</th></tr></thead><tbody>
-<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td></tr><?php endforeach; ?>
+<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?><?= !empty($fr['files']) ? ' <span class="tag">' . count($fr['files']) . ' קבצים</span>' : '' ?><?= !empty($fr['flags']) ? ' <span class="tag warn">לבדיקה</span>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td></tr><?php endforeach; ?>
 </tbody></table></div>
 <?php endif; ?>
 

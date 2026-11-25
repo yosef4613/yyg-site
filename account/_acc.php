@@ -99,7 +99,7 @@ function acc_page(string $title, string $body): void {
     header('X-Robots-Tag: noindex, nofollow');
     header('X-Frame-Options: DENY');
     echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">'
-        . '<title>' . h($title) . ' | YYG</title><link rel="icon" href="/assets/img/icon-64.png" type="image/png"><link rel="stylesheet" href="/assets/site.css?v=37"><style>'
+        . '<title>' . h($title) . ' | YYG</title><link rel="icon" href="/assets/img/icon-64.png" type="image/png"><link rel="stylesheet" href="/assets/site.css?v=38"><style>'
         . '.acc{padding:clamp(32px,6vw,72px) 0 clamp(56px,8vw,96px)}.acc .wrap{max-width:720px}.acc .logo{height:52px;width:auto}.acc-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:28px}'
         . '.acc h1{font-size:var(--step-2)}.acc h2{font-size:var(--step-1);margin-top:30px}.acc p{margin-top:10px;color:var(--muted)}.acc .lead{color:#C9D1DD}'
         . '.box{margin-top:18px;padding:clamp(18px,3vw,26px);background:var(--panel);border:1px solid var(--line-2);border-radius:16px}.box form{display:grid;gap:14px}'

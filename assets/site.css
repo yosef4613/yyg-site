@@ -1118,3 +1118,12 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 .qf-talk{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
 .qf-done .btn{width:auto}
 @media (max-width:640px){.qf-steps{display:none}.qf-end{min-width:0;flex-basis:100%}.qf-scale-row .chips{order:2}.qf-scale-row .qf-end:last-child{order:3;text-align:end}.qf-nav .btn{min-width:0;flex:1}}
+.qf-file input[type=file]{padding:10px;min-height:52px;border-style:dashed;cursor:pointer;font-size:.92rem}
+.qf-file input[type=file]::file-selector-button{margin-inline-end:12px;padding:8px 14px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--text);font:600 .9rem var(--font);cursor:pointer}
+.qf-files{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.qf-files:empty{display:none}
+.qf-files li{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:.92rem}
+.qf-files li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qf-files small{color:var(--muted)}
+.qf-x{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--line-2);background:none;color:var(--muted);cursor:pointer}
+.qf-x:hover{color:#fff}

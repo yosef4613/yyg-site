@@ -24,6 +24,18 @@ window.YYG_FORMS = {
           { id: 'biz_unique', type: 'textarea', label: t('למה לקוחות בוחרים בכם ולא במישהו אחר?', 'Why do customers choose you over someone else?'), hint: t('שלושה דברים מספיקים. זה הלב של האתר.', 'Three things are enough. This is the heart of the site.') },
           { id: 'competitors', type: 'textarea', label: t('מתחרים או עסקים דומים שאתם מכירים', 'Competitors or similar businesses you know'), hint: t('שם או קישור. גם אם האתר שלהם לא מוצא חן בעיניכם, זה עוזר.', 'A name or a link. Even if you don\'t like their site, it helps.') }
         ] },
+      { title: t('השם והפרטים באתר', 'Name and details on the site'), intro: t('הפרטים שיופיעו באתר עצמו. מה שלא בטוח, נסגור יחד.', 'The details that will appear on the site itself. Anything you\'re unsure about, we\'ll settle together.'),
+        qs: [
+          { id: 'site_name', type: 'text', label: t('השם שיופיע באתר', 'The name shown on the site'), hint: t('בדיוק כמו שצריך להיכתב, כולל אותיות באנגלית אם יש.', 'Exactly as it should be written.') },
+          { id: 'slogan', type: 'text', label: t('משפט קצר מתחת לשם (סלוגן)', 'A short line under the name (tagline)'), hint: t('אם אין, אציע כמה אפשרויות.', 'If you don\'t have one, I\'ll suggest a few.') },
+          { id: 'domain_wish', type: 'text', ltr: true, label: t('כתובת האתר הרצויה', 'The web address you want'), hint: t('למשל mybusiness.co.il. אם כבר יש כתובת, כתבו אותה.', 'For example mybusiness.com. If you already have one, write it.') },
+          { id: 'site_phone', type: 'tel', label: t('טלפון שיופיע באתר', 'Phone number to show on the site') },
+          { id: 'site_whatsapp', type: 'tel', label: t('מספר וואטסאפ, אם שונה', 'WhatsApp number, if different') },
+          { id: 'site_email', type: 'email', label: t('מייל שיופיע באתר', 'Email to show on the site') },
+          { id: 'site_address', type: 'text', label: t('כתובת העסק', 'Business address'), hint: t('רק אם יש קבלת קהל או משלוחים מאזור מסוים.', 'Only if customers visit you, or you deliver from a specific area.') },
+          { id: 'site_hours', type: 'text', label: t('שעות פעילות שיופיעו באתר', 'Opening hours to show on the site'), hint: t('למשל: א׳ עד ה׳, 9:00 עד 17:00', 'For example: Sun to Thu, 9:00 to 17:00') },
+          { id: 'social', type: 'textarea', label: t('קישורים לרשתות ולפרופיל העסק בגוגל', 'Links to your social profiles and Google Business Profile') }
+        ] },
       { title: t('הלקוחות', 'Your customers'),
         qs: [
           { id: 'cust_who', type: 'checks', label: t('מי הלקוחות שלכם?', 'Who are your customers?'), other: true, options: [t('לקוחות פרטיים', 'Private customers'), t('בעלי עסקים', 'Business owners'), t('מוסדות וארגונים', 'Institutions and organizations'), t('הורים', 'Parents'), t('צעירים', 'Young people'), t('מבוגרים', 'Older people'), t('ציבור דתי וחרדי', 'A religious community'), t('דוברי אנגלית', 'English speakers')] },
@@ -36,8 +48,7 @@ window.YYG_FORMS = {
         qs: [
           { id: 'goal_action', type: 'radio', label: t('מה הדבר הכי חשוב שגולש יעשה באתר?', 'What\'s the single most important thing a visitor should do?'), other: true, options: [t('להתקשר', 'Call'), t('לשלוח הודעת וואטסאפ', 'Send a WhatsApp message'), t('להשאיר פרטים בטופס', 'Leave details in a form'), t('להזמין או לבקש הצעת מחיר', 'Order or request a quote'), t('להירשם', 'Sign up'), t('לקנות ולשלם באתר', 'Buy and pay on the site'), t('להתרשם ולקרוא', 'Read and get to know us')] },
           { id: 'goal_success', type: 'textarea', label: t('איך תדעו שהאתר הצליח?', 'How will you know the site is working?'), hint: t('למשל: 10 פניות בחודש, 30 הרשמות לחוג, פחות שיחות עם אותן שאלות.', 'For example: 10 inquiries a month, 30 class sign-ups, fewer calls with the same questions.') },
-          { id: 'goal_channels', type: 'checks', label: t('איך הכי נוח לכם לקבל פניות?', 'How do you prefer to receive inquiries?'), options: [t('טלפון', 'Phone'), t('וואטסאפ', 'WhatsApp'), t('מייל', 'Email'), t('טופס עם כל הפרטים', 'A form with all the details'), t('הזמנה מסודרת באתר', 'A structured order on the site')] },
-          { id: 'goal_hours', type: 'text', label: t('מתי אתם זמינים לענות ללקוחות?', 'When are you available to answer customers?'), hint: t('למשל: א׳ עד ה׳, 9:00 עד 17:00', 'For example: Sun to Thu, 9:00 to 17:00') }
+          { id: 'goal_channels', type: 'checks', label: t('איך הכי נוח לכם לקבל פניות?', 'How do you prefer to receive inquiries?'), options: [t('טלפון', 'Phone'), t('וואטסאפ', 'WhatsApp'), t('מייל', 'Email'), t('טופס עם כל הפרטים', 'A form with all the details'), t('הזמנה מסודרת באתר', 'A structured order on the site')] }
         ] },
       { title: t('מה יהיה באתר', 'What goes on the site'),
         qs: [
@@ -47,14 +58,20 @@ window.YYG_FORMS = {
           { id: 'update_who', type: 'radio', label: t('מי יעדכן את האתר אחרי שיעלה?', 'Who will update the site after launch?'), options: [t('אני או מישהו מהעסק', 'Me or someone in the business'), t('אשמח שאתה תעדכן', 'I\'d like you to do it'), t('כמעט לא צריך עדכונים', 'It hardly needs updates')] },
           { id: 'update_what', type: 'textarea', label: t('מה צריך להתעדכן לעיתים קרובות?', 'What needs updating often?'), hint: t('למשל מוצרים, מבצעים, אירועים, שעות פתיחה.', 'For example products, offers, events, opening hours.') }
         ] },
-      { title: t('תוכן וחומרים', 'Content and materials'),
+      { title: t('תוכן וחומרים', 'Content and materials'), intro: t('כאן אפשר לצרף את מה שיש: לוגו, תמונות וקבצים. קבצים לא נשמרים אם סוגרים את הדף, אז כדאי לצרף אותם כשמוכנים לשלוח.', 'Attach what you have here: your logo, photos and files. Files aren\'t kept if you close the page, so attach them when you\'re ready to send.'),
         qs: [
           { id: 'logo', type: 'radio', label: t('לוגו', 'Logo'), options: [t('יש לוגו בקובץ איכותי', 'I have a good-quality logo file'), t('יש רק תמונה או צילום של הלוגו', 'I only have a picture of it'), t('אין, צריך לוגו', 'None, I need a logo'), t('יש, אבל רוצים לחדש', 'I have one, but want a new one')] },
-          { id: 'texts', type: 'radio', label: t('טקסטים לאתר', 'Website text'), options: [t('יש טקסטים מוכנים', 'I have the text ready'), t('יש חלק', 'I have some'), t('אשמח שתכתוב', 'I\'d like you to write it')] },
+          { id: 'logo_file', type: 'file', max: 3, accept: '.svg,.ai,.eps,.pdf,.png,.jpg,.jpeg,.webp,.gif', label: t('צרפו את הלוגו', 'Attach your logo'), hint: t('הקובץ הכי איכותי שיש: SVG, AI, PDF או PNG. גם צילום ברור עוזר.', 'The best-quality file you have: SVG, AI, PDF or PNG. A clear photo helps too.'), show: { id: 'logo', in: [t('יש לוגו בקובץ איכותי', 'I have a good-quality logo file'), t('יש רק תמונה או צילום של הלוגו', 'I only have a picture of it'), t('יש, אבל רוצים לחדש', 'I have one, but want a new one')] } },
+          { id: 'about_text', type: 'textarea', rows: 5, label: t('כמה משפטים עליכם, לעמוד "אודות"', 'A few sentences about you, for the About page'), hint: t('מי אתם, איך התחלתם, ומה חשוב לכם. גם נקודות מספיקות, ואני אנסח.', 'Who you are, how you started, and what matters to you. Bullet points are fine; I\'ll write it up.') },
+          { id: 'services_text', type: 'textarea', rows: 6, label: t('השירותים או המוצרים, אחד בכל שורה', 'Your services or products, one per line'), hint: t('עם תיאור קצר, ומחיר אם רוצים להציג אותו באתר.', 'With a short description, and a price if you want it shown.') },
+          { id: 'texts', type: 'radio', label: t('ושאר הטקסטים לאתר?', 'And the rest of the website text?'), options: [t('יש טקסטים מוכנים, אצרף', 'I have text ready, I\'ll attach it'), t('יש חלק', 'I have some'), t('אשמח שתכתוב', 'I\'d like you to write it')] },
+          { id: 'docs', type: 'file', max: 6, accept: '.pdf,.doc,.docx,.txt,.rtf,.odt,.xls,.xlsx,.ppt,.pptx', label: t('קבצים: טקסטים, מחירון, תפריט או קטלוג', 'Files: text, price list, menu or catalog'), hint: t('Word, PDF או Excel. לא חובה.', 'Word, PDF or Excel. Optional.') },
           { id: 'photos', type: 'radio', label: t('תמונות', 'Photos'), options: [t('יש תמונות מקצועיות', 'I have professional photos'), t('יש תמונות מהטלפון', 'I have phone photos'), t('אין, צריך תמונות', 'None, I need photos')] },
+          { id: 'photo_files', type: 'file', max: 15, resize: true, accept: '.jpg,.jpeg,.png,.webp,.heic,.heif,.gif', label: t('צרפו תמונות', 'Attach photos'), hint: t('עבודות, מוצרים, העסק או הצוות. עד 15 תמונות. אני מקטין אותן אוטומטית כדי שהשליחה תהיה מהירה. אם יש הרבה, אפשר גם קישור לתיקייה למטה.', 'Work, products, the business or the team. Up to 15. They\'re shrunk automatically so sending is quick. If you have many, use a folder link below.'), show: { id: 'photos', in: [t('יש תמונות מקצועיות', 'I have professional photos'), t('יש תמונות מהטלפון', 'I have phone photos')] } },
           { id: 'reviews', type: 'radio', label: t('המלצות של לקוחות', 'Customer testimonials'), options: [t('יש', 'I have some'), t('אפשר לאסוף', 'I can collect some'), t('עוד אין', 'None yet')] },
+          { id: 'reviews_text', type: 'textarea', rows: 4, label: t('ההמלצות עצמן', 'The testimonials themselves'), hint: t('שם הממליץ, ומה כתב. מה שיש.', 'The person\'s name and what they wrote. Whatever you have.'), show: { id: 'reviews', in: [t('יש', 'I have some')] } },
           { id: 'brand_colors', type: 'text', label: t('הצבעים של העסק, אם יש', 'Your brand colors, if any'), hint: t('למשל: זהב ושחור', 'For example: gold and black') },
-          { id: 'assets_link', type: 'url', label: t('קישור לתיקייה עם חומרים', 'A link to a folder with materials'), hint: t('Google Drive או Dropbox. לא חובה.', 'Google Drive or Dropbox. Optional.') }
+          { id: 'assets_link', type: 'url', label: t('קישור לתיקייה עם עוד חומרים', 'A link to a folder with more materials'), hint: t('Google Drive או Dropbox. לא חובה.', 'Google Drive or Dropbox. Optional.') }
         ] },
       { title: t('עיצוב ותחושה', 'Design and feel'),
         qs: [
@@ -69,13 +86,11 @@ window.YYG_FORMS = {
         ] },
       { title: t('פרטים טכניים', 'Technical details'),
         qs: [
-          { id: 'domain', type: 'radio', label: t('כתובת לאתר (דומיין)', 'Web address (domain)'), options: [t('יש כתובת', 'I have one'), t('אין, צריך', 'None, I need one'), t('לא יודע/ת', 'Not sure')] },
-          { id: 'domain_name', type: 'text', label: t('מה הכתובת?', 'What is it?'), ltr: true, show: { id: 'domain', in: [t('יש כתובת', 'I have one')] } },
+          { id: 'domain', type: 'radio', label: t('הכתובת (הדומיין) כבר שלכם?', 'Do you already own the web address (domain)?'), options: [t('כן, רשומה על שמי', 'Yes, it\'s registered to me'), t('לא, צריך לרשום', 'No, it needs registering'), t('לא יודע/ת', 'Not sure')] },
           { id: 'site_now', type: 'radio', label: t('יש אתר קיים?', 'Do you have a site now?'), options: [t('כן', 'Yes'), t('לא', 'No')] },
           { id: 'site_url', type: 'url', label: t('הכתובת של האתר הקיים', 'Your current site\'s address'), show: { id: 'site_now', in: [t('כן', 'Yes')] } },
           { id: 'site_good_bad', type: 'textarea', label: t('מה טוב בו, ומה לא?', 'What works in it, and what doesn\'t?'), hint: t('חשוב לי לדעת, כדי לשמור על מה שכבר עובד בגוגל.', 'This helps me keep what already works on Google.'), show: { id: 'site_now', in: [t('כן', 'Yes')] } },
           { id: 'biz_email', type: 'radio', label: t('מייל עסקי (שם@העסק)', 'Business email (name@yourbusiness)'), options: [t('יש', 'I have one'), t('אין, רוצה', 'None, I want one'), t('לא צריך', 'I don\'t need one')] },
-          { id: 'social', type: 'textarea', label: t('קישורים לרשתות ולפרופיל העסק בגוגל, אם יש', 'Links to your social profiles and Google Business Profile, if any') },
           { id: 'languages', type: 'checks', label: t('באילו שפות?', 'Which languages?'), other: true, options: [t('עברית', 'Hebrew'), t('אנגלית', 'English'), t('יידיש', 'Yiddish'), t('רוסית', 'Russian'), t('צרפתית', 'French')] }
         ] },
       { title: t('זמנים ותקציב', 'Timing and budget'),
