@@ -668,12 +668,15 @@ const Planner = (() => {
   });
 })();
 
-/* ===== פנייה מהירה: שם וטלפון בלבד, למי שכבר השתכנע ולא רוצה לגלול עד הסוף ===== */
+/* ===== פנייה מהירה: שם, מייל וטלפון, למי שכבר השתכנע ולא רוצה לגלול עד הסוף =====
+   אחרי השליחה הלקוח מקבל מייל לאישור הכתובת, ורק אחרי האישור את הטלפון שלי ואת הקישור לשאלון */
+const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+const sentMsg = (name) => T(`תודה, ${name}. שלחתי לכם עכשיו מייל: לחיצה אחת לאישור הכתובת, ותקבלו את הפרטים שלי ואת הצעד הבא. אחזור אליכם תוך יום עבודה.`, `Thank you, ${name}. I just sent you an email: one click to confirm your address, and you’ll get my details and the next step. I’ll get back to you within one business day.`);
 (() => {
   document.querySelectorAll('form.quick-lead').forEach((form) => {
     const status = form.querySelector('.ql-status');
     const btn = form.querySelector('button[type=submit]');
-    const { name: fName, phone: fPhone } = form.elements;
+    const { name: fName, email: fEmail, phone: fPhone } = form.elements;
     let token = '';
     const getToken = () => fetch(CONFIG.formEndpoint + '?token=1', { cache: 'no-store' }).then((r) => r.json()).then((t) => { token = t.token || ''; }).catch(() => {});
     if ('IntersectionObserver' in window) {
@@ -684,17 +687,21 @@ const Planner = (() => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = fName.value.trim();
+      const email = fEmail.value.trim();
       const phone = fPhone.value.trim();
+      const okEmail = validEmail(email);
       const okPhone = phone.replace(/\D/g, '').length >= 9;
       fName.setAttribute('aria-invalid', String(!name));
+      fEmail.setAttribute('aria-invalid', String(!okEmail));
       fPhone.setAttribute('aria-invalid', String(!okPhone));
       status.className = 'ql-status';
       if (!name) { status.textContent = T('נא לכתוב שם.', 'Please enter your name.'); fName.focus(); return; }
+      if (!okEmail) { status.textContent = T('נא לכתוב כתובת מייל תקינה, למשל name@gmail.com.', 'Please enter a valid email address, e.g. name@gmail.com.'); fEmail.focus(); return; }
       if (!okPhone) { status.textContent = T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'); fPhone.focus(); return; }
       if (form.elements._honey.value) return;
       const picked = $('lead-plan') ? $('lead-plan').value : '';
       const data = {
-        name, phone,
+        name, email, phone,
         when: T('בימים א׳ עד ד׳, בין 10:00 ל־13:30', 'Sun to Wed, 10:00 to 13:30'),
         plan: form.elements.plan.value + '\n' + (picked || T('לא נבחר מסלול', 'No package chosen')) + (EN ? '\n(Sent from the English site)' : ''),
         _token: token
@@ -709,7 +716,7 @@ const Planner = (() => {
         form.reset();
         form.classList.add('is-sent');
         status.className = 'ql-status is-ok';
-        status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם תוך יום עבודה.`, `Thank you, ${name}. Got it. I’ll call you back within one business day.`);
+        status.textContent = sentMsg(name);
         countHit('lead');
       } catch (err) {
         status.textContent = '';
@@ -727,7 +734,7 @@ const Planner = (() => {
   if (!form) return;
   const status = $('lead-status');
   const submit = $('lead-submit');
-  const fields = { name: form.elements.name, phone: form.elements.phone };
+  const fields = { name: form.elements.name, email: form.elements.email, phone: form.elements.phone };
   /* הגנה מרובוטים: חותמת זמן חתומה מהשרת. רובוט ששולח ישר לשרת, בלי לטעון את הדף, לא מקבל אותה */
   let token = '';
   const getToken = () => fetch(CONFIG.formEndpoint + '?token=1', { cache: 'no-store' }).then((r) => r.json()).then((t) => { token = t.token || ''; }).catch(() => {});
@@ -743,8 +750,8 @@ const Planner = (() => {
     $('err-' + name).textContent = msg || '';
   };
   const fallback = (data) => {
-    const body = T(`שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nרקע מועדף: ${data.style}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`,
-      `Hi Yehuda,\n\nName: ${data.name}\nPhone: ${data.phone}\nBusiness: ${data.business}\nBest time to call: ${data.when}\nPreferred background: ${data.style}\nSites I like: ${data.likes}\nNotes: ${data.notes}\n\n${data.ready}\n\n${data.plan}`);
+    const body = T(`שלום יהודה,\n\nשם: ${data.name}\nמייל: ${data.email}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nרקע מועדף: ${data.style}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`,
+      `Hi Yehuda,\n\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nBusiness: ${data.business}\nBest time to call: ${data.when}\nPreferred background: ${data.style}\nSites I like: ${data.likes}\nNotes: ${data.notes}\n\n${data.ready}\n\n${data.plan}`);
     status.textContent = '';
     status.append(T('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', 'We couldn’t send this from here. You can call '), Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
       T(', או ', ', '), Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(T(`פנייה מהאתר: ${data.name}`, `Website inquiry: ${data.name}`), body), textContent: T('לשלוח את הפרטים במייל', 'email the details') }),
@@ -753,14 +760,17 @@ const Planner = (() => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = fields.name.value.trim();
+    const email = fields.email.value.trim();
     const phone = fields.phone.value.trim();
     setErr('name', name ? '' : T('נא לכתוב שם.', 'Please enter your name.'));
+    setErr('email', validEmail(email) ? '' : T('נא לכתוב כתובת מייל תקינה, למשל name@gmail.com.', 'Please enter a valid email address, e.g. name@gmail.com.'));
     setErr('phone', validPhone(phone) ? '' : T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'));
     if (!name) { status.textContent = ''; fields.name.focus(); return; }
+    if (!validEmail(email)) { status.textContent = ''; fields.email.focus(); return; }
     if (!validPhone(phone)) { status.textContent = ''; fields.phone.focus(); return; }
     if (form.elements._honey.value) return;
     const data = {
-      name, phone,
+      name, email, phone,
       business: form.elements.business.value.trim(),
       when: form.elements.when.value,
       style: form.elements.style.value,
@@ -783,7 +793,7 @@ const Planner = (() => {
       $('lead-ready').value = keepReady;
       countHit('lead');
       status.className = 'lead-status is-ok';
-      status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`, `Thank you, ${name}. Got it, and I’ll call you back at the time you chose.`);
+      status.textContent = sentMsg(name);
     } catch (err) {
       fallback(data);
     } finally {
