@@ -902,3 +902,19 @@ p{text-wrap:pretty}
 .promises{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;padding:0;list-style:none}
 .promises li{padding:8px 14px;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);font-size:.95rem;color:#D7DDE6}
 .promises b{color:#fff}
+
+/* ===== גרסה 22: השוואה למקובל בשוק ===== */
+.vs{margin-top:clamp(32px,5vw,56px);padding:clamp(18px,3vw,28px);border:1px solid var(--line-2);border-radius:16px;background:var(--panel)}
+.vs h3{font-size:var(--step-2);line-height:1.2}
+.vs-scroll{overflow-x:auto;margin-top:14px}
+.vs-table{width:100%;border-collapse:collapse;font-size:1rem;min-width:420px}
+.vs-table th,.vs-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+.vs-table thead th{color:var(--muted);font-weight:600;font-size:.92rem}
+.vs-table tbody th{color:#D7DDE6;font-weight:600}
+.vs-table td{color:var(--muted)}
+.vs-table td:last-child{color:#fff;background:rgba(255,255,255,.03)}
+.vs-table td:last-child b{color:#fff}
+.vs-note{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.vs-table{min-width:0;table-layout:fixed}
+.vs-table tbody th{width:34%}
+@media (max-width:520px){.vs-table{font-size:.88rem}.vs-table th,.vs-table td{padding:9px 7px}.vs-table thead th{font-size:.82rem}}
