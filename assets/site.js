@@ -21,7 +21,10 @@ document.querySelectorAll('.pkg[data-track]').forEach((el) => {
 
 const root = document.documentElement;
 const $ = (id) => document.getElementById(id);
-const nis = (n) => Math.round(n).toLocaleString('he-IL') + ' ₪';
+/* שפה: האתר בעברית, והעותק באנגלית יושב ב־/en/. T(עברית, English) */
+const EN = document.documentElement.lang === 'en';
+const T = (he, en) => (EN ? en : he);
+const nis = (n) => (EN ? '₪' + Math.round(n).toLocaleString('en-US') : Math.round(n).toLocaleString('he-IL') + ' ₪');
 const telHref = 'tel:' + CONFIG.phone.replace(/[^\d+]/g, '');
 const mailHref = (subject, body) =>
   `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}` + (body ? `&body=${encodeURIComponent(body)}` : '');
@@ -37,7 +40,8 @@ document.querySelectorAll('[data-tel]').forEach((a) => {
   if (bdi) bdi.textContent = CONFIG.phone;
   else if (/\d/.test(a.textContent)) a.textContent = CONFIG.phone;
 });
-const DEFAULT_MAIL = { subject: 'פנייה מהאתר: אתר לעסק שלי', body: 'שלום יהודה,\n\nהעסק שלי: \nיש לו כבר אתר? \nהטלפון שלי: \nמתי נוח שתתקשר: \n' };
+const DEFAULT_MAIL = T({ subject: 'פנייה מהאתר: אתר לעסק שלי', body: 'שלום יהודה,\n\nהעסק שלי: \nיש לו כבר אתר? \nהטלפון שלי: \nמתי נוח שתתקשר: \n' },
+  { subject: 'Website inquiry: a site for my business', body: 'Hi Yehuda,\n\nMy business: \nDo we already have a website? \nMy phone: \nBest time to call: \n' });
 const setMailLinks = (subject, body) => {
   document.querySelectorAll('[data-mail]').forEach((a) => {
     a.href = mailHref(subject, body);
@@ -158,8 +162,8 @@ if ('IntersectionObserver' in window) {
     mini.dataset.theme = btn.dataset.theme;
     img.src = src(btn.dataset.img);
     inset.src = src(btn.dataset.inset);
-    url.textContent = btn.dataset.theme === 'live' ? 'hakef.com, האתר שבאוויר' : `הכיף שבאפיה, ${btn.dataset.name}`;
-    mini.setAttribute('aria-label', `דף הבית של הכיף שבאפיה, ${btn.dataset.name}`);
+    url.textContent = btn.dataset.theme === 'live' ? T('hakef.com, האתר שבאוויר', 'hakef.com, the live site') : T(`הכיף שבאפיה, ${btn.dataset.name}`, `HaKef SheBaAfiya, ${btn.dataset.name}`);
+    mini.setAttribute('aria-label', T(`דף הבית של הכיף שבאפיה, ${btn.dataset.name}`, `HaKef SheBaAfiya home page, ${btn.dataset.name}`));
     note.textContent = btn.dataset.note;
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
   };
@@ -178,8 +182,9 @@ if ('IntersectionObserver' in window) {
     apply(btn);
     await Promise.all([img, inset].map((i) => (i.decode ? i.decode().catch(() => {}) : null)));
     const dur = 650, ease = 'cubic-bezier(.55,0,.25,1)';
-    const a = clone.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 100% 0 0)' }], { duration: dur, easing: ease, fill: 'forwards' });
-    scan.animate([{ right: '0%', opacity: 1 }, { right: '100%', opacity: 1 }], { duration: dur, easing: ease });
+    /* בעברית הקו עובר מימין לשמאל, ובאנגלית משמאל לימין */
+    const a = clone.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: EN ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }], { duration: dur, easing: ease, fill: 'forwards' });
+    scan.animate(EN ? [{ right: '100%', opacity: 1 }, { right: '0%', opacity: 1 }] : [{ right: '0%', opacity: 1 }, { right: '100%', opacity: 1 }], { duration: dur, easing: ease });
     await a.finished.catch(() => {});
     clone.remove();
     busy = false;
@@ -189,8 +194,8 @@ if ('IntersectionObserver' in window) {
     const i = buttons.indexOf(document.activeElement);
     if (i < 0) return;
     let n = null;
-    if (e.key === 'ArrowLeft') n = (i + 1) % buttons.length;   // RTL: שמאלה = הבא
-    if (e.key === 'ArrowRight') n = (i - 1 + buttons.length) % buttons.length;
+    if (e.key === (EN ? 'ArrowRight' : 'ArrowLeft')) n = (i + 1) % buttons.length;   // הבא: שמאלה בעברית, ימינה באנגלית
+    if (e.key === (EN ? 'ArrowLeft' : 'ArrowRight')) n = (i - 1 + buttons.length) % buttons.length;
     if (e.key === 'Home') n = 0;
     if (e.key === 'End') n = buttons.length - 1;
     if (n === null) return;
@@ -222,7 +227,7 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   if (!stage || !list) return;
   const items = [...list.querySelectorAll('li')];
   const tag = $('stage-tag');
-  const TAGS = { 1: 'שרטוט', 2: 'כיווני עיצוב', 3: 'באוויר', 4: 'התוצאה' };
+  const TAGS = T({ 1: 'שרטוט', 2: 'כיווני עיצוב', 3: 'באוויר', 4: 'התוצאה' }, { 1: 'Blueprint', 2: 'Design directions', 3: 'Live', 4: 'The result' });
 
   /* המרוץ: רץ פעם אחת כשמגיעים לשלב 4 */
   const nums = [...race.querySelectorAll('.race-num b')];
@@ -326,7 +331,8 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
 requestMovers();
 
 /* ===== הבחירה: מה שנשלח ביצירת קשר (מהמתכנן או מכרטיס מסלול) ===== */
-const extraText = (n) => n === 1 ? `כולל עמוד אחד נוסף (${nis(CONFIG.extraPagePrice)})` : `כולל ${n} עמודים נוספים (${nis(CONFIG.extraPagePrice)} לעמוד)`;
+const extraText = (n) => T(n === 1 ? `כולל עמוד אחד נוסף (${nis(CONFIG.extraPagePrice)})` : `כולל ${n} עמודים נוספים (${nis(CONFIG.extraPagePrice)} לעמוד)`,
+  n === 1 ? `includes 1 extra page (${nis(CONFIG.extraPagePrice)})` : `includes ${n} extra pages (${nis(CONFIG.extraPagePrice)} per page)`);
 const Selection = (() => {
   const box = $('picked');
   const en = $('picked-en');
@@ -339,22 +345,22 @@ const Selection = (() => {
     if (!s) return '';
     const p = PKG[s.track];
     return [
-      `${s.source === 'planner' ? 'התכנית מהמתכנן' : 'המסלול שנבחר'}: ${p.name}`,
-      `מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ` + (en.checked ? ' (כולל גרסה באנגלית)' : ''),
+      `${s.source === 'planner' ? T('התכנית מהמתכנן', 'Plan from the calculator') : T('המסלול שנבחר', 'Chosen package')}: ${p.name}`,
+      T(`מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ`, `Price: ${s.source === 'planner' ? 'estimated ' : 'from '}${nis(priceOf())}, final, no VAT added`) + (en.checked ? T(' (כולל גרסה באנגלית)', ' (including an English version)') : ''),
       s.extraPages ? extraText(s.extraPages) : null,
       ...p.incl.map((r) => `${r.label}: ${r.value}`),
-      s.answers ? `\nתשובות במתכנן:\n${s.answers}` : null,
-      s.pages ? `עמודים: ${s.pages.join(', ')}` : null,
-      s.feats ? `יכולות: ${s.feats.join(', ')}` : null
+      s.answers ? T(`\nתשובות במתכנן:\n${s.answers}`, `\nCalculator answers:\n${s.answers}`) : null,
+      s.pages ? T(`עמודים: ${s.pages.join(', ')}`, `Pages: ${s.pages.join(', ')}`) : null,
+      s.feats ? T(`יכולות: ${s.feats.join(', ')}`, `Features: ${s.feats.join(', ')}`) : null
     ].filter(Boolean).join('\n');
   };
   const render = () => {
     if (!s) return;
     const p = PKG[s.track];
     box.hidden = false;
-    $('picked-k').textContent = s.source === 'planner' ? 'התכנית שלכם' : 'המסלול שבחרתם';
+    $('picked-k').textContent = s.source === 'planner' ? T('התכנית שלכם', 'Your plan') : T('המסלול שבחרתם', 'Your package');
     $('picked-name').textContent = p.name;
-    $('picked-price').textContent = `${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ` + (en.checked ? ', כולל אנגלית' : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
+    $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, בלי מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, final, no VAT added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = r.label;
@@ -363,7 +369,8 @@ const Selection = (() => {
     }));
     const text = summary();
     $('lead-plan').value = text;
-    setMailLinks(`${s.source === 'planner' ? 'תכנית לאתר' : 'בחירת מסלול'}: ${p.name}`, `שלום יהודה,\n\n${text}\n\nשם: \nשם העסק: \nטלפון לחזרה: \nמתי נוח שתתקשר: \n`);
+    setMailLinks(T(`${s.source === 'planner' ? 'תכנית לאתר' : 'בחירת מסלול'}: ${p.name}`, `${s.source === 'planner' ? 'Website plan' : 'Package choice'}: ${p.name}`),
+      T(`שלום יהודה,\n\n${text}\n\nשם: \nשם העסק: \nטלפון לחזרה: \nמתי נוח שתתקשר: \n`, `Hi Yehuda,\n\n${text}\n\nName: \nBusiness: \nPhone: \nBest time to call: \n`));
   };
   en.addEventListener('change', render);
   $('picked-change').addEventListener('click', () => { const h = $('pkgs-title'); h.setAttribute('tabindex', '-1'); $('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' }); h.focus({ preventScroll: true }); });
@@ -388,23 +395,23 @@ const Planner = (() => {
   let touched = false;
 
   const KIND = {
-    products: { label: 'מוצרים או תפריט', pages: ['קטלוג', 'עמוד לכל מוצר'] },
-    org: { label: 'חוגים, מוסד או ארגון', pages: ['חוגים ופעילויות', 'מידע להורים ולמשתתפים'] },
-    service: { label: 'שירות מקצועי', pages: ['שירותים', 'לקוחות ועבודות'] }
+    products: T({ label: 'מוצרים או תפריט', pages: ['קטלוג', 'עמוד לכל מוצר'] }, { label: 'Products or a menu', pages: ['Catalog', 'A page per product'] }),
+    org: T({ label: 'חוגים, מוסד או ארגון', pages: ['חוגים ופעילויות', 'מידע להורים ולמשתתפים'] }, { label: 'Classes, an institution or an organization', pages: ['Classes & activities', 'Info for parents & participants'] }),
+    service: T({ label: 'שירות מקצועי', pages: ['שירותים', 'לקוחות ועבודות'] }, { label: 'A professional service', pages: ['Services', 'Clients & work'] })
   };
   const ACT = {
-    order: { label: 'להזמין או לבקש הצעת מחיר', feat: 'טופס הזמנה שמגיע עם כל הפרטים' },
-    register: { label: 'להירשם', feat: 'טופס הרשמה ואישור קבלה במייל', page: 'הרשמה' },
-    contact: { label: 'להתקשר או לכתוב', feat: 'כפתור חיוג ופנייה שתמיד נראה' },
-    read: { label: 'לקרוא תוכן שמתעדכן', feat: 'מדור תוכן (מתכונים, שירים או מאמרים)', page: 'מדור תוכן' },
-    pay: { label: 'לקנות ולשלם באתר', feat: 'עגלת קניות ותשלום באשראי (חברת הסליקה בנפרד)' }
+    order: T({ label: 'להזמין או לבקש הצעת מחיר', feat: 'טופס הזמנה שמגיע עם כל הפרטים' }, { label: 'Order or request a quote', feat: 'An order form that arrives with all the details' }),
+    register: T({ label: 'להירשם', feat: 'טופס הרשמה ואישור קבלה במייל', page: 'הרשמה' }, { label: 'Sign up', feat: 'A sign-up form with an email confirmation', page: 'Sign-up' }),
+    contact: T({ label: 'להתקשר או לכתוב', feat: 'כפתור חיוג ופנייה שתמיד נראה' }, { label: 'Call or write', feat: 'Call and contact buttons that are always visible' }),
+    read: T({ label: 'לקרוא תוכן שמתעדכן', feat: 'מדור תוכן (מתכונים, שירים או מאמרים)', page: 'מדור תוכן' }, { label: 'Read updated content', feat: 'A content section (recipes, songs or articles)', page: 'Content section' }),
+    pay: T({ label: 'לקנות ולשלם באתר', feat: 'עגלת קניות ותשלום באשראי (חברת הסליקה בנפרד)' }, { label: 'Buy and pay on the site', feat: 'A shopping cart and card payments (payment provider billed separately)' })
   };
-  const UPD = { none: 'כמעט כלום', me: 'תוכן מדי פעם, ואני מעדכן', team: 'גם לשלוח עדכונים לרשומים' };
+  const UPD = T({ none: 'כמעט כלום', me: 'תוכן מדי פעם, ואני מעדכן', team: 'גם לשלוח עדכונים לרשומים' }, { none: 'Almost nothing', me: 'Occasional content, and I update it myself', team: 'Also send updates to subscribers' });
   const TRACK = {
-    landing: 'עמוד אחד ברור, עם כל מה שצריך כדי לפנות אליכם.',
-    site: 'כמה עמודים, ומסך פשוט לעדכון מה שמשתנה.',
-    club: 'אתר עם אזור ניהול, ועוד הרשמה, חשבונות ורשימת תפוצה.',
-    store: 'קטלוג, עגלה ותשלום באתר, עם ניהול מוצרים והזמנות.'
+    landing: T('עמוד אחד ברור, עם כל מה שצריך כדי לפנות אליכם.', 'One clear page with everything people need to reach you.'),
+    site: T('כמה עמודים, ומסך פשוט לעדכון מה שמשתנה.', 'A few pages, plus a simple screen to update what changes.'),
+    club: T('אתר עם אזור ניהול, ועוד הרשמה, חשבונות ורשימת תפוצה.', 'A site with an admin panel, plus sign-ups, accounts and a mailing list.'),
+    store: T('קטלוג, עגלה ותשלום באתר, עם ניהול מוצרים והזמנות.', 'A catalog, cart and checkout, with product and order management.')
   };
 
   const read = () => {
@@ -420,19 +427,19 @@ const Planner = (() => {
 
     let pages;
     const feats = [];
-    if (track === 'landing') pages = ['עמוד אחד: פתיחה, מה אתם מציעים, אודות ויצירת קשר'];
-    else if (track === 'store') pages = ['דף הבית', 'קטגוריות', 'עמוד לכל מוצר', 'עגלה ותשלום', 'משלוחים והחזרות', 'תקנון ופרטיות', 'אודות', 'יצירת קשר'];
+    if (track === 'landing') pages = [T('עמוד אחד: פתיחה, מה אתם מציעים, אודות ויצירת קשר', 'One page: intro, what you offer, about and contact')];
+    else if (track === 'store') pages = T(['דף הבית', 'קטגוריות', 'עמוד לכל מוצר', 'עגלה ותשלום', 'משלוחים והחזרות', 'תקנון ופרטיות', 'אודות', 'יצירת קשר'], ['Home', 'Categories', 'A page per product', 'Cart & checkout', 'Shipping & returns', 'Terms & privacy', 'About', 'Contact']);
     else {
-      pages = ['דף הבית', ...KIND[kind].pages];
+      pages = [T('דף הבית', 'Home'), ...KIND[kind].pages];
       acts.forEach((a) => ACT[a].page && pages.push(ACT[a].page));
-      pages.push('אודות', 'יצירת קשר');
+      pages.push(T('אודות', 'About'), T('יצירת קשר', 'Contact'));
     }
     acts.forEach((a) => feats.push(ACT[a].feat));
-    if (track === 'store') feats.push('ניהול מוצרים, מלאי והזמנות');
-    else if (track !== 'landing') feats.push('אזור ניהול לעדכון תוכן');
-    if (track === 'club' || (track === 'store' && upd === 'team')) feats.push('חשבונות משתמש ורשימת תפוצה עם הסכמה');
-    if (en) feats.push('גרסה באנגלית עם מעבר בלחיצה');
-    feats.push('התאמה לגוגל ולטלפון', 'הצהרת נגישות');
+    if (track === 'store') feats.push(T('ניהול מוצרים, מלאי והזמנות', 'Product, stock and order management'));
+    else if (track !== 'landing') feats.push(T('אזור ניהול לעדכון תוכן', 'An admin panel to update content'));
+    if (track === 'club' || (track === 'store' && upd === 'team')) feats.push(T('חשבונות משתמש ורשימת תפוצה עם הסכמה', 'User accounts and an opt-in mailing list'));
+    if (en) feats.push(T('גרסה באנגלית עם מעבר בלחיצה', 'A second language with a one-click switch'));
+    feats.push(T('התאמה לגוגל ולטלפון', 'Optimized for Google and mobile'), T('הצהרת נגישות', 'Accessibility statement'));
 
     const p = PKG[track];
     const extraPages = (track === 'site' || track === 'club') ? Math.max(0, pages.length - p.quota) : 0;
@@ -468,10 +475,10 @@ const Planner = (() => {
 
   let last = null;
   const answersText = (ans) => [
-    `במה העסק עוסק: ${KIND[ans.kind].label}`,
-    `מה אנשים צריכים לעשות: ${ans.acts.length ? ans.acts.map((a) => ACT[a].label).join(', ') : 'לא נבחר'}`,
-    `מה ישתנה באתר: ${UPD[ans.upd]}`,
-    ans.en ? 'צריך גם גרסה באנגלית' : null
+    T(`במה העסק עוסק: ${KIND[ans.kind].label}`, `Business type: ${KIND[ans.kind].label}`),
+    T(`מה אנשים צריכים לעשות: ${ans.acts.length ? ans.acts.map((a) => ACT[a].label).join(', ') : 'לא נבחר'}`, `What visitors need to do: ${ans.acts.length ? ans.acts.map((a) => ACT[a].label).join(', ') : 'not chosen'}`),
+    T(`מה ישתנה באתר: ${UPD[ans.upd]}`, `What will change on the site: ${UPD[ans.upd]}`),
+    ans.en ? T('צריך גם גרסה באנגלית', 'Needs a second language too') : null
   ].filter(Boolean).join('\n');
 
   const render = () => {
@@ -490,16 +497,17 @@ const Planner = (() => {
       const b = document.createElement('b'); b.textContent = value;
       li.append(sp, b); return li;
     }));
-    $('r-count').textContent = p.track === 'landing' ? 'עמוד אחד' : `${p.pages.length} עמודים`;
+    $('r-count').textContent = p.track === 'landing' ? T('עמוד אחד', '1 page') : T(`${p.pages.length} עמודים`, `${p.pages.length} pages`);
     fill($('r-pages'), p.pages, 'pages');
     fill($('r-feats'), p.feats, 'feats');
-    $('r-live').textContent = `המסלול שמתאים לכם: ${PKG[p.track].name}. מחיר משוער ${nis(p.price)}.`;
+    $('r-live').textContent = T(`המסלול שמתאים לכם: ${PKG[p.track].name}. מחיר משוער ${nis(p.price)}.`, `Your best fit: ${PKG[p.track].name}. Estimated price ${nis(p.price)}.`);
     $('pb-track').textContent = PKG[p.track].name;
     $('pb-price').textContent = nis(p.price);
     $('r-status').textContent = '';
   };
 
-  const planText = () => `${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)}, סופי, בלי מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`;
+  const planText = () => T(`${answersText(last.ans)}\n\nהמסלול שהומלץ: ${PKG[last.p.track].name}\nמחיר משוער: ${nis(last.p.price)}, סופי, בלי מע״מ\nעמודים: ${last.p.pages.join(', ')}\nיכולות: ${last.p.feats.join(', ')}`,
+    `${answersText(last.ans)}\n\nRecommended package: ${PKG[last.p.track].name}\nEstimated price: ${nis(last.p.price)}, final, no VAT added\nPages: ${last.p.pages.join(', ')}\nFeatures: ${last.p.feats.join(', ')}`);
 
   $('r-send').addEventListener('click', (e) => {
     countHit('planner');
@@ -507,8 +515,8 @@ const Planner = (() => {
     Selection.set({ source: 'planner', track: last.p.track, en: last.ans.en, extraPages: last.p.extraPages, answers: answersText(last.ans), pages: last.p.pages, feats: last.p.feats });
   });
   $('r-copy').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(planText()); $('r-status').textContent = 'התכנית הועתקה.'; }
-    catch (e) { $('r-status').textContent = `לא הצלחנו להעתיק. אפשר לכתוב אל ${CONFIG.email}`; }
+    try { await navigator.clipboard.writeText(planText()); $('r-status').textContent = T('התכנית הועתקה.', 'Plan copied.'); }
+    catch (e) { $('r-status').textContent = T(`לא הצלחנו להעתיק. אפשר לכתוב אל ${CONFIG.email}`, `Couldn't copy. You can write to ${CONFIG.email}`); }
   });
   $('r-more').addEventListener('click', (e) => {
     e.preventDefault();
@@ -517,7 +525,7 @@ const Planner = (() => {
     card.classList.remove('is-flash'); void card.offsetWidth; card.classList.add('is-flash');
     card.classList.add('is-open');
     const tg = card.querySelector('.pkg-toggle');
-    if (tg) { tg.setAttribute('aria-expanded', 'true'); tg.textContent = 'פחות פרטים'; }
+    if (tg) { tg.setAttribute('aria-expanded', 'true'); tg.textContent = T('פחות פרטים', 'Fewer details'); }
     card.querySelector('.pkg-pick').focus({ preventScroll: true });
   });
 
@@ -548,7 +556,7 @@ const Planner = (() => {
       btn.setAttribute('aria-pressed', String(on));
       btn.classList.toggle('btn-gold', on);          // הזהב עובר לכפתור של מה שנבחר
       btn.classList.toggle('btn-line', !on);
-      btn.firstChild.textContent = on ? 'נבחר, ממשיכים ✓' : 'לבחור במסלול הזה';
+      btn.firstChild.textContent = on ? T('נבחר, ממשיכים ✓', 'Selected, continue ✓') : T('לבחור במסלול הזה', 'Choose this package');
     });
     Selection.set({ source: 'package', track, en: Planner && Planner.touched() ? Planner.en() : false });
   };
@@ -564,7 +572,7 @@ const Planner = (() => {
       const open = !c.classList.contains('is-open');
       c.classList.toggle('is-open', open);
       t.setAttribute('aria-expanded', String(open));
-      t.textContent = open ? 'פחות פרטים' : 'כל הפרטים';
+      t.textContent = open ? T('פחות פרטים', 'Fewer details') : T('כל הפרטים', 'All details');
     });
   });
   /* בטלפון המסלולים נגללים לצדדים: נפתחים על המסלול המומלץ, ואפשר לגלול אותם במקלדת */
@@ -587,20 +595,20 @@ const Planner = (() => {
   if (!boxes.length) return;
   const KEY = 'yyg-prep';
   const count = $('prep-count'), bar = $('prep-bar'), ready = $('lead-ready'), attached = $('prep-attached');
-  const words = (n, all) => n === 0 ? 'אפשר להתחיל גם מאפס.' : n === all ? 'מוכנים מצוין לשיחה.' : n >= all / 2 ? 'אתם כבר בדרך.' : 'התחלה טובה.';
+  const words = (n, all) => n === 0 ? T('אפשר להתחיל גם מאפס.', 'Starting from zero is fine too.') : n === all ? T('מוכנים מצוין לשיחה.', 'You’re fully ready to talk.') : n >= all / 2 ? T('אתם כבר בדרך.', 'You’re well on your way.') : T('התחלה טובה.', 'Good start.');
   let saved = [];
   try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { saved = []; }
   boxes.forEach((b) => { b.checked = saved.includes(b.value); });
   const sync = (store) => {
     const on = boxes.filter((b) => b.checked);
     const n = on.length, all = boxes.length;
-    count.textContent = `סימנתם ${n} מתוך ${all}. ${words(n, all)}`;
+    count.textContent = T(`סימנתם ${n} מתוך ${all}. ${words(n, all)}`, `${n} of ${all} ready. ${words(n, all)}`);
     bar.style.width = `${(n / all) * 100}%`;
     const list = on.map((b) => b.dataset.label);
     const missing = boxes.filter((b) => !b.checked).map((b) => b.dataset.label);
-    ready.value = n ? `מה כבר מוכן אצלם (${n} מתוך ${all}):\n• ${list.join('\n• ')}` + (missing.length ? `\nעוד לא:\n• ${missing.join('\n• ')}` : '') : '';
+    ready.value = n ? T(`מה כבר מוכן אצלם (${n} מתוך ${all}):`, `Already prepared (${n} of ${all}):`) + `\n• ${list.join('\n• ')}` + (missing.length ? T('\nעוד לא:', '\nNot yet:') + `\n• ${missing.join('\n• ')}` : '') : '';
     attached.hidden = !n;
-    attached.textContent = n ? `יצורף לפנייה: מה כבר מוכן אצלכם (${n} מתוך ${all})` : '';
+    attached.textContent = n ? T(`יצורף לפנייה: מה כבר מוכן אצלכם (${n} מתוך ${all})`, `Will be attached to your message: what you’ve prepared (${n} of ${all})`) : '';
     if (store) { try { localStorage.setItem(KEY, JSON.stringify(on.map((b) => b.value))); } catch (e) { /* בלי שמירה */ } }
   };
   boxes.forEach((b) => b.addEventListener('change', () => sync(true)));
@@ -612,9 +620,9 @@ const Planner = (() => {
   const cta = $('brand-cta');
   if (!cta) return;
   cta.addEventListener('click', () => {
-    $('lead-plan').value = 'בקשה: מותג מ־0 עד 100% (אפיון, לוגו, שפה עיצובית, אתר, כל התוכן, דפוס, רשתות וגוגל)';
+    $('lead-plan').value = T('בקשה: מותג מ־0 עד 100% (אפיון, לוגו, שפה עיצובית, אתר, כל התוכן, דפוס, רשתות וגוגל)', 'Request: Brand from 0 to 100% (discovery, logo, brand identity, website, all content, print, social and Google)');
     const notes = document.querySelector('#lead-form [name=notes]');
-    if (notes && !notes.value.trim()) notes.value = 'אני מעוניין/ת במותג מלא מ־0. ';
+    if (notes && !notes.value.trim()) notes.value = T('אני מעוניין/ת במותג מלא מ־0. ', 'I’m interested in a full brand from scratch. ');
     countHit('pick');
   });
 })();
@@ -641,18 +649,19 @@ const Planner = (() => {
     $('err-' + name).textContent = msg || '';
   };
   const fallback = (data) => {
-    const body = `שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nרקע מועדף: ${data.style}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`;
+    const body = T(`שלום יהודה,\n\nשם: ${data.name}\nטלפון: ${data.phone}\nשם העסק: ${data.business}\nמתי נוח שתתקשר: ${data.when}\nרקע מועדף: ${data.style}\nאתרים שאני אוהב: ${data.likes}\nהערות: ${data.notes}\n\n${data.ready}\n\n${data.plan}`,
+      `Hi Yehuda,\n\nName: ${data.name}\nPhone: ${data.phone}\nBusiness: ${data.business}\nBest time to call: ${data.when}\nPreferred background: ${data.style}\nSites I like: ${data.likes}\nNotes: ${data.notes}\n\n${data.ready}\n\n${data.plan}`);
     status.textContent = '';
-    status.append('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
-      ', או ', Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(`פנייה מהאתר: ${data.name}`, body), textContent: 'לשלוח את הפרטים במייל' }),
-      ' או ', Object.assign(document.createElement('a'), { className: 'text-link', href: gmailHref(`פנייה מהאתר: ${data.name}`, body), target: '_blank', rel: 'noopener', textContent: 'ב־Gmail' }), '.');
+    status.append(T('לא הצלחנו לשלוח מכאן. אפשר להתקשר ל־', 'We couldn’t send this from here. You can call '), Object.assign(document.createElement('a'), { className: 'text-link', href: telHref, textContent: CONFIG.phone }),
+      T(', או ', ', '), Object.assign(document.createElement('a'), { className: 'text-link', href: mailHref(T(`פנייה מהאתר: ${data.name}`, `Website inquiry: ${data.name}`), body), textContent: T('לשלוח את הפרטים במייל', 'email the details') }),
+      T(' או ', ' or use '), Object.assign(document.createElement('a'), { className: 'text-link', href: gmailHref(T(`פנייה מהאתר: ${data.name}`, `Website inquiry: ${data.name}`), body), target: '_blank', rel: 'noopener', textContent: T('ב־Gmail', 'Gmail') }), '.');
   };
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = fields.name.value.trim();
     const phone = fields.phone.value.trim();
-    setErr('name', name ? '' : 'נא לכתוב שם.');
-    setErr('phone', validPhone(phone) ? '' : 'נא לכתוב מספר טלפון מלא, למשל 050-1234567.');
+    setErr('name', name ? '' : T('נא לכתוב שם.', 'Please enter your name.'));
+    setErr('phone', validPhone(phone) ? '' : T('נא לכתוב מספר טלפון מלא, למשל 050-1234567.', 'Please enter a full phone number, e.g. 050-1234567.'));
     if (!name) { status.textContent = ''; fields.name.focus(); return; }
     if (!validPhone(phone)) { status.textContent = ''; fields.phone.focus(); return; }
     if (form.elements._honey.value) return;
@@ -663,14 +672,14 @@ const Planner = (() => {
       style: form.elements.style.value,
       likes: form.elements.likes.value.trim(),
       notes: form.elements.notes.value.trim(),
-      ready: $('lead-ready').value || 'לא סימנו ברשימת ההכנה',
-      plan: $('lead-plan').value || 'לא נבחר מסלול',
+      ready: $('lead-ready').value || T('לא סימנו ברשימת ההכנה', 'Prep checklist not filled in'),
+      plan: ($('lead-plan').value || T('לא נבחר מסלול', 'No package chosen')) + (EN ? '\n(Sent from the English site)' : ''),
       _token: token
     };
     if (!token) { await getToken(); data._token = token; }
     submit.disabled = true;
     status.className = 'lead-status';
-    status.textContent = 'שולח…';
+    status.textContent = T('שולח…', 'Sending…');
     try {
       const res = await fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
       const json = await res.json().catch(() => ({}));
@@ -679,7 +688,7 @@ const Planner = (() => {
       form.reset();
       $('lead-ready').value = keepReady;
       status.className = 'lead-status is-ok';
-      status.textContent = `תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`;
+      status.textContent = T(`תודה, ${name}. הפרטים התקבלו, ואחזור אליכם בזמן שבחרתם.`, `Thank you, ${name}. Got it, and I’ll call you back at the time you chose.`);
     } catch (err) {
       fallback(data);
     } finally {
@@ -690,7 +699,7 @@ const Planner = (() => {
   /* העתקת כתובת המייל */
   const copy = $('copy-mail');
   if (copy) copy.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(CONFIG.email); copy.textContent = 'הועתק'; setTimeout(() => { copy.textContent = 'העתקה'; }, 1800); }
+    try { await navigator.clipboard.writeText(CONFIG.email); copy.textContent = T('הועתק', 'Copied'); setTimeout(() => { copy.textContent = T('העתקה', 'Copy'); }, 1800); }
     catch (e) { copy.textContent = CONFIG.email; }
   });
 

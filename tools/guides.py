@@ -77,6 +77,9 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{url}">
+<link rel="alternate" hreflang="he" href="{url}">
+<link rel="alternate" hreflang="en" href="{url.replace('https://yygweb.com/guides/', 'https://yygweb.com/en/guides/')}">
+<link rel="alternate" hreflang="x-default" href="{url}">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="{url}">
@@ -99,6 +102,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
    <a class="text-link" href="/guides/">מדריכים</a>
    <a class="text-link" href="/#plan">מחשבון מחיר</a>
    <a class="text-link" href="/#contact">יצירת קשר</a>
+   <a class="text-link" href="{url.replace('https://yygweb.com', '').replace('/guides/', '/en/guides/')}" hreflang="en" lang="en">English</a>
   </nav>
  </div>
 </header>
@@ -196,7 +200,7 @@ prep_body = '''
 <p>רקע <b>כהה או בהיר</b>? צבעים שאתם אוהבים, וגם כאלה שלא? סגנון קלאסי, מודרני או חגיגי? אם זה כתוב מראש, העיצובים שתקבלו יהיו קרובים יותר למה שדמיינתם, ולא תצטרכו לעבור על דוגמאות מיותרות. גם "עוד לא יודע" זו תשובה טובה: אז אכין את העיצובים בכמה כיוונים שונים.</p>
 
 <h2>5. לוגו</h2>
-<p>הלוגו הוא הבסיס של העיצוב: ממנו נגזרים הצבעים, הפונטים והתחושה של האתר. שלחו אותו באיכות הכי טובה שיש, רצוי קובץ מקורי מהמעצב. <b>אין עדיין לוגו?</b> כדאי להכין קודם לוגו ומיתוג, ואז לבנות את האתר סביבם. אני מכין גם לוגו ומיתוג, בהצעת מחיר נפרדת.</p>
+<p>הלוגו הוא הבסיס של העיצוב: ממנו נגזרים הצבעים, הפונטים והתחושה של האתר. שלחו אותו באיכות הכי טובה שיש, רצוי קובץ מקורי מהמעצב. <b>אין עדיין לוגו?</b> כדאי להכין קודם לוגו ומיתוג, ואז לבנות את האתר סביבם. אני מכין גם לוגו: בסיסי ב־590 ₪ או מקצועי עם 3 סקיצות ב־1,500 ₪, ומיתוג בסיסי עם צבעים, פונטים וכרטיס ביקור ב־2,500 ₪.</p>
 
 <h2>6. תמונות אמיתיות</h2>
 <p>תמונות של העבודה, המוצרים, המקום או הצוות. <b>צילום טוב בטלפון, באור יום, עדיף על תמונה ממאגר</b>, כי לקוחות מרגישים מיד מה אמיתי. אם אין תמונות, אפשר להתחיל עם מעט ולהוסיף.</p>
@@ -220,7 +224,7 @@ prep_body = '''
 '''
 prep_faq = [
     ('חייבים להכין את כל הרשימה לפני שפונים?', 'לא. אפשר לפנות גם בלי שום הכנה. כל פריט מהרשימה רק מקצר את הדרך.'),
-    ('אין לי לוגו. אפשר לבנות אתר?', 'כדאי להתחיל מהלוגו, כי העיצוב של האתר נבנה סביבו. אם אין לוגו, אפשר להכין לוגו ומיתוג לפני האתר, בהצעת מחיר נפרדת.'),
+    ('אין לי לוגו. אפשר לבנות אתר?', 'כדאי להתחיל מהלוגו, כי העיצוב של האתר נבנה סביבו. אם אין לוגו, אפשר להכין לוגו בסיסי (590 ₪), לוגו מקצועי (1,500 ₪) או מיתוג בסיסי (2,500 ₪) לפני האתר.'),
     ('מי כותב את הטקסטים לאתר?', 'אתם שולחים את המידע בנקודות, ואני כותב את כל הטקסטים בעזרת AI ועורך אותם אישית. אתם מאשרים כל מילה לפני שהאתר עולה.'),
 ]
 
@@ -293,6 +297,7 @@ open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לב�
 
 # מפת האתר
 urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3')]
+urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2')]
 open(f'{root}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n' for u, p in urls) + '</urlset>\n')
 print('ok', [s for s, *_ in G])

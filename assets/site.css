@@ -1,6 +1,7 @@
 @font-face{font-family:"Display";font-weight:700;font-display:swap;src:url(fonts/karantina-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Display";font-weight:700;font-display:swap;src:url(fonts/karantina-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2014,U+2018-201E,U+2022,U+2026,U+20AC}
 @font-face{font-family:"DisplayHero";font-weight:700;font-display:optional;src:url(fonts/karantina-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"DisplayHero";font-weight:700;font-display:optional;src:url(fonts/karantina-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2014,U+2018-201E,U+2022,U+2026,U+20AC}
 @font-face{font-family:"Frank";font-weight:500;font-display:swap;src:url(fonts/frank-500-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Frank";font-weight:500;font-display:swap;src:url(fonts/frank-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2014,U+2018-201E,U+2022,U+2026,U+20AC}
 /* גופנים מקומיים (רישיון OFL) */
@@ -943,3 +944,46 @@ p{text-wrap:pretty}
 .quote blockquote p{color:#D7DDE6;line-height:1.75}
 .quote figcaption{margin-top:10px;color:var(--muted);font-size:.95rem}
 .quote figcaption b{color:#fff}
+
+/* ===== גרסה 27: מעבר שפה ===== */
+.lang-link{font-weight:700;white-space:nowrap}
+
+/* ===== אנגלית: כללים שמתהפכים בכיוון שמאל לימין ===== */
+html[dir="ltr"] .motion-switch::after{right:auto;left:3px}
+html[dir="ltr"] .motion[aria-pressed="true"] .motion-switch::after{transform:translateX(14px)}
+html[dir="ltr"] .toggle input:checked+span::after{transform:translateX(18px)}
+html[dir="ltr"] .lab{transform:rotateX(4deg) rotateY(-9deg)}
+html[dir="ltr"] .motion-off .lab{transform:none}
+html[dir="ltr"] .phone{left:auto;right:-6px}
+html[dir="ltr"] .case-flip .phone{right:auto;left:-6px}
+@media (max-width:560px){html[dir="ltr"] .phone{left:auto;right:0}html[dir="ltr"] .case-flip .phone{right:auto;left:0}}
+html[dir="ltr"] .steps-pulse{right:auto;left:calc(var(--p) * 100%);margin-right:0;margin-left:-6px}
+@media (max-width:900px){
+ html[dir="ltr"] .steps::before,html[dir="ltr"] .steps::after{right:auto;left:0}
+ html[dir="ltr"] .steps-pulse{left:0;right:auto;margin:-6px 0 0 -5px}
+}
+html[dir="ltr"] .prep-tips li{padding-right:0;padding-left:40px}
+html[dir="ltr"] .prep-tips li::before{right:auto;left:0}
+html[dir="ltr"] .vs-table th,html[dir="ltr"] .vs-table td{text-align:left}
+html[dir="ltr"] .bp-steps li{padding-right:14px;padding-left:48px}
+html[dir="ltr"] .bp-steps li::before{right:auto;left:12px}
+html[dir="ltr"] .quote{border-right:0;border-left:3px solid rgba(255,255,255,.35)}
+html[dir="ltr"] .quote::before{content:"\201C";left:auto;right:14px}
+html[dir="ltr"] .stage-tag{right:auto;left:12px}
+html[dir="ltr"] .stage-race .race-replay{left:auto;right:12px}
+html[dir="ltr"] .prep-box::after{right:auto;left:6px}
+
+/* ===== גרסה 28: מחירי המותג המלא ===== */
+.bp-prices{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:8px}
+.bp-prices span{padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;background:rgba(21,25,32,.55);color:#D7DDE6;font-size:.95rem}
+.bp-prices b{color:#fff}
+
+/* באנגלית: האתר של הלקוח בתצוגה המקדימה נשאר בעברית, מימין לשמאל */
+html[dir="ltr"] .mini,html[dir="ltr"] .mini-clone{direction:rtl}
+/* באנגלית: ההערות על השרטוט נגמרות באותה נקודה שבה התחילו בעברית */
+html[dir="ltr"] .bp-notes text[text-anchor="start"]{text-anchor:end}
+
+/* באנגלית: ההערה בכתב יד ארוכה יותר, ולכן מותר לה לרדת שורה; ועמודת הפתיחה לא נמתחת מעבר למסך */
+.hero-grid>*{min-width:0}
+html[dir="ltr"] .hero .hero-note{white-space:normal;height:auto}
+html[dir="ltr"] .hero h1{max-width:21ch}
