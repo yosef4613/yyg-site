@@ -172,10 +172,14 @@ $html = '<!doctype html><html lang="he" dir="rtl"><body style="margin:0;padding:
       . '<div style="max-width:640px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">'
       . '<div style="padding:16px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700">פנייה חדשה מהאתר yygweb.com</div>'
       . '<table dir="rtl" style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">' . $rows . '</table>'
-      . '<div style="padding:14px 20px;color:#6b7280;font-size:13px">נשלח מהטופס באתר, ' . date('d/m/Y H:i') . '</div></div></body></html>';
+      . '<div style="padding:14px 20px;color:#6b7280;font-size:13px">נשלח מהטופס באתר, ' . date('d/m/Y H:i') . '. כל הפניות, עם סטטוס לכל אחת: <a href="https://yygweb.com/admin/#leads" style="color:#1a56db">דף הניהול</a></div></div></body></html>';
 $subject = ($score > 0 ? '[לבדיקה: ' . implode(', ', $why) . '] ' : '') . 'פנייה חדשה מהאתר: ' . preg_replace('/[\r\n]+/', ' ', $f['name']);
 
 $sent = send_mail($cfg, $subject, $html, $text);
+/* כל פנייה נשמרת גם בשרת, מחוץ לתיקיית האתר, כדי שאף פנייה לא תלך לאיבוד גם אם המייל נכשל. רואים אותן בדף הניהול */
+$lead = ['id' => bin2hex(random_bytes(6)), 't' => time(), 'sent' => $sent, 'score' => $score, 'why' => $why,
+         'lang' => strpos($f['plan'], 'English site') !== false ? 'en' : 'he'] + $f;
+@file_put_contents(data_dir() . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 if (!$sent) out(false, 'send', 502);
 @file_put_contents(data_dir() . '/leads.log', time() . "\n", FILE_APPEND | LOCK_EX);
 out(true);

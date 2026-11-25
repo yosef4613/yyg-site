@@ -1040,3 +1040,5 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 }
 .pkg.is-match::before{content:attr(data-match);position:absolute;z-index:1;top:-12px;inset-inline-end:16px;padding:3px 12px;border-radius:999px;background:#fff;color:var(--base);font-size:.8rem;font-weight:700;line-height:1.5;box-shadow:0 0 0 4px rgba(255,255,255,.15)}
 .result-details summary b{color:#fff}
+.ql-privacy{grid-column:1/-1;margin:0;font-size:.82rem;line-height:1.5;color:var(--muted)}
+.quick-lead.is-sent .ql-privacy{display:none}

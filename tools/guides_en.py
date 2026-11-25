@@ -130,7 +130,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 {faq_html}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what your website will cost?</h2>
-   <p>Answer 3 quick questions in the price calculator, no contact details required. And if we’re a good fit, I’ll prepare 3 design directions for your website before you pay anything.</p>
+   <p>Answer 3 quick questions in the price calculator, no contact details required. And if we’re a good fit, we start with 10%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
    <a class="btn btn-gold" href="/en/?src=guide-{slug}#plan">Open the price calculator</a>
   </section>
 {rel}
@@ -139,7 +139,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, Yehuda Gordon. Web design and development</p>
-  <p><a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a></p>
+  <p><a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a></p>
  </div>
 </footer>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
@@ -151,7 +151,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 # ---------- Guide 1: what a website costs ----------
 cost_body = '''
 <h2>The short answer</h2>
-<p>The price of a website depends mainly on three things: <b>how many pages</b> it has, <b>what the site needs to do</b> (just present information, take sign-ups, or sell), and <b>who updates it</b> afterward. Here are my starting prices, so you have a reference point. No VAT added. The final price depends on your needs and requirements, and it’s always spelled out in a clear written quote before we begin:</p>
+<p>The price of a website depends mainly on three things: <b>how many pages</b> it has, <b>what the site needs to do</b> (just present information, take sign-ups, or sell), and <b>who updates it</b> afterward. Here are my starting prices, so you have a reference point. No VAT is added. The final price depends on your needs and requirements, and it’s always spelled out in a clear written quote before we begin:</p>
 <div class="g-scroll"><table class="g-table">
 <thead><tr><th>Type of website</th><th>Price</th><th>Delivery time</th><th>Best for</th></tr></thead>
 <tbody>
@@ -182,17 +182,17 @@ cost_body = '''
 </ul>
 <p>I include <b>the first year of domain, hosting, and business email</b> in the price of the website. From the second year on, you choose: All-in Care, where I take care of everything for ₪590 a year, or a move to a hosting provider of your own. Either way, the domain is registered <b>in your name</b>, so the website is truly yours.</p>
 
-<h2>How to avoid paying for a website you don’t like</h2>
-<p>The biggest risk in building a website is paying up front and finding out at the end that the design isn’t what you had in mind. That’s why I work differently:</p>
+<h2>How to avoid committing to a website you haven’t seen</h2>
+<p>The biggest risk in building a website is paying a lot up front and finding out at the end that the design isn’t what you had in mind. Most designers ask for 30% to 50% before you see anything. I work differently:</p>
 <ol>
-<li>After a short call, I prepare <b>3 design directions</b> for your website, using your own content. Free of charge.</li>
-<li>Love one of the directions? You pay 50%, and we move on to the build.</li>
-<li>You pay the balance at the end, <b>after you’ve reviewed and approved everything</b>, before the site goes live.</li>
+<li>After a short call and a formal quote, you pay <b>just 10%</b> to start, and I prepare <b>3 design directions</b> for your website, using your own content.</li>
+<li>Love one of the directions? You pay another 40%, and we move on to the build.</li>
+<li>You pay the remaining 50% at the end, <b>after you’ve reviewed and approved everything</b>, before the site goes live.</li>
 </ol>
 '''
 cost_faq = [
-    ('How much does a landing page cost?', 'My landing pages start at ₪2,000, with no VAT added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 4 working days. The final price depends on what the page needs.'),
-    ('Does the price include VAT?', 'Yes. My prices are final, with no VAT added on top.'),
+    ('How much does a landing page cost?', 'My landing pages start at ₪2,000, and no VAT is added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 4 working days. The final price depends on what the page needs.'),
+    ('Does the price include VAT?', 'Yes. My prices are final, and no VAT is added on top.'),
     ('Is there a monthly fee?', 'There’s no monthly fee. The first year of domain, hosting, and business email is included in the price of the website. After that, All-in Care is ₪590 a year if you’d like me to take care of everything.'),
     ('What if I need more pages later?', 'You can add pages even after the site is live. Each page beyond your package costs ₪350.'),
 ]
@@ -284,13 +284,13 @@ lp_body = '''
 lp_faq = [
     ('Can I start with a landing page and expand later?', 'Yes. The landing page becomes the home page, or one of the pages, of the full website, so you don’t start from scratch.'),
     ('Will a landing page show up on Google?', 'Yes, but usually for fewer searches than a full website, because it has less content and fewer pages.'),
-    ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. Prices are final, with no VAT added.'),
+    ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. Prices are final, and no VAT is added.'),
 ]
 
 G = [
     ('website-cost', 'How much does a business website cost? Prices and what drives them',
      'What a business website costs in Israel: prices for a landing page, a website with admin panel, a website with sign-ups & mailing list, and an online store, plus what makes a site more expensive and the ongoing costs.',
-     'How much does a business website cost?', 'Real prices, what drives them, and how to make sure you never pay for a website you don’t like.', cost_body, cost_faq),
+     'How much does a business website cost?', 'Real prices, what drives them, and how to see the design before you commit to the full price.', cost_body, cost_faq),
     ('before-you-build', 'What to prepare before building a website: 9 things that save time and money',
      'A list of 9 things worth preparing before you build a website: sites you like, a goal, your audience, a dark or light background, a logo, photos, content, a domain, a timeline, and a budget. Plus how to reach out the right way.',
      'What to prepare before you build a website', 'Here are 9 things that get you to a website that fits you perfectly, faster. None of them are required, but each one helps.', prep_body, prep_faq),

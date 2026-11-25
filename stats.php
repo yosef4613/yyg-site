@@ -26,6 +26,8 @@ header('X-Robots-Tag: noindex, nofollow');
 $cfg = private_config();
 $key = (string) ($cfg['stats_key'] ?? '');
 if ($key === '' || !hash_equals($key, (string) ($_GET['k'] ?? ''))) { http_response_code(404); exit('Not found'); }
+/* העמוד עבר לדף הניהול. הקישור הישן ממשיך לעבוד ומעביר לשם (חוץ מ־JSON) */
+if (($_GET['format'] ?? '') !== 'json') { header('Location: /admin/?k=' . rawurlencode($key), true, 302); exit; }
 
 $tz = new DateTimeZone('Asia/Jerusalem');
 $dir = data_dir() . '/stats';

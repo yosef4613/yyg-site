@@ -4,5 +4,6 @@ Disallow: /stats.php
 Disallow: /hit.php
 Disallow: /send.php
 Disallow: /_private/
+Disallow: /admin/
 
 Sitemap: https://yygweb.com/sitemap.xml

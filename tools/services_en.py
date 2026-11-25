@@ -25,7 +25,7 @@ def esc(s):
 
 
 COMMON_INCL = [
-    '3 complete design directions before you pay, with your own content',
+    'Start with 10% and get 3 complete design directions, with your own content',
     '3 revision rounds',
     'All the copy: written with the help of AI, personally edited by me and approved by you',
     'Fully mobile-friendly and fast to load',
@@ -36,10 +36,10 @@ COMMON_INCL = [
 ]
 HOW = '''<h2>How it works</h2>
 <ol>
-<li><b>A short call</b>: what your business does, who it serves and what the website needs to achieve.</li>
-<li><b>3 designs before you pay</b>: with your own content. You scroll through them on your phone, just like a real website.</li>
-<li><b>You choose a direction</b>: you pay 50%, and we move on to the build.</li>
-<li><b>Build and review</b>: you review and approve everything, and pay the balance before the site goes live.</li>
+<li><b>A short call</b>: what your business does, who it serves and what the website needs to achieve. Then you get a formal quote.</li>
+<li><b>Start with 10%</b>: and get 3 designs with your own content. You scroll through them on your phone, just like a real website.</li>
+<li><b>You choose a direction</b>: you pay another 40%, and we move on to the build.</li>
+<li><b>Build and review</b>: you review and approve everything, and pay the remaining 50% before the site goes live.</li>
 <li><b>Launch and training</b>, plus 4 months of support.</li>
 </ol>'''
 
@@ -51,8 +51,8 @@ def ul(items):
 PAGES = [
     dict(
         slug='landing-page', kw='Landing page design',
-        title='Landing page design for your business from ₪2,000 | 3 designs before you pay | YYG',
-        desc='Landing page design that brings in customers: 3 designs before you pay, 3 revision rounds, and live within 4 business days. From ₪2,000, final price, no VAT added, including the first year of domain and hosting.',
+        title='Landing page design for your business from ₪2,000 | Start with 10%, 3 designs | YYG',
+        desc='Landing page design that brings in customers: start with 10% and see 3 designs, 3 revision rounds, and live within 4 business days. From ₪2,000, final price, no VAT is added, including the first year of domain and hosting.',
         h1='Landing page design that brings in customers', lead='One focused, fast page where everything leads to a single action: calling you or leaving their details.',
         price='2,000', price_n=2000, service='Landing page design',
         body='''<h2>Who a landing page is for</h2>
@@ -72,7 +72,7 @@ PAGES = [
 {incl}
 <p>One page with up to 7 sections, a contact form and a call button that's always visible. <b>Delivery time: up to 4 business days</b> from the day I receive the materials.</p>
 <h2>Price</h2>
-<p><b>From ₪2,000</b>, final price, no VAT added. The final price depends on what the page needs, and it appears in a formal quote before we start. A second language (Hebrew or English): ₪500.</p>
+<p><b>From ₪2,000</b>, final price, no VAT is added. The final price depends on what the page needs, and it appears in a formal quote before we start. A second language (Hebrew or English): ₪500.</p>
 {how}''',
         faq=[('How long does it take to build a landing page?', 'Up to 4 business days from the day I receive all the materials, not counting days spent waiting for your reply.'),
              ('Can I expand the landing page into a full website later?', "Yes. The landing page becomes the home page or one of the pages of the website, so we don't start from scratch."),
@@ -82,8 +82,8 @@ PAGES = [
     ),
     dict(
         slug='business-website', kw='Small business website design',
-        title='Small business website design with an admin panel from ₪4,000 | 3 designs before you pay | YYG',
-        desc='Small business website design with an admin panel you update yourself: up to 6 pages, 3 designs before you pay, and live within 10 business days. From ₪4,000, final price, no VAT added.',
+        title='Small business website design with an admin panel from ₪4,000 | Start with 10%, 3 designs | YYG',
+        desc='Small business website design with an admin panel you update yourself: up to 6 pages, start with 10% and see 3 designs, and live within 10 business days. From ₪4,000, final price, no VAT is added.',
         h1='Small business website design you can update yourself', lead='A multi-page business website with a simple admin panel for updating whatever changes: services, prices, promotions and photos.',
         price='4,000', price_n=4000, service='Small business website design',
         body='''<h2>Who a website with an admin panel is for</h2>
@@ -98,7 +98,7 @@ PAGES = [
 <h2>An example from my work</h2>
 <p>For HaKef SheBaAfiya (boutique dessert catering), I built a website with a catalog organized by category, a bar planner that sends the business an organized request, and a recipe template the owner updates on her own. The new site loads three times faster on a phone than the old one. <a class="text-link" href="/en/#work">Read the full story</a></p>
 <h2>Price</h2>
-<p><b>From ₪4,000</b>, final price, no VAT added. Each additional page beyond 6: ₪350. A second language (Hebrew or English): ₪1,000.</p>
+<p><b>From ₪4,000</b>, final price, no VAT is added. Each additional page beyond 6: ₪350. A second language (Hebrew or English): ₪1,000.</p>
 {how}''',
         faq=[('How long does it take to build a business website?', 'Up to 10 business days from the day I receive all the materials.'),
              ('Will I be able to update the website myself?', "Yes. There's a simple admin panel for updating the content that changes, and I walk you through it in a one-on-one session and a written guide."),
@@ -109,7 +109,7 @@ PAGES = [
     dict(
         slug='online-store', kw='Online store development',
         title='Online store development from ₪7,000 | Up to 30 products included | YYG',
-        desc='Online store development with a cart, credit card payments and shipping, plus product, inventory and order management. Up to 30 products that I add for you, and 3 designs before you pay. From ₪7,000, final price, no VAT added.',
+        desc='Online store development with a cart, credit card payments and shipping, plus product, inventory and order management. Up to 30 products that I add for you. Start with 10% and see 3 designs. From ₪7,000, final price, no VAT is added.',
         h1='Online store development that makes buying easy', lead="A catalog, a cart and credit card payments, with simple management of products, inventory and orders. Built for phones, because that's where people shop.",
         price='7,000', price_n=7000, service='Online store development',
         body='''<h2>What's included in your store</h2>
@@ -122,9 +122,9 @@ PAGES = [
 </ul>
 <p><b>Delivery time: up to 20 business days.</b> It's a good idea to open an account with a payment processor right at the start, because approval takes a few days.</p>
 <h2>Price</h2>
-<p><b>From ₪7,000</b>, final price, no VAT added. A second language (Hebrew or English): ₪1,800.</p>
+<p><b>From ₪7,000</b>, final price, no VAT is added. A second language (Hebrew or English): ₪1,800.</p>
 {how}''',
-        faq=[('How much does it cost to build an online store?', 'With me, from ₪7,000, final price, no VAT added. That includes up to 30 products that I add for you, plus the first year of domain, hosting and business email.'),
+        faq=[('How much does it cost to build an online store?', 'With me, from ₪7,000, final price, no VAT is added. That includes up to 30 products that I add for you, plus the first year of domain, hosting and business email.'),
              ('How do I accept credit card payments?', 'Through an Israeli payment processor. You open an account with them, and I connect it to your store. Their fees are paid to them directly.'),
              ('Can I add products myself?', "Yes. There's simple management of products, inventory and orders, and I walk you through it.")],
         related=['business-website', 'logo-branding'],
@@ -132,7 +132,7 @@ PAGES = [
     dict(
         slug='institutions', kw='Website for institutions, nonprofits and classes',
         title='Website for institutions, nonprofits and classes, with sign-ups and a mailing list | YYG',
-        desc='A website for institutions, nonprofits and classes: a sign-up form, user accounts, a mailing list and 3 email templates. Content and images suited to your community. From ₪6,000, final price, no VAT added.',
+        desc='A website for institutions, nonprofits and classes: a sign-up form, user accounts, a mailing list and 3 email templates. Content and images suited to your community. From ₪6,000, final price, no VAT is added.',
         h1='Website for institutions, nonprofits and classes', lead='A website that showcases your activities and takes organized sign-ups: parents and participants find what suits them and sign up right from their phones.',
         price='6,000', price_n=6000, service='Website for institutions, nonprofits and classes',
         body='''<h2>What an institution's website needs</h2>
@@ -148,7 +148,7 @@ PAGES = [
 <h2>An example from my work</h2>
 <p>For the Pirchei Shomayim Boys' Choir, I built a website with a class search by the child's age and city, a full registration form with the option to open an account, a song library with a player that doesn't slow the site down, and an English version. Before the build, they saw five designs and chose their favorite. <a class="text-link" href="/en/#work">See the full project</a></p>
 <h2>Price</h2>
-<p><b>From ₪6,000</b>, final price, no VAT added. A second language (Hebrew or English): ₪1,500.</p>
+<p><b>From ₪6,000</b>, final price, no VAT is added. A second language (Hebrew or English): ₪1,500.</p>
 {how}''',
         faq=[('Can the website take sign-ups and payments?', 'Sign-ups, yes, including email confirmation. Credit card payments can also be connected through a payment processor, as an add-on listed in the quote.'),
              ('Will the website suit a Torah-observant community?', "Yes. The content and images are chosen to suit your community, and the site is built clean and simple, so it's easy to approve on filtered internet."),
@@ -158,7 +158,7 @@ PAGES = [
     dict(
         slug='logo-branding', kw='Logo design and branding',
         title='Logo design and branding for your business from ₪590 | A full brand with a website | YYG',
-        desc='Logo design and branding: a basic logo for ₪590, a professional logo with 3 sketches for ₪1,500, basic branding for ₪2,500, and Brand from 0 to 100% with a website, content, print and Google from ₪5,900. Final prices, no VAT added.',
+        desc='Logo design and branding: a basic logo for ₪590, a professional logo with 3 sketches for ₪1,500, basic branding for ₪2,500, and Brand from 0 to 100% with a website, content, print and Google from ₪5,900. Final prices, no VAT is added.',
         h1='Logo design and branding for your business', lead='From a simple logo for a new business to a complete brand: logo, colors, fonts, website and content, all in one visual language.',
         price='590', price_n=590, service='Logo design and branding',
         body='''<h2>Logo, branding or a full brand: what's the difference?</h2>
@@ -172,7 +172,7 @@ PAGES = [
 <tr><td>Full brand + landing page</td><td>From ₪5,900</td><td>Branding, website, all the content, a business card and flyer, social media images, Google and 4 months of support</td></tr>
 <tr><td>Full brand + website</td><td>From ₪7,900</td><td>Same as above, with a website with an admin panel (with sign-ups from ₪9,900, with a store from ₪10,900)</td></tr>
 </tbody></table></div>
-<p>All prices are final, no VAT added.</p>
+<p>All prices are final, and no VAT is added.</p>
 <h2>Why it pays to start with the logo</h2>
 <p>The website is designed around the logo: the colors, the fonts and the feel all grow out of it. When you start with the branding, your website, business card and sign look like one business, not a collection of unrelated pieces.</p>
 <h2>How it works</h2>
@@ -181,7 +181,7 @@ PAGES = [
 <li><b>Sketches</b>: one direction for a basic logo, 3 directions for a professional logo and for branding.</li>
 <li><b>Choosing and revisions</b>, and then files ready for every use.</li>
 </ol>''',
-        faq=[('How much does logo design cost?', 'A basic logo with one sketch costs ₪590. A professional logo with 3 sketches, 3 revision rounds and all the files costs ₪1,500. Final prices, no VAT added.'),
+        faq=[('How much does logo design cost?', 'A basic logo with one sketch costs ₪590. A professional logo with 3 sketches, 3 revision rounds and all the files costs ₪1,500. Final prices, no VAT is added.'),
              ("What's the difference between a logo and branding?", 'A logo is the mark. Branding is the whole visual language: logo, colors, fonts, a style guide and a business card, so your business looks the same everywhere.'),
              ('What is Brand from 0 to 100%?', 'You bring the idea for the business, and I build everything else: branding, website, all the content, print, social media and a Google Business Profile.'),
              ('Do I need a business name first?', 'Yes. The packages assume your business already has a name. Coming up with a name is separate work, with its own quote.')],
@@ -273,7 +273,7 @@ def page(p, is_index=False, cards=''):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, Yehuda Gordon. Web design and development</p>
-  <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a></p>
+  <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a></p>
  </div>
 </footer>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
@@ -287,6 +287,6 @@ for p in PAGES:
 cards = '<div class="g-cards">\n' + '\n'.join(
     f'<a class="g-card" href="/en/services/{p["slug"]}.html"><b>{p["h1"]}</b><span>{p["lead"]}</span></a>' for p in PAGES) + '\n</div>'
 (OUT / 'index.html').write_text(page(dict(title='Services: website design, online stores, logo design and branding | YYG',
-    desc="All of YYG's services: landing page design, small business website design, online store development, websites for institutions, nonprofits and classes, and logo design and branding. 3 designs before you pay, and final prices with no VAT added.",
-    h1='Services', lead='Websites, online stores, logos and branding for small businesses and institutions. With every service, you see the design before you pay.'), True, cards), encoding='utf-8')
+    desc="All of YYG's services: landing page design, small business website design, online store development, websites for institutions, nonprofits and classes, and logo design and branding. Start with 10% and see 3 designs, with final prices, and no VAT is added.",
+    h1='Services', lead='Websites, online stores, logos and branding for small businesses and institutions. With every service, you start with 10% and see the design before you go ahead.'), True, cards), encoding='utf-8')
 print('ok', [p['slug'] for p in PAGES] + ['index'])
