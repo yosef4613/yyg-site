@@ -824,13 +824,11 @@ const sentMsg = (status, d) => {
   }
 })();
 
-/* ===== כלל 1: כפתור אחד במסך הראשון. כפתור "להצעת מחיר" בתפריט מופיע רק כשהכפתור של הפתיחה כבר לא במסך ===== */
+/* ===== הכפתור "להצעת מחיר" בכותרת: תמיד גלוי. כשכפתור זהוב אחר נראה במסך הוא מסגרת בלבד, וכשאין, הוא זהוב (זהב אחד בכל מסך) ===== */
 (() => {
-  const heroBtn = document.querySelector('.hero-cta .btn-gold');
-  if (!heroBtn || !document.querySelector('.top-q') || !('IntersectionObserver' in window)) return;
+  if (!document.querySelector('.top-q') || !('IntersectionObserver' in window)) return;
   const root = document.documentElement;
   root.classList.add('has-hero-cta');
-  /* מופיע רק כשאף כפתור זהב אחר לא נראה במסך: כפתור זהב אחד בכל מסך */
   const shown = new Set();
   const io = new IntersectionObserver((es) => {
     es.forEach((e) => (e.isIntersecting ? shown.add(e.target) : shown.delete(e.target)));

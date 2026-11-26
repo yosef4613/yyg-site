@@ -77,7 +77,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{E(h1)}">
 <meta property="og:description" content="{E(desc)}">
-<meta property="og:image" content="{SITE}/assets/img/og-2.jpg">
+<meta property="og:image" content="{SITE}/assets/img/og-3.jpg">
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
