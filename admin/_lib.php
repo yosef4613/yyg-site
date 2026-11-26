@@ -30,7 +30,10 @@ function fmt_time(int $t, string $f = 'd/m/Y H:i'): string { return (new DateTim
 /* ---------- כניסה: עוגייה חתומה ל־30 יום ---------- */
 const ADM_COOKIE = 'yyg_admin';
 function adm_key(): string { return (string) (private_config()['stats_key'] ?? ''); }
-function adm_sign(string $v): string { return hash_hmac('sha256', $v, adm_key()); }
+/* העוגייה נחתמת בסוד נפרד שנשמר בשרת (ולא במפתח הכניסה עצמו), יחד עם "גרסת כניסה":
+ * "יציאה מכל המכשירים" מעלה את הגרסה, וכך מנתקת כל מכשיר, גם עוגייה שנגנבה */
+function adm_gen(): int { return max(1, (int) @file_get_contents(data_dir() . '/admin-gen.txt')); }
+function adm_sign(string $v): string { return hash_hmac('sha256', 'adm|' . adm_gen() . '|' . $v, site_secret()); }
 function adm_authed(): bool {
     if (adm_key() === '' || !empty($GLOBALS['ADM_OUT'])) return false;
     if (!empty($GLOBALS['ADM_JUST_IN'])) return true;   // נכנס בבקשה הזו, והעוגייה עוד לא חזרה מהדפדפן
@@ -46,7 +49,9 @@ function adm_login(): void {
     setcookie('yyg_adm', '1', ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
     $GLOBALS['ADM_JUST_IN'] = true; $GLOBALS['ADM_OUT'] = false;
 }
-function adm_logout(): void {
+/* $everywhere: מעלה את גרסת הכניסה, וכך מנתק את הניהול בכל המכשירים (למשל אחרי שטלפון אבד) */
+function adm_logout(bool $everywhere = false): void {
+    if ($everywhere) @file_put_contents(data_dir() . '/admin-gen.txt', (string) (adm_gen() + 1), LOCK_EX);
     foreach (['/', '/admin/'] as $p) setcookie(ADM_COOKIE, '', ['expires' => 1, 'path' => $p, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     setcookie('yyg_adm', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
     $GLOBALS['ADM_OUT'] = true; $GLOBALS['ADM_JUST_IN'] = false;
@@ -144,7 +149,14 @@ function leads_load(): array {
 /* ---------- הצעות מחיר ---------- */
 const Q_STATUSES = ['draft' => 'טיוטה', 'sent' => 'נשלחה', 'approved' => 'אושרה', 'declined' => 'לא רלוונטית'];
 function quotes_load(): array { return json_load('quotes.json'); }
-function quotes_save(array $q): bool { return json_save('quotes.json', $q); }
+/* שמירה תחת אותה נעילה של data_update, כדי שצפייה או אישור של לקוח באותו רגע לא ימחקו שינוי בניהול (ולהפך) */
+function quotes_save(array $q): bool {
+    $lock = fopen(data_dir() . '/quotes.json.lock', 'c');
+    if ($lock) flock($lock, LOCK_EX);
+    $ok = json_save('quotes.json', $q);
+    if ($lock) { flock($lock, LOCK_UN); fclose($lock); }
+    return $ok;
+}
 function quote_find_by_token(array $quotes, string $token): ?string {
     if (!preg_match('/^[a-f0-9]{24}$/', $token)) return null;
     foreach ($quotes as $num => $q) if (hash_equals((string) ($q['token'] ?? ''), $token)) return (string) $num;
@@ -166,6 +178,10 @@ function quote_url(array $q): string { return 'https://yygweb.com/q/?t=' . ($q['
 
 /* ---------- שליחת מייל דרך תיבת המייל של האתר (Hostinger Mail API) ---------- */
 function mail_send(string $to, string $subject, string $html, string $text, string $from = 'YYG Web Design · יהודה גורדון'): bool {
+    /* ירידות שורה ותווי בקרה בנושא, בשם השולח ובכתובת יכולים להוסיף כותרות למייל. מחליפים אותם ברווח */
+    $subject = trim(preg_replace('/[\x00-\x1F\x7F]+/', ' ', $subject));
+    $from = trim(preg_replace('/[\x00-\x1F\x7F]+/', ' ', $from));
+    if (preg_match('/[\x00-\x1F\x7F]/', $to)) return false;
     $cfg = private_config();
     /* בסביבת בדיקה בלבד (מפתח שלא קיים בשרת): המייל נכתב לקובץ במקום להישלח */
     if (!empty($cfg['mail_outbox']) && is_dir((string) $cfg['mail_outbox'])) {
@@ -229,7 +245,13 @@ function rate_ok(string $bucket, int $max, int $window): bool {
     @file_put_contents($f, implode("\n", $hits), LOCK_EX);
     return true;
 }
-function client_ip(): string { return trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? '')))[0]); }
+/* כתובת הגולש, למגבלות קצב. ה־CDN של Hostinger מוסיף את הכתובת האמיתית בסוף X-Forwarded-For.
+ * מה שבתחילת הכותרת הגולש יכול לכתוב בעצמו, ולכן לוקחים את הכתובת התקינה האחרונה, ולא את הראשונה */
+function client_ip(): string {
+    $xff = (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? '');
+    foreach (array_reverse(explode(',', $xff)) as $p) { $p = trim($p); if (filter_var($p, FILTER_VALIDATE_IP)) return $p; }
+    return (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+}
 /* קריאה, שינוי ושמירה של קובץ נתונים תחת נעילה, כדי ששתי בקשות במקביל לא ימחקו זו לזו */
 function data_update(string $name, callable $fn) {
     $lock = fopen(data_dir() . '/' . $name . '.lock', 'c');

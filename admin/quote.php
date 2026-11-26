@@ -191,8 +191,8 @@ ob_start(); ?>
  </div>
  <h3 style="margin:16px 0 6px;font-size:1rem;color:#fff">שליחה ללקוח</h3>
  <div class="acts">
-  <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את ההצעה במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_quote"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn gold" type="submit">שליחת ההצעה במייל ללקוח</button></form>
-  <form method="post" onsubmit="return <?= $hasMail ? "confirm('לשלוח את שאלון המשוב במייל ל־" . h($q['client']['email']) . "?')" : 'true' ?>"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_feedback"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn" type="submit">שליחת שאלון המשוב במייל</button></form>
+  <form method="post" <?= $hasMail ? 'data-msg="' . h('לשלוח את ההצעה במייל ל־' . $q['client']['email'] . '?') . '" onsubmit="return confirm(this.dataset.msg)"' : '' ?>><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_quote"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn gold" type="submit">שליחת ההצעה במייל ללקוח</button></form>
+  <form method="post" <?= $hasMail ? 'data-msg="' . h('לשלוח את שאלון המשוב במייל ל־' . $q['client']['email'] . '?') . '" onsubmit="return confirm(this.dataset.msg)"' : '' ?>><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><input type="hidden" name="do" value="email_feedback"><input type="hidden" name="num" value="<?= h($num) ?>"><button class="btn" type="submit">שליחת שאלון המשוב במייל</button></form>
  </div>
  <?php if (!$hasMail): ?><p class="small muted" style="margin-top:6px">כדי לשלוח במייל, מכניסים את המייל של הלקוח בפרטים למטה ושומרים.</p><?php endif; ?>
  <?php if (!empty($q['sent_log'])): ?><p class="small muted" style="margin-top:6px">נשלח: <?= h(implode(' · ', array_map(static fn($l) => $l['what'] . ' ל־' . $l['to'] . ' ב־' . fmt_time((int) $l['t'], 'd/m H:i'), array_slice($q['sent_log'], -4)))) ?></p><?php endif; ?>

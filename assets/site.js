@@ -324,7 +324,12 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   };
   movers.push({
     el: wrap,
-    update(r, vh) { set(clamp01((vh * 0.85 - r.top) / (r.height * 1.3 + vh * 0.7))); },
+    /* הקו מגיע לשלב 5 כשכל השלבים עוד על המסך: במחשב כשראש האזור בשליש העליון של המסך,
+       ובטלפון (קו אנכי) כשקו הקריאה, ב־62% מגובה המסך, מגיע לסוף הרשימה */
+    update(r, vh) {
+      const vertical = window.matchMedia('(max-width: 900px)').matches;
+      set(clamp01(vertical ? (vh * 0.62 - r.top) / Math.max(r.height, 1) : (vh * 0.85 - r.top) / (vh * 0.5)));
+    },
     settle(where) { set(where === 'before' ? 0 : 1); }
   });
 })();

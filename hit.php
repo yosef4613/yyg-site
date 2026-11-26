@@ -44,7 +44,10 @@ if (!$salt) {
     @file_put_contents($saltFile, $salt);
     foreach (glob("$dir/salt-*") ?: [] as $old) if ($old !== $saltFile) @unlink($old); // מלח של אתמול נמחק
 }
-$ip = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? ''))[0]);
+/* הכתובת התקינה האחרונה ב־X-Forwarded-For (מה־CDN), כמו client_ip() בספרייה המשותפת */
+$ip = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+foreach (array_reverse(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''))) as $p) { $p = trim($p); if (filter_var($p, FILTER_VALIDATE_IP)) { $ip = $p; break; } }
 $vid = substr(hash('sha256', $salt . $ip . $ua), 0, 12);
 $line = json_encode(['t' => time(), 'e' => $type, 'p' => $page, 'r' => $ref, 'd' => $dev, 'v' => $vid, 's' => $utm], JSON_UNESCAPED_UNICODE);
-@file_put_contents("$dir/" . gmdate('Y-m') . '.log', $line . "\n", FILE_APPEND | LOCK_EX);
+$logFile = "$dir/" . gmdate('Y-m') . '.log';
+if (@filesize($logFile) < 50 * 1024 * 1024) @file_put_contents($logFile, $line . "\n", FILE_APPEND | LOCK_EX);   // תקרה: 50MB בחודש

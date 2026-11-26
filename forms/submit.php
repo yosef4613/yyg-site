@@ -28,7 +28,7 @@ if (!empty($in['hp']) || !empty($in['website'])) {
     @file_put_contents(data_dir() . '/spam.log', date('c') . ' [שאלון: שדה נסתר מולא] ' . json_encode($contact, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
     $out(true);
 }
-if (!rate_ok('forms-' . client_ip(), 8, 3600)) $out(false, 'rate', 429);
+if (!rate_ok('forms-' . client_ip(), 8, 3600) || !rate_ok('forms-all', 40, 86400)) $out(false, 'rate', 429);   // גם תקרה יומית כללית
 
 $form = in_array($in['form'] ?? '', ['intake', 'feedback'], true) ? $in['form'] : '';
 if ($form === '') $out(false, 'form', 400);

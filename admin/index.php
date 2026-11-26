@@ -11,7 +11,7 @@ adm_headers();
 if (adm_key() === '') { http_response_code(503); exit('חסר מפתח בהגדרות'); }
 
 /* ---------- כניסה ---------- */
-$ip = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? ''))[0]);
+$ip = client_ip();
 $failFile = data_dir() . '/admin-fail-' . substr(hash('sha256', $ip), 0, 16);
 $fails = array_filter(array_map('intval', @file($failFile, FILE_IGNORE_NEW_LINES) ?: []), static fn($t) => $t > time() - 3600);
 $tryKey = trim((string) ($_GET['k'] ?? ($_POST['k'] ?? '')));
@@ -19,6 +19,12 @@ if ($tryKey !== '') {
     if (count($fails) >= 10) { http_response_code(429); exit('יותר מדי ניסיונות. נסו שוב בעוד שעה.'); }
     if (hash_equals(adm_key(), $tryKey)) { adm_login(); @unlink($failFile); header('Location: ' . adm_after_login(), true, 303); exit; }
     $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails));
+}
+/* יציאה מכל המכשירים: רק בטופס עם אסימון, כדי שקישור מאתר אחר לא יוכל לנתק */
+if (($_POST['do'] ?? '') === 'logout_all' && adm_authed() && hash_equals(adm_csrf(), (string) ($_POST['csrf'] ?? ''))) {
+    $u = user_current();
+    if ($u && is_owner_email((string) $u['email'])) user_logout_cookie();
+    adm_logout(true); header('Location: /admin/', true, 303); exit;
 }
 if (isset($_GET['logout'])) {
     /* יציאה מהניהול יוצאת גם מהחשבון של בעל האתר, אחרת הכניסה לחשבון הייתה מחזירה אותו לניהול */
@@ -62,7 +68,7 @@ if ($magic !== '' && preg_match('/^[a-f0-9]{40}$/', $magic)) {
 
 if (!adm_authed()) {
     $g = google_button('admin', false);
-    $gMsg = ['bad' => 'הכניסה עם Google לא הצליחה. אפשר לנסות שוב, או לקבל קישור במייל.', 'no' => 'לחשבון Google הזה אין גישה לניהול. נכנסים פעם אחת עם קישור במייל, ואז באזור האישי נותנים לחשבון הזה גישה.'][$_GET['g'] ?? ''] ?? '';
+    $gMsg = ['bad' => 'הכניסה עם Google לא הצליחה. אפשר לנסות שוב, או לקבל קישור במייל.', 'no' => 'לחשבון Google הזה אין גישה לניהול. נכנסים פעם אחת עם קישור במייל, ואז באזור האישי נותנים לחשבון הזה גישה.'][is_string($_GET['g'] ?? null) ? $_GET['g'] : ''] ?? '';
     adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>דף הניהול של YYG Web Design</h1>'
         . ($gMsg !== '' ? '<p style="color:var(--bad)" role="alert">' . h($gMsg) . '</p>' : '')
         . ($g !== '' ? $g . '<p class="or">או</p>' : '')
@@ -336,7 +342,7 @@ ob_start(); ?>
 
 <h2 id="google">כניסה לניהול וכניסה עם Google</h2>
 <div class="card">
- <p style="margin:0 0 8px"><b>מיילים עם גישה לניהול.</b> מי שנכנס לאזור האישי עם אחד מהם (עם סיסמה או עם Google) נכנס גם לניהול, ורואה למעלה באתר את הקישור "ניהול".</p>
+ <p style="margin:0 0 8px"><b>מיילים עם גישה לניהול.</b> מי שנכנס לאזור האישי עם אחד מהם דרך Google (או עם סיסמה שבחר מתוך קישור איפוס במייל) נכנס גם לניהול, ורואה למעלה באתר את הקישור "ניהול". סיסמה מטופס ההרשמה לא מספיקה, כי כל אחד יכול להירשם מראש עם מייל של מישהו אחר.</p>
  <?php $adminMails = array_keys(owner_linked()); ?>
  <ul style="margin:0 0 10px;padding-inline-start:20px;line-height:2">
   <li><bdi><?= $e($adminMail) ?></bdi> <small>(המייל של העסק, תמיד)</small></li>
@@ -348,6 +354,7 @@ ob_start(); ?>
  <form method="post" action="/admin/#google" style="display:flex;gap:8px;flex-wrap:wrap;max-width:620px;align-items:end"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="do" value="adm_mail_add">
   <label style="flex:1 1 260px">להוסיף מייל (למשל הג׳ימייל שלך)<input type="email" name="email" dir="ltr" required autocomplete="off" placeholder="name@gmail.com"></label>
   <button class="btn" type="submit">הוספה</button></form>
+ <form method="post" action="/admin/" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="do" value="logout_all"><button class="btn" type="submit">יציאה מהניהול בכל המכשירים</button><small style="color:var(--muted)">למשל אם טלפון אבד. אחר כך נכנסים מחדש.</small></form>
  <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
  <?php $gcid = google_client_id(); ?>
  <p style="margin:0 0 10px"><?= $gcid !== '' ? '<b style="color:var(--ok)">פעיל.</b> הכפתור "המשך עם Google" מופיע בהרשמה ובכניסה לאזור האישי, ובדף הכניסה לניהול.' : '<b style="color:var(--warn)">עוד לא פעיל.</b> צריך Client ID מ־Google Cloud. אחרי שמדביקים אותו כאן, הכפתור מופיע לבד.' ?></p>

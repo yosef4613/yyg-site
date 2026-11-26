@@ -6,6 +6,15 @@ Options -Indexes
 </FilesMatch>
 # כלי הבנייה (סקריפטים ונתוני הדוגמאות) לא צריכים להיות נגישים מהרשת
 RedirectMatch 404 ^/tools/
+# קבצי PHP פנימיים (שמתחילים ב־_) נטענים רק מתוך קבצים אחרים, אף פעם לא ישירות מהרשת
+<FilesMatch "^_.*\.php$">
+  Require all denied
+</FilesMatch>
+# הגדרות PHP, תיעוד פנימי וקבצים של ספק האחסון לא נגישים מהרשת
+<FilesMatch "^(\.user\.ini|README\.md|CNAME)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/\.hostinger/
 AddDefaultCharset UTF-8
 # עמוד "לא נמצא" בעיצוב של האתר (בעברית, ובאנגלית לכתובות שמתחילות ב־/en/)
 ErrorDocument 404 /404.html
@@ -51,10 +60,14 @@ SetEnvIf Request_URI "^/en/(index\.html)?$" YYG_HOME_EN
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   # גלישה מאובטחת תמיד: הדפדפן זוכר לשנה שהאתר עובד רק ב־HTTPS (בלי תתי־דומיינים, כדי לא לפגוע במייל)
   Header always set Strict-Transport-Security "max-age=31536000"
-  # אסור להציג את העמודים בתוך אתר אחר (רק בתוך האתר עצמו). עמודי PHP קובעים את זה בעצמם
+  # האתר לא משתמש במצלמה, במיקרופון, במיקום או בתשלום בדפדפן, אז חוסמים אותם מראש
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  # אסור להציג את העמודים בתוך אתר אחר (רק בתוך האתר עצמו), ורק הסקריפטים של האתר רצים. עמודי PHP קובעים את זה בעצמם
   <FilesMatch "\.(html|md)$">
     Header set X-Frame-Options "SAMEORIGIN"
-    Header set Content-Security-Policy "frame-ancestors 'self'"
+    # CSP:start (נוצר על ידי tools/csp.py, לא לערוך ידנית)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-/7ssbpslPnvrnwzCunurEOXCeuS47ZDpkaM+WWZIIY8=' 'sha256-/s73F32Ev/tZAhap+NbemkpLa5MSx0tilfTxmGlSKV8=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0HsfK/IydVp2bO0yDzL9C400zhPG8TDtl4rBTfRGJ1o=' 'sha256-1OMzgssiWYRYm2tcnBv6T45LCH3icLj0EVi7myyjRAo=' 'sha256-1SP48Xgh5H/ZwJpMQyTFXWbDJS/XKa4HgGczYuk9cmw=' 'sha256-1UQvmheXX1wX+J1EEp9DDE3Bf0L9O+tXRQcu6BdhnTg=' 'sha256-69XYPKUf+axm5PpnuCg9WiVNyE9FogTH5p+z3r90yqc=' 'sha256-7FGAOsHSFVsQhM9HVXB9UsJTE9y9oZNzrzqs41SYVv8=' 'sha256-8+9qzEhpyh89lT7sefeZNCrDxTyQfd0UOa2rYGOhrP4=' 'sha256-8UCsb0v1voTkCl1mdfHutJTKDSCOrrr+e+PVvIYwcQw=' 'sha256-9XxpOdCD6Ah0LPhmixrTigJDl5jwIDw1rSLzoENfxaA=' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-JniE+2E6eU6vw4awRIK7PHeRR87VyxvgY463yoKe9tg=' 'sha256-K0QBGNRRnVeWUx6LT/yZjvKQ7Z9Bsv0w7BjbXjdCOPA=' 'sha256-KP2LmBLjaZJCMHog4lWDchz0jmJh1RqIbZmsmeQxatg=' 'sha256-NhHaznLxYZW+zIsnhPlwoy55rZ29eX46+J3aZhYHaaQ=' 'sha256-Oxxc/4iySzGF+mEbZvJypmrdk5uXTW7MBhQWbfC7O8o=' 'sha256-PBma2GSSPuE9lS8IrN2XusP3ttsC1oQptTiAgf054EE=' 'sha256-PE0A/b+gfZ+Yq2v9Sfy5Jc+dJw3Oq8WNv3Cb8YTTFcM=' 'sha256-VncyNvvTdAV7eb9qb2foQk2a2iAqhPk4dLKt+0SrcWE=' 'sha256-WrxZ/5FuJAhrhpH3IhbqB1pnmsgrAPBXbfszJ/7KCdI=' 'sha256-dEj5tlyp9GwNyjyayM2ZyQW6Fr9TXNCfCWVYf8fdom8=' 'sha256-e3Uy0IgFGvV38dQONl2EgAZqonTzBZIacY38IoxV6fs=' 'sha256-efAAtTIg8b74Ow82Xl1xnomUGFVXoiS7kLbSL4g51Ow=' 'sha256-gXeDSIZ22rELgib/TpcFiDpRdx7+ILxjZgAr9vw+ZnY=' 'sha256-ga+IOob8pnYFBXVvw2N9MrY4vipgadC3SmeSb07fubU=' 'sha256-hhtPyk2TexxHqTUwUjJmkzIJ7fXRMZ3eJqMyKLJAok0=' 'sha256-ilvvy69zAecvaC75/M7ORN/d7Xr6swy5CR3Vb5h0JD4=' 'sha256-lvDTOkNHopH1Raz3Hw3iz15fo+2MXhqqOSv9kcPPle8=' 'sha256-mbPN34cTQDWscpdxfkX8+bRU3r6mneQuuluEvDPa3ec=' 'sha256-oksFtu3C4ZXxx6979huhX+YS8hvkYfuEkMj43PUdTXU=' 'sha256-qXEtZ7lPNZXbEqgRTrazeJ0l+BY4FRnKPWYtsQGI1Kw=' 'sha256-rYgrnLexKcsHQSskaHbDkrMF09b2uAdTQN1lGlYXFQ4=' 'sha256-s7/OQcNyrTPDCuOyfYoO8EUe9M3UVI4ZLFyZZVNdQ3E=' 'sha256-ttrVzh5nB85YaBcFCVm2NWU1wpnO4B8WTRy1vCksQ/k=' 'sha256-u465FNKt2stTFtDBaa2RZ9l32B1StVFMbfaTaVL+Drg=' 'sha256-uFZ1QQ8MYxlSmG1uwjcALcupl1n9faYfml+PjoHzqAw=' 'sha256-wZMIiSsDdJ2+FPt+3ZOiA3ldDnKE2AvoWxhiYrSKgt0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-src 'self'; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    # CSP:end
   </FilesMatch>
 </IfModule>
 <IfModule mod_mime.c>

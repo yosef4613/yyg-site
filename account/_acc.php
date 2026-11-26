@@ -27,17 +27,22 @@ function user_by_email(array $users, string $email): ?string {
     foreach ($users as $uid => $u) if (($u['email'] ?? '') === $email) return (string) $uid;
     return null;
 }
-/* עוגיית כניסה חתומה ל־60 יום. sv הוא "גרסת כניסה": שינוי סיסמה מנתק את כל המכשירים */
-function user_login_cookie(string $uid, int $sv): void {
+/* עוגיית כניסה חתומה ל־60 יום. sv הוא "גרסת כניסה": שינוי סיסמה מנתק את כל המכשירים.
+ * $google: הכניסה הזו עברה דרך Google עכשיו */
+function user_login_cookie(string $uid, int $sv, bool $google = false): void {
     $exp = time() + 60 * 86400;
     $v = $uid . '.' . $exp . '.' . $sv;
     setcookie(U_COOKIE, $v . '.' . sign('u' . $v), ['expires' => $exp, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     /* רמז לדפי האתר (בלי שום הרשאה): בכותרת כתוב "האזור האישי" במקום "כניסה" */
     setcookie('yyg_in', '1', ['expires' => $exp, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
-    /* בעל האתר שנכנס לחשבון שלו נכנס גם לניהול */
+    /* בעל האתר שנכנס לחשבון שלו נכנס גם לניהול, אבל רק בכניסה מהימנה (ראו user_admin_ok) */
     $u = users_load()[$uid] ?? null;
-    if ($u && is_owner_email((string) ($u['email'] ?? ''))) adm_login();
+    if ($u && is_owner_email((string) ($u['email'] ?? '')) && ($google || user_admin_ok($u))) adm_login();
 }
+/* חשבון של בעל האתר נותן גישה לניהול רק אם הסיסמה שלו לא נבחרה על ידי מישהו אחר:
+ * חשבון בלי סיסמה (נפתח עם Google), או סיסמה שנקבעה מתוך קישור איפוס במייל או מתוך חשבון מהימן.
+ * סיסמה מטופס ההרשמה לא מספיקה, כי כל אחד יכול להירשם מראש עם המייל של בעל האתר. */
+function user_admin_ok(array $u): bool { return (string) ($u['pass'] ?? '') === '' || !empty($u['pw_trusted']); }
 function user_logout_cookie(): void {
     setcookie(U_COOKIE, '', ['expires' => 1, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     setcookie('yyg_in', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
@@ -124,6 +129,8 @@ function sub_links(array $s): array {
 function sub_upsert(string $email, string $name, string $source, string $lang, bool $confirmed): array {
     $email = email_norm($email);
     return data_update('subscribers.json', static function (array &$subs) use ($email, $name, $source, $lang, $confirmed): array {
+        /* מנוי פעיל לא משתנה מבקשה שלא אושרה: אחרת כל אחד יכול לשנות לו שם, שפה ומועד הסכמה */
+        if (!$confirmed && ($subs[$email]['status'] ?? '') === 'active') return $subs[$email];
         $s = $subs[$email] ?? ['email' => $email, 'token' => bin2hex(random_bytes(12)), 'created' => time()];
         if ($name !== '') $s['name'] = $name;
         $s['source'] = $s['source'] ?? $source;

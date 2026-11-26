@@ -118,13 +118,16 @@ if (preg_match('/[\p{Cyrillic}\p{Han}\p{Hiragana}\p{Katakana}\p{Thai}]/u', $free
 $digits = preg_replace('/\D/', '', $f['phone']);
 if ($digits !== '' && !preg_match('/^(0\d{8,9}|972\d{8,9})$/', $digits)) { $score += 1; $why[] = 'טלפון לא ישראלי'; }
 if ($score >= 3) {
-    @file_put_contents(data_dir() . '/spam.log', date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+    /* היומן מוגבל: עד 20 רשומות בשעה מאותה כתובת, ועד 5MB בסך הכול, כדי ששטף של רובוטים לא ימלא את הדיסק */
+    $log = data_dir() . '/spam.log';
+    if (rate_ok('spamlog-' . client_ip(), 20, 3600) && @filesize($log) < 5 * 1024 * 1024) {
+        @file_put_contents($log, date('c') . ' [' . implode(', ', $why) . '] ' . json_encode($f, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+    }
     out(true);
 }
 
 // הגבלה פשוטה: עד 5 פניות ב־10 דקות מאותה כתובת
-$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? '0');
-$ip = trim(explode(',', $ip)[0]);
+$ip = client_ip() ?: '0';
 $rl = sys_get_temp_dir() . '/yyg-rl-' . hash('sha256', $ip);
 $now = time();
 $hits = array_filter(array_map('intval', @file($rl, FILE_IGNORE_NEW_LINES) ?: []), static fn($t) => $t > $now - 600);
@@ -182,7 +185,9 @@ $lead = ['id' => bin2hex(random_bytes(6)), 't' => time(), 'sent' => $sent, 'scor
 @file_put_contents(data_dir() . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 if (!$sent) out(false, 'send', 502);
 @file_put_contents(data_dir() . '/leads.log', time() . "\n", FILE_APPEND | LOCK_EX);
-lead_confirm_request($lead, $ctok);
+/* המייל האוטומטי ללקוח: עד 2 ביום לאותה כתובת ועד 60 ביום בסך הכול. כך אי אפשר להשתמש בטופס כדי לשלוח מיילים
+   מהתיבה העסקית לכתובות זרות. הפנייה עצמו נשמרת ומגיעה אליי בכל מקרה */
+if (rate_ok('lead-to-' . $lead['email'], 2, 86400) && rate_ok('lead-to-all', 60, 86400)) lead_confirm_request($lead, $ctok);
 out(true);
 
 /* ---------- מייל ללקוח מיד אחרי הפנייה: הצעד הבא, שאלון האפיון ----------
@@ -193,7 +198,11 @@ function lead_confirm_request(array $lead, string $ctok): bool {
     $base = ['l' => $lead['id'], 't' => $ctok] + ($en ? ['lang' => 'en'] : []);
     $q = 'https://yygweb.com/account/confirm.php?' . http_build_query($base + ['go' => 'q']);
     $talk = 'https://yygweb.com/account/confirm.php?' . http_build_query($base);
-    $name = (string) $lead['name'];
+    /* השם בא מהטופס, כלומר ממי שמילא אותו, ולא בהכרח מבעל הכתובת. לכן הנושא קבוע, ובפתיחה מופיע השם
+       רק אם הוא נראה כמו שם (אותיות בלבד, עד 4 מילים), כדי שאי אפשר יהיה לכתוב דרכו הודעה למישהו אחר */
+    $name = trim(preg_replace('/\s+/u', ' ', (string) $lead['name']));
+    if (!preg_match("/^[\p{L}][\p{L}'\x{05BE}\x{05F3}\x{05F4}\"\-]*( [\p{L}'\x{05BE}\x{05F3}\x{05F4}\"\-]+){0,3}$/u", $name) || mb_strlen($name, 'UTF-8') > 40) $name = '';
+    $hi = $en ? ($name !== '' ? "Hi $name" : 'Hi') : ($name !== '' ? "שלום $name" : 'שלום');
     $body = $en
         ? '<p>Thank you for reaching out through yygweb.com. So I can send you a precise quote, the next step is a short discovery questionnaire: about 10 minutes, you can stop and continue later, and the details you already gave are filled in.</p>'
           . mail_button($q, 'To the questionnaire')
@@ -203,9 +212,9 @@ function lead_confirm_request(array $lead, string $ctok): bool {
           . mail_button($q, 'לשאלון האפיון')
           . '<p>אחרי השאלון תקבלו במייל הצעת מחיר מסודרת, ותוכלו לאשר אותה בלחיצה. בלי שיחות חובה.</p>'
           . '<p style="color:#5A6472;font-size:14px">מעדיפים לדבר קודם? <a href="' . h($talk) . '" style="color:#1a56db">לאישור הפנייה ולקבלת מספר הטלפון שלי</a>. לא אתם השארתם פרטים באתר? פשוט התעלמו מהמייל הזה.</p>';
-    return mail_send((string) $lead['email'], $en ? "$name, here's the next step | YYG Web Design" : "$name, הצעד הבא לאתר שלכם | YYG Web Design",
-        mail_wrap($en ? "Hi $name" : "שלום $name", $body, '', $en, false),
-        ($en ? "Hi $name,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "שלום $name,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"), mail_from($en));
+    return mail_send((string) $lead['email'], $en ? "The next step for your website | YYG Web Design" : "הצעד הבא לאתר שלכם | YYG Web Design",
+        mail_wrap($hi, $body, '', $en, false),
+        ($en ? "$hi,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "$hi,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"), mail_from($en));
 }
 
 /* ---------- שליחה ---------- */

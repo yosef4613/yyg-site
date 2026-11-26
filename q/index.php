@@ -76,11 +76,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'a
     elseif (mb_strlen($name, 'UTF-8') < 2) $err = $L('נא לכתוב שם מלא.', 'Please enter your full name.');
     elseif (empty($_POST['agree'])) $err = $L('נא לסמן שקראתם ואתם מאשרים את ההצעה.', 'Please tick the box to confirm you\'ve read and approve the quote.');
     else {
-        $quotes = quotes_load();   // טוענים מחדש, למקרה שמשהו השתנה בינתיים
-        $quotes[$num]['approved'] = ['name' => $name, 't' => time(), 'total' => quote_totals($quotes[$num])['total']];
-        $quotes[$num]['status'] = 'approved';
-        $quotes[$num]['updated'] = time();
-        quotes_save($quotes);
+        /* קריאה, שינוי ושמירה תחת נעילה, כדי לא למחוק שינוי שנעשה באותו רגע בניהול */
+        $quotes = data_update('quotes.json', static function (array &$all) use ($num, $name): array {
+            $all[$num]['approved'] = ['name' => $name, 't' => time(), 'total' => quote_totals($all[$num])['total']];
+            $all[$num]['status'] = 'approved';
+            $all[$num]['updated'] = time();
+            return $all;
+        });
         $t = quote_totals($quotes[$num]);
         notify_me('ההצעה ' . $num . ' אושרה: ' . $name,
             '<div dir="rtl" style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6"><h2 style="margin:0 0 8px">ההצעה אושרה</h2><p><b>' . h($name) . '</b> אישר/ה את הצעת המחיר ' . h($num) . ' (' . h($q['client']['name'] ?? '') . ') על סך ' . h(nis($t['total'])) . '.</p><p><a href="' . h($adminLink) . '">להצעה בדף הניהול</a></p><p>הצעד הבא: לתאם את התשלום הראשון ואת תחילת העבודה.</p></div>',
@@ -93,9 +95,11 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'a
 $ua = (string) ($_SERVER['HTTP_USER_AGENT'] ?? '');
 if (!$isAdmin && !isset($_GET['ok']) && ($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && $ua !== '' && !preg_match('/bot|crawl|spider|preview|whatsapp|telegram|facebookexternalhit|slack|headless|curl|python/i', $ua)) {
     $first = empty($q['views']);
-    $quotes[$num]['views'] = (int) ($q['views'] ?? 0) + 1;
-    $quotes[$num]['last_view'] = time();
-    quotes_save($quotes);
+    data_update('quotes.json', static function (array &$all) use ($num): void {
+        if (!isset($all[$num])) return;
+        $all[$num]['views'] = (int) ($all[$num]['views'] ?? 0) + 1;
+        $all[$num]['last_view'] = time();
+    });
     if ($first) notify_me('נפתחה הצעת המחיר ' . $num . ': ' . ($q['client']['name'] ?? ''),
         '<div dir="rtl" style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6"><p>' . h($q['client']['name'] ?? '') . ' פתח/ה עכשיו את הצעת המחיר ' . h($num) . '. זה זמן טוב להתקשר.</p><p><a href="' . h($adminLink) . '">להצעה בדף הניהול</a></p></div>',
         ($q['client']['name'] ?? '') . " פתח/ה עכשיו את הצעת המחיר $num.\n$adminLink");

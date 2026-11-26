@@ -19,7 +19,7 @@ $host = (string) parse_url($origin, PHP_URL_HOST);
 if ($host !== '' && !preg_match('/(^|\.)yygweb\.com$/i', $host) && $host !== 'localhost') $out(false, 'origin', 403);
 /* בקשה גדולה מהמותר בשרת מגיעה בלי שדות בכלל */
 if (empty($_POST) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) $out(false, 'too_big', 413);
-if (!rate_ok('up-' . client_ip(), 240, 3600)) $out(false, 'rate', 429);
+if (!rate_ok('up-' . client_ip(), 240, 3600) || !rate_ok('up-all', 800, 86400)) $out(false, 'rate', 429);   // גם תקרה יומית כללית
 
 $id = (string) ($_POST['id'] ?? '');
 if (!preg_match('/^[a-f0-9]{12}$/', $id) || !hash_equals(sign('up' . $id), (string) ($_POST['up'] ?? ''))) $out(false, 'token', 403);

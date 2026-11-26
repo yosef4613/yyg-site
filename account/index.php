@@ -13,7 +13,7 @@ $me = user_current();
 if ($me && ($_COOKIE['yyg_in'] ?? '') !== '1') setcookie('yyg_in', '1', ['expires' => time() + 60 * 86400, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 if (!$me && isset($_COOKIE['yyg_in'])) setcookie('yyg_in', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 /* בעל האתר (מייל מהרשימה במסך הניהול) שמחובר לחשבון שלו: מחובר גם לניהול, גם אם המייל נוסף לרשימה אחרי הכניסה */
-if ($me && !adm_authed() && is_owner_email($me['email'])) adm_login();
+if ($me && !adm_authed() && is_owner_email($me['email']) && user_admin_ok($me)) adm_login();
 $langField = $EN ? '<input type="hidden" name="lang" value="en">' : '';
 $go = static function (string $q = '') use ($EN): void { header('Location: /account/' . ($EN ? '?lang=en' . ($q ? '&' . $q : '') : ($q ? '?' . $q : '')), true, 303); exit; };
 $msgPage = static function (string $title, string $text) : void {
@@ -48,7 +48,7 @@ if ($POST && $do === 'register' && $err === '') {
         if ($existing !== null) {
             /* לא מגלים בדף שהכתובת רשומה. שולחים לבעל הכתובת מייל עם קישור כניסה ואיפוס */
             $u = users_load()[$existing];
-            $send($u, T('כבר יש לכם חשבון ב־YYG Web Design', 'You already have a YYG Web Design account'), T('כבר יש לכם חשבון', 'You already have an account'),
+            if (rate_ok('reg-mail-' . $email, 2, 86400)) $send($u, T('כבר יש לכם חשבון ב־YYG Web Design', 'You already have a YYG Web Design account'), T('כבר יש לכם חשבון', 'You already have an account'),
                 '<p>' . T('מישהו ניסה להירשם עם הכתובת הזו. אם זה הייתם אתם, אפשר פשוט להיכנס, או לאפס את הסיסמה:', 'Someone tried to sign up with this address. If it was you, just log in, or reset your password:') . '</p>' . mail_button(acc_url('', ['do' => 'forgot']), T('איפוס סיסמה', 'Reset my password')),
                 acc_url('', ['do' => 'forgot']));
         } else {
@@ -58,7 +58,7 @@ if ($POST && $do === 'register' && $err === '') {
             });
             if ($news) sub_upsert($email, $name, 'register', $lang, false);
             $link = acc_url('', ['do' => 'verify', 'u' => $uid, 't' => $tok]);
-            $send(['email' => $email, 'lang' => $lang], T('אישור ההרשמה ל־YYG Web Design', 'Confirm your YYG Web Design account'), T('ברוכים הבאים, ' . $name, 'Welcome, ' . $name),
+            if (rate_ok('reg-mail-' . $email, 2, 86400)) $send(['email' => $email, 'lang' => $lang], T('אישור ההרשמה ל־YYG Web Design', 'Confirm your YYG Web Design account'), T('ברוכים הבאים', 'Welcome'),
                 '<p>' . T('עוד לחיצה אחת, ואתם בפנים. הקישור בתוקף ל־48 שעות.', 'One more click and you\'re in. The link is valid for 48 hours.') . '</p>' . mail_button($link, T('אישור המייל וכניסה', 'Confirm and log in'))
                 . ($news ? '<p style="color:#5A6472;font-size:14px">' . T('האישור יצרף אתכם גם לרשימת התפוצה, כמו שביקשתם.', 'This also adds you to the mailing list, as you asked.') . '</p>' : ''),
                 $link);
@@ -91,7 +91,10 @@ if ($POST && $do === 'login' && $err === '') {
         $users = users_load();
         $uid = user_by_email($users, $email);
         $u = $uid ? $users[$uid] : null;
-        if (!$u || !password_verify($pass, (string) $u['pass'])) $err = T('המייל או הסיסמה לא נכונים.', 'Wrong email or password.');
+        /* גם כשאין משתמש בודקים סיסמה (מול גיבוב קבוע), כדי שהזמן לא יגלה אילו כתובות רשומות */
+        $real = $u && (string) $u['pass'] !== '';
+        $hashOk = password_verify($pass, $real ? (string) $u['pass'] : '$2y$10$' . str_repeat('A', 53)) && $real;
+        if (!$hashOk) $err = T('המייל או הסיסמה לא נכונים.', 'Wrong email or password.');
         elseif (empty($u['verified'])) $err = T('צריך קודם לאשר את המייל. לא הגיע? אפשר לבקש שוב למטה.', 'Please confirm your email first. Didn\'t get it? You can ask for it again below.');
         else {
             data_update('users.json', static function (array &$users) use ($uid, $pass): void {
@@ -138,6 +141,7 @@ if ($do === 'reset') {
         else {
             $sv = data_update('users.json', static function (array &$users) use ($uid, $pass): int {
                 $users[$uid]['pass'] = password_hash($pass, PASSWORD_DEFAULT);
+                $users[$uid]['pw_trusted'] = true;                             // נבחרה מתוך קישור במייל
                 $users[$uid]['sv'] = (int) ($users[$uid]['sv'] ?? 1) + 1;   // מנתק מכשירים אחרים
                 $users[$uid]['verified'] = true;
                 unset($users[$uid]['rt'], $users[$uid]['rt_exp']);
@@ -171,7 +175,13 @@ if ($POST && $do === 'google') {
                 do { $uid = bin2hex(random_bytes(8)); } while (isset($users[$uid]));
                 $users[$uid] = ['email' => $g['email'], 'name' => $g['name'] !== '' ? $g['name'] : strstr($g['email'], '@', true), 'phone' => '', 'pass' => '', 'created' => time(), 'verified' => true, 'sv' => 1, 'lang' => $lang, 'via' => 'google'];
             }
-            /* Google כבר אימת את המייל, אז גם חשבון שחיכה לאישור במייל נפתח */
+            /* Google כבר אימת את המייל, אז גם חשבון שחיכה לאישור במייל נפתח. הסיסמה שנבחרה בהרשמה שלא אושרה
+               נמחקת: ייתכן שמישהו אחר נרשם מראש עם הכתובת הזו, ואסור שהסיסמה שלו תמשיך לעבוד */
+            if (empty($users[$uid]['verified'])) {
+                $users[$uid]['pass'] = '';
+                unset($users[$uid]['pw_trusted']);
+                $users[$uid]['sv'] = (int) ($users[$uid]['sv'] ?? 1) + 1;
+            }
             $users[$uid]['verified'] = true;
             unset($users[$uid]['vt'], $users[$uid]['vt_exp']);
             $users[$uid]['google'] = $g['sub'];
@@ -179,7 +189,7 @@ if ($POST && $do === 'google') {
             return $uid;
         });
         $u = users_load()[$uid];
-        user_login_cookie($uid, (int) $u['sv']);
+        user_login_cookie($uid, (int) $u['sv'], true);
         if ($toAdmin) { header('Location: ' . adm_after_login(), true, 303); exit; }
         $go();
     }
@@ -207,7 +217,8 @@ if ($POST && $me && in_array($do, ['logout', 'profile', 'password', 'news', 'del
         if ((string) $me['pass'] !== '' && !password_verify($cur, (string) $me['pass'])) $err = T('הסיסמה הנוכחית לא נכונה.', 'Your current password is wrong.');
         elseif (strlen($new) < 8) $err = T('הסיסמה החדשה צריכה להיות באורך 8 תווים לפחות.', 'Your new password needs at least 8 characters.');
         else {
-            $sv = data_update('users.json', static function (array &$users) use ($uid, $new): int { $users[$uid]['pass'] = password_hash($new, PASSWORD_DEFAULT); $users[$uid]['sv'] = (int) ($users[$uid]['sv'] ?? 1) + 1; return $users[$uid]['sv']; });
+            $trusted = user_admin_ok($me);   // סיסמה חדשה מחשבון מהימן נשארת מהימנה; מסיסמת הרשמה היא לא נהיית מהימנה
+            $sv = data_update('users.json', static function (array &$users) use ($uid, $new, $trusted): int { $users[$uid]['pass'] = password_hash($new, PASSWORD_DEFAULT); if ($trusted) $users[$uid]['pw_trusted'] = true; $users[$uid]['sv'] = (int) ($users[$uid]['sv'] ?? 1) + 1; return $users[$uid]['sv']; });
             user_login_cookie($uid, $sv);
             $go('saved=1');
         }

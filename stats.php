@@ -25,9 +25,18 @@ header('Cache-Control: no-store');
 header('X-Robots-Tag: noindex, nofollow');
 $cfg = private_config();
 $key = (string) ($cfg['stats_key'] ?? '');
-if ($key === '' || !hash_equals($key, (string) ($_GET['k'] ?? ''))) { http_response_code(404); exit('Not found'); }
-/* העמוד עבר לדף הניהול. הקישור הישן ממשיך לעבוד ומעביר לשם (חוץ מ־JSON) */
-if (($_GET['format'] ?? '') !== 'json') { header('Location: /admin/?k=' . rawurlencode($key), true, 302); exit; }
+/* ניסיונות שגויים נספרים יחד עם הכניסה לניהול (אותו קובץ), כדי שאי אפשר יהיה לנחש את המפתח כאן בלי הגבלה */
+$ip = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+foreach (array_reverse(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''))) as $p) { $p = trim($p); if (filter_var($p, FILTER_VALIDATE_IP)) { $ip = $p; break; } }
+$failFile = data_dir() . '/admin-fail-' . substr(hash('sha256', $ip), 0, 16);
+$fails = array_filter(array_map('intval', @file($failFile, FILE_IGNORE_NEW_LINES) ?: []), static fn($t) => $t > time() - 3600);
+if (count($fails) >= 10) { http_response_code(429); exit('Too many attempts'); }
+if ($key === '' || !hash_equals($key, (string) ($_GET['k'] ?? ''))) {
+    $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails), LOCK_EX);
+    http_response_code(404); exit('Not found');
+}
+/* העמוד עבר לדף הניהול. הקישור הישן מעביר לשם (חוץ מ־JSON), בלי המפתח בכתובת */
+if (($_GET['format'] ?? '') !== 'json') { header('Location: /admin/', true, 302); exit; }
 
 $tz = new DateTimeZone('Asia/Jerusalem');
 $dir = data_dir() . '/stats';
