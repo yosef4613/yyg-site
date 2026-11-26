@@ -19,8 +19,13 @@
 .demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
 .demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
 .demo-ribbon{position:fixed;top:42%;right:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
-@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
-@media print{.demo-ribbon{display:none}}
+.demo-home{position:fixed;left:16px;bottom:calc(16px + var(--lift,0px) + env(safe-area-inset-bottom,0px));z-index:98;display:inline-flex;align-items:center;gap:8px;padding:7px 16px 7px 8px;background:#151920;color:#fff;border:2px solid #F2C95A;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.35);font:700 15px/1.2 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;text-decoration:none}
+.demo-home img{width:30px;height:30px;flex:none}
+.demo-home:hover{background:#262D3A}
+.demo-home:focus-visible{outline:3px solid #F2C95A;outline-offset:3px}
+.demo-home-s{display:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}.demo-home-l{display:none}.demo-home-s{display:inline}.demo-home{left:12px;font-size:14px;padding:6px 14px 6px 7px}}
+@media print{.demo-ribbon,.demo-home{display:none}}
 
 /* ---------- גופנים: Suez One לכותרות (כמו אותיות חקוקות באבן), Heebo לגוף ---------- */
 @font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+25CC,U+FB1D-FB4F}
@@ -279,6 +284,8 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px soli
  <a class="demo-back" href="/demo/shul/">לסיפור הפרויקט</a>
 </div>
 <div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<a class="demo-home" href="/"><img src="/assets/img/yyg-icon-96.png" width="30" height="30" alt=""><span class="demo-home-l">חזרה לאתר של YYG Web Design</span><span class="demo-home-s">חזרה ל־YYG Web Design</span></a>
+<script src="/demo/demo-home.js" defer></script>
 <header class="wrap top">
  <a class="brand" href="/demo/shul/final/" aria-label="נחלת יצחק, לאתר">
   <svg aria-hidden="true" focusable="false"><use href="#mark"/></svg>
