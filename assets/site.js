@@ -838,3 +838,21 @@ const sentMsg = (status, d) => {
   });
   document.querySelectorAll('main .btn-gold').forEach((b) => io.observe(b));
 })();
+
+/* ===== מחובר? בכותרת: "האזור האישי" במקום "כניסה", ולבעל האתר גם קישור "ניהול".
+   העוגיות כאן הן רק רמז לתצוגה. ההרשאה נבדקת בשרת, בכל דף של האזור האישי והניהול ===== */
+(() => {
+  const acc = document.querySelector('.acc-link');
+  if (!acc) return;
+  const has = (n) => document.cookie.split('; ').includes(n + '=1');
+  const en = document.documentElement.lang === 'en';
+  if (has('yyg_in')) acc.textContent = en ? 'My account' : 'האזור האישי';
+  if (has('yyg_adm')) {
+    const a = document.createElement('a');
+    a.className = 'text-link acc-link adm-link';
+    a.href = '/admin/';
+    a.lang = 'he';
+    a.textContent = 'ניהול';
+    acc.after(a);
+  }
+})();

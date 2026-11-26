@@ -41,9 +41,12 @@ function adm_login(): void {
     $exp = (string) (time() + 30 * 86400);
     /* Lax ולא Strict: אחרת הדפדפן לא שולח את העוגייה כשנכנסים מקישור במייל, ודף הניהול חושב שלא מחוברים */
     setcookie(ADM_COOKIE, $exp . '.' . adm_sign($exp), ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+    /* רמז לדפי האתר (בלי שום הרשאה): קישור "ניהול" בכותרת. ההרשאה עצמה רק בעוגייה החתומה */
+    setcookie('yyg_adm', '1', ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 }
 function adm_logout(): void {
     foreach (['/', '/admin/'] as $p) setcookie(ADM_COOKIE, '', ['expires' => 1, 'path' => $p, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+    setcookie('yyg_adm', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 }
 function adm_csrf(): string { return adm_sign('csrf' . substr((string) ($_COOKIE[ADM_COOKIE] ?? ''), 0, 10)); }
 function adm_headers(): void {
@@ -63,7 +66,15 @@ function adm_require(): void {
     }
     /* עוגייה ישנה מסוג Strict מוחלפת ב־Lax, באותו תוקף */
     $c = (string) ($_COOKIE[ADM_COOKIE] ?? '');
-    if (preg_match('/^(\d{10})\./', $c, $m)) setcookie(ADM_COOKIE, $c, ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+    if (preg_match('/^(\d{10})\./', $c, $m)) {
+        setcookie(ADM_COOKIE, $c, ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+    }
+    adm_hint();
+}
+/* מי שכבר מחובר (גם מלפני שהיה רמז): מוסיפים את הרמז לקישור "ניהול" בכותרת האתר */
+function adm_hint(): void {
+    $c = (string) ($_COOKIE[ADM_COOKIE] ?? '');
+    if (($_COOKIE['yyg_adm'] ?? '') !== '1' && preg_match('/^(\d{10})\./', $c, $m)) setcookie('yyg_adm', '1', ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 }
 /* אחרי כניסה: חזרה לדף שרצו להגיע אליו, אם יש */
 function adm_after_login(): string {
@@ -254,6 +265,7 @@ select,textarea,input[type=password],input[type=text],input[type=tel],input[type
 textarea{min-height:40px;resize:vertical}
 .links{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.links a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-decoration:none}.links a small{display:block}
 .spam{font-size:.88rem}.spam div{padding:8px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.g-wrap{display:grid;justify-items:center;gap:6px;min-height:44px;margin-top:16px}.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.9rem;margin:16px 0 0}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line)}
 .login{max-width:380px;margin:12vh auto;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.login form{display:grid;gap:10px;margin-top:14px}
 .del{display:inline}.del .btn{color:var(--bad)}
 .flash{padding:10px 14px;border-radius:10px;background:#1f3a2a;border:1px solid #2f6b45;margin:12px 0}

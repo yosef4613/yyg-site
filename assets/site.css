@@ -833,6 +833,8 @@ p{text-wrap:pretty}
 .story-steps li{min-height:64vh}
 .story-steps li:first-child{min-height:48vh}
 .story-steps h4{margin-top:10px;font-size:var(--step-2)}
+.story-steps .quote{max-width:46ch}
+.story-steps .quote p{margin-top:0;font-size:1rem;max-width:none}
 .story-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:20px}
 .stage{box-shadow:0 0 0 1px rgba(255,255,255,.03) inset}
 .proof-sheet{box-shadow:none}

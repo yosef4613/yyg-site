@@ -148,11 +148,49 @@ if ($do === 'reset') {
         . '<button class="btn btn-gold" type="submit">' . T('שמירה וכניסה', 'Save and log in') . '</button></form></div>');
 }
 
+/* ---------- כניסה והרשמה עם Google ---------- */
+if ($POST && $do === 'google') {
+    $toAdmin = ($_POST['to'] ?? '') === 'admin';
+    $g = rate_ok('google-' . client_ip(), 20, 900) ? google_verify((string) ($_POST['credential'] ?? '')) : null;
+    if (!$g) {
+        if ($toAdmin) { header('Location: /admin/?g=bad', true, 303); exit; }
+        $err = T('הכניסה עם Google לא הצליחה. אפשר לנסות שוב, או להיכנס עם מייל וסיסמה.', 'Signing in with Google didn\'t work. Please try again, or log in with your email and password.');
+    } elseif ($toAdmin && !is_owner_email($g['email'])) {
+        /* מדף הכניסה לניהול: רק בעל האתר. לא פותחים חשבון למי שאינו */
+        header('Location: /admin/?g=no', true, 303); exit;
+    } else {
+        $lang = $EN ? 'en' : 'he';
+        $uid = data_update('users.json', static function (array &$users) use ($g, $lang): string {
+            $uid = user_by_email($users, $g['email']);
+            if ($uid === null) {
+                do { $uid = bin2hex(random_bytes(8)); } while (isset($users[$uid]));
+                $users[$uid] = ['email' => $g['email'], 'name' => $g['name'] !== '' ? $g['name'] : strstr($g['email'], '@', true), 'phone' => '', 'pass' => '', 'created' => time(), 'verified' => true, 'sv' => 1, 'lang' => $lang, 'via' => 'google'];
+            }
+            /* Google כבר אימת את המייל, אז גם חשבון שחיכה לאישור במייל נפתח */
+            $users[$uid]['verified'] = true;
+            unset($users[$uid]['vt'], $users[$uid]['vt_exp']);
+            $users[$uid]['google'] = $g['sub'];
+            $users[$uid]['last_login'] = time();
+            return $uid;
+        });
+        $u = users_load()[$uid];
+        user_login_cookie($uid, (int) $u['sv']);
+        if ($toAdmin) { header('Location: ' . adm_after_login(), true, 303); exit; }
+        $go();
+    }
+}
+
 /* ---------- פעולות של משתמש מחובר ---------- */
-if ($POST && $me && in_array($do, ['logout', 'profile', 'password', 'news', 'delete'], true)) {
+if ($POST && $me && in_array($do, ['logout', 'profile', 'password', 'news', 'delete', 'admin_link', 'admin_unlink'], true)) {
     if (!hash_equals(user_csrf($me), (string) ($_POST['csrf'] ?? ''))) $go();
     $uid = $me['uid'];
-    if ($do === 'logout') { user_logout_cookie(); $go('bye=1'); }
+    if ($do === 'logout') { if (is_owner_email($me['email'])) adm_logout(); user_logout_cookie(); $go('bye=1'); }
+    /* רק מדפדפן שכבר מחובר לניהול: החשבון הזה יקבל גישה לניהול (למשל הג׳ימייל, לכניסה עם Google) */
+    if (($do === 'admin_link' || $do === 'admin_unlink') && adm_authed()) {
+        $email = $me['email'];
+        data_update('admin-accounts.json', static function (array &$a) use ($email, $do): void { if ($do === 'admin_link') $a[$email] = ['t' => time()]; else unset($a[$email]); });
+        $go('saved=1');
+    }
     if ($do === 'profile') {
         $name = mb_substr(trim((string) ($_POST['name'] ?? '')), 0, 80, 'UTF-8');
         $phone = mb_substr(trim((string) ($_POST['phone'] ?? '')), 0, 30, 'UTF-8');
@@ -161,7 +199,7 @@ if ($POST && $me && in_array($do, ['logout', 'profile', 'password', 'news', 'del
     }
     if ($do === 'password') {
         $cur = (string) ($_POST['current'] ?? ''); $new = (string) ($_POST['password'] ?? '');
-        if (!password_verify($cur, (string) $me['pass'])) $err = T('הסיסמה הנוכחית לא נכונה.', 'Your current password is wrong.');
+        if ((string) $me['pass'] !== '' && !password_verify($cur, (string) $me['pass'])) $err = T('הסיסמה הנוכחית לא נכונה.', 'Your current password is wrong.');
         elseif (strlen($new) < 8) $err = T('הסיסמה החדשה צריכה להיות באורך 8 תווים לפחות.', 'Your new password needs at least 8 characters.');
         else {
             $sv = data_update('users.json', static function (array &$users) use ($uid, $new): int { $users[$uid]['pass'] = password_hash($new, PASSWORD_DEFAULT); $users[$uid]['sv'] = (int) ($users[$uid]['sv'] ?? 1) + 1; return $users[$uid]['sv']; });
@@ -198,8 +236,10 @@ if (!$me) {
     $body = '<h1>' . T('האזור האישי', 'Your account') . '</h1><p class="lead">' . T('כאן רואים את הצעות המחיר שלכם, מאשרים אותן, ומנהלים את ההרשמה למדריכים במייל.', 'See and approve your quotes, and manage your email subscription to new guides.') . '</p>'
         . ($flash ? '<p class="msg">' . h($flash) . '</p>' : '') . ($err ? '<p class="msg bad" role="alert">' . h($err) . '</p>' : '')
         . '<nav class="tabs"><a href="' . $q('login') . '" class="' . ($tab === 'login' ? 'on' : '') . '">' . T('כניסה', 'Log in') . '</a><a href="' . $q('register') . '" class="' . ($tab === 'register' ? 'on' : '') . '">' . T('הרשמה', 'Sign up') . '</a></nav><div class="box">';
+    $gBtn = google_button('account', $EN);
+    $or = $gBtn !== '' ? $gBtn . '<p class="or">' . T('או עם מייל', 'or with email') . '</p>' : '';
     if ($tab === 'register') {
-        $body .= '<form method="post" action="/account/">' . $langField . $hp . '<input type="hidden" name="do" value="register"><input type="hidden" name="ft" value="' . h($ft) . '">'
+        $body .= $or . '<form method="post" action="/account/">' . $langField . $hp . '<input type="hidden" name="do" value="register"><input type="hidden" name="ft" value="' . h($ft) . '">'
             . '<label class="field"><span>' . T('שם', 'Name') . '</span><input name="name" autocomplete="name" required value="' . h($_POST['name'] ?? '') . '"></label>'
             . '<label class="field"><span>' . T('מייל', 'Email') . '</span><input type="email" name="email" autocomplete="email" dir="ltr" required value="' . h($_POST['email'] ?? '') . '"></label>'
             . '<label class="field"><span>' . T('טלפון', 'Phone') . ' <small>' . T('לא חובה', 'optional') . '</small></span><input type="tel" name="phone" autocomplete="tel" dir="ltr" value="' . h($_POST['phone'] ?? '') . '"></label>'
@@ -213,7 +253,7 @@ if (!$me) {
             . '<label class="field"><span>' . T('מייל', 'Email') . '</span><input type="email" name="email" autocomplete="email" dir="ltr" required></label>'
             . '<button class="btn btn-gold" type="submit">' . T('שליחה', 'Send') . '</button></form>';
     } else {
-        $body .= '<form method="post" action="/account/">' . $langField . $hp . '<input type="hidden" name="do" value="login"><input type="hidden" name="ft" value="' . h($ft) . '">'
+        $body .= $or . '<form method="post" action="/account/">' . $langField . $hp . '<input type="hidden" name="do" value="login"><input type="hidden" name="ft" value="' . h($ft) . '">'
             . '<label class="field"><span>' . T('מייל', 'Email') . '</span><input type="email" name="email" autocomplete="email" dir="ltr" required value="' . h($_POST['email'] ?? '') . '"></label>'
             . '<label class="field"><span>' . T('סיסמה', 'Password') . '</span><input type="password" name="password" autocomplete="current-password" required></label>'
             . '<button class="btn btn-gold" type="submit">' . T('כניסה', 'Log in') . '</button>'
@@ -237,6 +277,11 @@ $subPending = $sub && ($sub['status'] ?? '') === 'pending';
 $body = '<h1>' . T('שלום ', 'Hi ') . h($me['name']) . '</h1>'
     . (isset($_GET['welcome']) ? '<p class="msg">' . T('המייל אושר, ואתם בפנים. ברוכים הבאים!', 'Your email is confirmed and you\'re in. Welcome!') . '</p>' : '')
     . ($flash ? '<p class="msg">' . h($flash) . '</p>' : '') . ($err ? '<p class="msg bad" role="alert">' . h($err) . '</p>' : '')
+    . (adm_authed() ? '<div class="box" lang="he" dir="rtl"><p style="margin:0"><b>ניהול האתר.</b> ' . (is_owner_email($me['email']) ? 'החשבון הזה מחובר לניהול: כשנכנסים אליו (גם עם Google), נכנסים גם לניהול.' : 'הדפדפן הזה מחובר לניהול. אפשר לתת לחשבון הזה (<bdi>' . h($me['email']) . '</bdi>) גישה לניהול, ואז כניסה אליו, גם עם Google, תכניס גם לניהול.') . '</p>'
+        . '<div class="inline"><a class="btn btn-gold" href="/admin/">לדף הניהול</a>'
+        . (!is_owner_email($me['email']) ? '<form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="admin_link"><button class="btn" type="submit">לתת לחשבון הזה גישה לניהול</button></form>'
+           : (isset(owner_linked()[$me['email']]) ? '<form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="admin_unlink"><button class="btn" type="submit">להסיר את הגישה לניהול</button></form>' : ''))
+        . '</div></div>' : '')
     . '<h2>' . T('הצעות המחיר שלי', 'My quotes') . '</h2>';
 if ($myQuotes) {
     $body .= '<div class="rows">';
@@ -260,7 +305,8 @@ $body .= '<h2>' . T('מדריכים במייל', 'Guides by email') . '</h2><div
     . '<label class="field"><span>' . T('טלפון', 'Phone') . '</span><input type="tel" name="phone" autocomplete="tel" dir="ltr" value="' . h($me['phone'] ?? '') . '"></label>'
     . '<button class="btn" type="submit">' . T('שמירה', 'Save') . '</button></form></div>'
     . '<h2>' . T('סיסמה', 'Password') . '</h2><div class="box"><form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="password">'
-    . '<label class="field"><span>' . T('סיסמה נוכחית', 'Current password') . '</span><input type="password" name="current" autocomplete="current-password" required></label>'
+    . ((string) $me['pass'] === '' ? '<p style="margin:0">' . T('נכנסתם עם Google, ולכן אין צורך בסיסמה. אפשר לבחור סיסמה, כדי להיכנס גם עם המייל.', 'You signed in with Google, so you don\'t need a password. You can choose one to also log in with your email.') . '</p>'
+        : '<label class="field"><span>' . T('סיסמה נוכחית', 'Current password') . '</span><input type="password" name="current" autocomplete="current-password" required></label>')
     . '<label class="field"><span>' . T('סיסמה חדשה', 'New password') . ' <small>' . T('8 תווים לפחות', 'at least 8 characters') . '</small></span><input type="password" name="password" autocomplete="new-password" minlength="8" required></label>'
     . '<button class="btn" type="submit">' . T('החלפת סיסמה', 'Change password') . '</button></form></div>'
     . '<div class="inline" style="margin-top:28px"><form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="logout"><button class="btn" type="submit">' . T('יציאה', 'Log out') . '</button></form></div>'

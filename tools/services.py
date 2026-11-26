@@ -534,7 +534,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=48">
+<link rel="stylesheet" href="/assets/site.css?v=49">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>

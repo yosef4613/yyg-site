@@ -56,13 +56,19 @@ if ($magic !== '' && preg_match('/^[a-f0-9]{40}$/', $magic)) {
 }
 
 if (!adm_authed()) {
+    $g = google_button('admin', false);
+    $gMsg = ['bad' => 'הכניסה עם Google לא הצליחה. אפשר לנסות שוב, או לקבל קישור במייל.', 'no' => 'לחשבון Google הזה אין גישה לניהול. נכנסים פעם אחת עם קישור במייל, ואז באזור האישי נותנים לחשבון הזה גישה.'][$_GET['g'] ?? ''] ?? '';
     adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>דף הניהול של YYG Web Design</h1>'
+        . ($gMsg !== '' ? '<p style="color:var(--bad)" role="alert">' . h($gMsg) . '</p>' : '')
+        . ($g !== '' ? $g . '<p class="or">או</p>' : '')
         . '<p class="muted">נשלח לך קישור כניסה למייל <bdi>' . h($maskMail($adminMail)) . '</bdi>, שמגיע גם לג׳ימייל שלך. לוחצים עליו ונכנסים. הדפדפן יזכור אותך ל־30 יום.</p>'
         . '<form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור כניסה למייל</button></form>'
         . '<details' . ($tryKey !== '' ? ' open' : '') . ' style="margin-top:18px"><summary>כניסה עם מפתח</summary>'
         . ($tryKey !== '' ? '<p style="color:var(--bad)">המפתח לא נכון.</p>' : '')
         . '<form method="post" action="/admin/"><label>מפתח<input type="password" name="k" autocomplete="current-password" required></label><button class="btn" type="submit">כניסה</button></form></details></div>');
 }
+
+adm_hint();
 
 /* ---------- נתונים ---------- */
 $tz = tz();
@@ -92,6 +98,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 's
     exit;
 }
 $stOf = static fn(string $id): string => $status[$id]['st'] ?? 'new';
+
+/* כניסה עם Google: שמירת ה־Client ID (מ־Google Cloud). הוא לא סוד, הוא מופיע בכל דף עם הכפתור */
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'google_cid') {
+    if (!hash_equals($csrf, (string) ($_POST['csrf'] ?? ''))) { http_response_code(400); exit('הטופס פג תוקף. רעננו את הדף ונסו שוב.'); }
+    $cid = trim((string) ($_POST['cid'] ?? ''));
+    $okCid = $cid === '' || preg_match('/^[0-9]{6,}-[a-z0-9]{10,}\.apps\.googleusercontent\.com$/', $cid);
+    if ($okCid) data_update('settings.json', static function (array &$st) use ($cid): void { if ($cid === '') unset($st['google_client_id']); else $st['google_client_id'] = $cid; });
+    header('Location: /admin/?' . ($okCid ? 'saved=1' : 'gbad=1') . '#google', true, 303);
+    exit;
+}
 
 /* מחיקת פנייה, שאלון או הצעת מחיר (למשל בדיקות) */
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && in_array($_POST['do'] ?? '', ['lead_delete', 'form_delete', 'quote_delete'], true)) {
@@ -302,6 +318,24 @@ ob_start(); ?>
 <h2 id="spam">ספאם שנחסם</h2>
 <div class="card spam"><?php if (!$spam): ?><small>לא נחסם כלום. מצוין.</small><?php endif; ?>
  <?php foreach ($spam as $l): ?><div><?= $e(mb_substr($l, 0, 400, 'UTF-8')) ?></div><?php endforeach; ?></div>
+
+<h2 id="google">כניסה עם Google</h2>
+<div class="card">
+ <?php $gcid = google_client_id(); ?>
+ <p style="margin:0 0 10px"><?= $gcid !== '' ? '<b style="color:var(--ok)">פעיל.</b> הכפתור "המשך עם Google" מופיע בהרשמה ובכניסה לאזור האישי, ובדף הכניסה לניהול.' : '<b style="color:var(--warn)">עוד לא פעיל.</b> צריך Client ID מ־Google Cloud. אחרי שמדביקים אותו כאן, הכפתור מופיע לבד.' ?></p>
+ <?php if (isset($_GET['gbad'])): ?><p style="color:var(--bad)">זה לא נראה כמו Client ID. הוא נגמר ב־<bdi>.apps.googleusercontent.com</bdi>.</p><?php endif; ?>
+ <form method="post" action="/admin/#google" style="display:grid;gap:8px;max-width:620px"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="do" value="google_cid">
+  <label>Client ID<input name="cid" dir="ltr" value="<?= $e($gcid) ?>" placeholder="123456789-xxxx.apps.googleusercontent.com" autocomplete="off"></label>
+  <button class="btn" type="submit">שמירה</button></form>
+ <details style="margin-top:12px"><summary>איך מקבלים Client ID (פעם אחת, כ־5 דקות)</summary><ol style="margin:8px 0 0;padding-inline-start:20px;line-height:1.8">
+  <li>נכנסים ל־<a href="https://console.cloud.google.com/auth/overview" target="_blank" rel="noopener">Google Cloud: Google Auth Platform</a> עם הג׳ימייל, ויוצרים פרויקט בשם YYG Web Design.</li>
+  <li>Get started: שם האפליקציה YYG Web Design, מייל תמיכה, Audience: External, ואז Create.</li>
+  <li>Branding: מוסיפים את הדומיין yygweb.com ואת מדיניות הפרטיות <bdi>https://yygweb.com/privacy.html</bdi>. ב־Audience לוחצים Publish app.</li>
+  <li>Clients, Create client: סוג Web application. ב־Authorized JavaScript origins מוסיפים <bdi>https://yygweb.com</bdi>, ואז Create.</li>
+  <li>מעתיקים את ה־Client ID ומדביקים כאן למעלה.</li>
+ </ol></details>
+ <p style="margin:12px 0 0"><small>כדי להיכנס לניהול עם Google: נכנסים <a href="/account/">לאזור האישי</a> עם חשבון ה־Google שלך, ולוחצים שם "לתת לחשבון הזה גישה לניהול". המייל של העסק מקבל גישה לבד.</small></p>
+</div>
 
 <h2 id="links">קישורים מהירים</h2>
 <div class="links">
