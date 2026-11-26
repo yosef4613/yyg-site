@@ -277,11 +277,16 @@ $subPending = $sub && ($sub['status'] ?? '') === 'pending';
 $body = '<h1>' . T('שלום ', 'Hi ') . h($me['name']) . '</h1>'
     . (isset($_GET['welcome']) ? '<p class="msg">' . T('המייל אושר, ואתם בפנים. ברוכים הבאים!', 'Your email is confirmed and you\'re in. Welcome!') . '</p>' : '')
     . ($flash ? '<p class="msg">' . h($flash) . '</p>' : '') . ($err ? '<p class="msg bad" role="alert">' . h($err) . '</p>' : '')
-    . (adm_authed() ? '<div class="box" lang="he" dir="rtl"><p style="margin:0"><b>ניהול האתר.</b> ' . (is_owner_email($me['email']) ? 'החשבון הזה מחובר לניהול: כשנכנסים אליו (גם עם Google), נכנסים גם לניהול.' : 'הדפדפן הזה מחובר לניהול. אפשר לתת לחשבון הזה (<bdi>' . h($me['email']) . '</bdi>) גישה לניהול, ואז כניסה אליו, גם עם Google, תכניס גם לניהול.') . '</p>'
-        . '<div class="inline"><a class="btn btn-gold" href="/admin/">לדף הניהול</a>'
-        . (!is_owner_email($me['email']) ? '<form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="admin_link"><button class="btn" type="submit">לתת לחשבון הזה גישה לניהול</button></form>'
-           : (isset(owner_linked()[$me['email']]) ? '<form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="admin_unlink"><button class="btn" type="submit">להסיר את הגישה לניהול</button></form>' : ''))
-        . '</div></div>' : '')
+    /* רק בדפדפן שמחובר לניהול. חשבון של בעל האתר: קישור לניהול. חשבון של לקוח: תיבה סגורה שאומרת במפורש שזה חשבון רגיל */
+    . (!adm_authed() ? '' : (is_owner_email($me['email'])
+        ? '<div class="box" lang="he" dir="rtl"><p style="margin:0"><b>ניהול האתר.</b> החשבון הזה מחובר לניהול: כשנכנסים אליו (גם עם Google), נכנסים גם לניהול.</p>'
+          . '<div class="inline"><a class="btn btn-gold" href="/admin/">לדף הניהול</a>'
+          . (isset(owner_linked()[$me['email']]) ? '<form method="post" action="/account/">' . $hidden . '<input type="hidden" name="do" value="admin_unlink"><button class="btn" type="submit">להסיר את הגישה לניהול</button></form>' : '')
+          . '</div></div>'
+        : '<details class="box" lang="he" dir="rtl"><summary><span style="font-weight:400"><b>הדפדפן הזה מחובר לניהול.</b> החשבון הזה (<bdi>' . h($me['email']) . '</bdi>) הוא חשבון לקוח רגיל, בלי גישה לניהול.</span></summary>'
+          . '<p>את התיבה הזאת רואה רק מי שמחובר לניהול באותו דפדפן. לקוחות לא רואים אותה. אם זה חשבון שלך (למשל הג׳ימייל שלך) ורוצים להיכנס דרכו גם לניהול, אפשר לתת לו גישה:</p>'
+          . '<div class="inline"><form method="post" action="/account/" onsubmit="return confirm(\'לתת לחשבון הזה גישה מלאה לניהול האתר?\')">' . $hidden . '<input type="hidden" name="do" value="admin_link"><button class="btn" type="submit">לתת לחשבון הזה גישה לניהול</button></form>'
+          . '<a class="text-link" href="/admin/">לדף הניהול</a></div></details>'))
     . '<h2>' . T('הצעות המחיר שלי', 'My quotes') . '</h2>';
 if ($myQuotes) {
     $body .= '<div class="rows">';

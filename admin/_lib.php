@@ -265,7 +265,7 @@ select,textarea,input[type=password],input[type=text],input[type=tel],input[type
 textarea{min-height:40px;resize:vertical}
 .links{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.links a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-decoration:none}.links a small{display:block}
 .spam{font-size:.88rem}.spam div{padding:8px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
-.g-wrap{display:grid;justify-items:center;gap:6px;min-height:44px;margin-top:16px}.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.9rem;margin:16px 0 0}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line)}
+.g-wrap{display:grid;justify-items:center;gap:6px;min-height:44px;margin-top:16px}.g_id_signin{color-scheme:light}.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.9rem;margin:16px 0 0}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line)}
 .login{max-width:380px;margin:12vh auto;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.login form{display:grid;gap:10px;margin-top:14px}
 .del{display:inline}.del .btn{color:var(--bad)}
 .flash{padding:10px 14px;border-radius:10px;background:#1f3a2a;border:1px solid #2f6b45;margin:12px 0}
