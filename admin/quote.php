@@ -243,7 +243,7 @@ ob_start(); ?>
 
  <fieldset><legend>שלבי תשלום</legend>
   <div id="pay"></div>
-  <div class="acts"><button class="btn" type="button" id="pay-10">10% · 40% · 50%</button><button class="btn" type="button" id="pay-50">50% · 50%</button><button class="btn" type="button" id="pay-add">+ שלב</button></div>
+  <div class="acts"><button class="btn" type="button" id="pay-10">30% · 40% · 30%</button><button class="btn" type="button" id="pay-50">50% · 50%</button><button class="btn" type="button" id="pay-add">+ שלב</button></div>
   <p class="small" id="pay-sum"></p>
  </fieldset>
 
@@ -290,28 +290,35 @@ const LANG0 = <?= json_encode($q ? (($q['lang'] ?? 'he') === 'en' ? 'en' : 'he')
 const HOSTING = 'דומיין, אחסון ומייל עסקי לשנה הראשונה';
 const TEXTS = 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית';
 const GOOGLE = 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות';
-const P10 = [[10, 'כדי להתחיל, לפני הכנת 3 העיצובים'], [40, 'אחרי שבוחרים עיצוב, לפני הבנייה'], [50, 'בסיום, אחרי האישור שלכם ולפני העלייה לאוויר']];
+const P10 = [[30, 'כדי להתחיל, לפני הכנת 3 העיצובים'], [40, 'אחרי שבוחרים עיצוב, לפני הבנייה'], [30, 'בסיום, אחרי האישור שלכם ולפני העלייה לאוויר']];   // השם נשאר P10, הפריסה עכשיו 30/40/30
 const P50 = [[50, 'כדי להתחיל'], [50, 'בסיום, אחרי האישור שלכם ולפני העלייה לאוויר']];
 const BRAND = ['אפיון: שיחת היכרות על הלקוחות, הייחוד והמסר', 'לוגו: 3 כיוונים, 3 סבבי תיקונים וקבצים לכל שימוש', 'שפה עיצובית: צבעים, פונטים ודף הנחיות קצר', 'כל התוכן: טקסטים, בחירת תמונות והכנסת הכול לאתר', 'דפוס ורשתות: כרטיס ביקור, פלאייר, תמונת פרופיל ותמונת שער', 'גוגל: רישום האתר ופתיחת פרופיל עסק'];
 const BASES = {
   none: { label: 'בלי מסלול, רק תוספות', price: 0, en: 0, t: [0, 0, 0, 0], pay: P50, incl: [] },
-  landing_basic: { label: 'דף נחיתה בסיסי', price: 1290, en: 500, t: [1, 1, 3, 1], pay: P50, incl: ['עמוד אחד, עד 5 חלקים', 'עיצוב אחד וסבב תיקונים אחד', 'הטקסטים מגיעים מכם', 'טופס פנייה וכפתור חיוג', 'דומיין ואחסון לשנה הראשונה', GOOGLE] },
-  landing: { label: 'דף נחיתה', price: 2000, en: 500, t: [3, 3, 4, 4], pay: P10, incl: ['עמוד אחד, עד 7 חלקים', 'טופס פנייה וכפתור חיוג', 'שינויים קטנים עליי בתקופת הליווי', HOSTING, TEXTS, GOOGLE] },
+  landing_basic: { label: 'דף נחיתה בסיסי', price: 1490, en: 450, t: [1, 1, 4, 1], pay: P50, incl: ['עמוד אחד, עד 5 חלקים', 'עיצוב אחד וסבב תיקונים אחד', 'הטקסטים מגיעים מכם', 'טופס פנייה וכפתור חיוג', 'דומיין ואחסון לשנה הראשונה', GOOGLE] },
+  landing: { label: 'דף נחיתה', price: 2290, en: 700, t: [3, 3, 7, 4], pay: P10, incl: ['עמוד אחד, עד 7 חלקים', 'טופס פנייה וכפתור חיוג', 'שינויים קטנים עליי בתקופת הליווי', HOSTING, TEXTS, GOOGLE] },
   site_basic: { label: 'אתר בסיסי', price: 2900, en: 1000, t: [1, 1, 7, 1], pay: P50, incl: ['עד 4 עמודים', 'עיצוב אחד וסבב תיקונים אחד', 'הטקסטים מגיעים מכם', 'טופס פנייה וכפתור חיוג', 'דומיין ואחסון לשנה הראשונה', GOOGLE] },
-  site: { label: 'אתר עם אזור ניהול', price: 4000, en: 1000, t: [3, 3, 10, 4], pay: P10, incl: ['עד 6 עמודים', 'אזור ניהול לעדכון התוכן שמשתנה', 'טפסים ומדור תוכן', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
-  club: { label: 'אתר עם הרשמה ורשימת תפוצה', price: 6000, en: 1500, t: [3, 3, 15, 4], pay: P10, incl: ['עד 8 עמודים', 'הרשמה, חשבונות משתמש, רשימת תפוצה ו־3 תבניות מייל', 'אזור ניהול: תוכן, פניות ומנויים', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
-  store: { label: 'חנות אונליין', price: 7000, en: 1800, t: [3, 3, 20, 4], pay: P10, incl: ['חנות מלאה, עד 30 מוצרים, ואני מכניס אותם', 'עגלה, סליקה באשראי ומשלוחים', 'אזור ניהול: מוצרים, מלאי והזמנות', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
-  brand_landing: { label: 'מותג מ־0 עד 100% עם דף נחיתה', price: 5900, en: 500, t: [3, 3, 14, 4], pay: P10, incl: BRAND.concat(['דף נחיתה בעיצוב המותג', HOSTING, GOOGLE]) },
-  brand_site: { label: 'מותג מ־0 עד 100% עם אתר עם אזור ניהול', price: 7900, en: 1000, t: [3, 3, 20, 4], pay: P10, incl: BRAND.concat(['אתר עם אזור ניהול, עד 6 עמודים', HOSTING, GOOGLE]) },
-  brand_club: { label: 'מותג מ־0 עד 100% עם אתר עם הרשמה', price: 9900, en: 1500, t: [3, 3, 25, 4], pay: P10, incl: BRAND.concat(['אתר עם הרשמה ורשימת תפוצה, עד 8 עמודים', HOSTING, GOOGLE]) },
-  brand_store: { label: 'מותג מ־0 עד 100% עם חנות', price: 10900, en: 1800, t: [3, 3, 30, 4], pay: P10, incl: BRAND.concat(['חנות אונליין, עד 30 מוצרים', HOSTING, GOOGLE]) }
+  site: { label: 'אתר תדמית', price: 4900, en: 1500, t: [3, 3, 14, 4], pay: P10, incl: ['עד 6 עמודים', 'מסך עדכון לתוכן שמשתנה', 'טפסים לפי הצורך', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
+  club: { label: 'אתר תדמית מורחב', price: 6900, en: 2100, t: [3, 3, 20, 4], pay: P10, incl: ['עד 12 עמודים', 'מדור תוכן: חדשות, מאמרים או אירועים', 'מסך עדכון לתוכן שמשתנה', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
+  store: { label: 'חנות אונליין', price: 7900, en: 2400, t: [3, 3, 25, 4], pay: P10, incl: ['חנות מלאה, עד 30 מוצרים, ואני מכניס אותם', 'עגלה, סליקה באשראי, משלוחים ועמודי תקנון', 'מסך מוצרים, מלאי והזמנות', 'הדרכה: שיחה אישית ומדריך כתוב', HOSTING, TEXTS, GOOGLE] },
+  brand_landing: { label: 'מותג מ־0 עד 100% עם דף נחיתה', price: 6190, en: 700, t: [3, 3, 17, 4], pay: P10, incl: BRAND.concat(['דף נחיתה בעיצוב המותג', HOSTING, GOOGLE]) },
+  brand_site: { label: 'מותג מ־0 עד 100% עם אתר תדמית', price: 8800, en: 1500, t: [3, 3, 24, 4], pay: P10, incl: BRAND.concat(['אתר תדמית, עד 6 עמודים', HOSTING, GOOGLE]) },
+  brand_club: { label: 'מותג מ־0 עד 100% עם אתר תדמית מורחב', price: 10800, en: 2100, t: [3, 3, 30, 4], pay: P10, incl: BRAND.concat(['אתר תדמית מורחב, עד 12 עמודים ומדור תוכן', HOSTING, GOOGLE]) },
+  brand_store: { label: 'מותג מ־0 עד 100% עם חנות', price: 11800, en: 2400, t: [3, 3, 35, 4], pay: P10, incl: BRAND.concat(['חנות אונליין, עד 30 מוצרים', HOSTING, GOOGLE]) }
 };
 const ADDONS = [
-  { k: 'page', label: 'עמוד נוסף', price: 350, qty: true },
+  { k: 'page', label: 'עמוד נוסף', price: 400, qty: true },
   { k: 'en', label: 'גרסה באנגלית', price: null },
   { k: 'design', label: 'כיוון עיצוב נוסף', price: 400, qty: true },
-  { k: 'rev', label: 'סבב תיקונים נוסף או שעת עבודה', price: 150, qty: true },
-  { k: 'products', label: '10 מוצרים נוספים בחנות', price: 200, qty: true },
+  { k: 'rev', label: 'סבב תיקונים נוסף או שעת עבודה', price: 250, qty: true },
+  { k: 'products', label: '10 מוצרים נוספים בחנות', price: 250, qty: true },
+  { k: 'm_upd', label: 'מסך עדכון לדף נחיתה (שעות פתיחה, מבצע)', price: 1000 },
+  { k: 'm_reg', label: 'טופס הרשמה מתקדם: שדות לפי הצורך, אישור במייל וייצוא לאקסל', price: 700 },
+  { k: 'm_sched', label: 'לוח זמנים או אירועים שמתעדכן', price: 700 },
+  { k: 'm_mail', label: 'רשימת תפוצה ו־3 תבניות מייל', price: 900 },
+  { k: 'm_acc', label: 'חשבונות משתמשים: כניסה, פרופיל והיסטוריה', price: 2000 },
+  { k: 'm_don', label: 'תרומות באשראי, חד־פעמי ובהוראת קבע', price: 1200 },
+  { k: 'm_camp', label: 'קמפיין עם מד יעד ורשימת תורמים', price: 800 },
   { k: 'logo1', label: 'לוגו בסיסי: סקיצה אחת וסבב תיקונים אחד', price: 590 },
   { k: 'logo2', label: 'לוגו מקצועי: 3 כיוונים ו־3 סבבי תיקונים', price: 1500 },
   { k: 'brand', label: 'מיתוג בסיסי: לוגו, צבעים, פונטים, דף הנחיות וכרטיס ביקור', price: 2500 }
@@ -326,7 +333,7 @@ const RECURRING = [
 const EN_HOSTING = 'Domain, hosting and business email for the first year';
 const EN_TEXTS = 'Website copy: written with AI and personally edited';
 const EN_GOOGLE = 'Mobile, Google and accessibility ready, with an accessibility statement';
-const EN_P10 = [[10, 'To start, before the 3 designs'], [40, 'After you choose a design, before the build'], [50, 'At the end, after your approval and before going live']];
+const EN_P10 = [[30, 'To start, before the 3 designs'], [40, 'After you choose a design, before the build'], [30, 'At the end, after your approval and before going live']];
 const EN_P50 = [[50, 'To start'], [50, 'At the end, after your approval and before going live']];
 const EN_BRAND = ['Discovery: a call about your customers, what sets you apart and your message', 'Logo: 3 directions, 3 revision rounds and files for every use', 'Visual language: colors, fonts and a short style guide', 'All the content: copy, choosing photos and putting it all on the site', 'Print and social media: a business card, a flyer, a profile picture and a cover image', 'Google: registering the site and opening a Business Profile'];
 const BASES_EN = {
@@ -334,15 +341,15 @@ const BASES_EN = {
   landing_basic: { label: 'Basic landing page', incl: ['One page, up to 5 sections', 'One design and one revision round', 'You provide the text', 'A contact form and a call button', 'Domain and hosting for the first year', EN_GOOGLE] },
   landing: { label: 'Landing page', incl: ['One page, up to 7 sections', 'A contact form and a call button', 'Small changes on me during the support period', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
   site_basic: { label: 'Basic website', incl: ['Up to 4 pages', 'One design and one revision round', 'You provide the text', 'A contact form and a call button', 'Domain and hosting for the first year', EN_GOOGLE] },
-  site: { label: 'Website with an admin area', incl: ['Up to 6 pages', 'An admin area to update the content that changes', 'Forms and a content section', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
-  club: { label: 'Website with sign-ups and a mailing list', incl: ['Up to 8 pages', 'Sign-ups, user accounts, a mailing list and 3 email templates', 'An admin area: content, inquiries and subscribers', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
-  store: { label: 'Online store', incl: ['A full store with up to 30 products, which I add for you', 'A cart, card payments and shipping', 'An admin area: products, stock and orders', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  site: { label: 'Business website', incl: ['Up to 6 pages', 'An update screen for the content that changes', 'Forms as needed', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  club: { label: 'Extended business website', incl: ['Up to 12 pages', 'A content section: news, articles or events', 'An update screen for the content that changes', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  store: { label: 'Online store', incl: ['A full store with up to 30 products, which I add for you', 'A cart, card payments, shipping and policy pages', 'A screen for products, stock and orders', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
   brand_landing: { label: 'Brand from 0 to 100% with a landing page', incl: EN_BRAND.concat(['A landing page in the brand design', EN_HOSTING, EN_GOOGLE]) },
-  brand_site: { label: 'Brand from 0 to 100% with a website', incl: EN_BRAND.concat(['A website with an admin area, up to 6 pages', EN_HOSTING, EN_GOOGLE]) },
-  brand_club: { label: 'Brand from 0 to 100% with a sign-up website', incl: EN_BRAND.concat(['A website with sign-ups and a mailing list, up to 8 pages', EN_HOSTING, EN_GOOGLE]) },
+  brand_site: { label: 'Brand from 0 to 100% with a business website', incl: EN_BRAND.concat(['A business website, up to 6 pages', EN_HOSTING, EN_GOOGLE]) },
+  brand_club: { label: 'Brand from 0 to 100% with an extended business website', incl: EN_BRAND.concat(['An extended business website, up to 12 pages and a content section', EN_HOSTING, EN_GOOGLE]) },
   brand_store: { label: 'Brand from 0 to 100% with a store', incl: EN_BRAND.concat(['An online store, up to 30 products', EN_HOSTING, EN_GOOGLE]) }
 };
-const ADDONS_EN = { page: 'An extra page', en: 'A second language version', design: 'An extra design direction', rev: 'An extra revision round or hour of work', products: '10 more products in the store', logo1: 'Basic logo: one sketch and one revision round', logo2: 'Professional logo: 3 directions and 3 revision rounds', brand: 'Basic branding: logo, colors, fonts, a style guide and a business card' };
+const ADDONS_EN = { page: 'An extra page', en: 'A second language version', design: 'An extra design direction', rev: 'An extra revision round or hour of work', products: '10 more products in the store', m_upd: 'An update screen for a landing page (opening hours, a promotion)', m_reg: 'An advanced sign-up form: custom fields, email confirmation and Excel export', m_sched: 'An updatable schedule or events', m_mail: 'A mailing list and 3 email templates', m_acc: 'User accounts: login, profile and history', m_don: 'Card donations, one-time and monthly', m_camp: 'A campaign with a goal meter and donor list', logo1: 'Basic logo: one sketch and one revision round', logo2: 'Professional logo: 3 directions and 3 revision rounds', brand: 'Basic branding: logo, colors, fonts, a style guide and a business card' };
 const RECURRING_EN = { care: { label: '"All-in Care": domain, hosting, business email, security, backups and fixes', note: 'from the second year' }, maint: { label: 'Maintenance: updates and small changes, up to half an hour a month', note: 'optional' }, seo: { label: 'Google promotion: monthly content and tracking', note: 'by separate quote' } };
 const LAUNCH = ['מחיר השקה (תמורת הצגת האתר בעבודות והמלצה כתובה)', 'Launch price (in return for showing the site in my work and a written testimonial)'];
 
@@ -385,6 +392,8 @@ const applyBase = (k, keepPrice) => {
   [$('t-designs').value, $('t-revisions').value, $('t-days').value, $('t-support').value] = b.t;
   $('includes').value = bIncl(k).join('\n');
   setPay(bPay(k));
+  const care = document.querySelector('#recurring [data-k="care"] [data-price]');   // "הכול עליי": בחנות 890 ₪ לשנה
+  if (care && !keepPrice) care.value = /store/.test(k) ? 890 : 590;
   const who = $('c-business').value.trim() || $('c-name').value.trim();
   if (k !== 'none') $('title').value = bLabel(k) + forWho(who);
 };

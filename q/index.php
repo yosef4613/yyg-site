@@ -104,7 +104,8 @@ if (!$isAdmin && !isset($_GET['ok']) && ($_SERVER['REQUEST_METHOD'] ?? '') === '
 $t = quote_totals($q);
 $terms = (array) ($q['terms'] ?? []);
 $pay = (array) ($q['payment'] ?? []);
-$first10 = isset($pay[0]) && (int) $pay[0]['pct'] === 10;
+$firstPct = isset($pay[0]) && count($pay) >= 3 ? (int) $pay[0]['pct'] : 0;
+$first10 = $firstPct > 0 && $firstPct < 50;
 $created = fmt_time((int) ($q['created'] ?? time()), 'd/m/Y');
 $validTxt = (new DateTime((string) ($q['valid_until'] ?? $today)))->format('d/m/Y');
 $incl = array_values(array_filter(array_map('trim', explode("\n", (string) ($q['includes'] ?? ''))), 'strlen'));
@@ -162,10 +163,13 @@ ob_start(); ?>
 
  <h2><?= $L('חשוב לדעת', 'Good to know') ?></h2>
  <ul class="fine">
-  <li><?= $L('האתר, הדומיין והתוכן רשומים על שמכם.', 'The website, the domain and the content are registered in your name.') ?></li>
+  <li><?= $L('הדומיין רשום על שמכם מההתחלה. האתר והתוכן עוברים אליכם עם התשלום האחרון, והעיצובים שלא נבחרו נשארים שלי.', 'The domain is in your name from the start. The site and content are yours with the last payment, and the designs you didn\'t choose stay mine.') ?></li>
+  <li><?= $L('כל תשלום מגיע עד 7 ימים מהבקשה. שלב שלא קיבלתי עליו תגובה תוך 10 ימי עבודה נחשב מאושר.', 'Each payment is due within 7 days of the request. A stage with no reply within 10 business days counts as approved.') ?></li>
+  <li><?= $L('סבב תיקונים הוא רשימה אחת מרוכזת של הערות, ולא הודעה על כל שינוי בנפרד.', 'A revision round is one consolidated list of comments, not a separate message for each change.') ?></li>
+  <li><?= $L('אם הטקסטים, התמונות והלוגו לא מגיעים תוך 30 יום, הפרויקט מוקפא וחוזר לתור.', 'If the text, photos and logo don\'t arrive within 30 days, the project is paused and goes back in the queue.') ?></li>
   <?php if (!empty($terms['days'])): ?><li><?= $L('זמן האספקה נספר מהיום שמקבלים את כל החומרים (טקסטים, תמונות ולוגו), ולא כולל ימים שבהם מחכים לתשובה שלכם.', 'The delivery time is counted from the day I receive all the materials (text, photos and logo), not including days spent waiting for your reply.') ?></li><?php endif; ?>
-  <?php if ($first10): ?><li><?= $L('ה־10% הם חלק מהמחיר, לא תוספת. אם אחרי העיצובים מחליטים לא להמשיך, הם מכסים את עבודת העיצוב, ולא משלמים יותר.', 'The 10% is part of the price, not an extra. If you decide not to go ahead after the designs, it covers the design work, and you pay nothing more.') ?></li><?php endif; ?>
-  <li><?= $L('עבודה שלא כתובה בהצעה מתומחרת מראש, ומתבצעת רק באישור שלכם.', 'Any work not listed in the quote is priced in advance, and done only with your approval.') ?></li>
+  <?php if ($first10): ?><li><?= $L('ה־' . $firstPct . '% הראשונים הם חלק מהמחיר, לא תוספת. אם אחרי העיצובים מחליטים לא להמשיך, הם מכסים את עבודת העיצוב, ולא משלמים יותר.', 'The first ' . $firstPct . '% is part of the price, not an extra. If you decide not to go ahead after the designs, it covers the design work, and you pay nothing more.') ?></li><?php endif; ?>
+  <li><?= $L('עבודה שלא כתובה בהצעה מתומחרת מראש, ומתבצעת רק באישור שלכם. מה ששולם לא מוחזר, ושלב שכבר התחיל משולם לפי העבודה שנעשתה.', 'Any work not listed in the quote is priced in advance, and done only with your approval. Payments made are not refunded, and a stage that has started is paid for the work done.') ?></li>
   <li><?= $L('ההצעה בתוקף עד', 'This quote is valid until') ?> <?= h($validTxt) ?>.</li>
  </ul>
 

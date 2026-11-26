@@ -7,7 +7,7 @@ def admin_anaf(lang, pfx, n):
            if he else ['Add a project: a photo from the phone, a name, the wood and one sentence', 'Edit, reorder and delete projects', 'A short notice at the top of the site, e.g. before a holiday', 'Photos are resized automatically, so the site stays fast', 'Easy on the phone, no waiting for anyone'])
     return f'''  <section class="d-step" id="sa" aria-labelledby="sa-t">
    <div class="d-step-h"><span class="d-num" aria-hidden="true">{n}</span><h2 id="sa-t">{E('מסך ניהול התוכן' if he else 'The content admin screen')}</h2></div>
-   <p>{E('בגלל זה בחרנו באתר עם אזור ניהול: בעל הנגריה מוסיף עבודות לגלריה בערך פעם בחודש. במסך הזה הוא מוסיף עבודה עם תמונה, משנה טקסט, מסדר ומוחק, ושומר. הגלריה באתר מתעדכנת מיד.' if he else 'This is why we chose a website with an admin area: the owner adds projects to the gallery about once a month. On this screen he adds a project with a photo, edits text, reorders and deletes, and saves. The gallery on the site updates right away.')}</p>
+   <p>{E('בגלל זה בחרנו באתר תדמית, שיש בו מסך עדכון: בעל הנגריה מוסיף עבודות לגלריה בערך פעם בחודש. במסך הזה הוא מוסיף עבודה עם תמונה, משנה טקסט, מסדר ומוחק, ושומר. הגלריה באתר מתעדכנת מיד.' if he else 'This is why we chose a business website, which comes with an update screen: the owner adds projects to the gallery about once a month. On this screen he adds a project with a photo, edits text, reorders and deletes, and saves. The gallery on the site updates right away.')}</p>
    <div class="d-hours">
     <a href="/{pfx}admin/"{'' if he else ' hreflang="he"'}><img src="/{pfx}shots/admin-d.webp" width="960" height="660" alt="{E('מסך ניהול התוכן של הנגריה' if he else 'The carpentry content admin screen')}" loading="lazy"></a>
     <div><ul>{''.join(f'<li>{E(x)}</li>' for x in pts)}</ul>
@@ -44,10 +44,10 @@ T_OPT['he'].update(
   note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, וגם הלוגו עוצב לדוגמה.',
   nav=['שאלון אפיון', 'הצעת מחיר', '3 עיצובים', 'עדכון השעות', 'משוב ובחירה', 'הגרסה הסופית'],
   s1p='בעל החנות מילא את השאלון בכ־10 דקות. הלוגו הישן לא שירת אותו, ותמונות לא היו בכלל. אלה התשובות שהכי השפיעו:',
-  files='מה הכנתי בשבילו: לוגו חדש והדמיות מוצר',
-  s2p='הבונה שלי זיהה מהשאלון דף נחיתה, לוגו חדש, ושני דברים לתמחור: תמונות, ומסך לעדכון השעות. תמחרתי, בדקתי, והלקוח קיבל במייל הצעה מסודרת עם אישור בלחיצה.',
-  s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו דף נחיתה. בכל אחד מהם השעות והסטטוס "פתוח עכשיו" חיים, ומתעדכנים לפי שעון ישראל:',
-  s5p='הלקוח בחר בעיצוב 1 ושילם 40%. בניתי את הדף על עיצוב 1, עם מה שביקש מהעיצובים האחרים. משם הלקוח מאשר, משלם את ה־50% האחרונים, והדף באוויר. מאותו יום הוא מעדכן את השעות ואת המבצע לבד.',
+  files='מה הכנתי בשבילו: לוגו מחודש והדמיות מוצר',
+  s2p='הבונה שלי זיהה מהשאלון דף נחיתה ותוספת אחת: מסך שבו בעל העסק מעדכן את השעות ואת המבצע. הוא סימן גם לוגו ותמונות. את הלוגו הקיים חידשתי לקובץ נקי, וההדמיות של המסגרות כלולות במחיר. בדקתי, והלקוח קיבל במייל הצעה מסודרת עם אישור בלחיצה.',
+  s3p='אחרי ה־30% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו דף נחיתה. בכל אחד מהם השעות והסטטוס "פתוח עכשיו" חיים, ומתעדכנים לפי שעון ישראל:',
+  s5p='הלקוח בחר בעיצוב 1 ושילם 40%. בניתי את הדף על עיצוב 1, עם מה שביקש מהעיצובים האחרים. משם הלקוח מאשר, משלם את ה־30% האחרונים, והדף באוויר. מאותו יום הוא מעדכן את השעות ואת המבצע לבד.',
   changes=['סטטוס "פתוח עכשיו" גדול בראש הדף, בסגנון המדבקה של עיצוב 3', 'המדבקה "מוכן תוך 3 ימי עבודה" מעיצוב 3', 'תמונת מסגרות הזהב הגדולה, כמו בפתיחה של עיצוב 2, בחלק של המסגרות', 'הערה שבמוצאי שבת פתוח רק בחורף', 'פחות תנועה ואנימציות, כמו שביקש', 'המבצע בדף מתעדכן מאותו מסך של השעות'],
 )
 T_OPT['en'].update(
@@ -58,24 +58,24 @@ T_OPT['en'].update(
   note='A fictional example business: the name, details and testimonials are made up. The images are 3D renders I built specially, and the logo was designed for the example too.',
   nav=['Questionnaire', 'Quote', '3 designs', 'Hours screen', 'Feedback', 'Final version'],
   s1p='The shop owner filled in the questionnaire in about 10 minutes. His old logo wasn\'t working for him, and there were no photos at all. These are the answers that shaped the work most:',
-  files='What I prepared for him: a new logo and product renders',
-  s2p='From the questionnaire, my builder picked a landing page, a new logo, and two things to price: images, and a screen for updating the hours. I priced and checked it, and the client got a formal quote by email with one-click approval.',
-  s3p='After the first 10%, I prepare 3 completely different directions for the same landing page. In each, the hours and the "open now" status are live, by Israel time:',
-  s5p='The client chose design 1 and paid 40%. I built the page on design 1, with what he asked for from the other designs. From here he approves it, pays the final 50%, and the page goes live. From that day on he updates the hours and the promotion himself.',
+  files='What I prepared for him: a refreshed logo and product renders',
+  s2p='From the questionnaire, my builder picked a landing page and one add-on: a screen where the owner updates the hours and the promotion. It also flagged a logo and images. I refreshed the existing logo into a clean file, and the frame renders are included in the price. I checked it, and the client got a formal quote by email with one-click approval.',
+  s3p='After the first 30%, I prepare 3 completely different directions for the same landing page. In each, the hours and the "open now" status are live, by Israel time:',
+  s5p='The client chose design 1 and paid 40%. I built the page on design 1, with what he asked for from the other designs. From here he approves it, pays the final 30%, and the page goes live. From that day on he updates the hours and the promotion himself.',
   changes=['A big "open now" status at the top, in the style of the sticker from design 3', 'The "ready in 3 working days" sticker from design 3', 'The big gold-frames shot, like the opening of design 2, in the frames section', 'A note that Saturday night opening is in winter only', 'Less motion and animation, as he asked', 'The promotion on the page is updated from the same screen as the hours'],
 )
 
 QUOTE_OPT = {
- 'he': dict(items=[('דף נחיתה', 2000), ('לוגו בסיסי: סקיצה אחת וסבב תיקונים אחד', 590), ('מסך עדכון קטן לבעל העסק: שעות פתיחה והודעה זמנית, מהטלפון', 450), ('12 הדמיות מוצר של המסגרות (תלת־ממד, בלי אנשים)', 350)],
-   incl=['עמוד אחד, עד 7 חלקים', 'טופס פנייה וכפתור חיוג', 'שינויים קטנים עליי בתקופת הליווי', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '4 ימי עבודה לאספקה', '4 חודשי ליווי'],
+ 'he': dict(items=[('דף נחיתה', 2290), ('מסך עדכון לדף הנחיתה: שעות פתיחה, הודעה זמנית ומבצע, מהטלפון', 1000)],
+   incl=['עמוד אחד, עד 7 חלקים', 'טופס פנייה וכפתור חיוג', 'חידוש הלוגו הקיים לקובץ נקי לאתר', '12 הדמיות תלת־ממד של המסגרות, בלי אנשים', 'שינויים קטנים עליי בתקופת הליווי', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
+   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '9 ימי עבודה לאספקה', '4 חודשי ליווי'],
    pay=QUOTE['he']['pay'], annual=QUOTE['he']['annual'],
-   notes=['הבונה הציע לוגו מקצועי (1,500 ₪). בגלל התקציב בחרנו בלוגו בסיסי, ואפשר לשדרג בהמשך.', 'צריך לרשום דומיין: משהו קצר עם השם צלול. כלול בשנה הראשונה.', 'לוח זמנים: תוך שבועיים. התקציב שציין: 2,000 עד 4,000 ₪.']),
- 'en': dict(items=[('Landing page', 2000), ('Basic logo: one sketch and one revision round', 590), ('A small update screen for the owner: opening hours and a temporary notice, from the phone', 450), ('12 product renders of the frames (3D, no people)', 350)],
-   incl=['One page, up to 7 sections', 'A contact form and a call button', 'Small changes on me during the support period', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['3 design directions', '3 revision rounds', '4 working days to deliver', '4 months of support'],
+   notes=['הבונה הציע לוגו מקצועי (1,500 ₪). בגלל התקציב בחרנו לחדש את הלוגו הקיים לקובץ נקי, וזה כלול. אפשר לשדרג בהמשך.', 'אין תמונות, ולא צריך לקנות: הדף בנוי מהדמיות תלת־ממד של המסגרות, והן כלולות במחיר.', 'צריך לרשום דומיין: משהו קצר עם השם צלול. כלול בשנה הראשונה.', 'לוח זמנים: תוך שבועיים, ו־9 ימי עבודה מספיקים. התקציב שציין: 2,500 עד 5,000 ₪.']),
+ 'en': dict(items=[('Landing page', 2290), ('An update screen for the landing page: opening hours, a temporary notice and a promotion, from the phone', 1000)],
+   incl=['One page, up to 7 sections', 'A contact form and a call button', 'A refresh of the existing logo into a clean file for the site', 'Twelve 3D renders of the frames, with no people', 'Small changes on me during the support period', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
+   terms=['3 design directions', '3 revision rounds', '9 business days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['The builder suggested a professional logo (₪1,500). Because of the budget we chose a basic logo, with an upgrade possible later.', 'A domain needs registering: something short with the name Tzalul. Included in the first year.', 'Timing: within two weeks. Stated budget: ₪2,000 to ₪4,000.']),
+   notes=['The builder suggested a professional logo (₪1,500). Because of the budget we chose to refresh the existing logo into a clean file, and that\'s included. An upgrade is possible later.', 'There are no photos, and none need buying: the page is built from 3D renders of the frames, and they\'re included in the price.', 'A domain needs registering: something short with the name Tzalul. Included in the first year.', 'Timing: within two weeks, and 9 business days are enough. Stated budget: ₪2,500 to ₪5,000.']),
 }
 
 def hi_optika(ans, he):
@@ -91,7 +91,7 @@ def hi_optika(ans, he):
     ]
 
 def files_optika(he):
-    return [('tzalul-logo-sm.webp', 'הלוגו החדש של צלול' if he else 'The new Tzalul logo', 293), ('round-560.webp', 'הדמיה: מסגרת עגולה שחורה' if he else 'Render: a round black frame', 126),
+    return [('tzalul-logo-sm.webp', 'הלוגו המחודש של צלול' if he else 'The refreshed Tzalul logo', 293), ('round-560.webp', 'הדמיה: מסגרת עגולה שחורה' if he else 'Render: a round black frame', 126),
             ('gold-round-560.webp', 'הדמיה: מסגרת זהב דקה' if he else 'Render: a thin gold frame', 126), ('tortoise-560.webp', 'הדמיה: מסגרת בגוון צב' if he else 'Render: a tortoise frame', 126), ('sun-aviator-560.webp', 'הדמיה: משקפי שמש טייסים' if he else 'Render: aviator sunglasses', 126)]
 
 def extra_optika(lang, pfx):
@@ -100,7 +100,7 @@ def extra_optika(lang, pfx):
            if he else ['Days and hours, including Saturday night', 'A temporary notice with an end date, e.g. before a holiday', 'A live status on the page: "open now", "closes in 25 minutes", "opens tomorrow at 10:00"', 'A promotion on the page, with an end date', 'A check that the hours make sense before saving', 'Easy on the phone: half a minute, no waiting for anyone'])
     return f'''  <section class="d-step" id="sx" aria-labelledby="sx-t">
    <div class="d-step-h"><span class="d-num" aria-hidden="true">4</span><h2 id="sx-t">{E('המסך שבעל העסק ביקש' if he else 'The screen the owner asked for')}</h2></div>
-   <p>{E('בדף נחיתה רגיל אין אזור ניהול, אז בניתי מסך עדכון קטן אחד, בדיוק למה שהוא צריך. מסמנים אילו ימים פתוח, משנים שעות, מוסיפים הודעה לחג או מבצע, ושומרים. הדף מתעדכן מיד.' if he else "A standard landing page has no admin area, so I built one small update screen for exactly what he needs. Mark which days are open, change hours, add a holiday notice or a promotion, and save. The page updates right away.")}</p>
+   <p>{E('בדף נחיתה רגיל אין מסך עדכון, אז הוספתי מסך עדכון קטן אחד, בדיוק למה שהוא צריך. מסמנים אילו ימים פתוח, משנים שעות, מוסיפים הודעה לחג או מבצע, ושומרים. הדף מתעדכן מיד.' if he else "A standard landing page has no update screen, so I added one small update screen for exactly what he needs. Mark which days are open, change hours, add a holiday notice or a promotion, and save. The page updates right away.")}</p>
    <div class="d-hours">
     <a href="/{pfx}admin/"{'' if he else ' hreflang="he"'}><img src="/{pfx}shots/admin-d.webp" width="960" height="700" alt="{E('מסך עדכון השעות והמבצע' if he else 'The hours and promotion update screen')}" loading="lazy"></a>
     <div><ul>{''.join(f'<li>{E(x)}</li>' for x in pts)}</ul>

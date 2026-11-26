@@ -31,9 +31,9 @@ def page(with_prices: bool, base: str) -> str:
   <section class="block reveal" id="prices">
     <h2>מחירים</h2>
     <div class="prices">
-      <a class="price" href="{PRICING}"><small>דף נחיתה</small><strong><span>החל מ־</span>2,000 ₪</strong></a>
-      <a class="price" href="{PRICING}"><small>אתר עם אזור ניהול</small><strong><span>החל מ־</span>4,000 ₪</strong></a>
-      <a class="price" href="{PRICING}"><small>חנות אונליין</small><strong><span>החל מ־</span>7,000 ₪</strong></a>
+      <a class="price" href="{PRICING}"><small>דף נחיתה</small><strong><span>החל מ־</span>2,290 ₪</strong></a>
+      <a class="price" href="{PRICING}"><small>אתר תדמית</small><strong><span>החל מ־</span>4,900 ₪</strong></a>
+      <a class="price" href="{PRICING}"><small>חנות אונליין</small><strong><span>החל מ־</span>7,900 ₪</strong></a>
     </div>
     <a class="more" href="{PRICING}">לכל המחירים ומה כלול בכל מסלול {ICON['arrow']}</a>
   </section>""" if with_prices else ""
@@ -44,11 +44,11 @@ def page(with_prices: bool, base: str) -> str:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>YYG Web Design · אתר שמביא לעסק שלכם לקוחות</title>
-<meta name="description" content="משלמים 10% בלבד, ומקבלים 3 עיצובים מלאים של האתר שלכם לפני שממשיכים. עיצוב ובניית אתרים לעסקים קטנים ולמוסדות.">
+<meta name="description" content="רואים 3 עיצובים מלאים של האתר שלכם ובוחרים, לפני שבונים. עיצוב ובניית אתרים לעסקים קטנים ולמוסדות.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="אתר שמביא לעסק שלכם לקוחות · YYG Web Design">
-<meta property="og:description" content="משלמים 10% בלבד, ורואים 3 עיצובים מלאים של האתר שלכם לפני שממשיכים.">
+<meta property="og:description" content="רואים 3 עיצובים מלאים של האתר שלכם ובוחרים, לפני שבונים.">
 <meta property="og:image" content="{PAGE_URL}img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -213,7 +213,7 @@ def page(with_prices: bool, base: str) -> str:
   </header>
 
   <h1><span class="ln"><span>אתר שמביא</span></span><span class="ln"><span>לעסק שלכם</span></span><span class="ln"><span class="shine">לקוחות.</span></span></h1>
-  <p class="sub">משלמים <b>10% בלבד</b>, ומקבלים <b>3 עיצובים מלאים</b> של האתר שלכם, עם התוכן שלכם. בוחרים אחד, ורק אז ממשיכים.</p>
+  <p class="sub">מתחילים ב־<b>30%</b>, ומקבלים <b>3 עיצובים מלאים</b> של האתר שלכם, עם התוכן שלכם. בוחרים אחד, ורק אז ממשיכים.</p>
   <span class="badge"><i></i>רואים לפני שמתחייבים</span>
 
   <div class="ctas" id="top-ctas">
@@ -258,10 +258,10 @@ def page(with_prices: bool, base: str) -> str:
   <section class="block reveal">
     <h2>איך <em>זה עובד</em></h2>
     <ol class="steps">
-      <li><span class="n">1</span><div><h3>שאלון של 10 דקות, באתר</h3><p>מה העסק עושה ולמי הוא פונה. בסוף רואים מיד הערכת מחיר, בלי צורך בשיחה.</p><span class="pay">מתחילים ב־10%</span></div></li>
+      <li><span class="n">1</span><div><h3>שאלון של 10 דקות, באתר</h3><p>מה העסק עושה ולמי הוא פונה. בסוף רואים מיד הערכת מחיר, בלי צורך בשיחה.</p><span class="pay">מתחילים ב־30%</span></div></li>
       <li><span class="n">2</span><div><h3>3 עיצובים מלאים</h3><p>עם התוכן שלכם. גוללים בהם בטלפון כמו באתר אמיתי.</p></div></li>
       <li><span class="n">3</span><div><h3>משוב ובחירה</h3><p>מה אהבתם, מה להוריד, ובאיזה כיוון ממשיכים.</p><span class="pay">עוד 40% אחרי הבחירה</span></div></li>
-      <li><span class="n">4</span><div><h3>בנייה</h3><p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות.</p><span class="pay">היתרה, 50%, אחרי האישור שלכם</span></div></li>
+      <li><span class="n">4</span><div><h3>בנייה</h3><p>כל העמודים, טפסי פנייה, התאמה לגוגל ונגישות.</p><span class="pay">היתרה, 30%, אחרי האישור שלכם</span></div></li>
       <li><span class="n">5</span><div><h3>עלייה לאוויר והדרכה</h3><p>דומיין, אחסון ומייל עסקי, והדרכה קצרה לעדכון התוכן.</p></div></li>
     </ol>
   </section>
@@ -305,7 +305,7 @@ def page(with_prices: bool, base: str) -> str:
 
   document.getElementById('share').addEventListener('click', function () {{
     var url = location.href.split('#')[0];
-    var text = 'מכיר מישהו שצריך אתר לעסק? אצל YYG משלמים 10% בלבד ורואים 3 עיצובים לפני שממשיכים: ';
+    var text = 'מכיר מישהו שצריך אתר לעסק? אצל YYG רואים 3 עיצובים מלאים של האתר ובוחרים, לפני שבונים: ';
     if (navigator.share) {{ navigator.share({{ title: 'YYG Web Design', text: text, url: url }}).catch(function () {{}}); }}
     else {{ location.href = 'https://wa.me/?text=' + encodeURIComponent(text + url); }}
   }});

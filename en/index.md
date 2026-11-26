@@ -1,17 +1,18 @@
 # YYG Web Design: Web design and development
 
-A web design and development studio for small businesses and institutions: landing pages, websites with an admin area, websites with sign-ups and a mailing list, online stores, logos and branding.
+A web design and development studio for small businesses and institutions: landing pages, business websites, online stores and features you add to a site (sign-ups, donations, a mailing list), logos and branding.
 
 Who: Yehuda Gordon. Area: All of Israel, by Zoom and phone.
 
 ## Packages and prices
 
-- **Basic landing page**: ₪1,290. One page with up to 5 sections, one design and one revision round. You provide the text. 50% upfront and 50% at launch.
-- **Landing page**: from ₪2,000. One page with up to 7 sections, 3 design directions and 3 revision rounds, copywriting, a contact form, and domain, hosting and business email for the first year.
-- **Website with an admin area**: from ₪4,000. Up to 6 pages, an admin area to update changing content, forms and a content section, training, and domain, hosting and business email for the first year.
-- **Website with sign-ups and a mailing list**: from ₪6,000. Up to 8 pages, sign-ups and user accounts, a mailing list with 3 email templates, and an admin area for content, inquiries and subscribers. Suited to institutions, nonprofits and classes.
-- **Online store**: from ₪7,000. A full store with up to 30 products (I upload them), a cart, card payments and shipping, and an admin area for products, stock and orders.
-- **Brand from 0 to 100%**: from ₪5,900. Logo, visual language, all the content, print and social, and Google, together with the website: 5,900 with a landing page, 7,900 with a website, 9,900 with sign-ups, 10,900 with a store.
+- **Basic landing page**: ₪1,490. One page with up to 5 sections, one design and one revision round. You provide the text. One month of support. 50% upfront and 50% at launch.
+- **Landing page**: from ₪2,290. One page with up to 7 sections, 3 design directions and 3 revision rounds, copywriting, a contact form and a call button, and domain, hosting and business email for the first year.
+- **Business website**: from ₪4,900. Up to 6 pages, an update screen for the content that changes, forms, training, and domain, hosting and business email for the first year.
+- **Extended business website**: from ₪6,900. Up to 12 pages and a content section (news, articles or events), plus everything in the business website. Sign-ups, donations and a mailing list are added as features.
+- **Online store**: from ₪7,900. A full store with up to 30 products (I upload them), a cart, card payments, shipping and policy pages, and a screen for products, stock and orders.
+- **Custom system or large store**: ₪0. A complex user area, connecting to other systems, or more than 100 products. By quote.
+- **Brand from 0 to 100%**: from ₪6,190. Logo, visual language, all the content, print and social media, and Google, together with the website: ₪3,900 on top of the package. ₪6,190 with a landing page, ₪8,800 with a business website, ₪10,800 with an extended business website and ₪11,800 with a store.
 
 No VAT is added to the prices. In every package except the basic landing page: 3 design directions, 3 revision rounds, 4 months of support, and mobile, Google and accessibility readiness. The basic landing page: one design, one revision round and one month of support.
 Full pricing: https://yygweb.com/en/pricing/
@@ -19,14 +20,14 @@ Full pricing: https://yygweb.com/en/pricing/
 ## How it works
 
 1. A short questionnaire or call, then a formal quote
-2. 10%, and 3 complete designs with your content
+2. 30%, and 3 complete designs with your content
 3. Feedback and choice, and another 40%
-4. Build, your review and approval, and the final 50%
+4. Build, your review and approval, and the final 30%
 5. Launch and training
 
 ## How payment works
 
-10% to start and get 3 designs of your site, 40% after you choose a design, and 50% at the end, after your approval and before going live.
+30% to start and get 3 designs of your site, 40% after you choose a design, and 30% at the end, after your approval and before going live. For the basic landing page: 50% upfront and 50% at the end.
 
 For the next 5 clients: 10% off, in return for showing the site in my work with a written testimonial.
 
@@ -34,19 +35,19 @@ For the next 5 clients: 10% off, in return for showing the site in my work with 
 
 ### How much does a website cost?
 
-A landing page starts at ₪2,000, a website with admin panel at ₪4,000, a website with sign-ups & mailing list at ₪6,000, and an online store at ₪7,000. These are starting prices, and no VAT is added to them. The final price depends on your needs and requirements. The price calculator gives you an estimate. At the end of the discovery questionnaire you see an estimate from your answers right away, and within one business day you get a formal, fixed quote by email, before we start. There is also a basic landing page for ₪1,290, with one design and one revision round. And my next 5 clients get a launch price: 10% off, in return for letting me show their site in my work with a written testimonial.
+A landing page starts at ₪2,290, a business website at ₪4,900, an extended business website at ₪6,900, and an online store at ₪7,900. Features like sign-ups, donations or a mailing list are added as needed, each with its own price. These are starting prices, and no VAT is added to them. The final price depends on your needs and requirements. The price calculator gives you an estimate. At the end of the discovery questionnaire you see an estimate from your answers right away, and within one business day you get a formal, fixed quote by email, before we start. There is also a basic landing page for ₪1,490, with one design and one revision round. And my next 5 clients get a launch price: 10% off, in return for letting me show their site in my work with a written testimonial.
 
 ### How does payment work?
 
-In three steps. You pay 10% to start, and I prepare 3 complete designs of your website. You pick one, pay another 40%, and I build. You pay the remaining 50% when the build is done, after you confirm everything is right. Only then does the site go live. The 10% is part of the price, not an extra. Most designers ask for 30% to 50% before you see anything.
+In three steps. You pay 30% to start, and I prepare 3 complete designs of your website. You pick one, pay another 40%, and I build. You pay the remaining 30% when the build is done, after you confirm everything is right. Only then does the site go live. The 30% is part of the price, not an extra, and it already gets you 3 complete designs. For the basic landing page, you pay 50% at the start and 50% at the end.
 
 ### How many designs and revisions are included?
 
-Every package includes 3 design directions and 3 revision rounds: two during the design stage and one after the site is built. Most designers who publish what's included offer one sketch and 2 revision rounds. An extra round is ₪150.
+Every package includes 3 design directions and 3 revision rounds: two during the design stage and one after the site is built. Most designers who publish what's included offer one sketch and 2 revision rounds. An extra round is ₪250.
 
 ### What isn't included in the price?
 
-Professional photography and payment processing fees for online stores. Domain, hosting and business email are included for the first year. From the second year, it's ₪590 per year with "All-in Care," or you move to a hosting company of your own. All of this is spelled out up front in the quote, so there are no surprises.
+Professional photography and payment processing fees for online stores. Domain, hosting and business email are included for the first year. From the second year, it's ₪590 per year with "All-in Care" (₪890 for a store), or you move to a hosting company of your own. All of this is spelled out up front in the quote, so there are no surprises.
 
 ### I don't have a logo. What now?
 
@@ -58,7 +59,7 @@ Yes. Every site is built Google-ready: fast, with the right titles and descripti
 
 ### I don't want to deal with domains and hosting. Is that OK?
 
-Of course. With "All-in Care," I take care of the domain, fast hosting, business email on your domain, security, backups and fixes. The first year is included in the price of the site, then it's ₪590 per year. The domain is registered in your name, and you can leave at any time.
+Of course. With "All-in Care," I take care of the domain, fast hosting, business email on your domain, security, backups and fixes. The first year is included in the price of the site, then it's ₪590 per year (₪890 for a store). The domain is registered in your name, and you can leave at any time.
 
 ### Whose name are the site and domain in?
 
@@ -70,7 +71,7 @@ Yes, on Zoom. I'm available Sunday to Wednesday, 10:00 to 13:30 (Israel time), o
 
 ### Can I update the site myself?
 
-Yes, on a website with an admin area: anything that changes often, like products, recipes or classes, gets a simple update screen. The rest of the site stays fixed, which keeps it fast. On a landing page I handle small changes, and you can add a small update screen, for example for opening hours.
+Yes, on a business website: anything that changes often, like products, recipes or classes, gets a simple update screen. The rest of the site stays fixed, which keeps it fast. On a landing page I handle small changes, and you can add a small update screen, for example for opening hours (₪1,000).
 
 ### I already have a website. What happens with Google?
 
@@ -78,7 +79,7 @@ The new site keeps the same page addresses as your current site, so you don't lo
 
 ### What if none of the designs feel right?
 
-You mark what you liked in a feedback form, and I work it into the next direction, within the revision rounds. If you still decide not to go ahead, the 10% covers the design work, and you owe nothing more.
+You mark what you liked in a feedback form, and I work it into the next direction, within the revision rounds. If you still decide not to go ahead, the 30% covers the design work, and you owe nothing more.
 
 ### Can I send a WhatsApp message or a text?
 
@@ -88,7 +89,7 @@ My phone is for calls only. To write, leave your details in the form below or se
 
 - [Example project: a carpentry website, 3 designs](https://yygweb.com/en/demo/)
 - [Example landing page: an eyewear shop with self-updated hours](https://yygweb.com/en/demo/optika/)
-- [Example landing page at ₪2,000: a tax-refund advisor, 3 designs](https://yygweb.com/en/demo/landing/)
+- [Example landing page at ₪2,290: a tax-refund advisor, 3 designs](https://yygweb.com/en/demo/landing/)
 - [Example basic landing page: a handyman, one design and one revision round](https://yygweb.com/en/demo/basic/)
 - [Example nonprofit site: card donations and a live campaign](https://yygweb.com/en/demo/donate/)
 - [Example synagogue site: prayer times, a renovation campaign and dedications](https://yygweb.com/en/demo/shul/)

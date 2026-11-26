@@ -3,7 +3,7 @@ const CONFIG = {
   email: ['yehuda', 'yygweb.com'].join('@'),   // שמור בחלקים, כדי שרובוטים שאוספים כתובות לא ימצאו אותו
   phone: '054-854-0700',                     // לשיחות בלבד
   formEndpoint: '/send.php',                 // שולח מהשרת בהוסטינגר, בלי שירות חיצוני
-  extraPagePrice: 350,                       // עמוד מעבר למכסה של המסלול
+  extraPagePrice: 400,                       // עמוד מעבר למכסה של המסלול
   showPrice: true                            // false מסתיר את המחיר המשוער במתכנן
 };
 
@@ -414,7 +414,7 @@ const Planner = (() => {
   const TRACK = {
     landing: T('עמוד אחד ברור, עם כל מה שצריך כדי לפנות אליכם.', 'One clear page with everything people need to reach you.'),
     site: T('כמה עמודים, ומסך פשוט לעדכון מה שמשתנה.', 'A few pages, plus a simple screen to update what changes.'),
-    club: T('אתר עם אזור ניהול, ועוד הרשמה, חשבונות ורשימת תפוצה.', 'A site with an admin panel, plus sign-ups, accounts and a mailing list.'),
+    club: T('עד 12 עמודים, ומדור תוכן שמתעדכן: חדשות, מאמרים או אירועים.', 'Up to 12 pages, plus a content section that updates: news, articles or events.'),
     store: T('קטלוג, עגלה ותשלום באתר, עם ניהול מוצרים והזמנות.', 'A catalog, cart and checkout, with product and order management.')
   };
 
@@ -423,11 +423,19 @@ const Planner = (() => {
     return { kind: fd.get('kind'), acts: fd.getAll('act'), upd: fd.get('upd'), en: fd.get('en') === 'on' };
   };
 
+  /* יכולות שמוסיפים לאתר (כמו בבונה ההצעות ובהערכה בסוף השאלון): הרשמה ורשימת תפוצה הן תוספות, לא מסלול */
+  const MOD = {
+    reg: { price: 700, label: T('טופס הרשמה מתקדם', 'An advanced sign-up form') },
+    mail: { price: 900, label: T('רשימת תפוצה ו־3 תבניות מייל', 'A mailing list and 3 email templates') }
+  };
   const plan = ({ kind, acts, upd, en }) => {
     let track = 'site';
     if (kind === 'store' || acts.includes('pay')) track = 'store';
-    else if (upd === 'team' || acts.includes('register')) track = 'club';   // הרשמה = המסלול עם הרשמה, כמו בבונה ההצעות
-    else if (upd === 'none' && !acts.includes('register') && !acts.includes('read')) track = 'landing';
+    else if (acts.includes('read')) track = 'club';   // מדור תוכן שמתעדכן = אתר תדמית מורחב
+    else if (upd === 'none' && !acts.includes('register')) track = 'landing';
+    const mods = [];
+    if (acts.includes('register') && track !== 'store') mods.push(MOD.reg);
+    if (upd === 'team') mods.push(MOD.mail);
 
     let pages;
     const feats = [];
@@ -438,16 +446,16 @@ const Planner = (() => {
       acts.forEach((a) => ACT[a].page && pages.push(ACT[a].page));
       pages.push(T('אודות', 'About'), T('יצירת קשר', 'Contact'));
     }
-    acts.forEach((a) => feats.push(ACT[a].feat));
+    acts.forEach((a) => { if (!(a === 'register' && mods.includes(MOD.reg))) feats.push(ACT[a].feat); });
     if (track === 'store') feats.push(T('ניהול מוצרים, מלאי והזמנות', 'Product, stock and order management'));
-    else if (track !== 'landing') feats.push(T('אזור ניהול לעדכון תוכן', 'An admin panel to update content'));
-    if (track === 'club' || (track === 'store' && upd === 'team')) feats.push(T('חשבונות משתמש ורשימת תפוצה עם הסכמה', 'User accounts and an opt-in mailing list'));
+    else if (track !== 'landing') feats.push(T('מסך עדכון לתוכן שמשתנה', 'An update screen for content that changes'));
+    mods.forEach((m) => feats.push(`${m.label} (${nis(m.price)})`));
     if (en) feats.push(T('גרסה באנגלית עם מעבר בלחיצה', 'A second language with a one-click switch'));
     feats.push(T('התאמה לגוגל ולטלפון', 'Optimized for Google and mobile'), T('הצהרת נגישות', 'Accessibility statement'));
 
     const p = PKG[track];
     const extraPages = (track === 'site' || track === 'club') ? Math.max(0, pages.length - p.quota) : 0;
-    const price = p.price + (en ? p.en : 0) + extraPages * CONFIG.extraPagePrice;
+    const price = p.price + (en ? p.en : 0) + extraPages * CONFIG.extraPagePrice + mods.reduce((t, m) => t + m.price, 0);
     return { track, pages, feats, extraPages, price };
   };
 
@@ -626,7 +634,7 @@ const Planner = (() => {
 (() => {
   const basic = $('basic-cta');
   if (basic) basic.addEventListener('click', () => {
-    $('lead-plan').value = T('בקשה: דף נחיתה בסיסי, 1,290 ₪ (עיצוב אחד, סבב תיקונים אחד, הטקסטים מהלקוח, חודש ליווי, 50% בהתחלה ו־50% בסיום)', 'Request: Basic landing page, ₪1,290 (one design, one revision round, client provides the text, one month of support, 50% upfront and 50% at launch)');
+    $('lead-plan').value = T('בקשה: דף נחיתה בסיסי, 1,490 ₪ (עיצוב אחד, סבב תיקונים אחד, הטקסטים מהלקוח, חודש ליווי, 50% בהתחלה ו־50% בסיום)', 'Request: Basic landing page, ₪1,490 (one design, one revision round, client provides the text, one month of support, 50% upfront and 50% at launch)');
     countHit('pick');
   });
   const launch = $('launch-cta');

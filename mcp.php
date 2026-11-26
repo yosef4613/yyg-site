@@ -45,12 +45,12 @@ $TOOLS = [
      'description' => 'All YYG Web Design website packages, add-ons and recurring costs, with prices in ILS. Prices are final, and no VAT is added.',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'get_process_and_payment', 'title' => 'Process and payment',
-     'description' => 'How a YYG Web Design project works step by step (3 designs before committing), and how payment works (10% / 40% / 50%).',
+     'description' => 'How a YYG Web Design project works step by step (3 designs before committing), and how payment works (30% / 40% / 30%).',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'estimate_price', 'title' => 'Estimate a price',
      'description' => 'A rough starting estimate in ILS for a website. The final price comes in a formal quote after a short questionnaire.',
      'inputSchema' => ['type' => 'object', 'properties' => [
-        'type' => ['type' => 'string', 'enum' => ['landing_basic', 'landing', 'site', 'club', 'store'], 'description' => 'landing_basic, landing (one page), site (website with an admin area), club (sign-ups and a mailing list), store (online store)'],
+        'type' => ['type' => 'string', 'enum' => ['landing_basic', 'landing', 'site', 'club', 'store'], 'description' => 'landing_basic, landing (one page), site (business website), club (extended business website, up to 12 pages and a content section), store (online store)'],
         'pages' => ['type' => 'integer', 'minimum' => 1, 'maximum' => 40, 'description' => 'Number of pages (for site or club)'],
         'english' => ['type' => 'boolean', 'description' => 'Also an English version'],
         'logo' => ['type' => 'string', 'enum' => ['none', 'basic', 'pro'], 'description' => 'Need a logo: none, basic, or pro'],
@@ -91,14 +91,14 @@ function call_tool(string $name, array $a, array $O): string {
             foreach ($O['packages'] ?? [] as $p) if ($p['id'] === $type) { $pkg = $p; $base = (int) $p['price']; }
             if ($pkg === null) return $he ? 'סוג לא מוכר. אפשרויות: landing_basic, landing, site, club, store.' : 'Unknown type. Options: landing_basic, landing, site, club, store.';
             $total = $base; $lines = [L($pkg['name'], $lang) . ': ' . nis($base)];
-            $quota = ['site' => 6, 'club' => 8][$type] ?? null;
+            $quota = ['site' => 6, 'club' => 12][$type] ?? null;
             $pages = (int) ($a['pages'] ?? 0);
-            if ($quota !== null && $pages > $quota) { $x = ($pages - $quota) * 350; $total += $x; $lines[] = ($he ? 'עמודים נוספים: ' : 'Extra pages: ') . ($pages - $quota) . ' × 350 = ' . nis($x); }
-            if (!empty($a['english'])) { $x = ['landing_basic' => 500, 'landing' => 500, 'site' => 1000, 'club' => 1500, 'store' => 1800][$type]; $total += $x; $lines[] = ($he ? 'גרסה באנגלית: ' : 'English version: ') . nis($x); }
+            if ($quota !== null && $pages > $quota) { $x = ($pages - $quota) * 400; $total += $x; $lines[] = ($he ? 'עמודים נוספים: ' : 'Extra pages: ') . ($pages - $quota) . ' × 400 = ' . nis($x); }
+            if (!empty($a['english'])) { $x = ['landing_basic' => 450, 'landing' => 700, 'site' => 1500, 'club' => 2100, 'store' => 2400][$type]; $total += $x; $lines[] = ($he ? 'גרסה באנגלית: ' : 'English version: ') . nis($x); }
             $logo = (string) ($a['logo'] ?? 'none');
             if ($logo === 'basic') { $total += 590; $lines[] = ($he ? 'לוגו בסיסי: ' : 'Basic logo: ') . nis(590); }
             if ($logo === 'pro') { $total += 1500; $lines[] = ($he ? 'לוגו מקצועי: ' : 'Professional logo: ') . nis(1500); }
-            $lines[] = ($he ? 'הערכה: ' : 'Estimate: ') . ($type === 'landing_basic' ? '' : $from) . nis($total) . ($he ? ' (סופי, בלי מע״מ)' : ' (final, no VAT added)');
+            $lines[] = ($he ? 'הערכה: ' : 'Estimate: ') . ($type === 'landing_basic' ? '' : $from) . nis($total) . ($he ? ' (הערכה, בלי תוספת מע״מ)' : ' (an estimate, no VAT added)');
             $lines[] = $he ? 'זו הערכה ראשונית. הצעת מחיר מסודרת מגיעה אחרי שאלון קצר: https://yygweb.com/questionnaire/' : 'This is a first estimate. A formal quote comes after a short questionnaire: https://yygweb.com/en/questionnaire/';
             return implode("\n", $lines);
         case 'list_examples':

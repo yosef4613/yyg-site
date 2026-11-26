@@ -1,5 +1,5 @@
 {
- "_note": "הפרויקט לדוגמה השלישי (סל ברכה, עמותה דמיונית לסלי מזון לשבת ולחג בירושלים): אתר עם אזור ניהול, תרומות באשראי וקמפיין עם מד יעד. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום.",
+ "_note": "הפרויקט לדוגמה השלישי (סל ברכה, עמותה דמיונית לסלי מזון לשבת ולחג בירושלים): אתר תדמית, תרומות באשראי וקמפיין עם מד יעד. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום. המסלול והתקציב: אובייקט he/en, כדי שלא יהיו תלויים בנוסח המדויק של האפשרויות בשאלון.",
  "quote": "YYG-2026-005",
  "intake": [
   ["name", {"he": "חיים, עמותת סל ברכה (לקוח לדוגמה)", "en": "Chaim, Sal Bracha (example client)"}],
@@ -58,8 +58,8 @@
   ["deadline", "יש תאריך מסוים"],
   ["deadline_date", "2026-11-10"],
   ["deadline_why", {"he": "קמפיין החורף נפתח בראש חודש כסלו, ואני רוצה שתרומות באשראי יעבדו מהיום הראשון.", "en": "The winter campaign opens on Rosh Chodesh Kislev, and I want card donations working from day one."}],
-  ["package", "אתר עם אזור ניהול (מ־4,000 ₪)"],
-  ["budget", "4,000 עד 7,000 ₪"],
+  ["package", {"he": "אתר תדמית (מ־4,900 ₪)", "en": "Business website (from ₪4,900)"}],
+  ["budget", {"he": "5,000 עד 8,000 ₪", "en": "₪5,000 to ₪8,000"}],
   ["deciders", {"he": "אני והוועד: הגזבר ועוד חבר. הגזבר רוצה לראות את רשימת התורמים ואת הקבלות.", "en": "Me and the board: the treasurer and one more member. The treasurer wants to see the donor list and the receipts."}],
   ["extra", {"he": "חשוב לי שתורם של 50 ₪ ירגיש בדיוק כמו תורם של 5,000. ושהמשפחות אף פעם לא ירגישו שמדברים עליהן.", "en": "It matters to me that a ₪50 donor feels exactly like a ₪5,000 donor. And that the families never feel they're being talked about."}]
  ],

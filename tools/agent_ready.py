@@ -12,6 +12,10 @@ SITE = 'https://yygweb.com'
 O = json.loads((ROOT / 'assets/offer.json').read_text())
 E = lambda s: html.escape(str(s), quote=True)
 nis = lambda n, he=True: f'{n:,} ₪' if he else f'₪{n:,}'   # באנגלית ₪ לפני המספר, כמו בשאר האתר באנגלית
+def price_txt(x, he=True):
+    if x.get('quote'): return 'בהצעת מחיר' if he else 'by quote'
+    if x.get('percent'): return f'+{x["percent"]}%'
+    return (('מ־' if he else 'from ') if x.get('from') else '') + nis(x['price'], he)
 CSS_V = re.search(r'site\.css\?v=(\d+)', (ROOT / 'index.html').read_text()).group(1)
 
 STYLE = '''<style>
@@ -129,10 +133,12 @@ def offers_ld(lang):
     base = '/' if lang == 'he' else '/en/'
     items = []
     for p in O['packages']:
+        if p.get('quote'): continue   # בהצעת מחיר: בלי מחיר בנתונים
         o = {'@type': 'Offer', 'name': p['name'][lang], 'description': p['summary'][lang], 'price': str(p['price']), 'priceCurrency': 'ILS', 'url': f'{SITE}{base}pricing/', 'itemOffered': {'@type': 'Service', 'name': p['name'][lang], 'provider': {'@id': ORG['@id']}}}
         if p.get('from'): o['priceSpecification'] = {'@type': 'PriceSpecification', 'minPrice': str(p['price']), 'priceCurrency': 'ILS', 'valueAddedTaxIncluded': True}
         items.append(o)
     for a in O['addons']:
+        if a.get('percent'): continue
         items.append({'@type': 'Offer', 'name': a['name'][lang], 'price': str(a['price']), 'priceCurrency': 'ILS', 'url': f'{SITE}{base}pricing/', 'itemOffered': {'@type': 'Service', 'name': a['name'][lang]}})
     for r in O['recurring']:
         items.append({'@type': 'Offer', 'name': r['name'][lang], 'price': str(r['price']), 'priceCurrency': 'ILS', 'url': f'{SITE}{base}pricing/',
@@ -143,8 +149,8 @@ def offers_ld(lang):
 def pricing(lang):
     he = lang == 'he'; base = '/' if he else '/en/'
     days = lambda d: (f'עד {d} ימי עבודה' if he else f'up to {d} business days')
-    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"], he)}</td><td>{E(p["days_text"][lang]) if p.get("days_text") else days(p["days"])}</td></tr>' for p in O['packages'])
-    adds = ''.join(f'<li>{E(a["name"][lang])}: <b>{("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"], he)}</b></li>' for a in O['addons'])
+    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{E(price_txt(p, he))}</td><td>{E(p["days_text"][lang]) if p.get("days_text") else days(p["days"])}</td></tr>' for p in O['packages'])
+    adds = ''.join(f'<li>{E(a["name"][lang])}: <b>{E(price_txt(a, he))}</b></li>' for a in O['addons'])
     rec = ''.join(f'<li>{E(r["name"][lang])}: <b>{nis(r["price"], he)} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}</b></li>' for r in O['recurring'])
     body = f'''  <div class="g-scroll"><table class="g-table">
    <thead><tr><th>{'מסלול' if he else 'Package'}</th><th>{'מחיר' if he else 'Price'}</th><th>{'זמן אספקה' if he else 'Delivery'}</th></tr></thead>
@@ -163,9 +169,9 @@ def pricing(lang):
    <div class="acts"><a class="btn btn-gold" href="{base}#plan">{'למחשבון המחיר' if he else 'To the price calculator'}</a><a class="btn btn-line" href="{base}questionnaire/">{'לשאלון האפיון' if he else 'To the questionnaire'}</a></div>
   </section>'''
     t = 'מחירון: כמה עולה דף נחיתה, אתר וחנות | YYG Web Design' if he else 'Pricing: landing pages, websites and stores | YYG Web Design'
-    d = 'המחירים של YYG Web Design: דף נחיתה מ־2,000 ₪, אתר עם אזור ניהול מ־4,000 ₪, אתר עם הרשמה מ־6,000 ₪, חנות מ־7,000 ₪, תוספות ותשלומים קבועים. בלי מע״מ.' if he else 'YYG Web Design prices: landing page from 2,000, website with an admin area from 4,000, website with sign-ups from 6,000, online store from 7,000 (ILS), add-ons and recurring. No VAT added.'
+    d = 'המחירים של YYG Web Design: דף נחיתה מ־2,290 ₪, אתר תדמית מ־4,900 ₪, אתר תדמית מורחב מ־6,900 ₪, חנות מ־7,900 ₪, יכולות שמוסיפים, תוספות ותשלומים קבועים. בלי מע״מ.' if he else 'YYG Web Design prices: landing page from 2,290, business website from 4,900, extended business website from 6,900, online store from 7,900 (ILS), features you can add, add-ons and recurring. No VAT added.'
     h = 'מחירון' if he else 'Pricing'
-    lead = 'כל המסלולים, התוספות והתשלומים הקבועים, במקום אחד. המחירים בשקלים, סופיים, ולא מוסיפים עליהם מע״מ.' if he else 'Every package, add-on and recurring cost in one place. Prices are in shekels (ILS), final, and no VAT is added.'
+    lead = 'כל המסלולים, היכולות, התוספות והתשלומים הקבועים, במקום אחד. אלה מחירי התחלה בשקלים, בלי תוספת מע״מ. המחיר הסופי מגיע בהצעה במייל.' if he else 'Every package, feature, add-on and recurring cost in one place. These are starting prices in shekels (ILS), with no VAT added. The final price comes in the emailed quote.'
     ld = [offers_ld(lang), crumbs(lang, 'pricing', h)]
     return page(lang, 'pricing', t, d, h, lead, body, ld, h), md_pricing(lang)
 
@@ -173,8 +179,8 @@ def md_pricing(lang):
     he = lang == 'he'
     L = [f'# {"מחירון YYG Web Design" if he else "YYG Web Design pricing"}', '', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], '', f'## {"מסלולים" if he else "Packages"}', '']
     for p in O['packages']:
-        L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"], he)}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
-    L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"], he)}' for a in O['addons']]
+        L.append(f'- **{p["name"][lang]}**: {price_txt(p, he)}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
+    L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {price_txt(a, he)}' for a in O['addons']]
     L += ['', f'## {"תשלומים קבועים" if he else "Recurring"}', ''] + [f'- {r["name"][lang]}: {nis(r["price"], he)} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}' for r in O['recurring']]
     L += ['', f'## {"איך משלמים" if he else "How payment works"}', '', O['payment'][lang], '', O['launch_offer'][lang], '']
     return '\n'.join(L)
@@ -182,12 +188,12 @@ def md_pricing(lang):
 # ---------- אודות ----------
 ABOUT = {
  'he': dict(lead='נעים מאוד, יהודה גורדון. אני מעצב ובונה אתרים לעסקים קטנים ולמוסדות. את כל העבודה, מהשרטוט ועד העלייה לאוויר, אני עושה בעצמי, כך שאתם מדברים כל הזמן עם אותו אדם.',
-   parts=[('איך אני עובד', ['מתחילים בשאלון קצר או בשיחה, ומקבלים הצעת מחיר מסודרת וסגורה.', 'משלמים 10% ומקבלים 3 עיצובים מלאים של האתר שלכם, עם התוכן שלכם. בוחרים בעיניים, לא מתוך דמיון.', 'בוחרים עיצוב, משלמים עוד 40%, ואני בונה. את 50% האחרונים משלמים רק אחרי שאישרתם שהכול טוב.', 'לא מוסיפים מע״מ על המחירים.']),
+   parts=[('איך אני עובד', ['מתחילים בשאלון קצר או בשיחה, ומקבלים הצעת מחיר מסודרת וסגורה.', 'משלמים 30% ומקבלים 3 עיצובים מלאים של האתר שלכם, עם התוכן שלכם. בוחרים בעיניים, לא מתוך דמיון.', 'בוחרים עיצוב, משלמים עוד 40%, ואני בונה. את 30% האחרונים משלמים רק אחרי שאישרתם שהכול טוב.', 'לא מוסיפים מע״מ על המחירים.']),
           ('מה חשוב לי באתר', ['שיביא לקוחות: ברור מה אתם עושים, ומה הצעד הבא של הגולש.', 'שייטען מהר, גם בטלפון ובקליטה חלשה.', 'שיהיה נגיש, מוכן לגוגל ולכלי בינה מלאכותית, ושתוכלו לעדכן את מה שמשתנה.']),
           ('עבודות', ['הכיף שבאפיה (hakef.com): אתר לקייטרינג בוטיק ובר פטיפורים בירושלים, אחרי 6 כיווני עיצוב לבחירה.', 'פרחי שמיים (פרחישמים.com): אתר למקהלת ילדים וחוגי פיתוח קול, עם חיפוש חוג לפי גיל ועיר, הרשמה, חשבונות ועדכונים.', 'פרויקטים לדוגמה מלאים: אתר לנגריה, דף נחיתה לחנות משקפיים עם עדכון שעות עצמי, וחנות אונליין לתבלינים ותה.'])],
    links=[('/demo/', 'לפרויקטים לדוגמה'), ('/pricing/', 'למחירון'), ('/contact/', 'ליצירת קשר')]),
  'en': dict(lead="Nice to meet you, I'm Yehuda Gordon. I design and build websites for small businesses and institutions. I do all the work myself, from the first sketch to launch, so you always talk to the same person.",
-   parts=[('How I work', ['We start with a short questionnaire or a call, and you get a formal, fixed quote.', 'You pay 10% and get 3 complete designs of your own site, with your content. You choose with your eyes, not your imagination.', 'You pick a design, pay another 40%, and I build. You pay the final 50% only after you confirm everything is right.', 'No VAT is added to the prices.']),
+   parts=[('How I work', ['We start with a short questionnaire or a call, and you get a formal, fixed quote.', 'You pay 30% and get 3 complete designs of your own site, with your content. You choose with your eyes, not your imagination.', 'You pick a design, pay another 40%, and I build. You pay the final 30% only after you confirm everything is right.', 'No VAT is added to the prices.']),
           ('What matters to me in a website', ['That it brings in customers: clear about what you do, and clear about the next step.', 'That it loads fast, even on a phone with a weak signal.', 'That it is accessible, ready for Google and AI tools, and that you can update what changes.']),
           ('Work', ['HaKef SheBaAfiya (hakef.com): a website for a boutique catering and petit-four bar business in Jerusalem, after 6 design directions to choose from.', 'Pirchei Shomayim: a website for a boys\' choir and voice classes, with a class search by age and city, sign-ups, accounts and updates.', 'Complete example projects: a carpentry website, an eyewear shop landing page with self-updated hours, and an online spice and tea store.'])],
    links=[('/en/demo/', 'Example projects'), ('/en/pricing/', 'Pricing'), ('/en/contact/', 'Contact')]),
@@ -269,7 +275,7 @@ def md_home(lang):
 # ---------- כרטיס שרת MCP ----------
 TOOLS = [
  ('get_packages_and_prices', 'All YYG Web Design packages, add-ons and recurring costs, with prices in ILS (final, no VAT added).'),
- ('get_process_and_payment', 'How a project works step by step, and how payment works (10% / 40% / 50%).'),
+ ('get_process_and_payment', 'How a project works step by step, and how payment works (30% / 40% / 30%).'),
  ('estimate_price', 'A rough starting estimate for a website by type, page count, English version and logo.'),
  ('list_examples', 'Live client sites and complete example projects, with links.'),
  ('get_contact', 'How to reach YYG Web Design: phone, hours, the contact form and the discovery questionnaire.'),

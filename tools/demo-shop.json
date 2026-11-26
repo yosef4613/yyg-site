@@ -1,5 +1,5 @@
 {
- "_note": "פרויקט לדוגמה (גרגר, חנות תבלינים ותה, עסק דמיוני): חנות אונליין עם עגלה, משלוחים, ומסך ניהול למוצרים, למלאי ולהזמנות. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום.",
+ "_note": "פרויקט לדוגמה (גרגר, חנות תבלינים ותה, עסק דמיוני): חנות אונליין עם עגלה, משלוחים, ומסך ניהול למוצרים, למלאי ולהזמנות. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום. המסלול והתקציב: אובייקט he/en, כדי שלא יהיו תלויים בנוסח המדויק של האפשרויות בשאלון.",
  "quote": "YYG-2026-006",
  "intake": [
   ["name", {"he": "נתנאל, גרגר תבלינים (לקוח לדוגמה)", "en": "Netanel, Gargar spices (example client)"}],
@@ -58,8 +58,8 @@
   ["deadline", "יש תאריך מסוים"],
   ["deadline_date", "2027-01-31"],
   ["deadline_why", {"he": "לפני עונת המארזים: משלוחי מנות לפורים, ומתנות לעובדים לפני פסח.", "en": "Before gift box season: Purim gift parcels, and gifts for employees before Passover."}],
-  ["package", "חנות אונליין (מ־7,000 ₪)"],
-  ["budget", "מעל 7,000 ₪"],
+  ["package", {"he": "חנות אונליין (מ־7,900 ₪)", "en": "Online store (from ₪7,900)"}],
+  ["budget", {"he": "מעל 8,000 ₪", "en": "Over ₪8,000"}],
   ["deciders", {"he": "אני ואבא שלי, שעדיין עומד בחנות כל בוקר.", "en": "Me and my father, who's still in the shop every morning."}],
   ["extra", {"he": "יש לנו כ־40 מוצרים. הכי חשוב לי שאוכל לעדכן לבד מלאי ומחירים, ושההזמנות יגיעו מסודרות עם כתובת למשלוח. משלוח חינם מעל 250 ₪, אחרת 30 ₪, והגעה תוך 2 עד 4 ימי עבודה. אפשר גם איסוף עצמי מהחנות.", "en": "We have about 40 products. Most important to me: that I can update stock and prices myself, and that orders arrive organized, with a shipping address. Free shipping over ₪250, otherwise ₪30, with delivery in 2 to 4 working days. Pickup from the shop is also possible."}]
  ],

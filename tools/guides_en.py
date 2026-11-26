@@ -10,7 +10,7 @@ root = str(pathlib.Path(__file__).resolve().parent.parent)
 OUT = f'{root}/en/guides'
 os.makedirs(OUT, exist_ok=True)
 SITE = 'https://yygweb.com'
-TODAY = '2026-11-25'
+TODAY = '2026-11-26'
 
 # Same block as STYLE in guides.py, flipped for LTR (table cells align left).
 STYLE = '''<style>
@@ -105,7 +105,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=56">
+<link rel="stylesheet" href="/assets/site.css?v=57">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -132,7 +132,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 {faq_html}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what your website will cost?</h2>
-   <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. And if we’re a good fit, we start with 10%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
+   <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. And if we’re a good fit, we start with 30%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
    <a class="btn btn-gold" href="/en/questionnaire/" data-q="src=guide-{slug}">Get a quote: the questionnaire</a>
    <p style="margin-top:12px"><a class="text-link" href="/en/#plan" data-q="src=guide-{slug}">Just a ballpark: 3 questions in the calculator</a></p>
   </section>
@@ -168,16 +168,18 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 # ---------- Guide 1: what a website costs ----------
 cost_body = '''
 <h2>The short answer</h2>
-<p>The price of a website depends mainly on three things: <b>how many pages</b> it has, <b>what the site needs to do</b> (just present information, take sign-ups, or sell), and <b>who updates it</b> afterward. Here are my starting prices, so you have a reference point. No VAT is added. The final price depends on your needs and requirements, and it’s always spelled out in a clear written quote before we begin:</p>
+<p>The price of a website depends mainly on three things: <b>how many pages</b> it has, <b>what the site needs to do</b> (just present information, take sign-ups, or sell), and <b>who updates it</b> afterward. Here are my starting prices, so you have a reference point. No VAT is added. The exact price depends on your needs and requirements, and it always comes in a clear written quote by email before we begin:</p>
 <div class="g-scroll"><table class="g-table">
 <thead><tr><th>Type of website</th><th>Price</th><th>Delivery time</th><th>Best for</th></tr></thead>
 <tbody>
-<tr><td>Landing page</td><td>From ₪2,000</td><td>Up to 4 working days</td><td>A business with one service or promotion that wants the phone to ring</td></tr>
-<tr><td>Website with admin panel</td><td>From ₪4,000</td><td>Up to 10 working days</td><td>A business with several services that wants to update its own content</td></tr>
-<tr><td>Website with sign-ups &amp; mailing list</td><td>From ₪6,000</td><td>Up to 15 working days</td><td>Organizations, institutions, and class providers that take sign-ups</td></tr>
-<tr><td>Online store</td><td>From ₪7,000</td><td>Up to 20 working days</td><td>Anyone selling products, with credit card payments and shipping</td></tr>
+<tr><td>Basic landing page</td><td>From ₪1,490</td><td>Up to 4 working days</td><td>One simple page, with one design and your own copy</td></tr>
+<tr><td>Landing page</td><td>From ₪2,290</td><td>Up to 7 working days</td><td>A business with one service or promotion that wants the phone to ring</td></tr>
+<tr><td>Business website</td><td>From ₪4,900</td><td>Up to 14 working days</td><td>A business with several services that wants to update its own content</td></tr>
+<tr><td>Extended business website</td><td>From ₪6,900</td><td>Up to 20 working days</td><td>Up to 12 pages and a content section: news, articles, or events</td></tr>
+<tr><td>Online store</td><td>From ₪7,900</td><td>Up to 25 working days</td><td>Anyone selling products, with credit card payments and shipping</td></tr>
+<tr><td>Custom system or large store</td><td>By quote</td><td>By spec</td><td>A complex user area, connections to other systems, or more than 100 products</td></tr>
 </tbody></table></div>
-<p>An English version alongside the Hebrew site is an add-on, from ₪500 for a landing page up to ₪1,800 for an online store.</p>
+<p>Sign-ups, schedules, a mailing list, user accounts, and donations are modules you add to a site as needed, from ₪700 (details in <a class="text-link" href="/en/services/institutions.html">websites for institutions, nonprofits and classes</a>). A second language is 30% of the package price: ₪700 for a landing page, up to ₪2,400 for an online store.</p>
 
 <h2>What makes a website more expensive, and what doesn’t</h2>
 <h3>1. The number of pages</h3>
@@ -185,7 +187,7 @@ cost_body = '''
 <h3>2. What the site does</h3>
 <p>A site that only presents information is the least expensive. As soon as it needs to take sign-ups, send emails, manage user accounts, or accept payments, there’s more to build and more to test.</p>
 <h3>3. Who updates the site</h3>
-<p>If your content hardly ever changes, you can skip the admin panel and save. If you post news, promotions, products, or schedules, an admin panel is worth it: you make the updates yourself, without waiting on anyone.</p>
+<p>If your content hardly ever changes, you can skip the update screen and save. If you post news, promotions, products, or schedules, an update screen is worth it: you make the updates yourself, without waiting on anyone.</p>
 <h3>4. Custom design or a template</h3>
 <p>A ready-made template costs less at first, but it looks like hundreds of other websites. A custom design is built around your business, your customers, and the action you want them to take.</p>
 <h3>5. Accessibility</h3>
@@ -197,21 +199,22 @@ cost_body = '''
 <li><b>Hosting</b> (the server your site lives on): usually a few hundred shekels a year, depending on the provider and the plan.</li>
 <li><b>Business email</b> on your domain: optional. Some hosting providers include it free with the plan.</li>
 </ul>
-<p>I include <b>the first year of domain, hosting, and business email</b> in the price of the website. From the second year on, you choose: All-in Care, where I take care of everything for ₪590 a year, or a move to a hosting provider of your own. Either way, the domain is registered <b>in your name</b>, so the website is truly yours.</p>
+<p>I include <b>the first year of domain, hosting, and business email</b> in the price of the website. From the second year on, you choose: All-in Care, where I take care of everything for ₪590 a year (₪890 for a store), or a move to a hosting provider of your own. If you’d like me to make small changes for you, you can add maintenance of up to half an hour a month, for ₪199 a month. Either way, the domain is registered <b>in your name</b>, so the website is truly yours.</p>
 
 <h2>How to avoid committing to a website you haven’t seen</h2>
-<p>The biggest risk in building a website is paying a lot up front and finding out at the end that the design isn’t what you had in mind. Most designers ask for 30% to 50% before you see anything. I work differently:</p>
+<p>The biggest risk in building a website is paying a lot up front and finding out at the end that the design isn’t what you had in mind. With me, you pay in stages, and you see the design before you go ahead:</p>
 <ol>
-<li>After a short call and a formal quote, you pay <b>just 10%</b> to start, and I prepare <b>3 design directions</b> for your website, using your own content.</li>
-<li>Love one of the directions? You pay another 40%, and we move on to the build.</li>
-<li>You pay the remaining 50% at the end, <b>after you’ve reviewed and approved everything</b>, before the site goes live.</li>
+<li>After a short call and a formal quote, you pay <b>30%</b> to start, and for that you already get <b>3 complete design directions</b> for your website, using your own content.</li>
+<li>Love one of the directions? You pay another 40%, and we move on to the build. And if you decide not to go ahead, the 30% covers the design work, and you don’t pay anything more.</li>
+<li>You pay the remaining 30% at the end, <b>after you’ve reviewed and approved everything</b>, before the site goes live.</li>
 </ol>
+<p>With a basic landing page, which has one design, you pay 50% at the start and 50% before the site goes live.</p>
 '''
 cost_faq = [
-    ('How much does a landing page cost?', 'My landing pages start at ₪2,000, and no VAT is added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 4 working days. The final price depends on what the page needs.'),
+    ('How much does a landing page cost?', 'My landing pages start at ₪2,290, and no VAT is added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 7 working days. A basic landing page, with one design and your own copy, starts at ₪1,490. The exact price depends on what the page needs, and it comes in the quote.'),
     ('Is VAT added to the price?', "No. I don't add VAT to my prices: the price in your quote is the price you pay."),
-    ('Is there a monthly fee?', 'There’s no monthly fee. The first year of domain, hosting, and business email is included in the price of the website. After that, All-in Care is ₪590 a year if you’d like me to take care of everything.'),
-    ('What if I need more pages later?', 'You can add pages even after the site is live. Each page beyond your package costs ₪350.'),
+    ('Is there a monthly fee?', 'It isn’t required. The first year of domain, hosting, and business email is included in the price of the website. After that, All-in Care is ₪590 a year (₪890 for a store) if you’d like me to take care of everything. Maintenance of up to half an hour a month is your choice, for ₪199 a month.'),
+    ('What if I need more pages later?', 'You can add pages even after the site is live. Each page beyond your package costs ₪400.'),
 ]
 
 # ---------- Guide 2: what to prepare ----------
@@ -268,12 +271,12 @@ lp_body = '''
 <h3>A landing page is the right fit when:</h3>
 <ul>
 <li>You have <b>one main service</b> or a specific promotion.</li>
-<li>You want to <b>get started fast</b> (with me, up to 4 working days) and on a small budget (from ₪2,000).</li>
+<li>You want to <b>get started fast</b> (with me, up to 7 working days) and on a small budget (from ₪2,290).</li>
 <li>You’re running ads or handing out flyers, and you want everyone who arrives to do one thing.</li>
 </ul>
 
 <h2>What is a full website?</h2>
-<p>Several pages with a menu: home, services, about, FAQ, contact, and sometimes a content section too. With an admin panel, you update anything that changes on your own.</p>
+<p>Several pages with a menu: home, services, about, FAQ, contact, and sometimes a content section too. A business website has an update screen, where you update anything that changes on your own.</p>
 <h3>A full website is the right fit when:</h3>
 <ul>
 <li>You have <b>several services</b>, and each one needs its own explanation.</li>
@@ -282,16 +285,16 @@ lp_body = '''
 </ul>
 
 <h2>What if you need sign-ups or sales?</h2>
-<p>Organizations, institutions, and class providers that take sign-ups need a <b>website with sign-ups &amp; mailing list</b>: a sign-up form, user accounts, and automatic emails. And if you sell products, you need an <b>online store</b> with a cart, credit card payments, and shipping.</p>
+<p>Organizations, institutions, and class providers that take sign-ups add <b>modules</b> to the site: an advanced sign-up form, a mailing list, user accounts, or donations, each with its own price. A site with a lot of content, up to 12 pages and a section for news, articles, or events, is an <b>extended business website</b>. And if you sell products, you need an <b>online store</b> with a cart, credit card payments, and shipping.</p>
 
 <h2>A quick comparison</h2>
 <div class="g-scroll"><table class="g-table">
-<thead><tr><th></th><th>Landing page</th><th>Website with admin panel</th></tr></thead>
+<thead><tr><th></th><th>Landing page</th><th>Business website</th></tr></thead>
 <tbody>
-<tr><th>My price</th><td>From ₪2,000</td><td>From ₪4,000</td></tr>
+<tr><th>My starting price</th><td>From ₪2,290</td><td>From ₪4,900</td></tr>
 <tr><th>Pages</th><td>One page, up to 7 sections</td><td>Up to 6 pages</td></tr>
-<tr><th>Delivery time</th><td>Up to 4 working days</td><td>Up to 10 working days</td></tr>
-<tr><th>Updating it yourself</th><td>I handle small changes</td><td>You update the content that changes</td></tr>
+<tr><th>Delivery time</th><td>Up to 7 working days</td><td>Up to 14 working days</td></tr>
+<tr><th>Updating it yourself</th><td>I handle small changes, or an update screen for ₪1,000</td><td>You update the content that changes</td></tr>
 <tr><th>Best for</th><td>One service, a promotion, a quick start</td><td>Several services, content, and a presence on Google</td></tr>
 </tbody></table></div>
 
@@ -301,7 +304,7 @@ lp_body = '''
 lp_faq = [
     ('Can I start with a landing page and expand later?', 'Yes. The landing page becomes the home page, or one of the pages, of the full website, so you don’t start from scratch.'),
     ('Will a landing page show up on Google?', 'Yes, but usually for fewer searches than a full website, because it has less content and fewer pages.'),
-    ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. No VAT is added to the prices.'),
+    ('What’s the difference in price?', 'My landing pages start at ₪2,290, and a business website starts at ₪4,900. No VAT is added to the prices, and the exact price comes in the quote.'),
 ]
 
 # ---------- Guide 4: how to choose who builds your website ----------
@@ -313,15 +316,15 @@ choose_body = '''
 <h3>1. What exactly is included in the price?</h3>
 <p>How many pages, who writes the copy, whether there's a form, mobile optimization, Google readiness and an accessibility statement. A good answer is a written list in the quote, not "everything is included".</p>
 <h3>2. Does the price include VAT?</h3>
-<p>"From ₪3,000" can become ₪3,540 once VAT is added. Ask for the final price, as one number. I don't add VAT to my prices.</p>
+<p>"From ₪3,000" can become ₪3,540 once VAT is added. Ask for the full price, as one number. I don't add VAT to my prices.</p>
 <h3>3. Will I see a design before I pay most of the price?</h3>
-<p>In the market, people often pay 30% to 50% before they see anything. Ask how many designs you'll see, and what you pay at each stage. With me, you start with 10%, see 3 complete designs with your own content, and only after you choose do you pay another 40%.</p>
+<p>Ask how many designs you'll see, and what you pay at each stage. With me, you start with 30%, and for that you already see 3 complete designs with your own content. Only after you choose do you pay another 40%, and if you decide not to go ahead, you don't pay anything more.</p>
 <h3>4. How many revision rounds are included, and what counts as a revision?</h3>
 <p>Changing a color, a photo or some text is a revision. Changing the whole structure after you've approved it is new work. A good answer defines the number of rounds, and what goes into them.</p>
 <h3>5. Whose name will the domain and website be in?</h3>
 <p>The domain should be registered in your name, and the website should be yours, so you can move to another company without losing it. This is one of the most important questions, because it's hard to fix later.</p>
 <h3>6. What does it cost after the first year?</h3>
-<p>Domain, hosting, business email, plugin licenses and maintenance. Ask for one yearly number. With me, the first year is included, and after that it's ₪590 a year with All-in Care, or with your own hosting company.</p>
+<p>Domain, hosting, business email, plugin licenses and maintenance. Ask for one yearly number. With me, the first year is included, and after that it's ₪590 a year with All-in Care (₪890 for a store), or with your own hosting company.</p>
 <h3>7. Can I update it myself, and who teaches me?</h3>
 <p>Ask exactly what you'll be able to change yourself: prices, photos, promotions. And ask whether there's training and a written guide, or whether every change will cost you money.</p>
 <h3>8. How long will it take, and from which day do you count?</h3>
@@ -345,7 +348,7 @@ choose_body = '''
 <div class="g-scroll"><table class="g-table">
 <thead><tr><th>What to check</th><th>Why it matters</th></tr></thead>
 <tbody>
-<tr><td>A final price as one number</td><td>To compare like with like, including VAT</td></tr>
+<tr><td>A full price as one number</td><td>To compare like with like, including VAT</td></tr>
 <tr><td>What's included</td><td>Pages, copy, forms, Google and accessibility</td></tr>
 <tr><td>Designs and revisions</td><td>How many directions you'll see, and how many times you can revise</td></tr>
 <tr><td>Delivery time</td><td>And from which day it's counted</td></tr>
@@ -363,14 +366,14 @@ choose_body = '''
 <li><b>Who will update the site?</b> You, someone on your team, or the designer.</li>
 <li><b>What's the budget and the deadline?</b> Even a rough range helps you get an accurate quote.</li>
 </ul>
-<p>And what to ask for in writing: a list of what's included, the final price, the payment stages, the delivery time and from which day it's counted, and what the second year costs. A tidy quote with all of these is a good sign in itself.</p>
+<p>And what to ask for in writing: a list of what's included, the full price, the payment stages, the delivery time and from which day it's counted, and what the second year costs. A tidy quote with all of these is a good sign in itself.</p>
 
 <h2>And what about me?</h2>
-<p>You'll find my answers to all 10 questions on my website: what each package includes, the final price, the 3 designs, the 3 revision rounds, delivery times and the second year. Want an exact number? The calculator on my site gives you a recommended package, a list of pages and an estimated price, without leaving your details. You can also read <a class="text-link" href="/en/guides/website-cost.html">how much a business website costs</a> and <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>, or browse my <a class="text-link" href="/en/services/">services</a>.</p>
+<p>You'll find my answers to all 10 questions on my website: what each package includes, the starting price and the payment stages, the 3 designs, the 3 revision rounds, delivery times and the second year. Want an exact number? The calculator on my site gives you a recommended package, a list of pages and an estimated price, without leaving your details. You can also read <a class="text-link" href="/en/guides/website-cost.html">how much a business website costs</a> and <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>, or browse my <a class="text-link" href="/en/services/">services</a>.</p>
 '''
 choose_faq = [
     ('What is the most important thing to check before choosing a web designer?', "That the domain and website will be in your name, and that there's a written list of what the price includes. Everything else can be fixed later; that's hard to fix."),
-    ('Is it OK to pay a deposit?', "Yes, a deposit is normal. It's worth knowing up front what it pays for and when you'll see a design. With me, you start with 10%, and for that you get 3 complete designs."),
+    ('Is it OK to pay a deposit?', "Yes, a deposit is normal. It's worth knowing up front what it pays for and when you'll see a design. With me, you start with 30%, and for that you get 3 complete designs. If you decide not to go ahead after the designs, you don't pay anything more."),
     ('How can I tell if a website someone built is fast?', "Open it on your phone, ideally not on fast Wi-Fi, and see how long it takes until the content appears. You can also check it with Google's free PageSpeed Insights tool."),
     ('Is a low price a bad sign?', "Not necessarily. But check what's included, who writes the copy, and what the second year costs. Sometimes that's where the difference is."),
     ('How many quotes should I ask for?', 'Two or three are enough to understand the market. More than that usually just confuses.'),
@@ -383,19 +386,23 @@ time_body = '''
 <div class="g-scroll"><table class="g-table">
 <thead><tr><th>Type of site</th><th>Delivery time</th><th>Starting price</th></tr></thead>
 <tbody>
-<tr><td><a class="text-link" href="/en/services/landing-page.html">Landing page</a></td><td>Up to 4 business days</td><td>₪2,000</td></tr>
-<tr><td><a class="text-link" href="/en/services/business-website.html">Website with admin panel</a></td><td>Up to 10 business days</td><td>₪4,000</td></tr>
-<tr><td><a class="text-link" href="/en/services/institutions.html">Website with sign-ups and a mailing list</a></td><td>Up to 15 business days</td><td>₪6,000</td></tr>
-<tr><td><a class="text-link" href="/en/services/online-store.html">Online store</a></td><td>Up to 20 business days</td><td>₪7,000</td></tr>
+<tr><td>Basic landing page</td><td>Up to 4 days</td><td>₪1,490</td></tr>
+<tr><td><a class="text-link" href="/en/services/landing-page.html">Landing page</a></td><td>Up to 7 days</td><td>₪2,290</td></tr>
+<tr><td><a class="text-link" href="/en/services/business-website.html">Business website</a></td><td>Up to 14 days</td><td>₪4,900</td></tr>
+<tr><td>Extended business website</td><td>Up to 20 days</td><td>₪6,900</td></tr>
+<tr><td><a class="text-link" href="/en/services/online-store.html">Online store</a></td><td>Up to 25 days</td><td>₪7,900</td></tr>
+<tr><td><a class="text-link" href="/en/services/institutions.html">A module: sign-ups, donations and more</a></td><td>2 to 4 more days</td><td>From ₪700</td></tr>
+<tr><td><a class="text-link" href="/en/services/logo-branding.html">Brand from 0 to 100%</a></td><td>10 more days</td><td>An extra ₪3,900</td></tr>
 </tbody></table></div>
 <p>No VAT is added to the prices. Days spent waiting for your reply aren't counted. So what really decides how long it takes is mostly how quickly the materials and approvals come in.</p>
+<p>In every package, part of the time is for the designs and part is for the build. For a landing page, for example, 3 days for the designs and 4 for the build. Need it sooner? Rush delivery, in half the time, is an extra 25%.</p>
 
 <h2>The stages, one after another</h2>
 <ol>
 <li><b>A call and a quote</b>: what the business needs, and which package fits.</li>
 <li><b>Materials</b>: logo, key points for the copy, photos, and sites you like.</li>
 <li><b>3 designs</b> with your own content, and choosing a direction.</li>
-<li><b>The build</b>: all the pages, forms and the admin panel.</li>
+<li><b>The build</b>: all the pages, forms and the update screen.</li>
 <li><b>Revisions and testing</b> on phone and computer.</li>
 <li><b>Connecting the domain, going live, and training</b>.</li>
 </ol>
@@ -419,11 +426,11 @@ time_body = '''
 <li>For a store: open an account with a payment provider on day one.</li>
 </ul>
 
-<h2>Example: what a week looks like for a site with an admin panel</h2>
-<p>Say all the materials arrived on Sunday. In the first few days, I write the copy and prepare 3 designs. You choose a direction, and then I build all the pages and connect the admin panel. Toward the end there's a revision round, testing on phone and computer, connecting the domain, and training. If every round gets a reply within a day, it all fits into ten business days. Each day spent waiting for a reply pushes everything back by a day.</p>
+<h2>Example: what the weeks look like for a business website</h2>
+<p>Say all the materials arrived on Sunday. In the first 5 days, I write the copy and prepare 3 designs. You choose a direction, and then in the next 9 days I build all the pages and connect the update screen. Toward the end there's a revision round, testing on phone and computer, connecting the domain, and training. If every round gets a reply within a day, it all fits into 14 business days. Each day spent waiting for a reply pushes everything back by a day.</p>
 
 <h2>And a store?</h2>
-<p>A store takes longer, mostly because of the preparation, not the build: a product list with prices, descriptions and photos, an account with a payment provider, and a shipping and returns policy. When all of these are ready up front, up to 20 business days is enough even for a store with dozens of products. If one of them is missing, that's what decides when the store goes live.</p>
+<p>A store takes longer, mostly because of the preparation, not the build: a product list with prices, descriptions and photos, an account with a payment provider, and a shipping and returns policy. When all of these are ready up front, up to 25 business days is enough even for a store with dozens of products. If one of them is missing, that's what decides when the store goes live.</p>
 
 <h2>What gets checked before launch</h2>
 <ul>
@@ -448,8 +455,8 @@ time_body = '''
 <p>Want to know how long your website will take, and which package fits? Answer 3 questions in the calculator, or read <a class="text-link" href="/en/guides/landing-or-website.html">landing page or full website</a> and <a class="text-link" href="/en/guides/choose-web-designer.html">how to choose who builds your website</a>.</p>
 '''
 time_faq = [
-    ('How long does it take to build a landing page?', 'With me, up to 4 business days from the day I have all the materials.'),
-    ('Can a website be built in a week?', 'A landing page, yes. A multi-page website takes me up to 10 business days, about two weeks, if the materials and replies come quickly.'),
+    ('How long does it take to build a landing page?', 'With me, up to 7 business days from the day I have all the materials: 3 for the designs and 4 for the build. A basic landing page, with one design, takes up to 4 business days.'),
+    ('Can a website be built in a week?', 'A basic landing page, yes, within 4 business days. A landing page takes up to 7 business days, and a business website up to 14, about three weeks, if the materials and replies come quickly. Need it sooner? Rush delivery, in half the time, is an extra 25%.'),
     ('From which day is the delivery time counted?', "From the day I have all the materials: logo, key points for the copy and photos. Days spent waiting for your reply aren't counted."),
     ('When will the website show up on Google?', 'On launch day the site is registered in Google’s tools. Showing up in the results usually takes days to weeks, and rankings improve over time with good content.'),
     ('What delays a website build the most?', 'Usually not the build itself, but materials that come in slowly, copy nobody writes, and approvals from several people.'),
@@ -457,19 +464,19 @@ time_faq = [
 
 G = [
     ('website-cost', 'How much does a business website cost? Prices and what drives them',
-     'What a business website costs in Israel: prices for a landing page, a website with admin panel, a website with sign-ups & mailing list, and an online store, plus what makes a site more expensive and the ongoing costs.',
+     'What a business website costs in Israel: prices for a landing page, a business website, an extended business website, and an online store, plus what makes a site more expensive and the ongoing costs.',
      'How much does a business website cost?', 'Real prices, what drives them, and how to see the design before you commit to the full price.', cost_body, cost_faq),
     ('before-you-build', 'What to prepare before building a website: 9 things that save time and money',
      'A list of 9 things worth preparing before you build a website: sites you like, a goal, your audience, a dark or light background, a logo, photos, content, a domain, a timeline, and a budget. Plus how to reach out the right way.',
      'What to prepare before you build a website', 'Here are 9 things that get you to a website that fits you perfectly, faster. None of them are required, but each one helps.', prep_body, prep_faq),
     ('landing-or-website', 'Landing page or full website: which is right for your business?',
-     'The difference between a landing page and a full website: who each one suits, prices, delivery times, and a quick comparison. Plus when you need a website with sign-ups & mailing list or an online store.',
+     'The difference between a landing page and a full website: who each one suits, prices, delivery times, and a quick comparison. Plus when you add sign-ups or need an online store.',
      'Landing page or full website?', 'What sets them apart, who each one is for, and how to decide without paying for what you don’t need.', lp_body, lp_faq),
     ('choose-web-designer', 'How to choose a web designer: 10 questions to ask first',
      '10 questions to ask a web designer before you pay: what is included, VAT, whose name the domain is in, revisions, and the second-year cost.',
      'How to choose who builds your website', '10 questions worth asking before you pay, and what a good answer looks like. Even if you don’t end up choosing me.', choose_body, choose_faq),
     ('how-long-to-build', 'How long does it take to build a business website?',
-     'How long it takes to build a business website: landing page, admin panel, sign-ups or store. The stages, and what speeds it up or slows it down.',
+     'How long it takes to build a business website: landing page, business website, extended website or store. The stages, and what speeds it up or slows it down.',
      'How long does it take to build a business website?', 'Real delivery times, the stages, and what usually slows things down. Most delays have nothing to do with the build itself.', time_body, time_faq),
 ]
 

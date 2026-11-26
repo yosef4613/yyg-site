@@ -1,5 +1,5 @@
 {
- "_note": "הפרויקט לדוגמה השלישי (בית הכנסת נחלת יצחק, מוסד דמיוני): אתר תדמית עם אזור ניהול, תרומות באשראי, הקדשות וקמפיין לחידוש ההיכל, וזמני תפילות שהגבאי מעדכן בעצמו. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום. 'אחר' בשאלת בחירה: אובייקט he/en.",
+ "_note": "הפרויקט לדוגמה השלישי (בית הכנסת נחלת יצחק, מוסד דמיוני): אתר תדמית עם מסך גבאי, תרומות באשראי, הקדשות וקמפיין לחידוש ההיכל, וזמני תפילות שהגבאי מעדכן בעצמו. התשובות לשאלון האפיון ולשאלון המשוב. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום. 'אחר' בשאלת בחירה: אובייקט he/en. המסלול והתקציב: אובייקט he/en, כדי שלא יהיו תלויים בנוסח המדויק של האפשרויות בשאלון.",
  "quote": "YYG-2026-007",
  "intake": [
   ["name", {"he": "משה, גבאי בית הכנסת נחלת יצחק (לקוח לדוגמה)", "en": "Moshe, gabbai of Nachalat Yitzchak Synagogue (example client)"}],
@@ -58,8 +58,8 @@
   ["deadline", "יש תאריך מסוים"],
   ["deadline_date", "2026-11-19"],
   ["deadline_why", {"he": "ערב ההקדשה של הקהילה במוצאי שבת 21.11, שבו פותחים את הקמפיין לחידוש ההיכל.", "en": "The community dedication evening on Saturday night, November 21, where we launch the campaign to renovate the sanctuary."}],
-  ["package", "אתר עם אזור ניהול (מ־4,000 ₪)"],
-  ["budget", "4,000 עד 7,000 ₪"],
+  ["package", {"he": "אתר תדמית (מ־4,900 ₪)", "en": "Business website (from ₪4,900)"}],
+  ["budget", {"he": "5,000 עד 8,000 ₪", "en": "₪5,000 to ₪8,000"}],
   ["deciders", {"he": "ועד בית הכנסת: אני, הגזבר ויושב הראש. את העיצוב נראה גם לרב.", "en": "The synagogue committee: me, the treasurer and the chairman. We'll show the design to the rabbi too."}],
   ["extra", {"he": "שני דברים חשובים לי: שזמני התפילות באתר תמיד יהיו נכונים, ושמי שרוצה להקדיש ספסל יוכל לעשות את זה ולקבל קבלה בלי להתקשר אליי. אולי בהמשך גם אנגלית, בשביל המשפחות מחו״ל.", "en": "Two things matter to me: that the prayer times on the site are always right, and that anyone who wants to dedicate a bench can do it and get a receipt without calling me. Maybe English later on, for the families abroad."}]
  ],

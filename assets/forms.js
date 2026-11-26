@@ -262,7 +262,7 @@
         <ul class="qf-est-lines">${e.lines.map(([l, p]) => `<li><span>${esc(l)}</span><b>${nis(p)}</b></li>`).join('')}</ul>
         ${e.todo && e.todo.length ? `<p class="qf-est-h">${t('יתומחר אישית בהצעה:', 'Priced personally in the quote:')}</p><ul class="qf-est-todo">${e.todo.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
         <p class="qf-est-h">${t('אחרי ההשקה:', 'After launch:')}</p><ul class="qf-est-todo">${(e.yearly || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
-        <p class="qf-est-fine">${t('בלי תוספת מע״מ. זו הערכה אוטומטית: אני עובר על התשובות, ותוך יום עבודה מגיעה אליכם במייל הצעה מסודרת עם אישור בלחיצה. מתחילים ב־10% בלבד, ורואים 3 עיצובים לפני שממשיכים.', 'Final price, no VAT added. This is an automatic estimate: I go over your answers, and within one business day you get a formal quote by email with one-click approval. You start with just 10% and see 3 designs before going ahead.')}</p>
+        <p class="qf-est-fine">${t('בלי תוספת מע״מ. זו הערכה אוטומטית: אני עובר על התשובות, ותוך יום עבודה מגיעה אליכם במייל הצעה מסודרת עם אישור בלחיצה. מתחילים ב־30%, ורואים 3 עיצובים לפני שממשיכים.', 'No VAT added. This is an automatic estimate: I go over your answers, and within one business day you get a formal quote by email with one-click approval. You start with 30% and see 3 designs before going ahead.')}</p>
       </div>` : '';
       root.innerHTML = `<div class="qf-step qf-done"><h2 class="qf-title" tabindex="-1">${t('נשלח', 'Sent')}</h2><p class="qf-intro">${esc(def.done)}</p>${filesNote}${est}<p><a class="btn btn-line" href="${t('/', '/en/')}">${t('חזרה לאתר', 'Back to the site')}</a></p></div>`;
       root.querySelector('.qf-title').focus();

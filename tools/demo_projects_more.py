@@ -57,8 +57,8 @@ T_DON = t_for(dict(
   note='עמותה דמיונית לדוגמה: השם, הפרטים, התורמים וההמלצות בדויים, ושום תרומה לא נגבית. התמונות הן הדמיות תלת־ממד שבניתי במיוחד.',
   s1p='יו״ר העמותה מילא את השאלון בכ־10 דקות. היה לו רק צילום של הלוגו, ובלי תמונות בכלל, כי את המשפחות לא מצלמים. אלה התשובות שהכי השפיעו:',
   files='מה הכנתי בשבילו: שרטוט נקי של הלוגו, והדמיות תלת־ממד',
-  s2p='מהשאלון יצאו אתר עם אזור ניהול, ושני דברים לתמחור: תרומות באשראי, וקמפיין שמתעדכן לבד. בונה ההצעות שלי הכין טיוטה, עברתי עליה, והעמותה קיבלה במייל הצעה מסודרת עם אישור בלחיצה. עמלות חברת הסליקה משולמות ישירות לחברה.',
-  s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם המד, הימים שנותרו ורשימת התורמים חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
+  s2p='מהשאלון יצאו אתר תדמית, ושני דברים לתמחור: תרומות באשראי, וקמפיין שמתעדכן לבד. בונה ההצעות שלי הכין טיוטה, עברתי עליה, והעמותה קיבלה במייל הצעה מסודרת עם אישור בלחיצה. עמלות חברת הסליקה משולמות ישירות לחברה.',
+  s3p='אחרי ה־30% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם המד, הימים שנותרו ורשימת התורמים חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
   s5p='', changes=[]),
  dict(
   title='Example website: a nonprofit with card donations and a live campaign | YYG Web Design',
@@ -68,20 +68,20 @@ T_DON = t_for(dict(
   note='A fictional example nonprofit: the name, details, donors and testimonials are made up, and no donation is charged. The images are 3D renders I built specially.',
   s1p='The nonprofit\'s chairman filled in the questionnaire in about 10 minutes. He had only a photo of the logo, and no photos at all, since the families are never photographed. These are the answers that shaped the work most:',
   files='What I prepared for him: a clean redraw of the logo, and 3D renders',
-  s2p='From the questionnaire came a website with an admin area, and two things to price: card donations, and a campaign that updates itself. My quote builder drafted it, I reviewed it, and the nonprofit got a formal quote by email with one-click approval. The payment provider\'s fees are paid directly to the provider.',
-  s3p='After the first 10%, I prepare 3 completely different directions for the same site. In each, the meter, the days left and the donor list are live: you can make an example donation and watch them update.',
+  s2p='From the questionnaire came a business website, and two things to price: card donations, and a campaign that updates itself. My quote builder drafted it, I reviewed it, and the nonprofit got a formal quote by email with one-click approval. The payment provider\'s fees are paid directly to the provider.',
+  s3p='After the first 30%, I prepare 3 completely different directions for the same site. In each, the meter, the days left and the donor list are live: you can make an example donation and watch them update.',
   s5p='', changes=[]))
 QUOTE_DON = {
- 'he': dict(items=[('אתר עם אזור ניהול', 4000), ('תרומות באשראי: חיבור לחברת הסליקה, תרומה חד־פעמית או חודשית, וקבלה במייל', 1500), ('קמפיין: מד יעד, ספירה לאחור ורשימת תורמים שמתעדכנים לבד', 500)],
-   incl=['עד 6 עמודים', 'אזור ניהול: הקמפיין, עדכונים מהשטח, תרומות שנרשמות ביד ורשימת התורמים', 'עמוד תרומה: סכומים קבועים וסכום חופשי, הקדשה ובעילום שם', 'שרטוט נקי של הלוגו הקיים מתוך הצילום', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '14 ימי עבודה לאספקה', '4 חודשי ליווי'],
+ 'he': dict(items=[('אתר תדמית', 4900), ('תרומות באשראי: חיבור לחברת הסליקה, תרומה חד־פעמית או חודשית, וקבלה במייל', 1200), ('קמפיין: מד יעד, ספירה לאחור ורשימת תורמים שמתעדכנים לבד', 800)],
+   incl=['עד 6 עמודים', 'מסך ניהול לקמפיין: עדכונים מהשטח, תרומות שנרשמות ביד ורשימת התורמים', 'עמוד תרומה: סכומים קבועים וסכום חופשי, הקדשה ובעילום שם', 'שרטוט נקי של הלוגו הקיים מתוך הצילום', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
+   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '19 ימי עבודה לאספקה', '4 חודשי ליווי'],
    pay=QUOTE['he']['pay'], annual=QUOTE['he']['annual'],
-   notes=['סימן 5 עמודים, ועוד עמוד תרומה: 6 עמודים, בדיוק מה שכלול במסלול. אין תוספת עמודים.', 'תרומות באשראי: העמותה פותחת חשבון בחברת סליקה שתבחר, ואני מחבר אותו לאתר. העמלות של חברת הסליקה משולמות ישירות אליה.', 'לוח זמנים: הקמפיין נפתח בראש חודש כסלו, ו־14 ימי עבודה מספיקים. התקציב שציין: 4,000 עד 7,000 ₪.']),
- 'en': dict(items=[('Website with an admin area', 4000), ('Card donations: connection to the payment provider, one-time or monthly donations, and an emailed receipt', 1500), ('Campaign: a goal meter, a countdown and a donor list that update themselves', 500)],
-   incl=['Up to 6 pages', 'An admin area: the campaign, field updates, donations recorded by hand and the donor list', 'A donation page: set amounts and any amount, dedications and anonymous giving', 'A clean redraw of the existing logo from the photo', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['3 design directions', '3 revision rounds', '14 working days to deliver', '4 months of support'],
+   notes=['סימן 5 עמודים, ועוד עמוד תרומה: 6 עמודים, בדיוק מה שכלול במסלול. אין תוספת עמודים.', 'תרומות באשראי: העמותה פותחת חשבון בחברת סליקה שתבחר, ואני מחבר אותו לאתר. העמלות של חברת הסליקה משולמות ישירות אליה.', 'לוח זמנים: הקמפיין נפתח בראש חודש כסלו, ו־19 ימי עבודה מספיקים. התקציב שציין: 5,000 עד 8,000 ₪.']),
+ 'en': dict(items=[('Business website', 4900), ('Card donations: connection to the payment provider, one-time or monthly donations, and an emailed receipt', 1200), ('Campaign: a goal meter, a countdown and a donor list that update themselves', 800)],
+   incl=['Up to 6 pages', 'An admin screen for the campaign: field updates, donations recorded by hand and the donor list', 'A donation page: set amounts and any amount, dedications and anonymous giving', 'A clean redraw of the existing logo from the photo', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
+   terms=['3 design directions', '3 revision rounds', '19 business days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['Marked 5 pages, plus a donation page: 6 pages, exactly what the package includes. No extra pages.', 'Card donations: the nonprofit opens an account with a payment provider of its choice, and I connect it to the site. The provider\'s fees are paid directly to it.', 'Timing: the campaign opens on Rosh Chodesh Kislev, and 14 working days are enough. Stated budget: ₪4,000 to ₪7,000.']),
+   notes=['Marked 5 pages, plus a donation page: 6 pages, exactly what the package includes. No extra pages.', 'Card donations: the nonprofit opens an account with a payment provider of its choice, and I connect it to the site. The provider\'s fees are paid directly to it.', 'Timing: the campaign opens on Rosh Chodesh Kislev, and 19 business days are enough. Stated budget: ₪5,000 to ₪8,000.']),
 }
 DONATE = dict(prefix='demo/donate/', data=data_of('donate'), designs=DESIGNS_DON, T=T_DON, quote=QUOTE_DON, extra=None,
   hi=hi_generic([
@@ -123,8 +123,8 @@ T_SHUL = t_for(dict(
   note='בית כנסת דמיוני לדוגמה: השם, הפרטים, התורמים והסכומים בדויים, ושום תרומה לא נגבית. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, והסמל שורטט מחדש לדוגמה.',
   s1p='הגבאי מילא את השאלון בכ־10 דקות. היה לו רק צילום של הסמל הישן מהשלט בכניסה, ובלי תמונות בכלל. אלה התשובות שהכי השפיעו:',
   files='מה הכנתי בשבילו: שרטוט נקי של הסמל, והדמיות תלת־ממד',
-  s2p='מהשאלון יצאו אתר עם אזור ניהול, ושני דברים לתמחור: תרומות באשראי, והקדשות עם קמפיין שמתעדכן לבד. בונה ההצעות שלי הכין טיוטה, עברתי עליה, והגבאי קיבל במייל הצעה מסודרת עם אישור בלחיצה. עמלות חברת הסליקה משולמות ישירות לחברה.',
-  s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם זמני התפילות, התפילה הבאה, מד הקמפיין וההקדשות חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
+  s2p='מהשאלון יצאו אתר תדמית, ושלושה דברים לתמחור: זמני תפילות ושיעורים שהגבאי מעדכן, תרומות באשראי, והקדשות עם קמפיין שמתעדכן לבד. בונה ההצעות שלי הכין טיוטה, עברתי עליה, והגבאי קיבל במייל הצעה מסודרת עם אישור בלחיצה. עמלות חברת הסליקה משולמות ישירות לחברה.',
+  s3p='אחרי ה־30% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם זמני התפילות, התפילה הבאה, מד הקמפיין וההקדשות חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
   s5p='', changes=[]),
  dict(
   title='Example website: a synagogue with prayer times, a campaign and dedications | YYG Web Design',
@@ -134,20 +134,20 @@ T_SHUL = t_for(dict(
   note='A fictional example synagogue: the name, details, donors and amounts are made up, and no donation is charged. The images are 3D renders I built specially, and the emblem was redrawn for the example.',
   s1p='The gabbai filled in the questionnaire in about 10 minutes. He had only a photo of the old emblem from the sign at the entrance, and no photos at all. These are the answers that shaped the work most:',
   files='What I prepared for him: a clean redraw of the emblem, and 3D renders',
-  s2p='From the questionnaire came a website with an admin area, and two things to price: card donations, and dedications with a campaign that updates itself. My quote builder drafted it, I reviewed it, and the gabbai got a formal quote by email with one-click approval. The payment provider\'s fees are paid directly to the provider.',
-  s3p='After the first 10%, I prepare 3 completely different directions for the same site. In each, the prayer times, the next prayer, the campaign meter and the dedications are live: you can make an example donation and watch them update.',
+  s2p='From the questionnaire came a business website, and three things to price: prayer times and classes the gabbai updates, card donations, and dedications with a campaign that updates itself. My quote builder drafted it, I reviewed it, and the gabbai got a formal quote by email with one-click approval. The payment provider\'s fees are paid directly to the provider.',
+  s3p='After the first 30%, I prepare 3 completely different directions for the same site. In each, the prayer times, the next prayer, the campaign meter and the dedications are live: you can make an example donation and watch them update.',
   s5p='', changes=[]))
 QUOTE_SHUL = {
- 'he': dict(items=[('אתר עם אזור ניהול', 4000), ('תרומות באשראי: חיבור לחברת הסליקה, תרומה חד־פעמית או חודשית, וקבלה במייל', 1500), ('הקדשות וקמפיין: מד יעד, ספירה לאחור, פריטים להקדשה ורשימת תורמים שמתעדכנים לבד', 800)],
-   incl=['עד 6 עמודים', 'אזור ניהול לגבאי: זמני תפילות, שיעורים, הודעות לקהילה ועדכוני קמפיין', 'טופס תרומה מאובטח: חד־פעמית או הוראת קבע, גם בעילום שם', 'קבלה אוטומטית במייל אחרי כל תרומה', 'הקדשות במחירים קבועים, שמסומנות "הוקדש" לבד', 'טופס פנייה, כפתורי חיוג ווואטסאפ, והוראות הגעה', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '14 ימי עבודה לאספקה', '4 חודשי ליווי'],
+ 'he': dict(items=[('אתר תדמית', 4900), ('לוח זמנים שמתעדכן: זמני התפילות והשיעורים, שהגבאי משנה מהטלפון, והתפילה הבאה מוצגת לבד', 700), ('תרומות באשראי: חיבור לחברת הסליקה, תרומה חד־פעמית או חודשית, וקבלה במייל', 1200), ('הקדשות וקמפיין: מד יעד, ספירה לאחור, פריטים להקדשה ורשימת תורמים שמתעדכנים לבד', 800)],
+   incl=['עד 6 עמודים', 'מסך גבאי: זמני תפילות, שיעורים, הודעות לקהילה ועדכוני קמפיין', 'טופס תרומה מאובטח: חד־פעמית או הוראת קבע, גם בעילום שם', 'קבלה אוטומטית במייל אחרי כל תרומה', 'הקדשות במחירים קבועים, שמסומנות "הוקדש" לבד', 'טופס פנייה, כפתורי חיוג ווואטסאפ, והוראות הגעה', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
+   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '21 ימי עבודה לאספקה', '4 חודשי ליווי'],
    pay=QUOTE['he']['pay'], annual=QUOTE['he']['annual'],
-   notes=['סימן 6 עמודים: בית, אודות, זמני תפילות ושיעורים, תרומות והקדשות, אירועים והאולם, צור קשר. בדיוק 6, כמו שכלול במסלול. שאלות נפוצות הן חלק בעמוד התרומות.', 'יש רק צילום של הסמל הישן מהשלט בכניסה. משרטטים אותו מחדש כקובץ נקי לאתר, בלי לשנות את הסמל עצמו, וזה כלול.', 'לוח זמנים: לפני ערב ההקדשה שבו נפתח הקמפיין. התקציב שציין: 4,000 עד 7,000 ₪. עמלות חברת הסליקה בנפרד.']),
- 'en': dict(items=[('Website with an admin area', 4000), ('Card donations: connection to the payment provider, one-time or monthly giving, and an email receipt', 1500), ('Dedications and campaign: a goal meter, a countdown, items to dedicate and a donor list that all update by themselves', 800)],
-   incl=['Up to 6 pages', 'An admin area for the gabbai: prayer times, classes, community announcements and campaign updates', 'A secure donation form: one-time or monthly, anonymous giving too', 'An automatic email receipt after every donation', 'Dedications at fixed prices, marked "dedicated" automatically', 'A contact form, call and WhatsApp buttons, and directions', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['3 design directions', '3 revision rounds', '14 working days to deliver', '4 months of support'],
+   notes=['סימן 6 עמודים: בית, אודות, זמני תפילות ושיעורים, תרומות והקדשות, אירועים והאולם, צור קשר. בדיוק 6, כמו שכלול במסלול. שאלות נפוצות הן חלק בעמוד התרומות.', 'יש רק צילום של הסמל הישן מהשלט בכניסה. משרטטים אותו מחדש כקובץ נקי לאתר, בלי לשנות את הסמל עצמו, וזה כלול.', 'לוח זמנים: לפני ערב ההקדשה שבו נפתח הקמפיין. התקציב שציין: 5,000 עד 8,000 ₪. עמלות חברת הסליקה בנפרד.']),
+ 'en': dict(items=[('Business website', 4900), ('An updatable schedule: prayer times and classes the gabbai changes from his phone, with the next prayer shown automatically', 700), ('Card donations: connection to the payment provider, one-time or monthly giving, and an email receipt', 1200), ('Dedications and campaign: a goal meter, a countdown, items to dedicate and a donor list that all update by themselves', 800)],
+   incl=['Up to 6 pages', "A gabbai's screen: prayer times, classes, community announcements and campaign updates", 'A secure donation form: one-time or monthly, anonymous giving too', 'An automatic email receipt after every donation', 'Dedications at fixed prices, marked "dedicated" automatically', 'A contact form, call and WhatsApp buttons, and directions', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
+   terms=['3 design directions', '3 revision rounds', '21 business days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['Marked 6 pages: home, about, prayer times and classes, donations and dedications, events and the hall, contact. Exactly 6, as included in the package. The FAQ is a section of the donations page.', "There's only a photo of the old emblem from the sign at the entrance. I redraw it as a clean file for the site, without changing the emblem itself, and that's included.", 'Timing: before the dedication evening where the campaign launches. Stated budget: ₪4,000 to ₪7,000. Payment provider fees are separate.']),
+   notes=['Marked 6 pages: home, about, prayer times and classes, donations and dedications, events and the hall, contact. Exactly 6, as included in the package. The FAQ is a section of the donations page.', "There's only a photo of the old emblem from the sign at the entrance. I redraw it as a clean file for the site, without changing the emblem itself, and that's included.", 'Timing: before the dedication evening where the campaign launches. Stated budget: ₪5,000 to ₪8,000. Payment provider fees are separate.']),
 }
 SHUL = dict(prefix='demo/shul/', data=data_of('shul'), designs=DESIGNS_SHUL, T=T_SHUL, quote=QUOTE_SHUL, extra=None,
   hi=hi_generic([
@@ -190,7 +190,7 @@ T_SHOP = t_for(dict(
   s1p='בעל החנות מילא את השאלון בכ־10 דקות, וצירף את הלוגו הקיים. אלה התשובות שהכי השפיעו:',
   files='מה הכנתי בשבילו: לוגו מחודש והדמיות של המוצרים',
   s2p='מהשאלון יצאה חנות אונליין עם כ־40 מוצרים: 30 כלולים בחנות, ועוד 10 בתוספת. בונה ההצעות שלי הכין טיוטה, עברתי עליה, והלקוח קיבל במייל הצעה מסודרת עם אישור בלחיצה. עמלות חברת הסליקה משולמות ישירות לחברה.',
-  s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותה חנות. בכל אחד מהם העגלה עובדת: אפשר להוסיף מוצרים, לראות כמה חסר למשלוח חינם, ולבצע הזמנה לדוגמה בלי תשלום.',
+  s3p='אחרי ה־30% הראשונים מכינים 3 כיוונים שונים לגמרי לאותה חנות. בכל אחד מהם העגלה עובדת: אפשר להוסיף מוצרים, לראות כמה חסר למשלוח חינם, ולבצע הזמנה לדוגמה בלי תשלום.',
   s5p='', changes=[]),
  dict(
   title='Example store: spices and tea with a cart, shipping and stock management | YYG Web Design',
@@ -201,19 +201,19 @@ T_SHOP = t_for(dict(
   s1p='The shop owner filled in the questionnaire in about 10 minutes and attached his existing logo. These are the answers that shaped the work most:',
   files='What I prepared for him: a refined logo and product renders',
   s2p='From the questionnaire came an online store with about 40 products: 30 are included in the store, plus 10 as an add-on. My quote builder drafted it, I reviewed it, and the client got a formal quote by email with one-click approval. The payment provider\'s fees are paid directly to the provider.',
-  s3p='After the first 10%, I prepare 3 completely different directions for the same store. In each, the cart works: you can add products, see how much is left for free shipping, and place an example order with no payment.',
+  s3p='After the first 30%, I prepare 3 completely different directions for the same store. In each, the cart works: you can add products, see how much is left for free shipping, and place an example order with no payment.',
   s5p='', changes=[]))
 QUOTE_SHOP = {
- 'he': dict(items=[('חנות אונליין', 7000), ('10 מוצרים נוספים בחנות', 200)],
-   incl=['עד 30 מוצרים שאני מכניס, ועוד 10 בתוספת: 40 מוצרים בסך הכול', 'עגלת קניות, סליקה באשראי ומשלוחים', 'משלוח חינם מעל סכום שתקבעו, ואיסוף עצמי מהחנות', 'אזור ניהול למוצרים, למלאי ולהזמנות', 'הדרכה: שיחה אישית ומדריך כתוב', 'אחסון ומייל עסקי לשנה הראשונה, על הדומיין הקיים', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '20 ימי עבודה לאספקה', '4 חודשי ליווי'],
-   pay=QUOTE['he']['pay'], annual=QUOTE['he']['annual'],
-   notes=['יש כ־40 מוצרים: 30 כלולים בחנות, ועוד 10 בתוספת של 200 ₪. עמלות חברת הסליקה משולמות ישירות לחברה.', 'צירף את הלוגו הקיים: מעדנים אותו ומכינים קובץ נקי לאתר, בלי עלות נוספת. הדומיין כבר רשום על שמו.', 'לוח זמנים: עד 31.1.2027, לפני עונת המארזים לפורים ולפסח. התקציב שציין: מעל 7,000 ₪.']),
- 'en': dict(items=[('Online store', 7000), ('10 more products in the store', 200)],
-   incl=['Up to 30 products that I upload, plus 10 more as an add-on: 40 products in all', 'A shopping cart, card payments and shipping', 'Free shipping above an amount you set, and pickup from the shop', 'An admin area for products, stock and orders', 'Training: a personal call and a written guide', 'Hosting and business email for the first year, on the existing domain', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['3 design directions', '3 revision rounds', '20 working days to deliver', '4 months of support'],
-   pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['About 40 products: 30 are included in the store, plus 10 more for ₪200. Card-payment fees are paid directly to the payment provider.', 'He attached his existing logo: I refine it and prepare a clean file for the site, at no extra cost. The domain is already registered in his name.', 'Timing: by 31.1.2027, before the Purim and Passover gift box season. Stated budget: over ₪7,000.']),
+ 'he': dict(items=[('חנות אונליין', 7900), ('10 מוצרים נוספים בחנות', 250)],
+   incl=['עד 30 מוצרים שאני מכניס, ועוד 10 בתוספת: 40 מוצרים בסך הכול', 'עגלת קניות, סליקה באשראי ומשלוחים', 'משלוח חינם מעל סכום שתקבעו, ואיסוף עצמי מהחנות', 'מסך ניהול למוצרים, למלאי ולהזמנות', 'עמודי תקנון ומשלוחים', 'הדרכה: שיחה אישית ומדריך כתוב', 'אחסון ומייל עסקי לשנה הראשונה, על הדומיין הקיים', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
+   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '25 ימי עבודה לאספקה', '4 חודשי ליווי'],
+   pay=QUOTE['he']['pay'], annual='"הכול עליי": דומיין, אחסון, מייל עסקי, אבטחה, גיבויים ותיקון תקלות. 890 ₪ לשנה לחנות, מהשנה השנייה.',
+   notes=['יש כ־40 מוצרים: 30 כלולים בחנות, ועוד 10 בתוספת של 250 ₪. עמלות חברת הסליקה משולמות ישירות לחברה.', 'צירף את הלוגו הקיים: מעדנים אותו ומכינים קובץ נקי לאתר, בלי עלות נוספת. הדומיין כבר רשום על שמו.', 'לוח זמנים: עד 31.1.2027, לפני עונת המארזים לפורים ולפסח. התקציב שציין: מעל 8,000 ₪.']),
+ 'en': dict(items=[('Online store', 7900), ('10 more products in the store', 250)],
+   incl=['Up to 30 products that I upload, plus 10 more as an add-on: 40 products in all', 'A shopping cart, card payments and shipping', 'Free shipping above an amount you set, and pickup from the shop', 'An admin screen for products, stock and orders', 'Terms and shipping pages', 'Training: a personal call and a written guide', 'Hosting and business email for the first year, on the existing domain', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
+   terms=['3 design directions', '3 revision rounds', '25 business days to deliver', '4 months of support'],
+   pay=QUOTE['en']['pay'], annual='"All-in Care": domain, hosting, business email, security, backups and fixes. ₪890 a year for a store, from the second year.',
+   notes=['About 40 products: 30 are included in the store, plus 10 more for ₪250. Card-payment fees are paid directly to the payment provider.', 'He attached his existing logo: I refine it and prepare a clean file for the site, at no extra cost. The domain is already registered in his name.', 'Timing: by 31.1.2027, before the Purim and Passover gift box season. Stated budget: over ₪8,000.']),
 }
 SHOP = dict(prefix='demo/shop/', data=data_of('shop'), designs=DESIGNS_SHOP, T=T_SHOP, quote=QUOTE_SHOP, extra=None,
   hi=hi_generic([
@@ -237,11 +237,11 @@ SHOP = dict(prefix='demo/shop/', data=data_of('shop'), designs=DESIGNS_SHOP, T=T
 
 # ---------- גרגר: הגרסה הסופית ומסך הניהול (מתוך scratchpad/new-demos/shop/CASE.md) ----------
 T_SHOP['he'].update(
-  s5p='הלקוח בחר בעיצוב 1, "שוק התבלינים", ושילם 40%. בניתי את החנות על עיצוב 1, עם מה שביקש מהעיצובים האחרים: הפס הגדול של המשלוח החינם מעיצוב 3, וסיכום העגלה כמו קבלה מעיצוב 2, ושניהם צוירו מחדש בשפה של השוק. והוספתי את מה שהיה חסר לו: תאריך הטחינה האחרון על כל מוצר. משם הלקוח מאשר, משלם את ה־50% האחרונים, והחנות עולה לאוויר עם סליקה אמיתית. מאותו יום הוא מנהל לבד הזמנות, מלאי, מחירים ותאריכי טחינה.',
+  s5p='הלקוח בחר בעיצוב 1, "שוק התבלינים", ושילם 40%. בניתי את החנות על עיצוב 1, עם מה שביקש מהעיצובים האחרים: הפס הגדול של המשלוח החינם מעיצוב 3, וסיכום העגלה כמו קבלה מעיצוב 2, ושניהם צוירו מחדש בשפה של השוק. והוספתי את מה שהיה חסר לו: תאריך הטחינה האחרון על כל מוצר. משם הלקוח מאשר, משלם את ה־30% האחרונים, והחנות עולה לאוויר עם סליקה אמיתית. מאותו יום הוא מנהל לבד הזמנות, מלאי, מחירים ותאריכי טחינה.',
   changes=['פס משלוח חינם גדול מתחת לתפריט, שנשאר גלוי בגלילה ומראה כמה חסר. הרעיון מעיצוב 3, בצבעים ובגופנים של השוק', 'סיכום העגלה כמו קבלה: קווים מנוקדים, קו כפול לפני הסה״כ וקצוות משוננים. הרעיון מעיצוב 2', 'בטלפון תגיות המחיר ישרות, בלי ההטיה, כדי שיהיה קל לקרוא את המחיר', 'תאריך הטחינה האחרון על כל מוצר, כמו חותמת תאריך: "נטחן אתמול", "נטחן ב־25.11". תה ומארזים: "נארז"', 'הפס האדום הקטן מעל התפריט הוסר, כי הפס החדש מחליף אותו', 'החנות מתעדכנת מיד ממסך הניהול: מחירים, מלאי, "אזל מהמלאי", הודעה בראש החנות ותאריך הטחינה'],
 )
 T_SHOP['en'].update(
-  s5p='The client chose design 1, "The Spice Market", and paid 40%. I built the store on design 1, with what he asked for from the other designs: the big free-shipping bar from design 3 and the receipt-style cart summary from design 2, both redrawn in the market\'s language. I also added what he felt was missing: the latest grinding date on every product. From here he approves, pays the final 50%, and the store goes live with real card payments. From that day on, he manages orders, stock, prices and grinding dates himself.',
+  s5p='The client chose design 1, "The Spice Market", and paid 40%. I built the store on design 1, with what he asked for from the other designs: the big free-shipping bar from design 3 and the receipt-style cart summary from design 2, both redrawn in the market\'s language. I also added what he felt was missing: the latest grinding date on every product. From here he approves, pays the final 30%, and the store goes live with real card payments. From that day on, he manages orders, stock, prices and grinding dates himself.',
   changes=['A big free-shipping bar under the menu that stays visible while scrolling and shows how much is left. The idea from design 3, in the market\'s colors and type', 'A receipt-style cart summary: dotted leaders, a double rule before the total, and torn edges. The idea from design 2', 'On the phone the price tags are straight, without the tilt, so the price is easy to read', 'The latest grinding date on every product, like a date stamp: "ground yesterday", "ground on 25.11". Teas and gift boxes: "packed"', 'The small red strip above the menu was removed, since the new bar replaces it', 'The store updates instantly from the admin screen: prices, stock, "sold out", the notice at the top and the grinding date'],
 )
 SHOP['after'] = admin_step(
@@ -256,15 +256,15 @@ SHOP['after'] = admin_step(
 
 # ---------- סל ברכה: הגרסה הסופית ומסך הניהול (מתוך scratchpad/new-demos/donate/CASE.md) ----------
 T_DON['he'].update(
-  s5p='הלקוח בחר בעיצוב 2 ושילם 40%. בניתי את האתר על עיצוב 2, עם שלושה דברים מהעיצובים האחרים: לוח התורמים החרוט מעיצוב 1, שבו כל הסכומים באותו גודל, תמונת הסל מעיצוב 1 בפתיחה, ליד המד, וההזמנה לערב חמישי מעיצוב 3. כולם הותאמו לכחול, לזעפרן ולגופן של עיצוב 2. הוספתי גם מה שביקש בשאלון המשוב: הצהרה ברורה ששמות המשפחות לא נחשפים, ושאין צילומים שלהן. משם הלקוח מאשר, משלם את ה־50% האחרונים, והאתר באוויר. מאותו יום הוא מנהל את הקמפיין לבד.',
+  s5p='הלקוח בחר בעיצוב 2 ושילם 40%. בניתי את האתר על עיצוב 2, עם שלושה דברים מהעיצובים האחרים: לוח התורמים החרוט מעיצוב 1, שבו כל הסכומים באותו גודל, תמונת הסל מעיצוב 1 בפתיחה, ליד המד, וההזמנה לערב חמישי מעיצוב 3. כולם הותאמו לכחול, לזעפרן ולגופן של עיצוב 2. הוספתי גם מה שביקש בשאלון המשוב: הצהרה ברורה ששמות המשפחות לא נחשפים, ושאין צילומים שלהן. משם הלקוח מאשר, משלם את ה־30% האחרונים, והאתר באוויר. מאותו יום הוא מנהל את הקמפיין לבד.',
   changes=['לוח התורמים החרוט מעיצוב 1, בכחול ובזעפרן: השמות במרכז, וכל הסכומים באותו גודל קטן', 'תמונת הסל מעיצוב 1 בפתיחה, והמד הגדול עליה: רואים מה התרומה קונה', 'ההזמנה לערב חמישי מעיצוב 3, ככרטיס נייר על הרקע הכחול', 'הצהרה ברורה בחלק "לאן הולך הכסף": שמות המשפחות לא נחשפים, ואין צילומים שלהן', 'שאלה חדשה בשאלות הנפוצות: "יש באתר שמות או תמונות של המשפחות?"'])
 T_DON['en'].update(
-  s5p='The client chose design 2 and paid 40%. I built the site on design 2, with three things from the other designs: the engraved donor board from design 1, where every amount is the same size, the basket picture from design 1 in the opening, next to the meter, and the Thursday evening invitation from design 3. All of them were adapted to the navy, saffron and typeface of design 2. I also added what he asked for in the feedback form: a clear statement that the families\' names are never revealed, and that there are no photos of them. From here the client approves, pays the final 50%, and the site goes live. From that day on he runs the campaign himself.',
+  s5p='The client chose design 2 and paid 40%. I built the site on design 2, with three things from the other designs: the engraved donor board from design 1, where every amount is the same size, the basket picture from design 1 in the opening, next to the meter, and the Thursday evening invitation from design 3. All of them were adapted to the navy, saffron and typeface of design 2. I also added what he asked for in the feedback form: a clear statement that the families\' names are never revealed, and that there are no photos of them. From here the client approves, pays the final 30%, and the site goes live. From that day on he runs the campaign himself.',
   changes=['The engraved donor board from design 1, in navy and saffron: names centered, and every amount in the same small size', 'The basket picture from design 1 in the opening, with the big meter over it: you see what a donation buys', 'The Thursday evening invitation from design 3, as a paper ticket on the navy background', 'A clear statement in the "Where the money goes" section: the families\' names are never revealed, and there are no photos of them', 'A new FAQ question: "Are there names or photos of the families on the site?"'])
 DONATE['after'] = admin_step(
   ('מסך ניהול הקמפיין', 'The campaign admin screen'),
-  ('בגלל זה בחרנו באתר עם אזור ניהול: תרומות באשראי נכנסות לבד, אבל חלק גדול מהתרומות עדיין מגיע במזומן ובצ׳קים, ויו״ר העמותה רוצה לכתוב עדכון אחרי כל יום חמישי. במסך הזה הוא מוסיף תרומה שהגיעה ביד, כותב עדכון מהשטח, משנה את היעד ואת התאריכים, ורואה מי תרם. מד היעד, הספירה לאחור ורשימת התורמים באתר מתעדכנים מיד.',
-   'This is why we chose a website with an admin area: card donations come in by themselves, but much of the giving still arrives as cash and cheques, and the chairman wants to write an update after every Thursday. On this screen he adds a donation that came in by hand, writes a field update, changes the goal and the dates, and sees who gave. The goal meter, the countdown and the donor list on the site update right away.'),
+  ('בגלל זה יש באתר מסך ניהול לקמפיין: תרומות באשראי נכנסות לבד, אבל חלק גדול מהתרומות עדיין מגיע במזומן ובצ׳קים, ויו״ר העמותה רוצה לכתוב עדכון אחרי כל יום חמישי. במסך הזה הוא מוסיף תרומה שהגיעה ביד, כותב עדכון מהשטח, משנה את היעד ואת התאריכים, ורואה מי תרם. מד היעד, הספירה לאחור ורשימת התורמים באתר מתעדכנים מיד.',
+   'This is why the site has a campaign admin screen: card donations come in by themselves, but much of the giving still arrives as cash and cheques, and the chairman wants to write an update after every Thursday. On this screen he adds a donation that came in by hand, writes a field update, changes the goal and the dates, and sees who gave. The goal meter, the countdown and the donor list on the site update right away.'),
   (['תרומה שהגיעה ביד: מזומן, צ׳ק או העברה, בשם או בעילום שם, עם הקדשה', 'עדכון מהשטח אחרי כל יום חמישי, עם פתיחות מוכנות', 'רשימת התורמים: הסתרת שם או מחיקת תרומה, תמיד עם אישור לפני', 'הקמפיין: כותרת, יעד ותאריכים, ותמונת מצב של היום, השבוע והוראות הקבע', 'קובץ CSV לגזבר, לקבלות ולהנהלת החשבונות'],
    ['A donation that came in by hand: cash, cheque or transfer, named or anonymous, with a dedication', 'A field update after every Thursday, with ready-made openings', 'The donor list: hide a name or delete a donation, always with a confirmation first', 'The campaign: title, goal and dates, plus a snapshot of today, this week and the monthly donors', 'A CSV file for the treasurer, for receipts and bookkeeping']),
   ('מסך ניהול הקמפיין של סל ברכה: תמונת מצב, תרומה שהגיעה ביד והגדרות הקמפיין', 'The Sal Bracha campaign admin screen: a snapshot, a donation that came in by hand, and the campaign settings'),
@@ -272,15 +272,15 @@ DONATE['after'] = admin_step(
 
 # ---------- נחלת יצחק: הגרסה הסופית ומסך הגבאי (מתוך scratchpad/new-demos/shul/CASE.md) ----------
 T_SHUL['he'].update(
-  s5p='הגבאי בחר בעיצוב 3 ושילם 40%. בניתי את האתר על עיצוב 3, והוספתי בדיוק את מה שביקש מהעיצובים האחרים: את לוח הזמנים מעץ מעיצוב 1, ואת הפס "השבוע בבית הכנסת" ואת כפתור התרומה הקבוע בטלפון מעיצוב 2. שניהם הותאמו לצבעי האבן ולגופנים של עיצוב 3. הוספתי גם את מה שחסר לו: הדלקת נרות וצאת השבת, שהוא מקליד בעצמו כל שבוע. משם הגבאי מאשר, משלם את ה־50% האחרונים, והאתר באוויר. מאותו יום הוא מעדכן לבד את הזמנים, את השיעורים ואת הקמפיין.',
+  s5p='הגבאי בחר בעיצוב 3 ושילם 40%. בניתי את האתר על עיצוב 3, והוספתי בדיוק את מה שביקש מהעיצובים האחרים: את לוח הזמנים מעץ מעיצוב 1, ואת הפס "השבוע בבית הכנסת" ואת כפתור התרומה הקבוע בטלפון מעיצוב 2. שניהם הותאמו לצבעי האבן ולגופנים של עיצוב 3. הוספתי גם את מה שחסר לו: הדלקת נרות וצאת השבת, שהוא מקליד בעצמו כל שבוע. משם הגבאי מאשר, משלם את ה־30% האחרונים, והאתר באוויר. מאותו יום הוא מעדכן לבד את הזמנים, את השיעורים ואת הקמפיין.',
   changes=['לוח זמני התפילות מעץ, כמו הלוח בכניסה, מעיצוב 1: בצבעי האבן והנחושת, והודעת השבוע כפתק מתחתיו', 'הפס "השבוע בבית הכנסת" מעיצוב 2, מתחת לפתיחה: התפילה הבאה, השיעורים של היום וקיר האבנים של הקמפיין', 'בטלפון, כפתור "לתרומה" קבוע בתחתית, עם האחוז שכבר נאסף. הוא נעלם ליד טופס התרומה ובזמן הקלדה', 'הדלקת נרות וצאת השבת בלוח השבת. הגבאי מקליד אותן כל שבוע במסך העדכון, ושדה ריק פשוט לא מופיע', 'ליטוש בטופס: בחירת פריט להקדשה מסמנת את מחיר הפריט, ולא נשאר סכום ישן מודגש'])
 T_SHUL['en'].update(
-  s5p='The gabbai chose design 3 and paid 40%. I built the site on design 3 and added exactly what he asked for from the other designs: the wooden prayer-times board from design 1, and the "this week at shul" strip and the fixed donate button on phones from design 2. Both were adapted to design 3\'s stone colors and fonts. I also added what he said was missing: candle lighting and the end of Shabbat, which he types in himself every week. From here the gabbai approves, pays the final 50%, and the site goes live. From that day on he updates the times, the classes and the campaign himself.',
+  s5p='The gabbai chose design 3 and paid 40%. I built the site on design 3 and added exactly what he asked for from the other designs: the wooden prayer-times board from design 1, and the "this week at shul" strip and the fixed donate button on phones from design 2. Both were adapted to design 3\'s stone colors and fonts. I also added what he said was missing: candle lighting and the end of Shabbat, which he types in himself every week. From here the gabbai approves, pays the final 30%, and the site goes live. From that day on he updates the times, the classes and the campaign himself.',
   changes=['The wooden prayer-times board from design 1, like the board at the entrance: in stone and copper colors, with the weekly note pinned underneath', 'The "this week at shul" strip from design 2, under the opening: the next prayer, today\'s classes and the campaign\'s stone wall', 'On phones, a "donate" button fixed at the bottom, showing how much has been raised. It hides near the donation form and while typing', 'Candle lighting and the end of Shabbat on the Shabbat board. The gabbai types them in every week on the update screen, and an empty field simply doesn\'t show', 'Polish in the form: picking an item to dedicate selects its price, so no old amount stays highlighted'])
 SHUL['after'] = admin_step(
   ('מסך הגבאי', "The gabbai's screen"),
-  ('בגלל זה אתר עם אזור ניהול: הזמנים זזים עם השקיעה, השיעורים מתחלפים, והקמפיין חי כל יום. במסך הזה הגבאי מעדכן הכול בעצמו, מהטלפון, בחמש דקות במוצאי שבת. לוחצים "שמירה", והאתר מתעדכן מיד.',
-   "This is why it's a website with an admin area: the times move with sunset, the classes change, and the campaign is alive every day. On this screen the gabbai updates everything himself, from his phone, in five minutes on Saturday night. He presses \"save\", and the site updates right away."),
+  ('בגלל זה יש באתר מסך גבאי: הזמנים זזים עם השקיעה, השיעורים מתחלפים, והקמפיין חי כל יום. במסך הזה הגבאי מעדכן הכול בעצמו, מהטלפון, בחמש דקות במוצאי שבת. לוחצים "שמירה", והאתר מתעדכן מיד.',
+   "This is why the site has a gabbai's screen: the times move with sunset, the classes change, and the campaign is alive every day. On this screen the gabbai updates everything himself, from his phone, in five minutes on Saturday night. He presses \"save\", and the site updates right away."),
   (['זמני התפילות לימי חול ולשבת, כולל הדלקת נרות וצאת השבת, והודעת השבוע', 'קיצור לשקיעה: מנחה ומעריב 5 דקות מוקדם או מאוחר יותר, בלחיצה אחת', 'שיעורים והודעות לקהילה: הוספה, עריכה ומחיקה', 'הקמפיין: היעד, תאריך הסיום, עדכונים לקהילה, ותרומות שהגיעו במזומן או בצ׳ק', 'הקדשות: מחירים, מה כבר הוקדש, ושמות חדשים בלוח ההנצחה'],
    ['Weekday and Shabbat prayer times, including candle lighting, the end of Shabbat and the weekly note', 'A sunset shortcut: Mincha and Maariv 5 minutes earlier or later, in one tap', 'Classes and community announcements: add, edit and delete', 'The campaign: the goal, the end date, updates for the community, and donations that came in as cash or a cheque', "Dedications: prices, what's already dedicated, and new names on the memorial board"]),
   ('מסך הגבאי: זמני התפילות, השיעורים, הקמפיין וההקדשות, עם תצוגה של האתר בצד', 'The gabbai\'s screen: prayer times, classes, the campaign and dedications, with a preview of the site alongside'),
@@ -295,7 +295,7 @@ DESIGNS_BASIC = [
 T_BASIC = {lang: dict(T[lang]) for lang in T}
 T_BASIC['he'].update(
   title='דף נחיתה בסיסי לדוגמה: הנדימן לתיקונים קטנים בבית | YYG Web Design',
-  desc='הנדימן דמיוני עובר את המסלול הבסיסי של YYG Web Design, ב־1,290 ₪: שאלון, הצעת מחיר, עיצוב אחד עם הטקסטים שלו, סבב תיקונים אחד והגרסה הסופית.',
+  desc='הנדימן דמיוני עובר את המסלול הבסיסי של YYG Web Design, ב־1,490 ₪: שאלון, הצעת מחיר, עיצוב אחד עם הטקסטים שלו, סבב תיקונים אחד והגרסה הסופית.',
   h1='דף נחיתה בסיסי להנדימן, עם עיצוב אחד וסבב תיקונים אחד',
   lead='הדוגמה הכי פשוטה, במסלול הבסיסי: הנדימן דמיוני מבית שמש בשם יוסף, "בית בסדר", שרצה את האפשרות הכי זולה שעדיין נראית מקצועית. הוא הביא את הטקסטים בעצמו, קיבל עיצוב אחד, ביקש בסבב התיקונים האחד כמה שינויים קטנים, והדף מוכן. עברנו את כל הדרך כמו עם לקוח אמיתי: שאלון, הצעת מחיר, העיצוב, המשוב והגרסה הסופית.',
   note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, במקום צילומי הטלפון של הלקוח. בדף הבסיסי אין עיצוב לוגו, אז השם פשוט מסודר בגופן.',
@@ -307,14 +307,14 @@ T_BASIC['he'].update(
   s3p='בבסיסי מכינים כיוון אחד, ולא 3. בחרתי כיוון חם ומעשי: נייר בהיר, כחול אמין וענבר של כלי עבודה, ומספר הטלפון בכל מקום שהעין מגיעה אליו. הטקסטים הם שלו, עם עריכה קלה, והדף נבנה קודם לטלפון:',
   s4='המשוב וסבב התיקונים האחד',
   s4p='יוסף עבר על העיצוב, גם בטלפון, ומילא את שאלון המשוב. בבסיסי יש סבב תיקונים אחד, אז הוא ריכז בו הכול:',
-  s5p='יוסף אישר את העיצוב, ותיקנתי בדיוק את מה שביקש בסבב האחד. משם הוא בודק ומאשר, משלם את ה־50% האחרונים, והדף עולה לאוויר. כל העבודה לקחה 3 ימי עבודה, מהיום שהטקסטים והתמונות הגיעו.',
+  s5p='יוסף אישר את העיצוב, ותיקנתי בדיוק את מה שביקש בסבב האחד. משם הוא בודק ומאשר, משלם את ה־50% האחרונים, והדף עולה לאוויר. כל העבודה לקחה 4 ימי עבודה, מהיום שהטקסטים והתמונות הגיעו.',
   changes=['כפתור החיוג בפתיחה גדול יותר, עם "להתקשר ליוסף" והמספר בגדול', 'בטלפון: פס חיוג ווואטסאפ שנשאר תמיד בתחתית המסך', 'רמת בית שמש נוספה לאזורי השירות, וגם לטופס', 'המחירון ירד. במקומו: "כמה זה עולה?", עם כפתור לשליחת תמונה בוואטסאפ', 'בפתיחה ארגז כלים במקום המקדחה, שנראתה לו כמו שיפוצים גדולים'],
   open='לפתוח את העיצוב', rating='כמה העיצוב מרגיש נכון לעסק', took='מה הוא אהב, ומה פחות',
-  ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. בדף הבסיסי משלמים 50%, ומקבלים עיצוב אחד עם הטקסטים שלכם.',
+  ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. בדף הבסיסי משלמים 50% כדי להתחיל, ומקבלים עיצוב אחד עם הטקסטים שלכם.',
 )
 T_BASIC['en'].update(
   title='Example basic landing page: a handyman for small home repairs | YYG Web Design',
-  desc='A fictional handyman goes through the YYG Web Design basic package, for ₪1,290: a questionnaire, a quote, one design with his own texts, one revision round and the final version.',
+  desc='A fictional handyman goes through the YYG Web Design basic package, for ₪1,490: a questionnaire, a quote, one design with his own texts, one revision round and the final version.',
   h1='A basic landing page for a handyman, with one design and one revision round',
   lead='The simplest example, on the basic package: a fictional handyman from Beit Shemesh named Yosef, "Bayit Beseder", who wanted the cheapest option that still looks professional. He brought his own texts, got one design, asked for a few small changes in his one revision round, and the page is ready. We went all the way as with a real client: a questionnaire, a quote, the design, the feedback and the final version.',
   note='A fictional example business: the name, details and testimonials are made up. The images are 3D renders I built specially, in place of the client\'s phone photos. The basic page has no logo design, so the name is simply set in a font.',
@@ -326,22 +326,22 @@ T_BASIC['en'].update(
   s3p='On the basic package I prepare one direction, not 3. I chose a warm, practical one: light paper, a trustworthy blue and the amber of work tools, with the phone number wherever the eye lands. The texts are his, lightly edited, and the page was built for the phone first:',
   s4='The feedback and the one revision round',
   s4p='Yosef went over the design, on his phone too, and filled in the feedback form. The basic package has one revision round, so he put everything into it:',
-  s5p='Yosef approved the design, and I changed exactly what he asked for in the one round. From here he checks and approves it, pays the final 50%, and the page goes live. The whole job took 3 working days, from the day the texts and photos arrived.',
+  s5p='Yosef approved the design, and I changed exactly what he asked for in the one round. From here he checks and approves it, pays the final 50%, and the page goes live. The whole job took 4 business days, from the day the texts and photos arrived.',
   changes=['A bigger call button at the top, with "call Yosef" and the number in large type', 'On the phone: a call and WhatsApp bar that always stays at the bottom of the screen', 'Ramat Beit Shemesh added to the service areas, and to the form too', 'The price list is gone. In its place: "How much does it cost?", with a button to send a photo on WhatsApp', 'A toolbox at the top instead of the drill, which looked to him like big renovations'],
   open='Open the design', rating='How right the design feels for the business', took='What he liked, and what less',
-  ctap='Start with a 10-minute questionnaire, or a short call. On the basic page you pay 50%, and get one design with your own texts.',
+  ctap='Start with a 10-minute questionnaire, or a short call. On the basic page you pay 50% to start, and get one design with your own texts.',
 )
 QUOTE_BASIC = {
- 'he': dict(items=[('דף נחיתה בסיסי', 1290)],
+ 'he': dict(items=[('דף נחיתה בסיסי', 1490)],
    incl=['עמוד אחד, עד 5 חלקים', 'הטקסטים מגיעים מכם, עם עריכה קלה שלי', 'טופס פנייה, כפתור חיוג וכפתור וואטסאפ', 'השם שלכם מסודר בגופן נקי בראש הדף', 'דומיין ואחסון לשנה הראשונה', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['עיצוב אחד', 'סבב תיקונים אחד', '3 ימי עבודה לאספקה', 'חודש ליווי'],
+   terms=['עיצוב אחד', 'סבב תיקונים אחד', '4 ימי עבודה לאספקה', 'חודש ליווי'],
    pay=[(50, 'כדי להתחיל, לפני העיצוב'), (50, 'בסיום, אחרי האישור שלכם ולפני העלייה לאוויר')], annual=QUOTE['he']['annual'],
-   notes=['סימן 5 חלקים: פתיחה, שירותים, אודות, המלצות ויצירת קשר. אזורי השירות נכנסו לחלק של אודות, אז זה בדיוק מה שכלול בבסיסי.', 'לוגו לא כלול בבסיסי. יש לו רק צילום של מגנט, אז אסדר את השם בגופן נקי. אם ירצה בהמשך, לוגו בסיסי עולה 590 ₪.', 'לוח זמנים: תוך שבועיים, ו־3 ימי עבודה מהיום שהטקסטים והתמונות אצלי. צריך לרשום דומיין עם השם בית בסדר, וזה כלול בשנה הראשונה. התקציב שציין: עד 2,000 ₪.']),
- 'en': dict(items=[('Basic landing page', 1290)],
+   notes=['סימן 5 חלקים: פתיחה, שירותים, אודות, המלצות ויצירת קשר. אזורי השירות נכנסו לחלק של אודות, אז זה בדיוק מה שכלול בבסיסי.', 'לוגו לא כלול בבסיסי. יש לו רק צילום של מגנט, אז אסדר את השם בגופן נקי. אם ירצה בהמשך, לוגו בסיסי עולה 590 ₪.', 'לוח זמנים: תוך שבועיים, ו־4 ימי עבודה מהיום שהטקסטים והתמונות אצלי. צריך לרשום דומיין עם השם בית בסדר, וזה כלול בשנה הראשונה. התקציב שציין: עד 2,500 ₪.']),
+ 'en': dict(items=[('Basic landing page', 1490)],
    incl=['One page, up to 5 sections', 'You provide the texts, and I edit them lightly', 'A contact form, a call button and a WhatsApp button', 'Your name set in a clean font at the top of the page', 'Domain and hosting for the first year', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['One design', 'One revision round', '3 working days to deliver', 'One month of support'],
+   terms=['One design', 'One revision round', '4 business days to deliver', 'One month of support'],
    pay=[(50, 'To start, before the design'), (50, 'At the end, after your approval and before going live')], annual=QUOTE['en']['annual'],
-   notes=['Marked 5 sections: the opening, services, about, testimonials and contact. The service areas went into the about section, so this is exactly what the basic package includes.', 'A logo isn\'t included in the basic package. He only has a photo of a magnet, so I\'ll set the name in a clean font. If he wants one later, a basic logo costs ₪590.', 'Timing: within two weeks, and 3 working days from the day I have the texts and photos. A domain with the name Bayit Beseder needs registering, and that\'s included in the first year. Stated budget: up to ₪2,000.']),
+   notes=['Marked 5 sections: the opening, services, about, testimonials and contact. The service areas went into the about section, so this is exactly what the basic package includes.', 'A logo isn\'t included in the basic package. He only has a photo of a magnet, so I\'ll set the name in a clean font. If he wants one later, a basic logo costs ₪590.', 'Timing: within two weeks, and 4 business days from the day I have the texts and photos. A domain with the name Bayit Beseder needs registering, and that\'s included in the first year. Stated budget: up to ₪2,500.']),
 }
 BASIC = dict(prefix='demo/basic/', data=data_of('basic'), designs=DESIGNS_BASIC, T=T_BASIC, quote=QUOTE_BASIC, extra=None, after=None, no_admin=True,
   hi=hi_generic([
@@ -362,7 +362,7 @@ BASIC = dict(prefix='demo/basic/', data=data_of('basic'), designs=DESIGNS_BASIC,
   card={'he': ('דף נחיתה בסיסי להנדימן', 'עיצוב אחד, סבב תיקונים אחד, והטקסטים מהלקוח'),
         'en': ('A basic landing page for a handyman', "One design, one revision round, and the client's own texts")})
 
-# ---------- נקודה: יועץ החזרי מס, דף נחיתה במסלול הרגיל (2,000 ₪, בלי תוספות, בלי מסך ניהול) ----------
+# ---------- נקודה: יועץ החזרי מס, דף נחיתה במסלול הרגיל (2,290 ₪, בלי תוספות, בלי מסך ניהול) ----------
 DESIGNS_LANDING = [
  dict(n=1, he=dict(name='בנקאי ושקט', text='עיצוב שקט ומדויק, כמו דף חשבון של בנק פרטי: לבן וכחול כהה, קווים דקים, ספרות מסודרות בטבלה, ונקודה בזהב. בראש הדף "דף חשבון" קטן עם 6 השנים שאפשר לבדוק, והשנה שנסגרת מסומנת.', fonts='היבו ואסיסטנט'),
       en=dict(name='Calm and bank-like', text='A quiet, precise design, like a private bank statement: white and deep navy, fine rules, figures lined up in a table, and a gold dot. At the top, a small "statement" lists the 6 years you can still claim, with the closing year marked.', fonts='Heebo and Assistant'),
@@ -377,45 +377,45 @@ DESIGNS_LANDING = [
 T_LANDING = {lang: dict(T[lang]) for lang in T}
 T_LANDING['he'].update(
   title='דף נחיתה לדוגמה: יועץ החזרי מס לשכירים ולמשפחות | YYG Web Design',
-  desc='יועץ החזרי מס דמיוני עובר את המסלול הרגיל של YYG Web Design, ב־2,000 ₪ ובלי תוספות: שאלון, הצעת מחיר, 3 עיצובים לדף נחיתה עם טופס בדיקת זכאות, משוב והגרסה הסופית.',
+  desc='יועץ החזרי מס דמיוני עובר את המסלול הרגיל של YYG Web Design, ב־2,290 ₪ ובלי תוספות: שאלון, הצעת מחיר, 3 עיצובים לדף נחיתה עם טופס בדיקת זכאות, משוב והגרסה הסופית.',
   h1='דף נחיתה ליועץ החזרי מס, במסלול הרגיל ובלי תוספות',
-  lead='דוגמה למסלול הכי נפוץ: דף נחיתה של 2,000 ₪, בלי שום תוספת. יועץ החזרי מס דמיוני בשם "נקודה", שעובד לבד מאלעד, ביקש דף אחד שמסביר למשפחות למה אולי מגיע להן כסף, ומביא אותן לבדיקת זכאות. עברנו את כל התהליך כמו עם לקוח אמיתי: שאלון, הצעת מחיר, 3 עיצובים, משוב והגרסה הסופית.',
+  lead='דוגמה למסלול הכי נפוץ: דף נחיתה של 2,290 ₪, בלי שום תוספת. יועץ החזרי מס דמיוני בשם "נקודה", שעובד לבד מאלעד, ביקש דף אחד שמסביר למשפחות למה אולי מגיע להן כסף, ומביא אותן לבדיקת זכאות. עברנו את כל התהליך כמו עם לקוח אמיתי: שאלון, הצעת מחיר, 3 עיצובים, משוב והגרסה הסופית.',
   note='עסק דמיוני לדוגמה: השם, הפרטים, הסכומים וההמלצות בדויים, והמידע על החזרי מס כללי בלבד. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, וגם הלוגו עוצב לדוגמה.',
   nav=['שאלון אפיון', 'הצעת מחיר', '3 עיצובים', 'משוב ובחירה', 'הגרסה הסופית'],
   s1p='היועץ מילא את השאלון בכ־10 דקות. היה לו לוגו בקובץ מסודר, טקסטים לא היו, ותמונות לא רצה בכלל. אלה התשובות שהכי השפיעו:',
   files='הלוגו שצירף, וההדמיות שהכנתי לדף',
-  s2p='הבונה שלי זיהה מהשאלון דף נחיתה רגיל: עמוד אחד, טופס וכפתורי חיוג ווואטסאפ, טקסטים שאני כותב, ולוגו שכבר קיים. הוא גם הציע תחזוקה חודשית ותמונות מהמאגר, ושתיהן ירדו: שינויים קטנים כלולים ב־4 חודשי הליווי, וההדמיות כלולות במחיר. לכן ההצעה היא 2,000 ₪, בלי אף שורה נוספת. הלקוח קיבל אותה במייל, עם אישור בלחיצה.',
-  s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו דף. בכל אחד מהם טופס הבדיקה עובד לדוגמה, והשנה שנסגרת בסוף השנה מתעדכנת לבד:',
-  s5p='אברהם בחר בעיצוב 3 ושילם 40%. בניתי את הדף על עיצוב 3, עם בדיוק מה שביקש: פתיחה בהירה במקום הפס הכהה, כרטיס השנים מעיצוב 1 וההמלצות על שלטי דלת מעיצוב 2, שניהם בגופנים ובצבעים של עיצוב 3. הטופס וההערכה לדוגמה נשארו בפתיחה. משם הוא מאשר, משלם את ה־50% האחרונים, והדף באוויר. אין כאן מסך ניהול: את השינויים הקטנים אני עושה בשבילו, ב־4 חודשי הליווי.',
+  s2p='הבונה שלי זיהה מהשאלון דף נחיתה רגיל: עמוד אחד, טופס וכפתורי חיוג ווואטסאפ, טקסטים שאני כותב, ולוגו שכבר קיים. הוא גם הציע תחזוקה חודשית ותמונות מהמאגר, ושתיהן ירדו: שינויים קטנים כלולים ב־4 חודשי הליווי, וההדמיות כלולות במחיר. לכן ההצעה היא 2,290 ₪, בלי אף שורה נוספת. הלקוח קיבל אותה במייל, עם אישור בלחיצה.',
+  s3p='אחרי ה־30% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו דף. בכל אחד מהם טופס הבדיקה עובד לדוגמה, והשנה שנסגרת בסוף השנה מתעדכנת לבד:',
+  s5p='אברהם בחר בעיצוב 3 ושילם 40%. בניתי את הדף על עיצוב 3, עם בדיוק מה שביקש: פתיחה בהירה במקום הפס הכהה, כרטיס השנים מעיצוב 1 וההמלצות על שלטי דלת מעיצוב 2, שניהם בגופנים ובצבעים של עיצוב 3. הטופס וההערכה לדוגמה נשארו בפתיחה. משם הוא מאשר, משלם את ה־30% האחרונים, והדף באוויר. אין כאן מסך ניהול: את השינויים הקטנים אני עושה בשבילו, ב־4 חודשי הליווי.',
   changes=['פתיחה בהירה, וגם הכותרת העליונה, במקום הפס הכהה. הטופס וההערכה לדוגמה נשארו בפתיחה', 'כרטיס "השנים שאפשר לבדוק" מעיצוב 1, ליד הכותרת: 6 השנים, והשנה שנסגרת השנה מסומנת בצהוב', 'ההמלצות חתומות על שלטי דלת מעיצוב 2, בלבן ובכחול של עיצוב 3', '"אין שום תשלום מראש, גם לא דמי פתיחת תיק": בכרטיס התשלום, במספר 0 ₪ ובשאלות הנפוצות', 'בטלפון הטופס מגיע מיד אחרי הכותרת, וכרטיס השנים אחריו'],
-  ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. דף נחיתה מתחיל ב־2,000 ₪, ואחרי 10% בלבד מקבלים 3 עיצובים כאלה, עם התוכן שלכם.',
+  ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. דף נחיתה מתחיל ב־2,290 ₪. התשלום הראשון הוא 30%, וכבר הוא מביא 3 עיצובים שלמים כאלה, עם התוכן שלכם.',
 )
 T_LANDING['en'].update(
   title='Example landing page: a tax-refund advisor for employees and families | YYG Web Design',
-  desc='A fictional tax-refund advisor goes through the YYG Web Design standard package, for ₪2,000 with no add-ons: a questionnaire, a quote, 3 designs for a landing page with an eligibility form, feedback and the final version.',
+  desc='A fictional tax-refund advisor goes through the YYG Web Design standard package, for ₪2,290 with no add-ons: a questionnaire, a quote, 3 designs for a landing page with an eligibility form, feedback and the final version.',
   h1='A landing page for a tax-refund advisor, on the standard package with no add-ons',
-  lead='An example of the most common package: a ₪2,000 landing page, with nothing added. A fictional tax-refund advisor called "Nekuda", who works alone from Elad, asked for one page that explains to families why they may be owed money, and brings them to an eligibility check. We went through the whole process as with a real client: a questionnaire, a quote, 3 designs, feedback and the final version.',
+  lead='An example of the most common package: a ₪2,290 landing page, with nothing added. A fictional tax-refund advisor called "Nekuda", who works alone from Elad, asked for one page that explains to families why they may be owed money, and brings them to an eligibility check. We went through the whole process as with a real client: a questionnaire, a quote, 3 designs, feedback and the final version.',
   note='A fictional example business: the name, details, amounts and testimonials are made up, and the tax-refund information is general only. The images are 3D renders I built specially, and the logo was designed for the example too.',
   nav=['Questionnaire', 'Quote', '3 designs', 'Feedback', 'Final version'],
   s1p='The advisor filled in the questionnaire in about 10 minutes. He had a clean logo file, no text, and didn\'t want photos at all. These are the answers that shaped the work most:',
   files='The logo he attached, and the renders I made for the page',
-  s2p='From the questionnaire, my builder picked a standard landing page: one page, a form with call and WhatsApp buttons, text that I write, and a logo that already exists. It also suggested monthly maintenance and stock photos, and both came off: small changes are included in the 4 months of support, and the renders are included in the price. So the quote is ₪2,000, without a single extra line. The client got it by email, with one-click approval.',
-  s3p='After the first 10%, I prepare 3 completely different directions for the same page. In each, the eligibility form works as an example, and the year that closes at the end of the year updates itself:',
-  s5p='Avraham chose design 3 and paid 40%. I built the page on design 3, with exactly what he asked for: a light opening instead of the dark band, the years card from design 1 and the door-nameplate testimonials from design 2, both in design 3\'s fonts and colors. The form and the example estimate stayed at the top. From here he approves it, pays the final 50%, and the page goes live. There\'s no admin screen here: I make the small changes for him, during the 4 months of support.',
+  s2p='From the questionnaire, my builder picked a standard landing page: one page, a form with call and WhatsApp buttons, text that I write, and a logo that already exists. It also suggested monthly maintenance and stock photos, and both came off: small changes are included in the 4 months of support, and the renders are included in the price. So the quote is ₪2,290, without a single extra line. The client got it by email, with one-click approval.',
+  s3p='After the first 30%, I prepare 3 completely different directions for the same page. In each, the eligibility form works as an example, and the year that closes at the end of the year updates itself:',
+  s5p='Avraham chose design 3 and paid 40%. I built the page on design 3, with exactly what he asked for: a light opening instead of the dark band, the years card from design 1 and the door-nameplate testimonials from design 2, both in design 3\'s fonts and colors. The form and the example estimate stayed at the top. From here he approves it, pays the final 30%, and the page goes live. There\'s no admin screen here: I make the small changes for him, during the 4 months of support.',
   changes=['A light opening, header included, instead of the dark band. The form and the example estimate stayed at the top', 'The "years you can still check" card from design 1, next to the headline: the 6 years, with the one that closes this year marked in yellow', 'The testimonials signed on door nameplates from design 2, in design 3\'s white and navy', '"No upfront payment at all, not even a file-opening fee": on the fee card, on the ₪0 figure and in the FAQ', 'On the phone, the form comes right after the headline, and the years card after it'],
-  ctap='Start with a 10-minute questionnaire, or a short call. A landing page starts at ₪2,000, and after just 10% you get 3 designs like these, with your content.',
+  ctap='Start with a 10-minute questionnaire, or a short call. A landing page starts at ₪2,290. The first payment is 30%, and it already gets you 3 complete designs like these, with your content.',
 )
 QUOTE_LANDING = {
- 'he': dict(items=[('דף נחיתה', 2000)],
+ 'he': dict(items=[('דף נחיתה', 2290)],
    incl=['עמוד אחד, עד 7 חלקים', 'טופס פנייה וכפתור חיוג', 'שינויים קטנים עליי בתקופת הליווי', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
-   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '4 ימי עבודה לאספקה', '4 חודשי ליווי'],
+   terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '7 ימי עבודה לאספקה', '4 חודשי ליווי'],
    pay=QUOTE['he']['pay'], annual=QUOTE['he']['annual'],
-   notes=['הבונה הציע תחזוקה חודשית, כי ביקש שאני אעדכן את הדף. בדף נחיתה שינויים קטנים כלולים ב־4 חודשי הליווי, ומעבר לזה כמעט אין מה לעדכן, אז התחזוקה לא בהצעה. אם ירצה בהמשך, היא בחירה שלו.', 'הבונה סימן תמונות מהמאגר, כי אין לו תמונות. לא צריך: הדף בנוי מהדמיות תלת־ממד נקיות של מסמכים, מחשבון ומפתח, בלי אנשים, והן כלולות במחיר.', 'יש לוגו בקובץ איכותי, אז לא צריך לוגו חדש. צריך לרשום דומיין עם המילה נקודה, וזה כלול בשנה הראשונה. לוח זמנים: תוך חודש. התקציב שציין: עד 2,000 ₪.']),
- 'en': dict(items=[('Landing page', 2000)],
+   notes=['הבונה הציע תחזוקה חודשית, כי ביקש שאני אעדכן את הדף. בדף נחיתה שינויים קטנים כלולים ב־4 חודשי הליווי, ומעבר לזה כמעט אין מה לעדכן, אז התחזוקה לא בהצעה. אם ירצה בהמשך, היא בחירה שלו.', 'הבונה סימן תמונות מהמאגר, כי אין לו תמונות. לא צריך: הדף בנוי מהדמיות תלת־ממד נקיות של מסמכים, מחשבון ומפתח, בלי אנשים, והן כלולות במחיר.', 'יש לוגו בקובץ איכותי, אז לא צריך לוגו חדש. צריך לרשום דומיין עם המילה נקודה, וזה כלול בשנה הראשונה. לוח זמנים: תוך חודש. התקציב שציין: עד 2,500 ₪.']),
+ 'en': dict(items=[('Landing page', 2290)],
    incl=['One page, up to 7 sections', 'A contact form and a call button', 'Small changes on me during the support period', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
-   terms=['3 design directions', '3 revision rounds', '4 working days to deliver', '4 months of support'],
+   terms=['3 design directions', '3 revision rounds', '7 business days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['The builder suggested monthly maintenance, because he asked me to make the updates. On a landing page, small changes are included in the 4 months of support, and beyond that there\'s hardly anything to update, so maintenance isn\'t in the quote. If he wants it later, it\'s his choice.', 'The builder flagged stock photos, because he has no photos. None needed: the page is built from clean 3D renders of documents, a calculator and a key, with no people, and they\'re included in the price.', 'He has a good-quality logo file, so no new logo is needed. A domain with the word Nekuda needs registering, and that\'s included in the first year. Timing: within a month. Stated budget: up to ₪2,000.']),
+   notes=['The builder suggested monthly maintenance, because he asked me to make the updates. On a landing page, small changes are included in the 4 months of support, and beyond that there\'s hardly anything to update, so maintenance isn\'t in the quote. If he wants it later, it\'s his choice.', 'The builder flagged stock photos, because he has no photos. None needed: the page is built from clean 3D renders of documents, a calculator and a key, with no people, and they\'re included in the price.', 'He has a good-quality logo file, so no new logo is needed. A domain with the word Nekuda needs registering, and that\'s included in the first year. Timing: within a month. Stated budget: up to ₪2,500.']),
 }
 LANDING = dict(prefix='demo/landing/', data=data_of('landing'), designs=DESIGNS_LANDING, T=T_LANDING, quote=QUOTE_LANDING, extra=None, after=None, no_admin=True,
   hi=hi_generic([
@@ -433,5 +433,5 @@ LANDING = dict(prefix='demo/landing/', data=data_of('landing'), designs=DESIGNS_
                     ('folder-560.webp', 'הדמיה: תיקייה פתוחה עם טפסים', 'Render: an open folder of forms', 126),
                     ('table-560.webp', 'הדמיה: שולחן משפחתי ערוך, בלי אנשים', 'Render: a family table, set, with no people', 126),
                     ('key-560.webp', 'הדמיה: מפתח לבית', 'Render: a house key', 126)]),
-  card={'he': ('דף נחיתה ליועץ החזרי מס', 'המסלול הרגיל, 2,000 ₪, בלי תוספות'),
-        'en': ('A landing page for a tax-refund advisor', 'The standard package, ₪2,000, no add-ons')})
+  card={'he': ('דף נחיתה ליועץ החזרי מס', 'המסלול הרגיל, 2,290 ₪, בלי תוספות'),
+        'en': ('A landing page for a tax-refund advisor', 'The standard package, ₪2,290, no add-ons')})

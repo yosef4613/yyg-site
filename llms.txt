@@ -1,20 +1,22 @@
 # YYG Web Design: עיצוב ובניית אתרים / Web design & development (Israel)
 
-> YYG Web Design is the web design studio of Yehuda Gordon in Israel. It builds landing pages, small business websites with an admin panel, websites with sign-ups and mailing lists for institutions, nonprofits and classes, and online stores, plus logo design and branding. Payment: 10% to start, then clients see 3 complete design directions of their own site; 40% when they pick one; the remaining 50% at launch, after approval. No VAT is added to the prices. Sites are fast, mobile-first, accessible and set up for Google. The first year of domain, hosting and business email is included.
+> YYG Web Design is the web design studio of Yehuda Gordon in Israel. It builds landing pages, business websites, extended business websites with a content section, and online stores, plus features added to a site as needed (sign-up forms, mailing lists, user accounts, card donations, campaigns, updatable schedules), logo design and branding. Payment: 30% to start, then clients see 3 complete design directions of their own site; 40% when they pick one; the remaining 30% at launch, after approval (basic landing page: 50% / 50%). No VAT is added to the prices. Sites are fast, mobile-first, accessible and set up for Google. The first year of domain, hosting and business email is included.
 
-## Prices (ILS, final, no VAT is added)
-- Landing page: from ₪2,000 (3 design directions, 3 revision rounds, up to 4 business days)
-- Basic landing page: ₪1,290 (1 design, 1 revision round, client provides the text, 1 month of support, 50% upfront and 50% at launch)
+## Prices (ILS, starting prices, no VAT is added; the final price comes in the emailed quote)
+- Basic landing page: ₪1,490 (up to 5 sections, 1 design, 1 revision round, client provides the text, 1 month of support, up to 4 business days, 50% upfront and 50% at launch)
+- Landing page: from ₪2,290 (up to 7 sections, 3 design directions, 3 revision rounds, up to 7 business days)
+- Business website: from ₪4,900 (up to 6 pages, an update screen for changing content, up to 14 business days)
+- Extended business website: from ₪6,900 (up to 12 pages and a content section: news, articles or events; up to 20 business days)
+- Online store: from ₪7,900 (up to 30 products uploaded, cart, card payments, shipping, up to 25 business days)
+- Custom system or large store (complex user area, integrations, 100+ products): by quote
+- Features added to a site: landing-page update screen ₪1,000; advanced sign-up form ₪700; updatable schedule or events ₪700; mailing list and 3 email templates ₪900; user accounts ₪2,000; card donations ₪1,200; campaign with a goal meter ₪800 (each adds 2 to 4 business days)
 - Launch price: 10% off for the next 5 clients who agree to be shown as a case study with a written testimonial
-- Website with admin panel: from ₪4,000 (up to 6 pages, up to 10 business days)
-- Website with sign-ups & mailing list: from ₪6,000 (up to 15 business days)
-- Online store: from ₪7,000 (up to 30 products uploaded, up to 20 business days)
 - Basic logo ₪590; professional logo ₪1,500; basic brand identity ₪2,500
-- Brand from 0 to 100% (branding + website + content + print + social + Google): from ₪5,900 / ₪7,900 / ₪9,900 / ₪10,900 (14 to 30 business days)
-- All-in Care (domain, hosting, business email, security, backups and fixes) from year 2: ₪590 per year
+- Brand from 0 to 100% (branding + website + content + print + social + Google): ₪3,900 on top of the package: from ₪6,190 / ₪8,800 / ₪10,800 / ₪11,800 (about 10 extra business days)
+- All-in Care (domain, hosting, business email, security, backups and fixes) from year 2: ₪590 per year (₪890 for a store)
 - Maintenance (optional): updates and small changes, up to half an hour a month: ₪199 per month
-- Extra page ₪350; extra design direction ₪400; extra revision round or an hour of work ₪150
-- Every package except the basic landing page: start with 10%, 3 design directions, 3 revision rounds, 4 months of support after launch
+- Extra page ₪400; extra design direction ₪400; extra revision round or an hour of work ₪250; 10 more store products ₪250; second language 30% of the package; rush delivery (half the time) +25%
+- Every package except the basic landing page: start with 30%, 3 design directions, 3 revision rounds, 4 months of support after launch
 
 ## Contact
 - Phone: 054-854-0700 (calls only), Sunday to Wednesday, 10:00–13:30 (Israel time)

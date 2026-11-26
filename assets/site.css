@@ -1238,3 +1238,6 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 /* באנגלית התוויות ארוכות יותר: התווית מתכווצת ונשברת לפני הערך */
 html[dir="ltr"] .pkg-row span{flex:0 1 34%}
 html[dir="ltr"] .pkg-row b{flex:1 1 auto}
+/* מה עוד אפשר להוסיף: ארבעה חלקים (בכל מסלול, יכולות, תוספות, לא כלול) בשתי עמודות */
+@media (min-width:861px){.pkgs-more{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.price-note{margin-top:10px;color:var(--muted);font-size:.9rem}
