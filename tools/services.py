@@ -589,7 +589,7 @@ def page(p, is_index=False, cards=''):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים</p>
-  <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
+  <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/terms.html">תקנון</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
   <p>{FOOT_SV}</p>
  </div>
 </footer>

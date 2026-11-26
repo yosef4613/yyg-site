@@ -481,7 +481,7 @@ def build(lang):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
-  <p><a class="foot-link" href="{home}">{E(t['home'])}</a> · <a class="foot-link" href="{'/services/' if he else '/en/services/'}">{'שירותים' if he else 'Services'}</a> · <a class="foot-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a> · <a class="foot-link" href="{'/privacy.html' if he else '/en/privacy.html'}">{'מדיניות פרטיות' if he else 'Privacy policy'}</a> · <a class="foot-link" href="{'/accessibility.html' if he else '/en/accessibility.html'}">{'הצהרת נגישות' if he else 'Accessibility statement'}</a></p>
+  <p><a class="foot-link" href="{home}">{E(t['home'])}</a> · <a class="foot-link" href="{'/services/' if he else '/en/services/'}">{'שירותים' if he else 'Services'}</a> · <a class="foot-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a> · <a class="foot-link" href="{'/privacy.html' if he else '/en/privacy.html'}">{'מדיניות פרטיות' if he else 'Privacy policy'}</a> · <a class="foot-link" href="{'/terms.html' if he else '/en/terms.html'}">{'תקנון' if he else 'Terms'}</a> · <a class="foot-link" href="{'/accessibility.html' if he else '/en/accessibility.html'}">{'הצהרת נגישות' if he else 'Accessibility statement'}</a></p>
  </div>
 </footer>
 <script src="/assets/q.js" defer></script>

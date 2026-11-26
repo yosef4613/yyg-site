@@ -1,6 +1,4 @@
 User-agent: *
-# איך מותר להשתמש בתוכן: חיפוש כן, תשובות של כלי בינה מלאכותית כן, אימון מודלים לא
-Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /stats.php
 Disallow: /hit.php

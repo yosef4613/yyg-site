@@ -140,7 +140,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים</p>
-  <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
+  <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/terms.html">תקנון</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
   <p>{FOOT_SV}</p>
  </div>
 </footer>
@@ -477,10 +477,10 @@ open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לב�
     f'<div class="g-cards">\n{cards}\n</div>'))
 
 # מפת האתר
-urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3'), ('privacy.html', '0.3'), ('questionnaire/', '0.6'), ('feedback/', '0.4'), ('demo/', '0.7'), ('demo/optika/', '0.7'), ('demo/shop/', '0.7'), ('demo/basic/', '0.6'), ('demo/landing/', '0.6'), ('demo/donate/', '0.6'), ('demo/shul/', '0.6'), ('pricing/', '0.8'), ('about/', '0.6'), ('contact/', '0.6')]
+urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3'), ('privacy.html', '0.3'), ('terms.html', '0.3'), ('questionnaire/', '0.6'), ('feedback/', '0.4'), ('demo/', '0.7'), ('demo/optika/', '0.7'), ('demo/shop/', '0.7'), ('demo/basic/', '0.6'), ('demo/landing/', '0.6'), ('demo/donate/', '0.6'), ('demo/shul/', '0.6'), ('pricing/', '0.8'), ('about/', '0.6'), ('contact/', '0.6')]
 SV = ['landing-page', 'business-website', 'online-store', 'institutions', 'catering', 'professionals', 'logo-branding']
 urls += [('services/', '0.8')] + [(f'services/{s}.html', '0.8') for s in SV] + [('en/services/', '0.6')] + [(f'en/services/{s}.html', '0.6') for s in SV]
-urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2'), ('en/privacy.html', '0.2'), ('en/questionnaire/', '0.4'), ('en/feedback/', '0.3'), ('en/demo/', '0.5'), ('en/demo/optika/', '0.5'), ('en/demo/shop/', '0.5'), ('en/demo/basic/', '0.4'), ('en/demo/landing/', '0.4'), ('en/demo/donate/', '0.4'), ('en/demo/shul/', '0.4'), ('en/pricing/', '0.6'), ('en/about/', '0.4'), ('en/contact/', '0.4')]
+urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2'), ('en/privacy.html', '0.2'), ('en/terms.html', '0.2'), ('en/questionnaire/', '0.4'), ('en/feedback/', '0.3'), ('en/demo/', '0.5'), ('en/demo/optika/', '0.5'), ('en/demo/shop/', '0.5'), ('en/demo/basic/', '0.4'), ('en/demo/landing/', '0.4'), ('en/demo/donate/', '0.4'), ('en/demo/shul/', '0.4'), ('en/pricing/', '0.6'), ('en/about/', '0.4'), ('en/contact/', '0.4')]
 open(f'{root}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n' for u, p in urls) + '</urlset>\n')
 print('ok', [s for s, *_ in G])

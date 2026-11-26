@@ -171,6 +171,7 @@ ob_start(); ?>
   <?php if ($first10): ?><li><?= $L('ה־' . $firstPct . '% הראשונים הם חלק מהמחיר, לא תוספת. אם אחרי העיצובים מחליטים לא להמשיך, הם מכסים את עבודת העיצוב, ולא משלמים יותר.', 'The first ' . $firstPct . '% is part of the price, not an extra. If you decide not to go ahead after the designs, it covers the design work, and you pay nothing more.') ?></li><?php endif; ?>
   <li><?= $L('עבודה שלא כתובה בהצעה מתומחרת מראש, ומתבצעת רק באישור שלכם. מה ששולם לא מוחזר, ושלב שכבר התחיל משולם לפי העבודה שנעשתה.', 'Any work not listed in the quote is priced in advance, and done only with your approval. Payments made are not refunded, and a stage that has started is paid for the work done.') ?></li>
   <li><?= $L('ההצעה בתוקף עד', 'This quote is valid until') ?> <?= h($validTxt) ?>.</li>
+  <li><?= $L('כל התנאים כתובים גם ב', 'All the terms are also on the ') ?><a href="<?= $L('/terms.html', '/en/terms.html') ?>" target="_blank" rel="noopener"><?= $L('תקנון', 'terms page') ?></a><?= $L('. אם יש הבדל, מה שכתוב בהצעה הזאת קובע.', '. If anything differs, this quote decides.') ?></li>
  </ul>
 
  <section class="approve<?= $approved ? ' done' : '' ?>" id="approve">

@@ -49,6 +49,13 @@ SetEnvIf Request_URI "^/en/(index\.html)?$" YYG_HOME_EN
   Header always set Link '</llms.txt>; rel="describedby"; type="text/plain", </en/index.md>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json", </en/pricing/>; rel="service-doc"' env=YYG_HOME_EN
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # גלישה מאובטחת תמיד: הדפדפן זוכר לשנה שהאתר עובד רק ב־HTTPS (בלי תתי־דומיינים, כדי לא לפגוע במייל)
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # אסור להציג את העמודים בתוך אתר אחר (רק בתוך האתר עצמו). עמודי PHP קובעים את זה בעצמם
+  <FilesMatch "\.(html|md)$">
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Content-Security-Policy "frame-ancestors 'self'"
+  </FilesMatch>
 </IfModule>
 <IfModule mod_mime.c>
   AddType font/woff2 .woff2

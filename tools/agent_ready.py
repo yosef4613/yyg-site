@@ -61,8 +61,8 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
     he_url, en_url = f'{SITE}/{slug}/', f'{SITE}/en/{slug}/'
     other = f'<a class="text-link" href="{"/en/" if he else "/"}{slug}/" hreflang="{"en" if he else "he"}" lang="{"en" if he else "he"}">{"English" if he else "עברית"}</a>'
     foot = ' · '.join(f'<a class="foot-link" href="{base}{h}">{t}</a>' for h, t in (
-        [('', 'עמוד הבית'), ('about/', 'אודות'), ('pricing/', 'מחירון'), ('contact/', 'יצירת קשר'), ('services/', 'שירותים'), ('guides/', 'מדריכים'), ('demo/', 'פרויקטים לדוגמה'), ('privacy.html', 'מדיניות פרטיות'), ('accessibility.html', 'הצהרת נגישות')] if he else
-        [('', 'Home'), ('about/', 'About'), ('pricing/', 'Pricing'), ('contact/', 'Contact'), ('services/', 'Services'), ('guides/', 'Guides'), ('demo/', 'Example projects'), ('privacy.html', 'Privacy policy'), ('accessibility.html', 'Accessibility statement')]))
+        [('', 'עמוד הבית'), ('about/', 'אודות'), ('pricing/', 'מחירון'), ('contact/', 'יצירת קשר'), ('services/', 'שירותים'), ('guides/', 'מדריכים'), ('demo/', 'פרויקטים לדוגמה'), ('privacy.html', 'מדיניות פרטיות'), ('terms.html', 'תקנון'), ('accessibility.html', 'הצהרת נגישות')] if he else
+        [('', 'Home'), ('about/', 'About'), ('pricing/', 'Pricing'), ('contact/', 'Contact'), ('services/', 'Services'), ('guides/', 'Guides'), ('demo/', 'Example projects'), ('privacy.html', 'Privacy policy'), ('terms.html', 'Terms of service'), ('accessibility.html', 'Accessibility statement')]))
     return f'''<!doctype html>
 <html lang="{lang}" dir="{'rtl' if he else 'ltr'}">
 <head>

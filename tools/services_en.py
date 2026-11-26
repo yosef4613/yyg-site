@@ -607,7 +607,7 @@ def page(p, is_index=False, cards=''):
 <footer class="foot">
  <div class="wrap foot-in">
   <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> YYG Web Design, Yehuda Gordon. Web design and development</p>
-  <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
+  <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/en/terms.html">Terms</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
   <p>{FOOT_SV}</p>
  </div>
 </footer>
