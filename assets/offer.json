@@ -1,8 +1,8 @@
 {
- "_about": "YYG: the studio's packages, prices and process, for people and AI agents. Single source for /pricing/, the Markdown versions, the WebMCP tools and the MCP server (/mcp). Prices are in ILS, final, and no VAT is added.",
+ "_about": "YYG Web Design: the studio's packages, prices and process, for people and AI agents. Single source for /pricing/, the Markdown versions, the WebMCP tools and the MCP server (/mcp). Prices are in ILS, final, and no VAT is added.",
  "updated": "2026-11-26",
  "business": {
-  "name": "YYG",
+  "name": "YYG Web Design",
   "owner": {"he": "יהודה גורדון", "en": "Yehuda Gordon"},
   "description": {"he": "סטודיו לעיצוב ובניית אתרים לעסקים קטנים ולמוסדות: דפי נחיתה, אתרים עם אזור ניהול, אתרים עם הרשמה ורשימת תפוצה, חנויות אונליין, לוגו ומיתוג.", "en": "A web design and development studio for small businesses and institutions: landing pages, websites with an admin area, websites with sign-ups and a mailing list, online stores, logos and branding."},
   "url": "https://yygweb.com/",

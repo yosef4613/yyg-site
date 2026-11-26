@@ -51,7 +51,7 @@ def ul(items):
 PAGES = [
     dict(
         slug='landing-page', kw='Landing page design',
-        title='Landing page design from ₪2,000 | 3 designs | YYG',
+        title='Landing page design from ₪2,000 | 3 designs | YYG Web Design',
         desc='Landing page design that brings in customers: start with 10% and see 3 designs, 3 revision rounds, live within 4 business days. From ₪2,000, no VAT is added.',
         h1='Landing page design that brings in customers', lead='One focused, fast page where everything leads to a single action: calling you or leaving their details.',
         price='2,000', price_n=2000, service='Landing page design',
@@ -83,7 +83,7 @@ PAGES = [
     ),
     dict(
         slug='business-website', kw='Small business website design',
-        title='Small business website design from ₪4,000 | YYG',
+        title='Small business website design from ₪4,000 | YYG Web Design',
         desc='A business website with an admin panel you update yourself: up to 6 pages, start with 10% and see 3 designs, live within 10 business days. From ₪4,000.',
         h1='Small business website design you can update yourself', lead='A multi-page business website with a simple admin panel for updating whatever changes: services, prices, promotions and photos.',
         price='4,000', price_n=4000, service='Small business website design',
@@ -109,7 +109,7 @@ PAGES = [
     ),
     dict(
         slug='online-store', kw='Online store development',
-        title='Online store development from ₪7,000 | YYG',
+        title='Online store development from ₪7,000 | YYG Web Design',
         desc='An online store with a cart, card payments and shipping, plus product and order management. Up to 30 products included. From ₪7,000, no VAT is added.',
         h1='Online store development that makes buying easy', lead="A catalog, a cart and credit card payments, with simple management of products, inventory and orders. Built for phones, because that's where people shop.",
         price='7,000', price_n=7000, service='Online store development',
@@ -132,7 +132,7 @@ PAGES = [
     ),
     dict(
         slug='institutions', kw='Website for institutions, nonprofits and classes',
-        title='Websites for institutions, nonprofits and classes | YYG',
+        title='Websites for institutions, nonprofits and classes | YYG Web Design',
         desc='Websites for institutions, nonprofits and classes: sign-up, user accounts, a mailing list and 3 email templates. From ₪6,000, final price, no VAT is added.',
         h1='Website for institutions, nonprofits and classes', lead='A website that showcases your activities and takes organized sign-ups: parents and participants find what suits them and sign up right from their phones.',
         price='6,000', price_n=6000, service='Website for institutions, nonprofits and classes',
@@ -158,7 +158,7 @@ PAGES = [
     ),
     dict(
         slug='logo-branding', kw='Logo design and branding',
-        title='Logo design and branding from ₪590 | YYG',
+        title='Logo design and branding from ₪590 | YYG Web Design',
         desc='Logo design and branding: basic logo ₪590, professional logo with 3 sketches ₪1,500, basic branding ₪2,500, and a full brand with a website from ₪5,900.',
         h1='Logo design and branding for your business', lead='From a simple logo for a new business to a complete brand: logo, colors, fonts, website and content, all in one visual language.',
         price='590', price_n=590, service='Logo design and branding',
@@ -339,7 +339,7 @@ for _p, _extra in (('landing-page', 'professionals'), ('business-website', 'cate
 PAGES += [
     dict(
         slug='catering', kw='Website design for catering businesses',
-        title='Websites for catering and food businesses from ₪2,000 | YYG',
+        title='Websites for catering and food businesses from ₪2,000 | YYG Web Design',
         desc='Websites for caterers, bakeries and food businesses: a menu or catalog with photos, ordering on WhatsApp or by email, and an event quantity planner.',
         h1='Websites for catering and food businesses', lead='A website that shows your food at its best, answers the repeat questions in advance, and turns a visitor into an organized order on WhatsApp or by email.',
         price='2,000', price_n=2000, service='Website design for catering and food businesses',
@@ -397,7 +397,7 @@ PAGES += [
     ),
     dict(
         slug='professionals', kw='Website design for trades and service providers',
-        title='Websites for trades and service providers from ₪2,000 | YYG',
+        title='Websites for trades and service providers from ₪2,000 | YYG Web Design',
         desc='Websites for electricians, plumbers, consultants, therapists and private tutors: a call button, a service area, testimonials and a short form. Start with 10%.',
         h1='Websites for trades and service providers', lead='A website that makes your phone ring: anyone who finds you on Google understands right away what you do, where, and why to choose you, and calls with one tap.',
         price='2,000', price_n=2000, service='Website design for trades and service providers',
@@ -473,12 +473,12 @@ def page(p, is_index=False, cards=''):
     if not is_index:
         ld.append({'@context': 'https://schema.org', '@type': 'Service', 'name': p['service'], 'serviceType': p['kw'],
                    'description': desc, 'url': url, 'areaServed': {'@type': 'Country', 'name': 'Israel'}, 'inLanguage': 'en',
-                   'provider': {'@type': 'ProfessionalService', 'name': 'YYG', 'url': SITE + '/en/', 'telephone': '+972-54-854-0700'},
+                   'provider': {'@type': 'ProfessionalService', 'name': 'YYG Web Design', 'url': SITE + '/en/', 'telephone': '+972-54-854-0700'},
                    'offers': {'@type': 'Offer', 'price': str(p['price_n']), 'priceCurrency': 'ILS', 'url': url}})
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in p['faq']]})
     ld.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + '/en/'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + '/en/'},
         {'@type': 'ListItem', 'position': 2, 'name': 'Services', 'item': SITE + '/en/services/'}]
         + ([] if is_index else [{'@type': 'ListItem', 'position': 3, 'name': h1, 'item': url}])})
     if is_index:
@@ -511,7 +511,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=46">
+<link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -519,7 +519,7 @@ def page(p, is_index=False, cards=''):
 <a class="skip" href="#main">Skip to content</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="/en/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG, home page"></a>
+  <a href="/en/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design, home page"></a>
   <nav aria-label="Main">
    <a class="text-link" href="/en/services/">Services</a>
    <a class="text-link" href="/en/#plan">Price calculator</a>
@@ -530,7 +530,7 @@ def page(p, is_index=False, cards=''):
 </header>
 <main id="main" class="g-main">
  <div class="wrap">
-  <p class="g-crumb"><a href="/en/">YYG</a> › <a href="/en/services/">Services</a></p>
+  <p class="g-crumb"><a href="/en/">YYG Web Design</a> › <a href="/en/services/">Services</a></p>
   <h1>{h1}</h1>
   <p class="g-lead">{lead}</p>
 {body}
@@ -544,7 +544,7 @@ def page(p, is_index=False, cards=''):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, Yehuda Gordon. Web design and development</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG Web Design, Yehuda Gordon. Web design and development</p>
   <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
   <p>{FOOT_SV}</p>
  </div>
@@ -559,7 +559,7 @@ for p in PAGES:
     (OUT / f"{p['slug']}.html").write_text(page(p), encoding='utf-8')
 cards = '<div class="g-cards">\n' + '\n'.join(
     f'<a class="g-card" href="/en/services/{p["slug"]}.html"><b>{p["h1"]}</b><span>{p["lead"]}</span></a>' for p in PAGES) + '\n</div>'
-(OUT / 'index.html').write_text(page(dict(title='Services: websites, online stores, logos and branding | YYG',
-    desc="YYG services: landing pages, business websites, online stores, sites for institutions, catering and trades, and logo design and branding. Start with 10%.",
+(OUT / 'index.html').write_text(page(dict(title='Services: websites, online stores, logos and branding | YYG Web Design',
+    desc="YYG Web Design services: landing pages, business websites, online stores, sites for institutions, catering and trades, and logo design and branding. Start with 10%.",
     h1='Services', lead='Websites, online stores, logos and branding for small businesses and institutions. With every service, you start with 10% and see the design before you go ahead.'), True, cards), encoding='utf-8')
 print('ok', [p['slug'] for p in PAGES] + ['index'])

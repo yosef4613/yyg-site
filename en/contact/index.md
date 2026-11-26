@@ -1,4 +1,4 @@
-# Contact: YYG
+# Contact: YYG Web Design
 
 Leave your name and email, and get a personal email with the next step right away. You can also go straight to the discovery questionnaire, or call. A personal reply within one business day.
 

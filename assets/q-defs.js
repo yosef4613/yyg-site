@@ -1,4 +1,4 @@
-/* YYG: התוכן של שני השאלונים, בעברית ובאנגלית.
+/* YYG Web Design: התוכן של שני השאלונים, בעברית ובאנגלית.
    סוגי שאלות: text, email, tel, url, date, textarea, radio, checks (אפשר max), scale (1 עד 5 עם תוויות בקצוות).
    other: true מוסיף "אחר" עם שדה טקסט. show: {id, in: [...]} מציג את השאלה רק אחרי תשובה מסוימת. */
 window.YYG_FORMS = {

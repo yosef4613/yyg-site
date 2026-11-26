@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: צפייה בשאלון שלקוח מילא (אפיון או משוב על עיצובים). https://yygweb.com/admin/form.php?id=...
+ * YYG Web Design: צפייה בשאלון שלקוח מילא (אפיון או משוב על עיצובים). https://yygweb.com/admin/form.php?id=...
  */
 declare(strict_types=1);
 require __DIR__ . '/_lib.php';
@@ -9,7 +9,7 @@ $id = (string) ($_GET['id'] ?? '');
 $rec = null;
 foreach ((@file(data_dir() . '/forms.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && ($r['id'] ?? '') === $id) $rec = $r; }
 if ($rec) $rec['files'] = form_files($rec);
-if (!$rec) { http_response_code(404); adm_page('לא נמצא | YYG', adm_nav() . '<main class="wrap"><h1>השאלון לא נמצא</h1><p><a href="/admin/#forms">חזרה</a></p></main>'); }
+if (!$rec) { http_response_code(404); adm_page('לא נמצא | YYG Web Design', adm_nav() . '<main class="wrap"><h1>השאלון לא נמצא</h1><p><a href="/admin/#forms">חזרה</a></p></main>'); }
 $c = $rec['contact'];
 $digits = preg_replace('/\D/', '', (string) $c['phone']);
 $wa = preg_replace('/^0/', '972', $digits);
@@ -28,7 +28,7 @@ foreach ($rec['items'] as $it) {
     if ($it['s'] !== $sec) { $sec = $it['s']; $plain .= "\n## " . $sec . "\n"; }
     $plain .= '- ' . $it['q'] . "\n  " . str_replace("\n", "\n  ", $it['a']) . "\n";
 }
-$brief = "אני יהודה מ־YYG, סטודיו לעיצוב ובניית אתרים לעסקים קטנים ולמוסדות. למטה שאלון " . ($rec['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים') . " שלקוח מילא.\n"
+$brief = "אני יהודה מ־YYG Web Design, סטודיו לעיצוב ובניית אתרים לעסקים קטנים ולמוסדות. למטה שאלון " . ($rec['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים') . " שלקוח מילא.\n"
     . ($rec['form'] === 'intake'
         ? "על בסיסו:\n1. המלץ על מסלול ובנה הצעת מחיר מפורטת לפי המחירון שלי, כולל תוספות שנדרשות לפי התשובות.\n2. בנה תוכנית עבודה: רשימת עמודים, המבנה של כל עמוד, יכולות, תוכן שחסר ומה לבקש מהלקוח, ולוחות זמנים לפי השלבים.\n3. כתוב טיוטת טקסטים לאתר, והצע 3 כיווני עיצוב שונים שמתאימים למה שהלקוח כתב.\n4. כתוב לי אילו שאלות כדאי לשאול את הלקוח בשיחה, איפה התשובות לא ברורות או חסרות.\n"
         : "על בסיסו: סכם מה לשנות בסבב העיצוב הבא, לפי סדר חשיבות, ואיזה כיוון לבחור.\n")
@@ -83,4 +83,4 @@ ob_start(); ?>
 <?php endforeach; if ($sec !== null) echo '</dl></section>'; ?>
 <?php if (!$rec['items']): ?><p class="muted">הלקוח שלח רק פרטים, בלי תשובות.</p><?php endif; ?>
 </main>
-<?php adm_page($title . ': ' . $c['name'] . ' | YYG', (string) ob_get_clean(), '.copy-acts{margin-top:10px;align-items:center}.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}.file{display:grid;gap:6px;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);text-decoration:none;overflow:hidden}.file img{width:100%;height:110px;object-fit:cover;border-radius:6px;background:#fff}.file .ext{display:grid;place-items:center;height:110px;border-radius:6px;background:var(--panel);font-weight:800;color:var(--muted)}.file small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media print{.top,.acts{display:none}body{background:#fff;color:#000}.card{border:1px solid #ccc;background:#fff}.kv dt{color:#555}}');
+<?php adm_page($title . ': ' . $c['name'] . ' | YYG Web Design', (string) ob_get_clean(), '.copy-acts{margin-top:10px;align-items:center}.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}.file{display:grid;gap:6px;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);text-decoration:none;overflow:hidden}.file img{width:100%;height:110px;object-fit:cover;border-radius:6px;background:#fff}.file .ext{display:grid;place-items:center;height:110px;border-radius:6px;background:var(--panel);font-weight:800;color:var(--muted)}.file small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media print{.top,.acts{display:none}body{background:#fff;color:#000}.card{border:1px solid #ccc;background:#fff}.kv dt{color:#555}}');

@@ -1,4 +1,4 @@
-# YYG · אתר עיצוב ובניית אתרים
+# YYG Web Design · אתר עיצוב ובניית אתרים
 
 **האתר החי: [yygweb.com](https://yygweb.com)** · [מדריכים](https://yygweb.com/guides/)
 

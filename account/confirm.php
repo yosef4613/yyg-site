@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: אישור המייל של מי שהשאיר פנייה באתר. https://yygweb.com/account/confirm.php?l=<פנייה>&t=<אסימון>
+ * YYG Web Design: אישור המייל של מי שהשאיר פנייה באתר. https://yygweb.com/account/confirm.php?l=<פנייה>&t=<אסימון>
  * הקישור מגיע ללקוח במייל מיד אחרי שהשאיר פרטים. האישור עצמו בלחיצה על כפתור (POST),
  * כדי שסורקי קישורים בתיבות מייל לא יאשרו במקום האדם.
  * אחרי האישור: הלקוח רואה (ומקבל במייל) את הטלפון שלי ואת הקישור לשאלון האפיון, ואני מקבל מייל קצר.
@@ -64,7 +64,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($in['do'] ?? '') === 'conf
             : '<p>תודה שאישרתם. אחזור אליכם תוך יום עבודה.</p>'
               . '<p><b>רוצים לדבר כבר עכשיו?</b> אפשר להתקשר אליי: <a href="tel:0548540700" style="color:#1a56db;font-weight:700">' . $phone . '</a>, ' . h($hours) . '.</p>'
               . '<p><b>הצעד הבא:</b> שאלון אפיון קצר, כ־10 דקות. איתו אני מגיע לשיחה מוכן, עם הצעת מחיר מסודרת.</p>' . mail_button($qLink, 'לשאלון האפיון');
-        mail_send((string) $lead['email'], $EN ? 'My details, and the next step | YYG' : 'הפרטים שלי, והצעד הבא | YYG',
+        mail_send((string) $lead['email'], $EN ? 'My details, and the next step | YYG Web Design' : 'הפרטים שלי, והצעד הבא | YYG Web Design',
             mail_wrap($EN ? "Thank you, $name" : "תודה, $name", $body, '', $EN),
             ($EN ? "Thank you, $name.\nPhone: $phone ($hours)\nQuestionnaire: " : "תודה, $name.\nטלפון: $phone ($hours)\nשאלון האפיון: ") . $qLink);
     }

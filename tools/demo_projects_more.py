@@ -1,4 +1,4 @@
-# YYG: שלושת הפרויקטים לדוגמה הנוספים: עמותה (סל ברכה), בית כנסת (נחלת יצחק) וחנות (גרגר).
+# YYG Web Design: שלושת הפרויקטים לדוגמה הנוספים: עמותה (סל ברכה), בית כנסת (נחלת יצחק) וחנות (גרגר).
 # נטען מתוך tools/demo_projects.py (exec), ומשתמש בפונקציות ובקבועים של tools/demo.py.
 
 def admin_step(title, p, pts, alt, btn, h=660):
@@ -50,8 +50,8 @@ DESIGNS_DON = [
       colors=['#FBF6EC', '#4A6E42', '#B1532F', '#2E2A24']),
 ]
 T_DON = t_for(dict(
-  title='אתר לדוגמה: עמותה עם תרומות באשראי וקמפיין חי | YYG',
-  desc='עמותה דמיונית עוברת את כל התהליך של YYG: שאלון, הצעת מחיר, 3 עיצובים לאתר עם תרומות באשראי וקמפיין חי, משוב, הגרסה הסופית ומסך ניהול הקמפיין.',
+  title='אתר לדוגמה: עמותה עם תרומות באשראי וקמפיין חי | YYG Web Design',
+  desc='עמותה דמיונית עוברת את כל התהליך של YYG Web Design: שאלון, הצעת מחיר, 3 עיצובים לאתר עם תרומות באשראי וקמפיין חי, משוב, הגרסה הסופית ומסך ניהול הקמפיין.',
   h1='אתר לעמותה, עם תרומות באשראי וקמפיין שמתעדכן לבד',
   lead='עמותה דמיונית בשם "סל ברכה", שמביאה סלי מזון לשבת ולחג לכ־400 משפחות בירושלים. עד היום תרמו לה רק במזומן ובהעברה. ביקשו אתר שאפשר לתרום בו באשראי, חד־פעמי או בהוראת קבע, עם קמפיין חורף, מד יעד ורשימת תורמים שמתעדכנים לבד. עברנו את כל התהליך: שאלון, הצעת מחיר, 3 עיצובים, משוב, הגרסה הסופית ומסך הניהול.',
   note='עמותה דמיונית לדוגמה: השם, הפרטים, התורמים וההמלצות בדויים, ושום תרומה לא נגבית. התמונות הן הדמיות תלת־ממד שבניתי במיוחד.',
@@ -61,8 +61,8 @@ T_DON = t_for(dict(
   s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם המד, הימים שנותרו ורשימת התורמים חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
   s5p='', changes=[]),
  dict(
-  title='Example website: a nonprofit with card donations and a live campaign | YYG',
-  desc='A fictional nonprofit goes through the whole YYG process: a questionnaire, a quote, 3 designs for a site with card donations and a live campaign, feedback, the final version and the campaign admin screen.',
+  title='Example website: a nonprofit with card donations and a live campaign | YYG Web Design',
+  desc='A fictional nonprofit goes through the whole YYG Web Design process: a questionnaire, a quote, 3 designs for a site with card donations and a live campaign, feedback, the final version and the campaign admin screen.',
   h1='A nonprofit website, with card donations and a campaign that updates itself',
   lead='A fictional nonprofit called "Sal Bracha", which brings Shabbat and holiday food baskets to about 400 families in Jerusalem. Until now it only took cash and bank transfers. It asked for a site where people can give by card, one-time or monthly, with a winter campaign, a goal meter and a donor list that update themselves. We went through the whole process: a questionnaire, a quote, 3 designs, feedback, the final version and the admin screen.',
   note='A fictional example nonprofit: the name, details, donors and testimonials are made up, and no donation is charged. The images are 3D renders I built specially.',
@@ -116,8 +116,8 @@ DESIGNS_SHUL = [
       colors=['#EFE6D6', '#2D2418', '#4D5A36', '#9A4C2A']),
 ]
 T_SHUL = t_for(dict(
-  title='אתר לדוגמה: בית כנסת עם זמני תפילה, קמפיין והקדשות | YYG',
-  desc='בית כנסת דמיוני עובר את כל התהליך של YYG: שאלון, הצעת מחיר, 3 עיצובים לאתר תדמית עם תרומות, זמני תפילה שהגבאי מעדכן, קמפיין שיפוץ והקדשות, משוב, הגרסה הסופית ומסך הניהול.',
+  title='אתר לדוגמה: בית כנסת עם זמני תפילה, קמפיין והקדשות | YYG Web Design',
+  desc='בית כנסת דמיוני עובר את כל התהליך של YYG Web Design: שאלון, הצעת מחיר, 3 עיצובים לאתר תדמית עם תרומות, זמני תפילה שהגבאי מעדכן, קמפיין שיפוץ והקדשות, משוב, הגרסה הסופית ומסך הניהול.',
   h1='אתר לבית כנסת: זמני תפילה, קמפיין שיפוץ והקדשות',
   lead='בית כנסת דמיוני בשם "נחלת יצחק" בבית שמש, קהילה של כ־120 משפחות. הגבאי ביקש שני דברים: לעדכן בעצמו את זמני התפילות מהטלפון, וקמפיין לשיפוץ ההיכל עם תרומות באשראי והקדשות. עברנו את כל התהליך: שאלון, הצעת מחיר, 3 עיצובים, משוב, הגרסה הסופית ומסך הניהול.',
   note='בית כנסת דמיוני לדוגמה: השם, הפרטים, התורמים והסכומים בדויים, ושום תרומה לא נגבית. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, והסמל שורטט מחדש לדוגמה.',
@@ -127,8 +127,8 @@ T_SHUL = t_for(dict(
   s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותו אתר. בכל אחד מהם זמני התפילות, התפילה הבאה, מד הקמפיין וההקדשות חיים: אפשר לתרום לדוגמה ולראות אותם מתעדכנים.',
   s5p='', changes=[]),
  dict(
-  title='Example website: a synagogue with prayer times, a campaign and dedications | YYG',
-  desc='A fictional synagogue goes through the whole YYG process: a questionnaire, a quote, 3 designs for a presentation site with donations, prayer times the gabbai updates, a renovation campaign and dedications, feedback, the final version and the admin screen.',
+  title='Example website: a synagogue with prayer times, a campaign and dedications | YYG Web Design',
+  desc='A fictional synagogue goes through the whole YYG Web Design process: a questionnaire, a quote, 3 designs for a presentation site with donations, prayer times the gabbai updates, a renovation campaign and dedications, feedback, the final version and the admin screen.',
   h1='A synagogue website: prayer times, a renovation campaign and dedications',
   lead='A fictional synagogue called "Nachalat Yitzchak" in Beit Shemesh, a community of about 120 families. The gabbai asked for two things: to update the prayer times himself from his phone, and a campaign to renovate the sanctuary, with card donations and dedications. We went through the whole process: a questionnaire, a quote, 3 designs, feedback, the final version and the admin screen.',
   note='A fictional example synagogue: the name, details, donors and amounts are made up, and no donation is charged. The images are 3D renders I built specially, and the emblem was redrawn for the example.',
@@ -182,8 +182,8 @@ DESIGNS_SHOP = [
       colors=['#FFF8EC', '#1C1A2E', '#C8381F', '#F2B32A']),
 ]
 T_SHOP = t_for(dict(
-  title='חנות לדוגמה: תבלינים ותה עם עגלה, משלוחים וניהול מלאי | YYG',
-  desc='חנות תבלינים דמיונית עוברת את כל התהליך של YYG: שאלון, הצעת מחיר, 3 עיצובים לחנות אונליין עם עגלה שעובדת, משוב, הגרסה הסופית, ומסך ניהול למוצרים, למלאי ולהזמנות.',
+  title='חנות לדוגמה: תבלינים ותה עם עגלה, משלוחים וניהול מלאי | YYG Web Design',
+  desc='חנות תבלינים דמיונית עוברת את כל התהליך של YYG Web Design: שאלון, הצעת מחיר, 3 עיצובים לחנות אונליין עם עגלה שעובדת, משוב, הגרסה הסופית, ומסך ניהול למוצרים, למלאי ולהזמנות.',
   h1='חנות אונליין לתבלינים ותה, עם עגלה, משלוחים וניהול מלאי',
   lead='חנות תבלינים משפחתית דמיונית בשם "גרגר", דור שלישי לטוחנים ליד השוק בירושלים. הם רצו למכור באתר ולשלוח לכל הארץ, עם כ־40 מוצרים, משלוח חינם מעל 250 ₪ ואיסוף עצמי. עברנו את כל התהליך: שאלון, הצעת מחיר, 3 עיצובים, משוב, הגרסה הסופית ומסך הניהול.',
   note='חנות דמיונית לדוגמה: השם, הפרטים וההמלצות בדויים, ושום הזמנה לא נשלחת ולא נגבית. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, וגם הלוגו עוצב לדוגמה.',
@@ -193,8 +193,8 @@ T_SHOP = t_for(dict(
   s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי לאותה חנות. בכל אחד מהם העגלה עובדת: אפשר להוסיף מוצרים, לראות כמה חסר למשלוח חינם, ולבצע הזמנה לדוגמה בלי תשלום.',
   s5p='', changes=[]),
  dict(
-  title='Example store: spices and tea with a cart, shipping and stock management | YYG',
-  desc='A fictional spice shop goes through the whole YYG process: a questionnaire, a quote, 3 designs for an online store with a working cart, feedback, the final version, and an admin screen for products, stock and orders.',
+  title='Example store: spices and tea with a cart, shipping and stock management | YYG Web Design',
+  desc='A fictional spice shop goes through the whole YYG Web Design process: a questionnaire, a quote, 3 designs for an online store with a working cart, feedback, the final version, and an admin screen for products, stock and orders.',
   h1='An online spice and tea store, with a cart, shipping and stock management',
   lead='A fictional family spice shop called "Gargar", the third generation grinding near the market in Jerusalem. They wanted to sell online and ship across Israel, with about 40 products, free shipping over 250 ₪ and pickup from the shop. We went through the whole process: a questionnaire, a quote, 3 designs, feedback, the final version and the admin screen.',
   note='A fictional example store: the name, details and testimonials are made up, and no order is shipped or charged. The images are 3D renders I built specially, and the logo was designed for the example too.',
@@ -294,8 +294,8 @@ DESIGNS_BASIC = [
 ]
 T_BASIC = {lang: dict(T[lang]) for lang in T}
 T_BASIC['he'].update(
-  title='דף נחיתה בסיסי לדוגמה: הנדימן לתיקונים קטנים בבית | YYG',
-  desc='הנדימן דמיוני עובר את המסלול הבסיסי של YYG, ב־1,290 ₪: שאלון, הצעת מחיר, עיצוב אחד עם הטקסטים שלו, סבב תיקונים אחד והגרסה הסופית.',
+  title='דף נחיתה בסיסי לדוגמה: הנדימן לתיקונים קטנים בבית | YYG Web Design',
+  desc='הנדימן דמיוני עובר את המסלול הבסיסי של YYG Web Design, ב־1,290 ₪: שאלון, הצעת מחיר, עיצוב אחד עם הטקסטים שלו, סבב תיקונים אחד והגרסה הסופית.',
   h1='דף נחיתה בסיסי להנדימן, עם עיצוב אחד וסבב תיקונים אחד',
   lead='הדוגמה הכי פשוטה, במסלול הבסיסי: הנדימן דמיוני מבית שמש בשם יוסף, "בית בסדר", שרצה את האפשרות הכי זולה שעדיין נראית מקצועית. הוא הביא את הטקסטים בעצמו, קיבל עיצוב אחד, ביקש בסבב התיקונים האחד כמה שינויים קטנים, והדף מוכן. עברנו את כל הדרך כמו עם לקוח אמיתי: שאלון, הצעת מחיר, העיצוב, המשוב והגרסה הסופית.',
   note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, במקום צילומי הטלפון של הלקוח. בדף הבסיסי אין עיצוב לוגו, אז השם פשוט מסודר בגופן.',
@@ -313,8 +313,8 @@ T_BASIC['he'].update(
   ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. בדף הבסיסי משלמים 50%, ומקבלים עיצוב אחד עם הטקסטים שלכם.',
 )
 T_BASIC['en'].update(
-  title='Example basic landing page: a handyman for small home repairs | YYG',
-  desc='A fictional handyman goes through the YYG basic package, for ₪1,290: a questionnaire, a quote, one design with his own texts, one revision round and the final version.',
+  title='Example basic landing page: a handyman for small home repairs | YYG Web Design',
+  desc='A fictional handyman goes through the YYG Web Design basic package, for ₪1,290: a questionnaire, a quote, one design with his own texts, one revision round and the final version.',
   h1='A basic landing page for a handyman, with one design and one revision round',
   lead='The simplest example, on the basic package: a fictional handyman from Beit Shemesh named Yosef, "Bayit Beseder", who wanted the cheapest option that still looks professional. He brought his own texts, got one design, asked for a few small changes in his one revision round, and the page is ready. We went all the way as with a real client: a questionnaire, a quote, the design, the feedback and the final version.',
   note='A fictional example business: the name, details and testimonials are made up. The images are 3D renders I built specially, in place of the client\'s phone photos. The basic page has no logo design, so the name is simply set in a font.',

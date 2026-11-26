@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YYG: החלק "פרויקטים לדוגמה" בדף הבית (עברית ואנגלית), לפי סדר המסלולים ומחיר ההצעה.
+"""YYG Web Design: החלק "פרויקטים לדוגמה" בדף הבית (עברית ואנגלית), לפי סדר המסלולים ומחיר ההצעה.
 פרויקט נכנס רק כשיש לו גרסה סופית, מסך ניהול וצילומים (כמו ב־tools/demo_projects.py).
 מחליף את מה שבין <!-- examples:start --> ל־<!-- examples:end -->. הרצה: python3 tools/home_examples.py"""
 import html, pathlib

@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: בונה הצעות מחיר. https://yygweb.com/admin/quote.php
+ * YYG Web Design: בונה הצעות מחיר. https://yygweb.com/admin/quote.php
  * ?lead=מזהה  הצעה חדשה עם פרטי הפנייה
  * ?id=מספר    עריכת הצעה קיימת
  * ?dup=מספר   הצעה חדשה שמועתקת מהצעה קיימת
@@ -40,7 +40,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
             $body = '<p>שלום ' . h($name) . ',</p><p>מצורפת הצעת המחיר' . ($q['title'] ? ': <b>' . h($q['title']) . '</b>' : '') . ', על סך ' . h(nis($t['total'])) . '. המחיר סופי, לא מוסיפים מע״מ.</p>'
                 . '<p>בקישור אפשר לראות את כל הפרטים, להדפיס או לשמור כ־PDF, ולאשר בלחיצה.</p>' . mail_button(quote_url($q), 'לצפייה בהצעה')
                 . '<p style="color:#5A6472;font-size:14px">ההצעה בתוקף עד ' . h($valid) . '. שאלות? אפשר להשיב למייל הזה או להתקשר ל־054-854-0700.</p><p>יהודה</p>';
-            $ok = mail_send($to, 'הצעת מחיר מ־YYG' . ($q['title'] ? ': ' . $q['title'] : ''), mail_wrap('הצעת מחיר ' . $num, $body), "שלום $name,
+            $ok = mail_send($to, 'הצעת מחיר מ־YYG Web Design' . ($q['title'] ? ': ' . $q['title'] : ''), mail_wrap('הצעת מחיר ' . $num, $body), "שלום $name,
 הצעת המחיר: " . quote_url($q) . "
 יהודה, 054-854-0700");
             $what = 'ההצעה';
@@ -146,7 +146,7 @@ ob_start(); ?>
 <?php if ($q && $num): $st = (string) ($q['status'] ?? 'draft'); $url = quote_url($q);
       $phone = preg_replace('/[^\d+]/', '', (string) ($q['client']['phone'] ?? ''));
       $hasMail = (bool) filter_var((string) ($q['client']['email'] ?? ''), FILTER_VALIDATE_EMAIL);
-      $smsQuote = 'שלום ' . ($q['client']['name'] ?? '') . ', כאן יהודה מ־YYG. הצעת המחיר שלך: ' . $url . ' אפשר לאשר אותה ישירות מהקישור.';
+      $smsQuote = 'שלום ' . ($q['client']['name'] ?? '') . ', כאן יהודה מ־YYG Web Design. הצעת המחיר שלך: ' . $url . ' אפשר לאשר אותה ישירות מהקישור.';
       $fbLink = 'https://yygweb.com/feedback/?' . http_build_query(['name' => $q['client']['name'] ?? '', 'phone' => $q['client']['phone'] ?? '', 'business' => $q['client']['business'] ?? '', 'quote' => $num]);
       $smsFb = 'שלום ' . ($q['client']['name'] ?? '') . ', אחרי שתעבור/י על 3 העיצובים, אשמח למשוב קצר כאן: ' . $fbLink; ?>
 <?php if (isset($_GET['mailed'])): ?><p class="flash"><?= h((string) $_GET['mailed']) ?> <?= $_GET['mailed'] === 'ההצעה' ? 'נשלחה' : 'נשלח' ?> במייל ל־<bdi><?= h($q['client']['email'] ?? '') ?></bdi>.</p><?php endif; ?>
@@ -447,7 +447,7 @@ const cp = $('copy-url');
 if (cp) cp.addEventListener('click', async () => { try { await navigator.clipboard.writeText($('qurl').href); cp.textContent = 'הועתק'; } catch (e) { cp.textContent = $('qurl').href; } });
 </script>
 <?php
-adm_page(($num ? $num . ' | ' : '') . 'הצעת מחיר | YYG', (string) ob_get_clean(), '
+adm_page(($num ? $num . ' | ' : '') . 'הצעת מחיר | YYG Web Design', (string) ob_get_clean(), '
 .qgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start;margin-top:16px}
 .qside{position:sticky;top:76px}.qside .total{font-size:1.15rem;border-top:2px solid var(--line);margin-top:6px;padding-top:10px}
 fieldset{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 14px;background:var(--panel);min-width:0}

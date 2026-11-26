@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: קבלת פנייה מהטופס באתר ושליחתה במייל, ישירות מהשרת בהוסטינגר.
+ * YYG Web Design: קבלת פנייה מהטופס באתר ושליחתה במייל, ישירות מהשרת בהוסטינגר.
  * - הדרך הראשית: שירות המייל של הוסטינגר, עם מפתח שמוגבל לתיבה yehuda@yygweb.com (בלי סיסמת התיבה).
  *   המפתח שמור ב־_private/mail-config.php, שלא נשמר ב־Git ונמצא בתיקייה חסומה.
  * - גיבוי: SMTP, אם הוגדר, ואחריו פונקציית המייל של השרת.
@@ -22,7 +22,7 @@ function out(bool $ok, string $msg = '', int $code = 200): void {
         $t = $ok ? ($en ? 'Thank you, got it. I just emailed you the next step: a short questionnaire, then a formal quote.' : 'תודה, הפרטים התקבלו. שלחתי לכם עכשיו מייל עם הצעד הבא: שאלון קצר, ואחריו הצעת מחיר מסודרת.')
                  : (in_array($msg, ['missing', 'email', 'phone'], true) ? ($en ? 'Some details are missing. Please go back and fill in your name and email.' : 'חסרים פרטים. נא לחזור ולמלא שם ומייל.')
                  : ($en ? 'Something went wrong, and the details were not sent. Please email yehuda@yygweb.com.' : 'משהו השתבש, והפרטים לא נשלחו. אפשר לכתוב ל־yehuda@yygweb.com.'));
-        echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>YYG</title></head>'
+        echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>YYG Web Design</title></head>'
            . '<body style="margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#151920;color:#E9EDF3;font:18px/1.6 Arial,sans-serif;text-align:center"><main><p>' . $t . '</p>'
            . '<p><a style="color:#F2C95A" href="' . ($en ? '/en/' : '/') . '">' . ($en ? 'Back to the site' : 'חזרה לאתר') . '</a></p></main></body></html>';
         exit;
@@ -139,7 +139,7 @@ $all[] = $now;
 $cfg = [
     'to'        => 'yehuda@yygweb.com',   // התיבה מעבירה עותק לג׳ימייל
     'from'      => 'site@yygweb.com',
-    'from_name' => 'האתר של YYG',
+    'from_name' => 'האתר של YYG Web Design',
     'smtp'      => null, // ['host' => 'smtp.hostinger.com', 'port' => 465, 'user' => '...', 'pass' => '...']
 ];
 $cfg = array_merge($cfg, private_config());
@@ -165,7 +165,7 @@ $html = '<!doctype html><html lang="he" dir="rtl"><body style="margin:0;padding:
       . '<div style="max-width:640px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">'
       . '<div style="padding:16px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700">פנייה חדשה מהאתר yygweb.com</div>'
       . '<div style="padding:14px 20px;background:#FBF0DE;font-size:15px;line-height:1.5">הלקוח קיבל מייל אישי עם קישור לשאלון האפיון. כשיפתח אותו (וזה גם מאשר שהמייל אמיתי), תקבל מייל קצר. הטלפון שלך נשלח אליו רק אם יבקש לדבר.</div>'
-      . '<div style="padding:14px 20px"><a href="mailto:' . htmlspecialchars($f['email'], ENT_QUOTES) . '?subject=' . rawurlencode('הפנייה שלך ל־YYG') . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:10px">השבה ללקוח במייל</a></div>'
+      . '<div style="padding:14px 20px"><a href="mailto:' . htmlspecialchars($f['email'], ENT_QUOTES) . '?subject=' . rawurlencode('הפנייה שלך ל־YYG Web Design') . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:10px">השבה ללקוח במייל</a></div>'
       . '<table dir="rtl" style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">' . $rows . '</table>'
       . '<div style="padding:14px 20px;color:#6b7280;font-size:13px">נשלח מהטופס באתר, ' . date('d/m/Y H:i') . '. כל הפניות, עם סטטוס לכל אחת: <a href="https://yygweb.com/admin/#leads" style="color:#1a56db">דף הניהול</a></div></div></body></html>';
 $subject = ($score > 0 ? '[לבדיקה: ' . implode(', ', $why) . '] ' : '') . 'פנייה חדשה מהאתר: ' . preg_replace('/[\r\n]+/', ' ', $f['name']);
@@ -200,7 +200,7 @@ function lead_confirm_request(array $lead, string $ctok): bool {
           . mail_button($q, 'לשאלון האפיון')
           . '<p>אחרי השאלון תקבלו במייל הצעת מחיר מסודרת, ותוכלו לאשר אותה בלחיצה. בלי שיחות חובה.</p>'
           . '<p style="color:#5A6472;font-size:14px">מעדיפים לדבר קודם? <a href="' . h($talk) . '" style="color:#1a56db">לאישור הפנייה ולקבלת מספר הטלפון שלי</a>. לא אתם השארתם פרטים באתר? פשוט התעלמו מהמייל הזה.</p>';
-    return mail_send((string) $lead['email'], $en ? "$name, here's the next step | YYG" : "$name, הצעד הבא לאתר שלכם | YYG",
+    return mail_send((string) $lead['email'], $en ? "$name, here's the next step | YYG Web Design" : "$name, הצעד הבא לאתר שלכם | YYG Web Design",
         mail_wrap($en ? "Hi $name" : "שלום $name", $body, '', $en, false),
         ($en ? "Hi $name,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "שלום $name,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"));
 }
@@ -215,7 +215,7 @@ function build_message(array $cfg, string $subject, string $html, string $text, 
         'Reply-To: ' . $cfg['from'],
         'MIME-Version: 1.0',
         'Content-Type: multipart/alternative; boundary="' . $b . '"',
-        'X-Mailer: YYG site',
+        'X-Mailer: YYG Web Design site',
     ];
     $headersOut = implode("\r\n", $headers);
     return "--$b\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($text))

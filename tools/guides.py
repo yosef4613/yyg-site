@@ -52,14 +52,14 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
         '@context': 'https://schema.org', '@type': 'Article', 'headline': h1, 'description': desc,
         'inLanguage': 'he', 'datePublished': TODAY, 'dateModified': TODAY, 'mainEntityOfPage': url,
         'author': {'@type': 'Person', 'name': 'יהודה גורדון', 'url': SITE + '/'},
-        'publisher': {'@type': 'Organization', 'name': 'YYG', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}},
+        'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}},
         'image': SITE + '/assets/img/og.jpg',
     }]
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
     ld.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + '/'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + '/'},
         {'@type': 'ListItem', 'position': 2, 'name': 'מדריכים', 'item': SITE + '/guides/'},
     ] + ([{'@type': 'ListItem', 'position': 3, 'name': h1, 'item': url}] if slug != 'index' else [])})
     faq_html = ''
@@ -91,7 +91,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=46">
+<link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -99,7 +99,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <a class="skip" href="#main">דילוג לתוכן</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG, לעמוד הבית"></a>
+  <a href="/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design, לעמוד הבית"></a>
   <nav aria-label="ניווט">
    <a class="text-link" href="/guides/">מדריכים</a>
    <a class="text-link" href="/#plan">מחשבון מחיר</a>
@@ -110,7 +110,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 </header>
 <main id="main" class="g-main">
  <div class="wrap">
-  <p class="g-crumb"><a href="/">YYG</a> › <a href="/guides/">מדריכים</a></p>
+  <p class="g-crumb"><a href="/">YYG Web Design</a> › <a href="/guides/">מדריכים</a></p>
   <h1>{h1}</h1>
   <p class="g-lead">{lead}</p>
   <p class="g-meta">יהודה גורדון, מעצב ובונה אתרים · עודכן בכסלו תשפ״ז</p>
@@ -132,14 +132,14 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
    <input type="hidden" name="source" value="guide-{slug}">
    <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
    <label class="field"><span>מייל</span><input type="email" name="email" autocomplete="email" dir="ltr" required></label>
-   <label class="news-consent"><input type="checkbox" name="consent" value="1" required><span>אני מסכים/ה לקבל מ־YYG במייל מדריכים, טיפים ועדכונים, כולל הצעות לשירותים. אפשר להסיר את עצמי בכל רגע.</span></label>
+   <label class="news-consent"><input type="checkbox" name="consent" value="1" required><span>אני מסכים/ה לקבל מ־YYG Web Design במייל מדריכים, טיפים ועדכונים, כולל הצעות לשירותים. אפשר להסיר את עצמי בכל רגע.</span></label>
    <button class="btn btn-line" type="submit">הצטרפות</button>
   </form>
  </div>
 </section>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, יהודה גורדון. עיצוב ובניית אתרים</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים</p>
   <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
   <p>{FOOT_SV}</p>
  </div>
@@ -460,10 +460,10 @@ G = [
 
 for slug, title, desc, h1, lead, body, faq in G:
     related = [(s, h) for s, _, _, h, *_ in G if s != slug]
-    open(f'{root}/guides/{slug}.html', 'w').write(page(slug, title + ' | YYG', desc, h1, lead, body, faq, related))
+    open(f'{root}/guides/{slug}.html', 'w').write(page(slug, title + ' | YYG Web Design', desc, h1, lead, body, faq, related))
 
 cards = '\n'.join(f'<a class="g-card" href="/guides/{s}.html"><b>{h}</b><span>{l}</span></a>' for s, _, _, h, l, *_ in G)
-open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לבניית אתר לעסק | YYG',
+open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לבניית אתר לעסק | YYG Web Design',
     'מדריכים לבעלי עסקים ומוסדות: כמה עולה אתר, מה להכין, דף נחיתה או אתר מלא, איך לבחור בונה אתרים, וכמה זמן זה לוקח.',
     'מדריכים לבניית אתר', 'תשובות קצרות וברורות לשאלות שבעלי עסקים שואלים לפני שבונים אתר.',
     f'<div class="g-cards">\n{cards}\n</div>'))

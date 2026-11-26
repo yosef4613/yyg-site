@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: שרת MCP קטן לסוכני בינה מלאכותית. https://yygweb.com/mcp
+ * YYG Web Design: שרת MCP קטן לסוכני בינה מלאכותית. https://yygweb.com/mcp
  * Streamable HTTP בלי מצב (stateless): כל בקשה היא JSON-RPC אחת, והתשובה JSON.
  * לקריאה בלבד: מחירים, תהליך ותשלום, הערכת מחיר, דוגמאות ודרכי יצירת קשר. אין כאן גישה לשום נתון פרטי.
  * המקור לכל התשובות: assets/offer.json (אותו קובץ שממנו נבנים המחירון וגרסאות ה־Markdown).
@@ -42,10 +42,10 @@ function L(array $v, string $lang): string { return (string) ($v[$lang] ?? $v['e
 $langProp = ['type' => 'string', 'enum' => ['he', 'en'], 'description' => 'Answer language: he (Hebrew) or en (English). Default en.'];
 $TOOLS = [
     ['name' => 'get_packages_and_prices', 'title' => 'Packages and prices',
-     'description' => 'All YYG website packages, add-ons and recurring costs, with prices in ILS. Prices are final, and no VAT is added.',
+     'description' => 'All YYG Web Design website packages, add-ons and recurring costs, with prices in ILS. Prices are final, and no VAT is added.',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'get_process_and_payment', 'title' => 'Process and payment',
-     'description' => 'How a YYG project works step by step (3 designs before committing), and how payment works (10% / 40% / 50%).',
+     'description' => 'How a YYG Web Design project works step by step (3 designs before committing), and how payment works (10% / 40% / 50%).',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'estimate_price', 'title' => 'Estimate a price',
      'description' => 'A rough starting estimate in ILS for a website. The final price comes in a formal quote after a short questionnaire.',
@@ -56,10 +56,10 @@ $TOOLS = [
         'logo' => ['type' => 'string', 'enum' => ['none', 'basic', 'pro'], 'description' => 'Need a logo: none, basic, or pro'],
         'lang' => $langProp], 'required' => ['type']], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'list_examples', 'title' => 'Examples',
-     'description' => 'Live client websites and complete example projects by YYG, with links.',
+     'description' => 'Live client websites and complete example projects by YYG Web Design, with links.',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
     ['name' => 'get_contact', 'title' => 'Contact',
-     'description' => 'How to reach YYG: phone (calls only), hours, the contact form, and the discovery questionnaire that leads to a formal quote.',
+     'description' => 'How to reach YYG Web Design: phone (calls only), hours, the contact form, and the discovery questionnaire that leads to a formal quote.',
      'inputSchema' => ['type' => 'object', 'properties' => ['lang' => $langProp]], 'annotations' => ['readOnlyHint' => true]],
 ];
 
@@ -135,8 +135,8 @@ switch ($m) {
         reply($id, [
             'protocolVersion' => in_array($want, VERSIONS, true) ? $want : VERSIONS[1],
             'capabilities' => ['tools' => ['listChanged' => false]],
-            'serverInfo' => ['name' => 'yygweb', 'title' => 'YYG web design studio', 'version' => '1.0.0'],
-            'instructions' => 'Read-only information about YYG, a web design and development studio in Israel (Hebrew and English). Use get_packages_and_prices for prices (ILS, final, no VAT added), estimate_price for a rough estimate, and get_contact to point the user to the contact form or the discovery questionnaire. Pass lang "he" for Hebrew answers.',
+            'serverInfo' => ['name' => 'yygweb', 'title' => 'YYG Web Design web design studio', 'version' => '1.0.0'],
+            'instructions' => 'Read-only information about YYG Web Design, a web design and development studio in Israel (Hebrew and English). Use get_packages_and_prices for prices (ILS, final, no VAT added), estimate_price for a rough estimate, and get_contact to point the user to the contact form or the discovery questionnaire. Pass lang "he" for Hebrew answers.',
         ]);
     case 'ping':
         reply($id, []);

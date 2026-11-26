@@ -1,4 +1,4 @@
-# About: YYG
+# About: YYG Web Design
 
 Nice to meet you, I'm Yehuda Gordon. I design and build websites for small businesses and institutions. I do all the work myself, from the first sketch to launch, so you always talk to the same person.
 

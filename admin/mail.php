@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: שליחת עדכון לרשימת התפוצה. https://yygweb.com/admin/mail.php
+ * YYG Web Design: שליחת עדכון לרשימת התפוצה. https://yygweb.com/admin/mail.php
  * שני סוגים: "פוסט חדש מהאתר" (בוחרים מדריך, והמייל נבנה ממנו: כותרת, תקציר, זמן קריאה, עוד מדריכים)
  * ו"מייל חופשי". יש תצוגה מקדימה לפני השליחה.
  * נשלח לכל מנוי בנפרד (אף אחד לא רואה את הכתובות של האחרים), עם קישור הסרה אישי.
@@ -51,9 +51,9 @@ function campaign_html(array $c, ?array $sub): array {
     $paras = static fn(string $t): array => array_values(array_filter(array_map('trim', preg_split('/\n\s*\n/', str_replace("\r", '', $t))), 'strlen'));
     $pHtml = static fn(array $ps): string => implode('', array_map(static fn($p) => '<p style="margin:0 0 14px">' . nl2br(h($p)) . '</p>', $ps));
     $unsub = $sub ? sub_links($sub)['unsub'] : 'https://yygweb.com/account/list.php';
-    $footer = $en ? 'You received this email because you joined the YYG mailing list. <a href="' . h($unsub) . '" style="color:#5A6472">Unsubscribe</a>'
-                  : 'קיבלתם את המייל כי הצטרפתם לרשימת התפוצה של YYG. <a href="' . h($unsub) . '" style="color:#5A6472">להסרה מהרשימה</a>';
-    $sign = $en ? '<p style="margin:22px 0 0">All the best,<br><b>Yehuda Gordon</b> · YYG</p>' : '<p style="margin:22px 0 0">בברכה,<br><b>יהודה גורדון</b> · YYG</p>';
+    $footer = $en ? 'You received this email because you joined the YYG Web Design mailing list. <a href="' . h($unsub) . '" style="color:#5A6472">Unsubscribe</a>'
+                  : 'קיבלתם את המייל כי הצטרפתם לרשימת התפוצה של YYG Web Design. <a href="' . h($unsub) . '" style="color:#5A6472">להסרה מהרשימה</a>';
+    $sign = $en ? '<p style="margin:22px 0 0">All the best,<br><b>Yehuda Gordon</b> · YYG Web Design</p>' : '<p style="margin:22px 0 0">בברכה,<br><b>יהודה גורדון</b> · YYG Web Design</p>';
 
     if (($c['type'] ?? '') === 'post') {
         $posts = site_posts($en ? 'en' : 'he');
@@ -72,7 +72,7 @@ function campaign_html(array $c, ?array $sub): array {
         $html = mail_wrap((string) ($c['title'] ?: ($en ? 'A new guide on the site' : 'מדריך חדש באתר')), $pHtml($intro) . $card . $moreHtml . $sign, $footer, $en);
         $text = implode("\n\n", $intro) . "\n\n" . $p['title'] . "\n" . $p['lead'] . "\n" . $url
             . ($more ? "\n\n" . ($en ? 'More guides:' : 'עוד מדריכים:') . "\n" . implode("\n", array_map(static fn($x) => '- ' . $x['title'] . ': ' . nl_link($x['url'], $p['slug']), $more)) : '')
-            . "\n\n" . ($en ? 'Yehuda Gordon, YYG' : 'יהודה גורדון, YYG') . "\n\n" . ($en ? 'Unsubscribe: ' : 'להסרה: ') . $unsub;
+            . "\n\n" . ($en ? 'Yehuda Gordon, YYG Web Design' : 'יהודה גורדון, YYG Web Design') . "\n\n" . ($en ? 'Unsubscribe: ' : 'להסרה: ') . $unsub;
         return [$html, $text];
     }
 
@@ -254,4 +254,4 @@ document.getElementById('go').addEventListener('click', async () => {
   while (!j.done) { j = await (await post({ do: 'batch', id: c.id })).json(); if (!j.ok) { st.textContent = 'השליחה נעצרה: ' + (j.error || ''); return; } st.textContent = `נשלחו ${j.sent} מתוך ${j.total}` + (j.failed ? `, ${j.failed} נכשלו` : '') + (j.done ? '. הסתיים.' : '…'); }
 });
 </script>
-<?php adm_page('עדכון לרשימת התפוצה | YYG', (string) ob_get_clean(), '[hidden]{display:none!important}.mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:14px}.prev{position:sticky;top:12px}.prev iframe{width:100%;height:760px;border:1px solid var(--line);border-radius:10px;background:#F4F5F7}.seg{display:flex;gap:8px;flex-wrap:wrap}.seg label{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.seg input{width:auto;min-height:0}@media (max-width:900px){.mgrid{grid-template-columns:1fr}.prev{position:static}.prev iframe{height:600px}}'); ?>
+<?php adm_page('עדכון לרשימת התפוצה | YYG Web Design', (string) ob_get_clean(), '[hidden]{display:none!important}.mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:14px}.prev{position:sticky;top:12px}.prev iframe{width:100%;height:760px;border:1px solid var(--line);border-radius:10px;background:#F4F5F7}.seg{display:flex;gap:8px;flex-wrap:wrap}.seg label{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.seg input{width:auto;min-height:0}@media (max-width:900px){.mgrid{grid-template-columns:1fr}.prev{position:static}.prev iframe{height:600px}}'); ?>

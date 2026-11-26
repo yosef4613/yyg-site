@@ -65,14 +65,14 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
         '@context': 'https://schema.org', '@type': 'Article', 'headline': h1, 'description': desc,
         'inLanguage': 'en', 'datePublished': TODAY, 'dateModified': TODAY, 'mainEntityOfPage': url,
         'author': {'@type': 'Person', 'name': 'Yehuda Gordon', 'url': SITE + '/en/'},
-        'publisher': {'@type': 'Organization', 'name': 'YYG', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}},
+        'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}},
         'image': SITE + '/assets/img/og.jpg',
     }]
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
     ld.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + '/en/'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + '/en/'},
         {'@type': 'ListItem', 'position': 2, 'name': 'Guides', 'item': SITE + '/en/guides/'},
     ] + ([{'@type': 'ListItem', 'position': 3, 'name': h1, 'item': url}] if slug != 'index' else [])})
     faq_html = ''
@@ -105,7 +105,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=46">
+<link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -113,7 +113,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <a class="skip" href="#main">Skip to content</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="/en/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG, home page"></a>
+  <a href="/en/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design, home page"></a>
   <nav aria-label="Main">
    <a class="text-link" href="/en/guides/">Guides</a>
    <a class="text-link" href="/en/#plan">Price calculator</a>
@@ -124,7 +124,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 </header>
 <main id="main" class="g-main">
  <div class="wrap">
-  <p class="g-crumb"><a href="/en/">YYG</a> › <a href="/en/guides/">Guides</a></p>
+  <p class="g-crumb"><a href="/en/">YYG Web Design</a> › <a href="/en/guides/">Guides</a></p>
   <h1>{h1}</h1>
   <p class="g-lead">{lead}</p>
   <p class="g-meta">Yehuda Gordon, web designer · Updated November 2026</p>
@@ -146,14 +146,14 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
    <input type="hidden" name="source" value="guide-en-{slug}"><input type="hidden" name="lang" value="en">
    <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
    <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" dir="ltr" required></label>
-   <label class="news-consent"><input type="checkbox" name="consent" value="1" required><span>I agree to receive guides, tips and updates from YYG by email, including service offers. I can unsubscribe at any time.</span></label>
+   <label class="news-consent"><input type="checkbox" name="consent" value="1" required><span>I agree to receive guides, tips and updates from YYG Web Design by email, including service offers. I can unsubscribe at any time.</span></label>
    <button class="btn btn-line" type="submit">Join</button>
   </form>
  </div>
 </section>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, Yehuda Gordon. Web design and development</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG Web Design, Yehuda Gordon. Web design and development</p>
   <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
   <p>{FOOT_SV}</p>
  </div>
@@ -466,11 +466,11 @@ G = [
 for slug, title, desc, h1, lead, body, faq in G:
     related = [(s, h) for s, _, _, h, *_ in G if s != slug]
     with open(f'{OUT}/{slug}.html', 'w', encoding='utf-8') as f:
-        f.write(page(slug, title + ' | YYG', desc, h1, lead, body, faq, related))
+        f.write(page(slug, title + ' | YYG Web Design', desc, h1, lead, body, faq, related))
 
 cards = '\n'.join(f'<a class="g-card" href="/en/guides/{s}.html"><b>{h}</b><span>{l}</span></a>' for s, _, _, h, l, *_ in G)
 with open(f'{OUT}/index.html', 'w', encoding='utf-8') as f:
-    f.write(page('index', 'Guides to building a business website | YYG',
+    f.write(page('index', 'Guides to building a business website | YYG Web Design',
         'Guides for business owners and institutions: what a website costs, what to prepare, landing page or full site, choosing a web designer, and how long it takes.',
         'Guides to building a website', 'Short, clear answers to the questions business owners ask before they build a website.',
         f'<div class="g-cards">\n{cards}\n</div>'))

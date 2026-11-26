@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: דף הניהול של יהודה. https://yygweb.com/admin/
+ * YYG Web Design: דף הניהול של יהודה. https://yygweb.com/admin/
  * כניסה: הקישור האישי (?k=המפתח) או הקלדת המפתח. אחרי הכניסה נשמרת עוגייה חתומה ל־30 יום, והמפתח יורד מהכתובת.
  * מה יש כאן: פניות עם סטטוס והערה, הצעות מחיר, נתוני כניסות, ספאם שנחסם, וקישורים מהירים.
  */
@@ -38,25 +38,25 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'm
             $m = array_slice(array_values($m), -5);
         });
         $link = 'https://yygweb.com/admin/?magic=' . $tok;
-        mail_send($adminMail, 'כניסה לדף הניהול של YYG', mail_wrap('כניסה לדף הניהול', '<p>לחצו על הכפתור כדי להיכנס. הקישור בתוקף ל־15 דקות, ועובד פעם אחת.</p>' . mail_button($link, 'כניסה לדף הניהול') . '<p style="color:#5A6472;font-size:14px">לא ביקשתם להיכנס? אפשר להתעלם מהמייל. בלי הקישור אי אפשר להיכנס.</p>'), "כניסה לדף הניהול: $link");
+        mail_send($adminMail, 'כניסה לדף הניהול של YYG Web Design', mail_wrap('כניסה לדף הניהול', '<p>לחצו על הכפתור כדי להיכנס. הקישור בתוקף ל־15 דקות, ועובד פעם אחת.</p>' . mail_button($link, 'כניסה לדף הניהול') . '<p style="color:#5A6472;font-size:14px">לא ביקשתם להיכנס? אפשר להתעלם מהמייל. בלי הקישור אי אפשר להיכנס.</p>'), "כניסה לדף הניהול: $link");
     }
-    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>בדקו את המייל</h1><p>' . $msg . '</p><p class="muted">לא הגיע תוך דקה? כדאי לבדוק בתיקיית הספאם.</p><p><a class="btn" href="/admin/">חזרה</a></p></div>');
+    adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>בדקו את המייל</h1><p>' . $msg . '</p><p class="muted">לא הגיע תוך דקה? כדאי לבדוק בתיקיית הספאם.</p><p><a class="btn" href="/admin/">חזרה</a></p></div>');
 }
 $magic = (string) ($_POST['magic'] ?? $_GET['magic'] ?? '');
 if ($magic !== '' && preg_match('/^[a-f0-9]{40}$/', $magic)) {
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
-        adm_page('כניסה לניהול | YYG', '<div class="login"><h1>כניסה לדף הניהול</h1><p class="muted">לחצו כדי להיכנס. הדפדפן הזה יזכור אתכם ל־30 יום.</p><form method="post" action="/admin/"><input type="hidden" name="magic" value="' . h($magic) . '"><button class="btn gold" type="submit">כניסה</button></form></div>');
+        adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>כניסה לדף הניהול</h1><p class="muted">לחצו כדי להיכנס. הדפדפן הזה יזכור אתכם ל־30 יום.</p><form method="post" action="/admin/"><input type="hidden" name="magic" value="' . h($magic) . '"><button class="btn gold" type="submit">כניסה</button></form></div>');
     }
     $ok = data_update($magicFile, static function (array &$m) use ($magic): bool {
         foreach ($m as $i => $x) if (empty($x['used']) && (int) $x['exp'] > time() && hash_equals((string) $x['h'], hash('sha256', $magic))) { $m[$i]['used'] = time(); return true; }
         return false;
     });
     if ($ok) { adm_login(); header('Location: ' . adm_after_login(), true, 303); exit; }
-    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>הקישור כבר לא בתוקף</h1><p class="muted">הקישור עובד פעם אחת ובמשך 15 דקות. אפשר לבקש קישור חדש.</p><form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור חדש</button></form></div>');
+    adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>הקישור כבר לא בתוקף</h1><p class="muted">הקישור עובד פעם אחת ובמשך 15 דקות. אפשר לבקש קישור חדש.</p><form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור חדש</button></form></div>');
 }
 
 if (!adm_authed()) {
-    adm_page('כניסה לניהול | YYG', '<div class="login"><h1>דף הניהול של YYG</h1>'
+    adm_page('כניסה לניהול | YYG Web Design', '<div class="login"><h1>דף הניהול של YYG Web Design</h1>'
         . '<p class="muted">נשלח לך קישור כניסה למייל <bdi>' . h($maskMail($adminMail)) . '</bdi>, שמגיע גם לג׳ימייל שלך. לוחצים עליו ונכנסים. הדפדפן יזכור אותך ל־30 יום.</p>'
         . '<form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור כניסה למייל</button></form>'
         . '<details' . ($tryKey !== '' ? ' open' : '') . ' style="margin-top:18px"><summary>כניסה עם מפתח</summary>'
@@ -223,7 +223,7 @@ ob_start(); ?>
    <?php if (empty($r['sent'])): ?><span class="tag bad">המייל לא נשלח, הפנייה נשמרה רק כאן</span><?php endif; ?>
    <?php if (($r['lang'] ?? '') === 'en'): ?><span class="tag">מהאתר באנגלית</span><?php endif; ?>
    <?php if (!empty($r['q_opened'])): ?><span class="tag ok">✓ פתח/ה את השאלון מהמייל</span><?php elseif (!empty($r['email_ok'])): ?><span class="tag ok">✓ אישר/ה את המייל</span><?php elseif (!empty($r['ctok'])): ?><span class="tag">המייל עוד לא אושר</span><?php endif; ?></div>
-  <div class="acts"><?php if (!empty($r['email'])): ?><a class="btn gold" href="mailto:<?= $e($r['email']) ?>?subject=<?= $e(rawurlencode('הפנייה שלך ל־YYG')) ?>"><bdi><?= $e($r['email']) ?></bdi></a><?php endif; ?><?php if (!empty($r['phone'])): ?><a class="btn<?= empty($r['email']) ? ' gold' : '' ?>" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone']) ?></bdi></a><?php endif; ?><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'email' => $r['email'] ?? '', 'phone' => $r['phone'] ?? '', 'business' => $r['business'] ?? ''])) ?>">העתקת קישור לשאלון</button><form method="post" class="del" onsubmit="return confirm('למחוק את הפנייה? אי אפשר לשחזר.')"><input type="hidden" name="do" value="lead_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $id) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></div>
+  <div class="acts"><?php if (!empty($r['email'])): ?><a class="btn gold" href="mailto:<?= $e($r['email']) ?>?subject=<?= $e(rawurlencode('הפנייה שלך ל־YYG Web Design')) ?>"><bdi><?= $e($r['email']) ?></bdi></a><?php endif; ?><?php if (!empty($r['phone'])): ?><a class="btn<?= empty($r['email']) ? ' gold' : '' ?>" href="tel:<?= $e(preg_replace('/[^\d+]/', '', (string) ($r['phone'] ?? ''))) ?>"><bdi><?= $e($r['phone']) ?></bdi></a><?php endif; ?><a class="btn" href="/admin/quote.php?lead=<?= $e(rawurlencode((string) $id)) ?>">הצעת מחיר</a><button class="btn" type="button" data-copy-link="<?= $e('https://yygweb.com/questionnaire/?' . http_build_query(['name' => $r['name'] ?? '', 'email' => $r['email'] ?? '', 'phone' => $r['phone'] ?? '', 'business' => $r['business'] ?? ''])) ?>">העתקת קישור לשאלון</button><form method="post" class="del" onsubmit="return confirm('למחוק את הפנייה? אי אפשר לשחזר.')"><input type="hidden" name="do" value="lead_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $id) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></div>
   <dl class="kv">
    <?php foreach (['business' => 'שם העסק', 'when' => 'מתי נוח', 'style' => 'רקע מועדף'] as $k => $label): if (($r[$k] ?? '') === '') continue; ?><dt><?= $label ?></dt><dd><?= $e($r[$k]) ?></dd><?php endforeach; ?>
   </dl>
@@ -316,4 +316,4 @@ ob_start(); ?>
 </div>
 </main>
 <script>document.querySelectorAll('[data-copy-link]').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.copyLink); b.textContent = 'הועתק'; } catch (e) { prompt('העתיקו את הקישור:', b.dataset.copyLink); } }));</script>
-<?php adm_page('ניהול | YYG', (string) ob_get_clean());
+<?php adm_page('ניהול | YYG Web Design', (string) ob_get_clean());

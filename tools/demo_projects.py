@@ -1,4 +1,4 @@
-# YYG: ההגדרות של כל פרויקט לדוגמה. נטען מתוך tools/demo.py (exec), ומשתמש בפונקציות ובקבועים שלו.
+# YYG Web Design: ההגדרות של כל פרויקט לדוגמה. נטען מתוך tools/demo.py (exec), ומשתמש בפונקציות ובקבועים שלו.
 # כל פרויקט: קובץ נתונים, תיקייה באתר, 3 עיצובים, טקסטים, הצעת מחיר, ומה מוצג בשלב 1.
 
 def admin_anaf(lang, pfx, n):
@@ -37,8 +37,8 @@ DESIGNS_OPT = [
 
 T_OPT = {lang: dict(T[lang]) for lang in T}
 T_OPT['he'].update(
-  title='דף נחיתה לדוגמה: חנות משקפיים עם שעות שמתעדכנות | YYG',
-  desc='חנות משקפיים דמיונית עוברת את כל התהליך של YYG: שאלון, הצעת מחיר, 3 עיצובים לדף נחיתה, מסך שבו בעל העסק מעדכן בעצמו את שעות הפתיחה, ושאלון משוב.',
+  title='דף נחיתה לדוגמה: חנות משקפיים עם שעות שמתעדכנות | YYG Web Design',
+  desc='חנות משקפיים דמיונית עוברת את כל התהליך של YYG Web Design: שאלון, הצעת מחיר, 3 עיצובים לדף נחיתה, מסך שבו בעל העסק מעדכן בעצמו את שעות הפתיחה, ושאלון משוב.',
   h1='דף נחיתה לחנות משקפיים, עם שעות שבעל העסק מעדכן בעצמו',
   lead='עוד דוגמה מלאה, הפעם דף נחיתה: חנות משקפיים דמיונית בשם "צלול", שבעליה ביקש דבר אחד מעל הכול: לעדכן בעצמו את שעות הפתיחה, מהטלפון. עברנו את כל התהליך כמו עם לקוח אמיתי: שאלון, הצעת מחיר, 3 עיצובים, מסך העדכון, ומשוב.',
   note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות הן הדמיות תלת־ממד שבניתי במיוחד, וגם הלוגו עוצב לדוגמה.',
@@ -51,8 +51,8 @@ T_OPT['he'].update(
   changes=['סטטוס "פתוח עכשיו" גדול בראש הדף, בסגנון המדבקה של עיצוב 3', 'המדבקה "מוכן תוך 3 ימי עבודה" מעיצוב 3', 'תמונת מסגרות הזהב הגדולה, כמו בפתיחה של עיצוב 2, בחלק של המסגרות', 'הערה שבמוצאי שבת פתוח רק בחורף', 'פחות תנועה ואנימציות, כמו שביקש', 'המבצע בדף מתעדכן מאותו מסך של השעות'],
 )
 T_OPT['en'].update(
-  title='Example landing page: an eyewear shop with self-updating hours | YYG',
-  desc='A fictional eyewear shop goes through the whole YYG process: a questionnaire, a quote, 3 landing page designs, a screen where the owner updates the opening hours himself, and a feedback form.',
+  title='Example landing page: an eyewear shop with self-updating hours | YYG Web Design',
+  desc='A fictional eyewear shop goes through the whole YYG Web Design process: a questionnaire, a quote, 3 landing page designs, a screen where the owner updates the opening hours himself, and a feedback form.',
   h1='A landing page for an eyewear shop, with hours the owner updates himself',
   lead='Another complete example, this time a landing page: a fictional eyewear shop called "Tzalul", whose owner asked for one thing above all: to update the opening hours himself, from his phone. We went through the whole process as with a real client: a questionnaire, a quote, 3 designs, the update screen, and feedback.',
   note='A fictional example business: the name, details and testimonials are made up. The images are 3D renders I built specially, and the logo was designed for the example too.',

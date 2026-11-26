@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YYG: הפס העליון והתווית הצדדית בכל עמודי הדוגמה, כדי שאף אחד לא יחשוב שזה אתר אמיתי של עסק.
+"""YYG Web Design: הפס העליון והתווית הצדדית בכל עמודי הדוגמה, כדי שאף אחד לא יחשוב שזה אתר אמיתי של עסק.
 מחליף את הפס הקיים (HTML ו־CSS) בכל העיצובים, בגרסה הסופית ובמסך השעות של צלול. אפשר להריץ שוב ושוב.
 הרצה: python3 tools/demo_bar.py"""
 import pathlib, re
@@ -22,7 +22,7 @@ CSS = '''.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;p
 .demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
 .demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
 .demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
-.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+.demo-ribbon{position:fixed;top:42%;right:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
 @media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
 @media print{.demo-ribbon{display:none}}
 '''

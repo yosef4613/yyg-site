@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: פונקציות משותפות לדף הניהול, לבונה הצעות המחיר ולדף ההצעה שהלקוח רואה.
+ * YYG Web Design: פונקציות משותפות לדף הניהול, לבונה הצעות המחיר ולדף ההצעה שהלקוח רואה.
  * הנתונים נשמרים מחוץ לתיקיית האתר (yyg-data), כך שעדכון של האתר לא מוחק אותם.
  */
 declare(strict_types=1);
@@ -144,7 +144,7 @@ function quote_totals(array $q): array {
 function quote_url(array $q): string { return 'https://yygweb.com/q/?t=' . ($q['token'] ?? ''); }
 
 /* ---------- שליחת מייל דרך תיבת המייל של האתר (Hostinger Mail API) ---------- */
-function mail_send(string $to, string $subject, string $html, string $text, string $from = 'YYG · יהודה גורדון'): bool {
+function mail_send(string $to, string $subject, string $html, string $text, string $from = 'YYG Web Design · יהודה גורדון'): bool {
     $cfg = private_config();
     /* בסביבת בדיקה בלבד (מפתח שלא קיים בשרת): המייל נכתב לקובץ במקום להישלח */
     if (!empty($cfg['mail_outbox']) && is_dir((string) $cfg['mail_outbox'])) {
@@ -164,16 +164,16 @@ function mail_send(string $to, string $subject, string $html, string $text, stri
 }
 /* מייל אליי */
 function notify_me(string $subject, string $html, string $text): bool {
-    return mail_send((string) (private_config()['to'] ?? ''), $subject, $html, $text, 'האתר של YYG');
+    return mail_send((string) (private_config()['to'] ?? ''), $subject, $html, $text, 'האתר של YYG Web Design');
 }
 /* מסגרת אחידה למיילים שיוצאים ללקוחות ולמנויים */
 function mail_wrap(string $title, string $body, string $footer = '', bool $en = false, bool $phone = true): string {
     return '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><body style="margin:0;padding:24px 12px;background:#F4F5F7;font-family:Arial,sans-serif;color:#151920">'
         . '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #DCE0E6">'
-        . '<div style="padding:16px 22px;background:#151920;color:#fff;font-size:17px;font-weight:700">YYG · ' . ($en ? 'Web design &amp; development' : 'עיצוב ובניית אתרים') . '</div>'
+        . '<div style="padding:16px 22px;background:#151920;color:#fff;font-size:17px;font-weight:700">YYG Web Design · ' . ($en ? 'Web design &amp; development' : 'עיצוב ובניית אתרים') . '</div>'
         . '<div style="padding:22px;font-size:16px;line-height:1.65"><h1 style="font-size:21px;margin:0 0 12px">' . h($title) . '</h1>' . $body . '</div>'
         . '<div style="padding:14px 22px;background:#F4F5F7;color:#5A6472;font-size:13px;line-height:1.6">' . ($footer !== '' ? $footer . '<br>' : '')
-        . ($en ? 'YYG, Yehuda Gordon · ' : 'YYG, יהודה גורדון · ') . ($phone ? '054-854-0700 · ' : '') . 'yehuda@yygweb.com · yygweb.com</div></div></body></html>';
+        . ($en ? 'YYG Web Design, Yehuda Gordon · ' : 'YYG Web Design, יהודה גורדון · ') . ($phone ? '054-854-0700 · ' : '') . 'yehuda@yygweb.com · yygweb.com</div></div></body></html>';
 }
 function mail_button(string $url, string $label): string {
     return '<p style="margin:20px 0"><a href="' . h($url) . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:10px">' . h($label) . '</a></p>';
@@ -263,5 +263,5 @@ function adm_page(string $title, string $body, string $extraCss = ''): void {
     exit;
 }
 function adm_nav(int $newLeads = 0): string {
-    return '<header class="top"><div class="wrap"><b>ניהול YYG</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#forms">שאלונים</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
+    return '<header class="top"><div class="wrap"><b>ניהול YYG Web Design</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#forms">שאלונים</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
 }

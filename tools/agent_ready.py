@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YYG: עמודים וקבצים שעוזרים לסוכני בינה מלאכותית להבין את האתר.
+"""YYG Web Design: עמודים וקבצים שעוזרים לסוכני בינה מלאכותית להבין את האתר.
 - /pricing/, /about/, /contact/ (ואותם באנגלית תחת /en/): עמודי HTML רגילים, בלי צורך ב־JavaScript
 - גרסת Markdown לכל עמוד (index.md), שהשרת מגיש כשסוכן מבקש Accept: text/markdown (ראו .htaccess)
 - כרטיס שרת MCP: /.well-known/mcp/server-card.json (וגם /.well-known/mcp.json)
@@ -89,7 +89,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 <a class="skip" href="#main">{'דילוג לתוכן' if he else 'Skip to content'}</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="{base}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG, לעמוד הבית' if he else 'YYG, to the home page'}"></a>
+  <a href="{base}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
   <nav aria-label="{'ניווט' if he else 'Navigation'}">
    <a class="text-link" href="{base}pricing/">{'מחירון' if he else 'Pricing'}</a>
    <a class="text-link" href="{base}about/">{'אודות' if he else 'About'}</a>
@@ -100,7 +100,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 </header>
 <main id="main" class="g-main">
  <div class="wrap">
-  <p class="g-crumb"><a href="{base}">YYG</a> › {E(crumb)}</p>
+  <p class="g-crumb"><a href="{base}">YYG Web Design</a> › {E(crumb)}</p>
   <h1>{E(h1)}</h1>
   <p class="g-lead">{E(lead)}</p>
 {body}
@@ -108,7 +108,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG, Yehuda Gordon. Web design and development'}</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
   <p>{foot}</p>
  </div>
 </footer>
@@ -117,12 +117,12 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 </html>
 '''
 
-ORG = {'@type': 'Organization', '@id': f'{SITE}/#organization', 'name': 'YYG', 'url': f'{SITE}/', 'logo': f'{SITE}/assets/img/logo-320.webp'}
+ORG = {'@type': 'Organization', '@id': f'{SITE}/#organization', 'name': 'YYG Web Design', 'url': f'{SITE}/', 'logo': f'{SITE}/assets/img/logo-320.webp'}
 
 def crumbs(lang, slug, name):
     base = '/' if lang == 'he' else '/en/'
     return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': f'{SITE}{base}'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': f'{SITE}{base}'},
         {'@type': 'ListItem', 'position': 2, 'name': name, 'item': f'{SITE}{base}{slug}/'}]}
 
 def offers_ld(lang):
@@ -137,7 +137,7 @@ def offers_ld(lang):
     for r in O['recurring']:
         items.append({'@type': 'Offer', 'name': r['name'][lang], 'price': str(r['price']), 'priceCurrency': 'ILS', 'url': f'{SITE}{base}pricing/',
                       'priceSpecification': {'@type': 'UnitPriceSpecification', 'price': str(r['price']), 'priceCurrency': 'ILS', 'unitCode': 'ANN' if r['per'] == 'year' else 'MON'}})
-    return {'@context': 'https://schema.org', '@type': 'OfferCatalog', 'name': 'מחירון YYG' if lang == 'he' else 'YYG pricing', 'url': f'{SITE}{base}pricing/', 'itemListElement': items, 'offeredBy': ORG}
+    return {'@context': 'https://schema.org', '@type': 'OfferCatalog', 'name': 'מחירון YYG Web Design' if lang == 'he' else 'YYG Web Design pricing', 'url': f'{SITE}{base}pricing/', 'itemListElement': items, 'offeredBy': ORG}
 
 # ---------- עמוד המחירון ----------
 def pricing(lang):
@@ -162,8 +162,8 @@ def pricing(lang):
    <p>{'המחירים כאן הם מחירי התחלה. המחיר הסופי נקבע לפי מה שאתם צריכים, ומגיע בהצעה מסודרת לפני שמתחילים.' if he else 'These are starting prices. The final price depends on what you need, and comes in a formal quote before we start.'}</p>
    <div class="acts"><a class="btn btn-gold" href="{base}#plan">{'למחשבון המחיר' if he else 'To the price calculator'}</a><a class="btn btn-line" href="{base}questionnaire/">{'לשאלון האפיון' if he else 'To the questionnaire'}</a></div>
   </section>'''
-    t = 'מחירון: כמה עולה דף נחיתה, אתר וחנות | YYG' if he else 'Pricing: landing pages, websites and stores | YYG'
-    d = 'המחירים של YYG: דף נחיתה מ־2,000 ₪, אתר עם אזור ניהול מ־4,000 ₪, אתר עם הרשמה מ־6,000 ₪, חנות מ־7,000 ₪, תוספות ותשלומים קבועים. בלי מע״מ.' if he else 'YYG prices: landing page from 2,000, website with an admin area from 4,000, website with sign-ups from 6,000, online store from 7,000 (ILS), add-ons and recurring. No VAT added.'
+    t = 'מחירון: כמה עולה דף נחיתה, אתר וחנות | YYG Web Design' if he else 'Pricing: landing pages, websites and stores | YYG Web Design'
+    d = 'המחירים של YYG Web Design: דף נחיתה מ־2,000 ₪, אתר עם אזור ניהול מ־4,000 ₪, אתר עם הרשמה מ־6,000 ₪, חנות מ־7,000 ₪, תוספות ותשלומים קבועים. בלי מע״מ.' if he else 'YYG Web Design prices: landing page from 2,000, website with an admin area from 4,000, website with sign-ups from 6,000, online store from 7,000 (ILS), add-ons and recurring. No VAT added.'
     h = 'מחירון' if he else 'Pricing'
     lead = 'כל המסלולים, התוספות והתשלומים הקבועים, במקום אחד. המחירים בשקלים, סופיים, ולא מוסיפים עליהם מע״מ.' if he else 'Every package, add-on and recurring cost in one place. Prices are in shekels (ILS), final, and no VAT is added.'
     ld = [offers_ld(lang), crumbs(lang, 'pricing', h)]
@@ -171,7 +171,7 @@ def pricing(lang):
 
 def md_pricing(lang):
     he = lang == 'he'
-    L = [f'# {"מחירון YYG" if he else "YYG pricing"}', '', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], '', f'## {"מסלולים" if he else "Packages"}', '']
+    L = [f'# {"מחירון YYG Web Design" if he else "YYG Web Design pricing"}', '', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], '', f'## {"מסלולים" if he else "Packages"}', '']
     for p in O['packages']:
         L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
     L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"])}' for a in O['addons']]
@@ -199,11 +199,11 @@ def about(lang):
     body += '  <p><b>' + ('זמינות' if he else 'Availability') + ':</b> ' + E(O['business']['hours'][lang]) + '. ' + ('טלפון לשיחות: ' if he else 'Phone, for calls: ') + f'<a class="text-link" href="tel:0548540700" dir="ltr">{O["business"]["phone"]}</a></p>\n'
     body += '  <p>' + ' · '.join(f'<a class="text-link" href="{h}">{E(t)}</a>' for h, t in A['links']) + '</p>'
     h = 'אודות' if he else 'About'
-    t = 'אודות: יהודה גורדון, עיצוב ובניית אתרים | YYG' if he else 'About: Yehuda Gordon, web design and development | YYG'
+    t = 'אודות: יהודה גורדון, עיצוב ובניית אתרים | YYG Web Design' if he else 'About: Yehuda Gordon, web design and development | YYG Web Design'
     d = A['lead']
     ld = [{'@context': 'https://schema.org', '@type': 'AboutPage', 'name': h, 'url': f'{SITE}{"/" if he else "/en/"}about/', 'inLanguage': lang, 'about': ORG,
            'mainEntity': {'@type': 'Person', 'name': O['business']['owner'][lang], 'jobTitle': 'מעצב ובונה אתרים' if he else 'Web designer and developer', 'worksFor': ORG, 'url': f'{SITE}/'}}, crumbs(lang, 'about', h)]
-    md = '\n'.join([f'# {h}: YYG', '', A['lead'], ''] + sum([[f'## {hh}', ''] + [f'- {x}' for x in items] + [''] for hh, items in A['parts']], []) +
+    md = '\n'.join([f'# {h}: YYG Web Design', '', A['lead'], ''] + sum([[f'## {hh}', ''] + [f'- {x}' for x in items] + [''] for hh, items in A['parts']], []) +
                    [f'{"זמינות" if he else "Availability"}: {O["business"]["hours"][lang]}. {"טלפון לשיחות" if he else "Phone, for calls"}: {O["business"]["phone"]}', ''] +
                    [f'- [{tt}]({SITE}{hh})' for hh, tt in A['links']] + [''])
     return page(lang, 'about', t, d, h, A['lead'], body, ld, h), md
@@ -219,7 +219,7 @@ def contact(lang):
     lbl = (lambda a, b: a if he else b)
     form = f'''  <h2>{lbl('השאירו פרטים', 'Leave your details')}</h2>
   <p>{lbl('תקבלו מיד במייל את הצעד הבא: שאלון קצר, ואחריו הצעת מחיר מסודרת. בלי שיחות חובה.', "You'll get the next step by email right away: a short questionnaire, then a formal quote. No required calls.")}</p>
-  <form class="c-form" method="post" action="/send.php" toolname="contact_yyg" tooldescription="{lbl('שליחת פנייה ליהודה גורדון מ־YYG לבניית אתר. חובה: שם ומייל.', 'Send an inquiry to Yehuda Gordon at YYG about building a website. Required: name and email.')}">
+  <form class="c-form" method="post" action="/send.php" toolname="contact_yyg" tooldescription="{lbl('שליחת פנייה ליהודה גורדון מ־YYG Web Design לבניית אתר. חובה: שם ומייל.', 'Send an inquiry to Yehuda Gordon at YYG Web Design about building a website. Required: name and email.')}">
    <div class="row"><label class="field"><span>{lbl('שם', 'Name')}</span><input name="name" autocomplete="name" required toolparamdescription="{lbl('שם הפונה', 'Your name')}"></label>
    <label class="field"><span>{lbl('מייל', 'Email')}</span><input name="email" type="email" autocomplete="email" dir="ltr" required toolparamdescription="{lbl('כתובת מייל לחזרה', 'Email address for the reply')}"></label></div>
    <label class="field"><span>{lbl('טלפון', 'Phone')} <small>{lbl('לא חובה', 'Optional')}</small></span><input name="phone" type="tel" autocomplete="tel" dir="ltr" toolparamdescription="{lbl('טלפון, לא חובה', 'Phone, optional')}"></label>
@@ -233,12 +233,12 @@ def contact(lang):
 <script>(function(){{var m=["yehuda","yygweb.com"].join("@");document.querySelectorAll("[data-mail]").forEach(function(a){{a.textContent=m;a.href="mailto:"+m;a.dir="ltr"}});var f=document.querySelector(".c-form");fetch("/send.php?token=1",{{cache:"no-store"}}).then(function(r){{return r.json()}}).then(function(t){{f.elements._token.value=t.token||""}}).catch(function(){{}});}})();</script>'''
     body = f'  <div class="c-grid">{cg}</div>\n{form}'
     h = 'יצירת קשר' if he else 'Contact'
-    t = 'יצירת קשר | YYG, עיצוב ובניית אתרים' if he else 'Contact | YYG web design and development'
+    t = 'יצירת קשר | YYG Web Design, עיצוב ובניית אתרים' if he else 'Contact | YYG Web Design web design and development'
     lead = lbl('משאירים שם ומייל, ומקבלים מיד מייל אישי עם הצעד הבא. אפשר גם למלא ישר את שאלון האפיון, או להתקשר. תשובה אישית תוך יום עבודה.', 'Leave your name and email, and get a personal email with the next step right away. You can also go straight to the discovery questionnaire, or call. A personal reply within one business day.')
     ld = [{'@context': 'https://schema.org', '@type': 'ContactPage', 'name': h, 'url': f'{SITE}{base}contact/', 'inLanguage': lang,
            'about': dict(ORG, contactPoint={'@type': 'ContactPoint', 'telephone': '+972-54-854-0700', 'contactType': 'customer service', 'areaServed': 'IL', 'availableLanguage': ['he', 'en'],
                                            'hoursAvailable': {'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Sunday', 'Monday', 'Tuesday', 'Wednesday'], 'opens': '10:00', 'closes': '13:30'}})}, crumbs(lang, 'contact', h)]
-    md = '\n'.join([f'# {h}: YYG', '', lead, '', f'- {"טלפון, לשיחות בלבד" if he else "Phone, calls only"}: {B["phone"]}', f'- {"מתי" if he else "When"}: {B["hours"][lang]}',
+    md = '\n'.join([f'# {h}: YYG Web Design', '', lead, '', f'- {"טלפון, לשיחות בלבד" if he else "Phone, calls only"}: {B["phone"]}', f'- {"מתי" if he else "When"}: {B["hours"][lang]}',
                     f'- {"טופס פנייה" if he else "Contact form"}: {B["contact_page"][lang]}', f'- {"שאלון אפיון" if he else "Discovery questionnaire"}: {B["questionnaire"][lang]}', ''])
     return page(lang, 'contact', t, lead, h, lead, body, ld, h), md
 
@@ -251,7 +251,7 @@ def md_home(lang):
         d = json.loads(m.group(1))
         for x in (d if isinstance(d, list) else [d]):
             if x.get('@type') == 'FAQPage': faq = [(q['name'], q['acceptedAnswer']['text']) for q in x['mainEntity']]
-    L = [f'# YYG: {"עיצוב ובניית אתרים" if he else "Web design and development"}', '', B['description'][lang], '',
+    L = [f'# YYG Web Design: {"עיצוב ובניית אתרים" if he else "Web design and development"}', '', B['description'][lang], '',
          f'{"מי" if he else "Who"}: {B["owner"][lang]}. {"אזור" if he else "Area"}: {B["area"][lang]}.', '',
          f'## {"מסלולים ומחירים" if he else "Packages and prices"}', '']
     L += [f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}. {p["summary"][lang]}' for p in O['packages']]
@@ -268,17 +268,17 @@ def md_home(lang):
 
 # ---------- כרטיס שרת MCP ----------
 TOOLS = [
- ('get_packages_and_prices', 'All YYG packages, add-ons and recurring costs, with prices in ILS (final, no VAT added).'),
+ ('get_packages_and_prices', 'All YYG Web Design packages, add-ons and recurring costs, with prices in ILS (final, no VAT added).'),
  ('get_process_and_payment', 'How a project works step by step, and how payment works (10% / 40% / 50%).'),
  ('estimate_price', 'A rough starting estimate for a website by type, page count, English version and logo.'),
  ('list_examples', 'Live client sites and complete example projects, with links.'),
- ('get_contact', 'How to reach YYG: phone, hours, the contact form and the discovery questionnaire.'),
+ ('get_contact', 'How to reach YYG Web Design: phone, hours, the contact form and the discovery questionnaire.'),
 ]
 def server_card():
     return {
-     'name': 'com.yygweb/studio', 'title': 'YYG web design studio', 'version': '1.0.0',
-     'description': 'Read-only MCP server for YYG, a web design and development studio in Israel: packages and prices, process and payment, examples, and contact options.',
-     'serverInfo': {'name': 'yygweb', 'title': 'YYG web design studio', 'version': '1.0.0'},
+     'name': 'com.yygweb/studio', 'title': 'YYG Web Design web design studio', 'version': '1.0.0',
+     'description': 'Read-only MCP server for YYG Web Design, a web design and development studio in Israel: packages and prices, process and payment, examples, and contact options.',
+     'serverInfo': {'name': 'yygweb', 'title': 'YYG Web Design web design studio', 'version': '1.0.0'},
      'protocolVersion': '2025-06-18',
      'transport': {'type': 'streamable-http', 'endpoint': f'{SITE}/mcp'},
      'endpoint': f'{SITE}/mcp',

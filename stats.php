@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: עמוד נתונים פרטי. נפתח רק עם המפתח שמוגדר ב־_private/mail-config.php ('stats_key').
+ * YYG Web Design: עמוד נתונים פרטי. נפתח רק עם המפתח שמוגדר ב־_private/mail-config.php ('stats_key').
  * ?k=המפתח              עמוד בעברית
  * ?k=המפתח&format=json  אותם נתונים כ־JSON
  */
@@ -82,7 +82,7 @@ $max = max(1, ...array_values($byDay));
 header('Content-Type: text/html; charset=utf-8');
 ?><!doctype html>
 <html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
-<title>נתוני האתר | YYG</title>
+<title>נתוני האתר | YYG Web Design</title>
 <style>
 :root{--bg:#151920;--panel:#262D3A;--line:#343C4B;--text:#E9EDF3;--muted:#A3ADBD;--gold:#E3B341;--cyan:#3FD8E6}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,"Segoe UI",Arial,sans-serif}

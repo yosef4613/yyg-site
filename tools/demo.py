@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YYG: בונה את עמודי "ככה זה עובד" של הפרויקטים לדוגמה: הנגריה (/demo/) וחנות המשקפיים (/demo/optika/), בעברית ובאנגלית.
+"""YYG Web Design: בונה את עמודי "ככה זה עובד" של הפרויקטים לדוגמה: הנגריה (/demo/) וחנות המשקפיים (/demo/optika/), בעברית ובאנגלית.
 הנתונים: tools/demo-data.json (התשובות של הלקוח לדוגמה) ו־assets/q-defs.js (נוסח השאלות, בעברית ובאנגלית).
 העיצובים עצמם: demo/design-1..3/index.html. צילומי המסך שלהם: demo/shots/ (נוצרים בסקריפט צילום נפרד).
 הרצה: python3 tools/demo.py"""
@@ -74,8 +74,8 @@ DESIGNS = [
 
 T = {
  'he': dict(
-   title='ככה זה עובד: פרויקט לדוגמה מהשאלון ועד 3 עיצובים | YYG',
-   desc='נגריה דמיונית עוברת את כל התהליך של YYG: שאלון אפיון מלא, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו אתר, שאלון משוב, הגרסה הסופית ומסך ניהול התוכן. אפשר להיכנס לכל שלב.',
+   title='ככה זה עובד: פרויקט לדוגמה מהשאלון ועד 3 עיצובים | YYG Web Design',
+   desc='נגריה דמיונית עוברת את כל התהליך של YYG Web Design: שאלון אפיון מלא, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו אתר, שאלון משוב, הגרסה הסופית ומסך ניהול התוכן. אפשר להיכנס לכל שלב.',
    h1='ככה זה עובד, על פרויקט לדוגמה',
    lead='לקחתי נגריה דמיונית בשם "ענף" והעברתי אותה בדיוק את מה שעובר כל לקוח: שאלון אפיון, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו תוכן, שאלון משוב שבוחר כיוון, ועד הגרסה הסופית ומסך הניהול. העסק דמיוני, וזה לא אתר חי של עסק. השאלונים, ההצעה והעיצובים אמיתיים, ואפשר להיכנס לכל אחד מהם.',
    note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות מ־StockSnap, ברישיון CC0.',
@@ -95,11 +95,11 @@ T = {
    q_open='לשאלון האפיון', calc='למחשבון המחיר', of5='מתוך 5',
    quote_h='הצעת מחיר', quote_for='עבור', item='פריט', price='מחיר', total='סה״כ', final='המחיר סופי, לא מוסיפים מע״מ.', incl='מה כלול', terms='תנאים',
    pay='תשלומים', annual='שנתי', notes='מהשאלון, לבדיקה בשיחה', approve='אישור ההצעה בלחיצה',
-   crumb='YYG', home='עמוד הבית', guides='מדריכים', contact='יצירת קשר', other_lang='English', other_href='/en/demo/', lang='he', dir='rtl',
+   crumb='YYG Web Design', home='עמוד הבית', guides='מדריכים', contact='יצירת קשר', other_lang='English', other_href='/en/demo/', lang='he', dir='rtl',
  ),
  'en': dict(
-   title='How it works: an example project from questionnaire to 3 designs | YYG',
-   desc='A fictional carpentry shop goes through the whole YYG process: a full discovery questionnaire, a quote, 3 completely different designs of the same site, a feedback form, the final version and the content admin screen.',
+   title='How it works: an example project from questionnaire to 3 designs | YYG Web Design',
+   desc='A fictional carpentry shop goes through the whole YYG Web Design process: a full discovery questionnaire, a quote, 3 completely different designs of the same site, a feedback form, the final version and the content admin screen.',
    h1='How it works, on an example project',
    lead='I took a fictional carpentry shop called "Anaf" and put it through exactly what every client goes through: a discovery questionnaire, a quote, 3 completely different designs for the same content, a feedback form that picks a direction, all the way to the final version and the admin screen. The business is fictional, and this is not a live business website. The questionnaires, the quote and the designs are real, and you can open each of them.',
    note='A fictional example business: the name, details and testimonials are made up. Photos from StockSnap, CC0 license.',
@@ -119,7 +119,7 @@ T = {
    q_open='To the questionnaire', calc='To the price calculator', of5='of 5',
    quote_h='Quote', quote_for='for', item='Item', price='Price', total='Total', final='Final price, no VAT added.', incl="What's included", terms='Terms',
    pay='Payments', annual='Yearly', notes='From the questionnaire, to check on the call', approve='Approve the quote',
-   crumb='YYG', home='Home', guides='Guides', contact='Contact', other_lang='עברית', other_href='/demo/', lang='en', dir='ltr',
+   crumb='YYG Web Design', home='Home', guides='Guides', contact='Contact', other_lang='עברית', other_href='/demo/', lang='en', dir='ltr',
  ),
 }
 
@@ -334,9 +334,9 @@ def build(lang):
     all2, n2 = all_answers('feedback', lang)
     ld = [{'@context': 'https://schema.org', '@type': 'Article', 'headline': t['h1'], 'description': t['desc'], 'inLanguage': lang, 'datePublished': TODAY, 'dateModified': TODAY,
            'mainEntityOfPage': url, 'author': {'@type': 'Person', 'name': 'יהודה גורדון' if he else 'Yehuda Gordon', 'url': SITE + '/'},
-           'publisher': {'@type': 'Organization', 'name': 'YYG', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}}, 'image': f'{SITE}/{pfx}shots/design-1-d.webp'},
+           'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}}, 'image': f'{SITE}/{pfx}shots/design-1-d.webp'},
           {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-           {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + ('/' if he else '/en/')}, {'@type': 'ListItem', 'position': 2, 'name': t['h1'], 'item': url}]}]
+           {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + ('/' if he else '/en/')}, {'@type': 'ListItem', 'position': 2, 'name': t['h1'], 'item': url}]}]
     home = '/' if he else '/en/'
     ex = P.get('extra'); af = P.get('after')
     anchors = ['s1', 's2', 's3'] + (['sx'] if ex else []) + ['s4', 's5'] + (['sa'] if af else [])
@@ -379,7 +379,7 @@ def build(lang):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=46">
+<link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -387,7 +387,7 @@ def build(lang):
 <a class="skip" href="#main">{'דילוג לתוכן' if he else 'Skip to content'}</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="{home}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG, לעמוד הבית' if he else 'YYG, to the home page'}"></a>
+  <a href="{home}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
   <nav aria-label="{'ניווט' if he else 'Navigation'}">
    <a class="text-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a>
    <a class="text-link" href="{home}#plan">{'מחשבון מחיר' if he else 'Price calculator'}</a>
@@ -398,7 +398,7 @@ def build(lang):
 </header>
 <main id="main" class="d-main">
  <div class="wrap">
-  <p class="d-crumb"><a href="{home}">YYG</a> › {'פרויקט לדוגמה' if he else 'Example project'}</p>
+  <p class="d-crumb"><a href="{home}">YYG Web Design</a> › {'פרויקט לדוגמה' if he else 'Example project'}</p>
   <h1>{E(t['h1'])}</h1>
   <p class="d-lead">{E(t['lead'])}</p>
   <p class="d-note">{E(t['note'])}</p>
@@ -461,7 +461,7 @@ def build(lang):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG, Yehuda Gordon. Web design and development'}</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
   <p><a class="foot-link" href="{home}">{E(t['home'])}</a> · <a class="foot-link" href="{'/services/' if he else '/en/services/'}">{'שירותים' if he else 'Services'}</a> · <a class="foot-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a> · <a class="foot-link" href="{'/privacy.html' if he else '/en/privacy.html'}">{'מדיניות פרטיות' if he else 'Privacy policy'}</a> · <a class="foot-link" href="{'/accessibility.html' if he else '/en/accessibility.html'}">{'הצהרת נגישות' if he else 'Accessibility statement'}</a></p>
  </div>
 </footer>

@@ -1,4 +1,4 @@
-/* YYG: כלים לסוכני בינה מלאכותית שרצים בדפדפן (WebMCP).
+/* YYG Web Design: כלים לסוכני בינה מלאכותית שרצים בדפדפן (WebMCP).
    סוכן שעוזר לגולש יכול לקבל מחירים, הערכת מחיר, דרכי יצירת קשר, ולשלוח פנייה בשמו (אותן הגנות כמו בטופס).
    הנתונים: /assets/offer.json. בדפדפנים בלי WebMCP הקובץ לא עושה כלום. */
 (() => {
@@ -13,7 +13,7 @@
   const tools = [
     {
       name: 'yyg_get_prices',
-      description: 'Get all YYG website packages, add-ons and recurring costs, with prices in ILS (final, no VAT added).',
+      description: 'Get all YYG Web Design website packages, add-ons and recurring costs, with prices in ILS (final, no VAT added).',
       inputSchema: { type: 'object', properties: {} },
       annotations: { readOnlyHint: true },
       async execute() {
@@ -25,7 +25,7 @@
     },
     {
       name: 'yyg_estimate_price',
-      description: 'Get a rough starting estimate in ILS for a website from YYG.',
+      description: 'Get a rough starting estimate in ILS for a website from YYG Web Design.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -49,7 +49,7 @@
     },
     {
       name: 'yyg_send_inquiry',
-      description: 'Send an inquiry to YYG (web design) on behalf of the user. The user then gets an email with the next step. Ask the user before sending.',
+      description: 'Send an inquiry to YYG Web Design (web design) on behalf of the user. The user then gets an email with the next step. Ask the user before sending.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -72,7 +72,7 @@
     },
     {
       name: 'yyg_contact_info',
-      description: 'How to reach YYG: phone (calls only), hours, the contact page and the discovery questionnaire.',
+      description: 'How to reach YYG Web Design: phone (calls only), hours, the contact page and the discovery questionnaire.',
       inputSchema: { type: 'object', properties: {} },
       annotations: { readOnlyHint: true },
       async execute() {

@@ -1,4 +1,4 @@
-# YYG: Web design and development
+# YYG Web Design: Web design and development
 
 A web design and development studio for small businesses and institutions: landing pages, websites with an admin area, websites with sign-ups and a mailing list, online stores, logos and branding.
 

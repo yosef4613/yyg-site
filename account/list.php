@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: רשימת התפוצה. https://yygweb.com/account/list.php
+ * YYG Web Design: רשימת התפוצה. https://yygweb.com/account/list.php
  * POST (JSON או טופס רגיל): הצטרפות. נשלח מייל עם קישור אישור, ורק אחריו המנוי פעיל.
  * ?do=confirm&e=&t=  אישור ההצטרפות
  * ?do=unsub&e=&t=    הסרה (עם כפתור, כדי שסורקי קישורים במייל לא יסירו בטעות)

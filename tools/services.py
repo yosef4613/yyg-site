@@ -36,7 +36,7 @@ def ul(items):
 PAGES = [
     dict(
         slug='landing-page', kw='בניית דף נחיתה',
-        title='בניית דף נחיתה לעסק מ־2,000 ₪ | 3 עיצובים | YYG',
+        title='בניית דף נחיתה לעסק מ־2,000 ₪ | 3 עיצובים | YYG Web Design',
         desc='בניית דף נחיתה שמביא לקוחות: מתחילים ב־10% ורואים 3 עיצובים, 3 סבבי תיקונים, באוויר תוך 4 ימי עבודה. מ־2,000 ₪, המחיר סופי, לא מוסיפים מע״מ.',
         h1='בניית דף נחיתה שמביא לקוחות', lead='עמוד אחד, ממוקד ומהיר, שכל מה שבו מוביל לפעולה אחת: שיתקשרו אליכם או ישאירו פרטים.',
         price='2,000', price_n=2000, service='בניית דף נחיתה',
@@ -68,7 +68,7 @@ PAGES = [
     ),
     dict(
         slug='business-website', kw='בניית אתר לעסק',
-        title='בניית אתר לעסק עם אזור ניהול מ־4,000 ₪ | YYG',
+        title='בניית אתר לעסק עם אזור ניהול מ־4,000 ₪ | YYG Web Design',
         desc='בניית אתר לעסק עם אזור ניהול לעדכון עצמי: עד 6 עמודים, מתחילים ב־10% ורואים 3 עיצובים, באוויר תוך 10 ימי עבודה. מ־4,000 ₪, לא מוסיפים מע״מ.',
         h1='בניית אתר לעסק, שאתם מעדכנים לבד', lead='אתר תדמית של כמה עמודים, עם אזור ניהול פשוט לעדכון מה שמשתנה: שירותים, מחירים, מבצעים ותמונות.',
         price='4,000', price_n=4000, service='בניית אתר תדמית לעסק',
@@ -94,7 +94,7 @@ PAGES = [
     ),
     dict(
         slug='online-store', kw='בניית חנות אינטרנטית',
-        title='בניית חנות אינטרנטית מ־7,000 ₪ | עד 30 מוצרים כלולים | YYG',
+        title='בניית חנות אינטרנטית מ־7,000 ₪ | עד 30 מוצרים כלולים | YYG Web Design',
         desc='בניית חנות אינטרנטית עם עגלה, תשלום באשראי ומשלוחים, וניהול מוצרים והזמנות. עד 30 מוצרים כלולים. מ־7,000 ₪, המחיר סופי, לא מוסיפים מע״מ.',
         h1='בניית חנות אינטרנטית שקל לקנות בה', lead='קטלוג, עגלה ותשלום באשראי, עם ניהול פשוט של מוצרים, מלאי והזמנות. בנויה לטלפון, כי שם קונים.',
         price='7,000', price_n=7000, service='בניית חנות אינטרנטית',
@@ -117,7 +117,7 @@ PAGES = [
     ),
     dict(
         slug='institutions', kw='בניית אתר למוסד',
-        title='בניית אתר למוסד, עמותה או חוג, עם הרשמה ורשימת תפוצה | YYG',
+        title='בניית אתר למוסד, עמותה או חוג, עם הרשמה ורשימת תפוצה | YYG Web Design',
         desc='בניית אתר למוסדות, עמותות וחוגים: הרשמה, חשבונות משתמש, רשימת תפוצה ו־3 תבניות מייל. מ־6,000 ₪, המחיר סופי, לא מוסיפים מע״מ.',
         h1='בניית אתר למוסד, עמותה או חוג', lead='אתר שמציג את הפעילות ומקבל הרשמות מסודרות: הורים ומשתתפים מוצאים מה מתאים להם, ונרשמים ישר מהטלפון.',
         price='6,000', price_n=6000, service='בניית אתר למוסד, עמותה או חוג',
@@ -143,7 +143,7 @@ PAGES = [
     ),
     dict(
         slug='logo-branding', kw='עיצוב לוגו ומיתוג לעסק',
-        title='עיצוב לוגו ומיתוג לעסק מ־590 ₪ | מותג מלא עם אתר | YYG',
+        title='עיצוב לוגו ומיתוג לעסק מ־590 ₪ | מותג מלא עם אתר | YYG Web Design',
         desc='עיצוב לוגו ומיתוג לעסק: לוגו בסיסי 590 ₪, לוגו מקצועי עם 3 סקיצות 1,500 ₪, מיתוג בסיסי 2,500 ₪, ומותג מלא עם אתר מ־5,900 ₪. לא מוסיפים מע״מ.',
         h1='עיצוב לוגו ומיתוג לעסק', lead='מלוגו פשוט לעסק שמתחיל, ועד מותג שלם: לוגו, צבעים, פונטים, אתר ותוכן, הכול באותה שפה.',
         price='590', price_n=590, service='עיצוב לוגו ומיתוג',
@@ -319,7 +319,7 @@ for _p, _extra in (('landing-page', 'professionals'), ('business-website', 'cate
 PAGES += [
     dict(
         slug='catering', kw='בניית אתר לקייטרינג',
-        title='בניית אתר לקייטרינג ולעסקי אוכל מ־2,000 ₪ | YYG',
+        title='בניית אתר לקייטרינג ולעסקי אוכל מ־2,000 ₪ | YYG Web Design',
         desc='בניית אתר לקייטרינג, קונדיטוריה ועסקי אוכל: תפריט וקטלוג עם תמונות, הזמנה בוואטסאפ או במייל, ומתכנן כמויות לאירוע. מתחילים ב־10% ורואים 3 עיצובים.',
         h1='בניית אתר לקייטרינג ולעסקי אוכל', lead='אתר שמראה את האוכל במיטבו, עונה מראש על השאלות שחוזרות, והופך גולש להזמנה מסודרת בוואטסאפ או במייל.',
         price='2,000', price_n=2000, service='בניית אתר לקייטרינג ולעסקי אוכל',
@@ -371,7 +371,7 @@ PAGES += [
     ),
     dict(
         slug='professionals', kw='בניית אתר לבעלי מקצוע',
-        title='בניית אתר לבעלי מקצוע ונותני שירות מ־2,000 ₪ | YYG',
+        title='בניית אתר לבעלי מקצוע ונותני שירות מ־2,000 ₪ | YYG Web Design',
         desc='בניית אתר לחשמלאים, אינסטלטורים, יועצים, מטפלים ומורים פרטיים: כפתור חיוג, אזור שירות, המלצות וטופס קצר. מתחילים ב־10% ורואים 3 עיצובים.',
         h1='בניית אתר לבעלי מקצוע ונותני שירות', lead='אתר שגורם לטלפון לצלצל: מי שמחפש אתכם בגוגל מבין מיד מה אתם עושים, איפה, ולמה לבחור בכם, ומתקשר בלחיצה.',
         price='2,000', price_n=2000, service='בניית אתר לבעלי מקצוע ונותני שירות',
@@ -497,12 +497,12 @@ def page(p, is_index=False, cards=''):
     if not is_index:
         ld.append({'@context': 'https://schema.org', '@type': 'Service', 'name': p['service'], 'serviceType': p['kw'],
                    'description': desc, 'url': url, 'areaServed': {'@type': 'Country', 'name': 'ישראל'}, 'inLanguage': 'he',
-                   'provider': {'@type': 'ProfessionalService', 'name': 'YYG', 'url': SITE + '/', 'telephone': '+972-54-854-0700'},
+                   'provider': {'@type': 'ProfessionalService', 'name': 'YYG Web Design', 'url': SITE + '/', 'telephone': '+972-54-854-0700'},
                    'offers': {'@type': 'Offer', 'price': str(p['price_n']), 'priceCurrency': 'ILS', 'url': url}})
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in p['faq']]})
     ld.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + '/'},
+        {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + '/'},
         {'@type': 'ListItem', 'position': 2, 'name': 'שירותים', 'item': SITE + '/services/'}]
         + ([] if is_index else [{'@type': 'ListItem', 'position': 3, 'name': h1, 'item': url}])})
     if is_index:
@@ -534,7 +534,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=46">
+<link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -542,7 +542,7 @@ def page(p, is_index=False, cards=''):
 <a class="skip" href="#main">דילוג לתוכן</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG, לעמוד הבית"></a>
+  <a href="/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design, לעמוד הבית"></a>
   <nav aria-label="ניווט">
    <a class="text-link" href="/services/">שירותים</a>
    <a class="text-link" href="/#plan">מחשבון מחיר</a>
@@ -553,7 +553,7 @@ def page(p, is_index=False, cards=''):
 </header>
 <main id="main" class="g-main">
  <div class="wrap">
-  <p class="g-crumb"><a href="/">YYG</a> › <a href="/services/">שירותים</a></p>
+  <p class="g-crumb"><a href="/">YYG Web Design</a> › <a href="/services/">שירותים</a></p>
   <h1>{h1}</h1>
   <p class="g-lead">{lead}</p>
 {body}
@@ -567,7 +567,7 @@ def page(p, is_index=False, cards=''):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG, יהודה גורדון. עיצוב ובניית אתרים</p>
+  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים</p>
   <p><a class="foot-link" href="/services/">שירותים</a> · <a class="foot-link" href="/guides/">מדריכים</a> · <a class="foot-link" href="/accessibility.html">הצהרת נגישות</a> · <a class="foot-link" href="/privacy.html">מדיניות פרטיות</a> · <a class="foot-link" href="/account/">אזור אישי</a></p>
   <p>{FOOT_SV}</p>
  </div>
@@ -582,7 +582,7 @@ for p in PAGES:
     (ROOT / 'services' / f"{p['slug']}.html").write_text(page(p))
 cards = '<div class="g-cards">\n' + '\n'.join(
     f'<a class="g-card" href="/services/{p["slug"]}.html"><b>{p["h1"]}</b><span>{p["lead"]}</span></a>' for p in PAGES) + '\n</div>'
-(ROOT / 'services' / 'index.html').write_text(page(dict(title='שירותים: בניית אתרים, חנויות, לוגו ומיתוג | YYG',
-    desc='כל השירותים של YYG: דף נחיתה, אתר לעסק, חנות, אתר למוסד או חוג, אתר לקייטרינג ולבעלי מקצוע, ולוגו ומיתוג. מתחילים ב־10% ורואים 3 עיצובים.',
+(ROOT / 'services' / 'index.html').write_text(page(dict(title='שירותים: בניית אתרים, חנויות, לוגו ומיתוג | YYG Web Design',
+    desc='כל השירותים של YYG Web Design: דף נחיתה, אתר לעסק, חנות, אתר למוסד או חוג, אתר לקייטרינג ולבעלי מקצוע, ולוגו ומיתוג. מתחילים ב־10% ורואים 3 עיצובים.',
     h1='שירותים', lead='בניית אתרים, חנויות, לוגו ומיתוג לעסקים קטנים ולמוסדות. בכל שירות מתחילים ב־10%, ורואים את העיצוב לפני שממשיכים.'), True, cards))
 print('ok', [p['slug'] for p in PAGES])

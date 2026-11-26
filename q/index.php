@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: דף הצעת המחיר שהלקוח רואה. https://yygweb.com/q/?t=...
+ * YYG Web Design: דף הצעת המחיר שהלקוח רואה. https://yygweb.com/q/?t=...
  * הקישור פרטי (קוד אקראי של 24 תווים). הלקוח רואה את ההצעה, מדפיס או שומר כ־PDF, ומאשר בלחיצה.
  * כשהלקוח פותח את ההצעה בפעם הראשונה, וכשהוא מאשר, נשלח אליי מייל.
  */
@@ -51,7 +51,7 @@ ul{margin:8px 0 0;padding-inline-start:22px}li{margin:4px 0}
 
 if ($num === null) {
     http_response_code(404);
-    $doc('הצעה לא נמצאה | YYG', '<main class="paper"><h1>ההצעה לא נמצאה</h1><p>ייתכן שהקישור לא הועתק עד הסוף, או שההצעה עודכנה. אפשר להתקשר ל־<a href="tel:0548540700">054-854-0700</a> ואשלח קישור חדש.</p></main>');
+    $doc('הצעה לא נמצאה | YYG Web Design', '<main class="paper"><h1>ההצעה לא נמצאה</h1><p>ייתכן שהקישור לא הועתק עד הסוף, או שההצעה עודכנה. אפשר להתקשר ל־<a href="tel:0548540700">054-854-0700</a> ואשלח קישור חדש.</p></main>');
 }
 $q = $quotes[$num];
 $isAdmin = adm_authed();
@@ -107,7 +107,7 @@ ob_start(); ?>
 <main class="paper">
  <?php if ($isAdmin): ?><p class="no-print" style="background:#FBF0DE;border-radius:10px;padding:8px 12px">זו התצוגה שהלקוח רואה. הצפיות שלך לא נספרות. <a href="<?= h($adminLink) ?>">לעריכה</a></p><?php endif; ?>
  <header class="head">
-  <div class="brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG"><div><b>YYG · יהודה גורדון</b><span>עיצוב ובניית אתרים, מיתוג וקידום</span></div></div>
+  <div class="brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design"><div><b>YYG Web Design · יהודה גורדון</b><span>עיצוב ובניית אתרים, מיתוג וקידום</span></div></div>
   <div class="contact"><a href="tel:0548540700">054-854-0700</a><br><a href="mailto:yehuda@yygweb.com">yehuda@yygweb.com</a><br><a href="https://yygweb.com/">yygweb.com</a></div>
  </header>
 
@@ -189,4 +189,4 @@ ob_start(); ?>
  </div>
 </main>
 <?php
-$doc('הצעת מחיר ' . $num . ' | YYG', (string) ob_get_clean());
+$doc('הצעת מחיר ' . $num . ' | YYG Web Design', (string) ob_get_clean());

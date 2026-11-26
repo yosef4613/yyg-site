@@ -1,6 +1,6 @@
 <?php
 /*
- * YYG: האזור האישי. https://yygweb.com/account/  (באנגלית: ?lang=en)
+ * YYG Web Design: האזור האישי. https://yygweb.com/account/  (באנגלית: ?lang=en)
  * הרשמה (עם אימות מייל), כניסה, שכחתי סיסמה, ובאזור עצמו: הצעות המחיר שלי, רשימת התפוצה, פרטים, סיסמה ומחיקת חשבון.
  */
 declare(strict_types=1);
@@ -43,7 +43,7 @@ if ($POST && $do === 'register' && $err === '') {
         if ($existing !== null) {
             /* לא מגלים בדף שהכתובת רשומה. שולחים לבעל הכתובת מייל עם קישור כניסה ואיפוס */
             $u = users_load()[$existing];
-            $send($u, T('כבר יש לכם חשבון ב־YYG', 'You already have a YYG account'), T('כבר יש לכם חשבון', 'You already have an account'),
+            $send($u, T('כבר יש לכם חשבון ב־YYG Web Design', 'You already have a YYG Web Design account'), T('כבר יש לכם חשבון', 'You already have an account'),
                 '<p>' . T('מישהו ניסה להירשם עם הכתובת הזו. אם זה הייתם אתם, אפשר פשוט להיכנס, או לאפס את הסיסמה:', 'Someone tried to sign up with this address. If it was you, just log in, or reset your password:') . '</p>' . mail_button(acc_url('', ['do' => 'forgot']), T('איפוס סיסמה', 'Reset my password')),
                 acc_url('', ['do' => 'forgot']));
         } else {
@@ -53,7 +53,7 @@ if ($POST && $do === 'register' && $err === '') {
             });
             if ($news) sub_upsert($email, $name, 'register', $lang, false);
             $link = acc_url('', ['do' => 'verify', 'u' => $uid, 't' => $tok]);
-            $send(['email' => $email, 'lang' => $lang], T('אישור ההרשמה ל־YYG', 'Confirm your YYG account'), T('ברוכים הבאים, ' . $name, 'Welcome, ' . $name),
+            $send(['email' => $email, 'lang' => $lang], T('אישור ההרשמה ל־YYG Web Design', 'Confirm your YYG Web Design account'), T('ברוכים הבאים, ' . $name, 'Welcome, ' . $name),
                 '<p>' . T('עוד לחיצה אחת, ואתם בפנים. הקישור בתוקף ל־48 שעות.', 'One more click and you\'re in. The link is valid for 48 hours.') . '</p>' . mail_button($link, T('אישור המייל וכניסה', 'Confirm and log in'))
                 . ($news ? '<p style="color:#5A6472;font-size:14px">' . T('האישור יצרף אתכם גם לרשימת התפוצה, כמו שביקשתם.', 'This also adds you to the mailing list, as you asked.') . '</p>' : ''),
                 $link);
@@ -112,10 +112,10 @@ if ($POST && ($do === 'forgot' || $do === 'resend') && $err === '') {
             });
             if ($do === 'forgot') {
                 $link = acc_url('', ['do' => 'reset', 'u' => $uid, 't' => $tok]);
-                $send($u, T('איפוס סיסמה ב־YYG', 'Reset your YYG password'), T('איפוס סיסמה', 'Reset your password'), '<p>' . T('לחצו כדי לבחור סיסמה חדשה. הקישור בתוקף לשעה. אם לא ביקשתם, אפשר להתעלם.', 'Click to choose a new password. The link is valid for one hour. If you didn\'t ask for this, you can ignore it.') . '</p>' . mail_button($link, T('בחירת סיסמה חדשה', 'Choose a new password')), $link);
+                $send($u, T('איפוס סיסמה ב־YYG Web Design', 'Reset your YYG Web Design password'), T('איפוס סיסמה', 'Reset your password'), '<p>' . T('לחצו כדי לבחור סיסמה חדשה. הקישור בתוקף לשעה. אם לא ביקשתם, אפשר להתעלם.', 'Click to choose a new password. The link is valid for one hour. If you didn\'t ask for this, you can ignore it.') . '</p>' . mail_button($link, T('בחירת סיסמה חדשה', 'Choose a new password')), $link);
             } elseif (empty($u['verified'])) {
                 $link = acc_url('', ['do' => 'verify', 'u' => $uid, 't' => $tok]);
-                $send($u, T('אישור ההרשמה ל־YYG', 'Confirm your YYG account'), T('אישור המייל', 'Confirm your email'), mail_button($link, T('אישור המייל וכניסה', 'Confirm and log in')), $link);
+                $send($u, T('אישור ההרשמה ל־YYG Web Design', 'Confirm your YYG Web Design account'), T('אישור המייל', 'Confirm your email'), mail_button($link, T('אישור המייל וכניסה', 'Confirm and log in')), $link);
             }
         }
     }
