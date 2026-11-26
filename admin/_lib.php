@@ -246,8 +246,9 @@ const ADMIN_CSS = ':root{--bg:#151920;--bg2:#1B212B;--panel:#262D3A;--line:#343C
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,"Segoe UI",Arial,sans-serif}
 a{color:#fff}.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 64px}
 .top{position:sticky;top:0;z-index:5;background:rgba(21,25,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;padding-block:12px}
-.top b{font-size:1.05rem;margin-inline-end:auto}.top a{color:var(--muted);text-decoration:none;font-weight:600;font-size:.95rem;padding:6px 2px}.top a:hover{color:#fff}
+.top .wrap{display:flex;align-items:center;gap:6px 13px;flex-wrap:wrap;padding-block:12px}
+.top b{font-size:1.05rem;margin-inline-end:auto}.top a.site-back{color:#fff;border:1.5px solid var(--gold);border-radius:999px;padding:5px 14px}.top a.site-back:hover{background:rgba(227,179,65,.12)}
+.login-back{text-align:center;margin:-8vh 0 0}.login-back a{color:#fff;border:1.5px solid var(--gold);border-radius:999px;padding:7px 16px;text-decoration:none;font-weight:600}.top a{color:var(--muted);text-decoration:none;font-weight:600;font-size:.95rem;padding:6px 2px}.top a:hover{color:#fff}
 h1{font-size:1.5rem;margin:8px 0 2px}h2{font-size:1.2rem;margin:36px 0 12px}.muted{color:var(--muted)}small{color:var(--muted)}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .kpis{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px}.kpis .card{text-decoration:none;padding:12px 14px}.kpis .big{font-size:1.8rem}
@@ -283,9 +284,11 @@ table.list{width:100%;border-collapse:collapse;font-size:.95rem}table.list th,ta
 
 function adm_page(string $title, string $body, string $extraCss = ''): void {
     header('Content-Type: text/html; charset=utf-8');
+    /* גם בדפי הכניסה לניהול: דרך ברורה חזרה לאתר */
+    if (str_starts_with($body, '<div class="login">')) $body .= '<p class="login-back"><a href="/">חזרה לאתר</a></p>';
     echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png"><title>' . h($title) . '</title><style>' . ADMIN_CSS . $extraCss . '</style></head><body>' . $body . '</body></html>';
     exit;
 }
 function adm_nav(int $newLeads = 0): string {
-    return '<header class="top"><div class="wrap"><b>ניהול YYG Web Design</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#forms">שאלונים</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
+    return '<header class="top"><div class="wrap"><a class="site-back" href="/">חזרה לאתר</a><b>ניהול YYG Web Design</b><a href="/admin/#leads">פניות' . ($newLeads ? ($newLeads === 1 ? ' (חדשה אחת)' : " ($newLeads חדשות)") : '') . '</a><a href="/admin/#forms">שאלונים</a><a href="/admin/#quotes">הצעות מחיר</a><a href="/admin/#users">משתמשים ורשימה</a><a href="/admin/#stats">כניסות</a><a href="/admin/#spam">ספאם</a><a href="/admin/#links">קישורים</a><a href="/admin/?logout=1">יציאה</a></div></header>';
 }
