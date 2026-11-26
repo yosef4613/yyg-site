@@ -66,7 +66,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
         'inLanguage': 'en', 'datePublished': TODAY, 'dateModified': TODAY, 'mainEntityOfPage': url,
         'author': {'@type': 'Person', 'name': 'Yehuda Gordon', 'url': SITE + '/en/'},
         'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/yyg-logo-320.webp'}},
-        'image': SITE + '/assets/img/og-3.jpg',
+        'image': SITE + '/assets/img/og-4.jpg',
     }]
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
@@ -101,11 +101,11 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{html.escape(h1)}">
 <meta property="og:description" content="{html.escape(desc)}">
-<meta property="og:image" content="{SITE}/assets/img/og-3.jpg">
+<meta property="og:image" content="{SITE}/assets/img/og-4.jpg">
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=51">
+<link rel="stylesheet" href="/assets/site.css?v=53">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>

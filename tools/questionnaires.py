@@ -3,7 +3,7 @@
 התוכן של השאלות נמצא ב־assets/q-defs.js, והמנוע ב־assets/forms.js. הרצה: python3 tools/questionnaires.py"""
 import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CSS_V, JS_V = "51", "10"
+CSS_V, JS_V = "53", "10"
 PAGES = {
  ('intake', 'he'): dict(path='questionnaire/index.html', alt='en/questionnaire/', title='שאלון אפיון לבניית אתר: מה חשוב לדעת לפני שמתחילים | YYG Web Design',
    desc='שאלון אפיון מלא לבניית אתר לעסק: העסק, הלקוחות, מטרת האתר, עמודים ויכולות, תוכן, עיצוב, זמנים ותקציב. כ־10 דקות, והתשובות נשמרות תוך כדי.',

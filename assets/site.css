@@ -1201,21 +1201,20 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 .hand-note{font-family:var(--hand);font-size:clamp(1.35rem,1.2rem + .55vw,1.75rem);line-height:1.2;color:var(--warm-hi);margin-top:10px;transform:rotate(-1.2deg);transform-origin:right center}
 [dir="ltr"] .hand-note{transform-origin:left center;transform:rotate(1.2deg)}
 
-/* ככה אתר מביא לקוחות: האזור הבהיר */
-.results{--ink:#151920;--ink-2:#465061;--paper:#F4EFE6;position:relative;padding:clamp(56px,8vw,104px) 0;color:var(--ink);color-scheme:light;
- background:radial-gradient(900px 360px at 88% 0,#FFFDF9 0,rgba(255,253,249,0) 70%),radial-gradient(700px 300px at 0 100%,#EDE4D3 0,rgba(237,228,211,0) 70%),var(--paper)}
-.results .sec-title{color:var(--ink)}
-.results .sec-title::after{background:radial-gradient(circle at calc(100% - 4px) 50%,#465061 0 3px,transparent 3.6px),linear-gradient(270deg,#465061,rgba(70,80,97,0)) 0 50%/calc(100% - 8px) 2px no-repeat;opacity:.8}
-[dir="ltr"] .results .sec-title::after{background:radial-gradient(circle at 4px 50%,#465061 0 3px,transparent 3.6px),linear-gradient(90deg,#465061,rgba(70,80,97,0)) 8px 50%/calc(100% - 8px) 2px no-repeat}
-.results .sec-lead{color:var(--ink-2)}
-.res-grid{list-style:none;padding:0;margin:clamp(28px,4vw,44px) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px)}
-.res-item{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #E6DDCC;border-radius:20px;padding:clamp(22px,2.6vw,30px);box-shadow:0 26px 46px -30px rgba(21,25,32,.5)}
-.res-n{display:block;font-family:var(--display);font-weight:700;font-size:clamp(3rem,2.3rem + 2vw,4.2rem);line-height:.9;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
-.res-item h3{margin-top:12px;font-size:clamp(1.3rem,1.12rem + .6vw,1.6rem);color:var(--ink)}
-.res-item p{margin-top:8px;color:var(--ink-2);line-height:1.7}
-.res-item .res-proof{margin-top:auto;padding-top:16px;border-top:1px dashed #D6C9B0;font-family:var(--hand);font-size:1.32rem;line-height:1.35;color:#6E4314}
-.res-item p:not(.res-proof){margin-bottom:16px}
-.res-next{margin-top:28px;font-size:var(--step-1)}
-.results .text-link{color:var(--ink)}
+/* ככה אתר מביא לקוחות: לפני יצירת הקשר, באותו רקע כהה כמו כל האתר */
+.results{position:relative;padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line)}
+.res-grid{list-style:none;padding:0;margin:clamp(24px,3.5vw,36px) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.res-item{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line-2);border-radius:18px;padding:clamp(20px,2.4vw,26px);box-shadow:var(--lift)}
+.res-n{display:block;font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,2rem + 1.6vw,3.4rem);line-height:.9;color:transparent;-webkit-text-stroke:1.4px #C9D1DD}
+.res-item h3{margin-top:10px;font-size:clamp(1.2rem,1.05rem + .5vw,1.45rem);color:#fff}
+.res-item p{margin-top:8px;color:#C9D1DD;line-height:1.7}
+.res-item p:not(.res-proof){margin-bottom:14px}
+.res-item .res-proof{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-2);font-family:var(--hand);font-size:1.28rem;line-height:1.35;color:var(--warm-hi)}
+.res-next{margin-top:24px;font-size:var(--step-1)}
 @media (max-width:860px){.res-grid{grid-template-columns:1fr}}
-@media print{.results{background:none}}
+
+/* כותרת הפתיחה: שאלה ותשובה, באותו גופן. "לקוחות" לבן עם קו טורקיז מהלוגו, והתשובה קטנה יותר בגוון טורקיז עדין */
+.hero h1 .h1-q{display:block}
+.hero h1 .h1-key{position:relative;display:inline-block;color:#fff;-webkit-text-fill-color:#fff}
+.hero h1 .h1-key::after{content:"";position:absolute;inset-inline:-.04em;bottom:-.1em;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 14C50 5 120 3 196 9' fill='none' stroke='%2366CFDA' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.95}
+.hero h1 .h1-a{display:block;margin-top:.34em;font-size:.56em;line-height:1.05;color:#9ADCE3;-webkit-text-fill-color:#9ADCE3}
