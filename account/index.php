@@ -9,6 +9,9 @@ $EN = (($_GET['lang'] ?? $_POST['lang'] ?? '') === 'en');
 $POST = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
 $do = (string) ($_POST['do'] ?? $_GET['do'] ?? '');
 $me = user_current();
+/* הרמז לכותרת האתר ("האזור האישי" במקום "כניסה"): גם לחיבור מלפני שהיה רמז, ומתנקה כשהחיבור פג */
+if ($me && ($_COOKIE['yyg_in'] ?? '') !== '1') setcookie('yyg_in', '1', ['expires' => time() + 60 * 86400, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+if (!$me && isset($_COOKIE['yyg_in'])) setcookie('yyg_in', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 $langField = $EN ? '<input type="hidden" name="lang" value="en">' : '';
 $go = static function (string $q = '') use ($EN): void { header('Location: /account/' . ($EN ? '?lang=en' . ($q ? '&' . $q : '') : ($q ? '?' . $q : '')), true, 303); exit; };
 $msgPage = static function (string $title, string $text) : void {
@@ -275,6 +278,8 @@ $sub = subs_load()[$me['email']] ?? null;
 $subOn = $sub && ($sub['status'] ?? '') === 'active';
 $subPending = $sub && ($sub['status'] ?? '') === 'pending';
 $body = '<h1>' . T('שלום ', 'Hi ') . h($me['name']) . '</h1>'
+    /* מי מחובר, ויציאה מיד למעלה: כדי להחליף חשבון או להיכנס עם Google */
+    . '<form method="post" action="/account/" class="who">' . $hidden . '<input type="hidden" name="do" value="logout"><span>' . T('מחוברים בתור', 'Logged in as') . ' <bdi>' . h($me['email']) . '</bdi></span> · <button type="submit">' . T('יציאה', 'Log out') . '</button></form>'
     . (isset($_GET['welcome']) ? '<p class="msg">' . T('המייל אושר, ואתם בפנים. ברוכים הבאים!', 'Your email is confirmed and you\'re in. Welcome!') . '</p>' : '')
     . ($flash ? '<p class="msg">' . h($flash) . '</p>' : '') . ($err ? '<p class="msg bad" role="alert">' . h($err) . '</p>' : '')
     /* רק בדפדפן שמחובר לניהול. חשבון של בעל האתר: קישור לניהול. חשבון של לקוח: תיבה סגורה שאומרת במפורש שזה חשבון רגיל */
