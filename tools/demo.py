@@ -89,7 +89,7 @@ T = {
    chose='הבחירה', rating='כמה כל עיצוב מרגיש נכון לעסק', took='מה הוא לקח מכל עיצוב', liked='אהב', disliked='פחות', top3='3 הדברים הכי חשובים לשנות', dirs='לאן לזוז בסבב הבא',
    all2='כל התשובות לשאלון המשוב', try2='לראות את שאלון המשוב',
    s5='הגרסה הסופית', s5p='הלקוח אישר את הכיוון ושילם 40%. בניתי את האתר המלא על עיצוב 1, ושיניתי בדיוק את מה שביקש בשאלון המשוב. משם הלקוח בודק ומאשר, משלם את ה־50% האחרונים, והאתר עולה לאוויר.',
-   changed='מה השתנה אחרי המשוב', open_final='לפתוח את הגרסה הסופית', final_note='גם הגרסה הסופית היא דוגמה: העסק דמיוני, והאתר לא באוויר בשביל עסק אמיתי.',
+   changed='מה השתנה אחרי המשוב', open_final='לפתוח את הגרסה הסופית', he_only='', final_note='גם הגרסה הסופית היא דוגמה: העסק דמיוני, והאתר לא באוויר בשביל עסק אמיתי.',
    changes=['כפתור ראשי בולט, בכתום של עיצוב 2, כדי שמיד רואים איפה מתאמים מדידה', 'סרגל המידות מעיצוב 2, כקו מפריד בין החלקים', 'טיק נוסף לסוגי העץ: לרהיטי מרפסת וגינה', 'חלק חדש: אפשר לבוא לנגריה ולראות את העץ לפני שמחליטים', 'הגלריה מוכנה לתמונות של הנגריה, ובעל העסק מחליף אותן בעצמו במסך הניהול'],
    cta='רוצים לעבור את התהליך הזה עם העסק שלכם?', ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. אחרי 10% בלבד מקבלים 3 עיצובים כאלה, עם התוכן שלכם.',
    q_open='לשאלון האפיון', calc='למחשבון המחיר', of5='מתוך 5',
@@ -113,7 +113,8 @@ T = {
    chose='The choice', rating='How right each design feels for the business', took='What he took from each design', liked='Liked', disliked='Less', top3='The 3 most important changes', dirs='Where to move in the next round',
    all2='All the feedback answers', try2='See the feedback form',
    s5='The final version', s5p='The client approved the direction and paid 40%. I built the full site on design 1, and changed exactly what he asked for in the feedback form. From here the client checks and approves it, pays the final 50%, and the site goes live.',
-   changed='What changed after the feedback', open_final='Open the final version', final_note='The final version is an example too: the business is fictional, and the site is not live for a real business.',
+   changed='What changed after the feedback', open_final='Open the final version', final_note='The final version is an example too, in Hebrew: the business is fictional, and the site is not live for a real business.',
+   he_only='The example sites you can open from this page are in Hebrew, like the fictional business they were made for. This page explains every step in English.',
    changes=['A stronger main button, in the orange from design 2, so you see right away where to book a measurement', 'The measuring-tape ruler from design 2, as a divider between sections', 'Teak added to the wood types: for balcony and garden furniture', 'A new section: you can come to the workshop and see the wood before deciding', 'The gallery is ready for the shop\'s own photos, and the owner swaps them himself in the admin screen'],
    cta='Want to go through this process with your business?', ctap='Start with a 10-minute questionnaire, or a short call. After just 10%, you get 3 designs like these, with your content.',
    q_open='To the questionnaire', calc='To the price calculator', of5='of 5',
@@ -135,7 +136,7 @@ QUOTE = {
    terms=['3 design directions', '3 revision rounds', '10 working days to deliver', '4 months of support'],
    pay=[(10, 'To start, before the 3 designs'), (40, 'After you choose a design, before the build'), (50, 'At the end, after your approval and before going live')],
    annual='"All-in Care": domain, hosting, business email, security, backups and fixes. ₪590 a year, from the second year.',
-   notes=['Marked 7 pages and sections. The FAQ and testimonials count as sections on the home page, so there are 5 pages, and the package includes up to 6. No extra pages.', 'A domain needs registering: something short with the word Anaf. Included in the first year.', 'Timing: within a month. Stated budget: 4,000 to 7,000 ₪.']),
+   notes=['Marked 7 pages and sections. The FAQ and testimonials count as sections on the home page, so there are 5 pages, and the package includes up to 6. No extra pages.', 'A domain needs registering: something short with the word Anaf. Included in the first year.', 'Timing: within a month. Stated budget: ₪4,000 to ₪7,000.']),
 }
 
 STYLE = '''<style>
@@ -242,6 +243,7 @@ STYLE = '''<style>
  .d-final ul{margin-top:10px;padding-inline-start:20px;list-style:disc;color:#C9D1DD;line-height:1.85}
  .d-final .btn{margin-top:16px}
  .d-final small{display:block;margin-top:10px;color:var(--muted)}
+ .d-he{margin-top:10px;font-size:.92rem;color:var(--muted)}
  .d-flag{position:absolute;top:12px;inset-inline-start:12px;padding:4px 12px;border-radius:999px;background:#F2C95A;color:#151920;font-weight:800;font-size:.85rem;box-shadow:0 4px 14px rgba(0,0,0,.35)}
  .d-more{margin-top:clamp(56px,8vw,96px)}
  .d-more h2{font-size:var(--step-2)}
@@ -258,7 +260,7 @@ STYLE = '''<style>
 </style>'''
 
 
-def nis(n): return f'{n:,} ₪'
+def nis(n, he=True): return f'{n:,} ₪' if he else f'₪{n:,}'   # באנגלית ₪ לפני המספר, כמו בשאר האתר באנגלית
 
 def hi_anaf(ans, he):
     return [
@@ -279,6 +281,7 @@ def files_anaf(he):
 
 def build(lang):
     t = T[lang]; he = lang == 'he'; pfx = P['prefix']
+    HL = '' if he else ' hreflang="he"'   # the example sites are Hebrew only
     path = f'{pfx}index.html' if he else f'en/{pfx}index.html'
     url = f'{SITE}/{pfx}' if he else f'{SITE}/en/{pfx}'
     ans = lambda f, q: answer(f, lang, q, get(f, q))
@@ -291,11 +294,11 @@ def build(lang):
     Q = QUOTE[lang]
     items = Q.get('items') or [(Q['base'], Q['price'])]
     total = sum(pr for _, pr in items)
-    pay = ''.join(f'<li><b>{p}%</b> {nis(total * p // 100)} · {E(w)}</li>' for p, w in Q['pay'])
-    rows = ''.join(f'<tr><td>{E(n)}</td><td>{nis(pr)}</td></tr>' for n, pr in items)
+    pay = ''.join(f'<li><b>{p}%</b> {nis(total * p // 100, he)} · {E(w)}</li>' for p, w in Q['pay'])
+    rows = ''.join(f'<tr><td>{E(n)}</td><td>{nis(pr, he)}</td></tr>' for n, pr in items)
     quote = f'''<div class="d-quote" role="figure" aria-label="{E(t['quote_h'])}">
    <h3>{E(t['quote_h'])} {E(DATA['quote'])}</h3><p class="q-sub">{E(t['quote_for'])} {E(ans('intake', 'business'))}</p>
-   <table><thead><tr><th>{E(t['item'])}</th><th>{E(t['price'])}</th></tr></thead><tbody>{rows}<tr class="tot"><td>{E(t['total'])}</td><td>{nis(total)}</td></tr></tbody></table>
+   <table><thead><tr><th>{E(t['item'])}</th><th>{E(t['price'])}</th></tr></thead><tbody>{rows}<tr class="tot"><td>{E(t['total'])}</td><td>{nis(total, he)}</td></tr></tbody></table>
    <p class="q-fine">{E(t['final'])}</p>
    <h4>{E(t['incl'])}</h4><ul>{''.join(f'<li>{E(x)}</li>' for x in Q['incl'])}</ul>
    <h4>{E(t['terms'])}</h4><ul>{''.join(f'<li>{E(x)}</li>' for x in Q['terms'])}</ul>
@@ -309,11 +312,11 @@ def build(lang):
     for d in DESIGNS:
         L = d[lang]; n = d['n']
         designs += f'''<article class="d-design">
-   <a class="d-shot" href="/{pfx}design-{n}/" aria-label="{E(t['open'].format(n=n))}"><img class="dk" src="/{pfx}shots/design-{n}-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/design-{n}-m.webp" width="240" height="520" alt="" loading="lazy"></a>
+   <a class="d-shot" href="/{pfx}design-{n}/"{HL} aria-label="{E(t['open'].format(n=n))}"><img class="dk" src="/{pfx}shots/design-{n}-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/design-{n}-m.webp" width="240" height="520" alt="" loading="lazy"></a>
    <div class="d-design-b"><h3><small>{(('העיצוב' if he else 'The design') if len(DESIGNS) == 1 else (('עיצוב' if he else 'Design') + f' {n}'))}</small>{E(L['name'])}</h3><p>{E(L['text'])}</p>
     <p class="d-meta">{E(t['fonts'])}: {E(L['fonts'])}</p>
     <div class="d-sw" aria-label="{E(t['palette'])}"><span class="d-meta">{E(t['palette'])}:</span>{''.join(f'<i style="background:{c}"></i>' for c in d['colors'])}</div>
-    <a class="btn btn-line" href="/{pfx}design-{n}/">{E(t['open'].format(n=n))}</a></div>
+    <a class="btn btn-line" href="/{pfx}design-{n}/"{HL}>{E(t['open'].format(n=n))}</a></div>
   </article>'''
     # שלב 4: המשוב
     fb = dict(DATA['feedback'])
@@ -346,9 +349,9 @@ def build(lang):
     after_html = af(lang, pfx, n5 + 1) if af else ''
     changes = ''.join(f'<li>{E(x)}</li>' for x in t['changes'])
     final_html = f'''<div class="d-final">
-    <a class="d-shot" href="/{pfx}final/" aria-label="{E(t['open_final'])}"><img class="dk" src="/{pfx}shots/final-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/final-m.webp" width="240" height="520" alt="" loading="lazy"><span class="d-flag">{'דוגמה' if he else 'Example'}</span></a>
+    <a class="d-shot" href="/{pfx}final/"{HL} aria-label="{E(t['open_final'])}"><img class="dk" src="/{pfx}shots/final-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/final-m.webp" width="240" height="520" alt="" loading="lazy"><span class="d-flag">{'דוגמה' if he else 'Example'}</span></a>
     <div><h3>{E(t['changed'])}</h3><ul>{changes}</ul>
-     <a class="btn btn-gold" href="/{pfx}final/">{E(t['open_final'])}</a>
+     <a class="btn btn-gold" href="/{pfx}final/"{HL}>{E(t['open_final'])}</a>
      <small>{E(t['final_note'])}</small></div>
    </div>'''
     def thumb(q):
@@ -421,7 +424,8 @@ def build(lang):
 
   <section class="d-step" id="s3" aria-labelledby="s3-t">
    <div class="d-step-h"><span class="d-num" aria-hidden="true">3</span><h2 id="s3-t">{E(t['s3'])}</h2></div>
-   <p>{E(t['s3p'])}</p>
+   <p>{E(t['s3p'])}</p>{'' if he else f'''
+   <p class="d-he">{E(t['he_only'])}</p>'''}
    <div class="d-designs{' is-one' if len(DESIGNS) == 1 else ''}">{designs}</div>
   </section>
 

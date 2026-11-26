@@ -34,7 +34,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $to = (string) ($q['client']['email'] ?? '');
         $name = (string) ($q['client']['name'] ?? '');
         if (!filter_var($to, FILTER_VALIDATE_EMAIL)) { header('Location: /admin/quote.php?id=' . rawurlencode($num) . '&mailerr=1', true, 303); exit; }
-        if ($do === 'email_quote') {
+        $en = ($q['lang'] ?? 'he') === 'en';   // הצעה באנגלית: המייל ללקוח באנגלית
+        if ($do === 'email_quote' && $en) {
+            $valid = (new DateTime((string) ($q['valid_until'] ?? 'now')))->format('d/m/Y');
+            $t = quote_totals($q);
+            $body = '<p>Hi ' . h($name) . ',</p><p>Here is your quote' . ($q['title'] ? ': <b>' . h($q['title']) . '</b>' : '') . ', for a total of ' . h(nis_lang($t['total'], true)) . '. Final price, no VAT added.</p>'
+                . '<p>At the link you can see all the details, print it or save it as a PDF, and approve it with one click.</p>' . mail_button(quote_url($q), 'View the quote')
+                . '<p style="color:#5A6472;font-size:14px">The quote is valid until ' . h($valid) . '. Questions? Just reply to this email or call 054-854-0700.</p><p>Yehuda</p>';
+            $ok = mail_send($to, 'Your quote from YYG Web Design' . ($q['title'] ? ': ' . $q['title'] : ''), mail_wrap('Quote ' . $num, $body, '', true), "Hi $name,\nYour quote: " . quote_url($q) . "\nYehuda, 054-854-0700", mail_from(true));
+            $what = 'ההצעה';
+        } elseif ($do === 'email_quote') {
             $valid = (new DateTime((string) ($q['valid_until'] ?? 'now')))->format('d/m/Y');
             $t = quote_totals($q);
             $body = '<p>שלום ' . h($name) . ',</p><p>מצורפת הצעת המחיר' . ($q['title'] ? ': <b>' . h($q['title']) . '</b>' : '') . ', על סך ' . h(nis($t['total'])) . '. המחיר סופי, לא מוסיפים מע״מ.</p>'
@@ -44,6 +53,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
 הצעת המחיר: " . quote_url($q) . "
 יהודה, 054-854-0700");
             $what = 'ההצעה';
+        } elseif ($en) {
+            $link = 'https://yygweb.com/en/feedback/?' . http_build_query(['name' => $name, 'phone' => $q['client']['phone'] ?? '', 'email' => $to, 'business' => $q['client']['business'] ?? '', 'quote' => $num]);
+            $body = '<p>Hi ' . h($name) . ',</p><p>Once you\'ve gone through the 3 designs, I\'d love some short feedback: what you liked, what you didn\'t, and which direction to take. It takes about 5 minutes, and your details are already filled in.</p>'
+                . mail_button($link, 'To the feedback form') . '<p style="color:#5A6472;font-size:14px">Prefer to talk? 054-854-0700.</p><p>Yehuda</p>';
+            $ok = mail_send($to, 'Feedback on your website designs', mail_wrap('Feedback on the designs', $body, '', true), "Hi $name,\nThe feedback form: $link\nYehuda, 054-854-0700", mail_from(true));
+            $what = 'שאלון המשוב';
         } else {
             $link = 'https://yygweb.com/feedback/?' . http_build_query(['name' => $name, 'phone' => $q['client']['phone'] ?? '', 'email' => $to, 'business' => $q['client']['business'] ?? '', 'quote' => $num]);
             $body = '<p>שלום ' . h($name) . ',</p><p>אחרי שתעברו על 3 העיצובים, אשמח למשוב קצר: מה אהבתם, מה פחות, ובאיזה כיוון ממשיכים. זה לוקח כ־5 דקות, והפרטים שלכם כבר ממולאים.</p>'
@@ -91,6 +106,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $q = [
             'client' => ['name' => $str($in['client']['name'] ?? '', 120), 'phone' => $str($in['client']['phone'] ?? '', 40), 'email' => filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : '', 'business' => $str($in['client']['business'] ?? '', 160)],
             'title' => $str($in['title'] ?? '', 200),
+            'lang' => ($in['lang'] ?? '') === 'en' ? 'en' : 'he',   // שפת ההצעה: הדף /q/ והמיילים ללקוח
             'items' => $items,
             'recurring' => $recurring,
             'discount' => ['label' => $str($in['discount']['label'] ?? '', 120), 'amount' => round($num_($in['discount']['amount'] ?? 0, 0, 1000000))],
@@ -133,8 +149,19 @@ if ($q === null && $lead === null && isset($_GET['form'])) {
     foreach ((@file(data_dir() . '/forms.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && ($r['id'] ?? '') === (string) $_GET['form']) $formRec = $r; }
 }
 $init = $q ? (($q['ui'] ?? null) ?: null) : null;
+$auto = $formRec ? intake_to_quote($formRec) : null;
+if ($auto && ($formRec['lang'] ?? '') === 'en') {
+    /* שאלון מהאתר באנגלית: השורות שנוספו ממנו נכתבות באנגלית, כי הלקוח יראה אותן בהצעה */
+    $enLabel = static function (string $l): string {
+        if ($l === 'הרשמה, חשבונות משתמש ורשימת תפוצה') return 'Sign-ups, user accounts and a mailing list';
+        if (isset(EST_TODO_EN[$l])) return EST_TODO_EN[$l];
+        foreach (['מסך עדכון קטן לבעל העסק' => 'A small update screen for the owner', 'שפה נוספת' => 'Another language', 'יכולת נוספת' => 'Another feature'] as $he => $en) if (str_starts_with($l, $he)) return $en . mb_substr($l, mb_strlen($he, 'UTF-8'), null, 'UTF-8');
+        return $l;
+    };
+    foreach ($auto['custom'] as $i => $c) $auto['custom'][$i]['label'] = $enLabel((string) $c['label']);
+}
 $prefill = $formRec ? ['name' => $formRec['contact']['name'], 'phone' => $formRec['contact']['phone'], 'business' => $formRec['contact']['business'], 'email' => $formRec['contact']['email'],
-    'plan' => '', 'lead_id' => '', 'auto' => intake_to_quote($formRec)] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'email' => $lead['email'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id']] : null);
+    'plan' => '', 'lead_id' => '', 'auto' => $auto, 'lang' => ($formRec['lang'] ?? '') === 'en' ? 'en' : 'he'] : ($lead ? ['name' => $lead['name'] ?? '', 'phone' => $lead['phone'] ?? '', 'email' => $lead['email'] ?? '', 'business' => $lead['business'] ?? '', 'plan' => $lead['plan'] ?? '', 'lead_id' => (string) $lead['id'], 'lang' => ($lead['lang'] ?? '') === 'en' ? 'en' : 'he'] : null);
 $totals = $q ? quote_totals($q) : null;
 
 ob_start(); ?>
@@ -187,6 +214,7 @@ ob_start(); ?>
    <label>טלפון<input type="tel" id="c-phone" dir="ltr"></label>
    <label>שם העסק<input type="text" id="c-business"></label>
    <label>מייל <small>לא חובה. אם הלקוח רשום באתר, ההצעה תופיע גם באזור האישי שלו</small><input type="email" id="c-email" dir="ltr"></label>
+   <label>שפת ההצעה <small>הלקוח רואה את ההצעה ואת המיילים בשפה הזו. שורות והערות שכותבים בעצמכם, כותבים בשפה הזו</small><select id="q-lang"><option value="he">עברית</option><option value="en">English</option></select></label>
   </div>
  </fieldset>
 
@@ -257,6 +285,7 @@ const INIT = <?= json_encode($init, $JS) ?>;
 const PREFILL = <?= json_encode($prefill, $JS) ?>;
 const LEAD_ID = <?= json_encode($q['lead_id'] ?? ($prefill['lead_id'] ?? ''), $JS) ?>;
 const VALID_DEFAULT = <?= json_encode($q['valid_until'] ?? (new DateTime('+14 days', tz()))->format('Y-m-d'), $JS) ?>;
+const LANG0 = <?= json_encode($q ? (($q['lang'] ?? 'he') === 'en' ? 'en' : 'he') : ($prefill['lang'] ?? 'he'), $JS) ?>;
 
 const HOSTING = 'דומיין, אחסון ומייל עסקי לשנה הראשונה';
 const TEXTS = 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית';
@@ -293,7 +322,38 @@ const RECURRING = [
   { k: 'seo', label: 'קידום בגוגל: תוכן חודשי ומעקב', price: 0, per: 'month', note: 'לפי הצעה נפרדת', on: false }
 ];
 
+/* הצעה באנגלית: אותם מסלולים, תוספות ותנאים, בניסוח באנגלית. בהצעה נשמר רק הטקסט שהלקוח רואה */
+const EN_HOSTING = 'Domain, hosting and business email for the first year';
+const EN_TEXTS = 'Website copy: written with AI and personally edited';
+const EN_GOOGLE = 'Mobile, Google and accessibility ready, with an accessibility statement';
+const EN_P10 = [[10, 'To start, before the 3 designs'], [40, 'After you choose a design, before the build'], [50, 'At the end, after your approval and before going live']];
+const EN_P50 = [[50, 'To start'], [50, 'At the end, after your approval and before going live']];
+const EN_BRAND = ['Discovery: a call about your customers, what sets you apart and your message', 'Logo: 3 directions, 3 revision rounds and files for every use', 'Visual language: colors, fonts and a short style guide', 'All the content: copy, choosing photos and putting it all on the site', 'Print and social media: a business card, a flyer, a profile picture and a cover image', 'Google: registering the site and opening a Business Profile'];
+const BASES_EN = {
+  none: { label: 'No package, add-ons only', incl: [] },
+  landing_basic: { label: 'Basic landing page', incl: ['One page, up to 5 sections', 'One design and one revision round', 'You provide the text', 'A contact form and a call button', 'Domain and hosting for the first year', EN_GOOGLE] },
+  landing: { label: 'Landing page', incl: ['One page, up to 7 sections', 'A contact form and a call button', 'Small changes on me during the support period', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  site_basic: { label: 'Basic website', incl: ['Up to 4 pages', 'One design and one revision round', 'You provide the text', 'A contact form and a call button', 'Domain and hosting for the first year', EN_GOOGLE] },
+  site: { label: 'Website with an admin area', incl: ['Up to 6 pages', 'An admin area to update the content that changes', 'Forms and a content section', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  club: { label: 'Website with sign-ups and a mailing list', incl: ['Up to 8 pages', 'Sign-ups, user accounts, a mailing list and 3 email templates', 'An admin area: content, inquiries and subscribers', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  store: { label: 'Online store', incl: ['A full store with up to 30 products, which I add for you', 'A cart, card payments and shipping', 'An admin area: products, stock and orders', 'Training: a personal call and a written guide', EN_HOSTING, EN_TEXTS, EN_GOOGLE] },
+  brand_landing: { label: 'Brand from 0 to 100% with a landing page', incl: EN_BRAND.concat(['A landing page in the brand design', EN_HOSTING, EN_GOOGLE]) },
+  brand_site: { label: 'Brand from 0 to 100% with a website', incl: EN_BRAND.concat(['A website with an admin area, up to 6 pages', EN_HOSTING, EN_GOOGLE]) },
+  brand_club: { label: 'Brand from 0 to 100% with a sign-up website', incl: EN_BRAND.concat(['A website with sign-ups and a mailing list, up to 8 pages', EN_HOSTING, EN_GOOGLE]) },
+  brand_store: { label: 'Brand from 0 to 100% with a store', incl: EN_BRAND.concat(['An online store, up to 30 products', EN_HOSTING, EN_GOOGLE]) }
+};
+const ADDONS_EN = { page: 'An extra page', en: 'A second language version', design: 'An extra design direction', rev: 'An extra revision round or hour of work', products: '10 more products in the store', logo1: 'Basic logo: one sketch and one revision round', logo2: 'Professional logo: 3 directions and 3 revision rounds', brand: 'Basic branding: logo, colors, fonts, a style guide and a business card' };
+const RECURRING_EN = { care: { label: '"All-in Care": domain, hosting, business email, security, backups and fixes', note: 'from the second year' }, maint: { label: 'Maintenance: updates and small changes, up to half an hour a month', note: 'optional' }, seo: { label: 'Google promotion: monthly content and tracking', note: 'by separate quote' } };
+const LAUNCH = ['מחיר השקה (תמורת הצגת האתר בעבודות והמלצה כתובה)', 'Launch price (in return for showing the site in my work and a written testimonial)'];
+
 const $ = (id) => document.getElementById(id);
+const isEn = () => $('q-lang').value === 'en';
+const bLabel = (k) => (isEn() ? BASES_EN[k].label : BASES[k].label);
+const bIncl = (k) => (isEn() ? BASES_EN[k].incl : BASES[k].incl);
+const bPay = (k) => (isEn() ? (BASES[k].pay === P10 ? EN_P10 : EN_P50) : BASES[k].pay);
+const aLabel = (a) => (isEn() ? ADDONS_EN[a.k] : a.label);
+const rText = (r) => (isEn() ? RECURRING_EN[r.k] : r);
+const forWho = (who) => (who ? (isEn() ? ' for ' : ' עבור ') + who : '');
 const nis = (n) => Math.round(n).toLocaleString('en-US') + ' ₪';
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -323,30 +383,30 @@ const applyBase = (k, keepPrice) => {
   const ent = document.querySelector('#addons [data-k="en"] [data-price]');
   if (!keepPrice) ent.value = b.en || '';
   [$('t-designs').value, $('t-revisions').value, $('t-days').value, $('t-support').value] = b.t;
-  $('includes').value = b.incl.join('\n');
-  setPay(b.pay);
+  $('includes').value = bIncl(k).join('\n');
+  setPay(bPay(k));
   const who = $('c-business').value.trim() || $('c-name').value.trim();
-  if (k !== 'none') $('title').value = b.label + (who ? ' עבור ' + who : '');
+  if (k !== 'none') $('title').value = bLabel(k) + forWho(who);
 };
 $('base').addEventListener('change', () => applyBase($('base').value, false));
 $('add-custom').addEventListener('click', () => { customRow(); calc(); });
-$('pay-10').addEventListener('click', () => setPay(P10));
-$('pay-50').addEventListener('click', () => setPay(P50));
+$('pay-10').addEventListener('click', () => setPay(isEn() ? EN_P10 : P10));
+$('pay-50').addEventListener('click', () => setPay(isEn() ? EN_P50 : P50));
 $('pay-add').addEventListener('click', () => { payRow([0, '']); calc(); });
 $('disc-pct').addEventListener('input', () => { const pct = Number($('disc-pct').value) || 0; $('disc-amount').value = Math.round(subtotal() * pct / 100); calc(); });
 $('disc-amount').addEventListener('input', () => { $('disc-pct').value = ''; });
-$('launch-10').addEventListener('click', () => { $('disc-label').value = 'מחיר השקה (תמורת הצגת האתר בעבודות והמלצה כתובה)'; $('disc-pct').value = 10; $('disc-pct').dispatchEvent(new Event('input')); });
+$('launch-10').addEventListener('click', () => { $('disc-label').value = LAUNCH[isEn() ? 1 : 0]; $('disc-pct').value = 10; $('disc-pct').dispatchEvent(new Event('input')); });
 
 /* חישוב */
 const items = () => {
   const out = [];
   const k = $('base').value;
-  if (k !== 'none') out.push({ label: BASES[k].label, qty: 1, price: Number($('base-price').value) || 0 });
+  if (k !== 'none') out.push({ label: bLabel(k), qty: 1, price: Number($('base-price').value) || 0 });
   document.querySelectorAll('#addons .line').forEach((l) => {
     if (!l.querySelector('[data-on]').checked) return;
     const a = ADDONS.find((x) => x.k === l.dataset.k);
     const q = l.querySelector('[data-qty]');
-    out.push({ label: a.label, qty: q ? Math.max(1, Number(q.value) || 1) : 1, price: Number(l.querySelector('[data-price]').value) || 0 });
+    out.push({ label: aLabel(a), qty: q ? Math.max(1, Number(q.value) || 1) : 1, price: Number(l.querySelector('[data-price]').value) || 0 });
   });
   document.querySelectorAll('#custom .line').forEach((l) => {
     const label = l.querySelector('[data-label]').value.trim();
@@ -356,7 +416,7 @@ const items = () => {
 };
 const subtotal = () => items().reduce((s, i) => s + i.price * i.qty, 0);
 const payRows = () => [...document.querySelectorAll('#pay .line')].map((l) => ({ pct: Number(l.querySelector('[data-pct]').value) || 0, when: l.querySelector('[data-when]').value.trim() }));
-const recRows = () => [...document.querySelectorAll('#recurring .line')].filter((l) => l.querySelector('[data-on]').checked).map((l) => { const r = RECURRING.find((x) => x.k === l.dataset.k); return { label: r.label, price: Number(l.querySelector('[data-price]').value) || 0, per: r.per, note: r.note }; });
+const recRows = () => [...document.querySelectorAll('#recurring .line')].filter((l) => l.querySelector('[data-on]').checked).map((l) => { const r = RECURRING.find((x) => x.k === l.dataset.k); const x = rText(r); return { label: x.label, price: Number(l.querySelector('[data-price]').value) || 0, per: r.per, note: x.note }; });
 function calc() {
   document.querySelectorAll('#addons .line, #recurring .line').forEach((l) => l.classList.toggle('off', !l.querySelector('[data-on]').checked));
   const its = items();
@@ -383,7 +443,7 @@ const uiState = () => ({
   addons: [...document.querySelectorAll('#addons .line')].map((l) => ({ k: l.dataset.k, on: l.querySelector('[data-on]').checked, qty: l.querySelector('[data-qty]')?.value, price: l.querySelector('[data-price]').value })),
   custom: [...document.querySelectorAll('#custom .line')].map((l) => ({ label: l.querySelector('[data-label]').value, qty: l.querySelector('[data-qty]').value, price: l.querySelector('[data-price]').value })),
   recurring: [...document.querySelectorAll('#recurring .line')].map((l) => ({ k: l.dataset.k, on: l.querySelector('[data-on]').checked, price: l.querySelector('[data-price]').value })),
-  pay: payRows(), title: $('title').value, discLabel: $('disc-label').value, discAmount: $('disc-amount').value,
+  pay: payRows(), title: $('title').value, lang: $('q-lang').value, discLabel: $('disc-label').value, discAmount: $('disc-amount').value,
   terms: [$('t-designs').value, $('t-revisions').value, $('t-days').value, $('t-support').value], includes: $('includes').value, notes: $('notes').value, valid: $('valid').value,
   client: { name: $('c-name').value, phone: $('c-phone').value, business: $('c-business').value, email: $('c-email').value }
 });
@@ -396,7 +456,7 @@ $('qform').addEventListener('submit', (e) => {
   if (unpriced.length && !confirm(`יש ${unpriced.length} שורות בלי מחיר. לשמור בכל זאת? הן יופיעו ללקוח ב־0 ₪.`)) { e.preventDefault(); return; }
   const u = uiState();
   $('qdata').value = JSON.stringify({
-    client: u.client, title: u.title, items: items(), recurring: recRows(),
+    client: u.client, title: u.title, lang: u.lang, items: items(), recurring: recRows(),
     discount: { label: u.discLabel.trim(), amount: Number(u.discAmount) || 0 },
     terms: { designs: u.terms[0], revisions: u.terms[1], days: u.terms[2], support: u.terms[3] },
     payment: payRows(), valid_until: u.valid, includes: u.includes, notes: u.notes, lead_id: LEAD_ID, ui: u
@@ -405,6 +465,20 @@ $('qform').addEventListener('submit', (e) => {
 
 /* טעינה */
 $('valid').value = VALID_DEFAULT;
+$('q-lang').value = LANG0;
+/* החלפת שפה: מתרגמת את מה שעוד לא נערך ידנית (מה כלול, שלבי התשלום והכותרת), ומשאירה מחירים ותנאים */
+$('q-lang').addEventListener('change', () => {
+  const k = $('base').value, en = isEn();
+  const from = en ? BASES[k].incl : BASES_EN[k].incl;
+  if ($('includes').value.trim() === '' || $('includes').value === from.join('\n')) $('includes').value = bIncl(k).join('\n');
+  const pairs = [...P10.map((p, i) => [p[1], EN_P10[i][1]]), ...P50.map((p, i) => [p[1], EN_P50[i][1]])];
+  document.querySelectorAll('#pay [data-when]').forEach((w) => { const m = pairs.find((x) => x[en ? 0 : 1] === w.value); if (m) w.value = m[en ? 1 : 0]; });
+  const who = $('c-business').value.trim() || $('c-name').value.trim();
+  const oldTitle = (en ? BASES[k].label : BASES_EN[k].label) + (who ? (en ? ' עבור ' : ' for ') + who : '');
+  if (k !== 'none' && ($('title').value === oldTitle || $('title').value.trim() === '')) $('title').value = bLabel(k) + forWho(who);
+  if ($('disc-label').value === LAUNCH[en ? 0 : 1]) $('disc-label').value = LAUNCH[en ? 1 : 0];
+  calc();
+});
 if (INIT) {
   const u = INIT;
   $('base').value = BASES[u.base] ? u.base : 'none';
@@ -426,7 +500,8 @@ if (INIT) {
   }
   $('base').value = guess;
   applyBase(guess, false);
-  if (PREFILL && /אנגלית|English/.test(PREFILL.plan || '')) document.querySelector('#addons [data-k="en"] [data-on]').checked = true;
+  /* תוספת שפה שנייה רק כשביקשו אותה במחשבון. "(Sent from the English site)" לבד לא אומר שצריך שתי שפות */
+  if (PREFILL && /אנגלית|English version|with English|second language/i.test(PREFILL.plan || '')) document.querySelector('#addons [data-k="en"] [data-on]').checked = true;
   const extra = (PREFILL?.plan || '').match(/כולל (\d+) עמודים נוספים|כולל עמוד אחד נוסף/);
   if (extra) { const l = document.querySelector('#addons [data-k="page"]'); l.querySelector('[data-on]').checked = true; l.querySelector('[data-qty]').value = extra[1] || 1; }
   const A = PREFILL && PREFILL.auto;
@@ -434,7 +509,7 @@ if (INIT) {
     Object.entries(A.addons || {}).forEach(([k, v]) => { const l = document.querySelector(`#addons [data-k="${k}"]`); if (!l || !v) return; l.querySelector('[data-on]').checked = true; if (typeof v === 'number' && l.querySelector('[data-qty]')) l.querySelector('[data-qty]').value = v; });
     (A.custom || []).forEach(customRow);
     Object.entries(A.recurring || {}).forEach(([k, v]) => { const l = document.querySelector(`#recurring [data-k="${k}"]`); if (l) l.querySelector('[data-on]').checked = !!v; });
-    if (A.who && guess !== 'none') $('title').value = BASES[guess].label + ' עבור ' + A.who;
+    if (A.who && guess !== 'none') $('title').value = bLabel(guess) + forWho(A.who);
     const icon = { ok: '✓ נוסף', todo: '⚠ לתמחר', note: 'ℹ לשיחה' };
     const box = document.createElement('div');
     box.className = 'card qhints';

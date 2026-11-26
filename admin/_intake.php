@@ -127,7 +127,7 @@ function intake_estimate(array $rec, string $lang = 'he'): array {
     $b = EST_BASES[$d['base']] ?? EST_BASES['site'];
     $lines = [[$he ? $b[2] : $b[3], $b[0]]];
     if (!empty($d['addons']['en'])) $lines[] = [$he ? 'גרסה בשפה שנייה' : 'A second language version', $b[1]];
-    if (!empty($d['addons']['page'])) { $n = (int) $d['addons']['page']; $lines[] = [$he ? "$n עמודים נוספים" : "$n extra pages", $n * 350]; }
+    if (!empty($d['addons']['page'])) { $n = (int) $d['addons']['page']; $lines[] = [$he ? ($n === 1 ? 'עמוד נוסף' : "$n עמודים נוספים") : ($n === 1 ? '1 extra page' : "$n extra pages"), $n * 350]; }
     if (!empty($d['addons']['logo2'])) $lines[] = [$he ? 'לוגו מקצועי (או לוגו בסיסי ב־590 ₪)' : 'A professional logo (or a basic logo for ₪590)', 1500];
     $todo = [];
     foreach ($d['custom'] as $c) {

@@ -6,12 +6,12 @@ Who: Yehuda Gordon. Area: All of Israel, by Zoom and phone.
 
 ## Packages and prices
 
-- **Basic landing page**: 1,290 ₪. One page with up to 5 sections, one design and one revision round. You provide the text. 50% upfront and 50% at launch.
-- **Landing page**: from 2,000 ₪. One page with up to 7 sections, 3 design directions and 3 revision rounds, copywriting, a contact form, and domain, hosting and business email for the first year.
-- **Website with an admin area**: from 4,000 ₪. Up to 6 pages, an admin area to update changing content, forms and a content section, training, and domain, hosting and business email for the first year.
-- **Website with sign-ups and a mailing list**: from 6,000 ₪. Up to 8 pages, sign-ups and user accounts, a mailing list with 3 email templates, and an admin area for content, inquiries and subscribers. Suited to institutions, nonprofits and classes.
-- **Online store**: from 7,000 ₪. A full store with up to 30 products (I upload them), a cart, card payments and shipping, and an admin area for products, stock and orders.
-- **Brand from 0 to 100%**: from 5,900 ₪. Logo, visual language, all the content, print and social, and Google, together with the website: 5,900 with a landing page, 7,900 with a website, 9,900 with sign-ups, 10,900 with a store.
+- **Basic landing page**: ₪1,290. One page with up to 5 sections, one design and one revision round. You provide the text. 50% upfront and 50% at launch.
+- **Landing page**: from ₪2,000. One page with up to 7 sections, 3 design directions and 3 revision rounds, copywriting, a contact form, and domain, hosting and business email for the first year.
+- **Website with an admin area**: from ₪4,000. Up to 6 pages, an admin area to update changing content, forms and a content section, training, and domain, hosting and business email for the first year.
+- **Website with sign-ups and a mailing list**: from ₪6,000. Up to 8 pages, sign-ups and user accounts, a mailing list with 3 email templates, and an admin area for content, inquiries and subscribers. Suited to institutions, nonprofits and classes.
+- **Online store**: from ₪7,000. A full store with up to 30 products (I upload them), a cart, card payments and shipping, and an admin area for products, stock and orders.
+- **Brand from 0 to 100%**: from ₪5,900. Logo, visual language, all the content, print and social, and Google, together with the website: 5,900 with a landing page, 7,900 with a website, 9,900 with sign-ups, 10,900 with a store.
 
 Prices are final, and no VAT is added. In every package except the basic landing page: 3 design directions, 3 revision rounds, 4 months of support, and mobile, Google and accessibility readiness. The basic landing page: one design, one revision round and one month of support.
 Full pricing: https://yygweb.com/en/pricing/
@@ -66,7 +66,7 @@ Yours. The site, the domain and the content belong to you. Even when I manage yo
 
 ### Can we meet?
 
-Yes, on Zoom. I'm available Sunday to Wednesday, 10:00–13:30 (Israel time), or at another time by appointment.
+Yes, on Zoom. I'm available Sunday to Wednesday, 10:00 to 13:30 (Israel time), or at another time by appointment.
 
 ### Can I update the site myself?
 

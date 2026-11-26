@@ -255,7 +255,7 @@
       try { if (location.hostname === 'yygweb.com' && navigator.sendBeacon) navigator.sendBeacon('/hit.php', new Blob([JSON.stringify({ e: 'lead', p: location.pathname, r: '', s: '' })], { type: 'application/json' })); } catch (e) { /* בלי מונה */ }
       /* הערכת מחיר מיידית מהשרת, לפי התשובות (רק בשאלון האפיון) */
       const e = j.estimate;
-      const nis = (n) => Number(n).toLocaleString('en-US') + '\u00A0₪';
+      const nis = (n) => (EN ? '₪' + Number(n).toLocaleString('en-US') : Number(n).toLocaleString('en-US') + '\u00A0₪');   // כמו nis ב־site.js: באנגלית ₪ לפני המספר
       const est = e && e.total ? `<div class="qf-est" role="region" aria-labelledby="qf-est-t">
         <p class="qf-est-k" id="qf-est-t">${t('הערכת מחיר לפי התשובות שלכם', 'A price estimate from your answers')}</p>
         <p class="qf-est-v">${nis(e.total)}${e.todo && e.todo.length ? `<small>${t(' ועוד מה שיתומחר בהצעה', ' plus the items priced in the quote')}</small>` : ''}</p>

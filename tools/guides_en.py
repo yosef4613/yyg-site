@@ -340,6 +340,7 @@ choose_body = '''
 </ul>
 
 <h2>How to compare quotes</h2>
+<p>Put the quotes side by side, and check each one for:</p>
 <div class="g-scroll"><table class="g-table">
 <thead><tr><th>What to check</th><th>Why it matters</th></tr></thead>
 <tbody>
@@ -353,6 +354,7 @@ choose_body = '''
 <p>The cheapest quote isn't always the cheapest in the end, if you pay for everything separately in the second year. And the most expensive isn't always the best, if it has no clear list of what you get.</p>
 
 <h2>What to ask yourself before you reach out</h2>
+<p>The questions for a web designer work best when you know what you need. Five minutes with yourself before the call:</p>
 <ul>
 <li><b>What should the website achieve?</b> Calls, sign-ups, orders, or getting to know you.</li>
 <li><b>Who are your customers?</b> Age, area, and which device they use, usually a phone.</li>
@@ -360,6 +362,7 @@ choose_body = '''
 <li><b>Who will update the site?</b> You, someone on your team, or the designer.</li>
 <li><b>What's the budget and the deadline?</b> Even a rough range helps you get an accurate quote.</li>
 </ul>
+<p>And what to ask for in writing: a list of what's included, the final price, the payment stages, the delivery time and from which day it's counted, and what the second year costs. A tidy quote with all of these is a good sign in itself.</p>
 
 <h2>And what about me?</h2>
 <p>You'll find my answers to all 10 questions on my website: what each package includes, the final price, the 3 designs, the 3 revision rounds, delivery times and the second year. Want an exact number? The calculator on my site gives you a recommended package, a list of pages and an estimated price, without leaving your details. You can also read <a class="text-link" href="/en/guides/website-cost.html">how much a business website costs</a> and <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>, or browse my <a class="text-link" href="/en/services/">services</a>.</p>
@@ -414,6 +417,12 @@ time_body = '''
 <li>If there's a deadline, like a business opening or an event, mention it in the first call.</li>
 <li>For a store: open an account with a payment provider on day one.</li>
 </ul>
+
+<h2>Example: what a week looks like for a site with an admin panel</h2>
+<p>Say all the materials arrived on Sunday. In the first few days, I write the copy and prepare 3 designs. You choose a direction, and then I build all the pages and connect the admin panel. Toward the end there's a revision round, testing on phone and computer, connecting the domain, and training. If every round gets a reply within a day, it all fits into ten business days. Each day spent waiting for a reply pushes everything back by a day.</p>
+
+<h2>And a store?</h2>
+<p>A store takes longer, mostly because of the preparation, not the build: a product list with prices, descriptions and photos, an account with a payment provider, and a shipping and returns policy. When all of these are ready up front, up to 20 business days is enough even for a store with dozens of products. If one of them is missing, that's what decides when the store goes live.</p>
 
 <h2>What gets checked before launch</h2>
 <ul>

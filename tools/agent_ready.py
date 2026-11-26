@@ -11,7 +11,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://yygweb.com'
 O = json.loads((ROOT / 'assets/offer.json').read_text())
 E = lambda s: html.escape(str(s), quote=True)
-nis = lambda n: f'{n:,} ₪'
+nis = lambda n, he=True: f'{n:,} ₪' if he else f'₪{n:,}'   # באנגלית ₪ לפני המספר, כמו בשאר האתר באנגלית
 CSS_V = re.search(r'site\.css\?v=(\d+)', (ROOT / 'index.html').read_text()).group(1)
 
 STYLE = '''<style>
@@ -143,9 +143,9 @@ def offers_ld(lang):
 def pricing(lang):
     he = lang == 'he'; base = '/' if he else '/en/'
     days = lambda d: (f'עד {d} ימי עבודה' if he else f'up to {d} business days')
-    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}</td><td>{E(p["days_text"][lang]) if p.get("days_text") else days(p["days"])}</td></tr>' for p in O['packages'])
-    adds = ''.join(f'<li>{E(a["name"][lang])}: <b>{("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"])}</b></li>' for a in O['addons'])
-    rec = ''.join(f'<li>{E(r["name"][lang])}: <b>{nis(r["price"])} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}</b></li>' for r in O['recurring'])
+    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"], he)}</td><td>{E(p["days_text"][lang]) if p.get("days_text") else days(p["days"])}</td></tr>' for p in O['packages'])
+    adds = ''.join(f'<li>{E(a["name"][lang])}: <b>{("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"], he)}</b></li>' for a in O['addons'])
+    rec = ''.join(f'<li>{E(r["name"][lang])}: <b>{nis(r["price"], he)} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}</b></li>' for r in O['recurring'])
     body = f'''  <div class="g-scroll"><table class="g-table">
    <thead><tr><th>{'מסלול' if he else 'Package'}</th><th>{'מחיר' if he else 'Price'}</th><th>{'זמן אספקה' if he else 'Delivery'}</th></tr></thead>
    <tbody>{rows}</tbody></table></div>
@@ -173,9 +173,9 @@ def md_pricing(lang):
     he = lang == 'he'
     L = [f'# {"מחירון YYG Web Design" if he else "YYG Web Design pricing"}', '', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], '', f'## {"מסלולים" if he else "Packages"}', '']
     for p in O['packages']:
-        L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
-    L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"])}' for a in O['addons']]
-    L += ['', f'## {"תשלומים קבועים" if he else "Recurring"}', ''] + [f'- {r["name"][lang]}: {nis(r["price"])} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}' for r in O['recurring']]
+        L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"], he)}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
+    L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"], he)}' for a in O['addons']]
+    L += ['', f'## {"תשלומים קבועים" if he else "Recurring"}', ''] + [f'- {r["name"][lang]}: {nis(r["price"], he)} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}' for r in O['recurring']]
     L += ['', f'## {"איך משלמים" if he else "How payment works"}', '', O['payment'][lang], '', O['launch_offer'][lang], '']
     return '\n'.join(L)
 
@@ -254,7 +254,7 @@ def md_home(lang):
     L = [f'# YYG Web Design: {"עיצוב ובניית אתרים" if he else "Web design and development"}', '', B['description'][lang], '',
          f'{"מי" if he else "Who"}: {B["owner"][lang]}. {"אזור" if he else "Area"}: {B["area"][lang]}.', '',
          f'## {"מסלולים ומחירים" if he else "Packages and prices"}', '']
-    L += [f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}. {p["summary"][lang]}' for p in O['packages']]
+    L += [f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"], he)}. {p["summary"][lang]}' for p in O['packages']]
     L += ['', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], f'{"המחירון המלא" if he else "Full pricing"}: {SITE}{base}pricing/', '',
           f'## {"איך עובדים" if he else "How it works"}', ''] + [f'{i}. {x[lang]}' for i, x in enumerate(O['process'], 1)]
     L += ['', f'## {"איך משלמים" if he else "How payment works"}', '', O['payment'][lang], '', O['launch_offer'][lang], '']

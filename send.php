@@ -99,6 +99,9 @@ $f = [
 if ($f['name'] === '') out(false, 'missing', 422);
 if (!filter_var($f['email'], FILTER_VALIDATE_EMAIL)) out(false, 'email', 422);
 if ($f['phone'] !== '' && strlen(preg_replace('/\D/', '', $f['phone'])) < 9) out(false, 'phone', 422);
+/* פנייה מהאתר באנגלית: הסקריפט מוסיף "(Sent from the English site)", ובטופס בלי סקריפט מזהים לפי הדף שממנו נשלח */
+$fromEn = strpos($f['plan'], 'English site') !== false || ($in['lang'] ?? '') === 'en' || (bool) preg_match('~^https?://[^/]+/en/~', (string) ($_SERVER['HTTP_REFERER'] ?? ''));
+if ($fromEn && strpos($f['plan'], 'English site') === false) $f['plan'] = trim($f['plan'] . "\n(Sent from the English site)");
 
 /* ---------- סינון ספאם ----------
    מלכודת זמן: מי ששולח פחות מ־3 שניות אחרי שהטופס נטען הוא רובוט, ונענה "בהצלחה" בלי שליחה.
@@ -108,7 +111,7 @@ if ($age >= 0 && $age < 3) out(true);
 $score = 0; $why = [];
 if ($age < 0) { $score += 2; $why[] = 'בלי אסימון מהדף'; }
 $free = $f['name'] . ' ' . $f['business'] . ' ' . $f['notes'];
-if (!preg_match('/\p{Hebrew}/u', $free . $f['likes'])) { $score += 1; $why[] = 'בלי עברית'; }
+if (!$fromEn && !preg_match('/\p{Hebrew}/u', $free . $f['likes'])) { $score += 1; $why[] = 'בלי עברית'; }   // מהאתר באנגלית, בלי עברית זה טבעי
 if (preg_match_all('~https?://|www\.~i', $free) > 2) { $score += 2; $why[] = 'הרבה קישורים'; }
 if (preg_match('~https?://|www\.~i', $f['name'])) { $score += 2; $why[] = 'קישור בשם'; }
 if (preg_match('/[\p{Cyrillic}\p{Han}\p{Hiragana}\p{Katakana}\p{Thai}]/u', $free)) { $score += 2; $why[] = 'כתב זר'; }
@@ -175,7 +178,7 @@ $sent = send_mail($cfg, $subject, $html, $text);
 /* אסימון לאישור המייל של הלקוח: נשמר רק הגיבוב שלו */
 $ctok = bin2hex(random_bytes(16));
 $lead = ['id' => bin2hex(random_bytes(6)), 't' => time(), 'sent' => $sent, 'score' => $score, 'why' => $why,
-         'lang' => strpos($f['plan'], 'English site') !== false ? 'en' : 'he', 'ctok' => hash('sha256', $ctok)] + $f;
+         'lang' => $fromEn ? 'en' : 'he', 'ctok' => hash('sha256', $ctok)] + $f;
 @file_put_contents(data_dir() . '/leads.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 if (!$sent) out(false, 'send', 502);
 @file_put_contents(data_dir() . '/leads.log', time() . "\n", FILE_APPEND | LOCK_EX);
@@ -202,7 +205,7 @@ function lead_confirm_request(array $lead, string $ctok): bool {
           . '<p style="color:#5A6472;font-size:14px">מעדיפים לדבר קודם? <a href="' . h($talk) . '" style="color:#1a56db">לאישור הפנייה ולקבלת מספר הטלפון שלי</a>. לא אתם השארתם פרטים באתר? פשוט התעלמו מהמייל הזה.</p>';
     return mail_send((string) $lead['email'], $en ? "$name, here's the next step | YYG Web Design" : "$name, הצעד הבא לאתר שלכם | YYG Web Design",
         mail_wrap($en ? "Hi $name" : "שלום $name", $body, '', $en, false),
-        ($en ? "Hi $name,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "שלום $name,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"));
+        ($en ? "Hi $name,\n\nThe next step is a short questionnaire (about 10 minutes): $q\n\nPrefer to talk first? $talk" : "שלום $name,\n\nהצעד הבא הוא שאלון אפיון קצר (כ־10 דקות): $q\n\nמעדיפים לדבר קודם? $talk"), mail_from($en));
 }
 
 /* ---------- שליחה ---------- */

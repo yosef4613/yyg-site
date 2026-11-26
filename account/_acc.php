@@ -88,7 +88,7 @@ function sub_send_confirm(array $s): bool {
         ? '<p>Thanks for joining. To start receiving guides and tips, please confirm your email address:</p>' . mail_button($l['confirm'], 'Confirm my subscription') . '<p style="color:#5A6472;font-size:14px">If you didn\'t ask to join, just ignore this email and you won\'t receive anything.</p>'
         : '<p>תודה שהצטרפתם. כדי להתחיל לקבל מדריכים וטיפים, צריך רק לאשר את כתובת המייל:</p>' . mail_button($l['confirm'], 'אישור ההצטרפות') . '<p style="color:#5A6472;font-size:14px">אם לא ביקשתם להצטרף, פשוט התעלמו מהמייל הזה ולא יישלח אליכם כלום.</p>';
     return mail_send($s['email'], $en ? 'Please confirm your subscription to YYG Web Design' : 'אישור הצטרפות לרשימת התפוצה של YYG Web Design', mail_wrap($en ? 'One more click' : 'עוד לחיצה אחת', $body, '', $en),
-        ($en ? "Confirm your subscription: " : "לאישור ההצטרפות: ") . $l['confirm']);
+        ($en ? "Confirm your subscription: " : "לאישור ההצטרפות: ") . $l['confirm'], mail_from($en));
 }
 
 /* ---------- עמוד באזור האישי, בעיצוב של האתר ---------- */

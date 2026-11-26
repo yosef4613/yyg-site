@@ -9,10 +9,10 @@ def admin_step(title, p, pts, alt, btn, h=660):
    <div class="d-step-h"><span class="d-num" aria-hidden="true">{n}</span><h2 id="sa-t">{E(L(title))}</h2></div>
    <p>{E(L(p))}</p>
    <div class="d-hours">
-    <a href="/{pfx}admin/"><img src="/{pfx}shots/admin-d.webp" width="960" height="{h}" alt="{E(L(alt))}" loading="lazy"></a>
+    <a href="/{pfx}admin/"{'' if he else ' hreflang="he"'}><img src="/{pfx}shots/admin-d.webp" width="960" height="{h}" alt="{E(L(alt))}" loading="lazy"></a>
     <div><ul>{''.join(f'<li>{E(x)}</li>' for x in L(pts))}</ul>
-     <a class="btn btn-gold" href="/{pfx}admin/">{E(L(btn))}</a>
-     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
+     <a class="btn btn-gold" href="/{pfx}admin/"{'' if he else ' hreflang="he"'}>{E(L(btn))}</a>
+     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'The screen is in Hebrew. In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
    </div>
   </section>
 '''
@@ -81,7 +81,7 @@ QUOTE_DON = {
    incl=['Up to 6 pages', 'An admin area: the campaign, field updates, donations recorded by hand and the donor list', 'A donation page: set amounts and any amount, dedications and anonymous giving', 'A clean redraw of the existing logo from the photo', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
    terms=['3 design directions', '3 revision rounds', '14 working days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['Marked 5 pages, plus a donation page: 6 pages, exactly what the package includes. No extra pages.', 'Card donations: the nonprofit opens an account with a payment provider of its choice, and I connect it to the site. The provider\'s fees are paid directly to it.', 'Timing: the campaign opens on Rosh Chodesh Kislev, and 14 working days are enough. Stated budget: 4,000 to 7,000 ₪.']),
+   notes=['Marked 5 pages, plus a donation page: 6 pages, exactly what the package includes. No extra pages.', 'Card donations: the nonprofit opens an account with a payment provider of its choice, and I connect it to the site. The provider\'s fees are paid directly to it.', 'Timing: the campaign opens on Rosh Chodesh Kislev, and 14 working days are enough. Stated budget: ₪4,000 to ₪7,000.']),
 }
 DONATE = dict(prefix='demo/donate/', data=data_of('donate'), designs=DESIGNS_DON, T=T_DON, quote=QUOTE_DON, extra=None,
   hi=hi_generic([
@@ -196,7 +196,7 @@ T_SHOP = t_for(dict(
   title='Example store: spices and tea with a cart, shipping and stock management | YYG Web Design',
   desc='A fictional spice shop goes through the whole YYG Web Design process: a questionnaire, a quote, 3 designs for an online store with a working cart, feedback, the final version, and an admin screen for products, stock and orders.',
   h1='An online spice and tea store, with a cart, shipping and stock management',
-  lead='A fictional family spice shop called "Gargar", the third generation grinding near the market in Jerusalem. They wanted to sell online and ship across Israel, with about 40 products, free shipping over 250 ₪ and pickup from the shop. We went through the whole process: a questionnaire, a quote, 3 designs, feedback, the final version and the admin screen.',
+  lead='A fictional family spice shop called "Gargar", the third generation grinding near the market in Jerusalem. They wanted to sell online and ship across Israel, with about 40 products, free shipping over ₪250 and pickup from the shop. We went through the whole process: a questionnaire, a quote, 3 designs, feedback, the final version and the admin screen.',
   note='A fictional example store: the name, details and testimonials are made up, and no order is shipped or charged. The images are 3D renders I built specially, and the logo was designed for the example too.',
   s1p='The shop owner filled in the questionnaire in about 10 minutes and attached his existing logo. These are the answers that shaped the work most:',
   files='What I prepared for him: a refined logo and product renders',
@@ -213,7 +213,7 @@ QUOTE_SHOP = {
    incl=['Up to 30 products that I upload, plus 10 more as an add-on: 40 products in all', 'A shopping cart, card payments and shipping', 'Free shipping above an amount you set, and pickup from the shop', 'An admin area for products, stock and orders', 'Training: a personal call and a written guide', 'Hosting and business email for the first year, on the existing domain', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
    terms=['3 design directions', '3 revision rounds', '20 working days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['About 40 products: 30 are included in the store, plus 10 more for ₪200. Card-payment fees are paid directly to the payment provider.', 'He attached his existing logo: I refine it and prepare a clean file for the site, at no extra cost. The domain is already registered in his name.', 'Timing: by 31.1.2027, before the Purim and Passover gift box season. Stated budget: over 7,000 ₪.']),
+   notes=['About 40 products: 30 are included in the store, plus 10 more for ₪200. Card-payment fees are paid directly to the payment provider.', 'He attached his existing logo: I refine it and prepare a clean file for the site, at no extra cost. The domain is already registered in his name.', 'Timing: by 31.1.2027, before the Purim and Passover gift box season. Stated budget: over ₪7,000.']),
 }
 SHOP = dict(prefix='demo/shop/', data=data_of('shop'), designs=DESIGNS_SHOP, T=T_SHOP, quote=QUOTE_SHOP, extra=None,
   hi=hi_generic([

@@ -22,6 +22,8 @@ function private_config(): array {
 }
 function h($s): string { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 function nis($n): string { return number_format((float) $n, 0, '.', ',') . ' ₪'; }
+/* באנגלית ₪ לפני המספר, כמו באתר באנגלית */
+function nis_lang($n, bool $en): string { return $en ? '₪' . number_format((float) $n, 0, '.', ',') : nis($n); }
 function tz(): DateTimeZone { return new DateTimeZone('Asia/Jerusalem'); }
 function fmt_time(int $t, string $f = 'd/m/Y H:i'): string { return (new DateTime('@' . $t))->setTimezone(tz())->format($f); }
 
@@ -166,6 +168,8 @@ function mail_send(string $to, string $subject, string $html, string $text, stri
 function notify_me(string $subject, string $html, string $text): bool {
     return mail_send((string) (private_config()['to'] ?? ''), $subject, $html, $text, 'האתר של YYG Web Design');
 }
+/* שם השולח במיילים ללקוחות, בשפה של הלקוח */
+function mail_from(bool $en): string { return $en ? 'YYG Web Design · Yehuda Gordon' : 'YYG Web Design · יהודה גורדון'; }
 /* מסגרת אחידה למיילים שיוצאים ללקוחות ולמנויים */
 function mail_wrap(string $title, string $body, string $footer = '', bool $en = false, bool $phone = true): string {
     return '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><body style="margin:0;padding:24px 12px;background:#F4F5F7;font-family:Arial,sans-serif;color:#151920">'

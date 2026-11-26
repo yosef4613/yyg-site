@@ -9,10 +9,10 @@ def admin_anaf(lang, pfx, n):
    <div class="d-step-h"><span class="d-num" aria-hidden="true">{n}</span><h2 id="sa-t">{E('מסך ניהול התוכן' if he else 'The content admin screen')}</h2></div>
    <p>{E('בגלל זה בחרנו באתר עם אזור ניהול: בעל הנגריה מוסיף עבודות לגלריה בערך פעם בחודש. במסך הזה הוא מוסיף עבודה עם תמונה, משנה טקסט, מסדר ומוחק, ושומר. הגלריה באתר מתעדכנת מיד.' if he else 'This is why we chose a website with an admin area: the owner adds projects to the gallery about once a month. On this screen he adds a project with a photo, edits text, reorders and deletes, and saves. The gallery on the site updates right away.')}</p>
    <div class="d-hours">
-    <a href="/{pfx}admin/"><img src="/{pfx}shots/admin-d.webp" width="960" height="660" alt="{E('מסך ניהול התוכן של הנגריה' if he else 'The carpentry content admin screen')}" loading="lazy"></a>
+    <a href="/{pfx}admin/"{'' if he else ' hreflang="he"'}><img src="/{pfx}shots/admin-d.webp" width="960" height="660" alt="{E('מסך ניהול התוכן של הנגריה' if he else 'The carpentry content admin screen')}" loading="lazy"></a>
     <div><ul>{''.join(f'<li>{E(x)}</li>' for x in pts)}</ul>
-     <a class="btn btn-gold" href="/{pfx}admin/">{E('לנסות את מסך הניהול' if he else 'Try the admin screen')}</a>
-     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
+     <a class="btn btn-gold" href="/{pfx}admin/"{'' if he else ' hreflang="he"'}>{E('לנסות את מסך הניהול' if he else 'Try the admin screen')}</a>
+     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'The screen is in Hebrew. In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
    </div>
   </section>
 '''
@@ -75,7 +75,7 @@ QUOTE_OPT = {
    incl=['One page, up to 7 sections', 'A contact form and a call button', 'Small changes on me during the support period', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
    terms=['3 design directions', '3 revision rounds', '4 working days to deliver', '4 months of support'],
    pay=QUOTE['en']['pay'], annual=QUOTE['en']['annual'],
-   notes=['The builder suggested a professional logo (₪1,500). Because of the budget we chose a basic logo, with an upgrade possible later.', 'A domain needs registering: something short with the name Tzalul. Included in the first year.', 'Timing: within two weeks. Stated budget: 2,000 to 4,000 ₪.']),
+   notes=['The builder suggested a professional logo (₪1,500). Because of the budget we chose a basic logo, with an upgrade possible later.', 'A domain needs registering: something short with the name Tzalul. Included in the first year.', 'Timing: within two weeks. Stated budget: ₪2,000 to ₪4,000.']),
 }
 
 def hi_optika(ans, he):
@@ -102,10 +102,10 @@ def extra_optika(lang, pfx):
    <div class="d-step-h"><span class="d-num" aria-hidden="true">4</span><h2 id="sx-t">{E('המסך שבעל העסק ביקש' if he else 'The screen the owner asked for')}</h2></div>
    <p>{E('בדף נחיתה רגיל אין אזור ניהול, אז בניתי מסך עדכון קטן אחד, בדיוק למה שהוא צריך. מסמנים אילו ימים פתוח, משנים שעות, מוסיפים הודעה לחג או מבצע, ושומרים. הדף מתעדכן מיד.' if he else "A standard landing page has no admin area, so I built one small update screen for exactly what he needs. Mark which days are open, change hours, add a holiday notice or a promotion, and save. The page updates right away.")}</p>
    <div class="d-hours">
-    <a href="/{pfx}admin/"><img src="/{pfx}shots/admin-d.webp" width="960" height="700" alt="{E('מסך עדכון השעות והמבצע' if he else 'The hours and promotion update screen')}" loading="lazy"></a>
+    <a href="/{pfx}admin/"{'' if he else ' hreflang="he"'}><img src="/{pfx}shots/admin-d.webp" width="960" height="700" alt="{E('מסך עדכון השעות והמבצע' if he else 'The hours and promotion update screen')}" loading="lazy"></a>
     <div><ul>{''.join(f'<li>{E(x)}</li>' for x in pts)}</ul>
-     <a class="btn btn-gold" href="/{pfx}admin/">{E('לנסות את מסך העדכון' if he else 'Try the update screen')}</a>
-     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
+     <a class="btn btn-gold" href="/{pfx}admin/"{'' if he else ' hreflang="he"'}>{E('לנסות את מסך העדכון' if he else 'Try the update screen')}</a>
+     <small>{E('בדוגמה השינוי נשמר רק אצלכם בדפדפן, כדי שכל אחד יוכל לנסות. פתחו את הגרסה הסופית בלשונית אחרת, ותראו אותה מתעדכנת.' if he else 'The screen is in Hebrew. In the example, changes are saved only in your browser, so anyone can try. Open the final version in another tab and watch it update.')}</small></div>
    </div>
   </section>
 '''

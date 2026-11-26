@@ -61,7 +61,7 @@
   ["package", "חנות אונליין (מ־7,000 ₪)"],
   ["budget", "מעל 7,000 ₪"],
   ["deciders", {"he": "אני ואבא שלי, שעדיין עומד בחנות כל בוקר.", "en": "Me and my father, who's still in the shop every morning."}],
-  ["extra", {"he": "יש לנו כ־40 מוצרים. הכי חשוב לי שאוכל לעדכן לבד מלאי ומחירים, ושההזמנות יגיעו מסודרות עם כתובת למשלוח. משלוח חינם מעל 250 ₪, אחרת 30 ₪, והגעה תוך 2 עד 4 ימי עבודה. אפשר גם איסוף עצמי מהחנות.", "en": "We have about 40 products. Most important to me: that I can update stock and prices myself, and that orders arrive organized, with a shipping address. Free shipping over 250 ₪, otherwise 30 ₪, with delivery in 2 to 4 working days. Pickup from the shop is also possible."}]
+  ["extra", {"he": "יש לנו כ־40 מוצרים. הכי חשוב לי שאוכל לעדכן לבד מלאי ומחירים, ושההזמנות יגיעו מסודרות עם כתובת למשלוח. משלוח חינם מעל 250 ₪, אחרת 30 ₪, והגעה תוך 2 עד 4 ימי עבודה. אפשר גם איסוף עצמי מהחנות.", "en": "We have about 40 products. Most important to me: that I can update stock and prices myself, and that orders arrive organized, with a shipping address. Free shipping over ₪250, otherwise ₪30, with delivery in 2 to 4 working days. Pickup from the shop is also possible."}]
  ],
  "feedback": [
   ["name", {"he": "נתנאל, גרגר תבלינים (לקוח לדוגמה)", "en": "Netanel, Gargar spices (example client)"}],

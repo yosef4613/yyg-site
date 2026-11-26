@@ -14,9 +14,9 @@ $go = static function (string $q = '') use ($EN): void { header('Location: /acco
 $msgPage = static function (string $title, string $text) : void {
     acc_page($title, '<h1>' . h($title) . '</h1><p class="lead">' . $text . '</p><p><a class="text-link" href="' . h(acc_url()) . '">' . T('לכניסה לאזור האישי', 'Go to your account') . '</a></p>');
 };
-$send = static function (array $u, string $subject, string $title, string $body, string $text): bool {
-    $en = ($u['lang'] ?? 'he') === 'en';
-    return mail_send($u['email'], $subject, mail_wrap($title, $body, '', $en), $text);
+/* הטקסט של המייל נכתב בשפת הדף (T), ולכן גם המסגרת והשולח בשפת הדף */
+$send = static function (array $u, string $subject, string $title, string $body, string $text) use ($EN): bool {
+    return mail_send($u['email'], $subject, mail_wrap($title, $body, '', $EN), $text, mail_from($EN));
 };
 $err = '';
 
@@ -243,7 +243,7 @@ if ($myQuotes) {
     foreach (array_reverse($myQuotes, true) as $num => $q) {
         $t = quote_totals($q);
         $st = ($q['status'] ?? '') === 'approved' ? T('אושרה', 'Approved') : T('ממתינה לאישור', 'Awaiting approval');
-        $body .= '<a href="' . h(quote_url($q)) . '"><span><b>' . h($q['title'] ?: $num) . '</b><br><small>' . h($num) . ' · ' . h($st) . '</small></span><b>' . h(nis($t['total'])) . '</b></a>';
+        $body .= '<a href="' . h(quote_url($q)) . '"><span><b>' . h($q['title'] ?: $num) . '</b><br><small>' . h($num) . ' · ' . h($st) . '</small></span><b>' . h(nis_lang($t['total'], $EN)) . '</b></a>';
     }
     $body .= '</div>';
 } else {

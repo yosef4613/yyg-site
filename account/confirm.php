@@ -14,6 +14,7 @@ $tok = preg_replace('/[^a-f0-9]/', '', (string) ($in['t'] ?? ''));
 $leads = $id !== '' ? leads_load() : [];
 $lead = $leads[$id] ?? null;
 $valid = $lead && $tok !== '' && !empty($lead['ctok']) && hash_equals((string) $lead['ctok'], hash('sha256', $tok));
+if ($valid && ($lead['lang'] ?? '') === 'en') $EN = true;   // פנייה מהאתר באנגלית נשארת באנגלית, גם אם הקישור הגיע בלי lang=en
 
 if (!$valid) {
     acc_page(T('אישור הפנייה', 'Confirm your inquiry'), '<h1>' . T('הקישור לא תקין', 'This link isn\'t valid') . '</h1><p class="lead">'
@@ -66,7 +67,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($in['do'] ?? '') === 'conf
               . '<p><b>הצעד הבא:</b> שאלון אפיון קצר, כ־10 דקות. איתו אני מגיע לשיחה מוכן, עם הצעת מחיר מסודרת.</p>' . mail_button($qLink, 'לשאלון האפיון');
         mail_send((string) $lead['email'], $EN ? 'My details, and the next step | YYG Web Design' : 'הפרטים שלי, והצעד הבא | YYG Web Design',
             mail_wrap($EN ? "Thank you, $name" : "תודה, $name", $body, '', $EN),
-            ($EN ? "Thank you, $name.\nPhone: $phone ($hours)\nQuestionnaire: " : "תודה, $name.\nטלפון: $phone ($hours)\nשאלון האפיון: ") . $qLink);
+            ($EN ? "Thank you, $name.\nPhone: $phone ($hours)\nQuestionnaire: " : "תודה, $name.\nטלפון: $phone ($hours)\nשאלון האפיון: ") . $qLink, mail_from($EN));
     }
     header('Location: /account/confirm.php?' . http_build_query(['l' => $id, 't' => $tok] + ($EN ? ['lang' => 'en'] : [])), true, 303);
     exit;

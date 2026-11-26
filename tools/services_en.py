@@ -223,7 +223,8 @@ MORE = {
 <h2>What I need from you</h2>
 <p>Very little: your logo if you have one, a sentence or two about your business, the service you want to promote, and what sets you apart. Real photos of your work help a lot. I prepare everything else, including the copy. The full list is in the guide <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>.</p>
 <h2>After the page is live</h2>
-<p>During the 4 months of support, I fix bugs and answer questions. A landing page has no admin panel, so I make small text or image changes for you. If you later want to expand to a full website, the page becomes the home page, and we don't start from scratch. Not sure what fits? Read <a class="text-link" href="/en/guides/landing-or-website.html">landing page or full website</a>, or answer 3 questions in the <a class="text-link" href="/en/#plan">price calculator</a>.</p>''',
+<p>During the 4 months of support, I fix bugs and answer questions. A landing page has no admin panel, so I make small text or image changes for you. If you later want to expand to a full website, the page becomes the home page, and we don't start from scratch. Not sure what fits? Read <a class="text-link" href="/en/guides/landing-or-website.html">landing page or full website</a>, or answer 3 questions in the <a class="text-link" href="/en/#plan">price calculator</a>.</p>
+<p>You can see how I work in the two projects on the site: <a class="text-link" href="/en/#work">HaKef SheBaAfiya and Pirchei Shomayim</a>.</p>''',
 
 'business-website': '''<h2>Which pages a business website usually has</h2>
 <ul>
@@ -244,9 +245,11 @@ MORE = {
 <li><b>A second language</b>: ₪1,000.</li>
 <li><b>Logo and branding</b>, if you don't have them yet: <a class="text-link" href="/en/services/logo-branding.html">logo design and branding</a>.</li>
 </ul>
+<p>The final price appears in a formal quote before we start, so you know exactly what you're paying for.</p>
 <h2>Timeline</h2>
-<p>Up to 10 business days from the day I have all the materials: first 3 designs, and after you choose a direction, building all the pages, connecting the admin panel, testing on phone and computer, and training. More on what speeds things up or slows them down in the guide <a class="text-link" href="/en/guides/how-long-to-build.html">how long it takes to build a website</a>.</p>
-<p>There are also pages with tips for specific business types: <a class="text-link" href="/en/services/catering.html">catering and food businesses</a>, <a class="text-link" href="/en/services/professionals.html">trades and service providers</a>, and <a class="text-link" href="/en/services/institutions.html">institutions, nonprofits and classes</a>.</p>''',
+<p>Up to 10 business days from the day I have all the materials: first 3 designs, and after you choose a direction, building all the pages, connecting the admin panel, testing on phone and computer, and training. The clock starts on the day I receive the logo, the key points for the copy and the photos. More on what speeds things up or slows them down in the guide <a class="text-link" href="/en/guides/how-long-to-build.html">how long it takes to build a website</a>.</p>
+<h2>Who it suits by business type</h2>
+<p>There are separate pages with tips for specific business types: <a class="text-link" href="/en/services/catering.html">catering and food businesses</a>, <a class="text-link" href="/en/services/professionals.html">trades and service providers</a>, and <a class="text-link" href="/en/services/institutions.html">institutions, nonprofits and classes</a>.</p>''',
 
 'online-store': '''<h2>Who an online store is for</h2>
 <ul>
@@ -268,13 +271,10 @@ MORE = {
 <li><b>An account with a payment provider</b>. It's worth opening one right at the start, because approval takes a few days.</li>
 <li><b>A shipping and returns policy</b>: shipping cost, delivery time, and how returns work. I prepare the terms based on that, and you approve them.</li>
 </ul>
-<h2>Common mistakes in small stores</h2>
-<ul>
-<li><b>A shipping cost that only shows up at the end</b>. It's better to show it on the product page.</li>
-<li><b>Inconsistent photos</b>: different backgrounds, lighting and sizes make the store look messy.</li>
-<li><b>A long checkout</b>: every unnecessary step loses buyers. Checkout should be short and easy on a phone.</li>
-<li><b>No clear returns policy</b> to reassure first-time buyers.</li>
-</ul>''',
+<h2>Timeline</h2>
+<p>Up to 20 business days from the day I have all the materials. What usually stretches out a store isn't the build, but the product list and the payment provider's approval, so it's worth starting on both on day one. More in the guide <a class="text-link" href="/en/guides/how-long-to-build.html">how long it takes to build a website</a>.</p>
+<h2>After the store is live</h2>
+<p>I walk you through managing products, inventory and orders, and I stay available during the 4 months of support. It's also worth opening a Google Business Profile and linking it to the store, so people find you on Maps too. Not sure whether you need a store or a website? The <a class="text-link" href="/en/#plan">price calculator</a> recommends one based on what people need to do on your site.</p>''',
 
 'institutions': '''<h2>What good sign-up looks like</h2>
 <ul>
@@ -292,8 +292,16 @@ MORE = {
 <li><b>Online payment</b>: connecting a payment provider, at an extra cost shown in the quote.</li>
 <li><b>A second language</b>: ₪1,500.</li>
 </ul>
-<h2>Timeline and what I need from you</h2>
-<p>Up to 15 business days from the day I have all the materials: the list of classes or activities with ages and locations, the branches, suitable photos and the logo. It's worth publishing as much information as helps people decide, like the day, an approximate time and the location, to save repeat questions.</p>''',
+<h2>Timeline</h2>
+<p>Up to 15 business days from the day I have all the materials: the list of classes or activities, the branches, hours if they can be published, suitable photos and the logo. It's worth publishing as much information as helps people decide, like the day, an approximate time and the location, to save repeat questions.</p>
+<h2>What I need from you</h2>
+<ul>
+<li>A list of classes, lessons or activities, with ages and locations.</li>
+<li>What to ask at sign-up, and what can wait for a call.</li>
+<li>Who receives the inquiries by email, and who manages the site.</li>
+<li>Photos suited to your audience, if you have them. If not, illustrations or photos of the venues can be enough.</li>
+</ul>
+<p>More about the process in the guides <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a> and <a class="text-link" href="/en/guides/website-cost.html">how much it costs to build a website</a>, or in the <a class="text-link" href="/en/#plan">price calculator</a>.</p>''',
 
 'logo-branding': '''<h2>What you get at the end: the files</h2>
 <ul>
@@ -310,16 +318,12 @@ MORE = {
 <li><b>Fits the audience</b>: a kindergarten logo and an accounting firm logo shouldn't feel the same.</li>
 <li><b>Doesn't lean on a trend</b>: effects that look current today get dated fast.</li>
 </ul>
+<h2>Basic or professional logo?</h2>
+<p>A <b>basic logo</b> suits a business that's just starting out, needs a tidy mark for its website and social media, and has a rough idea of what it wants. A <b>professional logo</b> fits when the logo will stay with you for years: on a sign, a vehicle, packaging and documents. There, the 3 directions give you a real choice, and the 3 revision rounds let you fine-tune it. If you're also planning a website, <b>basic branding</b> saves you work: the colors, fonts and style guide go straight into designing the site.</p>
 <h2>Brand from 0 to 100%: what it means in practice</h2>
 <p>You bring the idea and the name of the business, and I build everything else in one language: logo and branding, a <a class="text-link" href="/en/services/landing-page.html">landing page</a> or a <a class="text-link" href="/en/services/business-website.html">website</a>, all the copy, a business card and flyer, social media images, and a Google Business Profile. For a full brand, payment works in stages like a website: 10% to start, 40% after you choose a direction, and 50% at the end.</p>
-<h2>How to prepare for the discovery call</h2>
-<ul>
-<li>One sentence that explains what the business does, and for whom.</li>
-<li>Three words that describe the feeling you want: for example warm, professional, young.</li>
-<li>Logos you like, and ones you don't, and why.</li>
-<li>Where the logo will appear: website, sign, vehicle, packaging, stickers or documents.</li>
-</ul>
-<p>You don't need to come with a ready idea. That's what sketches are for. The timeline mainly depends on how quickly answers come back between sketches and revisions, and the exact schedule appears in the quote.</p>''',
+<h2>How long it takes</h2>
+<p>It mainly depends on how quickly answers come back between sketches and revisions. The exact schedule appears in the quote. With a full brand, the logo and the website are built back to back, so work on the website starts as soon as the branding is approved.</p>''',
 }
 
 EXTRA_FAQ = {
@@ -331,7 +335,7 @@ EXTRA_FAQ = {
 }
 
 for _p in PAGES:
-    _p['body'] = _p['body'] + '\n' + MORE[_p['slug']] + ('\n' + WHY if _p['slug'] != 'logo-branding' else '')
+    _p['body'] = _p['body'] + '\n' + MORE[_p['slug']]
     _p['faq'] = _p['faq'] + EXTRA_FAQ[_p['slug']]
 for _p, _extra in (('landing-page', 'professionals'), ('business-website', 'catering'), ('online-store', 'catering')):
     next(x for x in PAGES if x['slug'] == _p)['related'].append(_extra)
@@ -378,19 +382,13 @@ PAGES += [
 <li>Your kosher certification details, if any.</li>
 <li>Delivery areas, minimum order, and how far ahead people need to order.</li>
 </ul>
-<h2>Common mistakes on food business websites</h2>
-<ul>
-<li><b>Stock photos</b> instead of your real food. Customers notice quickly, and it hurts trust.</li>
-<li><b>A menu as a PDF file</b> that's hard to read and zoom on a phone. A menu built into the site is easier, and Google can read it too.</li>
-<li><b>No price at all</b>: without even a starting price or range, some people simply won't reach out.</li>
-<li><b>Phone-only ordering</b> during limited hours. Someone planning an event in the evening needs a way to leave a request right away.</li>
-</ul>
+<p>More ideas in the guide <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>.</p>
 {how}''',
         faq=[('How much does a catering website cost?', 'A landing page from ₪2,000, a website with a menu and admin panel from ₪4,000, and a store with online payment from ₪7,000. Prices are final, and no VAT is added.'),
              ('Can I get orders on WhatsApp?', "Yes. The button opens a ready message with the order details. Next to it is a form that sends the same request by email, for people without WhatsApp."),
              ('Can I take payment on the site?', 'Yes, with the store package, through an Israeli payment provider. If every order is custom, it is usually better to receive a request and agree on the price in a call.'),
              ('Can I update the menu and prices myself?', 'Yes, with a website with an admin panel. On a landing page, I make small changes for you.'),
-             ('How long does it take?', 'A landing page up to 4 business days, a website with an admin panel up to 10, and a store up to 20, from the day I have all the materials.'),
+             ('How long does it take to build a website for a food business?', 'A landing page up to 4 business days, a website with an admin panel up to 10, and a store up to 20, from the day I have all the materials.'),
              ('Do I need professional photography?', "It isn't required. Professional photography isn't included in the price, and good, real phone photos can be enough. I help choose and arrange them."),
              PAY_FAQ],
         related=['business-website', 'online-store', 'landing-page'],
@@ -439,24 +437,67 @@ PAGES += [
 <li>2 or 3 client testimonials, with their permission.</li>
 <li>A license, certification or experience worth showing.</li>
 </ul>
-<h2>Common mistakes on tradespeople's websites</h2>
+{how}''',
+        faq=[('How much does a website for a tradesperson cost?', 'A landing page from ₪2,000, and a multi-page website from ₪4,000. Prices are final, no VAT is added, and they include the first year of domain, hosting and business email.'),
+             ('Do I need a website if I have a Google Business Profile?', "The profile is very important, but limited. On a website you explain each service, show work and prices, and get organized inquiries. They work best together."),
+             ('How do I get more calls from my website?', 'A call button that is always visible on a phone, a clear service area, real testimonials and a short form. And a fast site, because a slow site on a phone loses people before they even see the button.'),
+             ('How long does it take to build a website for a tradesperson?', 'A landing page up to 4 business days, and a multi-page website up to 10, from the day I have all the materials.'),
+             ('Can I add WhatsApp?', 'Yes. A WhatsApp button with a ready message, next to the call button and the form.'),
+             ('I work in several cities. Does that matter?', "It's worth listing them clearly on the site and in your Google Business Profile. With a multi-page website, you can add a page for your main areas, at ₪350 per page beyond 6."),
+             PAY_FAQ],
+        related=['landing-page', 'business-website', 'logo-branding'],
+    ),
+]
+# Same as SPEC in services.py: sections that close each page, after "How it works", then WHY on every page except the logo.
+SPEC = {
+'catering': '''<h2>Common mistakes on food business websites</h2>
+<ul>
+<li><b>Stock photos</b> instead of your real food. Customers notice quickly, and it hurts trust.</li>
+<li><b>A menu as a PDF file</b> that's hard to read and zoom on a phone. A menu built into the site is easier, and Google can read it too.</li>
+<li><b>No price at all</b>: without even a starting price or range, some people simply won't reach out.</li>
+<li><b>Phone-only ordering</b> during limited hours. Someone planning an event in the evening needs a way to leave a request right away.</li>
+</ul>''',
+'online-store': '''<h2>Common mistakes in small stores</h2>
+<ul>
+<li><b>A shipping cost that only shows up at the end</b>. It's better to show it on the product page.</li>
+<li><b>Inconsistent photos</b>: different backgrounds, lighting and sizes make the store look messy.</li>
+<li><b>A long checkout</b>: every unnecessary step loses buyers. Checkout should be short and easy on a phone.</li>
+<li><b>No clear returns policy</b> to reassure first-time buyers.</li>
+</ul>''',
+'professionals': '''<h2>Common mistakes on tradespeople's websites</h2>
 <ul>
 <li><b>A phone number you can't tap</b> on a phone, or one that only appears at the bottom of the page.</li>
 <li><b>No service area</b>: inquiries from cities you don't cover, and wasted time on both sides.</li>
 <li><b>Anonymous testimonials</b>, or "a happy customer". A testimonial with a first name and city, with the client's permission, is far more convincing.</li>
 <li><b>A site that hasn't been updated in years</b>: old prices, or services you no longer offer.</li>
+</ul>''',
+'logo-branding': '''<h2>How to prepare for the discovery call</h2>
+<ul>
+<li>One sentence that explains what the business does, and for whom.</li>
+<li>Three words that describe the feeling you want: for example warm, professional, young.</li>
+<li>Logos you like, and ones you don't, and why.</li>
+<li>Where the logo will appear: website, sign, vehicle, packaging, stickers or documents.</li>
+<li>Colors you want, or colors you'd rather avoid.</li>
 </ul>
-{how}''',
-        faq=[('How much does a website for a tradesperson cost?', 'A landing page from ₪2,000, and a multi-page website from ₪4,000. Prices are final, no VAT is added, and they include the first year of domain, hosting and business email.'),
-             ('Do I need a website if I have a Google Business Profile?', "The profile is very important, but limited. On a website you explain each service, show work and prices, and get organized inquiries. They work best together."),
-             ('How do I get more calls from my website?', 'A call button that is always visible on a phone, a clear service area, real testimonials and a short form. And a fast site, because a slow site on a phone loses people before they even see the button.'),
-             ('Can I add WhatsApp?', 'Yes. A WhatsApp button with a ready message, next to the call button and the form.'),
-             ('I work in several cities. Does that matter?', "It's worth listing them clearly on the site and in your Google Business Profile. With a multi-page website, you can add a page for your main areas, at ₪350 per page beyond 6."),
-             ('How long does it take?', 'A landing page up to 4 business days, and a multi-page website up to 10, from the day I have all the materials.'),
-             PAY_FAQ],
-        related=['landing-page', 'business-website', 'logo-branding'],
-    ),
-]
+<p>You don't need to come with a ready idea. That's what sketches are for.</p>
+<h2>Where you'll use the logo once it's ready</h2>
+<ul>
+<li><b>On your website and Google Business Profile</b>: the full logo at the top of the site, and the icon as the profile picture.</li>
+<li><b>On WhatsApp Business and social media</b>: a square version that still reads in a small circle.</li>
+<li><b>On a business card and flyer</b>: the printer will ask for a vector file, and you'll already have it.</li>
+<li><b>On a sign, a vehicle and packaging</b>: a one-color version, and sometimes versions for dark and light backgrounds.</li>
+</ul>
+<h2>Why design your logo with someone who builds websites</h2>
+<p>Because a logo first has to work on a screen: small on a phone, on dark and light backgrounds, and as the site icon. I plan it for all of these from the start, and when we get to the website, the colors and fonts are already in place. That way everything looks like one business.</p>''',
+'institutions': '''<h2>What makes an institution's website trustworthy</h2>
+<ul>
+<li><b>Complete, accurate details</b>: up-to-date addresses, hours and contact people.</li>
+<li><b>Photos from your activities</b>, with the permission of the participants or parents.</li>
+<li><b>Who's behind it</b>: the management, the staff and the mission.</li>
+</ul>''',
+}
+for _p in PAGES:
+    _p['body'] = _p['body'] + '\n' + SPEC.get(_p['slug'], '') + '\n' + (WHY if _p['slug'] != 'logo-branding' else '')
 GUIDE_LINKS = [('website-cost', 'How much does a business website cost?'), ('how-long-to-build', 'How long does it take to build a website?'), ('choose-web-designer', 'How to choose who builds your website')]
 NAMES = {p['slug']: p['h1'] for p in PAGES}
 SHORT = {'landing-page': 'Landing pages', 'business-website': 'Business websites', 'online-store': 'Online stores', 'institutions': 'Institutions and classes', 'catering': 'Catering and food', 'professionals': 'Trades and services', 'logo-branding': 'Logo and branding'}

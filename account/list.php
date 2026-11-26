@@ -40,6 +40,7 @@ $email = email_norm((string) ($in['e'] ?? ''));
 $subs = subs_load();
 $s = $subs[$email] ?? null;
 $valid = $s && hash_equals((string) $s['token'], (string) ($in['t'] ?? ''));
+if ($valid && ($s['lang'] ?? '') === 'en') $EN = true;   // מנוי באנגלית רואה את דף האישור וההסרה באנגלית
 if (!$valid) acc_page(T('רשימת התפוצה', 'Mailing list'), '<h1>' . T('הקישור לא תקין', 'This link is not valid') . '</h1><p class="lead">' . T('ייתכן שהקישור לא הועתק עד הסוף. אפשר לכתוב לי ל־yehuda@yygweb.com.', 'The link may not have been copied in full. You can write to me at yehuda@yygweb.com.') . '</p>');
 
 if ($do === 'confirm') {

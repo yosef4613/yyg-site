@@ -135,7 +135,7 @@ if ($POST) {
             $sub = $subs[$email] ?? null;
             if (!$sub || ($sub['status'] ?? '') !== 'active') { $failed[] = $email; continue; }   // הוסר בינתיים
             [$html, $text] = campaign_html($c, $sub);
-            if ($html !== '' && mail_send($email, campaign_subject($c), $html, $text)) $sent++; else $failed[] = $email;
+            if ($html !== '' && mail_send($email, campaign_subject($c), $html, $text, mail_from(($c['lang'] ?? 'he') === 'en'))) $sent++; else $failed[] = $email;
             usleep(250000);
         }
         $state = data_update('campaigns.json', static function (array &$all) use ($id, $sent, $failed): array {
