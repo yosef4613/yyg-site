@@ -459,7 +459,7 @@ def build(lang):
   <section class="d-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">{E(t['cta'])}</h2>
    <p>{E(t['ctap'])}</p>
-   <div class="acts"><a class="btn btn-gold" href="{'/questionnaire/' if he else '/en/questionnaire/'}">{E(t['q_open'])}</a><a class="btn btn-line" href="{home}?src=demo#plan">{E(t['calc'])}</a></div>
+   <div class="acts"><a class="btn btn-gold" href="{'/questionnaire/' if he else '/en/questionnaire/'}">{E(t['q_open'])}</a><a class="btn btn-line" href="{home}#plan" data-q="src=demo">{E(t['calc'])}</a></div>
   </section>
  </div>
 </main>
@@ -469,6 +469,7 @@ def build(lang):
   <p><a class="foot-link" href="{home}">{E(t['home'])}</a> · <a class="foot-link" href="{'/services/' if he else '/en/services/'}">{'שירותים' if he else 'Services'}</a> · <a class="foot-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a> · <a class="foot-link" href="{'/privacy.html' if he else '/en/privacy.html'}">{'מדיניות פרטיות' if he else 'Privacy policy'}</a> · <a class="foot-link" href="{'/accessibility.html' if he else '/en/accessibility.html'}">{'הצהרת נגישות' if he else 'Accessibility statement'}</a></p>
  </div>
 </footer>
+<script src="/assets/q.js" defer></script>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||q.get("utm_source")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
 </body>
 </html>

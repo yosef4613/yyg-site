@@ -578,8 +578,8 @@ def page(p, is_index=False, cards=''):
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what it will cost you?</h2>
    <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. The formal quote arrives by email within one business day.</p>
-   <a class="btn btn-gold" href="/en/questionnaire/?src=svc-{slug}">Get a quote: the questionnaire</a>
-   <p style="margin-top:12px"><a class="text-link" href="/en/?src=svc-{slug}#plan">Just a ballpark: 3 questions in the calculator</a> · <a class="text-link" href="/en/#contact">Or leave your details</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (calls only)</p>
+   <a class="btn btn-gold" href="/en/questionnaire/" data-q="src=svc-{slug}">Get a quote: the questionnaire</a>
+   <p style="margin-top:12px"><a class="text-link" href="/en/#plan" data-q="src=svc-{slug}">Just a ballpark: 3 questions in the calculator</a> · <a class="text-link" href="/en/#contact">Or leave your details</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (calls only)</p>
   </section>
  </div>
 </main>
@@ -590,6 +590,7 @@ def page(p, is_index=False, cards=''):
   <p>{FOOT_SV}</p>
  </div>
 </footer>
+<script src="/assets/q.js" defer></script>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
 </body>
 </html>

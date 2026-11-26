@@ -119,8 +119,8 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">רוצים לדעת כמה יעלה האתר שלכם?</h2>
    <p>שאלון האפיון לוקח כ־10 דקות, ובסופו רואים מיד הערכת מחיר לפי התשובות. ואם מתאים, מתחילים ב־10%, ואני מכין לכם 3 עיצובים של האתר לפני שממשיכים.</p>
-   <a class="btn btn-gold" href="/questionnaire/?src=guide-{slug}">להצעת מחיר: לשאלון האפיון</a>
-   <p style="margin-top:12px"><a class="text-link" href="/?src=guide-{slug}#plan">רק כיוון: 3 שאלות במחשבון</a></p>
+   <a class="btn btn-gold" href="/questionnaire/" data-q="src=guide-{slug}">להצעת מחיר: לשאלון האפיון</a>
+   <p style="margin-top:12px"><a class="text-link" href="/#plan" data-q="src=guide-{slug}">רק כיוון: 3 שאלות במחשבון</a></p>
   </section>
 {rel}
  </div>
@@ -144,6 +144,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
   <p>{FOOT_SV}</p>
  </div>
 </footer>
+<script src="/assets/q.js" defer></script>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
 </body>
 </html>

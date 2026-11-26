@@ -133,8 +133,8 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what your website will cost?</h2>
    <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. And if we’re a good fit, we start with 10%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
-   <a class="btn btn-gold" href="/en/questionnaire/?src=guide-{slug}">Get a quote: the questionnaire</a>
-   <p style="margin-top:12px"><a class="text-link" href="/en/?src=guide-{slug}#plan">Just a ballpark: 3 questions in the calculator</a></p>
+   <a class="btn btn-gold" href="/en/questionnaire/" data-q="src=guide-{slug}">Get a quote: the questionnaire</a>
+   <p style="margin-top:12px"><a class="text-link" href="/en/#plan" data-q="src=guide-{slug}">Just a ballpark: 3 questions in the calculator</a></p>
   </section>
 {rel}
  </div>
@@ -158,6 +158,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
   <p>{FOOT_SV}</p>
  </div>
 </footer>
+<script src="/assets/q.js" defer></script>
 <script>if(location.hostname==="yygweb.com"&&navigator.sendBeacon){{try{{var q=new URLSearchParams(location.search);navigator.sendBeacon("/hit.php",new Blob([JSON.stringify({{e:"view",p:location.pathname,r:document.referrer,s:q.get("src")||""}})],{{type:"application/json"}}))}}catch(e){{}}}}</script>
 </body>
 </html>
