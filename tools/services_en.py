@@ -72,7 +72,7 @@ PAGES = [
 {incl}
 <p>One page with up to 7 sections, a contact form and a call button that's always visible. <b>Delivery time: up to 4 business days</b> from the day I receive the materials.</p>
 <h2>Price</h2>
-<p><b>From ₪2,000</b>, final price, no VAT is added. The final price depends on what the page needs, and it appears in a formal quote before we start. A second language (Hebrew or English): ₪500.</p>
+<p><b>From ₪2,000</b>, no VAT is added. The final price depends on what the page needs, and it appears in a formal quote before we start. A second language (Hebrew or English): ₪500.</p>
 {how}''',
         faq=[('Is there a cheaper option?', 'Yes. A basic landing page costs ₪1,290: one design, one revision round, you provide the text, and one month of support. You pay 50% at the start and 50% at the end. My next 5 clients also get a launch price of 10% off, in return for letting me show their site in my work with a written testimonial.'),
              ('How long does it take to build a landing page?', 'Up to 4 business days from the day I receive all the materials, not counting days spent waiting for your reply.'),
@@ -99,7 +99,7 @@ PAGES = [
 <h2>An example from my work</h2>
 <p>For HaKef SheBaAfiya (boutique dessert catering), I built a website with a catalog organized by category, a bar planner that sends the business an organized request, and a recipe template the owner updates on her own. The new site loads three times faster on a phone than the old one. <a class="text-link" href="/en/#work">Read the full story</a></p>
 <h2>Price</h2>
-<p><b>From ₪4,000</b>, final price, no VAT is added. Each additional page beyond 6: ₪350. A second language (Hebrew or English): ₪1,000.</p>
+<p><b>From ₪4,000</b>, no VAT is added. Each additional page beyond 6: ₪350. A second language (Hebrew or English): ₪1,000.</p>
 {how}''',
         faq=[('How long does it take to build a business website?', 'Up to 10 business days from the day I receive all the materials.'),
              ('Will I be able to update the website myself?', "Yes. There's a simple admin panel for updating the content that changes, and I walk you through it in a one-on-one session and a written guide."),
@@ -123,9 +123,9 @@ PAGES = [
 </ul>
 <p><b>Delivery time: up to 20 business days.</b> It's a good idea to open an account with a payment processor right at the start, because approval takes a few days.</p>
 <h2>Price</h2>
-<p><b>From ₪7,000</b>, final price, no VAT is added. A second language (Hebrew or English): ₪1,800.</p>
+<p><b>From ₪7,000</b>, no VAT is added. A second language (Hebrew or English): ₪1,800.</p>
 {how}''',
-        faq=[('How much does it cost to build an online store?', 'With me, from ₪7,000, final price, no VAT is added. That includes up to 30 products that I add for you, plus the first year of domain, hosting and business email.'),
+        faq=[('How much does it cost to build an online store?', 'With me, from ₪7,000, no VAT is added. That includes up to 30 products that I add for you, plus the first year of domain, hosting and business email.'),
              ('How do I accept credit card payments?', 'Through an Israeli payment processor. You open an account with them, and I connect it to your store. Their fees are paid to them directly.'),
              ('Can I add products myself?', "Yes. There's simple management of products, inventory and orders, and I walk you through it.")],
         related=['business-website', 'logo-branding'],
@@ -133,7 +133,7 @@ PAGES = [
     dict(
         slug='institutions', kw='Website for institutions, nonprofits and classes',
         title='Websites for institutions, nonprofits and classes | YYG Web Design',
-        desc='Websites for institutions, nonprofits and classes: sign-up, user accounts, a mailing list and 3 email templates. From ₪6,000, final price, no VAT is added.',
+        desc='Websites for institutions, nonprofits and classes: sign-up, user accounts, a mailing list and 3 email templates. From ₪6,000, no VAT is added.',
         h1='Website for institutions, nonprofits and classes', lead='A website that showcases your activities and takes organized sign-ups: parents and participants find what suits them and sign up right from their phones.',
         price='6,000', price_n=6000, service='Website for institutions, nonprofits and classes',
         body='''<h2>What an institution's website needs</h2>
@@ -149,7 +149,7 @@ PAGES = [
 <h2>An example from my work</h2>
 <p>For the Pirchei Shomayim Boys' Choir, I built a website with a class search by the child's age and city, a full registration form with the option to open an account, a song library with a player that doesn't slow the site down, and an English version. Before the build, they saw five designs and chose their favorite. <a class="text-link" href="/en/#work">See the full project</a></p>
 <h2>Price</h2>
-<p><b>From ₪6,000</b>, final price, no VAT is added. A second language (Hebrew or English): ₪1,500.</p>
+<p><b>From ₪6,000</b>, no VAT is added. A second language (Hebrew or English): ₪1,500.</p>
 {how}''',
         faq=[('Can the website take sign-ups and payments?', 'Sign-ups, yes, including email confirmation. Credit card payments can also be connected through a payment processor, as an add-on listed in the quote.'),
              ('Will the website suit a Torah-observant community?', "Yes. The content and images are chosen to suit your community, and the site is built clean and simple, so it's easy to approve on filtered internet."),
@@ -173,7 +173,7 @@ PAGES = [
 <tr><td>Full brand + landing page</td><td>From ₪5,900</td><td>Branding, website, all the content, a business card and flyer, social media images, Google and 4 months of support</td></tr>
 <tr><td>Full brand + website</td><td>From ₪7,900</td><td>Same as above, with a website with an admin panel (with sign-ups from ₪9,900, with a store from ₪10,900)</td></tr>
 </tbody></table></div>
-<p>All prices are final, and no VAT is added.</p>
+<p>No VAT is added to any price.</p>
 <h2>Why it pays to start with the logo</h2>
 <p>The website is designed around the logo: the colors, the fonts and the feel all grow out of it. When you start with the branding, your website, business card and sign look like one business, not a collection of unrelated pieces.</p>
 <h2>How it works</h2>
@@ -182,7 +182,7 @@ PAGES = [
 <li><b>Sketches</b>: one direction for a basic logo, 3 directions for a professional logo and for branding.</li>
 <li><b>Choosing and revisions</b>, and then files ready for every use.</li>
 </ol>''',
-        faq=[('How much does logo design cost?', 'A basic logo with one sketch costs ₪590. A professional logo with 3 sketches, 3 revision rounds and all the files costs ₪1,500. Final prices, no VAT is added.'),
+        faq=[('How much does logo design cost?', 'A basic logo with one sketch costs ₪590. A professional logo with 3 sketches, 3 revision rounds and all the files costs ₪1,500. No VAT is added.'),
              ("What's the difference between a logo and branding?", 'A logo is the mark. Branding is the whole visual language: logo, colors, fonts, a style guide and a business card, so your business looks the same everywhere.'),
              ('What is Brand from 0 to 100%?', 'You bring the idea for the business, and I build everything else: branding, website, all the content, print, social media and a Google Business Profile.'),
              ('Do I need a business name first?', 'Yes. The packages assume your business already has a name. Coming up with a name is separate work, with its own quote.')],
@@ -195,7 +195,7 @@ NONE_FAQ = ("What if none of the designs feel right?", "You mark what you liked 
 WHY = '''<h2>Why build with me</h2>
 <ul>
 <li><b>See it before you go ahead</b>: you start with just 10% and get 3 complete designs with your own content. You only move on to the build after you choose. In the market, people often pay 30% to 50% before they see anything.</li>
-<li><b>A final price, known up front</b>: no VAT is added, and the first year of domain, hosting and business email is included. The full price appears in a formal quote before we start.</li>
+<li><b>No surprises in the price</b>: no VAT is added, and the first year of domain, hosting and business email is included. The full price appears in a formal quote before we start.</li>
 <li><b>A fast website</b>: built with clean code, without a heavy theme or unnecessary plugins, so it loads fast even on a phone and a weak connection.</li>
 <li><b>Everything in your name</b>: the domain, the website and the content belong to you, and you can move to another company at any time.</li>
 <li><b>Clear copy</b>: I write it in your customers' language, without jargon, and you approve every word.</li>
@@ -327,10 +327,10 @@ MORE = {
 }
 
 EXTRA_FAQ = {
-'landing-page': [('How much does a landing page cost?', 'From ₪2,000, final price, no VAT is added. It includes 3 designs, 3 revision rounds, the copy, and the first year of domain, hosting and business email.'), PAY_FAQ, NONE_FAQ],
-'business-website': [('How much does a business website cost?', 'From ₪4,000, final price, no VAT is added, including up to 6 pages, an admin panel, 3 designs, 3 revision rounds and the first year of domain, hosting and business email.'), PAY_FAQ, ('Who writes the copy?', 'I do, with the help of AI and personal editing. You give me the key points, and you approve every text before it goes live.')],
+'landing-page': [('How much does a landing page cost?', 'From ₪2,000, no VAT is added. It includes 3 designs, 3 revision rounds, the copy, and the first year of domain, hosting and business email.'), PAY_FAQ, NONE_FAQ],
+'business-website': [('How much does a business website cost?', 'From ₪4,000, no VAT is added, including up to 6 pages, an admin panel, 3 designs, 3 revision rounds and the first year of domain, hosting and business email.'), PAY_FAQ, ('Who writes the copy?', 'I do, with the help of AI and personal editing. You give me the key points, and you approve every text before it goes live.')],
 'online-store': [PAY_FAQ, ('Can I start with fewer products?', 'Yes. You can go live with your main products and add more yourself later from the admin panel.'), ('How long does it take to build a store?', 'Up to 20 business days from the day I have all the materials, including the product list. Open an account with a payment provider at the start, because approval takes a few days.'), ('Is there a monthly fee for the store?', "There's no store subscription fee. The first year of domain, hosting and business email is included, then ₪590 a year with All-in Care, or with your own hosting company. Per-transaction fees go to the payment provider.")],
-'institutions': [('How much does a website for an institution or class cost?', 'From ₪6,000, final price, no VAT is added, including up to 8 pages, sign-up, user accounts, a mailing list and 3 email templates.'), PAY_FAQ, ('How long does it take to build a website for an institution?', 'Up to 15 business days from the day I have all the materials: the list of classes or activities, the branches, photos and the logo.'), ('Can I add an English version?', 'Yes, for ₪1,500. Pirchei Shomayim, for example, has a full English version.')],
+'institutions': [('How much does a website for an institution or class cost?', 'From ₪6,000, no VAT is added, including up to 8 pages, sign-up, user accounts, a mailing list and 3 email templates.'), PAY_FAQ, ('How long does it take to build a website for an institution?', 'Up to 15 business days from the day I have all the materials: the list of classes or activities, the branches, photos and the logo.'), ('Can I add an English version?', 'Yes, for ₪1,500. Pirchei Shomayim, for example, has a full English version.')],
 'logo-branding': [('How many sketches do I get?', 'One sketch and one revision round with the basic logo. 3 sketches and 3 revision rounds with the professional logo and branding.'), ('Do I need a logo before building a website?', "It's recommended, because the website is designed around the logo: the colors and feel come from it. If you don't have one, you can order it together with the website."), ('Can I order a logo without a website?', 'Yes. You can order a logo or branding on its own, and add a website later in the same design language.')],
 }
 
@@ -372,7 +372,7 @@ PAGES += [
 <tr><td>A menu or catalog, a page per product, and updating prices, promotions and recipes yourself</td><td><a class="text-link" href="/en/services/business-website.html">Website with admin panel</a></td><td>From ₪4,000</td></tr>
 <tr><td>Selling with online payment: boxes, platters or deliveries at fixed prices</td><td><a class="text-link" href="/en/services/online-store.html">Online store</a></td><td>From ₪7,000</td></tr>
 </tbody></table></div>
-<p>A quantity planner like the one at HaKef SheBaAfiya usually fits a website with an admin panel, and its price is set in the quote based on what it needs to calculate. All prices are final, and no VAT is added.</p>
+<p>A quantity planner like the one at HaKef SheBaAfiya usually fits a website with an admin panel, and its price is set in the quote based on what it needs to calculate. No VAT is added to any price.</p>
 <h2>What's included in every package</h2>
 {incl}
 <h2>What to prepare</h2>
@@ -384,7 +384,7 @@ PAGES += [
 </ul>
 <p>More ideas in the guide <a class="text-link" href="/en/guides/before-you-build.html">what to prepare before you build a website</a>.</p>
 {how}''',
-        faq=[('How much does a catering website cost?', 'A landing page from ₪2,000, a website with a menu and admin panel from ₪4,000, and a store with online payment from ₪7,000. Prices are final, and no VAT is added.'),
+        faq=[('How much does a catering website cost?', 'A landing page from ₪2,000, a website with a menu and admin panel from ₪4,000, and a store with online payment from ₪7,000. No VAT is added to the prices.'),
              ('Can I get orders on WhatsApp?', "Yes. The button opens a ready message with the order details. Next to it is a form that sends the same request by email, for people without WhatsApp."),
              ('Can I take payment on the site?', 'Yes, with the store package, through an Israeli payment provider. If every order is custom, it is usually better to receive a request and agree on the price in a call.'),
              ('Can I update the menu and prices myself?', 'Yes, with a website with an admin panel. On a landing page, I make small changes for you.'),
@@ -424,7 +424,7 @@ PAGES += [
 <tr><td>Several services, a page for each, work samples and FAQ</td><td><a class="text-link" href="/en/services/business-website.html">Website with admin panel</a></td><td>From ₪4,000</td></tr>
 <tr><td>Sign-ups for workshops, courses or groups, and a mailing list</td><td><a class="text-link" href="/en/services/institutions.html">Website with sign-ups</a></td><td>From ₪6,000</td></tr>
 </tbody></table></div>
-<p>All prices are final, and no VAT is added.</p>
+<p>No VAT is added to any price.</p>
 <h2>What's included in every package</h2>
 {incl}
 <h2>An example: the site you're reading</h2>
@@ -438,7 +438,7 @@ PAGES += [
 <li>A license, certification or experience worth showing.</li>
 </ul>
 {how}''',
-        faq=[('How much does a website for a tradesperson cost?', 'A landing page from ₪2,000, and a multi-page website from ₪4,000. Prices are final, no VAT is added, and they include the first year of domain, hosting and business email.'),
+        faq=[('How much does a website for a tradesperson cost?', 'A landing page from ₪2,000, and a multi-page website from ₪4,000. No VAT is added, and prices include the first year of domain, hosting and business email.'),
              ('Do I need a website if I have a Google Business Profile?', "The profile is very important, but limited. On a website you explain each service, show work and prices, and get organized inquiries. They work best together."),
              ('How do I get more calls from my website?', 'A call button that is always visible on a phone, a clear service area, real testimonials and a short form. And a fast site, because a slow site on a phone loses people before they even see the button.'),
              ('How long does it take to build a website for a tradesperson?', 'A landing page up to 4 business days, and a multi-page website up to 10, from the day I have all the materials.'),

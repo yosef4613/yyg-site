@@ -1,6 +1,6 @@
 # YYG Web Design pricing
 
-Prices are final, and no VAT is added. In every package except the basic landing page: 3 design directions, 3 revision rounds, 4 months of support, and mobile, Google and accessibility readiness. The basic landing page: one design, one revision round and one month of support.
+No VAT is added to the prices. In every package except the basic landing page: 3 design directions, 3 revision rounds, 4 months of support, and mobile, Google and accessibility readiness. The basic landing page: one design, one revision round and one month of support.
 
 ## Packages
 

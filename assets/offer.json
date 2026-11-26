@@ -15,7 +15,7 @@
   "questionnaire": {"he": "https://yygweb.com/questionnaire/", "en": "https://yygweb.com/en/questionnaire/"}
  },
  "currency": "ILS",
- "vat_note": {"he": "המחירים סופיים, לא מוסיפים מע״מ.", "en": "Prices are final, and no VAT is added."},
+ "vat_note": {"he": "לא מוסיפים מע״מ על המחירים.", "en": "No VAT is added to the prices."},
  "packages": [
   {"id": "landing_basic", "price": 1290, "from": false, "days": 3,
    "name": {"he": "דף נחיתה בסיסי", "en": "Basic landing page"},

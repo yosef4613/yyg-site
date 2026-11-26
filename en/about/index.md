@@ -7,7 +7,7 @@ Nice to meet you, I'm Yehuda Gordon. I design and build websites for small busin
 - We start with a short questionnaire or a call, and you get a formal, fixed quote.
 - You pay 10% and get 3 complete designs of your own site, with your content. You choose with your eyes, not your imagination.
 - You pick a design, pay another 40%, and I build. You pay the final 50% only after you confirm everything is right.
-- Prices are final, and no VAT is added.
+- No VAT is added to the prices.
 
 ## What matters to me in a website
 

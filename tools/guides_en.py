@@ -209,7 +209,7 @@ cost_body = '''
 '''
 cost_faq = [
     ('How much does a landing page cost?', 'My landing pages start at ₪2,000, and no VAT is added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 4 working days. The final price depends on what the page needs.'),
-    ('Is VAT added to the price?', 'No. The price you see is the final price you pay, and no VAT is added on top.'),
+    ('Is VAT added to the price?', "No. I don't add VAT to my prices: the price in your quote is the price you pay."),
     ('Is there a monthly fee?', 'There’s no monthly fee. The first year of domain, hosting, and business email is included in the price of the website. After that, All-in Care is ₪590 a year if you’d like me to take care of everything.'),
     ('What if I need more pages later?', 'You can add pages even after the site is live. Each page beyond your package costs ₪350.'),
 ]
@@ -301,7 +301,7 @@ lp_body = '''
 lp_faq = [
     ('Can I start with a landing page and expand later?', 'Yes. The landing page becomes the home page, or one of the pages, of the full website, so you don’t start from scratch.'),
     ('Will a landing page show up on Google?', 'Yes, but usually for fewer searches than a full website, because it has less content and fewer pages.'),
-    ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. Prices are final, and no VAT is added.'),
+    ('What’s the difference in price?', 'My landing pages start at ₪2,000, and a website with admin panel starts at ₪4,000. No VAT is added to the prices.'),
 ]
 
 # ---------- Guide 4: how to choose who builds your website ----------
@@ -313,7 +313,7 @@ choose_body = '''
 <h3>1. What exactly is included in the price?</h3>
 <p>How many pages, who writes the copy, whether there's a form, mobile optimization, Google readiness and an accessibility statement. A good answer is a written list in the quote, not "everything is included".</p>
 <h3>2. Does the price include VAT?</h3>
-<p>"From ₪3,000" can become ₪3,540 once VAT is added. Ask for the final price, as one number. My prices are final, and no VAT is added.</p>
+<p>"From ₪3,000" can become ₪3,540 once VAT is added. Ask for the final price, as one number. I don't add VAT to my prices.</p>
 <h3>3. Will I see a design before I pay most of the price?</h3>
 <p>In the market, people often pay 30% to 50% before they see anything. Ask how many designs you'll see, and what you pay at each stage. With me, you start with 10%, see 3 complete designs with your own content, and only after you choose do you pay another 40%.</p>
 <h3>4. How many revision rounds are included, and what counts as a revision?</h3>
@@ -388,7 +388,7 @@ time_body = '''
 <tr><td><a class="text-link" href="/en/services/institutions.html">Website with sign-ups and a mailing list</a></td><td>Up to 15 business days</td><td>₪6,000</td></tr>
 <tr><td><a class="text-link" href="/en/services/online-store.html">Online store</a></td><td>Up to 20 business days</td><td>₪7,000</td></tr>
 </tbody></table></div>
-<p>Prices are final, and no VAT is added. Days spent waiting for your reply aren't counted. So what really decides how long it takes is mostly how quickly the materials and approvals come in.</p>
+<p>No VAT is added to the prices. Days spent waiting for your reply aren't counted. So what really decides how long it takes is mostly how quickly the materials and approvals come in.</p>
 
 <h2>The stages, one after another</h2>
 <ol>
