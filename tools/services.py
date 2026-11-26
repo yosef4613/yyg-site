@@ -534,7 +534,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=41">
+<link rel="stylesheet" href="/assets/site.css?v=45">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -559,9 +559,9 @@ def page(p, is_index=False, cards=''):
 {body}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">רוצים לדעת כמה זה יעלה לכם?</h2>
-   <p>3 שאלות קצרות במחשבון, בלי להשאיר פרטים. או השאירו שם ומייל, ותקבלו מיד במייל את הצעד הבא.</p>
-   <a class="btn btn-gold" href="/?src=svc-{slug}#plan">למחשבון המחיר</a>
-   <p style="margin-top:12px"><a class="text-link" href="/#contact">או להשאיר פרטים</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (שיחות בלבד)</p>
+   <p>שאלון האפיון לוקח כ־10 דקות, ובסופו רואים מיד הערכת מחיר לפי התשובות. ההצעה המסודרת מגיעה במייל תוך יום עבודה.</p>
+   <a class="btn btn-gold" href="/questionnaire/?src=svc-{slug}">להצעת מחיר: לשאלון האפיון</a>
+   <p style="margin-top:12px"><a class="text-link" href="/?src=svc-{slug}#plan">רק כיוון: 3 שאלות במחשבון</a> · <a class="text-link" href="/#contact">או להשאיר פרטים</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (שיחות בלבד)</p>
   </section>
  </div>
 </main>

@@ -511,7 +511,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=41">
+<link rel="stylesheet" href="/assets/site.css?v=45">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -536,9 +536,9 @@ def page(p, is_index=False, cards=''):
 {body}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what it will cost you?</h2>
-   <p>Answer 3 quick questions in the price calculator, no contact details required. Or leave your name and email, and get the next step by email right away.</p>
-   <a class="btn btn-gold" href="/en/?src=svc-{slug}#plan">Open the price calculator</a>
-   <p style="margin-top:12px"><a class="text-link" href="/en/#contact">Or leave your details</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (calls only)</p>
+   <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. The formal quote arrives by email within one business day.</p>
+   <a class="btn btn-gold" href="/en/questionnaire/?src=svc-{slug}">Get a quote: the questionnaire</a>
+   <p style="margin-top:12px"><a class="text-link" href="/en/?src=svc-{slug}#plan">Just a ballpark: 3 questions in the calculator</a> · <a class="text-link" href="/en/#contact">Or leave your details</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (calls only)</p>
   </section>
  </div>
 </main>

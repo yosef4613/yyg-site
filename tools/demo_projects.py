@@ -18,6 +18,7 @@ def admin_anaf(lang, pfx, n):
 '''
 
 ANAF = dict(prefix='demo/', data=DATA, designs=DESIGNS, T=T, quote=QUOTE, hi=hi_anaf, files=files_anaf, extra=None, after=admin_anaf,
+            card={'he': ('אתר מלא לנגריה', '3 כיוונים שונים לגמרי, הגרסה הסופית ומסך ניהול לגלריה'), 'en': ('A full website for a carpentry shop', '3 completely different directions, the final version and a gallery admin screen')},
             other={'he': ('/demo/optika/', 'דוגמה נוספת', 'דף נחיתה לחנות משקפיים, עם שעות שבעל העסק מעדכן בעצמו', '3 עיצובים, מסך עדכון השעות, משוב והגרסה הסופית'),
                    'en': ('/en/demo/optika/', 'Another example', 'A landing page for an eyewear shop, with hours the owner updates himself', '3 designs, the hours update screen, feedback and the final version')})
 
@@ -110,10 +111,16 @@ def extra_optika(lang, pfx):
 '''
 
 OPTIKA = dict(prefix='demo/optika/', data=json.loads((ROOT / 'tools/demo-optika.json').read_text()), designs=DESIGNS_OPT, T=T_OPT, quote=QUOTE_OPT, hi=hi_optika, files=files_optika, extra=extra_optika,
+              card={'he': ('דף נחיתה לחנות משקפיים', 'שעות פתיחה ומבצע שבעל העסק מעדכן בעצמו'), 'en': ('A landing page for an eyewear shop', 'Opening hours and a promotion the owner updates himself')},
               other={'he': ('/demo/', 'דוגמה נוספת', 'אתר מלא לנגריה, עם 3 כיוונים שונים לגמרי', 'שאלון של 60 תשובות, 3 עיצובים, הגרסה הסופית ומסך ניהול התוכן'),
                      'en': ('/en/demo/', 'Another example', 'A full website for a carpentry shop, with 3 completely different directions', 'A 60-answer questionnaire, 3 designs, the final version and the content admin screen')})
 
-PROJECTS = {'anaf': ANAF, 'optika': OPTIKA}
+exec(open(ROOT / 'tools/demo_projects_more.py').read())
+
+# פרויקט נכנס לאתר רק כשיש לו גרסה סופית (כדי שלא יעלה חצי פרויקט)
+def ready(v):
+    return all((ROOT / v['prefix'] / f).exists() for f in ('final/index.html', 'admin/index.html', 'shots/final-d.webp', 'shots/admin-d.webp')) and v['T']['he'].get('s5p', 'x') != ''
+PROJECTS = {k: v for k, v in {'anaf': ANAF, 'optika': OPTIKA, 'donate': DONATE, 'shul': SHUL, 'shop': SHOP}.items() if ready(v)}
 
 def use(key):
     global DATA, DESIGNS, T, QUOTE, P

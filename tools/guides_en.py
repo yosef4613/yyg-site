@@ -105,7 +105,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=41">
+<link rel="stylesheet" href="/assets/site.css?v=45">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -132,8 +132,9 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 {faq_html}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what your website will cost?</h2>
-   <p>Answer 3 quick questions in the price calculator, no contact details required. And if we’re a good fit, we start with 10%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
-   <a class="btn btn-gold" href="/en/?src=guide-{slug}#plan">Open the price calculator</a>
+   <p>The discovery questionnaire takes about 10 minutes, and at the end you see a price estimate from your answers right away. And if we’re a good fit, we start with 10%, and I’ll prepare 3 design directions for your website before you go ahead.</p>
+   <a class="btn btn-gold" href="/en/questionnaire/?src=guide-{slug}">Get a quote: the questionnaire</a>
+   <p style="margin-top:12px"><a class="text-link" href="/en/?src=guide-{slug}#plan">Just a ballpark: 3 questions in the calculator</a></p>
   </section>
 {rel}
  </div>

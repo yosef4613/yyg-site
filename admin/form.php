@@ -8,6 +8,7 @@ adm_require();
 $id = (string) ($_GET['id'] ?? '');
 $rec = null;
 foreach ((@file(data_dir() . '/forms.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && ($r['id'] ?? '') === $id) $rec = $r; }
+if ($rec) $rec['files'] = form_files($rec);
 if (!$rec) { http_response_code(404); adm_page('לא נמצא | YYG', adm_nav() . '<main class="wrap"><h1>השאלון לא נמצא</h1><p><a href="/admin/#forms">חזרה</a></p></main>'); }
 $c = $rec['contact'];
 $digits = preg_replace('/\D/', '', (string) $c['phone']);

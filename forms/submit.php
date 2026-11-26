@@ -7,9 +7,10 @@
  */
 declare(strict_types=1);
 require dirname(__DIR__) . '/admin/_lib.php';
+require dirname(__DIR__) . '/admin/_intake.php';
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
-$out = static function (bool $ok, string $msg = '', int $code = 200): void { http_response_code($code); echo json_encode(['success' => $ok ? 'true' : 'false', 'message' => $msg], JSON_UNESCAPED_UNICODE); exit; };
+$out = static function (bool $ok, string $msg = '', int $code = 200, array $extra = []): void { http_response_code($code); echo json_encode(['success' => $ok ? 'true' : 'false', 'message' => $msg] + $extra, JSON_UNESCAPED_UNICODE); exit; };
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') $out(false, 'method', 405);
 $origin = (string) ($_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? ''));
@@ -54,11 +55,7 @@ $lang = ($in['lang'] ?? '') === 'en' ? 'en' : 'he';
 $id = bin2hex(random_bytes(6));
 
 /* ---------- קבצים מצורפים ---------- */
-const FILE_TYPES = [
-    'logo_file'   => ['svg', 'ai', 'eps', 'pdf', 'png', 'jpg', 'jpeg', 'webp', 'gif'],
-    'photo_files' => ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'gif'],
-    'docs'        => ['pdf', 'doc', 'docx', 'txt', 'rtf', 'odt', 'xls', 'xlsx', 'ppt', 'pptx'],
-];
+/* סוגי הקבצים והמגבלות: FORM_FILE_TYPES ב־admin/_lib.php. קבצים חדשים מגיעים אחרי השאלון, אחד־אחד, דרך forms/upload.php */
 $files = [];
 $skipped = [];
 if (!empty($_FILES['files']['name']) && is_array($_FILES['files']['name'])) {
@@ -71,7 +68,7 @@ if (!empty($_FILES['files']['name']) && is_array($_FILES['files']['name'])) {
         $size = (int) ($_FILES['files']['size'][$i] ?? 0);
         $orig = $s(basename(str_replace('\\', '/', (string) $orig)), 120);
         $ext = strtolower(pathinfo($orig, PATHINFO_EXTENSION));
-        if ($err !== UPLOAD_ERR_OK || !is_uploaded_file($tmp) || !isset(FILE_TYPES[$qid]) || !in_array($ext, FILE_TYPES[$qid], true) || $size > 25 * 1048576 || $total + $size > 120 * 1048576) { $skipped[] = $orig; continue; }
+        if ($err !== UPLOAD_ERR_OK || !is_uploaded_file($tmp) || !isset(FORM_FILE_TYPES[$qid]) || !in_array($ext, FORM_FILE_TYPES[$qid], true) || $size > FORM_FILE_MAX_MB * 1048576 || $total + $size > FORM_FILES_TOTAL_MB * 1048576) { $skipped[] = $orig; continue; }
         /* תמונה צריכה להיות באמת תמונה */
         if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'], true) && @getimagesize($tmp) === false) { $skipped[] = $orig; continue; }
         if (!is_dir($dir)) @mkdir($dir, 0700, true);
@@ -88,6 +85,10 @@ if ($skipped) $flags[] = 'קבצים שלא התקבלו: ' . implode(', ', $ski
 $rec = ['id' => $id, 't' => time(), 'form' => $form, 'lang' => $lang, 'contact' => $contact, 'items' => $items, 'raw' => $raw, 'files' => $files, 'flags' => $flags];
 if (@file_put_contents(data_dir() . '/forms.jsonl', json_encode($rec, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX) === false) $out(false, 'store', 500);
 
+/* ---------- הערכת מחיר מיידית (רק בשאלון האפיון): הלקוח רואה אותה מיד, ואני מקבל אותה במייל עם קישור לטיוטת ההצעה ---------- */
+$est = null;
+if ($form === 'intake') { try { $est = intake_estimate($rec, $lang); } catch (Throwable $e) { $est = null; } }
+
 /* ---------- מייל אליי, מסודר לפי חלקים ---------- */
 $title = $form === 'intake' ? 'שאלון אפיון' : 'משוב על העיצובים';
 $link = 'https://yygweb.com/admin/form.php?id=' . $id;
@@ -97,6 +98,17 @@ $html = '<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;line-
     . '<h2 style="margin:0 0 8px">' . h($title) . ': ' . h($contact['name']) . ($contact['business'] ? ' · ' . h($contact['business']) : '') . '</h2>'
     . '<p style="margin:0 0 14px">' . ($contact['phone'] ? '<a href="tel:' . h($tel) . '">' . h($contact['phone']) . '</a> · ' : '') . ($contact['email'] ? h($contact['email']) . ' · ' : '') . ($contact['quote'] ? 'הצעה ' . h($contact['quote']) . ' · ' : '') . ($lang === 'en' ? 'מהאתר באנגלית · ' : '') . '<a href="' . h($link) . '">לשאלון ולקבצים בדף הניהול</a></p>';
 $text = "$title: {$contact['name']}\n{$contact['phone']} {$contact['email']}\n$link\n";
+$coming = max(0, min(FORM_FILES_MAX, (int) ($in['files_expected']['count'] ?? 0)));
+$comingMb = max(0, round((float) ($in['files_expected']['bytes'] ?? 0) / 1048576, 1));
+if ($coming) {
+    $html .= '<p style="margin:0 0 14px;padding:8px 12px;background:#EEF2F8;border-radius:8px">הלקוח מעלה עכשיו ' . $coming . ' קבצים (' . h((string) $comingMb) . ' MB). כשההעלאה תסתיים יגיע מייל נפרד עם מה שהגיע.</p>';
+    $text .= "הלקוח מעלה עכשיו $coming קבצים ($comingMb MB). יגיע מייל נפרד.\n";
+}
+if ($est) {
+    $qlink = 'https://yygweb.com/admin/quote.php?form=' . rawurlencode($id);
+    $html .= '<p style="margin:0 0 14px;padding:10px 14px;background:#EEF6EE;border-radius:8px">הלקוח ראה הערכה של <b>' . h(nis((int) $est['total'])) . '</b>' . ($est['todo'] ? ', ועוד לתמחור: ' . h(implode(', ', $est['todo'])) : '') . '.<br>' . mail_button($qlink, 'לטיוטת ההצעה מהשאלון') . '</p>';
+    $text .= 'הערכה שהלקוח ראה: ' . nis((int) $est['total']) . "\nטיוטת הצעה: $qlink\n";
+}
 if ($files) {
     $html .= '<p style="margin:0 0 14px"><b>קבצים מצורפים (' . count($files) . '):</b> ' . h(implode(', ', array_column($files, 'name'))) . '. <a href="' . h($link) . '">לצפייה ולהורדה</a></p>';
     $text .= 'קבצים: ' . implode(', ', array_column($files, 'name')) . "\n";
@@ -109,4 +121,4 @@ foreach ($items as $it) {
 }
 $html .= '</div>';
 notify_me(($flags ? '[לבדיקה] ' : '') . $title . ' מולא: ' . $contact['name'], $html, $text);
-$out(true, $skipped ? 'skipped' : '');
+$out(true, $skipped ? 'skipped' : '', 200, ['id' => $id, 'up' => sign('up' . $id)] + ($est ? ['estimate' => $est] : []));

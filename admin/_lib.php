@@ -75,6 +75,22 @@ function jsonl_remove(string $name, string $id): bool {
     return $found;
 }
 /* מוחק את הקבצים שצורפו לשאלון */
+/* קבצים של שאלון: מה שהגיע יחד עם השאלון (שאלונים ישנים), ועוד מה שהועלה אחריו קובץ־קובץ (forms/upload.php → uploads/<id>/manifest.jsonl) */
+const FORM_FILE_TYPES = [
+    'logo_file'   => ['svg', 'ai', 'eps', 'pdf', 'png', 'jpg', 'jpeg', 'webp', 'gif'],
+    'photo_files' => ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'gif'],
+    'docs'        => ['pdf', 'doc', 'docx', 'txt', 'rtf', 'odt', 'xls', 'xlsx', 'ppt', 'pptx'],
+];
+const FORM_FILE_MAX_MB = 60;      // לקובץ אחד (השרת מקבל עד 256MB, אבל טלפון בסלולרי נתקע בקבצים ענקיים)
+const FORM_FILES_TOTAL_MB = 400;  // לכל השאלון
+const FORM_FILES_MAX = 80;        // מספר קבצים לשאלון
+function form_files(array $rec): array {
+    $files = (array) ($rec['files'] ?? []);
+    $id = (string) ($rec['id'] ?? '');
+    if (!preg_match('/^[a-f0-9]{12}$/', $id)) return $files;
+    foreach ((@file(data_dir() . '/uploads/' . $id . '/manifest.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $f = json_decode($l, true); if (is_array($f) && isset($f['path'], $f['name'], $f['q'])) $files[] = $f; }
+    return $files;
+}
 function form_files_remove(string $id): void {
     if (!preg_match('/^[a-f0-9]{12}$/', $id)) return;
     $dir = data_dir() . '/uploads/' . $id;

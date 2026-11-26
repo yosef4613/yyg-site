@@ -3,14 +3,14 @@
 התוכן של השאלות נמצא ב־assets/q-defs.js, והמנוע ב־assets/forms.js. הרצה: python3 tools/questionnaires.py"""
 import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CSS_V, JS_V = "40", "4"
+CSS_V, JS_V = "45", "9"
 PAGES = {
  ('intake', 'he'): dict(path='questionnaire/index.html', alt='en/questionnaire/', title='שאלון אפיון לבניית אתר: מה חשוב לדעת לפני שמתחילים | YYG',
    desc='שאלון אפיון מלא לבניית אתר לעסק: העסק, הלקוחות, מטרת האתר, עמודים ויכולות, תוכן, עיצוב, זמנים ותקציב. כ־10 דקות, והתשובות נשמרות תוך כדי.',
-   h1='שאלון אפיון לאתר', lead='כל מה שחשוב לי לדעת כדי לבנות לכם אתר שמביא לקוחות: על העסק, על הלקוחות, ועל מה שצריך לקרות באתר. ממלאים בכ־10 דקות, ומקבלים הצעת מחיר מסודרת.'),
+   h1='שאלון אפיון לאתר', lead='כל מה שחשוב לי לדעת כדי לבנות לכם אתר שמביא לקוחות: על העסק, על הלקוחות, ועל מה שצריך לקרות באתר. ממלאים בכ־10 דקות, ובסוף רואים מיד הערכת מחיר לפי התשובות. ההצעה המסודרת מגיעה במייל תוך יום עבודה.'),
  ('intake', 'en'): dict(path='en/questionnaire/index.html', alt='questionnaire/', title='Website discovery questionnaire: what to know first | YYG',
    desc='A complete discovery questionnaire for a business website: the business, customers, goals, pages and features, content, design, timing and budget. About 10 minutes.',
-   h1='Website discovery questionnaire', lead='Everything I need to know to build you a website that brings in customers: your business, your customers, and what should happen on the site. About 10 minutes, then you get a formal quote.'),
+   h1='Website discovery questionnaire', lead='Everything I need to know to build you a website that brings in customers: your business, your customers, and what should happen on the site. About 10 minutes, and at the end you see a price estimate from your answers right away. The formal quote arrives by email within one business day.'),
  ('feedback', 'he'): dict(path='feedback/index.html', alt='en/feedback/', title='שאלון משוב על עיצובי האתר | YYG',
    desc='אחרי שמקבלים 3 עיצובים של האתר: בוחרים כיוון, מסמנים מה לקחת מכל עיצוב, ומדייקים צבעים, תחושה ותוכן לסבב הבא. כ־5 דקות.',
    h1='משוב על העיצובים', lead='אחרי שקיבלתם 3 עיצובים של האתר, השאלון הזה עוזר לבחור כיוון ולדייק את הסבב הבא. ככל שהמשוב מדויק יותר, העיצוב הבא קרוב יותר למה שאתם רוצים.'),

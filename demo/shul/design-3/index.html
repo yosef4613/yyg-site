@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>נחלת יצחק · עיצוב 3 מתוך 3 | אתר לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="בית הכנסת נחלת יצחק בבית שמש (מוסד דמיוני): זמני תפילות, שיעורים, קמפיין לחידוש ההיכל, הקדשות ותרומות. אתר לדוגמה של YYG, כיוון אבן ירושלמית.">
+<meta name="theme-color" content="#2D2418">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/suez-one-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/heebo-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/demo/shul/img/sanctuary-960.webp" imagesrcset="/demo/shul/img/sanctuary-560.webp 560w, /demo/shul/img/sanctuary-960.webp 960w" imagesizes="100vw">
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים: Suez One לכותרות (כמו אותיות חקוקות באבן), Heebo לגוף ---------- */
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* סימן השקל בכותרות: Suez One מצייר אותו כמו "שח", אז לוקחים אותו מ־Heebo Bold */
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+20AA}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- בסיס ---------- */
+:root{
+  --stone:#EFE6D6;--stone-2:#E6DAC4;--stone-3:#F6F0E4;--sand:#D7C3A1;--sand-d:#C6B08A;
+  --ink:#2D2418;--ink-2:#45382A;--muted:#5E5040;
+  --olive:#4D5A36;--olive-d:#3A4428;--olive-dd:#2C3420;--on-olive:#EFE6D6;--on-olive-2:#E4D6BC;
+  --copper:#9A4C2A;--copper-d:#7A3B20;--copper-l:#F2C9A6;--copper-m:#E3A47C;
+  --line:rgba(45,36,24,.14);--line-2:rgba(45,36,24,.26);
+  --head:"Suez One","Heebo",Georgia,serif;
+  --body:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:4px;--gutter:24px;--sec:104px;--header:78px;
+  --tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='176' viewBox='0 0 360 176'%3E%3Crect x='105' y='1' width='84' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='287' y='1' width='72' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='49' y='45' width='100' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='151' y='45' width='86' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='239' y='45' width='82' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='323' y='45' width='37' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='0' y='45' width='47' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='123' y='89' width='90' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='215' y='89' width='84' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='301' y='89' width='59' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='0' y='89' width='21' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='71' y='133' width='94' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='167' y='133' width='86' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='255' y='133' width='84' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Cpath d='M0 0.5H360M0.5 0v44M104.5 0v44M190.5 0v44M286.5 0v44M0 44.5H360M48.5 44v44M150.5 44v44M238.5 44v44M322.5 44v44M0 88.5H360M22.5 88v44M122.5 88v44M214.5 88v44M300.5 88v44M0 132.5H360M70.5 132v44M166.5 132v44M254.5 132v44M340.5 132v44' stroke='rgba(110,84,50,.075)' fill='none'/%3E%3C/svg%3E");
+  --tex-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='176' viewBox='0 0 360 176'%3E%3Crect x='105' y='1' width='84' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='287' y='1' width='72' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='49' y='45' width='100' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='151' y='45' width='86' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='239' y='45' width='82' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='323' y='45' width='37' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='0' y='45' width='47' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='123' y='89' width='90' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='215' y='89' width='84' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='301' y='89' width='59' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='0' y='89' width='21' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='71' y='133' width='94' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='167' y='133' width='86' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='255' y='133' width='84' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Cpath d='M0 0.5H360M0.5 0v44M104.5 0v44M190.5 0v44M286.5 0v44M0 44.5H360M48.5 44v44M150.5 44v44M238.5 44v44M322.5 44v44M0 88.5H360M22.5 88v44M122.5 88v44M214.5 88v44M300.5 88v44M0 132.5H360M70.5 132v44M166.5 132v44M254.5 132v44M340.5 132v44' stroke='rgba(0,0,0,.09)' fill='none'/%3E%3C/svg%3E");
+  /* שיפוע אבן מסותתת: אור מלמעלה, צל קטן למטה */
+  --chisel:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(45,36,24,.12),0 1px 0 rgba(45,36,24,.08),0 10px 24px -18px rgba(45,36,24,.45);
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--stone);color:var(--ink);font:400 17px/1.7 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:var(--copper)}
+h1,h2,h3,h4{font-family:var(--head);font-weight:400;margin:0;color:var(--ink);line-height:1.18}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--copper);outline-offset:3px;border-radius:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;inset-inline-start:16px;top:-80px;z-index:200;background:var(--ink);color:var(--stone);padding:10px 16px;border-radius:var(--r);text-decoration:none;font-weight:700}
+.skip:focus{top:12px}
+.container{width:min(1200px,100% - var(--gutter)*2);margin-inline:auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+section[id]{scroll-margin-top:calc(var(--header) + 8px)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+/* רקעי אבן: שורות אבנים בגווני חול, בניגודיות נמוכה מאוד */
+.stone-bg{background-color:var(--stone);background-image:linear-gradient(160deg,rgba(255,248,232,.55),rgba(255,248,232,0) 45%),var(--tex);background-size:auto,360px 176px}
+.stone-bg--warm{background-color:var(--stone-2)}
+.olive-bg{background-color:var(--olive);background-image:radial-gradient(90% 70% at 85% 0,rgba(255,236,200,.10),rgba(255,236,200,0) 60%),linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.16)),var(--tex-dark);background-size:auto,auto,360px 176px;color:var(--on-olive)}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--r);border:1.5px solid transparent;font:700 16.5px/1.2 var(--body);text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,box-shadow .2s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-copper{background:var(--copper);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.18),0 10px 22px -14px rgba(122,59,32,.9)}
+.btn-copper:hover{background:var(--copper-d)}
+.btn-ghost{background:transparent;color:var(--stone);border-color:rgba(239,230,214,.62)}
+.btn-ghost:hover{background:rgba(239,230,214,.12);border-color:var(--stone)}
+.btn-line{background:transparent;color:var(--copper-d);border-color:rgba(154,76,42,.55)}
+.btn-line:hover{background:rgba(154,76,42,.08);border-color:var(--copper)}
+.btn-stone{background:var(--stone);color:var(--ink);box-shadow:var(--chisel)}
+.btn-stone:hover{background:#fff}
+.btn-sm{min-height:44px;padding:0 18px;font-size:15.5px}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(-3px)}
+/* ---------- כותרת עליונה: שקופה מעל התמונה, ואבן אחרי הגלילה ---------- */
+.site-header{position:sticky;top:0;z-index:50;color:var(--stone);transition:background-color .3s,color .3s,box-shadow .3s}
+.site-header::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,15,8,.55),rgba(22,15,8,0));transition:opacity .3s}
+.site-header.is-solid{background:rgba(239,230,214,.95);color:var(--ink);box-shadow:0 1px 0 var(--line),0 10px 24px -20px rgba(45,36,24,.6);-webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px)}
+.site-header.is-solid::before{opacity:0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:var(--header)}
+.brand{display:inline-flex;align-items:center;gap:12px;color:inherit;text-decoration:none;flex:none;min-height:44px}
+.brand-mark{width:31px;height:40px;flex:none;color:var(--copper-l);transition:color .3s}
+.site-header.is-solid .brand-mark{color:var(--copper)}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-name{font:400 25px/1 var(--head);letter-spacing:.01em}
+.brand-sub{font:400 13px/1 var(--body);margin-top:6px;opacity:.86;letter-spacing:.02em}
+.main-nav{display:flex;align-items:center;gap:18px}
+.main-nav ul{display:flex;align-items:center;gap:2px}
+.main-nav ul a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:inherit;text-decoration:none;font:400 15.5px/1 var(--body);border-radius:var(--r)}
+.main-nav ul a::after{content:"";position:absolute;inset-inline:11px;bottom:7px;height:2px;background:var(--copper-m);transform:scaleX(0);transition:transform .25s}
+.site-header.is-solid .main-nav ul a::after{background:var(--copper)}
+.main-nav ul a:hover::after{transform:scaleX(1)}
+.nav-donate{min-height:44px;padding:0 20px}
+.menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;padding:0 14px;border:1px solid currentColor;border-radius:var(--r);background:transparent;cursor:pointer;font:700 15px/1 var(--body);color:inherit}
+.menu-btn .bars{position:relative;width:18px;height:12px}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;inset-inline:0;height:2px;border-radius:2px;background:currentColor;transition:transform .25s,top .25s}
+.menu-btn .bars::before{top:2px}.menu-btn .bars::after{top:8px}
+.menu-btn[aria-expanded="true"] .bars::before{top:5px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{top:5px;transform:rotate(-45deg)}
+.site-header :focus-visible{outline-color:var(--copper-m)}
+.site-header.is-solid :focus-visible{outline-color:var(--copper)}
+/* ---------- פתיחה ---------- */
+.hero{position:relative;margin-top:calc(var(--header) * -1);min-height:clamp(640px,90vh,880px);display:grid;align-items:end;color:var(--stone);isolation:isolate;overflow:hidden;background:#2A1F14}
+.hero-media{position:absolute;inset:0;z-index:-1;margin:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 36%}
+/* שכבה כהה וחמה, כמו אור של אחר הצהריים */
+.hero-media::before{content:"";position:absolute;inset:0;background:#B4733C;mix-blend-mode:multiply;opacity:.3}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,16,9,.6) 0,rgba(24,16,9,.08) 18%,rgba(24,16,9,0) 34%,rgba(24,16,9,.55) 58%,rgba(24,16,9,.9) 100%),linear-gradient(to left,rgba(24,16,9,.5) 0,rgba(24,16,9,0) 60%)}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 372px;align-items:end;gap:48px;padding:calc(var(--header) + 120px) 0 64px}
+.week-note{display:flex;width:fit-content;align-items:center;gap:10px;margin-bottom:22px;padding:8px 16px 8px 14px;border-radius:var(--r);background:rgba(239,230,214,.14);border:1px solid rgba(239,230,214,.26);font-size:15.5px;line-height:1.45;color:var(--stone);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);max-width:100%}
+.week-note::before{content:"";flex:none;width:18px;height:18px;background:var(--copper-l);-webkit-mask:var(--i-clock) center/contain no-repeat;mask:var(--i-clock) center/contain no-repeat}
+:root{--i-clock:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8.6'/%3E%3Cpath d='M12 7.4V12l3.1 2'/%3E%3C/svg%3E");--i-book:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 6.5C10 5 7 4.6 3.5 5v13c3.5-.4 6.5 0 8.5 1.5 2-1.5 5-1.9 8.5-1.5V5C17 4.6 14 5 12 6.5Zm0 0v13'/%3E%3C/svg%3E");--i-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.2 4.2L19 7'/%3E%3C/svg%3E");--i-alert:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8.6'/%3E%3Cpath d='M12 7.6v5.2M12 16.3v.1'/%3E%3C/svg%3E")}
+.kicker{display:inline-flex;align-items:center;gap:12px;font:700 15px/1.3 var(--body);letter-spacing:.03em;color:var(--copper)}
+/* שלוש אבנים קטנות לפני הקיקר */
+.kicker::before{content:"";flex:none;width:30px;height:12px;background:linear-gradient(currentColor,currentColor) 0 0/9px 5px no-repeat,linear-gradient(currentColor,currentColor) 11px 0/19px 5px no-repeat,linear-gradient(currentColor,currentColor) 4px 7px/16px 5px no-repeat,linear-gradient(currentColor,currentColor) 22px 7px/8px 5px no-repeat;opacity:.8}
+.hero .kicker{color:var(--copper-l)}
+.hero h1{margin-top:16px;font-size:clamp(2.6rem,1.2rem + 4.1vw,5.1rem);line-height:1.06;color:#F7F0E2;max-width:11ch;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-lead{margin-top:22px;max-width:35em;font-size:clamp(1.06rem,1rem + .3vw,1.22rem);line-height:1.7;color:#EDE3D1}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.next-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:26px;padding-top:20px;border-top:1px solid rgba(239,230,214,.22);font-size:16px;color:var(--stone);max-width:620px}
+.next-line .nl-text{display:inline-flex;align-items:center;gap:10px;font-weight:700}
+.next-line .nl-text::before{content:"";flex:none;width:20px;height:20px;background:var(--copper-l);-webkit-mask:var(--i-clock) center/contain no-repeat;mask:var(--i-clock) center/contain no-repeat}
+.next-line a{display:inline-flex;align-items:center;min-height:44px;color:var(--copper-l);text-underline-offset:5px;text-decoration-thickness:1px}
+.next-line a:hover{color:#fff}
+/* תקציר הקמפיין בפתיחה */
+.hero-camp{position:relative;padding:22px 22px 20px;border-radius:6px;background:rgba(32,23,14,.62);border:1px solid rgba(239,230,214,.2);-webkit-backdrop-filter:blur(12px) saturate(1.1);backdrop-filter:blur(12px) saturate(1.1);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.hc-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.hc-title{font:400 19px/1.2 var(--head);color:var(--stone)}
+.hc-pct{font:400 26px/1 var(--head);color:var(--copper-l)}
+.hc-sum{margin-top:14px;font-size:15px;color:var(--on-olive-2)}
+.hc-sum b{display:block;font:400 30px/1.15 var(--head);color:#F7F0E2;letter-spacing:.01em}
+.hc-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(239,230,214,.16);font-size:14.5px;color:var(--on-olive-2)}
+.hc-foot a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--copper-l);font-weight:700;text-decoration:none;white-space:nowrap}
+.hc-foot a:hover{color:#fff}
+.hc-foot a svg{width:16px;height:16px}
+.hero :focus-visible{outline-color:var(--copper-l)}
+/* ---------- הקיר: מד הקמפיין, 35 אבנים ---------- */
+.wall{--gap:5px;--sh:50px;display:grid;gap:var(--gap);position:relative}
+.course{display:flex;gap:var(--gap)}
+.st{position:relative;flex:var(--w,1) 1 0;min-width:0;height:var(--sh);border-radius:3px;border:1px dashed rgba(239,230,214,.3);background:rgba(239,230,214,.035);overflow:hidden}
+.st::before{content:"";position:absolute;inset:0;background:var(--tone);transform-origin:50% 100%;transform:scaleY(var(--f,0))}
+.st.is-set{border:0;background:var(--tone);background-image:linear-gradient(165deg,rgba(255,255,255,.26),rgba(255,255,255,0) 42%),radial-gradient(120% 90% at 80% 110%,rgba(45,36,24,.16),rgba(45,36,24,0) 60%);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -2px 0 rgba(45,36,24,.2),0 2px 4px rgba(0,0,0,.22)}
+.st.is-set::before{display:none}
+.st.is-part{border:1px solid var(--copper-l)}
+.st.is-part::before{opacity:.85}
+@media (prefers-reduced-motion:no-preference){
+  .st.is-new{animation:lay .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--k,0) * 70ms)}
+  @keyframes lay{0%{transform:translateY(-22px);opacity:0}70%{opacity:1}100%{transform:none;opacity:1}}
+  .st.is-part::before{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+}
+.wall--mini{--gap:3px;--sh:13px}
+.wall--mini .st{border-radius:2px}
+.wall--mini .st.is-set{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(45,36,24,.2)}
+/* יסוד הקיר */
+.wall-base{height:8px;margin-top:6px;border-radius:2px;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.08))}
+/* ---------- חלקים ---------- */
+.section{padding:var(--sec) 0}
+.sec-head{display:grid;gap:14px;margin-bottom:48px;max-width:760px}
+.sec-head h2{font-size:clamp(2rem,1.3rem + 2vw,3.05rem)}
+.sec-sub{max-width:40em;color:var(--muted);font-size:1.12rem}
+.small{font-size:15px;color:var(--muted)}
+/* תמונה חתוכה בקשת, עם מסגרת אבן */
+.arch{position:relative;margin:0;border-radius:999px 999px 6px 6px;overflow:hidden;background:var(--sand);box-shadow:0 0 0 8px var(--stone-3),0 0 0 9px var(--line-2),0 30px 50px -30px rgba(45,36,24,.55)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.cap{margin-top:22px;font-size:15px;color:var(--muted);line-height:1.55;display:flex;gap:10px}
+.cap::before{content:"";flex:none;width:18px;height:1.5px;margin-top:.75em;background:var(--copper)}
+/* ---------- דבר הרב ---------- */
+.rabbi-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:72px;align-items:center}
+.niche{position:relative;aspect-ratio:3/4;border-radius:999px 999px 4px 4px;background:linear-gradient(180deg,#D9C8A8,#E8DCC5 70%,#E1D3B8);box-shadow:inset 0 14px 30px -6px rgba(66,48,26,.45),inset 0 -2px 0 rgba(255,255,255,.4),0 0 0 10px var(--stone-3),0 0 0 11px var(--line-2),0 0 0 22px rgba(215,195,161,.38);display:grid;place-items:center}
+.niche::after{content:"";position:absolute;inset-inline:-30px;bottom:-26px;height:14px;border-radius:2px;background:linear-gradient(180deg,#D3BE98,#C2AA80);box-shadow:var(--chisel)}
+.niche svg{width:42%;height:auto;color:var(--copper);filter:drop-shadow(0 1px 0 rgba(255,255,255,.55)) drop-shadow(0 -1px 0 rgba(66,48,26,.35))}
+.letter{max-width:640px}
+.letter h2{font-size:clamp(2rem,1.3rem + 2vw,3.05rem);margin:14px 0 26px}
+.letter p{font-size:1.14rem;line-height:1.85;color:var(--ink-2)}
+.letter p + p{margin-top:18px}
+.letter .closing{font-family:var(--head);font-size:1.3rem;line-height:1.5;color:var(--ink)}
+.sign{display:flex;align-items:center;gap:16px;margin-top:30px;font:400 1.2rem/1.2 var(--head);color:var(--olive)}
+.sign::before{content:"";width:56px;height:2px;background:var(--olive);opacity:.6}
+/* ---------- עלינו ---------- */
+.about-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:end;margin-bottom:56px}
+.about-top .sec-head{margin-bottom:0}
+.about-text{font-size:1.1rem;color:var(--ink-2);line-height:1.8}
+/* ציר הזמן: שלוש אבנים בנדבך אחד */
+.course-3{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px;padding:8px;background:rgba(150,124,86,.16);border-radius:6px}
+.block{position:relative;padding:30px 30px 28px;border-radius:3px;background:linear-gradient(170deg,#F7F1E6,#EADFCB);box-shadow:var(--chisel)}
+.block:nth-child(2){background:linear-gradient(170deg,#EDE2CE,#DCCBAD)}
+.block:nth-child(3){background:linear-gradient(170deg,#C47A4C,#9A4C2A);color:#fff}
+.carve{font:400 clamp(2.4rem,1.6rem + 2vw,3.4rem)/1 var(--head);color:#8A7354;text-shadow:0 1px 0 rgba(255,255,255,.75),0 -1px 0 rgba(66,48,26,.35)}
+.block:nth-child(3) .carve{color:#F6DCC6;text-shadow:0 1px 0 rgba(255,255,255,.25),0 -1px 0 rgba(60,20,5,.55)}
+.block p{margin-top:12px;font-weight:700;font-size:1.05rem;line-height:1.45}
+.block:nth-child(3) p{color:#fff}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--line-2)}
+.nums li{padding:26px 24px 6px;display:grid;gap:6px;align-content:start}
+.nums li + li{border-inline-start:1px solid var(--line)}
+.nums b{font:400 clamp(2.4rem,1.8rem + 1.6vw,3.2rem)/1 var(--head);color:var(--olive)}
+.nums span{color:var(--muted);font-size:1rem;line-height:1.45}
+/* ---------- זמני תפילות ---------- */
+.times-grid{display:grid;grid-template-columns:1fr 1fr 340px;gap:24px;align-items:start}
+.slab{padding:30px 30px 18px;border-radius:4px;background:var(--stone-3);background-image:linear-gradient(170deg,rgba(255,255,255,.7),rgba(255,255,255,0) 50%);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.06)}
+.slab h3{font-size:1.7rem}
+.slab .slab-sub{margin-top:6px;font-size:15px;color:var(--muted)}
+.slab-head{padding-bottom:16px;margin-bottom:6px;border-bottom:2px solid var(--ink)}
+.t-list .t-row{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-areas:"name time" "sub time";align-items:center;column-gap:16px;padding:14px 12px;margin-inline:-12px;border-bottom:1px solid var(--line);border-radius:3px}
+.t-list .t-row:last-child{border-bottom:0}
+.t-name{grid-area:name;font-weight:700;font-size:1.1rem}
+.t-sub{grid-area:sub;font-size:14.5px;color:var(--muted)}
+.t-time{grid-area:time;font:700 1.6rem/1 var(--body);letter-spacing:.01em;color:#7E6648;text-shadow:0 1px 0 rgba(255,255,255,.9),0 -1px 0 rgba(66,48,26,.25);font-variant-numeric:tabular-nums;direction:ltr}
+.t-row.is-next{background:rgba(154,76,42,.09);border-bottom-color:transparent}
+.t-row.is-next::before{content:"";position:absolute;inset-inline-start:0;top:12px;bottom:12px;width:3px;border-radius:2px;background:var(--copper)}
+.t-row.is-next .t-time{color:var(--copper)}
+.t-row.is-next .t-name::after{content:"התפילה הבאה";display:inline-block;margin-inline-start:10px;padding:3px 8px;border-radius:3px;background:var(--copper);color:#fff;font:700 12px/1.2 var(--body);vertical-align:3px}
+.t-row:has(+ .is-next){border-bottom-color:transparent}
+.times-side{display:grid;gap:16px}
+.next-card{padding:26px;border-radius:4px;color:var(--on-olive)}
+.next-card .nc-ico{width:28px;height:28px;color:var(--copper-l)}
+.next-card p[data-times-next]{margin-top:10px;font:400 1.45rem/1.35 var(--head);color:#F7F0E2}
+.next-card .nc-upd{margin-top:14px;font-size:14px;color:var(--on-olive-2)}
+.owner{padding:20px 22px;border:1px dashed var(--line-2);border-radius:4px;background:rgba(246,240,228,.6);display:grid;gap:6px}
+.owner a{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:700;color:var(--copper-d);text-underline-offset:4px;justify-self:start}
+.owner a svg{width:20px;height:20px;flex:none}
+.owner p{font-size:14.5px;color:var(--muted);line-height:1.55}
+/* ---------- שיעורים ---------- */
+.shiur-head{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:48px;align-items:end;margin-bottom:44px}
+.shiur-head .sec-head{margin-bottom:0}
+.shiur-head .arch{aspect-ratio:4/5;max-height:300px;width:220px;justify-self:end}
+.today{justify-self:start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:9px 16px 9px 14px;border-radius:4px;background:var(--olive);color:var(--on-olive);font-weight:700;font-size:15.5px;line-height:1.45;max-width:100%}
+.today::before{content:"";flex:none;width:20px;height:20px;background:var(--copper-l);-webkit-mask:var(--i-book) center/contain no-repeat;mask:var(--i-book) center/contain no-repeat}
+.s-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.s-row{position:relative;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"time day" "topic topic" "by by" "note note";align-items:center;column-gap:14px;padding:24px 24px 22px;border-radius:4px;background:var(--stone-3);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.05)}
+.s-time{grid-area:time;font:700 1.8rem/1 var(--body);letter-spacing:.01em;color:#7E6648;text-shadow:0 1px 0 rgba(255,255,255,.9),0 -1px 0 rgba(66,48,26,.25);direction:ltr}
+.s-day{grid-area:day;justify-self:end;padding:4px 10px;border-radius:3px;background:rgba(77,90,54,.12);color:var(--olive-d);font-weight:700;font-size:14px;line-height:1.3}
+.s-topic{grid-area:topic;margin-top:16px;font:400 1.35rem/1.25 var(--head)}
+.s-by{grid-area:by;margin-top:4px;font-size:15px;color:var(--muted)}
+.s-note{grid-area:note;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2);font-size:14.5px;color:var(--muted);line-height:1.5}
+.s-row.is-today{box-shadow:var(--chisel),0 0 0 2px var(--copper)}
+.s-row.is-today .s-day{background:var(--copper);color:#fff}
+.s-row.is-today .s-day::before{content:"היום · "}
+.s-row.is-today .s-time{color:var(--copper)}
+.shiur-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:28px}
+/* ---------- הקמפיין ---------- */
+.camp-top{padding:var(--sec) 0 88px}
+.camp-top .kicker{color:var(--copper-l)}
+.camp-top h2{color:#F7F0E2;font-size:clamp(2.2rem,1.3rem + 2.6vw,3.6rem)}
+.camp-top .sec-sub{color:var(--on-olive-2)}
+.camp-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:40px;align-items:stretch}
+.wall-card{padding:30px 30px 26px;border-radius:6px;background:rgba(20,24,12,.24);border:1px solid rgba(239,230,214,.14)}
+.wall-legend{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 20px;margin-bottom:18px;font-size:14.5px;color:var(--on-olive-2)}
+.lg{display:inline-flex;align-items:center;gap:8px}
+.lg i{display:inline-block;width:22px;height:12px;border-radius:2px}
+.lg .lg-set{background:linear-gradient(90deg,#D7C3A1 50%,#B9693F 50%)}
+.lg .lg-open{border:1px dashed rgba(239,230,214,.5)}
+.wall-sum{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:22px;font-size:1.1rem;color:var(--on-olive-2)}
+.wall-sum b{font:400 clamp(2rem,1.4rem + 1.6vw,2.8rem)/1 var(--head);color:#F7F0E2}
+.wall-sum .of b{font-size:inherit;font-family:var(--body);font-weight:700;color:var(--on-olive)}
+.camp-side{display:grid;gap:18px;align-content:start}
+.figs{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:8px 22px;padding-bottom:20px;border-bottom:1px solid rgba(239,230,214,.18)}
+.pct{grid-row:span 2;font:400 clamp(3.6rem,2.6rem + 2.4vw,5rem)/.9 var(--head);color:var(--copper-l);text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.figs dl{margin:0;display:contents}
+.figs dl > div{display:flex;align-items:baseline;gap:8px;font-size:1.05rem;color:var(--on-olive-2)}
+.figs dd{margin:0;font-weight:700;color:var(--on-olive);font-size:1.15rem}
+.m-note{font-size:14.5px;color:var(--on-olive-2);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.m-note::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;background:var(--copper-l);-webkit-mask:var(--i-alert) center/contain no-repeat;mask:var(--i-alert) center/contain no-repeat}
+/* ספירה לאחור, חקוקה באבן */
+.count{padding:22px;border-radius:6px;background:rgba(239,230,214,.08);border:1px solid rgba(239,230,214,.14)}
+.count-title{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;font-weight:700;color:var(--on-olive-2);letter-spacing:.02em}
+.count-stones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.cs{display:grid;justify-items:center;gap:6px;padding:16px 6px 12px;border-radius:3px;background:linear-gradient(170deg,#F1E8D8,#DCCBAE);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 0 rgba(66,48,26,.18),0 3px 6px rgba(0,0,0,.2)}
+.cs b{font:400 clamp(2.2rem,1.8rem + 1vw,2.8rem)/1 var(--head);color:#7A6346;text-shadow:0 1px 0 rgba(255,255,255,.85),0 -1px 0 rgba(66,48,26,.4);font-variant-numeric:tabular-nums}
+.cs span{font-size:13.5px;font-weight:700;color:var(--muted)}
+.cs b[data-state="last"]{color:var(--copper)}
+.count-label{margin-top:14px;font:400 1.2rem/1.3 var(--head);color:#F7F0E2}
+.camp-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+/* אחרי שהקמפיין הסתיים */
+.camp-ended{display:grid;gap:16px;justify-items:start;padding:26px;border-radius:6px;background:linear-gradient(170deg,#F1E8D8,#DCCBAE);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 20px 40px -24px rgba(0,0,0,.6)}
+.camp-ended .ce-k{font-size:14px;font-weight:700;color:var(--olive);letter-spacing:.03em;display:inline-flex;gap:8px;align-items:center}
+.camp-ended .ce-k::before{content:"";width:18px;height:18px;background:var(--olive);-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat}
+.camp-ended p{font:400 1.45rem/1.4 var(--head);color:var(--ink)}
+.olive-bg :focus-visible{outline-color:var(--copper-l)}
+.olive-bg .camp-ended :focus-visible{outline-color:var(--copper)}
+/* על מה הכסף */
+.camp-more{padding:88px 0 var(--sec)}
+.money-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:start}
+.money h3,.camp-col h3{font-size:1.7rem;margin-bottom:8px}
+.money-list{margin-top:18px;border-top:2px solid var(--ink)}
+.money-list li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.money-list .mi-name{font-weight:700;font-size:1.06rem;line-height:1.4}
+.money-list .mi-sum{font:400 1.3rem/1 var(--head);color:var(--copper-d);white-space:nowrap}
+.mstones{grid-column:1/-1;height:12px;width:calc(var(--n) * 17px);max-width:100%;background:repeating-linear-gradient(to left,var(--sand-d) 0 14px,transparent 14px 17px);border-radius:1px;opacity:.9}
+.money-list li:nth-child(2) .mstones{background-image:repeating-linear-gradient(to left,#B9693F 0 14px,transparent 14px 17px)}
+.money-total{display:flex;justify-content:space-between;gap:12px;padding:16px 0 0;font-weight:700}
+.money-total span:last-child{font:400 1.3rem/1 var(--head)}
+.when{margin-top:30px;padding:22px 24px;border-radius:4px;background:var(--olive);color:var(--on-olive);display:grid;gap:6px}
+.when b{font:400 1.25rem/1.3 var(--head);color:#F7F0E2}
+.when p{color:var(--on-olive-2);line-height:1.6}
+.renders{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.renders figure{margin:0}
+.renders .arch{aspect-ratio:3/4}
+.renders figure:first-child{margin-top:48px}
+.renders .cap{margin-top:20px}
+.camp-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:84px;padding-top:56px;border-top:1px solid var(--line-2)}
+.u-list{margin-top:18px;display:grid;gap:0}
+.u-row{position:relative;padding:0 0 22px;padding-inline-start:92px;min-height:70px}
+.u-row::before{content:"";position:absolute;inset-inline-start:33px;top:58px;bottom:6px;width:2px;background:var(--line-2)}
+.u-row:last-child::before{display:none}
+.u-date{position:absolute;inset-inline-start:0;top:0;width:68px;height:50px;display:grid;place-items:center;border-radius:3px;background:linear-gradient(170deg,#F7F1E6,#E3D5BC);box-shadow:var(--chisel);font:400 1.15rem/1 var(--head);color:var(--copper-d)}
+.u-text{display:block;padding-top:10px;color:var(--ink-2);line-height:1.6}
+.donors-card{padding:26px 26px 18px;border-radius:4px;background:var(--stone-3);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.05)}
+.donors-card .small{margin-top:2px}
+.d-list{margin-top:14px}
+.donor{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+.donor:last-child{border-bottom:0}
+.d-name{font-weight:700}
+.d-amount{grid-column:2;grid-row:1;font:400 1.08rem/1.3 var(--head);color:var(--olive-d);white-space:nowrap}
+.d-item,.d-ded{grid-column:1;font-size:14.5px;color:var(--muted);line-height:1.45}
+.d-item{color:var(--copper-d);font-weight:700}
+.d-when{grid-column:2;grid-row:2;font-size:13.5px;color:var(--muted);text-align:end}
+.donor.is-anon .d-name{color:var(--muted)}
+.donor.is-mine{margin-inline:-14px;padding-inline:14px;border-radius:3px;background:rgba(154,76,42,.1);border-bottom-color:transparent}
+.donor.is-mine::before{content:"התרומה שלכם, לדוגמה בלבד";grid-column:1/-1;order:-1;justify-self:start;margin-bottom:6px;padding:2px 8px;border-radius:3px;background:var(--copper);color:#fff;font-size:12.5px;font-weight:700;line-height:1.5}
+.camp-join{display:grid;justify-items:start;gap:18px;margin-top:36px;padding:28px 30px;border-radius:6px;background:var(--ink);background-image:var(--tex-dark);color:var(--stone)}
+.camp-join p{font:400 1.4rem/1.35 var(--head);color:#F7F0E2}
+.camp-join :focus-visible{outline-color:var(--copper-l)}
+/* ---------- הקדשות ---------- */
+.ded-grid{display:grid;grid-template-columns:400px minmax(0,1fr);gap:56px;align-items:start}
+.ded-feature{position:sticky;top:calc(var(--header) + 24px)}
+.ded-feature .arch{aspect-ratio:4/5}
+.ded-feature .arch img{object-position:50% 40%}
+.plaque-pic{position:relative;width:62%;margin:-90px 0 0 auto;margin-inline-start:auto;border-radius:4px;overflow:hidden;box-shadow:0 0 0 6px var(--stone-3),0 0 0 7px var(--line-2),0 24px 40px -20px rgba(45,36,24,.6)}
+.plaque-pic img{aspect-ratio:3/2;object-fit:cover}
+.ded-feature .cap{margin-top:22px}
+.ded-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ded{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name price" "desc desc" "state btn" "by by";column-gap:16px;align-items:center;padding:22px 22px 18px;border-radius:4px;background:var(--stone-3);background-image:linear-gradient(170deg,rgba(255,255,255,.75),rgba(255,255,255,0) 55%);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.06);transition:box-shadow .2s}
+.ded-name{grid-area:name;font:400 1.3rem/1.25 var(--head)}
+.ded-price{grid-area:price;align-self:start;font:400 1.3rem/1.25 var(--head);color:var(--copper-d);white-space:nowrap}
+.ded-desc{grid-area:desc;margin-top:8px;font-size:15px;color:var(--muted);line-height:1.55}
+.ded-state{grid-area:state;margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--olive-d)}
+.ded-state::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 3px rgba(77,90,54,.18)}
+.ded-btn{grid-area:btn;margin-top:14px;min-height:44px;padding:0 18px;border:1.5px solid var(--copper);border-radius:var(--r);background:transparent;color:var(--copper-d);font:700 15px/1 var(--body);cursor:pointer;transition:background-color .2s,color .2s}
+.ded-btn:hover{background:var(--copper);color:#fff}
+.ded.is-available:hover{box-shadow:var(--chisel),0 0 0 1px rgba(154,76,42,.35)}
+.ded.is-taken{background:rgba(230,218,196,.55);box-shadow:inset 0 0 0 1px rgba(45,36,24,.1)}
+.ded.is-taken .ded-name,.ded.is-taken .ded-price{color:var(--muted)}
+.ded.is-taken .ded-state{color:var(--copper-d)}
+.ded.is-taken .ded-state::before{width:16px;height:16px;border-radius:0;box-shadow:none;background:var(--copper);-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat}
+.ded-by{grid-area:by;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2);font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.ded-foot{margin-top:22px}
+/* ---------- טופס התרומה ---------- */
+.donate-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:56px;align-items:start}
+.form-card{padding:40px;border-radius:6px;background:var(--stone-3);background-image:linear-gradient(170deg,rgba(255,255,255,.8),rgba(255,255,255,0) 50%);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.06),0 40px 70px -40px rgba(45,36,24,.5)}
+.form-card .sec-head{margin-bottom:30px}
+.dform{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}
+.dform fieldset{margin:0;padding:0;border:0;min-width:0}
+.dform legend,.field > label{display:block;padding:0;margin-bottom:10px;font-weight:700;font-size:15.5px;color:var(--ink)}
+.full{grid-column:1/-1}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{position:relative;display:block;cursor:pointer}
+.tile input,.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.tile span{display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 8px;border-radius:3px;background:var(--stone);border:1px solid var(--line-2);font:400 1.2rem/1 var(--head);color:var(--ink);transition:background-color .2s,color .2s,box-shadow .2s,border-color .2s}
+.tile:last-child span{font:700 15.5px/1.2 var(--body)}
+.tile:hover span{border-color:var(--copper)}
+.tile input:checked + span{background:var(--copper);border-color:var(--copper);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -2px 0 rgba(0,0,0,.2)}
+.tile input:focus-visible + span,.seg input:focus-visible + span,.check input:focus-visible + span::before{outline:3px solid var(--copper);outline-offset:2px}
+.tile input:disabled + span{opacity:.45;cursor:not-allowed}
+.other{display:grid;grid-template-columns:auto minmax(0,220px);align-items:center;gap:8px 14px;margin-top:12px}
+.other label{font-size:15px;color:var(--muted);font-weight:700}
+.input{width:100%;min-height:52px;padding:12px 16px;border:1px solid var(--line-2);border-radius:3px;background:#FFFCF6;font-size:17px;transition:border-color .2s,box-shadow .2s}
+.input::placeholder{color:#857660}
+.input:hover{border-color:rgba(45,36,24,.42)}
+.input:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 4px rgba(154,76,42,.16)}
+.input:disabled{background:var(--stone-2);color:var(--muted);cursor:not-allowed}
+textarea.input{min-height:120px;resize:vertical;line-height:1.55}
+select.input{appearance:none;-webkit-appearance:none;padding-inline-end:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A4C2A' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:18px;background-position:left 16px center}
+.hint{margin-top:6px;font-size:14px;color:var(--muted)}
+.seg{display:grid;grid-template-columns:1fr 1.5fr;gap:4px;padding:4px;border-radius:4px;background:var(--stone-2);border:1px solid var(--line)}
+.seg label{position:relative;display:block;cursor:pointer}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:46px;padding:0 10px;border-radius:3px;font-weight:700;font-size:15.5px;color:var(--ink-2);text-align:center;line-height:1.25;transition:background-color .2s,color .2s,box-shadow .2s}
+.seg input:checked + span{background:var(--stone-3);color:var(--copper-d);box-shadow:0 1px 3px rgba(45,36,24,.16),0 0 0 1px var(--line)}
+.seg input:disabled + span{opacity:.45;cursor:not-allowed}
+.name-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center}
+.check{position:relative;display:inline-flex;align-items:center;min-height:52px;cursor:pointer}
+.check input{position:absolute;opacity:0;width:24px;height:24px;margin:0;inset-inline-start:0;top:50%;transform:translateY(-50%);cursor:pointer}
+.check span{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15.5px}
+.check span::before{content:"";flex:none;width:24px;height:24px;border-radius:3px;border:1.5px solid var(--line-2);background:#FFFCF6;transition:background-color .2s,border-color .2s}
+.check input:checked + span::before{background:var(--copper) var(--i-check-w) center/16px no-repeat;border-color:var(--copper)}
+:root{--i-check-w:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.2 4.2L19 7'/%3E%3C/svg%3E")}
+.summary{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:3px;background:var(--stone-2);border-inline-start:4px solid var(--olive);font:400 1.15rem/1.4 var(--head);color:var(--ink)}
+.form-error{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;padding:14px 18px;border-radius:3px;background:#F6E1D6;border:1px solid #D9A487;color:#6E2E14;font-weight:700;line-height:1.5}
+.form-error::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;background:currentColor;-webkit-mask:var(--i-alert) center/contain no-repeat;mask:var(--i-alert) center/contain no-repeat}
+.submit-row{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.submit-row .btn{min-width:220px;min-height:56px;font-size:17.5px}
+.thanks{grid-column:1/-1;display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:4px;background:var(--olive);color:var(--on-olive);font-size:16.5px;line-height:1.65;box-shadow:0 20px 40px -24px rgba(45,36,24,.7);overflow-wrap:anywhere}
+.thanks::before{content:"";flex:none;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--copper-l) var(--i-check-d) center/18px no-repeat}
+:root{--i-check-d:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233A4428' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.2 4.2L19 7'/%3E%3C/svg%3E")}
+.thanks:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
+.donate-side{display:grid;gap:26px}
+.donate-side .arch{aspect-ratio:1/1;max-width:340px;width:100%;justify-self:center}
+.donate-side .arch img{object-position:50% 60%}
+.trust{display:grid;gap:0;border-top:1px solid var(--line-2)}
+.trust li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:700}
+.trust svg{flex:none;width:40px;height:40px;padding:9px;border-radius:3px;background:var(--stone-3);color:var(--olive);box-shadow:var(--chisel)}
+.no-charge{flex:1 1 220px;display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:15.5px;line-height:1.5;color:var(--ink)}
+.no-charge::before{content:"";flex:none;width:20px;height:20px;margin-top:1px;background:var(--copper);-webkit-mask:var(--i-alert) center/contain no-repeat;mask:var(--i-alert) center/contain no-repeat}
+.reset{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;border:0;background:none;color:var(--copper-d);font-weight:700;font-size:15px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.reset svg{width:16px;height:16px}
+/* ---------- בקהילה ---------- */
+.comm-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:start}
+.n-list{display:grid;gap:14px}
+.n-row{position:relative;min-height:104px;padding:20px 22px 20px;padding-inline-start:124px;border-radius:4px;background:var(--stone-3);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.05)}
+.n-row::before{content:"";position:absolute;inset-inline-start:16px;top:16px;width:88px;height:76px;border-radius:3px;background:linear-gradient(170deg,#EFE4D0,#D9C6A4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 0 rgba(66,48,26,.16)}
+.n-date{position:absolute;inset-inline-start:16px;top:26px;width:88px;text-align:center;font:400 1.7rem/1 var(--head);color:#6F5839;text-shadow:0 1px 0 rgba(255,255,255,.8),0 -1px 0 rgba(66,48,26,.3)}
+.n-day{position:absolute;inset-inline-start:16px;top:60px;width:88px;text-align:center;font-size:13.5px;font-weight:700;color:var(--muted)}
+.n-title{display:block;font:400 1.3rem/1.3 var(--head)}
+.n-when{display:block;margin-top:4px;font-size:14.5px;font-weight:700;color:var(--copper-d)}
+.n-text{display:block;margin-top:6px;color:var(--ink-2);line-height:1.6}
+.n-row.is-past{opacity:.62}
+.comm-side{display:grid;gap:22px}
+.comm-side .arch{aspect-ratio:1/1;max-width:400px;width:100%;justify-self:center}
+.comm-side .arch img{object-position:42% 50%}
+.wa-card{display:grid;gap:14px;padding:24px;border-radius:4px;background:var(--olive);color:var(--on-olive)}
+.wa-card p{font:400 1.25rem/1.4 var(--head);color:#F7F0E2}
+.wa-card .btn{justify-self:start}
+.wa-card :focus-visible{outline-color:var(--copper-l)}
+/* ---------- האולם ---------- */
+.hall-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:72px;align-items:center}
+.hall-pic .arch{aspect-ratio:4/5;max-width:440px}
+.hall-pic .arch img{object-position:72% 50%}
+.points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0 30px}
+.points li{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:3px;background:var(--stone-3);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.05);font-weight:700;line-height:1.45}
+.points li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;background:var(--olive);-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat}
+.hall-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+.tel-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:700;color:var(--copper-d);text-underline-offset:4px}
+.hall-note{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-2)}
+/* ---------- שאלות ---------- */
+.faq-wrap{display:grid;grid-template-columns:340px minmax(0,1fr);gap:64px;align-items:start}
+.faq-aside{position:sticky;top:calc(var(--header) + 32px)}
+.faq-list{border-top:2px solid var(--ink)}
+.faq-list details{border-bottom:1px solid var(--line-2)}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px;padding:18px 0;cursor:pointer;list-style:none;font:400 1.25rem/1.4 var(--head);color:var(--ink)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover{color:var(--copper-d)}
+.pm{position:relative;flex:none;width:38px;height:38px;border-radius:3px;background:var(--stone-3);box-shadow:var(--chisel);transition:background-color .2s}
+.pm::before,.pm::after{content:"";position:absolute;top:50%;left:50%;width:13px;height:2px;margin:-1px 0 0 -6.5px;background:var(--copper-d);transition:transform .25s}
+.pm::after{transform:rotate(90deg)}
+details[open] .pm{background:var(--copper)}
+details[open] .pm::before,details[open] .pm::after{background:#fff}
+details[open] .pm::after{transform:rotate(0)}
+.faq-list .ans{padding:0 0 26px;max-width:46em;color:var(--ink-2);font-size:1.08rem;line-height:1.75}
+/* ---------- איך מגיעים ---------- */
+.visit-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:stretch}
+.visit-list{border-top:2px solid var(--ink)}
+.visit-list li{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}
+.visit-list svg{width:42px;height:42px;padding:10px;border-radius:3px;background:var(--stone-3);color:var(--copper);box-shadow:var(--chisel)}
+.visit-list b{display:block;font-weight:700;font-size:1.06rem;line-height:1.4}
+.visit-list span{display:block;color:var(--muted);font-size:15.5px;line-height:1.55}
+.visit-list a{color:var(--copper-d)}
+.visit-list .vl-links{display:flex;flex-wrap:wrap;gap:0 18px}
+.vl-links a{display:inline-flex;align-items:center;min-height:36px}
+.visit-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.visit-cta .btn{padding:0 14px}
+.map{position:relative;align-self:start;aspect-ratio:600/440;border-radius:6px;overflow:hidden;background:#E9DEC9;box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.08)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.contact-card{margin-top:56px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:48px;padding:40px;border-radius:6px;background:var(--stone-3);box-shadow:var(--chisel),0 0 0 1px rgba(45,36,24,.06)}
+.contact-card h3{font-size:1.8rem}
+.contact-card .cc-intro p{margin-top:12px;color:var(--muted)}
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.cform .field > label{margin-bottom:8px}
+.form-status:not(:empty){grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:3px;background:var(--olive);color:var(--on-olive);font-weight:700}
+.form-status:not(:empty)::before{content:"";flex:none;width:18px;height:18px;background:var(--copper-l);-webkit-mask:var(--i-alert) center/contain no-repeat;mask:var(--i-alert) center/contain no-repeat}
+/* ---------- פוטר ---------- */
+.site-footer{background:var(--ink);background-image:var(--tex-dark);color:#D9CDB8;padding:76px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(239,230,214,.14)}
+.site-footer .brand{color:var(--stone)}
+.site-footer .brand-mark{color:var(--copper-m)}
+.f-line{margin-top:18px;color:#CDBFA6}
+.site-footer h3{font:700 14px/1 var(--body);color:var(--copper-m);letter-spacing:.06em;margin-bottom:16px}
+.f-links{display:grid;grid-template-columns:repeat(2,max-content);gap:2px 36px}
+.f-links a,.f-contact a{display:inline-flex;align-items:center;min-height:40px;color:#EFE6D6;text-decoration:none}
+.f-links a:hover,.f-contact a:hover{text-decoration:underline;text-underline-offset:4px}
+.f-contact{display:grid;gap:2px;color:#EFE6D6;justify-items:start}
+.f-owner{display:inline-flex;align-items:center;gap:8px;margin-top:12px;min-height:44px;padding:0 14px;border:1px solid rgba(239,230,214,.28);border-radius:var(--r);color:#fff;text-decoration:none;font-size:15px}
+.f-owner:hover{background:rgba(239,230,214,.08)}
+.f-owner svg{width:16px;height:16px}
+.site-footer :focus-visible{outline-color:var(--copper-m)}
+.f-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:24px;font-size:14.5px;color:#CDBFA6}
+.f-bottom a{color:#fff}
+.to-top{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:#EFE6D6;text-decoration:none}
+.to-top:hover{text-decoration:underline;text-underline-offset:4px}
+.to-top svg{width:16px;height:16px}
+/* ---------- רספונסיבי ---------- */
+@media (max-width:1160px){
+  .times-grid{grid-template-columns:1fr 1fr}
+  .times-side{grid-column:1/-1;grid-template-columns:1fr 1fr;align-items:stretch}
+  .ded-grid{grid-template-columns:320px minmax(0,1fr);gap:40px}
+}
+@media (max-width:1080px){
+  .menu-btn{display:inline-flex}
+  .main-nav{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;align-items:stretch;gap:16px;padding:8px var(--gutter) 24px;background:var(--stone);color:var(--ink);border-bottom:1px solid var(--line-2);box-shadow:0 24px 40px -24px rgba(45,36,24,.45);max-height:calc(100vh - var(--header));overflow-y:auto}
+  .main-nav.is-open{display:flex}
+  .main-nav ul{flex-direction:column;align-items:stretch;gap:0}
+  .main-nav ul a{display:flex;min-height:52px;padding:0 4px;font-size:17px;border-bottom:1px solid var(--line);border-radius:0}
+  .main-nav ul a::after{display:none}
+  .nav-donate{width:100%;min-height:52px}
+  .site-header.menu-open{background:var(--stone);color:var(--ink)}
+  .site-header.menu-open::before{opacity:0}
+  .site-header.menu-open .brand-mark{color:var(--copper)}
+  .hero-inner{grid-template-columns:minmax(0,1fr) 330px;gap:32px}
+  .camp-grid{grid-template-columns:1fr}
+  .camp-side{grid-template-columns:1fr 1fr;align-items:start}
+  .figs{grid-column:1/-1}
+  .money-grid{grid-template-columns:1fr;gap:56px}
+  .renders{max-width:640px}
+  .s-list{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  :root{--sec:84px}
+  .hero-inner{grid-template-columns:1fr;gap:28px;padding-top:calc(var(--header) + 260px)}
+  .hero-camp{max-width:460px}
+  .rabbi-grid{grid-template-columns:200px minmax(0,1fr);gap:44px}
+  .about-top{grid-template-columns:1fr;gap:22px}
+  .nums{grid-template-columns:1fr 1fr}
+  .nums li:nth-child(3){border-inline-start:0}
+  .nums li:nth-child(n+3){border-top:1px solid var(--line)}
+  .shiur-head{grid-template-columns:1fr}
+  .shiur-head .arch{display:none}
+  .camp-cols{grid-template-columns:1fr;gap:56px}
+  .ded-grid{grid-template-columns:1fr}
+  .ded-feature{position:static;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end}
+  .ded-feature .arch{aspect-ratio:1/1}
+  .plaque-pic{margin:0;width:100%}
+  .ded-feature .cap{grid-column:1/-1;margin-top:0}
+  .donate-grid{grid-template-columns:1fr}
+  .donate-side{grid-template-columns:240px minmax(0,1fr);align-items:start;gap:28px}
+  .donate-side .arch{grid-row:span 4}
+  .comm-grid{grid-template-columns:1fr;gap:44px}
+  .comm-side{grid-template-columns:200px minmax(0,1fr);align-items:center}
+  .hall-grid{grid-template-columns:1fr;gap:44px}
+  .hall-pic .arch{aspect-ratio:16/10;max-width:none;border-radius:999px 999px 6px 6px / 400px 400px 6px 6px}
+  .faq-wrap{grid-template-columns:1fr;gap:28px}
+  .faq-aside{position:static}
+  .visit-grid{grid-template-columns:1fr}
+  .contact-card{grid-template-columns:1fr;gap:24px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid > :first-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  :root{--gutter:16px;--sec:68px;--header:66px}
+  body{font-size:16.5px}
+  .brand-mark{width:27px;height:35px}
+  .brand-name{font-size:22px}
+  .brand-sub{font-size:12px}
+  .hero{min-height:0}
+  .hero-media img{object-position:50% 0}
+  .hero-inner{padding:calc(var(--header) + 190px) 0 40px}
+  .hero h1{font-size:2.65rem;max-width:none}
+  .hero-lead{margin-top:16px}
+  .hero-cta{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}
+  .hero-cta .btn{width:100%}
+  .next-line{margin-top:20px;padding-top:16px;font-size:15.5px}
+  .week-note{font-size:14.5px;margin-bottom:16px}
+  .hero-camp{padding:18px 16px 14px}
+  .wall--mini{--sh:11px}
+  .sec-head{margin-bottom:32px}
+  .rabbi-grid{grid-template-columns:1fr;gap:40px}
+  .niche{width:150px;margin-inline:auto}
+  .niche::after{inset-inline:-18px;bottom:-20px;height:10px}
+  .letter h2{margin-top:10px}
+  .letter p{font-size:1.06rem}
+  .course-3{grid-template-columns:1fr;padding:6px;gap:6px}
+  .block{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;padding:18px 20px}
+  .block p{margin-top:0}
+  .block:nth-child(2){margin-inline-start:28px}
+  .nums li{padding:20px 14px 4px}
+  .times-grid,.times-side{grid-template-columns:1fr}
+  .slab{padding:22px 20px 10px}
+  .t-list .t-row{padding:13px 10px;margin-inline:-10px}
+  .t-time{font-size:1.55rem}
+  .t-row.is-next .t-name::after{display:table;margin:6px 0 0}
+  .s-list{grid-template-columns:1fr;gap:12px}
+  .s-row{padding:16px 16px 14px}
+  .s-time{font-size:1.5rem}
+  .s-topic{margin-top:8px;font-size:1.2rem}
+  .s-note{margin-top:8px;padding-top:8px}
+  .camp-top{padding-bottom:64px}
+  .wall-card{padding:18px 14px 16px}
+  .wall{--gap:3px;--sh:30px}
+  .wall-legend{font-size:13.5px}
+  .camp-side{grid-template-columns:1fr}
+  .figs{gap:6px 16px}
+  .count{padding:16px}
+  .camp-more{padding-top:64px}
+  .renders{gap:16px}
+  .renders figure:first-child{margin-top:32px}
+  .renders .cap{font-size:14px}
+  .camp-cols{margin-top:56px;padding-top:44px}
+  .u-row{padding-inline-start:80px}
+  .u-date{width:60px;height:46px;font-size:1.05rem}
+  .u-row::before{inset-inline-start:29px;top:54px}
+  .donors-card{padding:20px 18px 12px}
+  .camp-join{padding:22px 20px}
+  .camp-join .btn{width:100%}
+  .ded-feature{grid-template-columns:1fr;gap:20px}
+  .ded-feature .arch{aspect-ratio:4/3;border-radius:999px 999px 6px 6px / 260px 260px 6px 6px}
+  .plaque-pic{display:none}
+  .ded-list{grid-template-columns:1fr;gap:12px}
+  .ded{padding:16px 16px 12px}
+  .ded-desc{margin-top:4px;font-size:14.5px}
+  .ded-state,.ded-btn{margin-top:10px}
+  .form-card{padding:26px 16px;margin-inline:-4px}
+  .dform{grid-template-columns:1fr;gap:20px}
+  .tiles{grid-template-columns:repeat(3,1fr);gap:6px}
+  .tile span{min-height:52px;font-size:1.08rem;padding:0 4px}
+  .tile:last-child span{font-size:14px}
+  .other{grid-template-columns:1fr}
+  .seg span{font-size:14.5px;padding:4px 8px}
+  .check{min-height:44px}
+  .summary{font-size:1.05rem}
+  .submit-row .btn{width:100%}
+  .thanks{padding:18px 16px;font-size:16px}
+  .donate-side{grid-template-columns:1fr}
+  .donate-side .arch{grid-row:auto;max-width:260px}
+  .n-row{padding:16px 16px 16px;padding-inline-start:100px;min-height:96px}
+  .n-row::before{inset-inline-start:12px;top:14px;width:74px;height:68px}
+  .n-date{inset-inline-start:12px;top:24px;width:74px;font-size:1.45rem}
+  .n-day{inset-inline-start:12px;top:54px;width:74px;font-size:12.5px}
+  .n-title{font-size:1.15rem}
+  .comm-side{grid-template-columns:1fr}
+  .comm-side .arch{max-width:280px}
+  .wa-card .btn{width:100%;white-space:normal;text-align:center}
+  .points{grid-template-columns:1fr;gap:8px}
+  .hall-pic .arch{aspect-ratio:4/3;border-radius:999px 999px 6px 6px / 240px 240px 6px 6px}
+  .hall-cta .btn{width:100%}
+  .faq-list summary{font-size:1.1rem;min-height:68px;padding:16px 0}
+  .faq-list .ans{font-size:1.02rem}
+  .visit-cta{grid-template-columns:1fr 1fr}
+  .contact-card{padding:26px 16px;margin-inline:-4px}
+  .cform{grid-template-columns:1fr}
+  .cform .btn{width:100%}
+  .footer-grid{grid-template-columns:1fr;gap:36px}
+  .site-footer{padding-top:56px}
+}
+@media (max-width:380px){
+  .hero h1{font-size:2.35rem}
+  .tile span{font-size:1rem}
+  .visit-cta{grid-template-columns:1fr}
+  .f-links{gap:2px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. אחד מ־3 כיווני עיצוב לאותו תוכן.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/shul/design-1/">עיצוב 1</a><a href="/demo/shul/design-2/">עיצוב 2</a><a href="/demo/shul/design-3/" aria-current="page">עיצוב 3</a><a href="/demo/shul/final/">הגרסה הסופית</a><a href="/demo/shul/admin/">מסך הגבאי</a></nav>
+ <a class="demo-back" href="/demo/shul/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<!-- סמלים משותפים -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+ <symbol id="mark" viewBox="0 0 56 72">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M6.5 64.5V28A21.5 21.5 0 0 1 49.5 28V64.5" stroke-width="2.4"/>
+   <path d="M10.6 64.5V28.6A17.4 17.4 0 0 1 45.4 28.6V64.5" stroke-width=".7" opacity=".75"/>
+   <path d="M3 64.5H53" stroke-width="2.2"/>
+   <path d="M.9 69H55.1" stroke-width="1.3"/>
+   <path d="M28.0 62.5C28.0 52 28.15 38 28.0 23.5" stroke-width="1.35"/>
+  </g>
+  <path fill="currentColor" d="M27.3 25.5C27.94 22.66 25.64 19.73 23.38 19.22C22.84 21.48 24.47 24.83 27.3 25.5ZM28.7 25.5C31.53 24.830 33.16 21.48 32.62 19.22C30.36 19.73 28.06 22.66 28.7 25.5ZM27.3 30.5C27.99 27.74 25.79 24.96 23.56 24.52C22.99 26.71 24.52 29.91 27.3 30.5ZM28.7 30.5C31.48 29.91 33.01 26.71 32.44 24.52C30.21 24.96 28.01 27.74 28.7 30.5ZM27.3 35.5C28.04 32.82 25.930 30.19 23.75 29.82C23.13 31.94 24.57 34.99 27.3 35.5ZM28.7 35.5C31.43 34.99 32.87 31.94 32.25 29.82C30.07 30.19 27.96 32.82 28.7 35.5ZM27.3 40.5C28.09 37.91 26.07 35.43 23.94 35.11C23.28 37.17 24.62 40.08 27.3 40.5ZM28.7 40.5C31.38 40.08 32.72 37.17 32.06 35.11C29.93 35.43 27.91 37.91 28.7 40.5ZM28 22.2C29.98 20.35 29.6 17.05 28 15.6C26.4 17.05 26.02 20.35 28 22.2Z"/>
+  <path fill="currentColor" d="M27.6 56.5Q24.64 47.6 15.5 45.5Q22.71 49.73 27.6 56.5ZM28.4 52.5Q34.58 47.65 40.5 42.5Q32.74 45.43 28.4 52.5Z"/>
+ </symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path class="ico" d="M19 12H5m6-6-6 6 6 6"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3.1 2"/></g></symbol>
+ <symbol id="i-up" viewBox="0 0 24 24"><path class="ico" d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><path class="ico" d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><g class="ico"><path d="M4.3 19.7l1.2-3.6A8 8 0 1 1 8.8 19Z"/><path d="M9 10.2h6M9 13.4h4"/></g></symbol>
+ <symbol id="i-nav" viewBox="0 0 24 24"><path class="ico" d="m3.5 11 17-7.5L13 20.5l-2-7.5Z"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><g class="ico"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+ <symbol id="i-parking" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M9.5 17V7.5h3.3a2.9 2.9 0 0 1 0 5.8H9.5"/></g></symbol>
+ <symbol id="i-ramp" viewBox="0 0 24 24"><g class="ico"><path d="M3 19.5h18M4 19.5 20 11v8.5"/><path d="M4 15.5 20 7M8 13.4v-1.6M14 10.2V8.6"/></g></symbol>
+ <symbol id="i-bus" viewBox="0 0 24 24"><g class="ico"><rect x="5" y="3.5" width="14" height="14" rx="2.5"/><path d="M5 11h14M8.5 17.5v2.5M15.5 17.5v2.5"/><circle cx="8.6" cy="14.3" r=".6"/><circle cx="15.4" cy="14.3" r=".6"/></g></symbol>
+ <symbol id="i-key" viewBox="0 0 24 24"><g class="ico"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16.5 6.5l2 2M14.5 8.5l1.6 1.6"/></g></symbol>
+ <symbol id="i-receipt" viewBox="0 0 24 24"><g class="ico"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></g></symbol>
+ <symbol id="i-lock" viewBox="0 0 24 24"><g class="ico"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.2"/></g></symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.6"/><path d="M10 9v6M14 9v6"/></g></symbol>
+ <symbol id="i-reset" viewBox="0 0 24 24"><g class="ico"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></g></symbol>
+ <symbol id="i-mail" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></g></symbol>
+</svg>
+
+<header class="site-header" id="site-header">
+ <div class="container header-inner">
+  <a class="brand" href="#top" aria-label="בית הכנסת נחלת יצחק, לראש העמוד">
+   <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+   <span class="brand-text"><span class="brand-name">נחלת יצחק</span><span class="brand-sub">בית הכנסת · בית שמש</span></span>
+  </a>
+  <nav class="main-nav" id="main-nav" aria-label="ניווט ראשי">
+   <ul>
+    <li><a href="#times">זמני תפילות</a></li>
+    <li><a href="#shiurim">שיעורים</a></li>
+    <li><a href="#campaign">חידוש ההיכל</a></li>
+    <li><a href="#dedications">הקדשות</a></li>
+    <li><a href="#community">קהילה</a></li>
+    <li><a href="#hall">האולם</a></li>
+    <li><a href="#contact">צור קשר</a></li>
+   </ul>
+   <a class="btn btn-copper nav-donate" href="#donate">לתרומה</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="bars" aria-hidden="true"></span><span>תפריט</span></button>
+ </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+ <!-- פתיחה: ההיכל על כל הרוחב -->
+ <section class="hero" id="top" aria-labelledby="hero-title">
+  <figure class="hero-media">
+   <img src="/demo/shul/img/sanctuary-960.webp" srcset="/demo/shul/img/sanctuary-560.webp 560w, /demo/shul/img/sanctuary-960.webp 960w" sizes="100vw" width="960" height="640" alt="הדמיה של ההיכל המחודש: ספסלי עץ, הבימה במרכז, נברשות פליז, וארון הקודש בקיר אבן ירושלמית" fetchpriority="high">
+  </figure>
+  <div class="container hero-inner">
+   <div class="hero-copy">
+    <p class="week-note" data-times-note hidden></p>
+    <p class="kicker">בית הכנסת נחלת יצחק · בית שמש</p>
+    <h1 id="hero-title">בית של תפילה,<br> תורה וקהילה</h1>
+    <p class="hero-lead">כ־120 משפחות, שני מנייני שחרית בכל בוקר, שיעורים בכל ערב, ודלת פתוחה לכל מי שנכנס. השנה אנחנו מחדשים את ההיכל, ומזמינים אתכם להיות שותפים.</p>
+    <div class="hero-cta">
+     <a class="btn btn-copper" href="#campaign">לתרומה לחידוש ההיכל <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+     <a class="btn btn-ghost" href="#times">זמני התפילות</a>
+    </div>
+    <p class="next-line"><span class="nl-text" data-times-next>התפילה הבאה</span><a href="#times">לכל הזמנים</a></p>
+   </div>
+   <aside class="hero-camp" aria-labelledby="hc-title">
+    <div class="hc-top"><h2 class="hc-title" id="hc-title">חידוש ההיכל</h2><span class="hc-pct" data-camp-percent></span></div>
+    <div class="wall wall--mini" data-camp-progress data-wall aria-label="התקדמות הקמפיין לחידוש ההיכל"></div>
+    <p class="hc-sum"><b data-camp-raised></b>נאספו מתוך <span data-camp-goal></span></p>
+    <div class="hc-foot"><span data-camp-days-label></span><a href="#campaign">לקמפיין <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+   </aside>
+  </div>
+ </section>
+
+ <!-- דבר הרב -->
+ <section class="section stone-bg" id="rabbi" aria-labelledby="rabbi-title">
+  <div class="container rabbi-grid">
+   <div class="niche" aria-hidden="true"><svg focusable="false"><use href="#mark"/></svg></div>
+   <div class="letter">
+    <p class="kicker">דבר הרב</p>
+    <h2 id="rabbi-title">ברוכים הבאים</h2>
+    <p>בית כנסת הוא לא רק מקום שמתפללים בו. זה המקום שבו נפגשים בבוקר לפני העבודה, לומדים יחד בערב, ושמחים יחד בשמחות של המשפחות. כאן הילדים גדלים, וכאן כל אחד מוצא חברותא ומקום קבוע.</p>
+    <p>ההיכל שלנו שירת אותנו עשרים שנה, ועכשיו הגיע הזמן לחדש אותו: ספסלים חדשים, ארון קודש חדש, מיזוג שקט וכניסה נגישה, כדי שכל אחד, מבוגר או צעיר, ירגיש כאן בבית. אני מודה לכל המשפחות שכבר הצטרפו, ומזמין גם אתכם להיות שותפים.</p>
+    <p class="closing">שנזכה לחנוך יחד את ההיכל המחודש, בעזרת ה׳.</p>
+    <p class="sign">רב בית הכנסת</p>
+   </div>
+  </div>
+ </section>
+
+ <!-- קצת עלינו -->
+ <section class="section stone-bg stone-bg--warm" id="about" aria-labelledby="about-title">
+  <div class="container">
+   <div class="about-top">
+    <div class="sec-head">
+     <p class="kicker">קצת עלינו</p>
+     <h2 id="about-title">קהילה שגדלה מתוך מקלט</h2>
+    </div>
+    <p class="about-text">הכול התחיל ב־1999, במניין קטן במקלט של בניין בשכונה, עם 15 משפחות. ב־2006 עברנו לבניין שלנו, שנקרא על שם ר׳ יצחק ז״ל, אביו של אחד המייסדים. היום אנחנו כ־120 משפחות: ותיקים וצעירים, ילידי הארץ ומשפחות שעלו מחו״ל, עם רב קבוע ושיעורים בכל ערב.</p>
+   </div>
+   <ol class="course-3" aria-label="ציר הזמן של הקהילה">
+    <li class="block"><span class="carve">1999</span><p>מניין במקלט, 15 משפחות</p></li>
+    <li class="block"><span class="carve">2006</span><p>חנוכת הבניין שלנו</p></li>
+    <li class="block"><span class="carve">2026</span><p>מחדשים את ההיכל</p></li>
+   </ol>
+   <ul class="nums">
+    <li><b>120</b><span>משפחות</span></li>
+    <li><b>2</b><span>מנייני שחרית בכל בוקר</span></li>
+    <li><b>6</b><span>שיעורים קבועים בשבוע</span></li>
+    <li><b>20</b><span>שנה בבניין שלנו</span></li>
+   </ul>
+  </div>
+ </section>
+
+ <!-- זמני התפילות -->
+ <section class="section stone-bg" id="times" aria-labelledby="times-title">
+  <div class="container">
+   <div class="sec-head">
+    <p class="kicker">לוח בית הכנסת</p>
+    <h2 id="times-title">זמני התפילות</h2>
+    <p class="sec-sub">הגבאי מעדכן את הזמנים בכל שבוע. מה שכתוב כאן הוא מה שקורה בבית הכנסת.</p>
+   </div>
+   <div class="times-grid">
+    <div class="slab">
+     <div class="slab-head"><h3 id="wk-title">ימי חול</h3><p class="slab-sub">ימים א׳ עד ה׳. ביום שישי שחרית כרגיל.</p></div>
+     <ul class="t-list" data-times-weekday aria-labelledby="wk-title"></ul>
+    </div>
+    <div class="slab">
+     <div class="slab-head"><h3 id="sh-title">שבת</h3><p class="slab-sub">מקבלת שבת ועד מוצאי שבת.</p></div>
+     <ul class="t-list" data-times-shabbat aria-labelledby="sh-title"></ul>
+    </div>
+    <div class="times-side">
+     <div class="next-card olive-bg">
+      <svg class="nc-ico" aria-hidden="true"><use href="#i-clock"/></svg>
+      <p data-times-next></p>
+      <p class="nc-upd" data-times-updated></p>
+     </div>
+     <div class="owner">
+      <a href="/demo/shul/admin/"><svg aria-hidden="true"><use href="#i-key"/></svg><span>לנסות: מסך העדכון של הגבאי</span></a>
+      <p>בדוגמה הזו כל אחד יכול לנסות לשנות זמנים. השינוי נשמר רק אצלכם בדפדפן.</p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- שיעורים -->
+ <section class="section stone-bg stone-bg--warm" id="shiurim" aria-labelledby="shiurim-title">
+  <div class="container">
+   <div class="shiur-head">
+    <div class="sec-head">
+     <p class="kicker">בית המדרש</p>
+     <h2 id="shiurim-title">שיעורים בבית הכנסת</h2>
+     <p class="sec-sub">לימוד לכל רמה, בכל ערב. אפשר להצטרף בכל שלב, בלי הרשמה.</p>
+     <p class="today" data-shiurim-today hidden></p>
+    </div>
+    <figure class="arch"><img src="/demo/shul/img/sefarim-560.webp" srcset="/demo/shul/img/sefarim-560.webp 560w, /demo/shul/img/sefarim-960.webp 960w" sizes="420px" width="560" height="373" loading="lazy" alt="ארון ספרים מעץ, מלא כרכים בכריכות בצבעי יין, כחול, ירוק וחום"></figure>
+   </div>
+   <ul class="s-list" data-shiurim aria-label="השיעורים הקבועים"></ul>
+   <div class="shiur-foot"><p class="small">כל השיעורים בבית המדרש, בקומת הכניסה.</p></div>
+  </div>
+ </section>
+
+ <!-- הקמפיין: הלב של הדף -->
+ <section id="campaign" aria-labelledby="camp-title">
+  <div class="camp-top olive-bg">
+   <div class="container">
+    <div class="sec-head">
+     <p class="kicker">קמפיין לחידוש ההיכל</p>
+     <h2 id="camp-title" data-camp-title>מחדשים את ההיכל</h2>
+     <p class="sec-sub" data-camp-text></p>
+    </div>
+    <div class="camp-grid">
+     <div class="wall-card">
+      <div class="wall-legend">
+       <span class="lg"><i class="lg-set" aria-hidden="true"></i>כל אבן בקיר: <b data-stone-value></b></span>
+       <span class="lg"><i class="lg-open" aria-hidden="true"></i>אבנים שעוד מחכות לשותפים</span>
+      </div>
+      <div class="wall" data-camp-progress data-wall aria-label="קיר הקמפיין: 35 אבנים, כל אבן היא חלק מהיעד"></div>
+      <div class="wall-base" aria-hidden="true"></div>
+      <p class="wall-sum"><span>נאספו</span> <b data-camp-raised></b> <span class="of">מתוך <b data-camp-goal></b></span></p>
+     </div>
+     <div class="camp-side">
+      <div class="figs">
+       <span class="pct" data-camp-percent></span>
+       <dl>
+        <div><dd data-camp-count></dd><dt>תרומות</dt></div>
+        <div data-camp-live data-remaining-row><dt>חסרים עוד</dt><dd data-camp-remaining></dd></div>
+       </dl>
+      </div>
+      <div class="count" data-camp-live>
+       <p class="count-title"><span>עד סוף הקמפיין</span><span data-camp-end></span></p>
+       <div class="count-stones">
+        <div class="cs"><b data-camp-days>0</b><span>ימים</span></div>
+        <div class="cs"><b data-camp-hours>0</b><span>שעות</span></div>
+        <div class="cs"><b data-camp-minutes>0</b><span>דקות</span></div>
+       </div>
+       <p class="count-label" data-camp-days-label></p>
+      </div>
+      <div class="camp-ended" data-camp-ended hidden>
+       <span class="ce-k">סיכום הקמפיין</span>
+       <p>הקמפיין הסתיים. תודה לכל השותפים! אפשר להמשיך לתרום לבית הכנסת.</p>
+       <a class="btn btn-copper btn-sm" href="#donate">לתרומה לבית הכנסת</a>
+      </div>
+      <p class="m-note" data-camp-monthly-note></p>
+      <div class="camp-cta" data-camp-live>
+       <a class="btn btn-stone" href="#donate">להצטרף לקמפיין <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="camp-more stone-bg">
+   <div class="container">
+    <div class="money-grid">
+     <div class="money">
+      <p class="kicker">על מה הכסף</p>
+      <h3>חמישה דברים שההיכל צריך</h3>
+      <ul class="money-list">
+       <li><span class="mi-name">ספסלים ושטנדרים חדשים לכל ההיכל</span><span class="mi-sum">140,000 ₪</span><span class="mstones" style="--n:14" aria-hidden="true"></span></li>
+       <li><span class="mi-name">ארון קודש חדש מעץ אגוז</span><span class="mi-sum">85,000 ₪</span><span class="mstones" style="--n:8.5" aria-hidden="true"></span></li>
+       <li><span class="mi-name">מיזוג אוויר שקט</span><span class="mi-sum">70,000 ₪</span><span class="mstones" style="--n:7" aria-hidden="true"></span></li>
+       <li><span class="mi-name">כניסה נגישה ושירותים נגישים</span><span class="mi-sum">40,000 ₪</span><span class="mstones" style="--n:4" aria-hidden="true"></span></li>
+       <li><span class="mi-name">תאורה ונברשות</span><span class="mi-sum">15,000 ₪</span><span class="mstones" style="--n:1.5" aria-hidden="true"></span></li>
+      </ul>
+      <p class="money-total"><span>ביחד</span><span>350,000 ₪</span></p>
+      <div class="when">
+       <b>מתי</b>
+       <p>העבודות בקיץ 2027, ובזמן הזה מתפללים באולם. ההיכל המחודש ייפתח לפני ראש השנה תשפ״ח.</p>
+      </div>
+     </div>
+     <div class="renders">
+      <figure>
+       <div class="arch"><img src="/demo/shul/img/model-560.webp" srcset="/demo/shul/img/model-560.webp 560w, /demo/shul/img/model-960.webp 960w" sizes="(max-width: 640px) 360px, 520px" width="560" height="373" loading="lazy" alt="דגם אדריכלי של בית הכנסת אחרי השיפוץ, עם אכסדרה בחזית ורמפה נגישה" style="object-position:38% 50%"></div>
+       <figcaption class="cap">הדגם של בית הכנסת אחרי השיפוץ, עם הכניסה הנגישה החדשה</figcaption>
+      </figure>
+      <figure>
+       <div class="arch"><img src="/demo/shul/img/aron-560.webp" srcset="/demo/shul/img/aron-560.webp 560w, /demo/shul/img/aron-960.webp 960w" sizes="(max-width: 640px) 360px, 520px" width="560" height="373" loading="lazy" alt="הדמיה של ארון הקודש החדש: עץ אגוז מגולף, כתר פליז ופרוכת קטיפה בצבע יין עם רקמת זהב"></div>
+       <figcaption class="cap">ארון הקודש החדש, בהדמיה</figcaption>
+      </figure>
+     </div>
+    </div>
+
+    <div class="camp-cols">
+     <div class="camp-col">
+      <p class="kicker">מה חדש</p>
+      <h3>עדכונים מהקמפיין</h3>
+      <ul class="u-list" data-camp-updates="3"></ul>
+      <div class="camp-join">
+       <p>הקיר נבנה אבן אחרי אבן. מצטרפים?</p>
+       <a class="btn btn-copper" href="#donate">להצטרף לקמפיין <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+     </div>
+     <div class="camp-col">
+      <div class="donors-card">
+       <h3 id="donors-title">תודה לשותפים</h3>
+       <p class="small">מי שביקש, מופיע בעילום שם.</p>
+       <ul class="d-list" data-camp-donors="8" aria-labelledby="donors-title"></ul>
+      </div>
+     </div>
+    </div>
+
+   </div>
+  </div>
+ </section>
+
+ <!-- הקדשות והנצחה -->
+ <section class="section stone-bg stone-bg--warm" id="dedications" aria-labelledby="ded-title">
+  <div class="container">
+   <div class="sec-head">
+    <p class="kicker">לדורות</p>
+    <h2 id="ded-title">הקדשות והנצחה</h2>
+    <p class="sec-sub">להקדיש חלק מההיכל לזכר יקיריכם, לזכות המשפחה או לרגל שמחה. ההקדשה נחרטת על שלט פליז במקום, ונשארת לדורות.</p>
+   </div>
+   <div class="ded-grid">
+    <div class="ded-feature">
+     <div class="arch"><img src="/demo/shul/img/memorial-960.webp" srcset="/demo/shul/img/memorial-560.webp 560w, /demo/shul/img/memorial-960.webp 960w" sizes="(max-width: 640px) 100vw, (max-width: 900px) 46vw, 760px" width="960" height="640" loading="lazy" alt="לוח הנצחה מעץ עם שלטי פליז ונורות זיכרון קטנות"></div>
+     <div class="plaque-pic"><img src="/demo/shul/img/plaque-560.webp" srcset="/demo/shul/img/plaque-560.webp 560w, /demo/shul/img/plaque-960.webp 960w" sizes="(max-width: 900px) 46vw, 250px" width="560" height="373" loading="lazy" alt="שלט הקדשה ריק מפליז על לוח עץ"></div>
+     <p class="cap">בלוח ההנצחה החדש בכניסה להיכל: שלט פליז חרוט, ונר זיכרון שנדלק ביום השנה.</p>
+    </div>
+    <div>
+     <ul class="ded-list" data-dedications aria-label="פריטים להקדשה"></ul>
+     <p class="small ded-foot">המחירים קבועים. אפשר לפרוס לתשלומים בתיאום עם הגבאי.</p>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- תרומה -->
+ <section class="section stone-bg" id="donate" aria-labelledby="donate-title">
+  <div class="container donate-grid">
+   <div class="form-card">
+    <div class="sec-head">
+     <p class="kicker">כל אבן נחשבת</p>
+     <h2 id="donate-title">תרומה לבית הכנסת</h2>
+     <p class="sec-sub">כל תרומה, גדולה או קטנה, בונה את הבית שלנו. אפשר לתרום פעם אחת או בהוראת קבע חודשית.</p>
+    </div>
+    <form class="dform" data-donate-form id="donate-form">
+     <fieldset class="full">
+      <legend>סכום התרומה</legend>
+      <div class="tiles">
+       <label class="tile"><input type="radio" name="amount" value="180"><span>180 ₪</span></label>
+       <label class="tile"><input type="radio" name="amount" value="360" checked><span>360 ₪</span></label>
+       <label class="tile"><input type="radio" name="amount" value="500"><span>500 ₪</span></label>
+       <label class="tile"><input type="radio" name="amount" value="1000"><span>1,000 ₪</span></label>
+       <label class="tile"><input type="radio" name="amount" value="1800"><span>1,800 ₪</span></label>
+       <label class="tile"><input type="radio" name="amount" value="other"><span>סכום אחר</span></label>
+      </div>
+      <div class="other">
+       <label for="d-other">סכום אחר בשקלים</label>
+       <input class="input" id="d-other" type="number" name="amount_other" min="10" inputmode="numeric" placeholder="למשל 260">
+      </div>
+     </fieldset>
+     <fieldset class="full">
+      <legend>תדירות</legend>
+      <div class="seg">
+       <label><input type="radio" name="freq" value="once" checked><span>פעם אחת</span></label>
+       <label><input type="radio" name="freq" value="monthly"><span>בכל חודש (הוראת קבע)</span></label>
+      </div>
+     </fieldset>
+     <div class="field full">
+      <label for="d-name">שם לפרסום ברשימת התורמים</label>
+      <div class="name-row">
+       <input class="input" id="d-name" name="name" autocomplete="name" aria-describedby="d-name-hint">
+       <label class="check"><input type="checkbox" name="anonymous"><span>בעילום שם</span></label>
+      </div>
+      <p class="hint" id="d-name-hint">למשל: משפחת כהן</p>
+     </div>
+     <div class="field">
+      <label for="d-ded">הקדשה (לא חובה)</label>
+      <input class="input" id="d-ded" name="dedication" maxlength="80" placeholder="לעילוי נשמת, לזכות, לרגל שמחה">
+     </div>
+     <div class="field">
+      <label for="d-item">הקדשת פריט (לא חובה)</label>
+      <select class="input" id="d-item" name="item"></select>
+     </div>
+     <div class="field full">
+      <label for="d-email">מייל לקבלה</label>
+      <input class="input" id="d-email" type="email" name="email" autocomplete="email" dir="ltr" style="text-align:right" aria-describedby="d-email-hint">
+      <p class="hint" id="d-email-hint">הקבלה נשלחת למייל הזה</p>
+     </div>
+     <p class="summary" data-donate-summary></p>
+     <p class="form-error" data-donate-error hidden></p>
+     <div class="submit-row">
+      <button class="btn btn-copper" type="submit">לתרום עכשיו</button>
+      <p class="no-charge">באתר לדוגמה הזה לא מחייבים שום כרטיס.</p>
+     </div>
+     <p class="thanks" data-donate-thanks hidden></p>
+    </form>
+   </div>
+   <aside class="donate-side" aria-label="על התרומה">
+    <div class="arch"><img src="/demo/shul/img/tzedakah-560.webp" srcset="/demo/shul/img/tzedakah-560.webp 560w, /demo/shul/img/tzedakah-960.webp 960w" sizes="(max-width: 640px) 390px, 510px" width="560" height="373" loading="lazy" alt="קופת צדקה מעץ אגוז עם מכסה ופינות פליז"></div>
+    <ul class="trust">
+     <li><svg aria-hidden="true"><use href="#i-receipt"/></svg>קבלה במייל מיד</li>
+     <li><svg aria-hidden="true"><use href="#i-lock"/></svg>תשלום בדף מאובטח של חברת הסליקה</li>
+     <li><svg aria-hidden="true"><use href="#i-pause"/></svg>הוראת קבע אפשר לעצור בכל זמן</li>
+    </ul>
+    <p class="small">מעדיפים העברה בנקאית או צ׳ק? <a href="#contact">דברו עם הגבאי.</a></p>
+    <button class="reset" type="button" data-demo-reset><svg aria-hidden="true"><use href="#i-reset"/></svg>לאפס את הדוגמה</button>
+   </aside>
+  </div>
+ </section>
+
+ <!-- בקהילה -->
+ <section class="section stone-bg stone-bg--warm" id="community" aria-labelledby="comm-title">
+  <div class="container comm-grid">
+   <div>
+    <div class="sec-head">
+     <p class="kicker">השבועות הקרובים</p>
+     <h2 id="comm-title">בקהילה</h2>
+     <p class="sec-sub">מה קורה אצלנו בשבועות הקרובים.</p>
+    </div>
+    <ul class="n-list" data-news="4" aria-labelledby="comm-title"></ul>
+   </div>
+   <div class="comm-side">
+    <figure>
+     <div class="arch"><img src="/demo/shul/img/shabbat-560.webp" srcset="/demo/shul/img/shabbat-560.webp 560w, /demo/shul/img/shabbat-960.webp 960w" sizes="(max-width: 640px) 520px, 720px" width="560" height="373" loading="lazy" alt="שולחן שבת ערוך: פמוטי כסף, חלות מתחת לכיסוי רקום וגביע קידוש"></div>
+     <figcaption class="cap">קידוש קהילתי בשבת</figcaption>
+    </figure>
+    <div class="wa-card">
+     <p>רוצים לקבל את העדכונים?</p>
+     <a class="btn btn-stone" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>להצטרף לקבוצת הוואטסאפ של הקהילה</a>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- האולם -->
+ <section class="section stone-bg" id="hall" aria-labelledby="hall-title">
+  <div class="container hall-grid">
+   <div class="hall-pic">
+    <div class="arch"><img src="/demo/shul/img/hall-960.webp" srcset="/demo/shul/img/hall-560.webp 560w, /demo/shul/img/hall-960.webp 960w" sizes="(max-width: 900px) 100vw, 830px" width="960" height="640" loading="lazy" alt="הדמיה של האולם לשמחות: שולחנות עגולים ערוכים, כיסאות עץ ונברשות"></div>
+   </div>
+   <div>
+    <div class="sec-head" style="margin-bottom:0">
+     <p class="kicker">לשמחות ולאירועים</p>
+     <h2 id="hall-title">האולם לשמחות</h2>
+     <p class="sec-sub">אולם מואר וממוזג לבר מצווה, ברית, שבע ברכות, קידוש ואירועי קהילה.</p>
+    </div>
+    <ul class="points">
+     <li>עד 120 איש בישיבה</li>
+     <li>מטבחון מאובזר, עם הפרדה בין בשרי לחלבי</li>
+     <li>שולחנות, כיסאות ומפות</li>
+     <li>כניסה נגישה מהחניה</li>
+     <li>מחיר מיוחד לבני הקהילה</li>
+    </ul>
+    <div class="hall-cta">
+     <a class="btn btn-copper" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>לבדוק תאריך פנוי</a>
+     <a class="tel-link" href="tel:0500000000">או התקשרו: <span class="ltr">050-000-0000</span></a>
+    </div>
+    <p class="small hall-note">בקיץ 2027, בזמן העבודות בהיכל, מתפללים באולם.</p>
+   </div>
+  </div>
+ </section>
+
+ <!-- שאלות נפוצות -->
+ <section class="section stone-bg stone-bg--warm" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-wrap">
+   <div class="faq-aside">
+    <div class="sec-head">
+     <p class="kicker">שואלים את הגבאי</p>
+     <h2 id="faq-title">שאלות נפוצות</h2>
+    </div>
+   </div>
+   <div class="faq-list">
+    <details>
+     <summary>מקבלים קבלה על התרומה?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">כן. הקבלה נשלחת במייל מיד אחרי התרומה, על שם העמותה של בית הכנסת, ומוכרת לצורכי מס לפי סעיף 46.</p>
+    </details>
+    <details>
+     <summary>אפשר לתרום בהוראת קבע, ולעצור אותה?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">כן. בוחרים "בכל חודש" בטופס. אפשר לשנות או לעצור בכל זמן, בהודעה פשוטה לגבאי. בקמפיין, הוראת קבע נספרת ביעד כשנים עשר חודשים.</p>
+    </details>
+    <details>
+     <summary>איך מקדישים ספסל, ספרים או שלט?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">בוחרים פריט ברשימת ההקדשות, כותבים את נוסח ההקדשה ומשלמים. הגבאי חוזר אליכם לאשר את הנוסח לפני החריטה.</p>
+    </details>
+    <details>
+     <summary>אפשר לתרום בעילום שם?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">בוודאי. מסמנים "בעילום שם", וברשימת התורמים יופיע רק "בעילום שם". הקבלה עדיין נשלחת אליכם.</p>
+    </details>
+    <details>
+     <summary>איך מזמינים את האולם לשמחה?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">שולחים וואטסאפ או מתקשרים לגבאי, עם התאריך ומספר האורחים. לבני הקהילה יש מחיר מיוחד.</p>
+    </details>
+    <details>
+     <summary>איפה מתפללים בזמן השיפוץ?<span class="pm" aria-hidden="true"></span></summary>
+     <p class="ans">בקיץ 2027, בזמן העבודות, התפילות עוברות לאולם. נעדכן כאן ובקבוצת הוואטסאפ.</p>
+    </details>
+   </div>
+  </div>
+ </section>
+
+ <!-- איך מגיעים וצור קשר -->
+ <section class="section stone-bg" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+   <div class="visit-grid">
+    <div>
+     <div class="sec-head" style="margin-bottom:32px">
+      <p class="kicker">נוף הגפן, בית שמש</p>
+      <h2 id="contact-title">איך מגיעים</h2>
+     </div>
+     <ul class="visit-list">
+      <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><b>רחוב הדוגמה 18, שכונת נוף הגפן, בית שמש</b></div></li>
+      <li><svg aria-hidden="true"><use href="#i-parking"/></svg><div><b>חניה</b><span>חניה ברחוב, וחניה נוספת מאחורי הבניין בערבים.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-ramp"/></svg><div><b>נגישות</b><span>היום: כניסה נגישה בדלת הצדדית, מהחניה האחורית. אחרי השיפוץ: רמפה בכניסה הראשית.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-bus"/></svg><div><b>אוטובוס</b><span>תחנה בפינת הרחוב, כשתי דקות הליכה.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>הגבאי: משה</b><span class="vl-links"><a href="tel:0500000000" class="ltr">050-000-0000</a><a href="mailto:gabbai@nachalat-example.co.il" class="ltr">gabbai@nachalat-example.co.il</a></span><span>זמין בטלפון בימים א׳ עד ה׳, 17:00 עד 20:00</span></div></li>
+     </ul>
+     <div class="visit-cta">
+      <a class="btn btn-copper" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>חיוג</a>
+      <a class="btn btn-line" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>וואטסאפ</a>
+      <a class="btn btn-line" href="https://waze.com/ul?q=%D7%91%D7%99%D7%AA%20%D7%A9%D7%9E%D7%A9" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-nav"/></svg>ניווט בוויז</a>
+      <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=%D7%91%D7%99%D7%AA%20%D7%A9%D7%9E%D7%A9" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>גוגל מפות</a>
+     </div>
+    </div>
+    <div class="map" aria-hidden="true">
+     <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <rect width="600" height="440" fill="#E9DEC9"/>
+      <!-- גושי בניינים -->
+      <g fill="#DDCFB4">
+       <rect x="20" y="20" width="160" height="110" rx="4"/><rect x="420" y="20" width="160" height="110" rx="4"/>
+       <rect x="20" y="230" width="160" height="80" rx="4"/><rect x="420" y="230" width="160" height="190" rx="4"/>
+       <rect x="20" y="334" width="160" height="86" rx="4"/>
+      </g>
+      <rect x="200" y="20" width="200" height="110" rx="4" fill="#CBD3B4"/>
+      <g fill="#B5C097"><circle cx="232" cy="52" r="13"/><circle cx="262" cy="92" r="11"/><circle cx="318" cy="58" r="14"/><circle cx="368" cy="96" r="12"/></g>
+      <!-- רחובות -->
+      <rect x="0" y="150" width="600" height="60" fill="#F6F0E4"/>
+      <rect x="390" y="210" width="20" height="230" fill="#F6F0E4"/>
+      <rect x="180" y="210" width="20" height="230" fill="#F6F0E4"/>
+      <path d="M0 150.5h600M0 209.5h600" stroke="#D2C2A3"/>
+      <g fill="#E3D6BF"><rect x="40" y="178" width="26" height="4" rx="2"/><rect x="100" y="178" width="26" height="4" rx="2"/><rect x="160" y="178" width="26" height="4" rx="2"/><rect x="220" y="178" width="26" height="4" rx="2"/><rect x="340" y="178" width="26" height="4" rx="2"/><rect x="400" y="178" width="26" height="4" rx="2"/><rect x="460" y="178" width="26" height="4" rx="2"/><rect x="520" y="178" width="26" height="4" rx="2"/></g>
+      <text x="500" y="200" text-anchor="middle" font-family="Heebo, sans-serif" font-size="16" font-weight="700" fill="#5E5040">רחוב הדוגמה</text>
+      <!-- בית הכנסת -->
+      <rect x="210" y="226" width="170" height="150" rx="4" fill="#EFE6D6" stroke="#9A4C2A" stroke-width="2"/>
+      <path d="M265 300v-26a30 30 0 0 1 60 0v26" fill="none" stroke="#9A4C2A" stroke-width="3"/>
+      <path d="M256 300h78" stroke="#9A4C2A" stroke-width="3"/>
+      <rect x="236" y="320" width="118" height="30" rx="3" fill="#2D2418"/>
+      <text x="295" y="341" text-anchor="middle" font-family="Suez One, serif" font-size="16" fill="#EFE6D6">נחלת יצחק</text>
+      <!-- חניה מאחור -->
+      <rect x="210" y="388" width="170" height="40" rx="4" fill="#DDCFB4"/>
+      <rect x="281" y="396" width="28" height="24" rx="4" fill="#fff" stroke="#9A4C2A"/>
+      <text x="295" y="413" text-anchor="middle" font-family="Heebo, sans-serif" font-size="14" font-weight="700" fill="#9A4C2A">P</text>
+      <!-- תחנת אוטובוס -->
+      <rect x="140" y="214" width="30" height="30" rx="5" fill="#4D5A36"/>
+      <g fill="none" stroke="#EFE6D6" stroke-width="1.6" stroke-linecap="round"><rect x="147" y="220" width="16" height="15" rx="2.5"/><path d="M147 228h16M150 235v3M160 235v3"/></g>
+      <!-- סימון -->
+      <circle cx="380" cy="226" r="26" fill="#9A4C2A" opacity=".12"/>
+      <circle cx="380" cy="226" r="10" fill="#9A4C2A" stroke="#fff" stroke-width="3"/>
+     </svg>
+    </div>
+   </div>
+
+   <div class="contact-card">
+    <div class="cc-intro">
+     <h3 id="cform-title">פנייה לגבאי</h3>
+     <p>שאלה על תרומה, הקדשה, האולם או השיעורים? כתבו כאן, והגבאי יחזור אליכם.</p>
+    </div>
+    <form class="cform" id="contact-form" novalidate aria-labelledby="cform-title">
+     <div class="field"><label for="c-name">שם</label><input class="input" id="c-name" name="name" autocomplete="name"></div>
+     <div class="field"><label for="c-phone">טלפון</label><input class="input" id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" style="text-align:right"></div>
+     <div class="field full"><label for="c-topic">במה אפשר לעזור?</label>
+      <select class="input" id="c-topic" name="topic"><option>תרומה או הקדשה</option><option>הזמנת האולם</option><option>שאלה על השיעורים</option><option>אחר</option></select></div>
+     <div class="field full"><label for="c-msg">הודעה</label><textarea class="input" id="c-msg" name="message" rows="4"></textarea></div>
+     <div class="full"><button class="btn btn-copper" type="submit">שליחה</button></div>
+     <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+   </div>
+  </div>
+ </section>
+</main>
+
+<footer class="site-footer">
+ <div class="container">
+  <div class="footer-grid">
+   <div>
+    <a class="brand" href="#top" aria-label="בית הכנסת נחלת יצחק, לראש העמוד">
+     <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+     <span class="brand-text"><span class="brand-name">בית הכנסת נחלת יצחק</span><span class="brand-sub">בית של תפילה, תורה וקהילה</span></span>
+    </a>
+    <p class="f-line">רחוב הדוגמה 18, נוף הגפן, בית שמש</p>
+   </div>
+   <nav aria-label="ניווט בפוטר">
+    <h3>בדף</h3>
+    <div class="f-links">
+     <a href="#times">זמני תפילות</a><a href="#donate">תרומה</a><a href="#dedications">הקדשות</a><a href="#hall">האולם</a><a href="#contact">צור קשר</a>
+    </div>
+   </nav>
+   <div>
+    <h3>הגבאי</h3>
+    <div class="f-contact">
+     <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a>
+     <a href="mailto:gabbai@nachalat-example.co.il"><span class="ltr">gabbai@nachalat-example.co.il</span></a>
+     <a class="f-owner" href="/demo/shul/admin/"><svg aria-hidden="true"><use href="#i-key"/></svg>כניסת הגבאי (לדוגמה)</a>
+    </div>
+   </div>
+  </div>
+  <div class="f-bottom">
+   <p>אתר לדוגמה שעיצב <a href="https://yygweb.com/demo/shul/">YYG</a>. בית הכנסת, הפרטים, התורמים והסכומים דמיוניים, ושום תרומה לא נגבית. התמונות: הדמיות תלת־ממד.</p>
+   <a class="to-top" href="#top">לראש העמוד <svg aria-hidden="true"><use href="#i-up"/></svg></a>
+  </div>
+ </div>
+</footer>
+
+<script>
+/* חייב לרוץ לפני shul.js (שנטען ב־defer), כדי לשמוע את הציור הראשון */
+(() => {
+  const root = document.documentElement;
+  root.classList.add('js');
+
+  /* כותרת: שקופה מעל תמונת הפתיחה, ואבן בהירה אחרי שגוללים */
+  const header = document.getElementById('site-header');
+  const hero = document.getElementById('top');
+  const onScroll = () => {
+    const limit = hero ? hero.offsetTop + hero.offsetHeight - header.offsetHeight - 40 : 40;
+    header.classList.toggle('is-solid', window.scrollY > Math.max(40, limit));
+  };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
+
+  /* תפריט בטלפון */
+  const btn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
+  const setMenu = (open) => { btn.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); header.classList.toggle('menu-open', open); };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setMenu(false); btn.focus(); } });
+  window.matchMedia('(min-width: 1081px)').addEventListener('change', (m) => { if (m.matches) setMenu(false); });
+
+  /* ---------- הקיר: 35 אבנים, כל אבן היא חלק שווה מהיעד ---------- */
+  const STONES = 35, PER = 7, COURSES = STONES / PER;
+  /* מספרים פסאודו־אקראיים קבועים, כדי שהקיר ייראה אותו דבר בכל טעינה */
+  let seed = 11;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  /* רוחב יחסי לכל אבן, כך שהתפרים לא נופלים זה מעל זה */
+  const widths = Array.from({ length: COURSES }, () => {
+    const w = Array.from({ length: PER }, () => 0.72 + rnd() * 0.62);
+    const s = w.reduce((a, b) => a + b, 0);
+    return w.map((x) => (x * PER) / s);
+  });
+  /* גוונים: בעיקר חול, ומדי פעם אבן נחושת */
+  const SAND = ['#E6D7BA', '#D7C3A1', '#CDB68F', '#DCCAA8', '#C8AD84', '#E0CFAE'];
+  const COPPER = ['#B9693F', '#9A4C2A', '#C4825A', '#A85A34'];
+  const tones = Array.from({ length: STONES }, () => (rnd() < 0.27 ? COPPER[Math.floor(rnd() * COPPER.length)] : SAND[Math.floor(rnd() * SAND.length)]));
+
+  const walls = Array.from(document.querySelectorAll('[data-wall]')).map((w) => {
+    const stones = new Array(STONES);
+    /* בונים מלמטה למעלה: הנדבך התחתון מתמלא ראשון, מימין לשמאל */
+    for (let c = 0; c < COURSES; c++) {
+      const course = document.createElement('div');
+      course.className = 'course';
+      course.setAttribute('aria-hidden', 'true');
+      const fromBottom = COURSES - 1 - c;
+      for (let j = 0; j < PER; j++) {
+        const i = fromBottom * PER + j;
+        const s = document.createElement('span');
+        s.className = 'st';
+        s.style.setProperty('--w', widths[fromBottom][j].toFixed(3));
+        s.style.setProperty('--tone', tones[i]);
+        course.append(s);
+        stones[i] = s;
+      }
+      w.append(course);
+    }
+    return { el: w, stones, shown: -1 };
+  });
+
+  const fmt = (n) => `${new Intl.NumberFormat('he-IL', { maximumFractionDigits: 0 }).format(Math.round(n))} ₪`;
+  const paint = (T) => {
+    const per = T.goal > 0 ? T.goal / STONES : 0;
+    const exact = per ? Math.min(STONES, T.raised / per) : 0;
+    const full = Math.floor(exact), frac = exact - full;
+    document.querySelectorAll('[data-stone-value]').forEach((e) => { e.textContent = per ? fmt(per) : ''; });
+    walls.forEach((w) => {
+      const first = w.shown < 0;
+      let k = 0;
+      w.stones.forEach((s, i) => {
+        const set = i < full;
+        const was = s.classList.contains('is-set');
+        s.classList.toggle('is-set', set);
+        s.classList.toggle('is-part', !set && i === full && frac > 0.02);
+        s.style.setProperty('--f', !set && i === full ? frac.toFixed(3) : '0');
+        /* אבן חדשה שנוספה אחרי תרומה: יורדת למקומה */
+        if (set && !was && !first) { s.style.setProperty('--k', String(k++)); s.classList.remove('is-new'); void s.offsetWidth; s.classList.add('is-new'); }
+      });
+      w.el.classList.toggle('is-full', exact >= STONES);
+      w.shown = full;
+    });
+    /* אחרי שהגענו ליעד אין טעם לכתוב "חסרים עוד 0 ₪" */
+    document.querySelectorAll('[data-remaining-row]').forEach((e) => { e.hidden = T.remaining <= 0 || T.left.state === 'ended'; });
+  };
+  document.addEventListener('nachalat:render', (e) => paint(e.detail));
+  document.addEventListener('animationend', (e) => { if (e.target.classList && e.target.classList.contains('st')) e.target.classList.remove('is-new'); });
+
+  /* טופס פנייה לדוגמה */
+  const cform = document.getElementById('contact-form');
+  cform.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const status = cform.querySelector('.form-status');
+    status.textContent = '';
+    setTimeout(() => { status.textContent = 'זה אתר לדוגמה, הטופס לא נשלח.'; }, 30);
+  });
+})();
+</script>
+<script src="/demo/shul/shul.js" defer></script>
+</body>
+</html>

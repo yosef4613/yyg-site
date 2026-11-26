@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>נחלת יצחק · מסך הגבאי | מסך ניהול לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="מסך לדוגמה: כך הגבאי של בית כנסת מעדכן בעצמו זמני תפילות, שיעורים, הודעות לקהילה, הקמפיין וההקדשות, מהטלפון, והאתר מתעדכן מיד.">
+<meta name="theme-color" content="#F3ECDF">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/heebo-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים: Suez One לכותרות (כמו אותיות חקוקות באבן), Heebo לגוף ---------- */
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* סימן השקל בכותרות: Suez One מצייר אותו כמו "שח", אז לוקחים אותו מ־Heebo Bold */
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+20AA}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- מסך הגבאי: בצבעי האבן של הגרסה הסופית ---------- */
+:root{
+  --bg:#F3ECDF;--card:#FFFDF8;--soft:#F6F0E4;--stone-2:#E6DAC4;--ink:#2D2418;--muted:#5E5040;--line:#E3D7C2;--line-2:#CDBB9C;
+  --copper:#9A4C2A;--copper-d:#7A3B20;--copper-l:#F2C9A6;--olive:#4D5A36;--olive-d:#3A4428;--ok:#3F5F2A;--bad:#A3361C;
+  --head:"Suez One","Heebo",Georgia,serif;--body:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='176' viewBox='0 0 360 176'%3E%3Crect x='105' y='1' width='84' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='287' y='1' width='72' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='49' y='45' width='100' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='151' y='45' width='86' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='239' y='45' width='82' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='323' y='45' width='37' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='0' y='45' width='47' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='123' y='89' width='90' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='215' y='89' width='84' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='301' y='89' width='59' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='0' y='89' width='21' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='71' y='133' width='94' height='43' fill='%23B79F78' fill-opacity='.075'/%3E%3Crect x='167' y='133' width='86' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Crect x='255' y='133' width='84' height='43' fill='%23fff' fill-opacity='.2'/%3E%3Cpath d='M0 0.5H360M0.5 0v44M104.5 0v44M190.5 0v44M286.5 0v44M0 44.5H360M48.5 44v44M150.5 44v44M238.5 44v44M322.5 44v44M0 88.5H360M22.5 88v44M122.5 88v44M214.5 88v44M300.5 88v44M0 132.5H360M70.5 132v44M166.5 132v44M254.5 132v44M340.5 132v44' stroke='rgba(110,84,50,.075)' fill='none'/%3E%3C/svg%3E");
+  --tex-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='176' viewBox='0 0 360 176'%3E%3Crect x='105' y='1' width='84' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='287' y='1' width='72' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='49' y='45' width='100' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='151' y='45' width='86' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='239' y='45' width='82' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='323' y='45' width='37' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='0' y='45' width='47' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='123' y='89' width='90' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='215' y='89' width='84' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='301' y='89' width='59' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='0' y='89' width='21' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='71' y='133' width='94' height='43' fill='%23000' fill-opacity='.03'/%3E%3Crect x='167' y='133' width='86' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Crect x='255' y='133' width='84' height='43' fill='%23fff' fill-opacity='.018'/%3E%3Cpath d='M0 0.5H360M0.5 0v44M104.5 0v44M190.5 0v44M286.5 0v44M0 44.5H360M48.5 44v44M150.5 44v44M238.5 44v44M322.5 44v44M0 88.5H360M22.5 88v44M122.5 88v44M214.5 88v44M300.5 88v44M0 132.5H360M70.5 132v44M166.5 132v44M254.5 132v44M340.5 132v44' stroke='rgba(0,0,0,.09)' fill='none'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(160deg,rgba(255,248,232,.6),rgba(255,248,232,0) 40%),var(--tex);background-size:auto,360px 176px;color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--copper-d)}
+h1,h2,h3{font-family:var(--head);font-weight:400;margin:0;line-height:1.2}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--copper);outline-offset:2px;border-radius:4px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ico{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+section[id],form[id]{scroll-margin-top:16px}
+/* כותרת */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 4px}
+.brand{display:inline-flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.brand svg{width:30px;height:39px;color:var(--copper)}
+.brand b{display:block;font:400 24px/1 var(--head)}
+.brand small{display:block;margin-top:5px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.who{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;color:var(--muted)}
+.who::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--olive)}
+h1{margin-top:22px;font-size:clamp(2rem,1.5rem + 1.6vw,2.7rem)}
+.lead{margin-top:6px;max-width:44em;color:var(--muted);font-size:1.06rem}
+.note{margin-top:16px;padding:14px 16px;border-radius:8px;background:#FBF1E2;border:1px solid #EBCFAF;font-size:15.5px;line-height:1.6}
+.note b{color:var(--copper-d)}
+/* מבט מהיר */
+.glance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.gl{display:grid;gap:4px;align-content:start;padding:16px 18px;border-radius:8px;background:var(--card);border:1px solid var(--line);box-shadow:0 10px 24px -22px rgba(45,36,24,.6)}
+.gl small{font-size:13.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.gl b{font:700 1.08rem/1.4 var(--body)}
+.gl .big{font:700 1.5rem/1.2 var(--body);color:var(--copper-d)}
+.gl-camp{grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+.gl-camp small,.gl-camp .meter{grid-column:1/-1}
+.meter{height:10px;border-radius:5px;background:var(--stone-2);overflow:hidden;box-shadow:inset 0 1px 2px rgba(45,36,24,.15)}
+.meter span{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,#B9693F,var(--copper))}
+.gl-olive{background:var(--olive);border-color:var(--olive);color:#EFE6D6}
+.gl-olive small{color:var(--copper-l)}
+/* ניווט בין החלקים */
+.jump{position:relative;z-index:20;display:flex;flex-wrap:wrap;gap:6px;margin:18px -16px 0;padding:10px 16px;background:rgba(243,236,223,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.jump a{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;background:var(--card);border:1px solid var(--line-2);color:var(--ink);font-size:15px;font-weight:700;text-decoration:none}
+.jump a svg{width:17px;height:17px;color:var(--copper)}
+.jump a:hover{border-color:var(--copper)}
+/* פריסה */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start;margin:18px 0 28px}
+.col{display:grid;gap:20px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 22px 20px;box-shadow:0 14px 30px -26px rgba(45,36,24,.55)}
+.card-h{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.card-h .ci{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:8px;background:var(--soft);color:var(--copper);box-shadow:inset 0 -1px 0 rgba(45,36,24,.1)}
+.card-h .ci svg{width:22px;height:22px}
+.card-h h2{font-size:1.5rem}
+.card-h p{margin-top:2px;font-size:15px;color:var(--muted)}
+.sub-h{margin:22px 0 8px;font:700 1.02rem/1.3 var(--body);color:var(--olive-d);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sub-h small{font-weight:400;color:var(--muted);font-size:14px}
+.hint{font-size:14.5px;color:var(--muted);line-height:1.5}
+/* שדות */
+.fld{display:grid;gap:5px;font-size:14.5px;font-weight:700;color:var(--muted)}
+.fld small{font-weight:400}
+input[type=text],input[type=number],input[type=date],input[type=time],textarea,select{width:100%;min-height:46px;padding:9px 12px;border:1px solid var(--line-2);border-radius:7px;background:#fff;color:var(--ink);font-weight:400;font-size:16px}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
+input[type=time]{width:8.2rem;direction:ltr;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+input[type=number],input[type=date]{direction:ltr;text-align:right}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(154,76,42,.3);outline-offset:0;border-color:var(--copper)}
+[aria-invalid="true"]{border-color:var(--bad)!important;background:#FFF6F3!important}
+.err{margin-top:6px;color:var(--bad);font-size:14px;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15.5px;font-weight:700;color:var(--ink);cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--copper)}
+/* זמנים */
+.tblock{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.trow:first-child{border-top:0}
+.trow label{display:grid;font-weight:700;font-size:16px;line-height:1.3}
+.trow label small{font-weight:400;font-size:13.5px;color:var(--muted)}
+.trow .tag{display:inline-block;margin-top:2px;font-size:12.5px;font-weight:700;color:var(--olive-d)}
+.trow.is-zman{background:var(--soft);margin-inline:-10px;padding-inline:10px;border-radius:7px;border-top:0;margin-block:4px}
+.trow.is-zman + .trow{border-top:0}
+.trow .zin{display:flex;align-items:center;gap:6px}
+.xbtn{display:inline-grid;place-items:center;width:44px;height:44px;border:1px solid var(--line-2);border-radius:7px;background:#fff;color:var(--muted);cursor:pointer}
+.xbtn svg{width:18px;height:18px}
+.xbtn:hover{border-color:var(--bad);color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--line-2);background:var(--soft);color:var(--ink);font-size:14.5px;font-weight:700;cursor:pointer}
+.chip:hover{border-color:var(--copper)}
+/* רשימות לעריכה (שיעורים, הודעות) */
+.items{display:grid;gap:10px;margin-top:12px}
+.item{border:1px solid var(--line);border-radius:9px;background:#fff}
+.item[open]{border-color:var(--line-2);box-shadow:0 10px 22px -20px rgba(45,36,24,.6)}
+.item summary{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;cursor:pointer;list-style:none}
+.item summary::-webkit-details-marker{display:none}
+.item summary::after{content:"";flex:none;width:10px;height:10px;margin-inline-start:auto;margin-top:-4px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+.item[open] summary::after{margin-top:4px;transform:rotate(-135deg)}
+.item summary b{font-weight:700;font-size:16.5px}
+.item summary span{color:var(--muted);font-size:14.5px}
+.item summary .when{flex:none;padding:3px 9px;border-radius:5px;background:var(--soft);color:var(--copper-d);font-weight:700;font-size:14px;direction:ltr;unicode-bidi:isolate}
+.item .body{display:grid;gap:12px;padding:4px 14px 16px;border-top:1px dashed var(--line)}
+.days{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.days label{position:relative;cursor:pointer}
+.days input{position:absolute;opacity:0;inset:0;margin:0}
+.days span{display:inline-grid;place-items:center;min-width:46px;min-height:40px;padding:0 8px;border-radius:7px;border:1px solid var(--line-2);background:#fff;color:var(--ink);font-weight:700;font-size:15px}
+.days input:checked + span{background:var(--olive);border-color:var(--olive);color:#fff}
+.days input:focus-visible + span{outline:3px solid var(--copper);outline-offset:2px}
+.del{justify-self:start;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 12px;border:1px solid #E5C1B5;border-radius:7px;background:#fff;color:var(--bad);font-weight:700;font-size:14.5px;cursor:pointer}
+.del svg{width:17px;height:17px}
+.del:hover{background:#FFF3EF}
+.add{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:12px;padding:0 16px;border:1.5px dashed var(--line-2);border-radius:8px;background:transparent;color:var(--copper-d);font-weight:700;cursor:pointer}
+.add svg{width:18px;height:18px}
+.add:hover{border-color:var(--copper);background:var(--soft)}
+/* כפתורים ושמירה */
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;border-radius:7px;border:1.5px solid transparent;font:700 16px/1.2 var(--body);text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn svg{width:18px;height:18px}
+.btn-copper{background:var(--copper);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.16)}
+.btn-copper:hover{background:var(--copper-d)}
+.btn-line{background:#fff;color:var(--ink);border-color:var(--line-2)}
+.btn-line:hover{border-color:var(--copper)}
+.btn-olive{background:var(--olive);color:#fff}
+.btn-olive:hover{background:var(--olive-d)}
+.saved{min-height:1.5em;font-weight:700;font-size:15px;color:var(--ok)}
+.saved.is-bad{color:var(--bad)}
+/* קמפיין */
+.camp-sum{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center;margin-top:10px;padding:14px 16px;border-radius:9px;background:var(--ink);background-image:var(--tex-dark);background-size:360px 176px;color:#E4D6BC}
+.camp-sum .pct{grid-row:span 2;font:400 2.1rem/1 var(--head);color:var(--copper-l)}
+.camp-sum b{font:700 1.15rem/1.3 var(--body);color:#F7F0E2}
+.camp-sum .meter{grid-column:1/-1;margin-top:8px;background:rgba(239,230,214,.16);box-shadow:none}
+.camp-sum .meter span{background:linear-gradient(90deg,#E3A47C,#C4825A)}
+.camp-sum small{grid-column:1/-1;font-size:14px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;margin:0}
+.seg span{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:7px;border:1px solid var(--line-2);background:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.seg input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff}
+.seg input:focus-visible + span{outline:3px solid var(--copper);outline-offset:2px}
+.mini-list{display:grid;margin-top:10px;border-top:1px solid var(--line)}
+.mini-list li{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.mini-list li time{flex:none;font-weight:700;color:var(--copper-d);direction:ltr}
+.mini-list li p{flex:1;min-width:0}
+.mini-list .xbtn{width:40px;height:40px}
+/* הקדשות */
+.drow{display:grid;grid-template-columns:minmax(0,1.3fr) 8.5rem minmax(0,1.6fr);gap:10px 14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.drow:first-of-type{border-top:0}
+.drow .dn b{display:block;font-size:16px}
+.drow .dn small{color:var(--muted);font-size:13.5px}
+.drow .price{position:relative}
+.drow .price input{padding-inline-end:34px}
+.drow .price::after{content:"₪";position:absolute;inset-inline-end:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:700}
+.dstate{display:grid;gap:8px}
+.dstate .by{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.left{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--muted);font-weight:700}
+.left input{width:6.2rem}
+.memo{margin-top:22px;padding:18px;border-radius:10px;background:var(--soft);border:1px solid var(--line)}
+.memo h3{font-size:1.2rem}
+.memo .grid2{margin-top:12px}
+/* תצוגה מקדימה */
+.preview{position:sticky;top:76px;display:grid;gap:14px}
+.preview h2{font-size:1.3rem}
+.pv-next{padding:12px 14px;border-radius:8px;background:var(--olive);color:#EFE6D6;font-weight:700;font-size:15.5px;line-height:1.45}
+.pv-note{padding:10px 12px;border-radius:8px;background:#FBF1E2;border:1px solid #EBCFAF;font-size:14.5px}
+.pv-h{font:700 14px/1.2 var(--body);color:var(--muted);letter-spacing:.02em;margin-bottom:4px}
+.pv-list .t-row{display:grid;grid-template-columns:1fr auto;grid-template-areas:"name time" "sub time";column-gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:15px}
+.pv-list .t-row:first-child{border-top:0}
+.pv-list .t-name{grid-area:name;font-weight:700}
+.pv-list .t-sub{grid-area:sub;font-size:13px;color:var(--muted)}
+.pv-list .t-time{grid-area:time;align-self:center;font-weight:700;color:var(--copper-d);direction:ltr;font-variant-numeric:tabular-nums}
+.pv-list .is-next{background:rgba(154,76,42,.08);margin-inline:-8px;padding-inline:8px;border-radius:5px}
+.pv-list .is-zman .t-name{font-weight:400;color:var(--muted)}
+.pv-camp{display:grid;gap:6px;font-size:15px}
+.pv-camp b{font-size:1.1rem}
+.pv-donors .donor{display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:7px 0;border-top:1px solid var(--line);font-size:14.5px}
+.pv-donors .donor:first-child{border-top:0}
+.pv-donors .d-name{font-weight:700}
+.pv-donors .d-amount{color:var(--copper-d);font-weight:700}
+.pv-donors .d-item,.pv-donors .d-ded,.pv-donors .d-when{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.pv-donors .d-when{display:none}
+.see{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700}
+/* תחתית */
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 20px;margin-bottom:40px}
+.foot .acts2{display:flex;flex-wrap:wrap;gap:10px}
+.foot p{flex:1 1 320px;font-size:14.5px;color:var(--muted)}
+@media (min-width:701px){.jump{position:sticky;top:0}}
+@media (max-width:1040px){
+  .layout{grid-template-columns:1fr}
+  .preview{position:static;grid-template-columns:1fr 1fr;align-items:start}
+  .preview > h2,.preview > .pv-next,.preview > .pv-note,.preview > .see{grid-column:1/-1}
+}
+@media (max-width:700px){
+  .glance{grid-template-columns:1fr 1fr}
+  .gl-camp{grid-column:1/-1}
+  .tblock{grid-template-columns:1fr}
+  .drow{grid-template-columns:1fr 8.5rem}
+  .dstate{grid-column:1/-1}
+  .preview{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .glance{grid-template-columns:1fr;gap:10px}
+  .gl{padding:14px 16px}
+  .card{padding:18px 14px 16px;border-radius:10px}
+  .card-h .ci{width:38px;height:38px}
+  .card-h h2{font-size:1.3rem}
+  .grid2,.dstate .by{grid-template-columns:1fr}
+  .acts .btn{flex:1 1 100%}
+  .foot .acts2,.foot .acts2 .btn{width:100%}
+  .who{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+ <symbol id="mark" viewBox="0 0 56 72">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M6.5 64.5V28A21.5 21.5 0 0 1 49.5 28V64.5" stroke-width="2.4"/>
+   <path d="M10.6 64.5V28.6A17.4 17.4 0 0 1 45.4 28.6V64.5" stroke-width=".7" opacity=".75"/>
+   <path d="M3 64.5H53" stroke-width="2.2"/>
+   <path d="M.9 69H55.1" stroke-width="1.3"/>
+   <path d="M28.0 62.5C28.0 52 28.15 38 28.0 23.5" stroke-width="1.35"/>
+  </g>
+  <path fill="currentColor" d="M27.3 25.5C27.94 22.66 25.64 19.73 23.38 19.22C22.84 21.48 24.47 24.83 27.3 25.5ZM28.7 25.5C31.53 24.830 33.16 21.48 32.62 19.22C30.36 19.73 28.06 22.66 28.7 25.5ZM27.3 30.5C27.99 27.74 25.79 24.96 23.56 24.52C22.99 26.71 24.52 29.91 27.3 30.5ZM28.7 30.5C31.48 29.91 33.01 26.71 32.44 24.52C30.21 24.96 28.01 27.74 28.7 30.5ZM27.3 35.5C28.04 32.82 25.930 30.19 23.75 29.82C23.13 31.94 24.57 34.99 27.3 35.5ZM28.7 35.5C31.43 34.99 32.87 31.94 32.25 29.82C30.07 30.19 27.96 32.82 28.7 35.5ZM27.3 40.5C28.09 37.91 26.07 35.43 23.94 35.11C23.28 37.17 24.62 40.08 27.3 40.5ZM28.7 40.5C31.38 40.08 32.72 37.17 32.06 35.11C29.93 35.43 27.91 37.91 28.7 40.5ZM28 22.2C29.98 20.35 29.6 17.05 28 15.6C26.4 17.05 26.02 20.35 28 22.2Z"/>
+  <path fill="currentColor" d="M27.6 56.5Q24.64 47.6 15.5 45.5Q22.71 49.73 27.6 56.5ZM28.4 52.5Q34.58 47.65 40.5 42.5Q32.74 45.43 28.4 52.5Z"/>
+ </symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3.1 2"/></g></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24"><g class="ico"><path d="M12 6.5C10 5 7 4.6 3.5 5v13c3.5-.4 6.5 0 8.5 1.5 2-1.5 5-1.9 8.5-1.5V5c-3.5-.4-6.5 0-8.5 1.5Z"/><path d="M12 6.5v13"/></g></symbol>
+ <symbol id="i-news" viewBox="0 0 24 24"><g class="ico"><path d="M4.5 9.5v5l10.5 4v-13Z"/><path d="M15 9a3 3 0 0 1 0 6M7.5 14.6l1.2 4.4"/></g></symbol>
+ <symbol id="i-wall" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="5" width="17" height="14" rx="1.5"/><path d="M3.5 9.7h17M3.5 14.3h17M9 5v4.7M15 5v4.7M12 9.7v4.6M7 14.3V19M17 14.3V19"/></g></symbol>
+ <symbol id="i-plaque" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M7.5 10h9M7.5 13.6h6"/><circle cx="5.8" cy="8.2" r=".5"/><circle cx="18.2" cy="8.2" r=".5"/></g></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path class="ico" d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-trash" viewBox="0 0 24 24"><g class="ico"><path d="M4.5 7h15M9.5 7V4.8h5V7M6.5 7l.9 12.2h9.2l.9-12.2"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></g></symbol>
+ <symbol id="i-x" viewBox="0 0 24 24"><path class="ico" d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 24 24"><g class="ico"><path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12Z"/><circle cx="12" cy="12" r="2.8"/></g></symbol>
+ <symbol id="i-reset" viewBox="0 0 24 24"><g class="ico"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></g></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path class="ico" d="M19 12H5m6-6-6 6 6 6"/></symbol>
+</svg>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/shul/design-1/">עיצוב 1</a><a href="/demo/shul/design-2/">עיצוב 2</a><a href="/demo/shul/design-3/">עיצוב 3</a><a href="/demo/shul/final/">הגרסה הסופית</a><a href="/demo/shul/admin/" aria-current="page">מסך הגבאי</a></nav>
+ <a class="demo-back" href="/demo/shul/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<header class="wrap top">
+ <a class="brand" href="/demo/shul/final/" aria-label="נחלת יצחק, לאתר">
+  <svg aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+  <span><b>נחלת יצחק</b><small>מסך הגבאי</small></span>
+ </a>
+ <span class="who">מחובר: משה, הגבאי (לדוגמה)</span>
+</header>
+
+<main class="wrap" id="main">
+ <h1>מסך הגבאי</h1>
+ <p class="lead">זמני התפילות, השיעורים, הודעות לקהילה, הקמפיין וההקדשות. משנים, שומרים, והאתר מתעדכן מיד. גם מהטלפון, בחמש דקות במוצאי שבת.</p>
+ <p class="note"><b>זה מסך לדוגמה:</b> כל אחד יכול לנסות כאן, והשינוי נשמר רק בדפדפן שלכם, לא בשום שרת. פתחו את <a href="/demo/shul/final/" target="_blank" rel="noopener">הגרסה הסופית</a> בלשונית אחרת, שנו כאן ולחצו "שמירה", ותראו אותה מתעדכנת. באתר אמיתי הגבאי נכנס עם סיסמה, והשינוי מופיע לכל הגולשים.</p>
+
+ <section class="glance" aria-label="מה רואים באתר עכשיו">
+  <div class="gl gl-olive"><small>עכשיו באתר</small><b data-times-next></b></div>
+  <div class="gl"><small>עד סוף הקמפיין</small><span class="big" data-camp-days-label></span></div>
+  <div class="gl gl-camp"><small>חידוש ההיכל</small><span class="big" data-camp-percent></span><b><span data-camp-raised></span> <span class="hint">מתוך <span data-camp-goal></span></span></b><div class="meter" data-camp-progress aria-label="התקדמות הקמפיין"><span data-camp-fill></span></div></div>
+ </section>
+
+ <nav class="jump" aria-label="חלקי המסך">
+  <a href="#f-times"><svg aria-hidden="true"><use href="#i-clock"/></svg>זמני תפילות</a>
+  <a href="#f-shiurim"><svg aria-hidden="true"><use href="#i-book"/></svg>שיעורים</a>
+  <a href="#f-news"><svg aria-hidden="true"><use href="#i-news"/></svg>הודעות</a>
+  <a href="#s-camp"><svg aria-hidden="true"><use href="#i-wall"/></svg>קמפיין</a>
+  <a href="#f-ded"><svg aria-hidden="true"><use href="#i-plaque"/></svg>הקדשות</a>
+ </nav>
+
+ <div class="layout">
+  <div class="col">
+
+   <!-- זמני תפילות -->
+   <form class="card" id="f-times" novalidate aria-labelledby="h-times">
+    <div class="card-h"><span class="ci" aria-hidden="true"><svg><use href="#i-clock"/></svg></span><div><h2 id="h-times">זמני תפילות</h2><p>מה שכתוב כאן הוא מה שמופיע באתר. כדאי לעבור על זה כל מוצאי שבת.</p></div></div>
+    <div class="tblock">
+     <div>
+      <h3 class="sub-h">ימי חול <small>א׳ עד ה׳, ושחרית גם בשישי</small></h3>
+      <div id="wk"></div>
+      <div class="chips" aria-label="קיצורים">
+       <button type="button" class="chip" data-shift="-5">מנחה ומעריב: 5 דקות מוקדם יותר</button>
+       <button type="button" class="chip" data-shift="5">5 דקות מאוחר יותר</button>
+      </div>
+     </div>
+     <div>
+      <h3 class="sub-h">שבת <small>עם הדלקת נרות וצאת השבת</small></h3>
+      <div id="sh"></div>
+      <p class="hint" style="margin-top:8px">הדלקת הנרות וצאת השבת: מקלידים לפי לוח הזמנים של השבוע. שדה ריק לא מופיע באתר.</p>
+     </div>
+    </div>
+    <h3 class="sub-h">הודעת השבוע</h3>
+    <label class="fld" for="note">מופיעה בראש האתר ועל לוח הזמנים. משאירים ריק כשאין הודעה.
+     <textarea id="note" maxlength="160" placeholder="לדוגמה: ביום שישי הקרוב מנחה גדולה ב־13:30"></textarea>
+    </label>
+    <div class="chips" aria-label="הודעות מוכנות">
+     <button type="button" class="chip" data-note="ביום שישי הקרוב מנחה גדולה ב־13:30, בנוסף למניין הרגיל.">מנחה גדולה בשישי</button>
+     <button type="button" class="chip" data-note="מחר ראש חודש: שחרית מניין ראשון ב־06:05.">ראש חודש</button>
+     <button type="button" class="chip" data-note="השבוע אין שיעור גמרא בעיון. נחזור בשבוע הבא.">אין שיעור השבוע</button>
+     <button type="button" class="chip" data-note="">בלי הודעה</button>
+    </div>
+    <div class="acts"><button class="btn btn-copper" type="submit">שמירת הזמנים</button><p class="saved" role="status" aria-live="polite"></p></div>
+   </form>
+
+   <!-- שיעורים -->
+   <form class="card" id="f-shiurim" novalidate aria-labelledby="h-shiurim">
+    <div class="card-h"><span class="ci" aria-hidden="true"><svg><use href="#i-book"/></svg></span><div><h2 id="h-shiurim">שיעורים</h2><p>מוסיפים, משנים ומוחקים. מגיד השיעור מופיע בתואר בלבד, בלי שמות.</p></div></div>
+    <div class="items" id="sh-items"></div>
+    <button type="button" class="add" id="sh-add"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספת שיעור</button>
+    <datalist id="by-list"><option value="רב בית הכנסת"><option value="אחד מאברכי הקהילה"><option value="צוות בית הכנסת"><option value="ראש הכולל"></datalist>
+    <div class="acts"><button class="btn btn-copper" type="submit">שמירת השיעורים</button><p class="saved" role="status" aria-live="polite"></p></div>
+   </form>
+
+   <!-- הודעות לקהילה -->
+   <form class="card" id="f-news" novalidate aria-labelledby="h-news">
+    <div class="card-h"><span class="ci" aria-hidden="true"><svg><use href="#i-news"/></svg></span><div><h2 id="h-news">הודעות ואירועים בקהילה</h2><p>מופיעים בחלק "בקהילה", מסודרים לפי התאריך.</p></div></div>
+    <div class="items" id="nw-items"></div>
+    <button type="button" class="add" id="nw-add"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספת הודעה</button>
+    <div class="acts"><button class="btn btn-copper" type="submit">שמירת ההודעות</button><p class="saved" role="status" aria-live="polite"></p></div>
+   </form>
+
+   <!-- קמפיין -->
+   <section class="card" id="s-camp" aria-labelledby="h-camp">
+    <div class="card-h"><span class="ci" aria-hidden="true"><svg><use href="#i-wall"/></svg></span><div><h2 id="h-camp">הקמפיין לחידוש ההיכל</h2><p>היעד, תאריך הסיום, עדכונים לקהילה, ותרומות שהגיעו במזומן או בצ׳ק.</p></div></div>
+    <div class="camp-sum">
+     <span class="pct" data-camp-percent></span>
+     <b><span data-camp-raised></span> נאספו מתוך <span data-camp-goal></span></b>
+     <span><span data-camp-count></span> תרומות · <span data-camp-days-label></span></span>
+     <div class="meter" data-camp-progress aria-label="התקדמות הקמפיין"><span data-camp-fill></span></div>
+    </div>
+
+    <form id="f-goal" novalidate>
+     <h3 class="sub-h">היעד ותאריך הסיום</h3>
+     <div class="grid2">
+      <label class="fld" for="goal">היעד בשקלים<input type="number" id="goal" min="1000" step="1000" inputmode="numeric"></label>
+      <label class="fld" for="end">הקמפיין נגמר בסוף היום של<input type="date" id="end"></label>
+     </div>
+     <div class="acts"><button class="btn btn-copper" type="submit">שמירה</button><p class="saved" role="status" aria-live="polite"></p></div>
+    </form>
+
+    <form id="f-upd" novalidate>
+     <h3 class="sub-h">עדכון מהקמפיין <small>מופיע באתר, החדש ראשון</small></h3>
+     <label class="fld" for="upd">מה חדש?<textarea id="upd" maxlength="220" placeholder="לדוגמה: הנגר התחיל לבנות את הספסלים הראשונים."></textarea></label>
+     <div class="acts"><button class="btn btn-olive" type="submit"><svg aria-hidden="true"><use href="#i-plus"/></svg>פרסום העדכון</button><p class="saved" role="status" aria-live="polite"></p></div>
+     <ul class="mini-list" id="upd-list" aria-label="העדכונים שבאתר"></ul>
+    </form>
+
+    <form id="f-cash" novalidate>
+     <h3 class="sub-h">תרומה שהגיעה במזומן או בצ׳ק <small>נכנסת למד היעד ולרשימת התורמים</small></h3>
+     <div class="grid2">
+      <label class="fld" for="c-name">שם לפרסום<input type="text" id="c-name" maxlength="40" placeholder="למשל: משפחת כהן" autocomplete="off"></label>
+      <label class="fld" for="c-amount">סכום בשקלים<input type="number" id="c-amount" min="10" step="1" inputmode="numeric"></label>
+     </div>
+     <label class="check"><input type="checkbox" id="c-anon"> בעילום שם</label>
+     <label class="fld" for="c-ded">הקדשה (לא חובה)<input type="text" id="c-ded" maxlength="80" placeholder="לעילוי נשמת, לזכות, לרגל שמחה"></label>
+     <fieldset style="border:0;padding:0;margin:12px 0 0"><legend class="fld" style="padding:0;margin-bottom:6px">איך הגיעה התרומה</legend>
+      <div class="seg"><label><input type="radio" name="via" value="cash" checked><span>מזומן</span></label><label><input type="radio" name="via" value="cheque"><span>צ׳ק</span></label><label><input type="radio" name="via" value="bank"><span>העברה בנקאית</span></label></div>
+     </fieldset>
+     <div class="acts"><button class="btn btn-olive" type="submit"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספת התרומה</button><p class="saved" role="status" aria-live="polite"></p></div>
+    </form>
+   </section>
+
+   <!-- הקדשות -->
+   <form class="card" id="f-ded" novalidate aria-labelledby="h-ded">
+    <div class="card-h"><span class="ci" aria-hidden="true"><svg><use href="#i-plaque"/></svg></span><div><h2 id="h-ded">הקדשות</h2><p>מחירים, ומה כבר הוקדש. פריט שהוקדש במשרד מסמנים כאן, והוא יוצא מהרשימה באתר.</p></div></div>
+    <div id="ded-rows"></div>
+    <div class="acts"><button class="btn btn-copper" type="submit">שמירת ההקדשות</button><p class="saved" role="status" aria-live="polite"></p></div>
+
+    <div class="memo" id="memo">
+     <h3>שם חדש בלוח ההנצחה</h3>
+     <p class="hint" id="memo-left"></p>
+     <div class="grid2">
+      <label class="fld" for="m-text">נוסח ההנצחה<input type="text" id="m-text" maxlength="80" placeholder="לעילוי נשמת אבינו ר׳ ... ז״ל" autocomplete="off"></label>
+      <label class="fld" for="m-by">על ידי<input type="text" id="m-by" maxlength="40" placeholder="למשל: משפחת לוי" autocomplete="off"></label>
+     </div>
+     <div class="acts"><button class="btn btn-olive" type="button" id="m-add"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספה ללוח</button><p class="saved" id="m-saved" role="status" aria-live="polite"></p></div>
+     <h4 class="sub-h" style="margin-top:14px">השמות בלוח <small>כולל מה שהוקדש באתר</small></h4>
+     <ul class="mini-list" id="memo-list"></ul>
+    </div>
+   </form>
+  </div>
+
+  <!-- תצוגה מקדימה -->
+  <aside class="card preview" aria-labelledby="pv-t">
+   <h2 id="pv-t">ככה זה נראה באתר</h2>
+   <p class="pv-next" data-times-next></p>
+   <p class="pv-note" data-times-note hidden></p>
+   <div><p class="pv-h">ימי חול</p><ul class="pv-list" data-times-weekday></ul></div>
+   <div><p class="pv-h">שבת</p><ul class="pv-list" data-times-shabbat></ul></div>
+   <div class="pv-camp"><p class="pv-h">חידוש ההיכל</p><b><span data-camp-percent></span> · <span data-camp-raised></span></b><div class="meter" data-camp-progress aria-label="התקדמות הקמפיין"><span data-camp-fill></span></div><span class="hint" data-camp-days-label></span></div>
+   <div><p class="pv-h">התורמים האחרונים</p><ul class="pv-donors" data-camp-donors="4"></ul></div>
+   <a class="see" href="/demo/shul/final/" target="_blank" rel="noopener"><svg aria-hidden="true" width="18" height="18"><use href="#i-eye"/></svg>לראות באתר, בלשונית חדשה</a>
+  </aside>
+ </div>
+
+ <div class="card foot">
+  <div class="acts2">
+   <a class="btn btn-copper" href="/demo/shul/final/"><svg aria-hidden="true"><use href="#i-eye"/></svg>לראות באתר</a>
+   <button class="btn btn-line" type="button" id="reset"><svg aria-hidden="true"><use href="#i-reset"/></svg>חזרה לנתוני הדוגמה</button>
+  </div>
+  <p id="reset-msg" role="status" aria-live="polite">החזרה מוחקת את מה ששיניתם בדפדפן הזה, ומחזירה את האתר למצב שבו הלקוח ראה אותו.</p>
+ </div>
+</main>
+
+<script>
+/* זמני השבת של השבוע, כמו בגרסה הסופית. נטען לפני shul.js */
+window.NACHALAT_DEFAULTS = { times: { candles: '16:08', havdalah: '17:06' } };
+</script>
+<script src="/demo/shul/shul.js"></script>
+<script>
+/* מסך הגבאי לדוגמה: קורא וכותב דרך המנוע המשותף (NachalatYitzchak). הכול נבנה כטקסט (בלי innerHTML) */
+(() => {
+  const N = window.NachalatYitzchak;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  /* בונה אלמנט: h('input', {type: 'time', value: '06:15', 'aria-label': '...'}, ...ילדים) */
+  const PROPS = ['value', 'checked', 'hidden', 'open', 'type', 'name', 'id', 'disabled', 'min', 'max', 'step', 'required', 'maxLength', 'placeholder', 'htmlFor', 'className', 'textContent', 'title'];
+  const h = (tag, props = {}, ...kids) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(props)) {
+      if (v == null || v === false) continue;
+      if (k === 'class') e.className = v;
+      else if (k === 'text') e.textContent = v;
+      else if (k === 'data') Object.assign(e.dataset, v);
+      else if (PROPS.includes(k)) e[k] = v;
+      else e.setAttribute(k, v === true ? '' : v);
+    }
+    for (const c of kids.flat()) if (c != null && c !== false) e.append(c);
+    return e;
+  };
+  const icon = (id) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('aria-hidden', 'true'); const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', `#${id}`); s.append(u); return s; };
+  let uid = 0;
+  const nid = (p) => `${p}-${++uid}`;
+  const isTime = (v) => /^\d{2}:\d{2}$/.test(String(v || ''));
+  const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
+  const todayIL = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem' }).format(new Date());
+  const stampIL = () => { const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date()).map((x) => [x.type, x.value])); return `${todayIL()}T${p.hour}:${p.minute}`; };
+  const dm = (iso) => { const [, m, d] = String(iso).split('-'); return `${Number(d)}.${Number(m)}`; };
+  const fmt = N.fmt;
+
+  /* הודעת שמירה ליד הכפתור, וסימון שדה שגוי */
+  const say = (form, text, bad) => { const s = $('.saved', form); if (!s) return; s.textContent = ''; setTimeout(() => { s.textContent = text; s.classList.toggle('is-bad', !!bad); }, 20); };
+  const clearErr = (form) => { $$('[aria-invalid]', form).forEach((x) => x.removeAttribute('aria-invalid')); $$('.err', form).forEach((x) => x.remove()); };
+  const markErr = (input, text) => {
+    input.setAttribute('aria-invalid', 'true');
+    const id = nid('err'), p = h('p', { class: 'err', id, text });
+    input.setAttribute('aria-describedby', id);
+    (input.closest('.trow, .fld, .drow, .left') || input).after(p);
+    return input;
+  };
+  const openTo = (input) => { const d = input.closest('details'); if (d) d.open = true; input.focus(); };
+
+  /* מה שהמשתמש התחיל לשנות ועוד לא שמר: לא דורסים כשמגיע עדכון מלשונית אחרת */
+  const dirty = new Set();
+  const track = (form) => form.addEventListener('input', () => dirty.add(form.id));
+
+  /* ================= זמני תפילות ================= */
+  const fTimes = $('#f-times');
+  const timeRow = (id, name, sub, value, tag, zkey) => h('div', { class: `trow${zkey ? ' is-zman' : ''}` },
+    h('label', { htmlFor: id }, name, sub ? h('small', { text: sub }) : null, tag ? h('span', { class: 'tag', text: tag }) : null),
+    zkey
+      ? h('span', { class: 'zin' }, h('input', { type: 'time', id, value: value || '' }), h('button', { type: 'button', class: 'xbtn', 'data-clear': id, 'aria-label': `ניקוי: ${name}`, title: 'ניקוי' }, icon('i-x')))
+      : h('input', { type: 'time', id, value: value || '', required: true }));
+  const fillTimes = () => {
+    const t = N.load().times;
+    $('#wk').replaceChildren(...t.weekday.map((r, i) => timeRow(`wk-${i}`, r.name, r.sub, r.time, r.fri ? 'גם ביום שישי' : '')));
+    $('#sh').replaceChildren(
+      timeRow('z-candles', 'הדלקת נרות', 'ביום שישי', t.candles, '', 'candles'),
+      ...t.shabbat.map((r, i) => timeRow(`sh-${i}`, r.name, r.sub || (Number(r.day) === 5 ? 'ביום שישי' : ''), r.time, '')),
+      timeRow('z-havdalah', 'צאת השבת', 'במוצאי שבת', t.havdalah, '', 'havdalah'));
+    $('#note').value = t.note || '';
+  };
+  fTimes.addEventListener('click', (e) => {
+    const c = e.target.closest('[data-clear]');
+    if (c) { const i = $(`#${c.dataset.clear}`); i.value = ''; i.focus(); dirty.add(fTimes.id); return; }
+    const n = e.target.closest('[data-note]');
+    if (n) { $('#note').value = n.dataset.note; $('#note').focus(); dirty.add(fTimes.id); return; }
+    const s = e.target.closest('[data-shift]');
+    if (s) {
+      const k = Number(s.dataset.shift), t = N.load().times;
+      t.weekday.forEach((r, i) => {
+        if (r.sub || !['מנחה', 'מעריב'].includes(r.name)) return;
+        const inp = $(`#wk-${i}`); if (!isTime(inp.value)) return;
+        const [hh, mm] = inp.value.split(':').map(Number), m = (hh * 60 + mm + k + 1440) % 1440;
+        inp.value = `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+      });
+      dirty.add(fTimes.id);
+      say(fTimes, `מנחה ומעריב ${k < 0 ? 'הוקדמו' : 'נדחו'} ב־5 דקות. לחצו "שמירת הזמנים".`);
+    }
+  });
+  fTimes.addEventListener('submit', (e) => {
+    e.preventDefault(); clearErr(fTimes);
+    const d = N.load(); let bad = null;
+    d.times.weekday.forEach((r, i) => { const v = $(`#wk-${i}`).value; if (!isTime(v)) bad = bad || markErr($(`#wk-${i}`), 'צריך שעה.'); else r.time = v; });
+    d.times.shabbat.forEach((r, i) => { const v = $(`#sh-${i}`).value; if (!isTime(v)) bad = bad || markErr($(`#sh-${i}`), 'צריך שעה.'); else r.time = v; });
+    const c = $('#z-candles').value, hv = $('#z-havdalah').value;
+    const kab = d.times.shabbat.find((r) => Number(r.day) === 5);
+    if (c && kab && isTime(kab.time) && c >= kab.time) bad = bad || markErr($('#z-candles'), `הדלקת הנרות צריכה להיות לפני ${kab.name} (${kab.time}).`);
+    if (bad) { say(fTimes, 'יש שעה שצריך לתקן.', true); bad.focus(); return; }
+    d.times.candles = c; d.times.havdalah = hv;
+    d.times.note = $('#note').value.replace(/\s+/g, ' ').trim();
+    d.times.updated = todayIL();
+    N.save(d); dirty.delete(fTimes.id);
+    say(fTimes, 'נשמר. האתר כבר מציג את הזמנים החדשים.');
+  });
+
+  /* ================= שיעורים ================= */
+  const DL = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'שבת'];
+  /* "מתי" אוטומטי מהימים שסומנו, כשלא כתבו נוסח משלהם */
+  const dayLabel = (days) => {
+    const ds = [...new Set(days)].sort((a, b) => a - b);
+    if (!ds.length) return '';
+    if (ds.length === 1) return ds[0] === 6 ? 'שבת' : `יום ${DL[ds[0]]}`;
+    const run = ds.every((x, i) => i === 0 || x === ds[i - 1] + 1);
+    if (run && ds.length >= 3 && ds[ds.length - 1] < 6) return `${DL[ds[0]]} עד ${DL[ds[ds.length - 1]]}`;
+    return `ימים ${ds.map((x) => DL[x]).join(', ')}`;
+  };
+  const field = (label, input, hint) => { input.id = input.id || nid('f'); return h('label', { class: 'fld', htmlFor: input.id }, label, hint ? h('small', { text: hint }) : null, input); };
+  const shiurItem = (s, open) => {
+    const days = Array.isArray(s.days) ? s.days.map(Number) : [];
+    const topic = h('input', { type: 'text', class: 's-topic', value: s.topic || '', maxLength: 40, placeholder: 'למשל: דף יומי' });
+    const day = h('input', { type: 'text', class: 's-day', value: s.day || '', maxLength: 30, placeholder: 'למשל: א׳ עד ה׳' });
+    const time = h('input', { type: 'time', class: 's-time', value: s.time || '' });
+    const by = h('input', { type: 'text', class: 's-by', value: s.by || '', maxLength: 40, list: 'by-list', placeholder: 'למשל: רב בית הכנסת' });
+    const note = h('input', { type: 'text', class: 's-note', value: s.note || '', maxLength: 60, placeholder: 'למשל: לפני מעריב המאוחר' });
+    const legend = nid('dl');
+    const dayBox = h('div', { class: 'days', role: 'group', 'aria-labelledby': legend }, DL.map((l, i) => h('label', {}, h('input', { type: 'checkbox', value: String(i), checked: days.includes(i), 'aria-label': i === 6 ? 'שבת' : `יום ${l}` }), h('span', { text: l }))));
+    const sum = h('summary', {}, h('span', { class: 'when' }), h('b'), h('span', { class: 'meta' }));
+    const paint = () => { sum.querySelector('b').textContent = topic.value.trim() || 'שיעור חדש'; sum.querySelector('.meta').textContent = [day.value.trim() || dayLabel($$('.days input:checked', it).map((x) => Number(x.value))), by.value.trim()].filter(Boolean).join(' · '); sum.querySelector('.when').textContent = time.value || '--:--'; };
+    const del = h('button', { type: 'button', class: 'del' }, icon('i-trash'), 'מחיקת השיעור');
+    const it = h('details', { class: 'item s-item', open: !!open }, sum, h('div', { class: 'body' },
+      field('נושא השיעור', topic),
+      h('div', { class: 'grid2' }, field('מתי (כמו שיופיע באתר)', day, 'אם ריק, נכתב לפי הימים'), field('שעה', time)),
+      h('div', { class: 'fld' }, h('span', { id: legend, text: 'באילו ימים (לסימון "היום" באתר)' }), dayBox),
+      h('div', { class: 'grid2' }, field('מגיד השיעור', by, 'תואר בלבד, בלי שמות'), field('הערה (לא חובה)', note)),
+      del));
+    it.addEventListener('input', paint); it.addEventListener('change', paint);
+    del.addEventListener('click', () => {
+      const next = it.nextElementSibling || it.previousElementSibling;
+      it.remove(); dirty.add('f-shiurim');
+      say($('#f-shiurim'), 'השיעור הוסר. לחצו "שמירת השיעורים" כדי לעדכן את האתר.');
+      (next ? next.querySelector('summary') : $('#sh-add')).focus();
+    });
+    paint();
+    return it;
+  };
+  const fillShiurim = () => $('#sh-items').replaceChildren(...(N.load().shiurim || []).map((s) => shiurItem(s, false)));
+  $('#sh-add').addEventListener('click', () => {
+    const it = shiurItem({ time: '20:00', by: 'רב בית הכנסת', days: [] }, true);
+    $('#sh-items').append(it); dirty.add('f-shiurim'); $('.s-topic', it).focus();
+  });
+  $('#f-shiurim').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    let bad = null;
+    const list = $$('.s-item', f).map((it) => {
+      const g = (c) => $(c, it).value.replace(/\s+/g, ' ').trim();
+      const days = $$('.days input:checked', it).map((x) => Number(x.value));
+      if (!g('.s-topic')) bad = bad || markErr($('.s-topic', it), 'צריך נושא.');
+      if (!isTime($('.s-time', it).value)) bad = bad || markErr($('.s-time', it), 'צריך שעה.');
+      if (!g('.s-day') && !days.length) bad = bad || markErr($('.s-day', it), 'כתבו מתי, או סמנו ימים.');
+      const s = { topic: g('.s-topic'), day: g('.s-day') || dayLabel(days), days, time: $('.s-time', it).value, by: g('.s-by') || 'רב בית הכנסת' };
+      if (g('.s-note')) s.note = g('.s-note');
+      return s;
+    });
+    if (bad) { say(f, 'יש שיעור שצריך להשלים.', true); openTo(bad); return; }
+    const d = N.load(); d.shiurim = list; N.save(d); dirty.delete(f.id);
+    say(f, `נשמר. באתר מופיעים עכשיו ${list.length} שיעורים.`);
+  });
+
+  /* ================= הודעות לקהילה ================= */
+  const newsItem = (x, open) => {
+    const date = h('input', { type: 'date', class: 'n-date', value: x.date || '' });
+    const title = h('input', { type: 'text', class: 'n-title', value: x.title || '', maxLength: 50, placeholder: 'למשל: קידוש קהילתי' });
+    const when = h('input', { type: 'text', class: 'n-when', value: x.when || '', maxLength: 50, placeholder: 'למשל: שבת, אחרי התפילה' });
+    const text = h('textarea', { class: 'n-text', value: x.text || '', maxLength: 160, placeholder: 'משפט או שניים' });
+    text.value = x.text || '';
+    const sum = h('summary', {}, h('span', { class: 'when' }), h('b'), h('span', { class: 'meta' }));
+    const paint = () => { sum.querySelector('b').textContent = title.value.trim() || 'הודעה חדשה'; sum.querySelector('.when').textContent = isDate(date.value) ? dm(date.value) : '--'; sum.querySelector('.meta').textContent = when.value.trim(); };
+    const del = h('button', { type: 'button', class: 'del' }, icon('i-trash'), 'מחיקת ההודעה');
+    const it = h('details', { class: 'item n-item', open: !!open }, sum, h('div', { class: 'body' },
+      h('div', { class: 'grid2' }, field('תאריך', date), field('כותרת', title)),
+      field('מתי (לא חובה)', when),
+      field('פרטים (לא חובה)', text),
+      del));
+    it.addEventListener('input', paint);
+    del.addEventListener('click', () => {
+      const next = it.nextElementSibling || it.previousElementSibling;
+      it.remove(); dirty.add('f-news');
+      say($('#f-news'), 'ההודעה הוסרה. לחצו "שמירת ההודעות" כדי לעדכן את האתר.');
+      (next ? next.querySelector('summary') : $('#nw-add')).focus();
+    });
+    paint();
+    return it;
+  };
+  const fillNews = () => $('#nw-items').replaceChildren(...(N.load().news || []).slice().sort((a, b) => String(a.date).localeCompare(String(b.date))).map((x) => newsItem(x, false)));
+  $('#nw-add').addEventListener('click', () => {
+    const it = newsItem({ date: todayIL() }, true);
+    $('#nw-items').append(it); dirty.add('f-news'); $('.n-title', it).focus();
+  });
+  $('#f-news').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    let bad = null;
+    const list = $$('.n-item', f).map((it) => {
+      const g = (c) => $(c, it).value.replace(/\s+/g, ' ').trim();
+      if (!isDate($('.n-date', it).value)) bad = bad || markErr($('.n-date', it), 'צריך תאריך.');
+      if (!g('.n-title')) bad = bad || markErr($('.n-title', it), 'צריך כותרת.');
+      const x = { date: $('.n-date', it).value, title: g('.n-title') };
+      if (g('.n-when')) x.when = g('.n-when');
+      if (g('.n-text')) x.text = g('.n-text');
+      return x;
+    });
+    if (bad) { say(f, 'יש הודעה שצריך להשלים.', true); openTo(bad); return; }
+    const d = N.load(); d.news = list; N.save(d); dirty.delete(f.id);
+    say(f, `נשמר. באתר מופיעות עכשיו ${list.length} הודעות.`);
+  });
+
+  /* ================= קמפיין ================= */
+  const fillGoal = () => { const c = N.load().campaign; $('#goal').value = c.goal; $('#end').value = c.end; };
+  $('#f-goal').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    const goal = Math.round(Number($('#goal').value)), end = $('#end').value;
+    let bad = null;
+    if (!Number.isFinite(goal) || goal < 1000) bad = bad || markErr($('#goal'), 'יעד של 1,000 ₪ לפחות.');
+    if (!isDate(end)) bad = bad || markErr($('#end'), 'צריך תאריך.');
+    if (bad) { say(f, 'צריך לתקן שדה אחד.', true); bad.focus(); return; }
+    const d = N.load(); d.campaign.goal = goal; d.campaign.end = end; N.save(d); dirty.delete(f.id);
+    const T = N.totals();
+    say(f, T.left.state === 'ended' ? 'נשמר. התאריך כבר עבר, ולכן באתר כתוב שהקמפיין הסתיים.' : `נשמר. היעד ${fmt(goal)}, ונאספו ${T.pct}%.`);
+  });
+  const fillUpdates = () => {
+    const ul = $('#upd-list');
+    const ups = (N.load().updates || []).map((u, i) => ({ u, i })).sort((a, b) => String(b.u.date).localeCompare(String(a.u.date)) || b.i - a.i);
+    ul.replaceChildren(...ups.map(({ u, i }) => h('li', {}, h('time', { datetime: u.date, text: dm(u.date) }), h('p', { text: u.text }),
+      h('button', { type: 'button', class: 'xbtn', 'data-upd': String(i), 'aria-label': `מחיקת העדכון מ־${dm(u.date)}`, title: 'מחיקה' }, icon('i-trash')))));
+  };
+  $('#f-upd').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    const text = $('#upd').value.replace(/\s+/g, ' ').trim();
+    if (!text) { markErr($('#upd'), 'כתבו מה חדש.'); say(f, '', true); $('#upd').focus(); return; }
+    const d = N.load(); d.updates = (d.updates || []).concat({ date: todayIL(), text }); N.save(d);
+    $('#upd').value = ''; dirty.delete(f.id); fillUpdates();
+    say(f, 'העדכון פורסם באתר.');
+  });
+  $('#upd-list').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-upd]'); if (!b) return;
+    const d = N.load(); d.updates.splice(Number(b.dataset.upd), 1); N.save(d); fillUpdates();
+    say($('#f-upd'), 'העדכון נמחק מהאתר.');
+    ($('#upd-list button') || $('#upd')).focus();
+  });
+  $('#c-anon').addEventListener('change', (e) => { $('#c-name').disabled = e.target.checked; });
+  $('#f-cash').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    const anon = $('#c-anon').checked, name = $('#c-name').value.replace(/\s+/g, ' ').trim(), amount = Math.round(Number($('#c-amount').value));
+    let bad = null;
+    if (!anon && !name) bad = bad || markErr($('#c-name'), 'כתבו שם, או סמנו "בעילום שם".');
+    if (!Number.isFinite(amount) || amount < 10) bad = bad || markErr($('#c-amount'), 'סכום של 10 ₪ לפחות.');
+    if (bad) { say(f, 'צריך לתקן שדה.', true); bad.focus(); return; }
+    const via = ($('input[name=via]:checked', f) || {}).value || 'cash';
+    const dn = { id: `g${Date.now().toString(36)}`, at: stampIL(), amount, via };
+    if (anon) dn.anonymous = true; else dn.name = name;
+    const ded = $('#c-ded').value.replace(/\s+/g, ' ').trim(); if (ded) dn.dedication = ded;
+    const d = N.load(); d.donations = (d.donations || []).concat(dn); N.save(d);
+    f.reset(); $('#c-name').disabled = false; dirty.delete(f.id);
+    const T = N.totals();
+    say(f, `נוסף: ${fmt(amount)} ${anon ? 'בעילום שם' : `מ${name.startsWith('משפחת') ? '' : ' '}${name}`.replace('מ ', 'מ־')}. נאספו עכשיו ${T.pct}% מהיעד.`);
+  });
+
+  /* ================= הקדשות ================= */
+  const dedRow = (it) => {
+    const price = h('input', { type: 'number', class: 'd-price', min: '0', step: '100', value: String(it.price), inputmode: 'numeric', 'aria-label': `מחיר: ${it.name}` });
+    let state;
+    if (it.qty) {
+      const left = h('input', { type: 'number', class: 'd-left', min: '0', max: String(it.qty), step: '1', value: String(it.left ?? it.qty), inputmode: 'numeric', 'aria-label': `כמה נשארו: ${it.name}` });
+      state = h('div', { class: 'dstate' }, h('span', { class: 'left' }, 'נשארו', left, `מתוך ${it.qty}`));
+    } else {
+      const g = nid('st');
+      const by = h('input', { type: 'text', class: 'd-by', value: it.by || '', maxLength: 40, placeholder: 'על ידי' });
+      const ded = h('input', { type: 'text', class: 'd-ded', value: it.ded || '', maxLength: 80, placeholder: 'נוסח (לא חובה)' });
+      const byBox = h('div', { class: 'by', hidden: !it.taken }, field('על ידי', by), field('נוסח ההקדשה', ded));
+      state = h('div', { class: 'dstate' },
+        h('div', { class: 'seg', role: 'radiogroup', 'aria-label': `מצב: ${it.name}` },
+          h('label', {}, h('input', { type: 'radio', name: g, value: 'free', checked: !it.taken }), h('span', { text: 'פנוי' })),
+          h('label', {}, h('input', { type: 'radio', name: g, value: 'taken', checked: !!it.taken }), h('span', { text: 'הוקדש' }))),
+        byBox);
+      state.addEventListener('change', () => { byBox.hidden = !$('input[value=taken]', state).checked; });
+    }
+    return h('div', { class: 'drow', data: { id: it.id } },
+      h('div', { class: 'dn' }, h('b', { text: it.name }), h('small', { text: it.qty ? `${it.qty} יחידות${it.camp === false ? ' · לא נספר ביעד' : ''}` : 'פריט אחד' })),
+      h('label', { class: 'price' }, h('span', { class: 'sr-only', text: `מחיר: ${it.name}` }), price),
+      state);
+  };
+  const fillDed = () => {
+    const d = N.load();
+    $('#ded-rows').replaceChildren(...d.items.map(dedRow));
+    fillMemo(d);
+  };
+  $('#f-ded').addEventListener('submit', (e) => {
+    const f = e.currentTarget; e.preventDefault(); clearErr(f);
+    const d = N.load(); let bad = null;
+    $$('.drow', f).forEach((row) => {
+      const it = d.items.find((x) => x.id === row.dataset.id); if (!it) return;
+      const p = Math.round(Number($('.d-price', row).value));
+      if (!Number.isFinite(p) || p < 0) bad = bad || markErr($('.d-price', row), 'מחיר לא תקין.'); else it.price = p;
+      if (it.qty) {
+        const l = Math.round(Number($('.d-left', row).value));
+        if (!Number.isFinite(l) || l < 0 || l > it.qty) bad = bad || markErr($('.d-left', row), `בין 0 ל־${it.qty}.`);
+        else { it.left = l; it.taken = l === 0; }
+      } else {
+        const taken = $('input[value=taken]', row).checked;
+        it.taken = taken;
+        if (taken) { it.by = $('.d-by', row).value.replace(/\s+/g, ' ').trim() || 'בעילום שם'; const dd = $('.d-ded', row).value.replace(/\s+/g, ' ').trim(); if (dd) it.ded = dd; else delete it.ded; }
+        else { delete it.by; delete it.ded; }
+      }
+    });
+    if (bad) { say(f, 'יש שדה שצריך לתקן.', true); bad.focus(); return; }
+    N.save(d); dirty.delete(f.id); fillMemo(N.load());
+    say(f, 'נשמר. רשימת ההקדשות באתר מעודכנת.');
+  });
+
+  /* לוח ההנצחה: השמות שנחרטו, מהאתר ומהמשרד */
+  const fillMemo = (d) => {
+    const pl = d.items.find((x) => x.id === 'plaque');
+    $('#memo').hidden = !pl;
+    if (!pl) return;
+    $('#memo-left').textContent = `כל שם עולה ${fmt(pl.price)}. נשארו ${pl.left} שלטים מתוך ${pl.qty}. השם נוסף לרשימת התורמים ולמד היעד.`;
+    const names = (d.donations || []).filter((x) => x.item === 'plaque').slice().reverse();
+    $('#memo-list').replaceChildren(...(names.length ? names.map((x) => h('li', {}, h('time', { datetime: String(x.at).slice(0, 10), text: dm(String(x.at).slice(0, 10)) }),
+      h('p', {}, h('b', { text: x.dedication || 'שלט בלי נוסח' }), document.createTextNode(` · ${x.anonymous || !x.name ? 'בעילום שם' : x.name}`)),
+      x.via === 'office' ? h('button', { type: 'button', class: 'xbtn', 'data-memo': x.id, 'aria-label': `מחיקה מהלוח: ${x.dedication || ''}`, title: 'מחיקה' }, icon('i-trash')) : null))
+      : [h('li', {}, h('p', { class: 'hint', text: 'עוד אין שמות בלוח.' }))]));
+    $('#m-add').disabled = Number(pl.left) <= 0;
+  };
+  $('#m-add').addEventListener('click', () => {
+    const box = $('#memo'); clearErr(box);
+    const text = $('#m-text').value.replace(/\s+/g, ' ').trim(), by = $('#m-by').value.replace(/\s+/g, ' ').trim();
+    const ms = $('#m-saved'), tell = (t, bad) => { ms.textContent = ''; setTimeout(() => { ms.textContent = t; ms.classList.toggle('is-bad', !!bad); }, 20); };
+    if (!text) { markErr($('#m-text'), 'כתבו את נוסח ההנצחה.'); tell('', true); $('#m-text').focus(); return; }
+    const d = N.load(), pl = d.items.find((x) => x.id === 'plaque');
+    if (!pl || Number(pl.left) <= 0) { tell('אין עוד שלטים פנויים בלוח.', true); return; }
+    pl.left = Number(pl.left) - 1; if (pl.left === 0) pl.taken = true;
+    const dn = { id: `o${Date.now().toString(36)}`, at: stampIL(), amount: Number(pl.price), item: 'plaque', dedication: text, via: 'office' };
+    if (by) dn.name = by; else dn.anonymous = true;
+    d.donations = (d.donations || []).concat(dn);
+    N.save(d); $('#m-text').value = ''; $('#m-by').value = '';
+    fillDed();
+    tell(`נוסף ללוח: ${text}. נשארו ${pl.left} שלטים.`);
+  });
+  $('#memo-list').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-memo]'); if (!b) return;
+    const d = N.load(), i = d.donations.findIndex((x) => x.id === b.dataset.memo); if (i < 0) return;
+    d.donations.splice(i, 1);
+    const pl = d.items.find((x) => x.id === 'plaque'); if (pl) { pl.left = Math.min(pl.qty, Number(pl.left) + 1); pl.taken = false; }
+    N.save(d); fillDed();
+    $('#m-saved').textContent = 'השם הוסר מהלוח.'; $('#m-text').focus();
+  });
+
+  /* ================= הכול יחד ================= */
+  const SECTIONS = { 'f-times': fillTimes, 'f-shiurim': fillShiurim, 'f-news': fillNews, 'f-goal': fillGoal, 'f-upd': fillUpdates, 'f-ded': fillDed };
+  ['f-times', 'f-shiurim', 'f-news', 'f-goal', 'f-upd', 'f-cash', 'f-ded'].forEach((id) => track($(`#${id}`)));
+  const fillAll = (skipDirty) => { for (const [id, fn] of Object.entries(SECTIONS)) if (!(skipDirty && dirty.has(id))) fn(); };
+  fillAll(false);
+  /* שינוי מלשונית אחרת (למשל תרומה באתר): מרעננים כל חלק שלא התחלתם לערוך */
+  window.addEventListener('storage', (e) => { if (e.key === N.KEY || e.key === null) fillAll(true); });
+
+  /* חזרה לנתוני הדוגמה: לחיצה ראשונה שואלת, השנייה מאפסת */
+  const rb = $('#reset'), rm = $('#reset-msg'), RM = rm.textContent;
+  let armed = 0;
+  rb.addEventListener('click', () => {
+    if (!armed) {
+      armed = setTimeout(() => { armed = 0; rb.lastChild.textContent = 'חזרה לנתוני הדוגמה'; rm.textContent = RM; }, 6000);
+      rb.lastChild.textContent = 'לחצו שוב כדי לאפס';
+      rm.textContent = 'בטוחים? כל מה ששיניתם בדפדפן הזה יימחק.';
+      return;
+    }
+    clearTimeout(armed); armed = 0;
+    N.reset(); dirty.clear(); fillAll(false);
+    rb.lastChild.textContent = 'חזרה לנתוני הדוגמה';
+    rm.textContent = 'חזרנו לנתוני הדוגמה. האתר מציג אותם עכשיו.';
+  });
+})();
+</script>
+</body>
+</html>

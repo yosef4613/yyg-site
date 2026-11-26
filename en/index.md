@@ -34,7 +34,7 @@ For the next 5 clients: 10% off, in return for showing the site in my work with 
 
 ### How much does a website cost?
 
-A landing page starts at ₪2,000, a website with admin panel at ₪4,000, a website with sign-ups & mailing list at ₪6,000, and an online store at ₪7,000. These are starting prices, and no VAT is added to them. The final price depends on your needs and requirements. The price calculator gives you an estimate, and after a short discovery call you get a formal, fixed quote before we start. There is also a basic landing page for ₪1,290, with one design and one revision round. And my next 5 clients get a launch price: 10% off, in return for letting me show their site in my work with a written testimonial.
+A landing page starts at ₪2,000, a website with admin panel at ₪4,000, a website with sign-ups & mailing list at ₪6,000, and an online store at ₪7,000. These are starting prices, and no VAT is added to them. The final price depends on your needs and requirements. The price calculator gives you an estimate. At the end of the discovery questionnaire you see an estimate from your answers right away, and within one business day you get a formal, fixed quote by email, before we start. There is also a basic landing page for ₪1,290, with one design and one revision round. And my next 5 clients get a launch price: 10% off, in return for letting me show their site in my work with a written testimonial.
 
 ### How does payment work?
 
@@ -88,6 +88,7 @@ My phone is for calls only. To write, leave your details in the form below or se
 
 - [Example project: a carpentry website, 3 designs](https://yygweb.com/en/demo/)
 - [Example landing page: an eyewear shop with self-updated hours](https://yygweb.com/en/demo/optika/)
+- [Example store: spices and tea, with a cart, shipping and stock management](https://yygweb.com/en/demo/shop/)
 
 ## Contact
 

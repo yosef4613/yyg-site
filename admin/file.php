@@ -9,6 +9,7 @@ adm_require();
 $id = (string) ($_GET['id'] ?? '');
 $rec = null;
 foreach ((@file(data_dir() . '/forms.jsonl', FILE_IGNORE_NEW_LINES) ?: []) as $l) { $r = json_decode($l, true); if (is_array($r) && ($r['id'] ?? '') === $id) $rec = $r; }
+if ($rec) $rec['files'] = form_files($rec);
 if (!$rec || empty($rec['files'])) { http_response_code(404); exit('לא נמצא'); }
 $base = realpath(data_dir() . '/uploads');
 $abs = static function (array $f) use ($base): ?string {

@@ -133,7 +133,7 @@ const countHit = (() => {
 countHit('view');
 if ('IntersectionObserver' in window) {
   const seen = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { countHit(en.target.id); seen.unobserve(en.target); } }), { threshold: 0.25 });
-  ['plan', 'packages', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
+  ['process', 'work', 'plan', 'packages', 'examples', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
 }
 
 /* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) =====
@@ -359,6 +359,8 @@ const Selection = (() => {
     const p = PKG[s.track];
     box.hidden = false;
     $('picked-k').textContent = s.source === 'planner' ? T('התכנית שלכם', 'Your plan') : T('המסלול שבחרתם', 'Your package');
+    const pq = $('picked-q');
+    if (pq) pq.href = T('/questionnaire/', '/en/questionnaire/') + '?package=' + s.track + '&src=' + (s.source === 'planner' ? 'calc' : 'pkg');
     $('picked-name').textContent = p.name;
     $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, בלי תוספת מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, no VAT added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
@@ -489,6 +491,8 @@ const Planner = (() => {
     last = { ans, p };
     $('r-track').textContent = PKG[p.track].name;
     $('r-why').textContent = TRACK[p.track];
+    const rq = $('r-q');   // הכפתור לשאלון: המסלול שיצא כבר מסומן בשאלון
+    if (rq) rq.href = T('/questionnaire/', '/en/questionnaire/') + '?package=' + p.track + '&src=calc';
     if (!CONFIG.showPrice) $('r-price-wrap').hidden = true; else setPrice(p.price);
     const extra = $('r-extra');
     extra.hidden = !p.extraPages;
@@ -552,10 +556,11 @@ const Planner = (() => {
       btn.firstChild.textContent = !on ? T('לבחור במסלול הזה', 'Choose this package') : fromPlanner ? T('להמשיך עם המסלול הזה', 'Continue with this package') : T('נבחר, ממשיכים ✓', 'Selected, continue ✓');
     });
   };
+  /* בחירת מסלול: ישר לשאלון האפיון, כשהמסלול כבר מסומן בו */
   const pick = (track) => {
     countHit('pick');
     mark(track, false);
-    Selection.set({ source: 'package', track, en: Planner && Planner.touched() ? Planner.en() : false });
+    location.href = T('/questionnaire/', '/en/questionnaire/') + '?package=' + encodeURIComponent(track) + '&src=pkg';
   };
   document.addEventListener('yyg:recommend', (e) => {
     mark(e.detail.track, true);
@@ -817,4 +822,19 @@ const sentMsg = (status, d) => {
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting) && motionOn()) { submit.classList.add('is-cue'); io.disconnect(); } }, { threshold: 0.6 });
     io.observe(submit);
   }
+})();
+
+/* ===== כלל 1: כפתור אחד במסך הראשון. כפתור "להצעת מחיר" בתפריט מופיע רק כשהכפתור של הפתיחה כבר לא במסך ===== */
+(() => {
+  const heroBtn = document.querySelector('.hero-cta .btn-gold');
+  if (!heroBtn || !document.querySelector('.top-q') || !('IntersectionObserver' in window)) return;
+  const root = document.documentElement;
+  root.classList.add('has-hero-cta');
+  /* מופיע רק כשאף כפתור זהב אחר לא נראה במסך: כפתור זהב אחד בכל מסך */
+  const shown = new Set();
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? shown.add(e.target) : shown.delete(e.target)));
+    root.classList.toggle('hero-cta-gone', shown.size === 0);
+  });
+  document.querySelectorAll('main .btn-gold').forEach((b) => io.observe(b));
 })();

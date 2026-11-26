@@ -17,6 +17,10 @@
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
   const params = new URLSearchParams(location.search);
   ['name', 'phone', 'email', 'business', 'quote'].forEach((k) => { if (params.get(k) && !state[k]) state[k] = params.get(k).slice(0, 120); });
+  /* מסלול שנבחר במחשבון או בכרטיס המסלול (?package=landing|site|club|store|basic|brand): מסומן מראש בשאלה על המסלול */
+  const PKG_INDEX = { basic: 0, landing: 1, site: 2, club: 3, store: 4, brand: 5 };
+  const pkgQ = steps.flatMap((s) => s.qs).find((q) => q.id === 'package');
+  if (pkgQ && params.get('package') in PKG_INDEX && !state.package) state.package = pkgQ.options[PKG_INDEX[params.get('package')]];
   /* זמן ההתחלה נשמר עם התשובות, כדי שגם מי שחוזר אחרי הפסקה ייחשב לפי הזמן הכולל (הגנה מרובוטים בשרת) */
   if (!state.__t0) state.__t0 = Date.now();
   let step = Math.min(Number(state.__step) || 0, REVIEW);
@@ -25,7 +29,9 @@
 
   /* קבצים מצורפים: נשמרים בזיכרון עד השליחה (אי אפשר לשמור קבצים בדפדפן) */
   const FILES = {};
-  const MAX_MB = 25;
+  const MAX_MB = 60;          // לקובץ אחד. כמו FORM_FILE_MAX_MB בשרת
+  const MAX_TOTAL_MB = 400;   // לכל השאלון
+  const MAIL = ['yehuda', 'yygweb.com'].join('@');
   const kb = (n) => (n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB');
   const shrink = (file) => new Promise((resolve) => {
     if (!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size < 700 * 1024) return resolve(file);
@@ -154,7 +160,9 @@
       if (allowed.length && !allowed.includes(ext)) { errEl.textContent = t(`הקובץ ${f.name} מסוג שלא מתאים כאן.`, `${f.name} isn't a supported file type here.`); continue; }
       if (list.length >= (q.max || 1)) { errEl.textContent = t(`אפשר לצרף עד ${q.max || 1} קבצים כאן.`, `You can attach up to ${q.max || 1} files here.`); break; }
       const ready = q.resize ? await shrink(f) : f;
-      if (ready.size > MAX_MB * 1048576) { errEl.textContent = t(`הקובץ ${f.name} גדול מדי (עד ${MAX_MB} MB). אפשר לשלוח קישור לתיקייה.`, `${f.name} is too large (up to ${MAX_MB} MB). You can share a folder link instead.`); continue; }
+      if (ready.size > MAX_MB * 1048576) { errEl.textContent = t(`הקובץ ${f.name} גדול מ־${MAX_MB} MB. שימו אותו בתיקייה בגוגל דרייב והדביקו את הקישור בשאלה "קישור לתיקייה" בהמשך, או שלחו אותו במייל ל־${MAIL}.`, `${f.name} is larger than ${MAX_MB} MB. Put it in a Google Drive folder and paste the link in the "folder link" question below, or email it to ${MAIL}.`); continue; }
+      const used = Object.values(FILES).flat().reduce((a, x) => a + x.size, 0);
+      if (used + ready.size > MAX_TOTAL_MB * 1048576) { errEl.textContent = t(`הגעתם ל־${MAX_TOTAL_MB} MB בשאלון. את השאר שימו בתיקייה בגוגל דרייב והדביקו את הקישור בהמשך, או שלחו במייל ל־${MAIL}.`, `You've reached ${MAX_TOTAL_MB} MB in this form. Put the rest in a Google Drive folder and paste the link below, or email them to ${MAIL}.`); break; }
       list.push(ready);
     }
     el.value = '';
@@ -188,7 +196,7 @@
   /* ---------- שליחה ---------- */
   const send = async (btn) => {
     const status = root.querySelector('.qf-status');
-    if ((state.name || '').trim().length < 2) { go(0); validStep(); return; }
+    if ((state.name || '').trim().length < 2 || !(state.email || '').trim()) { go(Math.max(0, steps.findIndex((s) => s.qs.some((q) => q.id === 'name')))); validStep(); return; }   // הפרטים בשלב האחרון
     const items = [];
     steps.forEach((s) => s.qs.forEach((q) => { if (['name', 'phone', 'email', 'business', 'quote'].includes(q.id)) return; if (visible(q) && hasAnswer(q)) items.push({ s: s.title, q: qTitle(q), a: answerText(q) }); }));
     btn.disabled = true;
@@ -196,24 +204,67 @@
       form: FORM, lang: EN ? 'en' : 'he', t: Date.now() - Number(state.__t0 || Date.now()), hp: root.querySelector('[name=_hpq]')?.value || '',
       contact: { name: state.name || '', phone: state.phone || '', email: state.email || '', business: state.business || '', quote: state.quote || '' }, items,
       raw: Object.fromEntries(Object.entries(state).filter(([k]) => !k.startsWith('__'))) };
+    const queue = [];
+    Object.entries(FILES).forEach(([qid, arr]) => { const q = steps.flatMap((s) => s.qs).find((x) => x.id === qid); if (!q || !visible(q)) return; arr.forEach((f) => queue.push({ q: qid, f })); });
+    const total = queue.reduce((a, x) => a + x.f.size, 0);
+    payload.files_expected = { count: queue.length, bytes: total };
     const fd = new FormData();
     fd.append('payload', JSON.stringify(payload));
-    let total = 0;
-    Object.entries(FILES).forEach(([qid, arr]) => { const q = steps.flatMap((s) => s.qs).find((x) => x.id === qid); if (!q || !visible(q)) return; arr.forEach((f) => { fd.append('files[]', f, f.name); fd.append('fileq[]', qid); total += f.size; }); });
-    status.textContent = total ? t('שולח את התשובות והקבצים…', 'Sending your answers and files…') : t('שולח…', 'Sending…');
+    status.textContent = t('שולח את התשובות…', 'Sending your answers…');
     try {
       const j = await new Promise((resolve, reject) => {
         const x = new XMLHttpRequest();
         x.open('POST', '/forms/submit.php');
         x.setRequestHeader('Accept', 'application/json');
-        x.upload.onprogress = (ev) => { if (total > 200000 && ev.lengthComputable) status.textContent = t(`שולח… ${Math.round((ev.loaded / ev.total) * 100)}%`, `Sending… ${Math.round((ev.loaded / ev.total) * 100)}%`); };
         x.onload = () => { let r = {}; try { r = JSON.parse(x.responseText); } catch (e) { /* תשובה לא תקינה */ } if (x.status >= 200 && x.status < 300 && String(r.success) === 'true') resolve(r); else reject(new Error(r.message || x.status)); };
         x.onerror = () => reject(new Error('network'));
         x.send(fd);
       });
       try { localStorage.removeItem(KEY); } catch (e) { /* לא קריטי */ }
+      /* התשובות הגיעו. עכשיו הקבצים, אחד־אחד, כל אחד בבקשה משלו (עם ניסיון חוזר) */
+      const failed = [];
+      if (queue.length && j.id && j.up) {
+        const leave = (ev) => { ev.preventDefault(); ev.returnValue = ''; };
+        window.addEventListener('beforeunload', leave);
+        let sent = 0;
+        const one = (item) => new Promise((resolve, reject) => {
+          const u = new FormData();
+          u.append('id', j.id); u.append('up', j.up); u.append('q', item.q); u.append('file', item.f, item.f.name);
+          const x = new XMLHttpRequest();
+          x.open('POST', '/forms/upload.php');
+          x.setRequestHeader('Accept', 'application/json');
+          x.upload.onprogress = (ev) => { if (ev.lengthComputable) status.textContent = t(`התשובות הגיעו. מעלה קבצים: ${sent + 1} מתוך ${queue.length} (${Math.round(((sent + ev.loaded / ev.total) / queue.length) * 100)}%). לא לסגור את הדף.`, `Your answers arrived. Uploading files: ${sent + 1} of ${queue.length} (${Math.round(((sent + ev.loaded / ev.total) / queue.length) * 100)}%). Please keep this page open.`); };
+          x.onload = () => { let r = {}; try { r = JSON.parse(x.responseText); } catch (e) { /* */ } if (x.status >= 200 && x.status < 300 && String(r.success) === 'true') resolve(); else reject(new Error(r.message || x.status)); };
+          x.onerror = () => reject(new Error('network'));
+          x.send(u);
+        });
+        for (const item of queue) {
+          let ok = false;
+          for (let attempt = 0; attempt < 3 && !ok; attempt++) {
+            try { await one(item); ok = true; } catch (er) { if (/too_big|type|full|expired|token/.test(er.message)) break; await new Promise((r) => setTimeout(r, 1500 * (attempt + 1))); }
+          }
+          if (!ok) failed.push(item.f.name);
+          sent++;
+        }
+        try { const d = new FormData(); d.append('id', j.id); d.append('up', j.up); d.append('done', '1'); d.append('failed', JSON.stringify(failed)); await fetch('/forms/upload.php', { method: 'POST', body: d, headers: { Accept: 'application/json' } }); } catch (e) { /* המייל המסכם לא קריטי: הקבצים כבר אצלי */ }
+        window.removeEventListener('beforeunload', leave);
+      }
+      const filesNote = !queue.length ? '' : (failed.length
+        ? `<div class="qf-files-note is-warn"><p><b>${t(`${queue.length - failed.length} מתוך ${queue.length} קבצים הגיעו.`, `${queue.length - failed.length} of ${queue.length} files arrived.`)}</b> ${t('אלה לא הצליחו לעלות:', 'These didn\'t upload:')} ${failed.map(esc).join(', ')}.</p><p>${t('כדי שלא נפספס אף חומר, שלחו אותם במייל, או שימו אותם בתיקייה בגוגל דרייב ושלחו את הקישור:', 'So nothing gets missed, email them, or put them in a Google Drive folder and send the link:')} <a class="text-link" href="mailto:${MAIL}?subject=${encodeURIComponent(t('קבצים לשאלון של ', 'Files for the questionnaire from ') + (state.name || ''))}">${MAIL}</a></p></div>`
+        : `<div class="qf-files-note"><p><b>${t(`כל ${queue.length} הקבצים הגיעו.`, `All ${queue.length} files arrived.`)}</b> ${t('יש עוד חומרים? אפשר תמיד לשלוח במייל או בקישור לגוגל דרייב:', 'More materials? You can always email them or send a Google Drive link:')} <a class="text-link" href="mailto:${MAIL}">${MAIL}</a></p></div>`);
       try { if (location.hostname === 'yygweb.com' && navigator.sendBeacon) navigator.sendBeacon('/hit.php', new Blob([JSON.stringify({ e: 'lead', p: location.pathname, r: '', s: '' })], { type: 'application/json' })); } catch (e) { /* בלי מונה */ }
-      root.innerHTML = `<div class="qf-step qf-done"><h2 class="qf-title" tabindex="-1">${t('נשלח', 'Sent')}</h2><p class="qf-intro">${esc(def.done)}</p><p><a class="btn btn-line" href="${t('/', '/en/')}">${t('חזרה לאתר', 'Back to the site')}</a></p></div>`;
+      /* הערכת מחיר מיידית מהשרת, לפי התשובות (רק בשאלון האפיון) */
+      const e = j.estimate;
+      const nis = (n) => Number(n).toLocaleString('en-US') + '\u00A0₪';
+      const est = e && e.total ? `<div class="qf-est" role="region" aria-labelledby="qf-est-t">
+        <p class="qf-est-k" id="qf-est-t">${t('הערכת מחיר לפי התשובות שלכם', 'A price estimate from your answers')}</p>
+        <p class="qf-est-v">${nis(e.total)}${e.todo && e.todo.length ? `<small>${t(' ועוד מה שיתומחר בהצעה', ' plus the items priced in the quote')}</small>` : ''}</p>
+        <ul class="qf-est-lines">${e.lines.map(([l, p]) => `<li><span>${esc(l)}</span><b>${nis(p)}</b></li>`).join('')}</ul>
+        ${e.todo && e.todo.length ? `<p class="qf-est-h">${t('יתומחר אישית בהצעה:', 'Priced personally in the quote:')}</p><ul class="qf-est-todo">${e.todo.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        <p class="qf-est-h">${t('אחרי ההשקה:', 'After launch:')}</p><ul class="qf-est-todo">${(e.yearly || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <p class="qf-est-fine">${t('המחיר סופי, לא מוסיפים מע״מ. זו הערכה אוטומטית: אני עובר על התשובות, ותוך יום עבודה מגיעה אליכם במייל הצעה מסודרת עם אישור בלחיצה. מתחילים ב־10% בלבד, ורואים 3 עיצובים לפני שממשיכים.', 'Final price, no VAT added. This is an automatic estimate: I go over your answers, and within one business day you get a formal quote by email with one-click approval. You start with just 10% and see 3 designs before going ahead.')}</p>
+      </div>` : '';
+      root.innerHTML = `<div class="qf-step qf-done"><h2 class="qf-title" tabindex="-1">${t('נשלח', 'Sent')}</h2><p class="qf-intro">${esc(def.done)}</p>${filesNote}${est}<p><a class="btn btn-line" href="${t('/', '/en/')}">${t('חזרה לאתר', 'Back to the site')}</a></p></div>`;
       root.querySelector('.qf-title').focus();
     } catch (err) {
       btn.disabled = false;

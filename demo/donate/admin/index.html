@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>סל ברכה · ניהול הקמפיין | מסך ניהול לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="מסך ניהול לדוגמה: כך יו״ר עמותה מעדכן בעצמו את הקמפיין, מוסיף תרומות במזומן ובצ׳קים, כותב עדכונים מהשטח ומוריד רשימת תורמים לגזבר. האתר מתעדכן מיד.">
+<meta name="theme-color" content="#13233F">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/heebo-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/heebo-900-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+.demo-note{display:flex;align-items:center;gap:10px;font-size:14.5px;line-height:1.45;color:var(--muted)}
+.demo-note::before{content:"";flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+/* ---------- גופנים: Heebo, כמו בגרסה הסופית ---------- */
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- בסיס: הפלטה של הגרסה הסופית (כחול לילה וזעפרן) ---------- */
+:root{
+  --navy:#13233F;--navy-2:#1D3256;--navy-3:#2B4372;
+  --bg:#F6F1E7;--card:#FFFFFF;--paper:#FFFCF6;
+  --ink:#13233F;--ink-2:#34425C;--muted:#56627A;
+  --line:#E8E1D3;--line-2:#D8CFBD;--field:#8C8270;
+  --saffron:#F2B23E;--saffron-50:#FDF3DF;--saffron-ink:#7A5310;
+  --pom:#B83A45;--pom-50:#FBEDEE;--ok:#1C7048;--ok-50:#E7F3EC;
+  --on-navy:#E8ECF3;--on-navy-2:#AEB9CC;
+  --font:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:10px;--shadow:0 1px 2px rgba(19,35,63,.05),0 14px 34px -22px rgba(19,35,63,.28);
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+a{color:var(--navy-3)}
+h1,h2,h3,p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--navy);outline-offset:2px;border-radius:6px}
+.on-navy :focus-visible{outline-color:var(--saffron)}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+/* ---------- כותרת ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:18px 0 4px}
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;min-height:44px}
+.brand svg{width:44px;height:44px;flex:none}
+.brand b{display:block;font:900 1.4rem/1 var(--font);letter-spacing:-.01em}
+.brand small{display:block;margin-top:4px;font:700 .8rem/1 var(--font);color:var(--saffron-ink);letter-spacing:.02em}
+.who{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.who::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
+h1{margin-top:20px;font:900 clamp(1.9rem,1.4rem + 1.8vw,2.6rem)/1.1 var(--font);letter-spacing:-.02em}
+.lead{margin-top:8px;max-width:44em;color:var(--ink-2)}
+.note{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--saffron-50);border:1px solid #F0DBAA;font-size:.95rem;line-height:1.6;color:var(--ink-2)}
+.note svg{width:22px;height:22px;color:var(--saffron-ink);margin-top:1px}
+.note b{color:var(--ink)}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border-radius:999px;background:#fff;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font:700 .9rem/1 var(--font)}
+.jump a:hover{border-color:var(--navy)}
+/* ---------- תמונת מצב ---------- */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.stat{display:grid;align-content:start;gap:4px;padding:16px 16px 15px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.stat-k{font:700 .85rem/1.2 var(--font);color:var(--muted)}
+.stat-v{font:900 1.65rem/1.1 var(--font);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.stat-s{font-size:.86rem;line-height:1.4;color:var(--muted)}
+.stats > .stat:last-child{grid-column:1/-1}
+.stat-raised{grid-column:1/-1;padding:18px 18px 16px;background:var(--navy);border-color:var(--navy);color:#fff}
+.stat-raised .stat-k{color:var(--on-navy-2)}
+.stat-raised .stat-v{font-size:clamp(2.1rem,1.6rem + 2vw,2.7rem)}
+.stat-raised .stat-s{color:var(--on-navy)}
+.stat-raised .stat-s b{color:#fff}
+.mini-meter{position:relative;height:10px;margin-top:10px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+.mini-meter span{position:absolute;inset-block:0;inset-inline-start:0;width:0;border-radius:inherit;background:var(--saffron)}
+.raised-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin-top:8px;font-size:.88rem;color:var(--on-navy-2)}
+.raised-foot b{color:#fff;font-weight:700}
+/* ---------- כרטיסים ---------- */
+.cols{display:grid;gap:14px;margin:14px 0 22px}
+.col{display:grid;gap:14px;align-content:start}
+.card{padding:20px 18px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);scroll-margin-top:14px}
+.card-h{display:flex;align-items:center;gap:12px}
+.card-ico{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:11px;background:var(--saffron-50);color:var(--saffron-ink)}
+.card-ico svg{width:21px;height:21px}
+.card h2{font:900 1.3rem/1.2 var(--font);letter-spacing:-.01em}
+.card-sub{margin-top:8px;font-size:.95rem;line-height:1.55;color:var(--muted)}
+.form{display:grid;gap:14px;margin-top:16px}
+.fld{display:grid;gap:6px;min-width:0}
+.fld > label,.lbl{font:700 .95rem/1.3 var(--font);color:var(--ink)}
+.opt{font-weight:400;color:var(--muted)}
+.hint{font-size:.85rem;line-height:1.45;color:var(--muted)}
+input[type=text],input[type=date],select,textarea{width:100%;min-height:50px;padding:10px 12px;border:1.5px solid var(--field);border-radius:var(--r);background:#fff;font-size:17px;line-height:1.35}
+textarea{min-height:96px;resize:vertical}
+input[type=date]{direction:rtl;min-width:0;max-width:100%}
+select{appearance:none;-webkit-appearance:none;padding-inline-end:40px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2313233F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat left 12px center/18px}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(19,35,63,.25);outline-offset:0;border-color:var(--navy);border-radius:var(--r)}
+[aria-invalid="true"]{border-color:var(--pom)!important;background:var(--pom-50)}
+input:disabled{background:#F3F0EA;color:var(--muted);border-color:var(--line-2)}
+.money{position:relative}
+.money input{padding-inline-end:38px;font-weight:700;font-variant-numeric:tabular-nums}
+.money i{position:absolute;inset-inline-end:14px;top:50%;transform:translateY(-50%);font-style:normal;font-weight:700;color:var(--muted)}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.check{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:.97rem;cursor:pointer}
+.check input{width:22px;height:22px;margin:0;accent-color:var(--navy)}
+/* בחירה מקוטעת: אמצעי התשלום */
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:5px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:grid;place-items:center;min-height:44px;padding:0 6px;border-radius:8px;font:700 .95rem/1.2 var(--font);color:var(--ink-2);text-align:center}
+.seg input:checked + span{background:var(--navy);color:#fff;box-shadow:0 6px 14px -8px rgba(19,35,63,.8)}
+.seg input:focus-visible + span{outline:3px solid var(--navy);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);font:700 .88rem/1 var(--font);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+/* ---------- כפתורים והודעות ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 20px;border-radius:var(--r);border:1.5px solid transparent;font:700 1rem/1.2 var(--font);text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn svg{width:19px;height:19px;flex:none}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy-3)}
+.btn.saffron{background:var(--saffron);color:var(--navy)}
+.btn.saffron:hover{background:#F6C35F}
+.btn.ghost{background:#fff;color:var(--navy);border-color:var(--line-2)}
+.btn.ghost:hover{border-color:var(--navy)}
+.btn.danger{background:var(--pom);color:#fff}
+.btn.danger:hover{background:#9E2F3A}
+.btn.sm{min-height:44px;padding:0 14px;font-size:.93rem}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.say{min-height:1.4em;font-weight:700;font-size:.95rem;line-height:1.5}
+.say.ok{color:var(--ok)}
+.say.err{color:var(--pom)}
+/* ---------- רשימת התורמים ---------- */
+.list-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
+.list-count{font-size:.9rem;color:var(--muted)}
+.drows{margin-top:10px;border-top:1.5px solid var(--navy)}
+.drow{display:grid;gap:8px;padding:14px 0;border-bottom:1px solid var(--line)}
+.d-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.d-name{min-width:0;font:700 1.03rem/1.35 var(--font);overflow-wrap:anywhere}
+.d-name small{display:inline-block;margin-inline-start:8px;padding:2px 8px 3px;border-radius:6px;background:var(--bg);font:700 .75rem/1.3 var(--font);color:var(--muted);vertical-align:2px}
+.d-amt{flex:none;font:700 1.03rem/1.35 var(--font);font-variant-numeric:tabular-nums;white-space:nowrap}
+.d-meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:.88rem;color:var(--muted)}
+.d-meta .m{display:inline-flex;align-items:center;padding:2px 8px 3px;border-radius:6px;font:700 .78rem/1.3 var(--font);background:#EDF0F5;color:var(--navy)}
+.d-meta .m-hand{background:var(--saffron-50);color:var(--saffron-ink)}
+.d-meta .m-monthly{background:var(--pom-50);color:var(--pom)}
+.d-ded{flex-basis:100%;color:var(--ink-2)}
+.d-acts{display:flex;flex-wrap:wrap;gap:6px}
+.link-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 10px;border:1px solid var(--line-2);border-radius:8px;background:#fff;font:700 .86rem/1 var(--font);color:var(--ink);cursor:pointer}
+.link-btn:hover{border-color:var(--navy)}
+.link-btn.del{color:var(--pom);border-color:#E9C6CA}
+.link-btn.del:hover{border-color:var(--pom)}
+.link-btn svg{width:16px;height:16px}
+.confirm{display:grid;gap:10px;padding:12px 14px;border-radius:12px;background:var(--pom-50);border:1px solid #EBC5C9}
+.confirm p{font-size:.95rem;line-height:1.5;color:var(--ink)}
+.confirm .acts{gap:8px}
+.drow.is-new{background:linear-gradient(90deg,rgba(242,178,62,0),rgba(242,178,62,.14));box-shadow:inset -3px 0 0 var(--saffron);padding-inline:12px 4px;margin-inline:-12px -4px}
+.more{margin-top:12px;width:100%}
+.empty{padding:18px 0;color:var(--muted)}
+/* ---------- עדכונים ---------- */
+.counter{justify-self:end;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.urows{margin-top:16px;border-top:1px solid var(--line)}
+.urow{display:grid;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}
+.u-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.u-title{font:700 1rem/1.4 var(--font)}
+.u-date{flex:none;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.u-text{font-size:.92rem;line-height:1.55;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sub-h{margin-top:20px;font:700 .95rem/1.2 var(--font);color:var(--muted)}
+/* ---------- ייצוא וכניסה לאתר ---------- */
+.export-card{background:var(--navy);border-color:var(--navy);color:#fff}
+.export-card .card-ico{background:rgba(242,178,62,.16);color:var(--saffron)}
+.export-card .card-sub{color:var(--on-navy)}
+.export-card .say.ok{color:#9FE0BD}
+.foot-card{display:grid;gap:12px}
+.foot-card .acts .btn{flex:1 1 180px}
+.tips{display:grid;gap:8px;margin-top:4px;font-size:.92rem;color:var(--ink-2)}
+.tips li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.tips li::before{content:"";width:8px;height:8px;margin-top:8px;border-radius:2px;background:var(--saffron)}
+/* ---------- מסך רחב ---------- */
+@media (min-width:640px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stats > .stat:last-child{grid-column:auto}
+  .card{padding:24px 24px}
+  /* שורת תורם: הכפתורים בצד, באותו גובה */
+  .drow{grid-template-columns:minmax(0,1fr) 206px;column-gap:16px}
+  .d-line,.d-meta{grid-column:1}
+  .d-acts{grid-column:2;grid-row:1/3;align-self:center;justify-content:flex-end}
+  .drow .confirm{grid-column:1/-1}
+}
+@media (min-width:960px){
+  .stats{grid-template-columns:1.7fr 1fr 1fr 1fr;gap:12px}
+  .stat-raised{grid-column:auto}
+  .cols{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;align-items:start}
+  .jump{display:none}
+}
+@media (max-width:380px){
+  .row2{grid-template-columns:1fr}
+  .seg span{font-size:.88rem}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/donate/design-1/">עיצוב 1</a><a href="/demo/donate/design-2/">עיצוב 2</a><a href="/demo/donate/design-3/">עיצוב 3</a><a href="/demo/donate/final/">הגרסה הסופית</a><a href="/demo/donate/admin/" aria-current="page">מסך ניהול הקמפיין</a></nav>
+ <a class="demo-back" href="/demo/donate/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M9.43 27.06L9.17 27.2 8.94 27.39 8.84 27.5 8.68 27.74 8.61 27.88 8.53 28.16 8.5 28.45 8.51 31.6 8.56 31.89 8.68 32.16 8.75 32.28 8.94 32.51 9.17 32.7 9.43 32.84 9.71 32.92 9.85 32.94 54 32.95 54.29 32.92 54.57 32.84 54.83 32.7 54.95 32.61 55.16 32.4 55.32 32.16 55.44 31.89 55.49 31.6 55.49 28.3 55.47 28.16 55.39 27.88 55.25 27.62 55.06 27.39 54.83 27.2 54.57 27.06 54.29 26.98 54 26.95 51.37 26.95 51.22 26.13 51.04 25.3 50.86 24.61 50.61 23.8 50.37 23.12 50.06 22.34 49.72 21.57 49.4 20.92 49.05 20.29 48.62 19.57 48.23 18.96 47.74 18.27 47.23 17.61 46.76 17.06 46.28 16.52 45.69 15.92 45.07 15.35 44.43 14.8 43.77 14.28 43.09 13.79 42.49 13.39 41.77 12.96 41.03 12.55 40.27 12.18 39.5 11.84 38.72 11.54 38.03 11.3 37.23 11.06 36.41 10.85 35.59 10.68 34.76 10.54 33.92 10.44 33.08 10.38 32.12 10.35 31.28 10.36 30.44 10.41 29.6 10.5 28.77 10.62 27.94 10.77 27.12 10.97 26.31 11.19 25.51 11.46 24.72 11.75 23.95 12.08 23.19 12.44 22.44 12.84 21.72 13.26 21.01 13.72 20.23 14.28 19.38 14.95 18.57 15.67 17.89 16.35 17.24 17.06 16.62 17.8 16.04 18.57 15.44 19.46 14.95 20.29 14.49 21.14 14.03 22.12 13.67 23.01 13.32 24.03 13.05 24.95 12.82 25.89 12.63 26.95 10 26.95 9.71 26.98ZM31.69 17.59L31.66 17.48 31.62 17.36 31.81 17.54ZM31.1 16.58L30.71 16.25 30.26 15.96 29.72 15.68 29.45 15.58 29.3 15.54 29.25 15.74 29.2 16.11 29.18 16.5 29.19 16.88 29.22 17.2 29.26 17.47 29.34 17.76 29.44 18 29.6 18.29 29.77 18.53 29.99 18.74 30.24 18.94 30.53 19.11 30.87 19.25 31.22 19.34 31.45 19.36 31.45 20.23 31.29 19.96 31.09 19.71 30.86 19.48 30.57 19.24 30.22 18.99 29.83 18.77 29.4 18.56 29.15 18.48 29.11 18.64 29.08 18.88 29.06 19.53 29.09 20.05 29.18 20.54 29.32 20.96 29.49 21.31 29.72 21.63 30.03 21.94 29.44 21.6 29.16 21.47 29 21.42 28.96 21.59 28.94 21.84 28.93 22.47 28.99 23.11 29.05 23.41 29.12 23.71 29.22 23.99 29.33 24.21 29.47 24.47 29.61 24.67 29.81 24.9 30 25.08 30.21 25.25 30.44 25.4 30.7 25.54 30.99 25.66 31.27 25.74 31.45 25.75 31.45 26.95 15.06 26.95 15.22 26.18 15.4 25.46 15.6 24.76 15.84 24.06 16.11 23.37 16.41 22.69 16.73 22.03 17.09 21.38 17.47 20.75 17.94 20.05 18.38 19.45 18.84 18.88 19.33 18.32 19.84 17.79 20.37 17.28 20.93 16.79 21.5 16.33 22.1 15.89 22.71 15.48 23.34 15.09 23.99 14.73 24.65 14.4 25.32 14.1 26.11 13.79 26.81 13.55 27.51 13.35 28.33 13.15 29.06 13 29.79 12.89 30.52 12.81 31.26 12.77 32 12.75 32.74 12.77 33.48 12.81 34.31 12.91 35.04 13.02 35.77 13.17 36.49 13.35 37.19 13.55 37.89 13.79 38.58 14.06 39.26 14.36 39.92 14.68 40.57 15.04 41.2 15.42 41.9 15.89 42.5 16.33 43.07 16.79 43.63 17.28 44.16 17.79 44.67 18.32 45.23 18.96 45.69 19.54 46.12 20.13 46.53 20.75 46.91 21.38 47.27 22.03 47.59 22.69 47.89 23.37 48.16 24.06 48.4 24.76 48.6 25.46 48.78 26.18 48.94 26.95 32.55 26.95 32.55 25.75 32.67 25.75 32.9 25.69 33.16 25.6 33.39 25.49 33.79 25.25 34.16 24.93 34.44 24.61 34.67 24.21 34.85 23.79 34.98 23.28 35.05 22.79 35.07 22.28 35.05 21.74 35 21.42 34.84 21.47 34.56 21.6 33.97 21.94 34.28 21.63 34.51 21.31 34.68 20.96 34.82 20.54 34.91 20.05 34.94 19.53 34.92 18.88 34.89 18.64 34.85 18.48 34.6 18.56 34.17 18.77 33.78 18.99 33.43 19.24 33.14 19.48 32.91 19.71 32.71 19.96 32.55 20.23 32.55 19.36 32.78 19.34 33.13 19.25 33.47 19.11 33.76 18.94 34.01 18.74 34.23 18.53 34.4 18.29 34.55 18.03 34.64 17.79 34.72 17.54 34.77 17.27 34.81 16.96 34.82 16.63 34.81 16.24 34.77 15.88 34.72 15.59 34.7 15.54 34.55 15.58 34.2 15.72 33.85 15.89 33.56 16.06 33.32 16.22 33.1 16.39 32.9 16.58 33.04 16.19 33.11 15.77 33.11 15.35 33.04 14.93 32.87 14.43 32.63 13.93 32.29 13.4 32.11 13.17 32 13.05 31.89 13.17 31.71 13.4 31.37 13.93 31.13 14.43 30.96 14.93 30.89 15.35 30.89 15.77 30.95 16.16ZM31.45 23.44L31.26 23.1 31.03 22.8 30.74 22.49 30.41 22.21 30.72 22.37 31 22.48 31.27 22.55 31.45 22.55ZM32.55 22.55L32.79 22.53 33.05 22.46 33.33 22.35 33.59 22.21 33.26 22.49 32.97 22.8 32.74 23.1 32.55 23.44ZM32.19 17.54L32.32 17.42 32.38 17.36 32.3 17.59ZM11.16 34.09L11.09 34.14 11.04 34.21 11 34.35 11.05 35.37 11.16 36.45 11.33 37.52 11.57 38.58 11.66 38.9 11.73 38.99 11.83 39.05 12.33 39.18 13.44 39.42 15.14 39.71 16.26 39.87 17.38 40 19.63 40.23 22.44 40.44 25.25 40.59 28.06 40.68 30.88 40.72 34.25 40.71 37.06 40.65 40.43 40.51 43.24 40.32 44.93 40.18 46.05 40.07 48.31 39.79 49.43 39.62 50.55 39.42 51.67 39.18 52.15 39.06 52.27 38.99 52.33 38.92 52.36 38.84 52.54 38.11 52.71 37.28 52.83 36.57 52.91 35.85 52.97 35.13 53 34.35 52.98 34.24 52.91 34.14 52.81 34.07 52.7 34.05 11.3 34.05ZM12.36 40.97L12.6 41.55 12.91 42.21 13.24 42.86 13.59 43.49 13.67 43.58 13.78 43.63 13.9 43.63 14.01 43.59 14.1 43.51 14.15 43.41 14.67 41.21 14.67 41.1 14.63 40.99 14.56 40.9 14.45 40.85 12.68 40.51 12.53 40.55 12.42 40.65 12.38 40.76 12.35 40.89ZM14.79 45.01L14.81 45.09 14.86 45.16 14.98 45.24 15.9 45.48 16.91 45.71 18.01 45.91 18.13 45.91 18.24 45.86 18.32 45.78 18.35 45.7 19.42 41.82 19.43 41.67 19.38 41.57 19.27 41.47 19.16 41.44 17.38 41.25 15.98 41.08 15.86 41.09 15.76 41.14 15.69 41.2 15.65 41.31 14.79 44.89ZM19.32 45.9L19.35 45.99 19.42 46.08 19.49 46.13 19.58 46.16 21.43 46.39 22.94 46.54 23.81 46.61 23.89 46.6 23.97 46.56 24.03 46.5 24.09 46.4 25.33 42.21 25.34 42.06 25.29 41.95 25.18 41.86 25.06 41.83 23.01 41.72 20.74 41.57 20.63 41.59 20.55 41.63 20.47 41.71 20.43 41.79 19.33 45.78ZM26.47 46.79L28.48 46.87 30.28 46.91 30.4 46.89 30.47 46.84 30.53 46.78 30.57 46.7 31.89 42.36 31.9 42.22 31.84 42.08 31.72 42 31.61 41.97 29.19 41.95 26.66 41.89 26.54 41.91 26.47 41.95 26.4 42.02 26.37 42.1 25.11 46.34 25.09 46.43 25.11 46.52 25.17 46.62 25.23 46.68 25.32 46.71ZM16.82 46.98L16.7 47.05 16.62 47.18 16.62 47.32 16.68 47.45 17.15 47.91 17.61 48.33 18.58 49.12 19.59 49.86 20.66 50.54 21.76 51.16 22.91 51.72 23.96 52.16 25.05 52.54 26.15 52.87 27.27 53.15 28.28 53.34 29.43 53.5 30.58 53.61 31.74 53.65 32.9 53.63 33.93 53.57 35.08 53.44 36.22 53.25 37.35 53 38.34 52.73 39.44 52.38 40.39 52.02 41.44 51.56 42.46 51.04 43.45 50.48 44.41 49.86 45.42 49.12 46.29 48.41 46.85 47.91 47.3 47.48 47.37 47.38 47.39 47.26 47.37 47.15 47.3 47.05 47.2 46.99 47.06 46.96 45.58 47.23 43.57 47.52 41.56 47.74 39.55 47.91 37.53 48.04 35.52 48.12 33.51 48.16 30.99 48.17 28.98 48.13 26.97 48.06 24.96 47.95 23.45 47.83 21.94 47.69 20.43 47.52 18.42 47.23 16.97 46.97ZM50.11 42.93L50.13 43.02 50.19 43.09 50.26 43.15 50.34 43.18 50.43 43.18 50.54 43.15 50.61 43.1 50.67 43.03 51.2 41.99 51.67 40.91 51.69 40.8 51.68 40.71 51.64 40.63 51.55 40.55 51.44 40.5 51.36 40.5 50.81 40.62 50.69 40.68 50.61 40.76 50.58 40.84 50.11 42.81ZM44.5 45.84L44.54 45.95 44.62 46.04 44.73 46.09 44.84 46.1 46.09 45.9 47.1 45.71 48.32 45.43 48.45 45.36 48.51 45.29 48.54 45.21 49.48 41.28 49.48 41.14 49.41 41.01 49.28 40.93 49.14 40.92 47.74 41.12 45.92 41.33 45.81 41.37 45.74 41.42 45.66 41.55 44.51 45.72ZM38.29 46.48L38.33 46.59 38.41 46.67 38.49 46.71 38.6 46.73 40.55 46.58 42.06 46.44 43.15 46.32 43.24 46.3 43.31 46.25 43.37 46.18 43.41 46.1 44.57 41.87 44.58 41.73 44.52 41.6 44.4 41.51 44.26 41.49 42.12 41.65 39.86 41.79 39.75 41.81 39.68 41.86 39.62 41.92 39.59 42 38.29 46.34ZM33.01 46.92L35.02 46.88 36.53 46.83 36.97 46.81 37.05 46.79 37.12 46.74 37.18 46.68 37.22 46.6 38.51 42.24 38.52 42.1 38.45 41.96 38.36 41.89 38.21 41.86 35.94 41.93 33.23 41.97 33.15 41.98 33.04 42.04 32.98 42.1 32.95 42.18 31.62 46.54 31.61 46.62 31.62 46.71 31.68 46.81 31.77 46.89 31.85 46.92Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5v5M17.5 9.5v5"/></g></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 19.5 6 15 15.5 5.5a2.1 2.1 0 0 1 3 3L9 18Z"/><path d="M13.5 7.5l3 3M4.5 19.5h15"/></g></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></g></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4.5M5 5h11l-2 4 2 4H5"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 19.5h14"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></g></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10.6 5.6A9.6 9.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a16 16 0 0 1-2.6 3.4M6.2 7.4C3.9 9.1 2.5 12 2.5 12S6 18.5 12 18.5a9.4 9.4 0 0 0 4.3-1M3.5 3.5l17 17"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></g></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+</svg>
+
+<header class="wrap top">
+ <a class="brand" href="/demo/donate/final/" aria-label="סל ברכה, לאתר">
+  <svg aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+  <span><b>סל ברכה</b><small>ניהול הקמפיין</small></span>
+ </a>
+ <span class="who">מחובר: חיים, יו״ר העמותה (לדוגמה)</span>
+</header>
+
+<main class="wrap" id="main">
+ <h1>ניהול הקמפיין</h1>
+ <p class="lead">מוסיפים תרומה שהגיעה במזומן או בצ׳ק, כותבים עדכון מהשטח, ורואים מי תרם. האתר מתעדכן מיד, וזה עובד גם מהטלפון.</p>
+ <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>זה מסך לדוגמה.</b> כל אחד יכול לנסות כאן, והשינויים נשמרים רק בדפדפן שלכם. פתחו את <a href="/demo/donate/final/" target="_blank" rel="noopener">הגרסה הסופית<span class="vh"> (נפתח בלשונית חדשה)</span></a> בלשונית אחרת, ותראו אותה מתעדכנת עם כל שינוי. באתר אמיתי נכנסים עם סיסמה או קישור במייל, תרומות באשראי נכנסות לבד מחברת הסליקה, והשינויים מופיעים לכל הגולשים.</span></p>
+ <nav class="jump" aria-label="חלקי המסך">
+  <a href="#hand">תרומה ביד</a><a href="#news">עדכון מהשטח</a><a href="#donors">התורמים</a><a href="#camp">הקמפיין</a><a href="#export">ייצוא לגזבר</a>
+ </nav>
+
+ <!-- תמונת מצב -->
+ <section class="stats" aria-label="תמונת מצב">
+  <div class="stat stat-raised on-navy">
+   <p class="stat-k" data-camp-title></p>
+   <p class="stat-v"><span data-camp-raised></span></p>
+   <p class="stat-s">נאספו מתוך <b data-camp-goal></b> · <b data-camp-percent></b></p>
+   <div class="mini-meter" data-camp-progress aria-label="התקדמות הקמפיין"><span data-camp-fill></span></div>
+   <p class="raised-foot"><span><b data-camp-count></b> תורמים</span><span data-camp-days="text"></span></p>
+  </div>
+  <div class="stat">
+   <p class="stat-k">היום</p>
+   <p class="stat-v" id="st-today"></p>
+   <p class="stat-s" id="st-today-n"></p>
+  </div>
+  <div class="stat">
+   <p class="stat-k">השבוע</p>
+   <p class="stat-v" id="st-week"></p>
+   <p class="stat-s" id="st-week-n"></p>
+  </div>
+  <div class="stat">
+   <p class="stat-k">בהוראת קבע</p>
+   <p class="stat-v" id="st-monthly"></p>
+   <p class="stat-s" id="st-monthly-n"></p>
+  </div>
+ </section>
+
+ <div class="cols">
+  <div class="col">
+
+   <!-- תרומה שהגיעה ביד -->
+   <section class="card" id="hand" aria-labelledby="hand-t">
+    <div class="card-h"><span class="card-ico" aria-hidden="true"><svg><use href="#i-hand"/></svg></span><h2 id="hand-t">תרומה שהגיעה ביד</h2></div>
+    <p class="card-sub">מזומן, צ׳ק או העברה בנקאית. התרומה נכנסת למד היעד ולרשימת התורמים, בדיוק כמו תרומה באשראי.</p>
+    <form class="form" id="hand-form" novalidate>
+     <fieldset class="fld" style="border:0;margin:0;padding:0;min-width:0">
+      <legend class="lbl" style="padding:0;margin-bottom:6px">איך התקבלה?</legend>
+      <div class="seg">
+       <label><input type="radio" name="method" value="cash" checked><span>מזומן</span></label>
+       <label><input type="radio" name="method" value="check"><span>צ׳ק</span></label>
+       <label><input type="radio" name="method" value="transfer"><span>העברה</span></label>
+      </div>
+     </fieldset>
+     <div class="row2">
+      <div class="fld">
+       <label for="h-amount">סכום</label>
+       <span class="money"><input id="h-amount" type="text" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="למשל 500"><i aria-hidden="true">₪</i></span>
+      </div>
+      <div class="fld">
+       <label for="h-date">מתי התקבלה</label>
+       <input id="h-date" type="date">
+      </div>
+     </div>
+     <div class="fld">
+      <label for="h-name">שם התורם</label>
+      <input id="h-name" type="text" autocomplete="off" maxlength="60" placeholder="למשל: משפחת כהן" aria-describedby="h-name-hint">
+      <p class="hint" id="h-name-hint">כך יופיע ברשימת התורמים באתר.</p>
+      <label class="check"><input type="checkbox" id="h-anon">בעילום שם</label>
+     </div>
+     <div class="row2">
+      <div class="fld">
+       <label for="h-kind">הקדשה <span class="opt">(לא חובה)</span></label>
+       <select id="h-kind"><option value="">בלי הקדשה</option></select>
+      </div>
+      <div class="fld" id="h-ded-wrap" hidden>
+       <label for="h-ded">שם להקדשה</label>
+       <input id="h-ded" type="text" autocomplete="off" maxlength="60" placeholder="למשל: אבינו ר׳ יעקב ז״ל">
+      </div>
+     </div>
+     <div class="acts"><button class="btn primary" type="submit"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספת התרומה</button></div>
+     <p class="say" id="hand-say" role="status"></p>
+    </form>
+   </section>
+
+   <!-- עדכון מהשטח -->
+   <section class="card" id="news" aria-labelledby="news-t">
+    <div class="card-h"><span class="card-ico" aria-hidden="true"><svg><use href="#i-note"/></svg></span><h2 id="news-t">עדכון מהשטח</h2></div>
+    <p class="card-sub">משפט או שניים אחרי יום חמישי: כמה סלים יצאו, ומה צריך השבוע. בלי שמות של משפחות.</p>
+    <form class="form" id="news-form" novalidate>
+     <div class="chips" role="group" aria-label="פתיחות מוכנות">
+      <button type="button" class="chip" data-t="הערב אורזים" data-x="מ־18:00 במחסן. צריך עוד ידיים לאריזת הירקות, ויש עבודה לכולם.">הערב אורזים</button>
+      <button type="button" class="chip" data-t="הסלים יצאו לשבת" data-x="המתנדבים ארזו עד הלילה, והנהגים סיימו לחלק בבוקר. תודה לכל מי שבא.">הסלים יצאו</button>
+      <button type="button" class="chip" data-t="חסרים נהגים ביום שישי" data-x="מי שיש לו רכב ושעתיים פנויות ביום שישי בבוקר, נשמח מאוד. אפשר לכתוב לנו בוואטסאפ.">חסרים נהגים</button>
+     </div>
+     <div class="fld">
+      <label for="u-title">כותרת</label>
+      <input id="u-title" type="text" autocomplete="off" maxlength="70" placeholder="למשל: 412 סלים יצאו לשבת">
+     </div>
+     <div class="fld">
+      <label for="u-text">מה קרה <span class="opt">(לא חובה)</span></label>
+      <textarea id="u-text" maxlength="280" rows="3" aria-describedby="u-count"></textarea>
+      <p class="counter" id="u-count" aria-live="off"></p>
+     </div>
+     <div class="fld">
+      <label for="u-date">תאריך</label>
+      <input id="u-date" type="date">
+     </div>
+     <div class="acts"><button class="btn primary" type="submit">פרסום העדכון</button></div>
+     <p class="say" id="news-say" role="status"></p>
+    </form>
+    <h3 class="sub-h">באתר עכשיו</h3>
+    <ul class="urows" id="urows"></ul>
+   </section>
+
+   <!-- התורמים -->
+   <section class="card" id="donors" aria-labelledby="donors-t">
+    <div class="card-h"><span class="card-ico" aria-hidden="true"><svg><use href="#i-users"/></svg></span><h2 id="donors-t">התורמים</h2></div>
+    <p class="card-sub">כל התרומות, מהחדשה לישנה. אפשר להסתיר שם מהרשימה באתר (התרומה נשארת במד), או למחוק תרומה שנרשמה בטעות.</p>
+    <div class="list-top">
+     <div class="chips" role="group" aria-label="סינון">
+      <button type="button" class="chip" data-f="all" aria-pressed="true">הכול</button>
+      <button type="button" class="chip" data-f="card" aria-pressed="false">באשראי</button>
+      <button type="button" class="chip" data-f="hand" aria-pressed="false">ביד</button>
+      <button type="button" class="chip" data-f="monthly" aria-pressed="false">הוראת קבע</button>
+     </div>
+     <p class="list-count" id="list-count" aria-live="polite"></p>
+    </div>
+    <ul class="drows" id="drows" aria-labelledby="donors-t"></ul>
+    <button type="button" class="btn ghost more" id="more" hidden></button>
+    <p class="say" id="donors-say" role="status"></p>
+   </section>
+  </div>
+
+  <div class="col">
+   <!-- הקמפיין -->
+   <section class="card" id="camp" aria-labelledby="camp-t">
+    <div class="card-h"><span class="card-ico" aria-hidden="true"><svg><use href="#i-flag"/></svg></span><h2 id="camp-t">הקמפיין</h2></div>
+    <p class="card-sub">הכותרת, היעד והתאריכים שמופיעים באתר, ליד מד היעד.</p>
+    <form class="form" id="camp-form" novalidate>
+     <div class="fld">
+      <label for="c-title">כותרת הקמפיין</label>
+      <input id="c-title" type="text" autocomplete="off" maxlength="60">
+     </div>
+     <div class="fld">
+      <label for="c-goal">היעד</label>
+      <span class="money"><input id="c-goal" type="text" inputmode="numeric" autocomplete="off" maxlength="10"><i aria-hidden="true">₪</i></span>
+     </div>
+     <div class="row2">
+      <div class="fld"><label for="c-start">מתחיל ב־</label><input id="c-start" type="date"></div>
+      <div class="fld"><label for="c-end">נגמר ב־</label><input id="c-end" type="date" aria-describedby="c-end-hint"></div>
+     </div>
+     <p class="hint" id="c-end-hint">הקמפיין נגמר בחצות, בסוף יום הסיום. הספירה לאחור באתר מתעדכנת לבד.</p>
+     <div class="acts"><button class="btn primary" type="submit">שמירת הקמפיין</button></div>
+     <p class="say" id="camp-say" role="status"></p>
+    </form>
+   </section>
+
+   <!-- ייצוא לגזבר -->
+   <section class="card export-card on-navy" id="export" aria-labelledby="export-t">
+    <div class="card-h"><span class="card-ico" aria-hidden="true"><svg><use href="#i-down"/></svg></span><h2 id="export-t">ייצוא לגזבר</h2></div>
+    <p class="card-sub">כל התרומות בקובץ אחד שנפתח באקסל: תאריך, שם, סכום, אמצעי תשלום והקדשה. נוח לקבלות ולהנהלת החשבונות.</p>
+    <div class="acts" style="margin-top:16px"><button type="button" class="btn saffron" id="csv"><svg aria-hidden="true"><use href="#i-down"/></svg>הורדת קובץ CSV</button></div>
+    <p class="say" id="export-say" role="status" style="margin-top:10px"></p>
+   </section>
+
+   <!-- לאתר, ואיפוס -->
+   <section class="card foot-card" aria-labelledby="foot-t">
+    <h2 id="foot-t">ומה עכשיו?</h2>
+    <ul class="tips">
+     <li>תרומה באשראי לא צריך להוסיף: היא נכנסת לבד, עם הקבלה.</li>
+     <li>עדכון קצר אחרי כל יום חמישי שומר על התורמים קרובים.</li>
+     <li>שם של משפחה לא כותבים, אף פעם. גם לא בעדכונים.</li>
+    </ul>
+    <div class="acts">
+     <a class="btn primary" href="/demo/donate/final/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-out"/></svg>לראות באתר<span class="vh"> (נפתח בלשונית חדשה)</span></a>
+     <button type="button" class="btn ghost" id="reset">איפוס לדוגמה</button>
+    </div>
+    <div class="confirm" id="reset-confirm" hidden>
+     <p>להחזיר את כל הנתונים לדוגמה המקורית? כל מה שהוספתם או שיניתם כאן יימחק מהדפדפן.</p>
+     <div class="acts"><button type="button" class="btn danger sm" id="reset-yes">כן, לאפס</button><button type="button" class="btn ghost sm" id="reset-no">ביטול</button></div>
+    </div>
+    <p class="say" id="foot-say" role="status"></p>
+   </section>
+  </div>
+ </div>
+</main>
+
+<script src="/demo/donate/campaign.js"></script>
+<script>
+/* מסך הניהול לדוגמה. כל הנתונים עוברים דרך המנוע המשותף (campaign.js), כך שהגרסה הסופית בלשונית אחרת מתעדכנת מיד.
+   כל טקסט שבעל העסק כותב נכנס לדף רק דרך textContent / value. */
+(() => {
+  const S = window.SalBracha;
+  const $ = (id) => document.getElementById(id);
+  const NF = new Intl.NumberFormat('he-IL');
+  const num = (v) => Number(String(v ?? '').replace(/[^\d]/g, '')) || 0;
+  const el = (tag, cls, text) => { const x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; };
+  const icon = (id) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('aria-hidden', 'true'); const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', '#' + id); s.append(u); return s; };
+  /* הודעה במקום ההודעה הקודמת (מנקה ואז כותבת, כדי שקוראי מסך יקריאו שוב) */
+  const say = (box, msg, kind = 'ok') => { box.className = 'say ' + kind; box.textContent = ''; if (msg) setTimeout(() => { box.textContent = msg; }, 40); };
+
+  /* ---------- זמן לפי שעון ישראל ---------- */
+  const parts = (d) => Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', weekday: 'short' }).formatToParts(d).map((p) => [p.type, p.value]));
+  const isoOf = (d) => { const p = parts(d); return `${p.year}-${p.month}-${p.day}`; };
+  const today = () => isoOf(new Date());
+  const dayNum = (iso) => { const [y, m, d] = iso.split('-').map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
+  const isoFromNum = (n) => new Date(n * 864e5).toISOString().slice(0, 10);
+  const weekStart = () => isoFromNum(dayNum(today()) - ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts(new Date()).weekday));
+  const when = (ts) => { const p = parts(new Date(ts)); return `${Number(p.day)}.${Number(p.month)} · ${p.hour}:${p.minute}`; };
+  const dm = (iso) => { const [, m, d] = String(iso).split('-'); return `${Number(d)}.${Number(m)}`; };
+  const isDate = (s) => /^\d{4}-\d{2}-\d{2}$/.test(String(s || ''));
+  const count = (n) => (n === 1 ? 'תרומה אחת' : `${NF.format(n)} תרומות`);
+  const METHOD_IN = { card: 'באשראי', cash: 'במזומן', check: 'בצ׳ק', transfer: 'בהעברה בנקאית' };
+  const displayName = (v) => (v.anonymous || !v.name ? 'בעילום שם' : v.name);
+
+  /* ---------- תמונת מצב: היום, השבוע, הוראת קבע ---------- */
+  function renderStats(data) {
+    const list = data.donations.filter((v) => v && v.amount > 0);
+    const t = today(), ws = weekStart();
+    const sum = (l) => l.reduce((s, v) => s + v.amount, 0);
+    const day = list.filter((v) => isoOf(new Date(v.ts)) === t);
+    const week = list.filter((v) => { const d = isoOf(new Date(v.ts)); return d >= ws && d <= t; });
+    const monthly = list.filter((v) => v.monthly);
+    $('st-today').textContent = S.fmt(sum(day));
+    $('st-today-n').textContent = day.length ? count(day.length) : 'עוד אין תרומות היום';
+    $('st-week').textContent = S.fmt(sum(week));
+    $('st-week-n').textContent = `${count(week.length)}, מיום ראשון`;
+    $('st-monthly').textContent = `${NF.format(monthly.length)} תורמים`;
+    $('st-monthly-n').textContent = `${S.fmt(sum(monthly))} בכל חודש`;
+  }
+
+  /* ---------- תרומה שהגיעה ביד ---------- */
+  const hf = $('hand-form'), hAmount = $('h-amount'), hDate = $('h-date'), hName = $('h-name'), hAnon = $('h-anon'), hKind = $('h-kind'), hDed = $('h-ded'), hDedWrap = $('h-ded-wrap'), hSay = $('hand-say');
+  S.DEDICATIONS.forEach((k) => { const o = el('option', null, k); o.value = k; hKind.append(o); });
+  const setToday = () => { const t = today(); hDate.value = t; hDate.max = t; };
+  const syncHand = () => { hName.disabled = hAnon.checked; hDedWrap.hidden = !hKind.value; };
+  hAnon.addEventListener('change', syncHand);
+  hKind.addEventListener('change', () => { syncHand(); if (hKind.value) hDed.focus(); });
+  hAmount.addEventListener('input', () => { const c = hAmount.value.replace(/[^\d]/g, ''); if (c !== hAmount.value) hAmount.value = c; hAmount.removeAttribute('aria-invalid'); });
+  [hName, hDed].forEach((x) => x.addEventListener('input', () => x.removeAttribute('aria-invalid')));
+  hf.addEventListener('submit', (e) => {
+    e.preventDefault();
+    [hAmount, hName, hDed, hDate].forEach((x) => x.removeAttribute('aria-invalid'));
+    const bad = (field, msg) => { field.setAttribute('aria-invalid', 'true'); say(hSay, msg, 'err'); field.focus(); };
+    const amountErr = S.validate({ amount: hAmount.value });
+    if (amountErr) return bad(hAmount, amountErr);
+    const anon = hAnon.checked, name = hName.value.trim();
+    if (!anon && !name) return bad(hName, 'נא לכתוב את שם התורם, או לסמן "בעילום שם".');
+    const kind = hKind.value, ded = hDed.value.trim();
+    if (kind && !ded) return bad(hDed, 'נא לכתוב שם להקדשה, או לבחור "בלי הקדשה".');
+    const d = isDate(hDate.value) ? hDate.value : today();
+    if (d > today()) return bad(hDate, 'התאריך עוד לא הגיע. בוחרים את היום שבו התרומה התקבלה.');
+    const method = hf.querySelector('input[name="method"]:checked').value;
+    const ts = d === today() ? new Date().toISOString() : `${d}T12:00:00+02:00`;
+    const res = S.donate({ amount: hAmount.value, name, anonymous: anon, dedication: kind ? { kind, name: ded } : null, method, ts });
+    if (!res.ok) return bad(hAmount, res.error);
+    fresh = res.donation.id; renderDonors(S.load());
+    say(hSay, `נוספה תרומה של ${S.fmt(res.donation.amount)} ${METHOD_IN[method]}, ${anon ? 'בעילום שם' : 'מ' + name}. המד באתר כבר עודכן.`);
+    hAmount.value = ''; hName.value = ''; hAnon.checked = false; hKind.value = ''; hDed.value = ''; setToday(); syncHand();
+    hAmount.focus();
+  });
+
+  /* ---------- עדכון מהשטח ---------- */
+  const nf = $('news-form'), uTitle = $('u-title'), uText = $('u-text'), uDate = $('u-date'), uCount = $('u-count'), nSay = $('news-say'), urows = $('urows');
+  const syncCount = () => { uCount.textContent = `${uText.value.length} / 280`; };
+  uText.addEventListener('input', syncCount);
+  uTitle.addEventListener('input', () => uTitle.removeAttribute('aria-invalid'));
+  document.querySelectorAll('#news-form [data-t]').forEach((b) => b.addEventListener('click', () => { uTitle.value = b.dataset.t; uText.value = b.dataset.x; syncCount(); uTitle.focus(); }));
+  nf.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = uTitle.value.trim(), text = uText.value.trim();
+    if (!title) { uTitle.setAttribute('aria-invalid', 'true'); say(nSay, 'נא לכתוב כותרת קצרה לעדכון.', 'err'); uTitle.focus(); return; }
+    const date = isDate(uDate.value) && uDate.value <= today() ? uDate.value : today();
+    S.addUpdate({ title, text, date });
+    say(nSay, 'העדכון פורסם, והוא כבר מופיע באתר תחת "עדכונים מהשטח".');
+    uTitle.value = ''; uText.value = ''; uDate.value = today(); syncCount();
+  });
+  function renderUpdates(data) {
+    const ups = data.updates.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    urows.replaceChildren();
+    if (!ups.length) { urows.append(el('li', 'empty', 'אין עדכונים באתר כרגע.')); return; }
+    ups.forEach((u) => {
+      const li = el('li', 'urow'); li.dataset.id = u.id;
+      const top = el('div', 'u-top'); top.append(el('span', 'u-title', u.title || '(בלי כותרת)'), el('span', 'u-date', isDate(u.date) ? dm(u.date) : ''));
+      li.append(top);
+      if (u.text) li.append(el('p', 'u-text', u.text));
+      const acts = el('div', 'd-acts');
+      const del = el('button', 'link-btn del'); del.type = 'button'; del.dataset.act = 'udel'; del.append(icon('i-trash'), document.createTextNode('הסרה מהאתר'));
+      del.setAttribute('aria-label', `הסרת העדכון "${u.title || ''}" מהאתר`);
+      acts.append(del); li.append(acts);
+      li.append(confirmBox(`להסיר את העדכון "${u.title || ''}" מהאתר?`, 'כן, להסיר'));
+      urows.append(li);
+    });
+  }
+  urows.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const li = b.closest('.urow'); const box = li.querySelector('.confirm');
+    if (b.dataset.act === 'udel') { box.hidden = false; box.querySelector('[data-act="no"]').focus(); }
+    else if (b.dataset.act === 'no') { box.hidden = true; li.querySelector('[data-act="udel"]').focus(); }
+    else if (b.dataset.act === 'yes') { S.removeUpdate(li.dataset.id); say(nSay, 'העדכון הוסר מהאתר.'); uTitle.focus(); }
+  });
+
+  /* ---------- התורמים ---------- */
+  const drows = $('drows'), listCount = $('list-count'), more = $('more'), dSay = $('donors-say');
+  const PAGE = 10;
+  let filter = 'all', shown = PAGE, fresh = '';
+  function confirmBox(text, yes) {
+    const box = el('div', 'confirm'); box.hidden = true; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'אישור');
+    box.append(el('p', null, text));
+    const acts = el('div', 'acts');
+    const y = el('button', 'btn danger sm', yes); y.type = 'button'; y.dataset.act = 'yes';
+    const n = el('button', 'btn ghost sm', 'ביטול'); n.type = 'button'; n.dataset.act = 'no';
+    acts.append(y, n); box.append(acts);
+    return box;
+  }
+  const passes = (v) => filter === 'all' || (filter === 'card' && (v.method || 'card') === 'card') || (filter === 'hand' && (v.method || 'card') !== 'card') || (filter === 'monthly' && v.monthly);
+  function renderDonors(data) {
+    const all = data.donations.filter((v) => v && v.amount > 0).sort((a, b) => Date.parse(b.ts) - Date.parse(a.ts));
+    const list = all.filter(passes);
+    drows.replaceChildren();
+    if (!list.length) drows.append(el('li', 'empty', 'אין תרומות שמתאימות לסינון הזה.'));
+    list.slice(0, shown).forEach((v) => {
+      const li = el('li', 'drow' + (v.id === fresh ? ' is-new' : '')); li.dataset.id = v.id;
+      const line = el('div', 'd-line');
+      const nm = el('span', 'd-name', displayName(v));
+      if (v.anonymous && v.name) { nm.textContent = v.name; nm.append(el('small', null, 'מוסתר באתר')); }
+      line.append(nm, el('span', 'd-amt', v.monthly ? `${S.fmt(v.amount)} לחודש` : S.fmt(v.amount)));
+      const meta = el('div', 'd-meta');
+      const m = (v.method || 'card');
+      meta.append(el('span', 'm' + (m === 'card' ? '' : ' m-hand'), S.METHODS[m] || 'אשראי'));
+      if (v.monthly) meta.append(el('span', 'm m-monthly', 'הוראת קבע'));
+      const tm = el('time', null, when(v.ts)); tm.setAttribute('datetime', v.ts); meta.append(tm);
+      const ded = S.dedText(v.dedication); if (ded) meta.append(el('span', 'd-ded', ded));
+      li.append(line, meta);
+      const acts = el('div', 'd-acts');
+      const label = v.name || displayName(v);
+      if (v.name && !v.anonymous) { const h = el('button', 'link-btn'); h.type = 'button'; h.dataset.act = 'hide'; h.append(icon('i-eye-off'), document.createTextNode('הסתרת השם')); h.setAttribute('aria-label', `הסתרת השם ${label} מהרשימה באתר`); acts.append(h); }
+      if (v.name && v.anonymous) { const h = el('button', 'link-btn'); h.type = 'button'; h.dataset.act = 'show'; h.append(icon('i-eye'), document.createTextNode('הצגת השם')); h.setAttribute('aria-label', `הצגת השם ${label} ברשימה באתר`); acts.append(h); }
+      const del = el('button', 'link-btn del'); del.type = 'button'; del.dataset.act = 'del'; del.append(icon('i-trash'), document.createTextNode('מחיקה')); del.setAttribute('aria-label', `מחיקת התרומה של ${label}, ${S.fmt(v.amount)}`);
+      acts.append(del); li.append(acts);
+      const c = confirmBox('', ''); c.dataset.for = ''; li.append(c);
+      drows.append(li);
+    });
+    const n = Math.min(shown, list.length);
+    listCount.textContent = list.length ? `מוצגות ${NF.format(n)} מתוך ${NF.format(list.length)}` : '';
+    const rest = list.length - shown;
+    more.hidden = rest <= 0;
+    if (rest > 0) more.textContent = `להציג עוד ${NF.format(Math.min(rest, PAGE))}`;
+  }
+  const findDon = (id) => S.load().donations.find((v) => v.id === id);
+  drows.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const li = b.closest('.drow'); if (!li) return;
+    const id = li.dataset.id, v = findDon(id); if (!v) return;
+    const box = li.querySelector('.confirm'), act = b.dataset.act;
+    const who = v.name || 'בעילום שם';
+    if (act === 'del' || act === 'hide') {
+      drows.querySelectorAll('.confirm').forEach((x) => { x.hidden = true; });
+      box.dataset.for = act;
+      box.querySelector('p').textContent = act === 'del'
+        ? `למחוק את התרומה של ${who}, ${S.fmt(v.amount)}${v.monthly ? ' לחודש' : ''}? היא תרד מהמד ומהרשימה באתר.`
+        : `להסתיר את השם "${v.name}" ברשימת התורמים באתר? התרומה נשארת במד, והשם נשאר כאן אצלכם לקבלה.`;
+      box.querySelector('[data-act="yes"]').textContent = act === 'del' ? 'כן, למחוק' : 'כן, להסתיר';
+      box.hidden = false; box.querySelector('[data-act="no"]').focus();
+    } else if (act === 'no') {
+      box.hidden = true; const back = li.querySelector(`[data-act="${box.dataset.for}"]`); if (back) back.focus();
+    } else if (act === 'yes') {
+      if (box.dataset.for === 'del') { S.removeDonation(id); say(dSay, `התרומה של ${who} נמחקה. המד באתר עודכן.`); }
+      else { const x = S.load(); const d = x.donations.find((y) => y.id === id); if (d) { d.anonymous = true; S.save(x); } say(dSay, `השם "${v.name}" מוסתר עכשיו באתר, ומופיע שם "בעילום שם".`); }
+      $('donors-t').setAttribute('tabindex', '-1'); $('donors-t').focus();
+    } else if (act === 'show') {
+      const x = S.load(); const d = x.donations.find((y) => y.id === id); if (d) { d.anonymous = false; S.save(x); }
+      say(dSay, `השם "${v.name}" מופיע שוב ברשימה באתר.`);
+      const again = drows.querySelector(`.drow[data-id="${id}"] [data-act="hide"]`); if (again) again.focus();
+    }
+  });
+  document.querySelectorAll('#donors [data-f]').forEach((b) => b.addEventListener('click', () => {
+    filter = b.dataset.f; shown = PAGE;
+    document.querySelectorAll('#donors [data-f]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    renderDonors(S.load());
+  }));
+  more.addEventListener('click', () => {
+    const first = shown; shown += PAGE; renderDonors(S.load());
+    const next = drows.children[first]; if (next) { const btn = next.querySelector('button'); if (btn) btn.focus(); }
+  });
+
+  /* ---------- הקמפיין ---------- */
+  const cf = $('camp-form'), cTitle = $('c-title'), cGoal = $('c-goal'), cStart = $('c-start'), cEnd = $('c-end'), cSay = $('camp-say');
+  let campDirty = false;
+  const fillCamp = (data) => { const c = data.campaign; cTitle.value = c.title || ''; cGoal.value = NF.format(c.goal || 0); cStart.value = c.start || ''; cEnd.value = c.end || ''; campDirty = false; };
+  cf.addEventListener('input', (e) => { campDirty = true; e.target.removeAttribute('aria-invalid'); });
+  cGoal.addEventListener('blur', () => { const n = num(cGoal.value); if (n) cGoal.value = NF.format(n); });
+  cf.addEventListener('submit', (e) => {
+    e.preventDefault();
+    [cTitle, cGoal, cStart, cEnd].forEach((x) => x.removeAttribute('aria-invalid'));
+    const bad = (f, msg) => { f.setAttribute('aria-invalid', 'true'); say(cSay, msg, 'err'); f.focus(); };
+    const title = cTitle.value.trim(), goal = num(cGoal.value);
+    if (!title) return bad(cTitle, 'נא לכתוב כותרת לקמפיין.');
+    if (goal < 1000) return bad(cGoal, 'היעד צריך להיות לפחות 1,000 ₪.');
+    if (goal > 10000000) return bad(cGoal, 'יעד גדול מדי. בדקו שאין אפס מיותר.');
+    if (!isDate(cStart.value)) return bad(cStart, 'נא לבחור תאריך התחלה.');
+    if (!isDate(cEnd.value)) return bad(cEnd, 'נא לבחור תאריך סיום.');
+    if (cEnd.value < cStart.value) return bad(cEnd, 'תאריך הסיום צריך להיות אחרי תאריך ההתחלה.');
+    S.setCampaign({ title, goal, start: cStart.value, end: cEnd.value });
+    campDirty = false;
+    const t = S.totals();
+    const st = t.state === 'ended' ? 'הקמפיין מסומן באתר כקמפיין שהסתיים.' : t.state === 'upcoming' ? 'באתר מופיע שהקמפיין עוד לא נפתח.' : `באתר: ${t.percent}% מהיעד.`;
+    say(cSay, `נשמר. ${st}`);
+  });
+
+  /* ---------- ייצוא CSV לגזבר ---------- */
+  const cell = (v) => {
+    let s = String(v ?? '');
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;              /* שלא ייפתח כנוסחה באקסל */
+    return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  $('csv').addEventListener('click', () => {
+    const data = S.load(), c = data.campaign;
+    const list = data.donations.filter((v) => v && v.amount > 0).sort((a, b) => Date.parse(a.ts) - Date.parse(b.ts));
+    const rows = [['תאריך', 'שעה', 'שם', 'מוצג באתר', 'סכום', 'הוראת קבע', 'נספר ביעד', 'אמצעי תשלום', 'הקדשה']];
+    list.forEach((v) => {
+      const p = parts(new Date(v.ts));
+      rows.push([`${p.day}/${p.month}/${p.year}`, `${p.hour}:${p.minute}`, v.name || '', v.anonymous || !v.name ? 'בעילום שם' : 'בשם', v.amount, v.monthly ? 'כן' : '', S.goalValue(v), S.METHODS[v.method || 'card'] || '', S.dedText(v.dedication)]);
+    });
+    rows.push([]);
+    rows.push(['', '', 'תרומות שנרשמו ביחד, בלי פירוט', '', c.offline || 0, '', c.offline || 0, `${c.offlineCount || 0} תרומות`, '']);
+    rows.push(['', '', 'סך הכול נספר ביעד', '', '', '', S.totals().raised, '', '']);
+    const csv = '﻿' + rows.map((r) => r.map(cell).join(',')).join('\r\n');
+    const name = `salbracha-donations-${today()}.csv`;
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    const a = el('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    say($('export-say'), `הקובץ ${name} ירד: ${count(list.length)}, ועוד שורת סיכום. בדוגמה הקובץ נוצר כאן בדפדפן, ולא נשלח לשום מקום.`);
+  });
+
+  /* ---------- איפוס ---------- */
+  const rc = $('reset-confirm');
+  $('reset').addEventListener('click', () => { rc.hidden = false; $('reset-no').focus(); });
+  $('reset-no').addEventListener('click', () => { rc.hidden = true; $('reset').focus(); });
+  $('reset-yes').addEventListener('click', () => {
+    S.reset(); rc.hidden = true; fresh = ''; filter = 'all'; shown = PAGE;
+    document.querySelectorAll('#donors [data-f]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.f === 'all')));
+    fillCamp(S.load());
+    say($('foot-say'), 'חזרנו לנתוני הדוגמה המקוריים. גם האתר חזר אליהם.');
+    $('reset').focus();
+  });
+
+  /* ---------- רינדור, וסנכרון חי עם לשונית האתר ---------- */
+  function renderAll() {
+    const data = S.load();
+    renderStats(data); renderDonors(data); renderUpdates(data);
+    if (!campDirty) fillCamp(data);
+  }
+  document.addEventListener('salbracha:change', renderAll);
+  setToday(); uDate.value = today(); syncCount(); syncHand();
+  renderAll();
+})();
+</script>
+</body>
+</html>

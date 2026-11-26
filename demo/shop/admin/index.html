@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גרגר · ניהול החנות | מסך ניהול לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="מסך ניהול לדוגמה לחנות תבלינים: הזמנות וסטטוסים, מחירים ומלאי, תאריך טחינה, מוצר חדש עם תמונה, משלוחים והודעה בחנות. החנות מתעדכנת מיד.">
+<meta name="theme-color" content="#F7EFE2">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/assistant-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Suez One";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/suez-one-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/assistant-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/assistant-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- צבעים: הפלטה של הגרסה הסופית, בגרסה שקטה ובהירה לעבודה יומיומית ---------- */
+:root{
+  --bg:#F7EFE2;--surface:#FFFDF8;--sand:#F3E7D3;--sand-2:#EADCC3;--line:#E4D5BC;--line-2:#CDB693;--field:#A88A63;
+  --ink:#2B1A12;--ink-2:#4A3426;--muted:#6E5442;
+  --paprika:#A93A1F;--paprika-d:#8E2F17;--saffron:#E3A42B;--saffron-d:#B47C17;--olive:#5F6B2E;--olive-d:#3F4A16;--danger:#A32D17;
+  --head:"Suez One","Frank Ruhl Libre",Georgia,serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --shadow:0 1px 1px rgba(43,26,18,.06),0 10px 24px -16px rgba(43,26,18,.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--paprika-d)}
+h1,h2,h3{margin:0;line-height:1.2}
+h1,h2{font-family:var(--head);font-weight:400}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--paprika);outline-offset:2px;border-radius:4px}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.ico{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+/* ---------- ראש העמוד ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;padding-top:18px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);text-decoration:none}
+.brand svg{width:38px;height:38px;color:var(--paprika);flex:none}
+.brand b{display:block;font:400 27px/1 var(--head)}
+.brand small{display:block;margin-top:4px;font:600 13px/1 var(--body);color:var(--muted);letter-spacing:.04em}
+.top-acts{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px}
+.who{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
+.who::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--olive)}
+h1{margin:22px 0 6px;font-size:clamp(30px,1.6rem + 1.4vw,42px)}
+.lead{max-width:40em;color:var(--ink-2);font-size:18px}
+.note{display:flex;gap:10px;align-items:flex-start;max-width:64em;margin-top:14px;padding:13px 16px;border:1px solid #E9CF97;border-radius:12px;background:#FBF0D6;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.note svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--saffron-d)}
+.note b{color:var(--ink)}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border:1.5px solid transparent;border-radius:999px;font:700 16px/1.2 var(--body);text-decoration:none;white-space:nowrap;transition:background-color .2s,border-color .2s,box-shadow .2s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:var(--paprika);color:#fff;box-shadow:0 2px 0 #6E2311}
+.btn.primary:hover{background:var(--paprika-d)}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line-2);font-weight:600}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.saffron{background:var(--saffron);color:var(--ink);box-shadow:0 2px 0 var(--saffron-d)}
+.btn.saffron:hover{background:#EDB548}
+.btn.sm{min-height:44px;padding:8px 16px;font-size:15px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 12px;border:1.5px solid var(--line-2);border-radius:10px;background:var(--surface);color:var(--ink);font:600 15px/1 var(--body)}
+.icon-btn svg{width:18px;height:18px;flex:none}
+.icon-btn:hover{border-color:var(--ink)}
+.icon-btn.danger{color:var(--danger)}
+.icon-btn.danger:hover{border-color:var(--danger);background:#FBEDE6}
+/* ---------- מספרים של היום ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.stat{display:grid;align-content:start;gap:2px;min-height:108px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);text-align:start;color:var(--ink);font:inherit}
+button.stat{cursor:pointer;transition:border-color .2s}
+button.stat:hover{border-color:var(--ink)}
+.stat .k{display:flex;align-items:center;gap:7px;font:700 14.5px/1.3 var(--body);color:var(--muted)}
+.stat .k svg{width:18px;height:18px;color:var(--paprika)}
+.stat b{font:700 34px/1.1 var(--body);font-variant-numeric:tabular-nums;color:var(--ink)}
+.stat small{font-size:14px;line-height:1.35;color:var(--muted)}
+.stat.warn b{color:var(--paprika-d)}
+.stat .go{font-size:13.5px;font-weight:700;color:var(--paprika-d);text-decoration:underline;text-underline-offset:3px}
+/* ---------- לשוניות ---------- */
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;margin:26px -16px 0;padding:10px 16px;background:rgba(247,239,226,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tab{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border:1.5px solid var(--line-2);border-radius:999px;background:var(--surface);color:var(--ink);font:700 16px/1 var(--body)}
+.tab:hover{border-color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--sand)}
+.tab .n{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--saffron);color:var(--ink);font:700 13.5px/1 var(--body);font-variant-numeric:tabular-nums}
+.tab .n:empty{display:none}
+.panel{padding:20px 0 120px}
+.panel:focus-visible{outline-offset:6px}
+.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 14px;margin-bottom:16px}
+.bar h2{font-size:26px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.seg button{min-height:44px;padding:0 15px;border:1.5px solid var(--line-2);border-radius:999px;background:var(--surface);font:600 15px/1 var(--body)}
+.seg button:hover{border-color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--paprika);border-color:var(--paprika);color:#fff}
+.hint{font-size:15px;color:var(--muted)}
+.empty{padding:34px 20px;border:1.5px dashed var(--line-2);border-radius:14px;text-align:center;color:var(--muted);font-size:17px}
+/* ---------- הזמנות ---------- */
+.orders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.order{position:relative;display:grid;gap:10px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);transition:border-color .3s,box-shadow .3s}
+.order.is-new{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(227,164,43,.35),var(--shadow)}
+.order.is-done{background:#FBF8F2}
+.o-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.o-id{font:700 15px/1 var(--body);color:var(--muted);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.o-badge{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 11px;border-radius:999px;font:700 14px/1 var(--body);background:#F1E2C8;color:#5C3D12}
+.o-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.o-badge[data-s="חדשה"]{background:#FBE5B0;color:#6B4A0A}
+.o-badge[data-s="שולמה"]{background:#F1E2C8;color:#5C3D12}
+.o-badge[data-s="נארזה"]{background:#E6EBD2;color:var(--olive-d)}
+.o-badge[data-s="נשלחה"]{background:#F6DED6;color:var(--paprika-d)}
+.o-badge[data-s="נמסרה"],.o-badge[data-s="נאספה"]{background:#E4E7DF;color:#34412F}
+.o-badge[data-s="בוטלה"]{background:#ECE6DE;color:var(--muted);text-decoration:line-through}
+.o-who{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px}
+.o-name{font:700 19px/1.25 var(--body)}
+.o-where{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--ink-2)}
+.o-where svg{width:17px;height:17px;color:var(--paprika)}
+.o-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font-size:15px;color:var(--muted)}
+.o-total{margin-inline-start:auto;font:700 20px/1 var(--body);color:var(--ink);font-variant-numeric:tabular-nums}
+.o-acts{display:flex;flex-wrap:wrap;gap:8px}
+.o-sel{position:relative;flex:1 1 150px}
+.o-sel select{width:100%;min-height:44px;padding:0 14px;border:1.5px solid var(--field);border-radius:10px;background:#fff;font:600 16px/1 var(--body);appearance:none;-webkit-appearance:none;padding-inline-end:38px}
+.o-sel::after{content:"";position:absolute;inset-inline-end:14px;top:50%;width:9px;height:9px;margin-top:-7px;border:solid var(--ink);border-width:0 2px 2px 0;transform:rotate(45deg);pointer-events:none}
+.o-sel select:hover{border-color:var(--ink)}
+.o-next{flex:1 1 150px}
+.o-more summary{display:flex;align-items:center;gap:8px;min-height:44px;font:700 15.5px/1 var(--body);color:var(--paprika-d);cursor:pointer;list-style:none}
+.o-more summary::-webkit-details-marker{display:none}
+.o-more summary::before{content:"";width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(135deg);transition:transform .2s}
+.o-more[open] summary::before{transform:rotate(45deg)}
+.o-items{display:grid;gap:6px;margin-top:6px;padding:12px 14px;border-radius:10px;background:var(--bg)}
+.o-items li{display:flex;justify-content:space-between;gap:10px;font-size:15.5px}
+.o-items li span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+.o-sum{display:grid;gap:4px;margin:10px 0 0;font-size:15px}
+.o-sum div{display:flex;justify-content:space-between;gap:10px}
+.o-sum dd{margin:0;font-variant-numeric:tabular-nums}
+.o-sum .t{padding-top:6px;border-top:1.5px dashed var(--line-2);font-weight:700}
+.o-info{display:grid;gap:6px;margin-top:10px;font-size:15.5px}
+.o-info li{display:flex;align-items:flex-start;gap:8px}
+.o-info svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--muted)}
+.o-demo{display:inline-block;margin-inline-start:8px;padding:2px 8px;border-radius:6px;background:var(--sand);font:700 12.5px/1.4 var(--body);color:var(--muted)}
+/* ---------- מוצרים ---------- */
+.prod-tools{display:flex;flex-wrap:wrap;gap:10px}
+.filters{margin-bottom:14px}
+.prods{display:grid;gap:12px}
+.prod{display:grid;grid-template-columns:76px minmax(0,1.3fr) minmax(0,2.2fr) auto;grid-template-areas:"img main ctrls tools";align-items:center;gap:12px 18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+.prod.is-out{background:#FBF8F2}
+.prod.is-new{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(227,164,43,.35)}
+.p-img{grid-area:img;width:76px;height:76px;object-fit:cover;border-radius:38px 38px 6px 6px;background:var(--sand);box-shadow:inset 0 0 0 1px rgba(43,26,18,.1)}
+.is-out .p-img{filter:grayscale(.6) opacity(.75)}
+.p-main{grid-area:main;min-width:0}
+.p-name{font:700 18px/1.25 var(--body)}
+.p-sub{margin-top:2px;font-size:14.5px;color:var(--muted)}
+.p-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.p-ground{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border:1.5px dashed var(--paprika);border-radius:4px;color:var(--paprika-d);font:700 13px/1.3 var(--body)}
+.p-ground svg{width:15px;height:15px}
+.p-state{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:4px;background:#E6EBD2;color:var(--olive-d);font:700 13px/1.3 var(--body)}
+.p-state[data-s="low"]{background:#FBE5B0;color:#6B4A0A}
+.p-state[data-s="out"]{background:#F6DED6;color:var(--paprika-d)}
+.p-ctrls{grid-area:ctrls;display:grid;grid-template-columns:minmax(92px,.8fr) minmax(140px,1.2fr) minmax(0,1.3fr);align-items:end;gap:8px 12px}
+.p-fld{display:grid;gap:4px;min-width:0}
+.p-fld > label,.p-fld > .lbl{font:700 13.5px/1.2 var(--body);color:var(--muted)}
+.num{width:100%;min-height:44px;padding:0 10px;border:1.5px solid var(--field);border-radius:10px;background:#fff;font:700 17px/1 var(--body);font-variant-numeric:tabular-nums;text-align:center}
+.num:hover{border-color:var(--ink)}
+.price-in{position:relative}
+.price-in .num{padding-inline-end:28px}
+.price-in::after{content:"₪";position:absolute;inset-inline-end:11px;top:50%;translate:0 -50%;font:700 15px/1 var(--body);color:var(--muted);pointer-events:none}
+.stepper{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;border:1.5px solid var(--field);border-radius:10px;background:#fff;overflow:hidden}
+.stepper:hover{border-color:var(--ink)}
+.stepper:focus-within{border-color:var(--paprika)}
+.stepper button{display:grid;place-items:center;min-height:42px;border:0;background:var(--bg);font:700 21px/1 var(--body);color:var(--ink)}
+.stepper button:hover{background:var(--sand-2)}
+.stepper button:disabled{opacity:.4;cursor:not-allowed}
+.stepper .num{min-height:42px;border:0;border-radius:0;padding:0 4px}
+.stepper .num:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--paprika)}
+.checks{display:grid;gap:2px}
+.chk{display:flex;align-items:center;gap:9px;min-height:40px;font:600 15px/1.25 var(--body);cursor:pointer}
+.chk input{width:22px;height:22px;margin:0;flex:none;accent-color:var(--paprika)}
+.p-tools{grid-area:tools;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.p-tools .btn{min-width:124px}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+[aria-invalid="true"]{border-color:var(--danger)!important;box-shadow:0 0 0 1px var(--danger)}
+/* ---------- מוצר חדש ---------- */
+.card{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+.card h2{font-size:24px}
+.card h3{font:700 17px/1.3 var(--body)}
+.add-form{margin-bottom:18px;border:1.5px solid var(--saffron);box-shadow:0 0 0 4px rgba(227,164,43,.18)}
+.add-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;margin-top:14px}
+.photo{display:grid;gap:8px;align-content:start}
+.photo-box{position:relative;display:grid;place-items:center;aspect-ratio:1;border:1.5px dashed var(--line-2);border-radius:12px;background:var(--bg);overflow:hidden;color:var(--muted);font-size:14px;text-align:center;padding:10px}
+.photo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-box svg{width:34px;height:34px;margin:0 auto 6px;color:var(--muted)}
+.file-in{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.file-in:focus-visible+label{outline:3px solid var(--paprika);outline-offset:3px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fld{display:grid;gap:5px;min-width:0}
+.fld.full{grid-column:1/-1}
+.fld label{font:700 15px/1.3 var(--body)}
+.fld .opt{font-weight:400;color:var(--muted)}
+.txt,.fld select{width:100%;min-height:46px;padding:9px 12px;border:1.5px solid var(--field);border-radius:10px;background:#fff;font:400 16.5px/1.4 var(--body)}
+textarea.txt{min-height:76px;resize:vertical}
+.txt:hover,.fld select:hover{border-color:var(--ink)}
+.err{font:700 14.5px/1.4 var(--body);color:var(--danger)}
+.form-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+/* ---------- הגדרות ---------- */
+.set-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+.set-grid .card + .card{margin-top:0}
+.ship-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{min-height:44px;padding:6px 14px;border:1.5px solid var(--line-2);border-radius:999px;background:var(--bg);font:600 14.5px/1.2 var(--body)}
+.chip:hover{border-color:var(--ink)}
+.sec-h{margin-top:22px}
+.preview{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:15px;color:var(--ink-2)}
+.preview b{color:var(--ink)}
+.how ul{display:grid;gap:8px;margin:12px 0 16px;padding-inline-start:20px;list-style:disc;font-size:15.5px;color:var(--ink-2)}
+.how li::marker{color:var(--paprika)}
+/* ---------- הודעת סטטוס צפה ---------- */
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:10px;max-width:560px;margin:0 auto;padding:13px 18px;border-radius:12px;background:var(--ink);color:var(--sand);font:600 16px/1.4 var(--body);box-shadow:0 18px 40px -16px rgba(0,0,0,.55);transform:translateY(0);transition:opacity .25s,transform .25s}
+.toast:empty{opacity:0;transform:translateY(12px);pointer-events:none}
+.toast::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:#A9C25A}
+.toast.is-err::before{background:#F08A6B}
+/* ---------- טלפון וטאבלט ---------- */
+@media (max-width:1000px){
+  .prod{grid-template-columns:76px minmax(0,1fr) auto;grid-template-areas:"img main tools" "ctrls ctrls ctrls"}
+  .set-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{min-height:96px;padding:12px 14px}
+  .stat b{font-size:28px}
+  .orders{grid-template-columns:1fr}
+  .tabs{gap:5px}
+  .tab{padding:0 13px;font-size:15px}
+  .add-grid{grid-template-columns:1fr}
+  .photo{grid-template-columns:120px 1fr;align-items:center}
+  .photo-box{aspect-ratio:1;width:120px}
+}
+@media (max-width:560px){
+  h1{margin-top:16px}
+  .lead{font-size:16.5px}
+  .top-acts .who{display:none}
+  .prod{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"img main" "ctrls ctrls" "tools tools";padding:12px}
+  .p-img{width:64px;height:64px}
+  .p-ctrls{grid-template-columns:1fr 1.4fr}
+  .checks{grid-column:1/-1;grid-template-columns:1fr 1fr}
+  .p-tools{flex-direction:row}
+  .p-tools .btn{flex:1;min-width:0}
+  .fields,.ship-fields{grid-template-columns:1fr}
+  .o-acts > *{flex-basis:100%}
+}
+@media (max-width:380px){
+  .tab{padding:0 10px}
+  .tab .t-long{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/shop/design-1/">עיצוב 1</a><a href="/demo/shop/design-2/">עיצוב 2</a><a href="/demo/shop/design-3/">עיצוב 3</a><a href="/demo/shop/final/">הגרסה הסופית</a><a href="/demo/shop/admin/" aria-current="page">ניהול החנות</a></nav>
+ <a class="demo-back" href="/demo/shop/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 39.31 39.31"><path fill="currentColor" fill-rule="evenodd" d="M28.62 16.31L29.18 15.57 29.69 14.79 30.17 13.99 30.61 13.15 31.01 12.29 31.39 11.4 31.73 10.49 32.1 9.36 32.43 8.21 32.78 6.83 33.08 5.42 33.35 3.98 33.56 2.5 33.67 1.39 33.67 1.25 33.64 1.17 33.57 1.07 33.46 1.01 33.38 1 33.29 1.01 32.57 1.25 31.56 1.64 30.59 2.05 28.7 2.94 27.78 3.4 26.89 3.88 26.03 4.38 25.35 4.8 24.05 5.67 23.43 6.13 22.83 6.6 21.84 7.47 20.91 8.4 20.42 8.96 20.07 9.39 19.62 9.99 19.31 10.45 18.92 11.08 18.64 11.57 18.3 12.25 18.07 12.78 17.86 13.32 17.67 13.88 17.49 14.45 17.34 15.04 17.22 15.65 17.11 16.31 20.94 16.31 30.03 4.68 30.15 4.57 30.24 4.52 30.4 4.48 30.56 4.48 30.71 4.53 30.8 4.59 30.88 4.66 30.97 4.8 31 4.9 31.01 5.06 30.99 5.17 30.93 5.32 22.34 16.31ZM3.06 16.43L2.79 16.53 2.55 16.71 2.37 16.94 2.28 17.22 2.26 17.41 2.26 20.61 2.28 20.81 2.33 21 2.48 21.25 2.62 21.39 2.79 21.49 2.97 21.57 3.16 21.61 36.06 21.61 36.35 21.57 36.53 21.49 36.69 21.39 36.83 21.25 36.94 21.08 37.01 20.9 37.05 20.71 37.06 17.41 37.04 17.22 36.98 17.03 36.89 16.86 36.69 16.64 36.44 16.49 36.15 16.42 3.26 16.41ZM5.66 24.28L5.89 24.95 6.17 25.62 6.48 26.27 6.83 26.9 7.21 27.52 7.62 28.12 8.07 28.69 8.55 29.25 9.07 29.77 9.61 30.28 10.17 30.75 10.77 31.2 11.39 31.62 12.03 32.01 12.69 32.36 13.42 32.71 13.66 32.69 25.66 32.69 25.89 32.71 26.62 32.36 27.28 32.01 27.93 31.62 28.84 30.98 29.43 30.52 30.25 29.77 30.76 29.25 31.47 28.41 31.9 27.82 32.3 27.21 32.67 26.59 33.15 25.62 33.42 24.95 33.76 23.93 33.94 23.24 34.09 22.44 5.22 22.44 5.38 23.24ZM10.97 37.7L10.96 37.9 11.01 38.04 11.07 38.12 11.13 38.2 11.26 38.27 11.46 38.31 27.86 38.31 28.05 38.27 28.21 38.16 28.32 38 28.36 37.8 28.33 37.65 28.29 37.56 26.09 33.76 26 33.65 25.89 33.57 25.75 33.52 25.66 33.51 13.66 33.51 13.52 33.53 13.35 33.62 13.22 33.76 11.02 37.56Z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><g class="ico"><path d="M2.5 6.5h11v9.5h-11Z"/><path d="M13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></g></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><g class="ico"><path d="M4 10v10h16V10"/><path d="M3 10c0-1 1-4.5 2-5.5h14c1 1 2 4.5 2 5.5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0Z"/><path d="M10 20v-5h4v5"/></g></symbol>
+  <symbol id="i-mill" viewBox="0 0 24 24"><g class="ico"><path d="M5 11h14l-1.4 9.5H6.4Z"/><path d="M8 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/><path d="M12 7V4.5h4.5"/><circle cx="12" cy="16" r="1.2"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><g class="ico"><path d="M5 8.5h14l-1 12H6Z"/><path d="M8.8 8.5V7a3.2 3.2 0 0 1 6.4 0v1.5"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g class="ico"><path d="M12 3.5 21 19.5H3Z"/><path d="M12 10v4.5M12 17v.1"/></g></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><g class="ico"><path d="M3.5 7.5 12 3.5l8.5 4v9L12 20.5l-8.5-4Z"/><path d="M3.5 7.5 12 11.5l8.5-4M12 11.5v9"/></g></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g class="ico" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></g></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path class="ico" stroke-width="2.2" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path class="ico" d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><g class="ico"><path d="M14 4.5h5.5V10M19.5 4.5 11 13"/><path d="M18 14v5.5H4.5V6H10"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path class="ico" d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g class="ico"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><g class="ico"><path d="M5 4.5h14v15H5Z"/><path d="M8.5 9h7M8.5 12.5h7M8.5 16h4"/></g></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5.5-5 4 3.5 2.5-2 4.5 4"/></g></symbol>
+</svg>
+
+<header class="wrap top">
+ <a class="brand" href="/demo/shop/final/" aria-label="גרגר, לחנות">
+  <svg aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+  <span><b>גרגר</b><small>ניהול החנות</small></span>
+ </a>
+ <div class="top-acts">
+  <span class="who">מחובר: בעל החנות (לדוגמה)</span>
+  <a class="btn ghost sm" href="/demo/shop/final/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ext"/></svg>לראות בחנות<span class="vh"> (נפתח בלשונית חדשה)</span></a>
+ </div>
+</header>
+
+<main class="wrap" id="main">
+ <h1>ניהול החנות</h1>
+ <p class="lead">הזמנות, מלאי, מחירים ותאריך טחינה, במקום אחד. כל שינוי מופיע בחנות מיד, גם כשעובדים מהטלפון.</p>
+ <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>זה מסך לדוגמה:</b> כל אחד יכול לנסות כאן, והכול נשמר רק בדפדפן שלכם. פתחו את החנות בלשונית אחרת, הזמינו משהו או שנו כאן מחיר, ותראו את שני המסכים מתעדכנים. באתר אמיתי נכנסים עם סיסמה, התשלום עובר בחברת סליקה, וכל שינוי נשמר בשרת לכל הלקוחות.</span></p>
+
+ <section class="stats" aria-label="מה קורה בחנות">
+  <div class="stat"><span class="k"><svg aria-hidden="true"><use href="#i-bag"/></svg>הזמנות היום</span><b id="st-today">0</b><small id="st-today-sum"></small></div>
+  <button type="button" class="stat" data-go="orders"><span class="k"><svg aria-hidden="true"><use href="#i-clock"/></svg>מחכות לטיפול</span><b id="st-open">0</b><small id="st-open-sub"></small></button>
+  <button type="button" class="stat" data-go="low"><span class="k"><svg aria-hidden="true"><use href="#i-alert"/></svg>מלאי נמוך</span><b id="st-low">0</b><small id="st-low-sub"></small></button>
+  <button type="button" class="stat" data-go="out"><span class="k"><svg aria-hidden="true"><use href="#i-box"/></svg>אזלו מהמלאי</span><b id="st-out">0</b><small id="st-out-sub"></small></button>
+ </section>
+
+ <div class="tabs" role="tablist" aria-label="אזורי הניהול">
+  <button type="button" class="tab" role="tab" id="tab-orders" aria-controls="p-orders" aria-selected="true"><span>הזמנות</span><span class="n" id="n-open"></span></button>
+  <button type="button" class="tab" role="tab" id="tab-products" aria-controls="p-products" aria-selected="false" tabindex="-1"><span>מוצרים<span class="t-long"> ומלאי</span></span><span class="n" id="n-products"></span></button>
+  <button type="button" class="tab" role="tab" id="tab-settings" aria-controls="p-settings" aria-selected="false" tabindex="-1">הגדרות</button>
+ </div>
+
+ <!-- הזמנות -->
+ <section class="panel" id="p-orders" role="tabpanel" aria-labelledby="tab-orders" tabindex="0">
+  <div class="bar">
+   <h2>הזמנות</h2>
+   <div class="seg" role="group" aria-label="אילו הזמנות להציג">
+    <button type="button" data-of="open" aria-pressed="true">מחכות לטיפול</button>
+    <button type="button" data-of="all" aria-pressed="false">כל ההזמנות</button>
+   </div>
+  </div>
+  <p class="hint" style="margin:-6px 0 14px">משנים סטטוס בלחיצה, והלקוח יודע איפה ההזמנה עומדת. הזמנה חדשה מהחנות מופיעה כאן מיד.</p>
+  <ol class="orders" id="orders" aria-label="רשימת ההזמנות"></ol>
+  <p class="empty" id="orders-empty" hidden>אין הזמנות שמחכות לטיפול. הכול נשלח.</p>
+ </section>
+
+ <!-- מוצרים -->
+ <section class="panel" id="p-products" role="tabpanel" aria-labelledby="tab-products" tabindex="0" hidden>
+  <div class="bar">
+   <h2>מוצרים ומלאי</h2>
+   <div class="prod-tools">
+    <button type="button" class="btn saffron" id="grind-all"><svg aria-hidden="true"><use href="#i-mill"/></svg>נטחן היום: כל התבלינים</button>
+    <button type="button" class="btn primary" id="add-open" aria-expanded="false" aria-controls="add-form"><svg aria-hidden="true"><use href="#i-plus"/></svg>הוספת מוצר</button>
+   </div>
+  </div>
+
+  <form class="card add-form" id="add-form" novalidate hidden aria-labelledby="add-t">
+   <h2 id="add-t">מוצר חדש</h2>
+   <p class="hint">התמונה מוקטנת אוטומטית, כדי שהחנות תישאר מהירה. המוצר נכנס ראשון בחנות, עם התאריך של היום.</p>
+   <div class="add-grid">
+    <div class="photo">
+     <div class="photo-box" id="ph-box"><span id="ph-empty"><svg aria-hidden="true"><use href="#i-image"/></svg>עוד אין תמונה</span></div>
+     <div>
+      <input type="file" id="ph-in" class="file-in" accept="image/*" aria-describedby="ph-err">
+      <label for="ph-in" class="btn ghost sm"><svg aria-hidden="true"><use href="#i-image"/></svg>בחירת תמונה</label>
+      <p class="err" id="ph-err" hidden></p>
+     </div>
+    </div>
+    <div class="fields">
+     <div class="fld full"><label for="a-name">שם המוצר</label><input class="txt" id="a-name" type="text" maxlength="40" required autocomplete="off" aria-describedby="a-name-err"><p class="err" id="a-name-err" hidden></p></div>
+     <div class="fld"><label for="a-cat">מחלקה</label><select id="a-cat"></select></div>
+     <div class="fld"><label for="a-unit">כמות באריזה</label><input class="txt" id="a-unit" type="text" maxlength="24" placeholder="למשל 100 גרם" autocomplete="off"></div>
+     <div class="fld"><label for="a-price">מחיר (₪)</label><input class="txt" id="a-price" type="number" min="1" step="1" inputmode="numeric" required aria-describedby="a-price-err"><p class="err" id="a-price-err" hidden></p></div>
+     <div class="fld"><label for="a-stock">כמה יש במלאי</label><input class="txt" id="a-stock" type="number" min="0" step="1" inputmode="numeric" value="10"></div>
+     <div class="fld full"><label for="a-desc">משפט קצר <span class="opt">(לא חובה)</span></label><input class="txt" id="a-desc" type="text" maxlength="110" autocomplete="off" placeholder="למה זה טוב ולמה מתאים"></div>
+     <div class="fld full"><label for="a-alt">מה רואים בתמונה <span class="opt">(למי שלא רואה אותה, ולגוגל)</span></label><input class="txt" id="a-alt" type="text" maxlength="140" autocomplete="off"></div>
+     <label class="chk fld full"><input type="checkbox" id="a-feat">להציג גם במומלצים בדף הבית</label>
+    </div>
+   </div>
+   <div class="form-acts">
+    <button type="submit" class="btn primary">הוספה לחנות</button>
+    <button type="button" class="btn ghost" id="add-cancel">ביטול</button>
+   </div>
+  </form>
+
+  <div class="seg filters" role="group" aria-label="אילו מוצרים להציג">
+   <button type="button" data-pf="all" aria-pressed="true">הכול</button>
+   <button type="button" data-pf="spices" aria-pressed="false">תבלינים</button>
+   <button type="button" data-pf="tea" aria-pressed="false">תה וחליטות</button>
+   <button type="button" data-pf="gifts" aria-pressed="false">מארזים</button>
+   <button type="button" data-pf="low" aria-pressed="false">מלאי נמוך או אזל</button>
+  </div>
+  <ul class="prods" id="prods" aria-label="רשימת המוצרים"></ul>
+  <p class="empty" id="prods-empty" hidden>אין מוצרים כאן.</p>
+ </section>
+
+ <!-- הגדרות -->
+ <section class="panel" id="p-settings" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden>
+  <div class="set-grid">
+   <form class="card" id="set-form" novalidate aria-labelledby="set-t">
+    <h2 id="set-t">משלוחים</h2>
+    <div class="ship-fields">
+     <div class="fld"><label for="s-threshold">משלוח חינם מעל (₪)</label><input class="txt" id="s-threshold" type="number" min="0" step="1" inputmode="numeric" required aria-describedby="s-err"></div>
+     <div class="fld"><label for="s-fee">דמי משלוח (₪)</label><input class="txt" id="s-fee" type="number" min="0" step="1" inputmode="numeric" required aria-describedby="s-err"></div>
+     <div class="fld full"><label for="s-days">זמן משלוח</label><input class="txt" id="s-days" type="text" maxlength="40" autocomplete="off"></div>
+    </div>
+    <p class="err" id="s-err" hidden></p>
+    <p class="preview" id="s-preview"></p>
+    <h2 class="sec-h">הודעה בחנות</h2>
+    <div class="fld" style="margin-top:10px">
+     <label for="s-notice">פס קצר בראש החנות, למשל לפני חג. משאירים ריק כשאין הודעה.</label>
+     <textarea class="txt" id="s-notice" maxlength="140" rows="2" placeholder="לדוגמה: הזמנות למשלוחי מנות לפורים עד יום חמישי"></textarea>
+    </div>
+    <div class="quick" role="group" aria-label="הודעות מוכנות">
+     <button type="button" class="chip" data-q="הזמנות למשלוחי מנות לפורים: עד שבוע לפני החג, כדי שיגיעו בזמן.">לפני פורים</button>
+     <button type="button" class="chip" data-q="לפני החג החנות פתוחה עד מאוחר, והמשלוחים יוצאים כרגיל עד יום לפני.">לפני חג</button>
+     <button type="button" class="chip" data-q="בחול המועד אין משלוחים. איסוף עצמי מהחנות כרגיל.">חול המועד</button>
+     <button type="button" class="chip" data-q="">בלי הודעה</button>
+    </div>
+    <div class="form-acts">
+     <button type="submit" class="btn primary">שמירת ההגדרות</button>
+     <a class="btn ghost" href="/demo/shop/final/" target="_blank" rel="noopener">לראות בחנות<span class="vh"> (נפתח בלשונית חדשה)</span></a>
+    </div>
+   </form>
+   <section class="card how" aria-labelledby="how-t">
+    <h2 id="how-t">איך זה עובד</h2>
+    <ul>
+     <li>מחיר ומלאי נשמרים ברגע שיוצאים מהשדה, והחנות מתעדכנת מיד.</li>
+     <li>מוצר שהמלאי שלו נגמר מקבל בחנות "אזל מהמלאי", ואי אפשר להזמין אותו.</li>
+     <li>אחרי כל טחינה לוחצים "נטחן היום", והתאריך מופיע על כל המוצרים.</li>
+     <li>הזמנה חדשה מהחנות נכנסת לרשימת ההזמנות, ויורדת מהמלאי.</li>
+    </ul>
+    <button type="button" class="btn ghost sm" id="reset">איפוס לנתוני הדוגמה</button>
+   </section>
+  </div>
+ </section>
+</main>
+
+<p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+<!-- תבניות. כל טקסט נכנס עם textContent / value -->
+<template id="tpl-order">
+ <li class="order">
+  <div class="o-head"><span class="o-id"></span><span class="o-badge"></span></div>
+  <p class="o-who"><b class="o-name"></b><span class="o-where"><svg aria-hidden="true"><use href="#i-truck"/></svg><span></span></span></p>
+  <p class="o-meta"><span class="o-date"></span><span class="o-count"></span><b class="o-total"></b></p>
+  <div class="o-acts">
+   <div class="o-sel"><select class="o-status"></select></div>
+   <button type="button" class="btn ghost sm o-next"></button>
+  </div>
+  <details class="o-more">
+   <summary>פרטי ההזמנה</summary>
+   <ul class="o-items"></ul>
+   <dl class="o-sum"><div><dt>מוצרים</dt><dd class="o-sub"></dd></div><div><dt>משלוח</dt><dd class="o-ship"></dd></div><div class="t"><dt>סה״כ</dt><dd class="o-tot"></dd></div></dl>
+   <ul class="o-info">
+    <li class="o-addr"><svg aria-hidden="true"><use href="#i-pin"/></svg><span></span></li>
+    <li><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="ltr o-phone"></span></li>
+    <li class="o-note"><svg aria-hidden="true"><use href="#i-note"/></svg><span></span></li>
+   </ul>
+  </details>
+ </li>
+</template>
+
+<template id="tpl-prod">
+ <li class="prod">
+  <img class="p-img" alt="" width="76" height="76" decoding="async" loading="lazy">
+  <div class="p-main">
+   <h3 class="p-name"></h3>
+   <p class="p-sub"></p>
+   <p class="p-tags"><span class="p-ground"><svg aria-hidden="true"><use href="#i-mill"/></svg><span></span></span><span class="p-state"></span></p>
+  </div>
+  <div class="p-ctrls">
+   <div class="p-fld"><label data-for="price">מחיר</label><div class="price-in"><input class="num" type="number" min="0" step="1" inputmode="decimal" data-k="price"></div></div>
+   <div class="p-fld"><span class="lbl" data-lbl="stock">מלאי</span><div class="stepper" role="group"><button type="button" data-step="1">+</button><input class="num" type="number" min="0" step="1" inputmode="numeric" data-k="stock"><button type="button" data-step="-1">−</button></div></div>
+   <div class="checks">
+    <label class="chk"><input type="checkbox" data-k="featured">מומלץ בדף הבית</label>
+    <label class="chk"><input type="checkbox" data-k="soldout">אזל מהמלאי</label>
+   </div>
+  </div>
+  <div class="p-tools">
+   <button type="button" class="btn ghost sm" data-act="grind"><svg aria-hidden="true"><use href="#i-mill"/></svg><span></span></button>
+   <button type="button" class="icon-btn danger" data-act="del"><svg aria-hidden="true"><use href="#i-trash"/></svg>מחיקה</button>
+  </div>
+ </li>
+</template>
+
+<script src="/demo/shop/shop.js"></script>
+<script>
+(() => {
+  const G = window.Gargar;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const fmt = G.format;
+  const toast = $('#toast');
+  let toastT = 0;
+  const say = (msg, err) => {
+    clearTimeout(toastT);
+    toast.classList.toggle('is-err', !!err);
+    toast.textContent = '';
+    setTimeout(() => { toast.textContent = msg; }, 40);
+    toastT = setTimeout(() => { toast.textContent = ''; }, err ? 9000 : 5200);
+  };
+  const saveErr = () => say(G.lastError === 'quota'
+    ? 'לא נשמר: אין מספיק מקום בדפדפן, כנראה בגלל תמונה גדולה. נסו תמונה קטנה יותר. (באתר האמיתי התמונות נשמרות בשרת, ואין מגבלה כזאת.)'
+    : 'לא נשמר: הדפדפן הזה לא מאפשר לשמור (אולי זה חלון גלישה בסתר). באתר האמיתי השמירה היא בשרת.', true);
+
+  /* ---------- תאריכים ---------- */
+  const dayStr = (iso) => { const [, m, d] = iso.slice(0, 10).split('-'); return `${Number(d)}.${Number(m)}`; };
+  const yesterday = () => new Date(Date.parse(`${G.today()}T12:00:00Z`) - 864e5).toISOString().slice(0, 10);
+  const when = (iso) => {
+    const d = String(iso || '').slice(0, 10), t = String(iso || '').slice(11, 16);
+    const day = d === G.today() ? 'היום' : d === yesterday() ? 'אתמול' : dayStr(d);
+    return t ? `${day}, ${t}` : day;
+  };
+  const DONE = ['נמסרה', 'נאספה', 'בוטלה'];
+  const isOpen = (o) => !DONE.includes(o.status);
+  const itemsN = (n) => (n === 1 ? 'פריט אחד' : `${n} פריטים`);
+
+  /* ---------- לשוניות ---------- */
+  const tabs = $$('[role="tab"]');
+  const show = (id, focus) => {
+    tabs.forEach((t) => {
+      const on = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      $('#' + t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    try { history.replaceState(null, '', '#' + id.replace('p-', '')); } catch (e) { /* */ }
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
+    t.addEventListener('keydown', (e) => {
+      const k = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : e.key === 'Home' ? -i : e.key === 'End' ? tabs.length - 1 - i : 0;
+      if (!k) return;
+      e.preventDefault();
+      show(tabs[(i + k + tabs.length) % tabs.length].getAttribute('aria-controls'), true);
+    });
+  });
+
+  /* ---------- מספרים ---------- */
+  function drawStats(d) {
+    const today = d.orders.filter((o) => String(o.date).slice(0, 10) === G.today() && o.status !== 'בוטלה');
+    $('#st-today').textContent = String(today.length);
+    $('#st-today-sum').textContent = today.length ? `${fmt(today.reduce((s, o) => s + Number(o.total || 0), 0))} מכירות` : 'עוד לא היום';
+    const open = d.orders.filter(isOpen);
+    $('#st-open').textContent = String(open.length);
+    const fresh = open.filter((o) => o.status === 'חדשה').length;
+    $('#st-open-sub').textContent = fresh ? `מתוכן ${fresh === 1 ? 'אחת חדשה' : `${fresh} חדשות`}` : 'אין חדשות';
+    const vis = d.products.filter((x) => !x.hidden);
+    const low = vis.filter((x) => Number(x.stock) > 0 && Number(x.stock) <= 5), out = vis.filter((x) => Number(x.stock) <= 0);
+    $('#st-low').textContent = String(low.length);
+    $('#st-low-sub').textContent = low.length ? low.map((x) => x.name).join(', ') : 'הכול במלאי';
+    $('#st-out').textContent = String(out.length);
+    $('#st-out-sub').textContent = out.length ? out.map((x) => x.name).join(', ') : 'אין';
+    $('#st-low').closest('.stat').classList.toggle('warn', low.length > 0);
+    $('#st-out').closest('.stat').classList.toggle('warn', out.length > 0);
+    $('#n-open').textContent = open.length ? String(open.length) : '';
+    $('#n-products').textContent = String(vis.length);
+  }
+  $$('.stat[data-go]').forEach((b) => b.addEventListener('click', () => {
+    if (b.dataset.go === 'orders') { setOrderFilter('open'); show('p-orders'); $('#p-orders').focus(); return; }
+    setProdFilter('low'); show('p-products'); $('#p-products').focus();
+  }));
+
+  /* ---------- הזמנות ---------- */
+  const ordersEl = $('#orders'), tplOrder = $('#tpl-order');
+  let orderFilter = 'open';
+  const seen = new Set(G.load().orders.map((o) => o.id));
+  const freshOrders = new Set();
+  function setOrderFilter(v) { orderFilter = v; $$('[data-of]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.of === v))); drawOrders(G.load()); }
+  $$('[data-of]').forEach((b) => b.addEventListener('click', () => setOrderFilter(b.dataset.of)));
+  function orderCard(o) {
+    const li = tplOrder.content.firstElementChild.cloneNode(true);
+    li.dataset.id = o.id;
+    li.classList.toggle('is-done', !isOpen(o)); li.classList.toggle('is-new', freshOrders.has(o.id));
+    $('.o-id', li).textContent = o.id;
+    const badge = $('.o-badge', li); badge.textContent = o.status; badge.dataset.s = o.status;
+    $('.o-name', li).textContent = o.name;
+    $('.o-where span', li).textContent = o.delivery === 'pickup' ? 'איסוף עצמי מהחנות' : `משלוח ל${o.city || 'כתובת שבהזמנה'}`;
+    $('.o-where use', li).setAttribute('href', o.delivery === 'pickup' ? '#i-store' : '#i-truck');
+    $('.o-date', li).textContent = when(o.date);
+    const n = (o.items || []).reduce((s, it) => s + Number(it.qty || 0), 0);
+    $('.o-count', li).textContent = itemsN(n);
+    $('.o-total', li).textContent = fmt(o.total);
+    // סטטוס
+    const flow = G.flow(o), opts = flow.concat(flow.includes(o.status) ? [] : [o.status]).concat(o.status === 'בוטלה' ? [] : ['בוטלה']);
+    const sel = $('.o-status', li);
+    sel.id = `st-${o.id}`;
+    sel.setAttribute('aria-label', `סטטוס הזמנה ${o.id} של ${o.name}`);
+    opts.forEach((s) => { const op = document.createElement('option'); op.value = s; op.textContent = s; op.selected = s === o.status; sel.appendChild(op); });
+    const next = flow[flow.indexOf(o.status) + 1];
+    const nb = $('.o-next', li);
+    if (next && o.status !== 'בוטלה') { nb.textContent = `סימון "${next}"`; nb.dataset.next = next; nb.setAttribute('aria-label', `הזמנה ${o.id}: סימון "${next}"`); }
+    else nb.hidden = true;
+    // פרטים
+    const items = $('.o-items', li);
+    (o.items || []).forEach((it) => { const r = document.createElement('li'); const a = document.createElement('span'); a.textContent = `${it.name} × ${it.qty}`; const b = document.createElement('span'); b.textContent = fmt(Number(it.price) * Number(it.qty)); r.append(a, b); items.appendChild(r); });
+    $('.o-sub', li).textContent = fmt(o.subtotal); $('.o-ship', li).textContent = Number(o.shipping) ? fmt(o.shipping) : (o.delivery === 'pickup' ? 'איסוף עצמי' : 'חינם'); $('.o-tot', li).textContent = fmt(o.total);
+    const addr = $('.o-addr span', li);
+    addr.textContent = o.delivery === 'pickup' ? 'איסוף עצמי מהחנות, רחוב הדוגמה 7' : [o.address, o.city].filter(Boolean).join(', ') || 'בלי כתובת';
+    $('.o-phone', li).textContent = o.phone || '';
+    const note = $('.o-note', li); note.hidden = !o.note; $('span', note).textContent = o.note || '';
+    if (o.demo) { const tag = document.createElement('span'); tag.className = 'o-demo'; tag.textContent = 'מהחנות לדוגמה'; $('.o-id', li).after(tag); $('.o-head', li).insertBefore(tag, badge); }
+    $('summary', li).setAttribute('aria-label', `פרטי הזמנה ${o.id}`);
+    return li;
+  }
+  function drawOrders(d) {
+    const openIds = new Set($$('.o-more[open]', ordersEl).map((x) => x.closest('.order').dataset.id));
+    const a = document.activeElement, keep = a && ordersEl.contains(a) ? { id: a.closest('.order') && a.closest('.order').dataset.id, cls: a.classList.contains('o-status') ? '.o-status' : a.classList.contains('o-next') ? '.o-next' : 'summary' } : null;
+    const list = d.orders.slice().sort((x, y) => String(y.date).localeCompare(String(x.date)) || String(y.id).localeCompare(String(x.id)))
+      .filter((o) => orderFilter === 'all' || isOpen(o) || freshOrders.has(o.id));
+    ordersEl.replaceChildren(...list.map(orderCard));
+    openIds.forEach((id) => { const c = ordersEl.querySelector(`[data-id="${CSS.escape(id)}"] .o-more`); if (c) c.open = true; });
+    $('#orders-empty').hidden = list.length > 0;
+    if (keep && keep.id) {
+      const c = ordersEl.querySelector(`[data-id="${CSS.escape(keep.id)}"]`);
+      let t = c && c.querySelector(keep.cls); if (t && t.hidden) t = c.querySelector('.o-status');
+      if (t) t.focus({ preventScroll: true });
+    }
+  }
+  function setStatus(id, s, focusSel) {
+    if (!G.setOrderStatus(id, s)) { saveErr(); return; }
+    const o = G.load().orders.find((x) => x.id === id);
+    freshOrders.add(id);   // נשארת ברשימה עד שמרעננים, גם אם הסתיימה
+    drawOrders(G.load()); drawStats(G.load());
+    if (focusSel) { const c = ordersEl.querySelector(`[data-id="${CSS.escape(id)}"]`); let t = c && c.querySelector(focusSel); if (t && t.hidden) t = c.querySelector('.o-status'); if (t) t.focus({ preventScroll: true }); }
+    say(`הזמנה ${id} של ${o.name}: ${s}.`);
+  }
+  ordersEl.addEventListener('change', (e) => { if (e.target.classList.contains('o-status')) setStatus(e.target.closest('.order').dataset.id, e.target.value, '.o-status'); });
+  ordersEl.addEventListener('click', (e) => { const b = e.target.closest('.o-next'); if (b) setStatus(b.closest('.order').dataset.id, b.dataset.next, '.o-next'); });
+
+  /* ---------- מוצרים ---------- */
+  const prodsEl = $('#prods'), tplProd = $('#tpl-prod');
+  let prodFilter = 'all';
+  const freshProds = new Set();
+  function setProdFilter(v) { prodFilter = v; $$('[data-pf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pf === v))); drawProducts(G.load()); }
+  $$('[data-pf]').forEach((b) => b.addEventListener('click', () => setProdFilter(b.dataset.pf)));
+  const verb = (x) => (x.groundVerb || (x.cat === 'spices' ? 'נטחן' : 'נארז'));
+  function fillRow(li, x, d) {
+    const cat = d.categories.find((c) => c.id === x.cat);
+    const out = Number(x.stock) <= 0, low = !out && Number(x.stock) <= 5;
+    li.classList.toggle('is-out', out);
+    $('.p-name', li).textContent = x.name;
+    $('.p-sub', li).textContent = [cat ? cat.name : '', x.unit, fmt(x.price)].filter(Boolean).join(' · ');
+    $('.p-ground > span', li).textContent = G.groundText(x);
+    const st = $('.p-state', li); st.dataset.s = out ? 'out' : low ? 'low' : 'ok'; st.textContent = out ? 'אזל מהמלאי' : low ? `נשארו רק ${x.stock}` : `${x.stock} במלאי`;
+    const price = $('[data-k="price"]', li), stock = $('[data-k="stock"]', li);
+    if (document.activeElement !== price) price.value = String(x.price);
+    if (document.activeElement !== stock) stock.value = String(Math.max(0, Number(x.stock) || 0));
+    $('[data-k="featured"]', li).checked = !!x.featured;
+    $('[data-k="soldout"]', li).checked = out;
+    $('[data-step="-1"]', li).disabled = out;
+    $('[data-act="grind"] span', li).textContent = `${verb(x)} היום`;
+  }
+  function prodRow(x, d) {
+    const li = tplProd.content.firstElementChild.cloneNode(true);
+    li.dataset.id = x.id;
+    li.classList.toggle('is-new', freshProds.has(x.id));
+    const img = $('.p-img', li); img.src = G.img(x, 560); img.alt = '';
+    const uid = `p-${x.id}`;
+    const price = $('[data-k="price"]', li); price.id = `${uid}-price`; $('label[data-for="price"]', li).htmlFor = price.id;
+    $('label[data-for="price"]', li).textContent = 'מחיר';
+    price.setAttribute('aria-label', `מחיר: ${x.name}, בשקלים`);
+    const stock = $('[data-k="stock"]', li); stock.id = `${uid}-stock`; stock.setAttribute('aria-label', `מלאי: ${x.name}`);
+    const lbl = $('[data-lbl="stock"]', li); lbl.id = `${uid}-stock-l`; $('.stepper', li).setAttribute('aria-labelledby', lbl.id);
+    $('[data-step="1"]', li).setAttribute('aria-label', `עוד אחד במלאי: ${x.name}`);
+    $('[data-step="-1"]', li).setAttribute('aria-label', `אחד פחות במלאי: ${x.name}`);
+    $('[data-k="featured"]', li).setAttribute('aria-label', `מומלץ בדף הבית: ${x.name}`);
+    $('[data-k="soldout"]', li).setAttribute('aria-label', `אזל מהמלאי: ${x.name}`);
+    $('[data-act="grind"]', li).setAttribute('aria-label', `${verb(x)} היום: ${x.name}`);
+    $('[data-act="del"]', li).setAttribute('aria-label', `מחיקה מהחנות: ${x.name}`);
+    fillRow(li, x, d);
+    return li;
+  }
+  function drawProducts(d) {
+    const vis = d.products.filter((x) => !x.hidden);
+    let list = vis;
+    if (prodFilter === 'low') list = vis.filter((x) => Number(x.stock) <= 5 || freshProds.has(x.id));
+    else if (prodFilter !== 'all') list = vis.filter((x) => x.cat === prodFilter);
+    prodsEl.replaceChildren(...list.map((x) => prodRow(x, d)));
+    $('#prods-empty').hidden = list.length > 0;
+  }
+  const rowOf = (el) => el.closest('.prod');
+  const prodOf = (li) => G.product(li.dataset.id);
+  function update(li, patch, msg) {
+    if (!G.updateProduct(li.dataset.id, patch)) { saveErr(); return false; }
+    const d = G.load(), x = d.products.find((p) => p.id === li.dataset.id);
+    if (x) fillRow(li, x, d);
+    drawStats(d);
+    if (msg) say(msg);
+    return true;
+  }
+  prodsEl.addEventListener('change', (e) => {
+    const k = e.target.dataset.k; if (!k) return;
+    const li = rowOf(e.target), x = prodOf(li); if (!x) return;
+    if (k === 'price') {
+      const v = Math.round(Number(e.target.value) * 100) / 100;
+      if (!e.target.value || !(v > 0)) { e.target.setAttribute('aria-invalid', 'true'); say(`המחיר של ${x.name} צריך להיות מספר גדול מ־0.`, true); e.target.value = String(x.price); return; }
+      e.target.removeAttribute('aria-invalid');
+      if (v !== Number(x.price)) update(li, { price: v }, `${x.name}: המחיר עכשיו ${fmt(v)}. החנות עודכנה.`);
+    } else if (k === 'stock') {
+      const v = Math.max(0, Math.floor(Number(e.target.value) || 0));
+      update(li, { stock: v, restock: v > 0 ? v : x.restock }, v ? `${x.name}: ${v} במלאי.` : `${x.name}: אזל מהמלאי. בחנות כבר אי אפשר להזמין אותו.`);
+    } else if (k === 'featured') {
+      update(li, { featured: e.target.checked }, e.target.checked ? `${x.name} מופיע עכשיו במומלצים.` : `${x.name} הוסר מהמומלצים.`);
+    } else if (k === 'soldout') {
+      if (e.target.checked) update(li, { stock: 0, restock: Number(x.stock) > 0 ? Number(x.stock) : x.restock }, `${x.name}: אזל מהמלאי. בחנות כבר אי אפשר להזמין אותו.`);
+      else { const v = Number(x.restock) > 0 ? Number(x.restock) : 10; update(li, { stock: v }, `${x.name} חזר למלאי: ${v} יחידות.`); }
+    }
+  });
+  prodsEl.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.matches('input.num')) { e.preventDefault(); e.target.dispatchEvent(new Event('change', { bubbles: true })); } });
+  prodsEl.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const li = rowOf(b), x = li && prodOf(li); if (!x) return;
+    if (b.dataset.step) {
+      const v = Math.max(0, (Number(x.stock) || 0) + Number(b.dataset.step));
+      update(li, { stock: v, restock: v > 0 ? v : x.restock }, v ? `${x.name}: ${v} במלאי.` : `${x.name}: אזל מהמלאי.`);
+    } else if (b.dataset.act === 'grind') {
+      if (!G.grind(x.id)) { saveErr(); return; }
+      const d = G.load(); fillRow(li, d.products.find((p) => p.id === x.id), d);
+      say(`${x.name}: ${verb(x)} היום. התאריך בחנות עודכן.`);
+    } else if (b.dataset.act === 'del') {
+      if (!window.confirm(`למחוק את "${x.name}" מהחנות? אפשר להחזיר עם "איפוס לנתוני הדוגמה".`)) return;
+      const d = G.load(), i = d.products.findIndex((p) => p.id === x.id);
+      d.products.splice(i, 1);
+      if (!G.save(d)) { saveErr(); return; }
+      const next = li.nextElementSibling || li.previousElementSibling;
+      drawProducts(G.load()); drawStats(G.load());
+      const t = next && prodsEl.querySelector(`[data-id="${CSS.escape(next.dataset.id)}"] [data-act="del"]`);
+      (t || $('#add-open')).focus();
+      say(`"${x.name}" נמחק מהחנות.`);
+    }
+  });
+  $('#grind-all').addEventListener('click', () => {
+    const n = G.grindAll();
+    drawProducts(G.load());
+    say(`נטחן היום: ${n} תבלינים. "נטחן היום" מופיע עכשיו בחנות.`);
+  });
+
+  /* ---------- מוצר חדש ---------- */
+  const addForm = $('#add-form'), addOpen = $('#add-open'), phIn = $('#ph-in'), phBox = $('#ph-box'), phErr = $('#ph-err');
+  let photo = null;
+  const cats = G.load().categories;
+  cats.forEach((c) => { const o = document.createElement('option'); o.value = c.id; o.textContent = c.name; $('#a-cat').appendChild(o); });
+  const openAdd = (open) => {
+    addForm.hidden = !open; addOpen.setAttribute('aria-expanded', String(open));
+    if (open) { $('#a-name').focus(); addForm.scrollIntoView({ block: 'nearest' }); } else addOpen.focus();
+  };
+  addOpen.addEventListener('click', () => openAdd(addForm.hidden));
+  $('#add-cancel').addEventListener('click', () => { resetAdd(); openAdd(false); });
+  /* הקטנת תמונה בדפדפן: עד 960 פיקסלים, WEBP (ואם אין תמיכה JPEG) */
+  const readImage = (file) => new Promise((res, rej) => { const u = URL.createObjectURL(file), im = new Image(); im.onload = () => { URL.revokeObjectURL(u); res(im); }; im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('decode')); }; im.src = u; });
+  async function shrink(file) {
+    if (!file || !/^image\//.test(file.type)) throw new Error('type');
+    const im = await readImage(file), sw = im.naturalWidth, sh = im.naturalHeight;
+    if (!sw || !sh) throw new Error('decode');
+    const s = Math.min(1, 960 / sw, 960 / sh), w = Math.max(1, Math.round(sw * s)), h = Math.max(1, Math.round(sh * s));
+    const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    const g = cv.getContext('2d'); g.fillStyle = '#F3EBDD'; g.fillRect(0, 0, w, h); g.imageSmoothingQuality = 'high'; g.drawImage(im, 0, 0, w, h);
+    let data = cv.toDataURL('image/webp', 0.8); if (!data.startsWith('data:image/webp')) data = cv.toDataURL('image/jpeg', 0.8);
+    return data;
+  }
+  const showPhoto = (src) => {
+    phBox.replaceChildren();
+    if (src) { const im = document.createElement('img'); im.src = src; im.alt = ''; phBox.appendChild(im); }
+    else { const sp = document.createElement('span'); sp.id = 'ph-empty'; sp.textContent = 'עוד אין תמונה'; phBox.appendChild(sp); }
+  };
+  phIn.addEventListener('change', async () => {
+    const f = phIn.files && phIn.files[0]; if (!f) return;
+    phErr.hidden = true;
+    try { photo = await shrink(f); showPhoto(photo); say('התמונה מוכנה, והוקטנה אוטומטית.'); }
+    catch (err) { phErr.textContent = err.message === 'type' ? 'הקובץ שנבחר הוא לא תמונה. בחרו JPG, PNG או WEBP.' : 'לא הצלחנו לפתוח את התמונה. נסו תמונה אחרת.'; phErr.hidden = false; }
+    phIn.value = '';
+  });
+  function resetAdd() { addForm.reset(); $('#a-stock').value = '10'; photo = null; showPhoto(null); $$('.err', addForm).forEach((x) => { x.hidden = true; }); $$('[aria-invalid]', addForm).forEach((x) => x.removeAttribute('aria-invalid')); }
+  addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    $$('.err', addForm).forEach((x) => { x.hidden = true; }); $$('[aria-invalid]', addForm).forEach((x) => x.removeAttribute('aria-invalid'));
+    const name = $('#a-name').value.trim(), price = Number($('#a-price').value);
+    const bad = [];
+    if (!name) { $('#a-name-err').textContent = 'צריך שם למוצר.'; $('#a-name-err').hidden = false; $('#a-name').setAttribute('aria-invalid', 'true'); bad.push($('#a-name')); }
+    if (!(price > 0)) { $('#a-price-err').textContent = 'צריך מחיר, מספר גדול מ־0.'; $('#a-price-err').hidden = false; $('#a-price').setAttribute('aria-invalid', 'true'); bad.push($('#a-price')); }
+    if (!photo) { phErr.textContent = 'צריך תמונה למוצר. אפשר מהטלפון.'; phErr.hidden = false; bad.push(phIn); }
+    if (bad.length) { say('חסרים פרטים במוצר החדש.', true); bad[0].focus(); return; }
+    const d = G.load(), id = `p${Date.now().toString(36)}`;
+    const x = { id, name, cat: $('#a-cat').value, price: Math.round(price * 100) / 100, unit: $('#a-unit').value.trim(), desc: $('#a-desc').value.trim(), img: photo,
+      alt: $('#a-alt').value.trim() || name, stock: Math.max(0, Math.floor(Number($('#a-stock').value) || 0)), badge: 'חדש', featured: $('#a-feat').checked, ground: G.today() };
+    d.products.unshift(x);
+    if (!G.save(d)) { saveErr(); return; }
+    freshProds.add(id);
+    resetAdd(); addForm.hidden = true; addOpen.setAttribute('aria-expanded', 'false');
+    setProdFilter('all');
+    const row = prodsEl.querySelector(`[data-id="${CSS.escape(id)}"]`);
+    if (row) { row.scrollIntoView({ block: 'center' }); $('[data-k="price"]', row).focus({ preventScroll: true }); }
+    drawStats(G.load());
+    say(`"${name}" נוסף לחנות, ראשון ברשימה.`);
+  });
+
+  /* ---------- הגדרות ---------- */
+  const setForm = $('#set-form');
+  const sT = $('#s-threshold'), sF = $('#s-fee'), sD = $('#s-days'), sN = $('#s-notice'), sErr = $('#s-err'), sPrev = $('#s-preview');
+  const preview = () => {
+    const t = Number(sT.value), f = Number(sF.value);
+    sPrev.textContent = t >= 0 && f >= 0 && sT.value !== '' && sF.value !== '' ? `בחנות יופיע: משלוח ${fmt(f)}, ובהזמנה מעל ${fmt(t)} המשלוח חינם. ${sD.value.trim() ? `זמן משלוח: ${sD.value.trim()}.` : ''}` : '';
+  };
+  function fillSettings(d) { const sh = d.shipping || {}; sT.value = sh.threshold ?? 250; sF.value = sh.fee ?? 30; sD.value = sh.days || ''; sN.value = d.notice || ''; preview(); }
+  [sT, sF, sD].forEach((i) => i.addEventListener('input', preview));
+  $$('[data-q]').forEach((b) => b.addEventListener('click', () => { sN.value = b.dataset.q; sN.focus(); }));
+  setForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sErr.hidden = true; [sT, sF].forEach((i) => i.removeAttribute('aria-invalid'));
+    const t = Number(sT.value), f = Number(sF.value), bad = [];
+    if (sT.value === '' || !(t >= 0)) bad.push(sT);
+    if (sF.value === '' || !(f >= 0)) bad.push(sF);
+    if (bad.length) { bad.forEach((i) => i.setAttribute('aria-invalid', 'true')); sErr.textContent = 'סכום המשלוח החינם ודמי המשלוח צריכים להיות מספרים, 0 או יותר.'; sErr.hidden = false; bad[0].focus(); return; }
+    const d = G.load();
+    d.shipping = Object.assign({}, d.shipping, { threshold: Math.round(t), fee: Math.round(f), days: sD.value.trim() || '2 עד 4 ימי עבודה' });
+    d.notice = sN.value.trim();
+    if (!G.save(d)) { saveErr(); return; }
+    fillSettings(G.load());
+    say(d.notice ? 'נשמר. ההגדרות וההודעה מופיעות בחנות.' : 'נשמר. ההגדרות מעודכנות בחנות, בלי הודעה.');
+  });
+  $('#reset').addEventListener('click', () => {
+    if (!window.confirm('לחזור לנתוני הדוגמה? המוצרים, ההזמנות וההגדרות שהשתניתם כאן יחזרו להתחלה.')) return;
+    G.reset('shop'); freshOrders.clear(); freshProds.clear(); seen.clear(); G.load().orders.forEach((o) => seen.add(o.id));
+    drawAll(); say('חזרנו לנתוני הדוגמה.');
+  });
+
+  /* ---------- הכול, וסנכרון עם החנות בלשונית אחרת ---------- */
+  function drawAll() { const d = G.load(); drawStats(d); drawOrders(d); drawProducts(d); fillSettings(d); }
+  let pending = false;
+  window.addEventListener('storage', (e) => {
+    if (e.key !== G.KEY && e.key !== null) return;
+    const d = G.load();
+    const fresh = d.orders.filter((o) => !seen.has(o.id));
+    fresh.forEach((o) => { seen.add(o.id); freshOrders.add(o.id); });
+    drawStats(d); drawOrders(d);
+    // לא בונים מחדש את המוצרים בזמן שמקלידים בהם
+    if (prodsEl.contains(document.activeElement) && document.activeElement.matches('input')) pending = true; else drawProducts(d);
+    if (fresh.length) say(fresh.length === 1 ? `הזמנה חדשה נכנסה: ${fresh[0].id} של ${fresh[0].name}, ${fmt(fresh[0].total)}.` : `${fresh.length} הזמנות חדשות נכנסו.`);
+  });
+  prodsEl.addEventListener('focusout', () => { if (pending) setTimeout(() => { if (!prodsEl.contains(document.activeElement)) { pending = false; drawProducts(G.load()); } }, 0); });
+
+  drawAll();
+  const h = (location.hash || '').slice(1);
+  if (['orders', 'products', 'settings'].includes(h)) show(`p-${h}`);
+})();
+</script>
+</body>
+</html>

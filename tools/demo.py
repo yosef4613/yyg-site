@@ -30,7 +30,7 @@ def qmap(form, lang):
 def answer(form, lang, qid, v):
     """התשובה כטקסט בשפה המבוקשת"""
     he_q, q = qmap(form, 'he')[qid], qmap(form, lang)[qid]
-    tr = lambda x: q['options'][he_q['options'].index(x)] if x in he_q['options'] else x
+    tr = lambda x: x[lang] if isinstance(x, dict) else (q['options'][he_q['options'].index(x)] if x in he_q['options'] else x)
     if isinstance(v, dict) and 'files' in v: return ', '.join(v['files'])
     if isinstance(v, dict): return v[lang]
     if isinstance(v, list):
@@ -241,7 +241,12 @@ STYLE = '''<style>
  .d-final .btn{margin-top:16px}
  .d-final small{display:block;margin-top:10px;color:var(--muted)}
  .d-flag{position:absolute;top:12px;inset-inline-start:12px;padding:4px 12px;border-radius:999px;background:#F2C95A;color:#151920;font-weight:800;font-size:.85rem;box-shadow:0 4px 14px rgba(0,0,0,.35)}
- .d-other{display:block;margin-top:clamp(48px,7vw,80px);padding:20px 22px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(135deg,#262D3A,#1B212B);color:var(--text);text-decoration:none}
+ .d-more{margin-top:clamp(56px,8vw,96px)}
+ .d-more h2{font-size:var(--step-2)}
+ .d-more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;margin-top:18px}
+ .d-other{display:block;padding:0 0 18px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(135deg,#262D3A,#1B212B);color:var(--text);text-decoration:none;overflow:hidden}
+ .d-other img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;margin-bottom:14px}
+ .d-other small,.d-other b,.d-other span{padding:0 18px}
  .d-other:hover,.d-other:focus-visible{border-color:var(--gold)}
  .d-other small{display:block;color:var(--gold);font-weight:700;font-size:.85rem}
  .d-other b{display:block;margin-top:4px;font-size:var(--step-1)}
@@ -343,8 +348,12 @@ def build(lang):
      <a class="btn btn-gold" href="/{pfx}final/">{E(t['open_final'])}</a>
      <small>{E(t['final_note'])}</small></div>
    </div>'''
-    o = P['other'][lang]
-    other_html = f'<a class="d-other" href="{o[0]}"><small>{E(o[1])}</small><b>{E(o[2])}</b><span>{E(o[3])}</span></a>'
+    def thumb(q):
+        f = 'final-d.webp' if (ROOT / q['prefix'] / 'shots/final-d.webp').exists() else 'design-1-d.webp'
+        return f'/{q["prefix"]}shots/{f}'
+    others = ''.join(f'<a class="d-other" href="{home}{q["prefix"]}"><img src="{thumb(q)}" width="960" height="660" alt="" loading="lazy"><small>{"דוגמה" if he else "Example"}</small><b>{E(q["card"][lang][0])}</b><span>{E(q["card"][lang][1])}</span></a>'
+                     for q in PROJECTS.values() if q is not P)
+    other_html = f'<section class="d-more" aria-labelledby="more-t"><h2 id="more-t">{"עוד פרויקטים לדוגמה" if he else "More example projects"}</h2><div class="d-more-grid">{others}</div></section>'
     other_href = ('/en/' + pfx) if he else ('/' + pfx)
     page = f'''<!doctype html>
 <html lang="{lang}" dir="{t['dir']}">
@@ -367,7 +376,7 @@ def build(lang):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=41">
+<link rel="stylesheet" href="/assets/site.css?v=45">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>

@@ -8,6 +8,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGES = {  # תיקיית פרויקט -> עמודים, וכל עמוד: איזה קישור מסומן כנוכחי
  '/demo/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
  '/demo/optika/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
+ '/demo/donate/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
+ '/demo/shul/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
+ '/demo/shop/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
 }
 CSS = '''.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
 .demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
@@ -22,7 +25,7 @@ CSS = '''.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;p
 @media print{.demo-ribbon{display:none}}
 '''
 
-ADMIN = {'/demo/': 'מסך ניהול התוכן', '/demo/optika/': 'מסך עדכון השעות'}
+ADMIN = {'/demo/': 'מסך ניהול התוכן', '/demo/optika/': 'מסך עדכון השעות', '/demo/donate/': 'מסך ניהול הקמפיין', '/demo/shul/': 'מסך הגבאי', '/demo/shop/': 'ניהול החנות'}
 
 def bar(prefix, current):
     links = [('design-1', 'עיצוב 1'), ('design-2', 'עיצוב 2'), ('design-3', 'עיצוב 3'), ('final', 'הגרסה הסופית'), ('admin', ADMIN[prefix])]

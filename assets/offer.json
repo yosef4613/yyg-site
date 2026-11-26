@@ -62,6 +62,7 @@
  ],
  "examples": [
   {"url": "https://yygweb.com/demo/", "name": {"he": "פרויקט לדוגמה: אתר לנגריה, 3 עיצובים", "en": "Example project: a carpentry website, 3 designs"}},
-  {"url": "https://yygweb.com/demo/optika/", "name": {"he": "דף נחיתה לדוגמה: חנות משקפיים עם עדכון שעות עצמי", "en": "Example landing page: an eyewear shop with self-updated hours"}}
+  {"url": "https://yygweb.com/demo/optika/", "name": {"he": "דף נחיתה לדוגמה: חנות משקפיים עם עדכון שעות עצמי", "en": "Example landing page: an eyewear shop with self-updated hours"}},
+  {"url": "https://yygweb.com/demo/shop/", "name": {"he": "חנות לדוגמה: תבלינים ותה, עם עגלה, משלוחים וניהול מלאי", "en": "Example store: spices and tea, with a cart, shipping and stock management"}}
  ]
 }

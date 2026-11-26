@@ -91,7 +91,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=41">
+<link rel="stylesheet" href="/assets/site.css?v=45">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -118,8 +118,9 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 {faq_html}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">רוצים לדעת כמה יעלה האתר שלכם?</h2>
-   <p>3 שאלות קצרות במחשבון, בלי להשאיר פרטים. ואם מתאים, מתחילים ב־10%, ואני מכין לכם 3 עיצובים של האתר לפני שממשיכים.</p>
-   <a class="btn btn-gold" href="/?src=guide-{slug}#plan">למחשבון המחיר</a>
+   <p>שאלון האפיון לוקח כ־10 דקות, ובסופו רואים מיד הערכת מחיר לפי התשובות. ואם מתאים, מתחילים ב־10%, ואני מכין לכם 3 עיצובים של האתר לפני שממשיכים.</p>
+   <a class="btn btn-gold" href="/questionnaire/?src=guide-{slug}">להצעת מחיר: לשאלון האפיון</a>
+   <p style="margin-top:12px"><a class="text-link" href="/?src=guide-{slug}#plan">רק כיוון: 3 שאלות במחשבון</a></p>
   </section>
 {rel}
  </div>
@@ -468,10 +469,10 @@ open(f'{root}/guides/index.html', 'w').write(page('index', 'מדריכים לב�
     f'<div class="g-cards">\n{cards}\n</div>'))
 
 # מפת האתר
-urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3'), ('privacy.html', '0.3'), ('questionnaire/', '0.6'), ('feedback/', '0.4'), ('demo/', '0.7'), ('demo/optika/', '0.7'), ('pricing/', '0.8'), ('about/', '0.6'), ('contact/', '0.6')]
+urls = [('', '1.0'), ('guides/', '0.6')] + [(f'guides/{s}.html', '0.7') for s, *_ in G] + [('accessibility.html', '0.3'), ('privacy.html', '0.3'), ('questionnaire/', '0.6'), ('feedback/', '0.4'), ('demo/', '0.7'), ('demo/optika/', '0.7'), ('demo/shop/', '0.7'), ('pricing/', '0.8'), ('about/', '0.6'), ('contact/', '0.6')]
 SV = ['landing-page', 'business-website', 'online-store', 'institutions', 'catering', 'professionals', 'logo-branding']
 urls += [('services/', '0.8')] + [(f'services/{s}.html', '0.8') for s in SV] + [('en/services/', '0.6')] + [(f'en/services/{s}.html', '0.6') for s in SV]
-urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2'), ('en/privacy.html', '0.2'), ('en/questionnaire/', '0.4'), ('en/feedback/', '0.3'), ('en/demo/', '0.5'), ('en/demo/optika/', '0.5'), ('en/pricing/', '0.6'), ('en/about/', '0.4'), ('en/contact/', '0.4')]
+urls += [('en/', '0.9'), ('en/guides/', '0.5')] + [(f'en/guides/{s}.html', '0.6') for s, *_ in G] + [('en/accessibility.html', '0.2'), ('en/privacy.html', '0.2'), ('en/questionnaire/', '0.4'), ('en/feedback/', '0.3'), ('en/demo/', '0.5'), ('en/demo/optika/', '0.5'), ('en/demo/shop/', '0.5'), ('en/pricing/', '0.6'), ('en/about/', '0.4'), ('en/contact/', '0.4')]
 open(f'{root}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n' for u, p in urls) + '</urlset>\n')
 print('ok', [s for s, *_ in G])

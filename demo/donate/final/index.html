@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>סל ברכה · הגרסה הסופית | אתר לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="סל ברכה, עמותה דמיונית לסלי מזון לשבת ולחג בירושלים: תרומה באשראי, קמפיין חי ושקיפות. אתר לדוגמה של YYG: הגרסה הסופית, אחרי המשוב של הלקוח.">
+<meta name="theme-color" content="#13233F">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/heebo-900-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/heebo-900-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/heebo-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים: משפחה אחת, Heebo ---------- */
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* סימן השקל בספרות הענקיות: קטן וקל יותר מהספרות, בלי לגעת בטקסט שהמנוע כותב */
+@font-face{font-family:"Shekel";font-style:normal;font-weight:100 900;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+20AA;size-adjust:64%}
+/* ---------- בסיס: כחול לילה, לבן חם, וזעפרן רק למילוי של המד ---------- */
+:root{
+  --navy:#13233F;--navy-2:#1D3256;--navy-3:#2B4372;
+  --paper:#FFFCF6;--panel:#F6F1E7;--card:#FFFFFF;
+  --ink:#13233F;--ink-2:#34425C;--muted:#56627A;
+  --line:#E8E1D3;--line-2:#D8CFBD;
+  --saffron:#F2B23E;--saffron-50:#FDF3DF;--saffron-ink:#7A5310;
+  --pom:#B83A45;--pom-50:#FBEDEE;
+  --on-navy:#E8ECF3;--on-navy-2:#AEB9CC;--navy-line:rgba(255,255,255,.13);
+  --track:#ECE5D7;
+  --font:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:10px;--r-lg:16px;
+  --shadow:0 1px 2px rgba(19,35,63,.05),0 14px 34px -18px rgba(19,35,63,.2);
+  --shadow-lg:0 2px 4px rgba(19,35,63,.06),0 40px 70px -36px rgba(19,35,63,.45);
+  --gutter:24px;--sec:104px;--header:72px;--w:1240px;
+  --i-wheat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22V9.5' stroke='%23000' stroke-width='1.7' stroke-linecap='round'/%3E%3Cg fill='%23000'%3E%3Cellipse cx='12' cy='5' rx='1.9' ry='3.1'/%3E%3Cellipse cx='9.3' cy='9.6' rx='1.7' ry='2.9' transform='rotate(-36 9.3 9.6)'/%3E%3Cellipse cx='14.7' cy='9.6' rx='1.7' ry='2.9' transform='rotate(36 14.7 9.6)'/%3E%3Cellipse cx='9.3' cy='14.2' rx='1.7' ry='2.9' transform='rotate(-36 9.3 14.2)'/%3E%3Cellipse cx='14.7' cy='14.2' rx='1.7' ry='2.9' transform='rotate(36 14.7 14.2)'/%3E%3C/g%3E%3C/svg%3E");
+  --i-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.5 12.5 4 4 9-9'/%3E%3C/svg%3E");
+  --i-repeat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11a7 7 0 0 1 12-4.9L18 8M20 13a7 7 0 0 1-12 4.9L6 16'/%3E%3Cpath d='M18 3.5V8h-4.5M6 20.5V16h4.5'/%3E%3C/svg%3E");
+  --i-info:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5.5M12 7.6v.1'/%3E%3C/svg%3E");
+  --i-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5m6-6-6 6 6 6'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:var(--navy)}
+h1,h2,h3,h4{font-family:var(--font);margin:0;color:inherit;line-height:1.15;font-weight:900}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+figure{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:6px}
+.on-navy :focus-visible{outline-color:var(--saffron)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;z-index:200;background:var(--navy);color:#fff;padding:10px 16px;border-radius:var(--r);text-decoration:none;font-weight:700}
+.skip:focus{top:12px}
+.container{width:min(var(--w),100% - var(--gutter)*2);margin-inline:auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums}
+section[id],aside[id]{scroll-margin-top:calc(var(--header) + 16px)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--r);border:1.5px solid transparent;font:700 16.5px/1.2 var(--font);text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,box-shadow .2s;white-space:nowrap}
+.btn svg{width:19px;height:19px;flex:none}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 10px 22px -14px rgba(19,35,63,.9)}
+.btn-primary:hover{background:var(--navy-3)}
+.btn-ghost{background:transparent;color:var(--navy);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--navy);background:#fff}
+.btn-light{background:#fff;color:var(--navy)}
+.btn-light:hover{background:var(--saffron-50)}
+.btn-outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-outline-light:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn-sm{min-height:44px;padding:0 18px;font-size:15.5px}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(-3px)}
+/* ---------- כותרת עליונה ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,252,246,.94);-webkit-backdrop-filter:saturate(1.3) blur(12px);backdrop-filter:saturate(1.3) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+.site-header.is-scrolled{border-bottom-color:var(--line);box-shadow:0 8px 24px -20px rgba(19,35,63,.5)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:var(--header)}
+.brand{display:inline-flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;flex:none}
+.brand-mark{width:42px;height:42px;color:var(--navy);flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-name{font:900 24px/1 var(--font);letter-spacing:-.01em}
+.brand-sub{font:400 12.5px/1 var(--font);color:var(--muted);margin-top:6px;letter-spacing:.01em}
+.main-nav{display:flex;align-items:center;gap:18px}
+.main-nav ul{display:flex;align-items:center;gap:2px}
+.main-nav ul a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-2);text-decoration:none;font:700 15px/1 var(--font);border-radius:8px;transition:color .2s}
+.main-nav ul a::after{content:"";position:absolute;inset-inline:11px;bottom:7px;height:3px;border-radius:2px;background:var(--saffron);transform:scaleX(0);transition:transform .25s}
+.main-nav ul a:hover{color:var(--navy)}
+.main-nav ul a:hover::after{transform:scaleX(1)}
+.menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;padding:0 14px;border:1.5px solid var(--line-2);border-radius:var(--r);background:#fff;cursor:pointer;font:700 15px/1 var(--font);color:var(--ink)}
+.menu-btn .bars{position:relative;width:18px;height:12px}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;inset-inline:0;height:2px;border-radius:2px;background:currentColor;transition:transform .25s,top .25s}
+.menu-btn .bars::before{top:2px}.menu-btn .bars::after{top:8px}
+.menu-btn[aria-expanded="true"] .bars::before{top:5px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{top:5px;transform:rotate(-45deg)}
+/* ---------- פתיחה: הכותרת מימין, לוח הקמפיין משמאל ---------- */
+.hero{position:relative;padding:60px 0 92px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(19,35,63,.05) 1px,transparent 1px),linear-gradient(0deg,rgba(19,35,63,.05) 1px,transparent 1px);background-size:48px 48px;background-position:center top;-webkit-mask:radial-gradient(60% 75% at 24% 46%,#000 0,rgba(0,0,0,.6) 45%,transparent 78%);mask:radial-gradient(60% 75% at 24% 46%,#000 0,rgba(0,0,0,.6) 45%,transparent 78%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:64px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:700 15px/1.3 var(--font);color:var(--ink-2);letter-spacing:.01em}
+.kicker::before{content:"";flex:none;width:10px;height:10px;border-radius:3px;background:var(--saffron)}
+.hero h1{margin-top:22px;font:900 clamp(2.75rem,1.2rem + 4.6vw,5.4rem)/1 var(--font);letter-spacing:-.025em;text-wrap:balance}
+.hero-lead{margin-top:26px;max-width:31em;font-size:clamp(1.08rem,1rem + .35vw,1.26rem);line-height:1.7;color:var(--ink-2)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-cta .btn{min-height:56px;padding:0 30px;font-size:17px}
+.trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:38px;padding-top:24px;border-top:1px solid var(--line)}
+.trust li{display:flex;align-items:center;gap:9px;font:700 14.5px/1.35 var(--font);color:var(--ink-2)}
+.trust svg{width:20px;height:20px;color:var(--navy);flex:none}
+/* כרטיס המד הגדול */
+.live-card{position:relative;padding:34px 38px 26px;border-radius:20px;background:var(--navy);color:#fff;box-shadow:var(--shadow-lg);isolation:isolate}
+.live-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(80% 60% at 85% 0,rgba(255,255,255,.08),rgba(255,255,255,0) 70%);z-index:-1;pointer-events:none}
+.lc-top{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
+.live-chip{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--navy-line);font:700 14px/1 var(--font);color:var(--on-navy)}
+.live-dot{position:relative;flex:none;width:9px;height:9px;border-radius:50%;background:var(--saffron)}
+.live-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--saffron);opacity:0}
+html[data-camp-state="ended"] .live-dot,html[data-camp-state="upcoming"] .live-dot{background:var(--on-navy-2)}
+.lc-days{display:inline-flex;align-items:center;gap:8px;font:700 15px/1.2 var(--font);color:var(--on-navy)}
+.lc-days svg{width:19px;height:19px;color:var(--saffron)}
+.lc-days .i-ended,html[data-camp-state="ended"] .lc-days .i-open{display:none}
+html[data-camp-state="ended"] .lc-days .i-ended{display:block}
+.lc-title{margin-top:28px;font:700 17px/1.35 var(--font);color:var(--on-navy-2)}
+.lc-raised{margin-top:4px;font:900 clamp(3.1rem,1.1rem + 5.4vw,6.35rem)/1.02 "Shekel",var(--font);letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;min-height:1.02em}
+.lc-goal{margin-top:10px;font-size:18px;color:var(--on-navy-2)}
+.lc-goal b{color:#fff;font-weight:700}
+/* המד: פס עבה, המילוי בזעפרן והאחוז על הסמן */
+.meter{position:relative;height:28px;margin-top:60px;border-radius:9px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.meter::before{content:"";position:absolute;inset:7px 0;background:repeating-linear-gradient(to left,transparent 0 calc(25% - 1px),rgba(255,255,255,.2) calc(25% - 1px) 25%);pointer-events:none}
+.meter-fill{position:absolute;inset-block:0;inset-inline-start:0;width:0;border-radius:inherit;background:linear-gradient(180deg,#F6C35F,var(--saffron) 60%,#EBA62E);box-shadow:0 0 24px -4px rgba(242,178,62,.55);transform-origin:100% 50%}
+.meter-flag{position:absolute;bottom:calc(100% + 13px);inset-inline-start:clamp(36px,calc(var(--p,0) * 1%),calc(100% - 36px));transform:translateX(50%);padding:8px 12px 7px;border-radius:9px;background:var(--saffron);color:var(--navy);font:900 19px/1 var(--font);font-variant-numeric:tabular-nums;white-space:nowrap;box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
+.meter-flag::after{content:"";position:absolute;top:calc(100% - 1px);left:50%;margin-left:-7px;border:7px solid transparent;border-top-color:var(--saffron);border-bottom:0}
+.meter-flag::before{content:"";position:absolute;top:100%;left:50%;width:2px;height:13px;margin-left:-1px;background:var(--saffron);opacity:.0}
+.lc-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 24px;margin-top:30px;padding-top:20px;border-top:1px solid var(--navy-line)}
+.lc-last{display:grid;gap:6px;min-width:0}
+.lc-last-label{font:700 12.5px/1 var(--font);color:var(--on-navy-2);letter-spacing:.03em}
+.lc-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;color:#fff;font:700 15.5px/1 var(--font);text-decoration:none;white-space:nowrap}
+.lc-link span{text-decoration:underline;text-decoration-color:rgba(242,178,62,.7);text-decoration-thickness:2px;text-underline-offset:6px}
+.lc-link:hover span{text-decoration-color:var(--saffron)}
+.lc-link svg{width:18px;height:18px;color:var(--saffron);transition:transform .2s}
+.lc-link:hover svg{transform:translateX(-3px)}
+/* התרומה האחרונה בתוך הכרטיס */
+.lc-last .donor{display:grid;grid-template-columns:34px minmax(0,1fr) auto;grid-template-areas:"ini name amt" "ini ded time";column-gap:11px;row-gap:1px;align-items:center;border-radius:10px}
+.lc-last .donor-initial{grid-area:ini;align-self:center;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.1);color:#fff;font:900 15px/1 var(--font)}
+.lc-last .donor-initial:empty::before{content:"";width:18px;height:18px;background:var(--saffron);-webkit-mask:var(--i-wheat) center/contain no-repeat;mask:var(--i-wheat) center/contain no-repeat}
+.lc-last .donor-name{grid-area:name;font:700 15px/1.3 var(--font);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-last .donor-amount{grid-area:amt;font:900 15.5px/1.3 var(--font);color:var(--saffron);text-align:end;white-space:nowrap;font-variant-numeric:tabular-nums}
+.lc-last .donor-ded{grid-area:ded;font-size:13px;line-height:1.35;color:var(--on-navy-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-last .donor-time{grid-area:time;font-size:13px;line-height:1.35;color:var(--on-navy-2);text-align:end;white-space:nowrap}
+/* ---------- סקשנים ---------- */
+.section{padding:var(--sec) 0}
+.section--panel{background:var(--panel)}
+.sec-head{display:grid;gap:14px;margin-bottom:44px;max-width:44em}
+.h2{font:900 clamp(2rem,1.25rem + 2.1vw,3.15rem)/1.08 var(--font);letter-spacing:-.02em;text-wrap:balance}
+.sec-sub{font-size:1.14rem;line-height:1.65;color:var(--ink-2);max-width:40em}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg)}
+.tag-sample{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line-2);border-radius:999px;font:700 13px/1 var(--font);color:var(--muted);background:#fff;white-space:nowrap}
+.tag-sample::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted)}
+/* ---------- הקמפיין: לוח מחוונים ---------- */
+.board{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.b-head{grid-column:span 7;display:grid;align-content:center;gap:14px;padding:10px 0 10px 32px}
+.b-head .sec-sub{font-size:1.08rem}
+.b-sub{font:700 clamp(1.15rem,1rem + .5vw,1.4rem)/1.45 var(--font);color:var(--ink-2)}
+.b-img{grid-column:span 5;overflow:hidden;background:#F5E7D0;min-height:280px;position:relative}
+.b-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.b-ended{grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:24px 28px;border-radius:var(--r-lg);background:var(--navy);color:#fff}
+.b-ended .ok{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--saffron);color:var(--navy)}
+.b-ended .ok::before{content:"";width:26px;height:26px;background:currentColor;-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat}
+.b-ended p{font-size:1.12rem;color:var(--on-navy)}
+.b-ended strong{display:block;font:900 1.4rem/1.3 var(--font);color:#fff;margin-bottom:2px}
+.b-meter{grid-column:1/-1;padding:34px 38px 30px}
+.bm-top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 32px;flex-wrap:wrap}
+.bm-pct{display:flex;align-items:baseline;gap:14px}
+.bm-pct b{font:900 clamp(3.4rem,2.2rem + 3.2vw,5.6rem)/.86 var(--font);letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.bm-pct span{font:700 17px/1.2 var(--font);color:var(--muted)}
+.bm-raised{font-size:1.18rem;color:var(--ink-2);flex:1 1 280px}
+.bm-raised b{font-weight:900;color:var(--ink)}
+.bm-remain{display:inline-flex;align-items:center;gap:10px;padding:11px 16px;border-radius:10px;background:var(--saffron-50);color:var(--saffron-ink);font:700 16px/1.2 var(--font);white-space:nowrap}
+.bm-remain b{font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
+/* מד מחולק למשבצות, כמו לוח מחוונים */
+.seg-meter{position:relative;height:48px;margin-top:28px;background:var(--track);border-radius:6px;-webkit-mask:repeating-linear-gradient(to left,#000 0 calc(2.5% - 4px),transparent calc(2.5% - 4px) 2.5%);mask:repeating-linear-gradient(to left,#000 0 calc(2.5% - 4px),transparent calc(2.5% - 4px) 2.5%)}
+.seg-fill{position:absolute;inset-block:0;inset-inline-start:0;width:0;background:var(--saffron);transform-origin:100% 50%}
+.seg-scale{position:relative;height:22px;margin-top:12px;font:700 13.5px/1 var(--font);color:var(--muted);font-variant-numeric:tabular-nums}
+.seg-scale > span{position:absolute;top:0;white-space:nowrap}
+.seg-scale .s0{inset-inline-start:0}
+.seg-scale .s25{inset-inline-start:25%;transform:translateX(50%)}
+.seg-scale .s50{inset-inline-start:50%;transform:translateX(50%)}
+.seg-scale .s75{inset-inline-start:75%;transform:translateX(50%)}
+.seg-scale .s100{inset-inline-end:0;color:var(--ink)}
+.b-stat{grid-column:span 3;display:flex;flex-direction:column;padding:26px 26px 24px}
+.stat-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stat-ico{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:var(--panel);color:var(--navy)}
+.stat-ico svg{width:21px;height:21px}
+.stat-num{margin-top:22px;font:900 clamp(2.8rem,2rem + 2vw,4rem)/.95 var(--font);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat-num[data-state="ended"]{font-size:clamp(1.9rem,1.5rem + 1vw,2.4rem);letter-spacing:-.01em}
+.stat-lbl{margin-top:10px;font:700 16.5px/1.3 var(--font);color:var(--ink-2)}
+.stat-sub{margin-top:auto;padding-top:16px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+html[data-camp-state="ended"] .b-days .stat-lbl,html[data-camp-state="ended"] .bm-remain{display:none}
+/* ביום האחרון: בלי "0" גדול, רק "היום האחרון" והשעות שנשארו */
+.b-days .stat-num[data-state="last"]{display:none}
+html[data-camp-state="last"] .cd span:first-child{display:none}
+html[data-camp-state="last"] .b-days .stat-lbl{margin-top:22px;font:900 clamp(1.9rem,1.5rem + 1vw,2.4rem)/1.05 var(--font);color:var(--ink)}
+.cd{display:flex;gap:6px;margin-top:auto;padding-top:18px}
+.cd span{flex:1;display:grid;justify-items:center;gap:3px;padding:9px 4px 8px;border-radius:9px;background:var(--panel)}
+.cd b{font:900 19px/1 var(--font);font-variant-numeric:tabular-nums}
+.cd small{font-size:12px;line-height:1;color:var(--muted)}
+.b-cta{grid-column:span 3;display:flex;flex-direction:column;justify-content:space-between;gap:20px;padding:28px 26px 26px;background:var(--navy);border-color:var(--navy);color:#fff}
+.b-cta p{font:700 1.18rem/1.45 var(--font);color:var(--on-navy)}
+.b-cta p b{display:block;font:900 2.4rem/1.05 "Shekel",var(--font);color:#fff;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.b-cta .btn{width:100%}
+html[data-camp-state="ended"] .cta-open{display:none}
+.b-note{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:4px 4px 0;font-size:15px;color:var(--muted)}
+.b-note::before{content:"";flex:none;width:18px;height:18px;background:var(--muted);-webkit-mask:var(--i-repeat) center/contain no-repeat;mask:var(--i-repeat) center/contain no-repeat}
+/* ---------- לתרומה: הטופס והפיד החי ---------- */
+.donate-grid{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(0,1fr);gap:24px;align-items:start}
+.donate-card{padding:44px 44px 40px;border-radius:20px;box-shadow:var(--shadow)}
+.donate-card .sec-head{margin-bottom:30px}
+.freq{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:0;padding:5px;border:1px solid var(--line);border-radius:13px;background:var(--panel);min-width:0}
+.freq label{position:relative;display:block;cursor:pointer}
+.freq input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.freq span{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 10px;border-radius:9px;font:700 16px/1.2 var(--font);color:var(--ink-2);text-align:center;transition:background-color .2s,color .2s,box-shadow .2s}
+.freq input:checked + span{background:var(--navy);color:#fff;box-shadow:0 8px 16px -12px rgba(19,35,63,.9)}
+.freq input:focus-visible + span{outline:3px solid var(--navy);outline-offset:2px}
+.freq .rep{width:17px;height:17px;background:currentColor;-webkit-mask:var(--i-repeat) center/contain no-repeat;mask:var(--i-repeat) center/contain no-repeat}
+.monthly-note{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 14px;border-radius:10px;background:var(--saffron-50);color:var(--saffron-ink);font:700 15px/1.4 var(--font)}
+.monthly-note::before{content:"";flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i-repeat) center/contain no-repeat;mask:var(--i-repeat) center/contain no-repeat}
+#donate-form:not([data-freq="monthly"]) .monthly-note{display:none}
+.per{display:none;font:700 15px/1 var(--font);color:var(--muted);letter-spacing:0;margin-inline-start:6px}
+#donate-form[data-freq="monthly"] .per{display:inline}
+fieldset{margin:0;padding:0;border:0;min-width:0}
+.legend{display:block;padding:0;margin-bottom:12px;font:700 15px/1.3 var(--font);color:var(--ink)}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.tiers > .legend{grid-column:1/-1;margin-bottom:0}
+.tier{position:relative;display:block}
+.tier > input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
+.tier-body{position:relative;display:grid;align-content:start;gap:6px;height:100%;min-height:150px;padding:22px 22px 20px;border:1.5px solid var(--line-2);border-radius:13px;background:#fff;transition:border-color .2s,box-shadow .2s,background-color .2s}
+.tier:hover .tier-body{border-color:#B9AE97}
+.tier-amt{display:flex;align-items:baseline;flex-wrap:wrap;font:900 2.15rem/1 "Shekel",var(--font);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink);padding-inline-end:36px}
+.tier-title{margin-top:8px;font:700 17px/1.3 var(--font);color:var(--ink)}
+.tier-text{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.tier-check{position:absolute;top:20px;inset-inline-end:20px;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line-2);background:#fff;transition:background-color .2s,border-color .2s}
+.tier-check::after{content:"";position:absolute;inset:5px;background:var(--navy);-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat;opacity:0;transition:opacity .2s}
+.tier > input:checked + .tier-body,.tier-other:has(#amt-other:checked) .tier-body{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy),0 14px 26px -20px rgba(19,35,63,.8);background:#FFFEFB}
+.tier > input:checked + .tier-body .tier-check,#amt-other:checked + .tier-body .tier-check{background:var(--saffron);border-color:var(--saffron)}
+.tier > input:checked + .tier-body .tier-check::after,#amt-other:checked + .tier-body .tier-check::after{opacity:1}
+.tier > input:focus-visible + .tier-body{outline:3px solid var(--navy);outline-offset:3px}
+.tier-other{grid-column:1/-1}
+.tier-other .tier-body{min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;column-gap:20px;padding:18px 22px}
+.tier-other .tier-hit{display:grid;gap:4px;padding-inline-end:36px;cursor:pointer}
+.tier-other .tier-title{margin-top:0}
+.tier-other > input{position:absolute;opacity:0;width:1px;height:1px;inset:auto;z-index:0}
+.tier-other > input:focus-visible + .tier-body{outline:3px solid var(--navy);outline-offset:3px}
+.other-field{display:flex;align-items:center;gap:8px;grid-column:2;grid-row:1;min-width:0}
+.other-input{position:relative;flex:1;min-width:0}
+.other-field input{width:100%;min-width:0;min-height:56px;padding:10px 16px;padding-inline-end:44px;border:1.5px solid var(--line-2);border-radius:10px;background:#fff;font:900 22px/1 var(--font);font-variant-numeric:tabular-nums;color:var(--ink)}
+.other-field input::placeholder{font:400 16px/1 var(--font);color:#6F7C94}
+.other-field input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px rgba(19,35,63,.12)}
+.other-field input[aria-invalid="true"]{border-color:var(--pom)}
+.other-field .cur{position:absolute;inset-inline-end:16px;top:50%;transform:translateY(-50%);font:900 19px/1 var(--font);color:var(--muted);pointer-events:none}
+.other-field .per{flex:none}
+.tier-other .tier-hit{position:relative}
+.tier-other .tier-hit .tier-check{top:50%;inset-inline-end:0;margin-top:-13px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:20px 18px;margin-top:30px}
+.field{display:grid;gap:8px;align-content:start}
+.field.full{grid-column:1/-1}
+.field > label,.field-label{font:700 15px/1.3 var(--font);color:var(--ink)}
+.field-opt{font-weight:400;color:var(--muted)}
+.field input[type="text"],.field input[type="email"],.field input[type="tel"],.field select,.field textarea{width:100%;min-height:52px;padding:12px 16px;border:1.5px solid var(--line-2);border-radius:10px;background:#fff;font-size:17px;transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:120px;resize:vertical;line-height:1.55}
+.field input::placeholder,.field textarea::placeholder{color:#6F7C94}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:#B9AE97}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px rgba(19,35,63,.12)}
+.field input:disabled{background:var(--panel);color:var(--muted);border-style:dashed}
+.field select{appearance:none;-webkit-appearance:none;padding-inline-end:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2313233F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:18px;background-position:left 16px center;cursor:pointer}
+.field-note{font-size:14px;line-height:1.45;color:var(--muted)}
+.check{display:inline-flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font:700 15.5px/1.3 var(--font);color:var(--ink-2);justify-self:start}
+.check input{width:22px;height:22px;margin:0;accent-color:var(--navy);cursor:pointer;flex:none}
+.secure{display:flex;align-items:flex-start;gap:14px;margin-top:28px;padding:16px 18px;border-radius:12px;background:var(--panel);font-size:15px;line-height:1.55;color:var(--ink-2)}
+.secure svg{width:22px;height:22px;flex:none;color:var(--navy);margin-top:1px}
+.form-foot{display:grid;gap:12px;margin-top:20px}
+.demo-note{display:flex;align-items:center;gap:10px;font-size:14.5px;line-height:1.45;color:var(--muted)}
+.demo-note::before{content:"";flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+.btn-donate{width:100%;min-height:64px;font:900 19px/1.2 var(--font);border-radius:12px}
+.btn-donate svg{width:20px;height:20px}
+.form-error:not(:empty){display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;background:var(--pom-50);color:#8F2A34;font:700 15.5px/1.4 var(--font)}
+.form-error:not(:empty)::before{content:"";flex:none;width:19px;height:19px;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+/* מצב תודה */
+.thanks{display:grid;justify-items:start;gap:16px;padding:8px 0}
+.thanks:focus{outline:none}
+.thanks:focus-visible{outline:3px solid var(--navy);outline-offset:8px;border-radius:12px}
+.thanks .ok{display:grid;place-items:center;width:68px;height:68px;border-radius:18px;background:var(--saffron);color:var(--navy)}
+.thanks .ok::before{content:"";width:34px;height:34px;background:currentColor;-webkit-mask:var(--i-check) center/contain no-repeat;mask:var(--i-check) center/contain no-repeat}
+.thanks h3{margin-top:6px;font:900 clamp(1.7rem,1.3rem + 1.2vw,2.3rem)/1.15 var(--font);letter-spacing:-.015em}
+.thanks-sum{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 14px;border-radius:10px;background:var(--panel);font:700 16px/1.4 var(--font);color:var(--ink)}
+.thanks-sum b{font-weight:900;font-variant-numeric:tabular-nums}
+.thanks-sum > * + *::before{content:"·";margin-inline-end:12px;color:var(--muted)}
+.thanks p{max-width:36em;color:var(--ink-2);font-size:1.06rem}
+.thanks-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.other-ways{display:flex;align-items:center;gap:16px;margin-top:22px;padding:12px;padding-inline-end:20px;border:1.5px dashed var(--line-2);border-radius:14px;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.other-ways img{flex:none;width:72px;height:72px;border-radius:10px;object-fit:cover;object-position:50% 38%;background:#FBEFE1}
+.other-ways a{font-weight:700;color:var(--navy);white-space:nowrap}
+/* הפיד החי */
+/* ---------- מה יש בסל ---------- */
+.basket-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:64px;align-items:center}
+.ph{position:relative;overflow:hidden;border-radius:var(--r-lg);background:#F5E7D3}
+.ph img{width:100%;height:100%;object-fit:cover}
+.basket-img{aspect-ratio:3/2;background:#F7E0B8}
+.basket-copy .sec-head{margin-bottom:28px}
+.manifest{border-top:1.5px solid var(--navy)}
+.manifest li{display:grid;grid-template-columns:42px 1fr;align-items:center;gap:10px;min-height:56px;padding:10px 0;border-bottom:1px solid var(--line);font:400 17px/1.45 var(--font)}
+.manifest .n{font:900 14px/1 var(--font);color:var(--muted);font-variant-numeric:tabular-nums}
+.manifest .hol{margin-top:10px;padding:12px 14px;border:0;border-radius:12px;background:var(--saffron-50);font-weight:700}
+.manifest .hol .n{color:var(--saffron-ink)}
+/* ---------- איך זה עובד ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.step{position:relative;display:flex;flex-direction:column}
+.step .ph{aspect-ratio:3/2;border-radius:var(--r-lg) var(--r-lg) 0 0;border:1px solid var(--line);border-bottom:0}
+.step-body{flex:1;display:grid;align-content:start;gap:10px;padding:24px 26px 28px;background:#fff;border:1px solid var(--line);border-radius:0 0 var(--r-lg) var(--r-lg)}
+.step-no{display:flex;align-items:center;gap:12px;font:700 14px/1 var(--font);color:var(--muted)}
+.step-no b{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;font:900 18px/1 var(--font)}
+.step h3{font:900 1.45rem/1.2 var(--font);letter-spacing:-.01em}
+.step p{color:var(--ink-2);font-size:16.5px}
+.step:not(:last-child)::after{content:"";position:absolute;z-index:2;top:calc((100% - 0px) * 0 + 33%);inset-inline-end:-29px;width:38px;height:38px;border-radius:50%;background:#fff var(--i-arrow) center/18px no-repeat;border:1px solid var(--line);box-shadow:var(--shadow)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:40px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff}
+.kpis li{display:grid;align-content:start;gap:10px;padding:28px 30px 30px}
+.kpis li + li{border-inline-start:1px solid var(--line)}
+.kpis b{display:flex;align-items:baseline;gap:4px;font:900 clamp(2.5rem,1.8rem + 2vw,3.6rem)/.95 var(--font);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpis b small{font:700 .42em/1 var(--font);letter-spacing:0;color:var(--muted)}
+.kpis span{font:700 15.5px/1.4 var(--font);color:var(--ink-2)}
+/* ---------- עדכונים מהשטח ---------- */
+.upd-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:40px}
+.upd-head .sec-head{margin-bottom:0}
+.updates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.upd{position:relative;display:grid;align-content:start;gap:10px;padding:26px 26px 28px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg)}
+.upd-date{justify-self:start;display:inline-flex;align-items:center;padding:7px 11px;border-radius:8px;background:var(--panel);font:900 15px/1 var(--font);font-variant-numeric:tabular-nums;color:var(--ink)}
+.upd:first-child .upd-date{background:var(--navy);color:#fff}
+.upd:first-child::after{content:"העדכון האחרון";position:absolute;top:33px;inset-inline-end:26px;padding-inline-start:15px;font:700 13px/1 var(--font);color:var(--ink-2);background:radial-gradient(circle at calc(100% - 4px) 50%,var(--saffron) 3.6px,transparent 4.2px)}
+.upd-title{margin-top:8px;font:900 1.28rem/1.3 var(--font);letter-spacing:-.005em}
+.upd-text{color:var(--ink-2);font-size:16px;line-height:1.6}
+.admin-try{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px 22px;margin-top:20px;padding:22px 26px;border:1.5px dashed #C9BEA8;border-radius:var(--r-lg);background:#fff}
+.admin-try .a-ico{display:grid;place-items:center;width:52px;height:52px;border-radius:13px;background:var(--navy);color:var(--saffron)}
+.admin-try .a-ico svg{width:24px;height:24px}
+.admin-try a{display:inline-flex;align-items:center;min-height:44px;font:900 1.2rem/1.3 var(--font);color:var(--navy);text-decoration:underline;text-decoration-color:var(--saffron);text-decoration-thickness:3px;text-underline-offset:7px}
+.admin-try a:hover{text-decoration-color:var(--navy)}
+.admin-try p{color:var(--muted);font-size:15.5px;line-height:1.55}
+.admin-try .go{width:24px;height:24px;color:var(--navy)}
+/* ---------- לאן הולך הכסף ---------- */
+.tr-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.chart-card{grid-column:span 7;padding:34px 36px 26px}
+.chart-title{display:flex;align-items:center;justify-content:space-between;gap:12px;font:700 15px/1.3 var(--font);color:var(--muted)}
+.stack{display:flex;gap:3px;height:60px;margin-top:18px;border-radius:10px;overflow:hidden}
+.stack span{flex:var(--w) 1 0;min-width:0}
+.stack .c1{background:var(--navy)}
+.stack .c2{background:#5D6E8E}
+.stack .c3{background:#A9B4C8}
+.legend-list{margin-top:14px}
+.legend-list li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.legend-list li:last-child{border-bottom:0}
+.legend-list b{display:flex;align-items:center;gap:12px;min-width:4.2ch;font:900 2.1rem/1 var(--font);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.legend-list b::before{content:"";flex:none;width:12px;height:12px;border-radius:3px;background:var(--sw)}
+.legend-list span{font-size:16.5px;line-height:1.5;color:var(--ink-2)}
+.legend-list strong{font-weight:700;color:var(--ink)}
+.tr-img{grid-column:span 5;min-height:300px;background:#A66530}
+.tr-img img{position:absolute;inset:0}
+.tr-items{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tr-item{display:grid;align-content:start;gap:10px;padding:26px 26px 24px}
+.tr-item .stat-ico{margin-bottom:6px}
+.tr-item h3{font:900 1.22rem/1.3 var(--font)}
+.tr-item p{color:var(--ink-2);font-size:16px;line-height:1.6}
+.dl{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:700 16px/1 var(--font);color:var(--navy);justify-self:start}
+.dl svg{width:18px;height:18px}
+.dl-status:not(:empty){display:block;padding:9px 12px;border-radius:9px;background:var(--panel);font:700 14.5px/1.4 var(--font);color:var(--ink-2)}
+/* ---------- התנדבות (הרצועה הכהה) ---------- */
+.vol{background:var(--navy);color:#fff}
+.vol-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:64px;align-items:center}
+.vol .kicker{color:var(--on-navy)}
+.vol .sec-head{margin-bottom:30px}
+.vol .sec-sub{color:var(--on-navy)}
+.shifts{display:grid;gap:10px}
+.shifts li{display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:16px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--navy-line)}
+.shifts .s-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:rgba(242,178,62,.14);color:var(--saffron)}
+.shifts .s-ico svg{width:22px;height:22px}
+.shifts b{display:block;font:900 1.12rem/1.3 var(--font);color:#fff}
+.shifts span{display:block;color:var(--on-navy-2);font-size:15.5px;line-height:1.5}
+.vol-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.vol-img{aspect-ratio:4/5;border-radius:20px;background:#F4E7D5;max-height:600px;justify-self:end;width:100%}
+/* ---------- המלצות ---------- */
+.quotes-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:40px}
+.quotes-head .sec-head{margin-bottom:0}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.quote{display:flex;flex-direction:column;gap:20px;padding:32px 30px 26px}
+.quote .q-mark{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--panel);color:var(--navy)}
+.quote .q-mark svg{width:20px;height:20px}
+.quote blockquote{margin:0;font:400 1.14rem/1.7 var(--font);color:var(--ink)}
+.quote figcaption{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:700 15px/1.3 var(--font);color:var(--muted)}
+/* ---------- שאלות ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.75fr);gap:64px;align-items:start}
+.faq-aside{position:sticky;top:calc(var(--header) + 32px)}
+.faq-aside .sec-head{margin-bottom:24px}
+.faq-aside .btn{margin-top:4px}
+.faq-list{border-top:1.5px solid var(--navy)}
+.faq-list details{border-bottom:1px solid var(--line-2)}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:74px;padding:16px 2px;cursor:pointer;list-style:none;font:700 1.15rem/1.4 var(--font);color:var(--ink)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover{color:var(--navy-3)}
+.pm{position:relative;flex:none;width:36px;height:36px;border-radius:9px;border:1.5px solid var(--line-2);background:#fff;transition:background-color .2s,border-color .2s}
+.pm::before,.pm::after{content:"";position:absolute;top:50%;left:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--navy);transition:transform .25s}
+.pm::after{transform:rotate(90deg)}
+.faq-list details[open] .pm{background:var(--navy);border-color:var(--navy)}
+.faq-list details[open] .pm::before,.faq-list details[open] .pm::after{background:#fff}
+.faq-list details[open] .pm::after{transform:rotate(0)}
+.faq-list .ans{padding:0 2px 24px;max-width:44em;color:var(--ink-2);font-size:1.06rem}
+/* ---------- צרו קשר ---------- */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:24px;align-items:start}
+.contact-info .sec-head{margin-bottom:28px}
+.c-list{display:grid;gap:10px}
+.c-list li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:14px;padding:12px 16px;min-height:72px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.c-list .stat-ico{width:44px;height:44px}
+.c-list small{display:block;font:700 13px/1.3 var(--font);color:var(--muted)}
+.c-list a,.c-list b{display:block;font:700 1.08rem/1.4 var(--font);color:var(--ink);text-decoration:none}
+.c-list a{display:inline-flex;align-items:center;min-height:32px;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:5px}
+.c-list a:hover{text-decoration-color:var(--navy)}
+.c-list span{color:var(--muted);font-size:15px}
+.form-card{padding:40px;border-radius:20px;box-shadow:var(--shadow)}
+.form-card h3{font:900 1.5rem/1.2 var(--font);margin-bottom:22px}
+.c-form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.c-form .form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:4px}
+.c-form .form-foot .btn{min-width:170px}
+.form-status:not(:empty){display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--panel);font:700 15px/1.4 var(--font);color:var(--ink)}
+.form-status:not(:empty)::before{content:"";width:18px;height:18px;flex:none;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+.discreet{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:14.5px;color:var(--muted)}
+.discreet svg{width:18px;height:18px;flex:none;color:var(--navy)}
+/* ---------- פוטר ---------- */
+.site-footer{background:var(--navy);color:var(--on-navy-2);padding:72px 0 26px}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--navy-line)}
+.site-footer .brand{color:#fff}
+.site-footer .brand-mark{color:var(--saffron)}
+.site-footer .brand-sub{color:var(--on-navy-2)}
+.f-line{margin-top:18px;font:700 1.05rem/1.5 var(--font);color:#fff}
+.f-legal{margin-top:8px;font-size:15px;line-height:1.6}
+.site-footer h3{font:700 13.5px/1 var(--font);color:var(--saffron);letter-spacing:.05em;margin-bottom:14px}
+.f-links{display:grid;grid-template-columns:repeat(2,max-content);gap:2px 36px}
+.f-links a{display:inline-flex;align-items:center;min-height:40px;color:var(--on-navy);text-decoration:none}
+.f-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.f-contact{display:grid;gap:6px;color:var(--on-navy)}
+.f-contact a{display:inline-flex;align-items:center;min-height:36px;color:var(--on-navy);text-decoration:none;justify-self:start}
+.f-contact a:hover{text-decoration:underline;text-underline-offset:4px}
+.f-owner{display:inline-flex;align-items:center;gap:8px;margin-top:12px;min-height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.25);border-radius:var(--r);color:#fff;text-decoration:none;font-size:15px;justify-self:start}
+.f-owner:hover{background:rgba(255,255,255,.08)}
+.f-owner svg{width:17px;height:17px}
+.f-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:22px;font-size:14.5px}
+.f-bottom a{color:#fff}
+.f-bottom .to-top{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--on-navy);text-decoration:none}
+.f-bottom .to-top:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.f-bottom .to-top svg{width:16px;height:16px}
+/* ---------- כפתור תרומה דביק בטלפון (לא חלון קופץ) ---------- */
+.dock{display:none}
+/* ================================================================
+   הגרסה הסופית: מה שהלקוח ביקש במשוב, מותאם לכחול, לזעפרן ול־Heebo
+   ================================================================ */
+/* 1. פתיחה: תמונת הסל (מעיצוב 1) ליד המד, כדי שיראו מה התרומה קונה */
+.hero-stage{position:relative;display:grid;align-content:start}
+.hero-basket{position:relative;margin:0;aspect-ratio:3/2;border-radius:22px;overflow:hidden;background:#F1E4D0;border:1px solid var(--line);box-shadow:var(--shadow)}
+.hero-basket img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.hero-basket figcaption{position:absolute;top:16px;inset-inline-start:16px;max-width:calc(100% - 32px);display:flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border-radius:999px;background:rgba(255,252,246,.95);box-shadow:0 8px 22px -12px rgba(19,35,63,.45);font:500 14px/1.35 var(--font);color:var(--ink-2)}
+.hero-basket figcaption b{flex:none;padding:6px 9px 5px;border-radius:999px;background:var(--saffron);color:var(--navy);font:900 14px/1 var(--font);font-variant-numeric:tabular-nums}
+.hero-stage .live-card{margin-top:-120px;margin-inline-start:9%}
+/* כל הסכומים באותו גודל: גם התרומה האחרונה במד לא בולטת יותר מהשם */
+.lc-last .donor-amount{font:500 14.5px/1.3 var(--font);color:var(--on-navy)}
+/* 2. תודה לתורמים: לוח חרוט (מעיצוב 1). השמות במרכז, וכל הסכומים קטנים ושווים */
+.plaque{position:sticky;top:calc(var(--header) + 20px);padding:9px;border-radius:20px;background:linear-gradient(180deg,var(--navy-2),var(--navy) 60%);color:#fff;box-shadow:var(--shadow-lg)}
+.plaque-in{position:relative;padding:34px 24px 22px;border-radius:13px;text-align:center;box-shadow:inset 0 0 0 1px rgba(242,178,62,.55),inset 0 0 0 6px var(--navy),inset 0 0 0 7px rgba(242,178,62,.22)}
+.plaque-in::before{content:"";position:absolute;inset:14px;pointer-events:none;background:
+  radial-gradient(circle,#F6CB73 0 1.8px,#9C6E1E 2.4px,transparent 3.2px) top right/8px 8px no-repeat,
+  radial-gradient(circle,#F6CB73 0 1.8px,#9C6E1E 2.4px,transparent 3.2px) top left/8px 8px no-repeat,
+  radial-gradient(circle,#F6CB73 0 1.8px,#9C6E1E 2.4px,transparent 3.2px) bottom right/8px 8px no-repeat,
+  radial-gradient(circle,#F6CB73 0 1.8px,#9C6E1E 2.4px,transparent 3.2px) bottom left/8px 8px no-repeat}
+.plaque-tag{display:flex;align-items:center;justify-content:center;gap:12px;font:700 12.5px/1.3 var(--font);letter-spacing:.12em;color:var(--saffron)}
+.plaque-tag::before,.plaque-tag::after{content:"";width:28px;height:1px;background:rgba(242,178,62,.6)}
+.plaque h2{margin-top:14px;font:900 1.75rem/1.1 var(--font);letter-spacing:-.015em;color:#fff}
+.plaque-sub{margin:8px auto 0;max-width:26em;font-size:14.5px;line-height:1.55;color:var(--on-navy-2)}
+.dboard{position:relative;margin-top:12px}
+.dboard .donor{position:relative;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;grid-template-areas:"new new" "ini ini" "name name" "ded ded" "amt time";padding:18px 6px 19px}
+.dboard .donor::after{content:"";position:absolute;bottom:0;left:50%;width:min(200px,70%);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(242,178,62,.5),transparent)}
+.dboard .donor:last-child::after{display:none}
+.dboard .donor-initial{grid-area:ini;justify-self:center;display:grid;place-items:center;width:34px;height:34px;margin-bottom:9px;border:1px solid rgba(242,178,62,.6);border-radius:50%;color:var(--saffron);font:700 14.5px/1 var(--font);box-shadow:inset 0 0 0 3px var(--navy),inset 0 0 0 4px rgba(242,178,62,.22)}
+.dboard .donor-initial:empty::before{content:"";width:17px;height:17px;background:var(--saffron);-webkit-mask:var(--i-wheat) center/contain no-repeat;mask:var(--i-wheat) center/contain no-repeat}
+.dboard .donor-name{grid-area:name;font:700 1.16rem/1.3 var(--font);letter-spacing:.01em;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.45);overflow-wrap:anywhere}
+.dboard .is-anon .donor-name{font-weight:500;color:var(--on-navy)}
+.dboard .donor-ded{grid-area:ded;margin-top:3px;font-size:14.5px;line-height:1.45;color:#F5CC7A}
+.dboard .donor-amount,.dboard .donor-time{margin-top:7px;font:400 14px/1.35 var(--font);color:var(--on-navy-2);white-space:nowrap}
+.dboard .donor-amount{grid-area:amt;justify-self:end;font-variant-numeric:tabular-nums}
+.dboard .donor-time{grid-area:time;justify-self:start}
+.dboard .donor-time::before{content:"·";margin:0 8px;color:rgba(242,178,62,.85)}
+.dboard .donor.is-new{background:radial-gradient(closest-side,rgba(242,178,62,.17),rgba(242,178,62,0))}
+.dboard .donor.is-new::before{content:"התרומה שלכם";grid-area:new;justify-self:center;margin-bottom:10px;padding:3px 12px 4px;border:1px solid rgba(242,178,62,.75);border-radius:999px;font:700 12.5px/1.4 var(--font);letter-spacing:.04em;color:var(--saffron)}
+.plaque-foot{display:grid;justify-items:center;gap:8px;margin-top:10px;padding-top:16px;border-top:1px solid rgba(242,178,62,.3)}
+.plaque-count{font-size:15px;color:var(--on-navy)}
+.plaque-count b{font:900 20px/1 var(--font);color:#fff;font-variant-numeric:tabular-nums}
+.plaque-live{display:inline-flex;align-items:center;gap:9px;font:700 13px/1 var(--font);color:var(--on-navy-2)}
+.plaque-live .live-dot{width:8px;height:8px}
+/* 3. התנדבות: הזמנה לערב חמישי (מעיצוב 3), ככרטיס נייר על הכחול */
+.ticket-wrap{filter:drop-shadow(0 30px 34px rgba(0,0,0,.28)) drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.ticket{--cut:25%;display:grid;grid-template-columns:1fr 25%;overflow:hidden;border-radius:20px;background:var(--paper);color:var(--ink);
+  -webkit-mask:radial-gradient(circle 15px at var(--cut) 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 15px at var(--cut) 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 15px at var(--cut) 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 15px at var(--cut) 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.ticket :focus-visible{outline-color:var(--navy)}
+.ticket-main{position:relative;padding:40px 40px 36px;border-inline-end:2px dashed var(--line-2)}
+.ticket-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 13px 7px 14px;border-radius:999px;background:var(--saffron);color:var(--navy);font:700 14px/1 var(--font)}
+.ticket-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--navy)}
+.ticket .h2{margin-top:18px;color:var(--ink)}
+.ticket-text{margin-top:12px;max-width:34em;color:var(--ink-2);font-size:1.06rem;line-height:1.7}
+.ticket-list{display:grid;margin-top:22px;border-top:1.5px solid var(--navy)}
+.ticket-list li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ticket-list .t-ico{display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:var(--saffron-50);color:var(--saffron-ink)}
+.ticket-list .t-ico svg{width:20px;height:20px}
+.ticket-list span{color:var(--ink-2);line-height:1.5}
+.ticket-list b{font-weight:700;color:var(--ink)}
+.ticket-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.ticket-stub{display:grid;place-items:center;align-content:center;gap:6px;padding:28px 14px;text-align:center;background:var(--saffron-50)}
+.ticket-stub .stub-mark{width:46px;height:46px;color:var(--saffron-ink);margin-bottom:4px}
+.ticket-stub .day{font:700 20px/1 var(--font);color:var(--saffron-ink)}
+.ticket-stub b{font:900 clamp(2.3rem,1.6rem + 1.6vw,3.2rem)/1 var(--font);letter-spacing:-.02em;color:var(--navy);font-variant-numeric:tabular-nums}
+.ticket-stub .vline{width:40px;height:1.5px;margin:8px 0;background:var(--line-2)}
+.ticket-stub .where{font-size:14px;line-height:1.45;color:var(--ink-2)}
+/* 4. כבוד המשפחות: בלי שמות ובלי תמונות */
+.privacy{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;align-items:start;padding:28px 30px;background:var(--navy);border-color:var(--navy);color:#fff}
+.privacy .p-ico{grid-row:span 2;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:rgba(242,178,62,.16);color:var(--saffron)}
+.privacy .p-ico svg{width:26px;height:26px}
+.privacy h3{font:900 1.3rem/1.3 var(--font);color:#fff}
+.privacy p{max-width:52em;color:var(--on-navy);font-size:1.04rem;line-height:1.7}
+/* ---------- תנועה עדינה, רק כשלא ביקשו להפחית תנועה ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .js [data-grow]:not(.is-in) .meter-fill,.js [data-grow]:not(.is-in) .seg-fill{transform:scaleX(0)}
+  .js [data-grow]:not(.is-in) .meter-flag{opacity:0;transform:translateX(50%) translateY(6px)}
+  .meter-fill,.seg-fill{transition:transform 1.5s cubic-bezier(.2,.75,.2,1),width .9s cubic-bezier(.2,.75,.2,1)}
+  .meter-flag{transition:opacity .5s ease 1.1s,transform .5s ease 1.1s,inset-inline-start .9s cubic-bezier(.2,.75,.2,1)}
+  html[data-camp-state="live"] .live-dot::after,html[data-camp-state="last"] .live-dot::after{animation:ping 2.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.4);opacity:.7}80%,100%{transform:scale(1.5);opacity:0}}
+  @keyframes arrive{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .is-bump .meter-flag{animation:bump .9s ease}
+  @keyframes bump{0%,100%{scale:1}35%{scale:1.14}}
+  .dboard .donor.is-new{animation:arrive 1.2s cubic-bezier(.2,.7,.2,1) both}
+  .dock{transition:transform .35s cubic-bezier(.2,.75,.2,1),visibility .35s}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+/* ---------- רספונסיבי ---------- */
+@media (max-width:1180px){
+  .hero-grid{gap:44px}
+  .live-card{padding:30px 30px 24px}
+  .b-stat,.b-cta{grid-column:span 6}
+  .b-head{padding-inline-end:0}
+  .main-nav ul a{padding:0 8px}
+}
+@media (max-width:1060px){
+  .donate-grid{grid-template-columns:1fr}
+  .plaque{position:static}
+  .plaque-in{padding:40px 36px 24px}
+  .dboard{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+  .dboard::before{content:"";position:absolute;top:12px;bottom:12px;left:50%;width:1px;background:linear-gradient(transparent,rgba(242,178,62,.32) 12%,rgba(242,178,62,.32) 88%,transparent)}
+  .dboard .donor:nth-last-child(2)::after{display:none}
+}
+@media (max-width:960px){
+  :root{--sec:84px}
+  .hero{padding:44px 0 72px}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .hero-copy{max-width:640px}
+  .hero-stage{max-width:620px}
+  .ticket-wrap{max-width:720px}
+  .board{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .b-head,.b-img{grid-column:1/-1}
+  .b-head{padding:0 0 8px}
+  .b-img{min-height:0;aspect-ratio:16/9}
+  .b-stat,.b-cta{grid-column:span 3}
+  .basket-grid{grid-template-columns:1fr;gap:40px}
+  .steps{grid-template-columns:1fr;gap:16px;max-width:620px}
+  .step{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+  .step .ph{aspect-ratio:auto;height:100%;border-radius:var(--r-lg) 0 0 var(--r-lg);border:1px solid var(--line);border-inline-start:0;order:2}
+  .step-body{border-radius:var(--r-lg) 0 0 var(--r-lg);border-radius:0 var(--r-lg) var(--r-lg) 0;order:1}
+  .step:not(:last-child)::after{top:auto;bottom:-27px;inset-inline-end:auto;inset-inline-start:40px;transform:rotate(-90deg)}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpis li:nth-child(3){border-inline-start:0}
+  .kpis li:nth-child(n+3){border-top:1px solid var(--line)}
+  .updates{grid-template-columns:1fr}
+  .upd-head{flex-direction:column;align-items:flex-start;gap:16px}
+  .tr-grid{grid-template-columns:1fr}
+  .chart-card,.tr-img,.tr-items{grid-column:1/-1}
+  .tr-img{min-height:0;aspect-ratio:3/2}
+  .tr-items{grid-template-columns:1fr}
+  .vol-grid{grid-template-columns:1fr;gap:40px}
+  .vol-img{max-width:440px;justify-self:start;aspect-ratio:4/5}
+  .privacy{padding:24px 22px}
+  .quotes{grid-template-columns:1fr}
+  .quotes-head{flex-direction:column;align-items:flex-start;gap:16px}
+  .faq-grid{grid-template-columns:1fr;gap:28px}
+  .faq-aside{position:static}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid > :first-child{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex}
+  .main-nav{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;align-items:stretch;gap:16px;padding:10px var(--gutter) 22px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(19,35,63,.35)}
+  .main-nav.is-open{display:flex}
+  .main-nav ul{flex-direction:column;align-items:stretch;gap:0}
+  .main-nav ul a{display:flex;min-height:54px;padding:0 4px;font-size:17px;border-bottom:1px solid var(--line);border-radius:0}
+  .main-nav ul a::after{display:none}
+  .nav-cta{width:100%;min-height:52px}
+}
+@media (max-width:760px){
+  .dock{position:fixed;z-index:60;inset-inline:0;bottom:0;display:flex;align-items:center;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(19,35,63,.97);color:#fff;box-shadow:0 -10px 30px -12px rgba(19,35,63,.5);transform:translateY(110%);visibility:hidden}
+  .dock.is-shown{transform:none;visibility:visible}
+  .dock-meter{flex:1;min-width:0;display:grid;gap:7px}
+  .dock-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font:700 13.5px/1 var(--font);color:var(--on-navy-2);white-space:nowrap}
+  .dock-row b{font:900 17px/1 var(--font);color:#fff;font-variant-numeric:tabular-nums}
+  .dock-bar{position:relative;height:8px;border-radius:5px;background:rgba(255,255,255,.14);overflow:hidden}
+  .dock-bar span{position:absolute;inset-block:0;inset-inline-start:0;width:0;border-radius:inherit;background:var(--saffron)}
+  .dock .btn{flex:none;min-height:48px;padding:0 20px;background:var(--saffron);color:var(--navy);box-shadow:none}
+  .dock .btn:hover{background:#F6C35F}
+  .dock :focus-visible{outline-color:var(--saffron)}
+}
+@media (max-width:640px){
+  :root{--gutter:16px;--sec:68px;--header:64px}
+  body{font-size:16.5px}
+  .brand-mark{width:38px;height:38px}
+  .brand-name{font-size:22px}
+  .brand-sub{font-size:12px}
+  .hero{padding:30px 0 56px}
+  .hero::before{background-size:36px 36px;-webkit-mask:radial-gradient(90% 50% at 50% 72%,#000 0,transparent 80%);mask:radial-gradient(90% 50% at 50% 72%,#000 0,transparent 80%)}
+  .hero h1{margin-top:16px;font-size:clamp(2.5rem,1.4rem + 6vw,3.1rem)}
+  .hero-lead{margin-top:16px;font-size:1.05rem;line-height:1.65}
+  .hero-grid{gap:0}
+  .hero-copy{display:contents}
+  .hero-head{order:1}
+  .live-card{order:2;margin-top:26px;padding:22px 20px 16px;border-radius:18px}
+  .hero-stage{order:2;margin-top:26px}
+  .hero-basket{border-radius:18px}
+  .hero-basket figcaption{top:10px;inset-inline-start:10px;max-width:calc(100% - 20px);padding:6px 10px 6px 6px;font-size:12.5px;gap:8px}
+  .hero-basket figcaption b{font-size:12.5px;padding:5px 7px 4px}
+  .hero-basket figcaption .cap-more{display:none}
+  .hero-stage .live-card{margin-top:-46px;margin-inline:10px}
+  .hero-cta{order:3;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+  .hero-cta .btn{width:100%;min-height:54px;padding:0 12px;font-size:16px}
+  .trust{order:4;display:grid;gap:10px;margin-top:24px;padding-top:20px}
+  .lc-title{margin-top:20px;font-size:15.5px}
+  .lc-raised{font-size:clamp(2.7rem,1.2rem + 8.8vw,3.4rem)}
+  .lc-goal{font-size:16px;margin-top:6px}
+  .meter{height:22px;margin-top:52px;border-radius:7px}
+  .meter::before{inset:5px 0}
+  .meter-flag{font-size:16.5px;padding:7px 10px 6px}
+  .lc-foot{grid-template-columns:1fr;gap:6px;margin-top:22px;padding-top:16px}
+  .lc-link{justify-self:start;padding:0}
+  .live-chip{padding:7px 11px;font-size:13px}
+  .lc-days{font-size:14px}
+  .sec-head{margin-bottom:30px}
+  .board{grid-template-columns:1fr 1fr;gap:10px}
+  .b-head{gap:10px}
+  .b-img{border-radius:14px}
+  .b-meter{padding:24px 20px 20px}
+  .bm-top{gap:14px}
+  .bm-raised{font-size:1.05rem;flex-basis:100%}
+  .bm-remain{font-size:15px;padding:10px 14px}
+  .seg-meter{height:40px;margin-top:22px;-webkit-mask:repeating-linear-gradient(to left,#000 0 calc(5% - 4px),transparent calc(5% - 4px) 5%);mask:repeating-linear-gradient(to left,#000 0 calc(5% - 4px),transparent calc(5% - 4px) 5%)}
+  .seg-scale{font-size:12.5px}
+  .seg-scale .s25,.seg-scale .s75{display:none}
+  .b-stat{grid-column:span 1;padding:18px 16px 16px}
+  .stat-ico{width:36px;height:36px;border-radius:10px}
+  .stat-ico svg{width:19px;height:19px}
+  .stat-num{margin-top:16px;font-size:clamp(2.3rem,1.6rem + 3vw,2.8rem)}
+  .stat-lbl{font-size:15px}
+  .stat-sub{font-size:13.5px;padding-top:10px}
+  .b-days{grid-column:1/-1}
+  .b-days .cd{max-width:320px}
+  .cd span{padding:8px 4px 7px}
+  .b-cta{grid-column:1/-1;padding:22px 20px 20px}
+  .b-ended{padding:20px;gap:14px;align-items:flex-start}
+  .b-ended .ok{width:44px;height:44px;border-radius:12px}
+  .b-ended strong{font-size:1.2rem}
+  .b-ended p{font-size:1rem}
+  .b-note{font-size:14px;align-items:flex-start}
+  .donate-card{padding:26px 18px 24px;border-radius:18px}
+  .freq span{font-size:15px;min-height:48px;padding:0 6px}
+  .freq .rep{display:none}
+  .tiers{gap:10px}
+  .tier-body{min-height:0;padding:16px 14px 14px;gap:4px}
+  .tier-amt{font-size:1.65rem;padding-inline-end:26px}
+  .tier-title{font-size:15.5px;margin-top:4px}
+  .tier-text{font-size:13.5px}
+  .tier-check{top:14px;inset-inline-end:12px;width:22px;height:22px}
+  .tier-check::after{inset:4px}
+  .tier-other .tier-body{grid-template-columns:1fr;row-gap:12px;padding:16px 14px}
+  .other-field{grid-column:1;grid-row:2}
+  .tier-other .tier-hit .tier-check{top:0;margin-top:0}
+  .fields{grid-template-columns:1fr;gap:18px}
+  .btn-donate{font-size:17.5px;min-height:60px}
+  .other-ways{align-items:flex-start;padding:10px;font-size:14.5px}
+  .other-ways img{width:60px;height:60px}
+  .basket-grid{gap:28px}
+  .manifest li{font-size:16px;min-height:52px}
+  .step{display:flex;flex-direction:column}
+  .step .ph{aspect-ratio:16/9;height:auto;border-radius:var(--r-lg) var(--r-lg) 0 0;border:1px solid var(--line);border-bottom:0;order:0}
+  .step-body{border-radius:0 0 var(--r-lg) var(--r-lg);padding:20px 20px 22px;order:1}
+  .step h3{font-size:1.3rem}
+  .step:not(:last-child)::after{bottom:-27px;inset-inline-start:24px}
+  .kpis li{padding:20px 18px 22px}
+  .kpis b{font-size:2.4rem}
+  .kpis span{font-size:14.5px}
+  .upd{padding:22px 20px 22px}
+  .upd:first-child::after{top:29px;inset-inline-end:20px}
+  .admin-try{grid-template-columns:auto minmax(0,1fr);padding:18px;gap:6px 14px;align-items:start}
+  .admin-try .a-ico{width:44px;height:44px;border-radius:12px;grid-row:span 2}
+  .admin-try .go{display:none}
+  .admin-try a{font-size:1.08rem}
+  .admin-try p{grid-column:2}
+  .chart-card{padding:24px 20px 16px}
+  .stack{height:48px}
+  .legend-list li{gap:14px;padding:14px 0}
+  .legend-list b{font-size:1.75rem}
+  .legend-list span{font-size:15.5px}
+  .tr-item{padding:22px 20px}
+  .plaque{padding:7px;border-radius:18px}
+  .plaque-in{padding:30px 14px 18px}
+  .plaque-in::before{inset:10px}
+  .dboard{display:block}
+  .dboard::before{display:none}
+  .dboard .donor:nth-last-child(2)::after{display:block}
+  .dboard .donor:nth-child(n+7){display:none}
+  .dboard .donor:nth-child(6)::after{display:none}
+  .dboard .donor{padding:16px 4px 17px}
+  .dboard .donor-name{font-size:1.1rem}
+  .ticket{grid-template-columns:1fr;border-radius:18px;-webkit-mask:radial-gradient(circle 14px at 0 calc(100% - 78px),#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% calc(100% - 78px),#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 14px at 0 calc(100% - 78px),#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% calc(100% - 78px),#0000 98%,#000) right/51% 100% no-repeat}
+  .ticket-main{padding:28px 20px 24px;border-inline-end:0;border-bottom:2px dashed var(--line-2)}
+  .ticket-text{font-size:1rem}
+  .ticket-list li{grid-template-columns:36px minmax(0,1fr);gap:12px}
+  .ticket-list .t-ico{width:36px;height:36px}
+  .ticket-cta{display:grid;gap:10px}
+  .ticket-cta .btn{width:100%}
+  .ticket-stub{grid-auto-flow:column;grid-template-columns:auto auto auto;justify-content:center;align-items:center;gap:14px;height:78px;padding:0 14px}
+  .ticket-stub .stub-mark{width:34px;height:34px;margin:0}
+  .ticket-stub b{font-size:2.1rem}
+  .ticket-stub .vline,.ticket-stub .where{display:none}
+  .privacy{grid-template-columns:1fr;padding:22px 20px;gap:12px}
+  .privacy .p-ico{grid-row:auto;width:46px;height:46px}
+  .privacy h3{font-size:1.18rem}
+  .privacy p{font-size:1rem}
+  .shifts li{padding:14px;gap:14px;grid-template-columns:42px minmax(0,1fr)}
+  .shifts .s-ico{width:42px;height:42px}
+  .vol-cta{display:grid;grid-template-columns:1fr;gap:10px}
+  .vol-cta .btn{width:100%}
+  .vol-img{max-width:none;aspect-ratio:1/1}
+  .vol-img img{object-position:50% 70%}
+  .quote{padding:24px 22px 20px}
+  .quote blockquote{font-size:1.08rem}
+  .faq-list summary{font-size:1.06rem;min-height:66px;padding:14px 0}
+  .faq-list .ans{padding:0 0 20px;font-size:1.02rem}
+  .form-card{padding:26px 18px;border-radius:18px}
+  .c-form{grid-template-columns:1fr}
+  .c-form .form-foot .btn{width:100%}
+  .footer-grid{grid-template-columns:1fr;gap:34px}
+  .site-footer{padding-top:56px}
+}
+@media (max-width:380px){
+  .hero-cta{grid-template-columns:1fr}
+  .tiers{grid-template-columns:1fr}
+  .tier-other{grid-column:auto}
+  .board{grid-template-columns:1fr}
+  .b-stat{grid-column:1/-1}
+  .f-links{grid-template-columns:1fr}
+  .dock .btn{padding:0 14px}
+}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. הגרסה הסופית, אחרי המשוב של הלקוח.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/donate/design-1/">עיצוב 1</a><a href="/demo/donate/design-2/">עיצוב 2</a><a href="/demo/donate/design-3/">עיצוב 3</a><a href="/demo/donate/final/" aria-current="page">הגרסה הסופית</a><a href="/demo/donate/admin/">מסך ניהול הקמפיין</a></nav>
+ <a class="demo-back" href="/demo/donate/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<!-- סמלים משותפים -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M9.43 27.06L9.17 27.2 8.94 27.39 8.84 27.5 8.68 27.74 8.61 27.88 8.53 28.16 8.5 28.45 8.51 31.6 8.56 31.89 8.68 32.16 8.75 32.28 8.94 32.51 9.17 32.7 9.43 32.84 9.71 32.92 9.85 32.94 54 32.95 54.29 32.92 54.57 32.84 54.83 32.7 54.95 32.61 55.16 32.4 55.32 32.16 55.44 31.89 55.49 31.6 55.49 28.3 55.47 28.16 55.39 27.88 55.25 27.62 55.06 27.39 54.83 27.2 54.57 27.06 54.29 26.98 54 26.95 51.37 26.95 51.22 26.13 51.04 25.3 50.86 24.61 50.61 23.8 50.37 23.12 50.06 22.34 49.72 21.57 49.4 20.92 49.05 20.29 48.62 19.57 48.23 18.96 47.74 18.27 47.23 17.61 46.76 17.06 46.28 16.52 45.69 15.92 45.07 15.35 44.43 14.8 43.77 14.28 43.09 13.79 42.49 13.39 41.77 12.96 41.03 12.55 40.27 12.18 39.5 11.84 38.72 11.54 38.03 11.3 37.23 11.06 36.41 10.85 35.59 10.68 34.76 10.54 33.92 10.44 33.08 10.38 32.12 10.35 31.28 10.36 30.44 10.41 29.6 10.5 28.77 10.62 27.94 10.77 27.12 10.97 26.31 11.19 25.51 11.46 24.72 11.75 23.95 12.08 23.19 12.44 22.44 12.84 21.72 13.26 21.01 13.72 20.23 14.28 19.38 14.95 18.57 15.67 17.89 16.35 17.24 17.06 16.62 17.8 16.04 18.57 15.44 19.46 14.95 20.29 14.49 21.14 14.03 22.12 13.67 23.01 13.32 24.03 13.05 24.95 12.82 25.89 12.63 26.95 10 26.95 9.71 26.98ZM31.69 17.59L31.66 17.48 31.62 17.36 31.81 17.54ZM31.1 16.58L30.71 16.25 30.26 15.96 29.72 15.68 29.45 15.58 29.3 15.54 29.25 15.74 29.2 16.11 29.18 16.5 29.19 16.88 29.22 17.2 29.26 17.47 29.34 17.76 29.44 18 29.6 18.29 29.77 18.53 29.99 18.74 30.24 18.94 30.53 19.11 30.87 19.25 31.22 19.34 31.45 19.36 31.45 20.23 31.29 19.96 31.09 19.71 30.86 19.48 30.57 19.24 30.22 18.99 29.83 18.77 29.4 18.56 29.15 18.48 29.11 18.64 29.08 18.88 29.06 19.53 29.09 20.05 29.18 20.54 29.32 20.96 29.49 21.31 29.72 21.63 30.03 21.94 29.44 21.6 29.16 21.47 29 21.42 28.96 21.59 28.94 21.84 28.93 22.47 28.99 23.11 29.05 23.41 29.12 23.71 29.22 23.99 29.33 24.21 29.47 24.47 29.61 24.67 29.81 24.9 30 25.08 30.21 25.25 30.44 25.4 30.7 25.54 30.99 25.66 31.27 25.74 31.45 25.75 31.45 26.95 15.06 26.95 15.22 26.18 15.4 25.46 15.6 24.76 15.84 24.06 16.11 23.37 16.41 22.69 16.73 22.03 17.09 21.38 17.47 20.75 17.94 20.05 18.38 19.45 18.84 18.88 19.33 18.32 19.84 17.79 20.37 17.28 20.93 16.79 21.5 16.33 22.1 15.89 22.71 15.48 23.34 15.09 23.99 14.73 24.65 14.4 25.32 14.1 26.11 13.79 26.81 13.55 27.51 13.35 28.33 13.15 29.06 13 29.79 12.89 30.52 12.81 31.26 12.77 32 12.75 32.74 12.77 33.48 12.81 34.31 12.91 35.04 13.02 35.77 13.17 36.49 13.35 37.19 13.55 37.89 13.79 38.58 14.06 39.26 14.36 39.92 14.68 40.57 15.04 41.2 15.42 41.9 15.89 42.5 16.33 43.07 16.79 43.63 17.28 44.16 17.79 44.67 18.32 45.23 18.96 45.69 19.54 46.12 20.13 46.53 20.75 46.91 21.38 47.27 22.03 47.59 22.69 47.89 23.37 48.16 24.06 48.4 24.76 48.6 25.46 48.78 26.18 48.94 26.95 32.55 26.95 32.55 25.75 32.67 25.75 32.9 25.69 33.16 25.6 33.39 25.49 33.79 25.25 34.16 24.93 34.44 24.61 34.67 24.21 34.85 23.79 34.98 23.28 35.05 22.79 35.07 22.28 35.05 21.74 35 21.42 34.84 21.47 34.56 21.6 33.97 21.94 34.28 21.63 34.51 21.31 34.68 20.96 34.82 20.54 34.91 20.05 34.94 19.53 34.92 18.88 34.89 18.64 34.85 18.48 34.6 18.56 34.17 18.77 33.78 18.99 33.43 19.24 33.14 19.48 32.91 19.71 32.71 19.96 32.55 20.23 32.55 19.36 32.78 19.34 33.13 19.25 33.47 19.11 33.76 18.94 34.01 18.74 34.23 18.53 34.4 18.29 34.55 18.03 34.64 17.79 34.72 17.54 34.77 17.27 34.81 16.96 34.82 16.63 34.81 16.24 34.77 15.88 34.72 15.59 34.7 15.54 34.55 15.58 34.2 15.72 33.85 15.89 33.56 16.06 33.32 16.22 33.1 16.39 32.9 16.58 33.04 16.19 33.11 15.77 33.11 15.35 33.04 14.93 32.87 14.43 32.63 13.93 32.29 13.4 32.11 13.17 32 13.05 31.89 13.17 31.71 13.4 31.37 13.93 31.13 14.43 30.96 14.93 30.89 15.35 30.89 15.77 30.95 16.16ZM31.45 23.44L31.26 23.1 31.03 22.8 30.74 22.49 30.41 22.21 30.72 22.37 31 22.48 31.27 22.55 31.45 22.55ZM32.55 22.55L32.79 22.53 33.05 22.46 33.33 22.35 33.59 22.21 33.26 22.49 32.97 22.8 32.74 23.1 32.55 23.44ZM32.19 17.54L32.32 17.42 32.38 17.36 32.3 17.59ZM11.16 34.09L11.09 34.14 11.04 34.21 11 34.35 11.05 35.37 11.16 36.45 11.33 37.52 11.57 38.58 11.66 38.9 11.73 38.99 11.83 39.05 12.33 39.18 13.44 39.42 15.14 39.71 16.26 39.87 17.38 40 19.63 40.23 22.44 40.44 25.25 40.59 28.06 40.68 30.88 40.72 34.25 40.71 37.06 40.65 40.43 40.51 43.24 40.32 44.93 40.18 46.05 40.07 48.31 39.79 49.43 39.62 50.55 39.42 51.67 39.18 52.15 39.06 52.27 38.99 52.33 38.92 52.36 38.84 52.54 38.11 52.71 37.28 52.83 36.57 52.91 35.85 52.97 35.13 53 34.35 52.98 34.24 52.91 34.14 52.81 34.07 52.7 34.05 11.3 34.05ZM12.36 40.97L12.6 41.55 12.91 42.21 13.24 42.86 13.59 43.49 13.67 43.58 13.78 43.63 13.9 43.63 14.01 43.59 14.1 43.51 14.15 43.41 14.67 41.21 14.67 41.1 14.63 40.99 14.56 40.9 14.45 40.85 12.68 40.51 12.53 40.55 12.42 40.65 12.38 40.76 12.35 40.89ZM14.79 45.01L14.81 45.09 14.86 45.16 14.98 45.24 15.9 45.48 16.91 45.71 18.01 45.91 18.13 45.91 18.24 45.86 18.32 45.78 18.35 45.7 19.42 41.82 19.43 41.67 19.38 41.57 19.27 41.47 19.16 41.44 17.38 41.25 15.98 41.08 15.86 41.09 15.76 41.14 15.69 41.2 15.65 41.31 14.79 44.89ZM19.32 45.9L19.35 45.99 19.42 46.08 19.49 46.13 19.58 46.16 21.43 46.39 22.94 46.54 23.81 46.61 23.89 46.6 23.97 46.56 24.03 46.5 24.09 46.4 25.33 42.21 25.34 42.06 25.29 41.95 25.18 41.86 25.06 41.83 23.01 41.72 20.74 41.57 20.63 41.59 20.55 41.63 20.47 41.71 20.43 41.79 19.33 45.78ZM26.47 46.79L28.48 46.87 30.28 46.91 30.4 46.89 30.47 46.84 30.53 46.78 30.57 46.7 31.89 42.36 31.9 42.22 31.84 42.08 31.72 42 31.61 41.97 29.19 41.95 26.66 41.89 26.54 41.91 26.47 41.95 26.4 42.02 26.37 42.1 25.11 46.34 25.09 46.43 25.11 46.52 25.17 46.62 25.23 46.68 25.32 46.71ZM16.82 46.98L16.7 47.05 16.62 47.18 16.62 47.32 16.68 47.45 17.15 47.91 17.61 48.33 18.58 49.12 19.59 49.86 20.66 50.54 21.76 51.16 22.91 51.72 23.96 52.16 25.05 52.54 26.15 52.87 27.27 53.15 28.28 53.34 29.43 53.5 30.58 53.61 31.74 53.65 32.9 53.63 33.93 53.57 35.08 53.44 36.22 53.25 37.35 53 38.34 52.73 39.44 52.38 40.39 52.02 41.44 51.56 42.46 51.04 43.45 50.48 44.41 49.86 45.42 49.12 46.29 48.41 46.85 47.91 47.3 47.48 47.37 47.38 47.39 47.26 47.37 47.15 47.3 47.05 47.2 46.99 47.06 46.96 45.58 47.23 43.57 47.52 41.56 47.74 39.55 47.91 37.53 48.04 35.52 48.12 33.51 48.16 30.99 48.17 28.98 48.13 26.97 48.06 24.96 47.95 23.45 47.83 21.94 47.69 20.43 47.52 18.42 47.23 16.97 46.97ZM50.11 42.93L50.13 43.02 50.19 43.09 50.26 43.15 50.34 43.18 50.43 43.18 50.54 43.15 50.61 43.1 50.67 43.03 51.2 41.99 51.67 40.91 51.69 40.8 51.68 40.71 51.64 40.63 51.55 40.55 51.44 40.5 51.36 40.5 50.81 40.62 50.69 40.68 50.61 40.76 50.58 40.84 50.11 42.81ZM44.5 45.84L44.54 45.95 44.62 46.04 44.73 46.09 44.84 46.1 46.09 45.9 47.1 45.71 48.32 45.43 48.45 45.36 48.51 45.29 48.54 45.21 49.48 41.28 49.48 41.14 49.41 41.01 49.28 40.93 49.14 40.92 47.74 41.12 45.92 41.33 45.81 41.37 45.74 41.42 45.66 41.55 44.51 45.72ZM38.29 46.48L38.33 46.59 38.41 46.67 38.49 46.71 38.6 46.73 40.55 46.58 42.06 46.44 43.15 46.32 43.24 46.3 43.31 46.25 43.37 46.18 43.41 46.1 44.57 41.87 44.58 41.73 44.52 41.6 44.4 41.51 44.26 41.49 42.12 41.65 39.86 41.79 39.75 41.81 39.68 41.86 39.62 41.92 39.59 42 38.29 46.34ZM33.01 46.92L35.02 46.88 36.53 46.83 36.97 46.81 37.05 46.79 37.12 46.74 37.18 46.68 37.22 46.6 38.51 42.24 38.52 42.1 38.45 41.96 38.36 41.89 38.21 41.86 35.94 41.93 33.23 41.97 33.15 41.98 33.04 42.04 32.98 42.1 32.95 42.18 31.62 46.54 31.61 46.62 31.62 46.71 31.68 46.81 31.77 46.89 31.85 46.92Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path class="ico" d="M19 12H5m6-6-6 6 6 6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></g></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path class="ico" d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><g class="ico"><path d="M4 11a7 7 0 0 1 12-4.9L18 8M20 13a7 7 0 0 1-12 4.9L6 16"/><path d="M18 3.5V8h-4.5M6 20.5V16h4.5"/></g></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><g class="ico"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.5"/></g></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><g class="ico"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g class="ico"><path d="M12 3.5 5 6v5.5c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g class="ico"><path d="M14 3.5H7A1.5 1.5 0 0 0 5.5 5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8Z"/><path d="M14 3.5V8h4.5M9 13h6M9 16.5h4"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path class="ico" d="M12 4v11m-5-5 5 5 5-5M5 19.5h14"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><g class="ico"><path d="M3.5 7.5 12 3.5l8.5 4v9L12 20.5l-8.5-4Z"/><path d="M3.5 7.5 12 11.5l8.5-4M12 11.5v9"/></g></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><g class="ico"><path d="M4 15.5V12l1.8-4.6A2 2 0 0 1 7.7 6h8.6a2 2 0 0 1 1.9 1.4L20 12v3.5"/><path d="M3.5 12h17v4.5h-17Z"/><circle cx="7.5" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/></g></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path class="ico" d="m12 3.8 2.4 5 5.4.6-4 3.7 1.1 5.4L12 15.8l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path class="ico" d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g class="ico"><path d="M4.3 19.7l1.2-3.6A8 8 0 1 1 8.8 19Z"/><path d="M9 10.2h6M9 13.4h4"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g class="ico"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><g class="ico"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></g></symbol>
+  <symbol id="i-done" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.8"/></g></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path class="ico" d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M10.2 5.5C6.3 6.6 4 9.6 4 13.6V18.5h6.2v-6.2H7.3c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Zm9.8 0c-3.9 1.1-6.2 4.1-6.2 8.1V18.5H20v-6.2h-2.9c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Z"/></symbol>
+</svg>
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#main" aria-label="סל ברכה, לראש העמוד">
+      <svg class="brand-mark" aria-hidden="true"><use href="#mark"/></svg>
+      <span class="brand-text"><span class="brand-name">סל ברכה</span><span class="brand-sub">סלי שבת וחג למשפחות</span></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="#campaign">הקמפיין</a></li>
+        <li><a href="#basket">מה יש בסל</a></li>
+        <li><a href="#how">איך זה עובד</a></li>
+        <li><a href="#transparency">לאן הולך הכסף</a></li>
+        <li><a href="#volunteer">התנדבות</a></li>
+        <li><a href="#faq">שאלות</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm nav-cta" href="#donate">לתרומה</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="bars" aria-hidden="true"></span><span>תפריט</span></button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- פתיחה -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-head">
+          <p class="kicker">סל ברכה · סלי מזון לשבת ולחג בירושלים</p>
+          <h1 id="hero-title">שבת מלאה בכל בית</h1>
+          <p class="hero-lead">בכל שבוע אנחנו מביאים סל לשבת לכ־400 משפחות בירושלים: חלות, מיץ ענבים, עוף, ירקות ופירות. בשקט, עד הדלת, ובכבוד. 180 ₪ הם שבת אחת למשפחה אחת.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#donate">לתרומה <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#how">איך זה עובד</a>
+        </div>
+        <ul class="trust">
+          <li><svg aria-hidden="true"><use href="#i-receipt"/></svg>קבלה לפי סעיף 46 במייל</li>
+          <li><svg aria-hidden="true"><use href="#i-lock"/></svg>תשלום מאובטח באשראי</li>
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>אישור ניהול תקין</li>
+        </ul>
+      </div>
+
+      <!-- תמונת הסל (מעיצוב 1), והמד הגדול עליה: רואים מה התרומה קונה ואיפה הקמפיין עומד -->
+      <div class="hero-stage">
+      <figure class="hero-basket">
+        <img src="/demo/donate/img/basket-960.webp" srcset="/demo/donate/img/basket-560.webp 560w, /demo/donate/img/basket-960.webp 960w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 960px) 620px, 580px" width="960" height="640" alt="ארגז עץ מלא במצרכים לשבת: חלה, מיץ ענבים, שמן, שימורים ופירות" fetchpriority="high">
+        <figcaption><b>180 ₪</b><span>סל לשבת<span class="cap-more">: חלה, מיץ ענבים, שמן, דבש, שימורים ופירות</span></span></figcaption>
+      </figure>
+      <div class="live-card on-navy" data-grow>
+        <div class="lc-top">
+          <span class="live-chip"><span class="live-dot" aria-hidden="true"></span>קמפיין החורף</span>
+          <span class="lc-days"><svg class="i-open" aria-hidden="true"><use href="#i-cal"/></svg><svg class="i-ended" aria-hidden="true"><use href="#i-done"/></svg><span data-camp-days="text"></span></span>
+        </div>
+        <p class="lc-title" data-camp-title></p>
+        <p class="lc-raised"><span data-camp-raised data-count="load"></span></p>
+        <p class="lc-goal">נאספו מתוך <b data-camp-goal></b></p>
+        <div class="meter" data-camp-progress aria-label="התקדמות קמפיין החורף">
+          <div class="meter-fill" data-camp-fill></div>
+          <span class="meter-flag" aria-hidden="true"><span data-camp-percent></span></span>
+        </div>
+        <div class="lc-foot">
+          <div class="lc-last">
+            <span class="lc-last-label">התרומה האחרונה</span>
+            <ul data-camp-donors="1" aria-label="התרומה האחרונה"></ul>
+          </div>
+          <a class="lc-link" href="#campaign"><span>לקמפיין החורף</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- הקמפיין -->
+  <section class="section section--panel" id="campaign" aria-labelledby="campaign-title">
+    <div class="container board">
+      <div class="b-head">
+        <p class="kicker">קמפיין החורף</p>
+        <h2 class="h2" id="campaign-title" data-camp-title>חורף של סלים מלאים</h2>
+        <p class="b-sub" data-camp-subtitle></p>
+        <p class="sec-sub">מראש חודש כסלו ועד יום חמישי שאחרי חנוכה, <span data-camp-end="long"></span>. כדי שאף משפחה לא תישאר בלי סל, מחנוכה ועד סוף החורף.</p>
+      </div>
+      <figure class="tile b-img">
+        <img src="/demo/donate/img/chanukiah-960.webp" srcset="/demo/donate/img/chanukiah-560.webp 560w, /demo/donate/img/chanukiah-960.webp 960w" sizes="(max-width: 960px) 92vw, 500px" width="960" height="640" loading="lazy" alt="חנוכיית כסף עם כוסיות שמן, ולצדה בקבוק שמן זית">
+      </figure>
+
+      <div class="b-ended" data-camp-when="ended" hidden>
+        <span class="ok" aria-hidden="true"></span>
+        <p><strong>הקמפיין הסתיים, ותודה לכל מי שתרם.</strong>הסלים ממשיכים לצאת בכל שבוע, ואפשר להמשיך לתרום.</p>
+      </div>
+
+      <div class="tile b-meter">
+        <div class="bm-top">
+          <p class="bm-pct"><b data-camp-percent data-count></b><span>מהיעד</span></p>
+          <p class="bm-raised"><b data-camp-raised data-count></b> נאספו מתוך <b data-camp-goal></b></p>
+          <p class="bm-remain">חסרים עוד <b data-camp-remaining></b></p>
+        </div>
+        <div class="seg-meter" data-camp-progress data-grow aria-label="מד היעד של קמפיין החורף">
+          <div class="seg-fill" data-camp-fill></div>
+        </div>
+        <div class="seg-scale" aria-hidden="true">
+          <span class="s0">0 ₪</span><span class="s25">25%</span><span class="s50">50%</span><span class="s75">75%</span><span class="s100">היעד: <span data-camp-goal></span></span>
+        </div>
+      </div>
+
+      <div class="tile b-stat b-days">
+        <div class="stat-top"><span class="stat-ico"><svg aria-hidden="true"><use href="#i-cal"/></svg></span></div>
+        <p class="stat-num" data-camp-days></p>
+        <p class="stat-lbl" data-camp-days-label></p>
+        <p class="stat-sub" data-camp-when="ended" hidden>ב<span data-camp-end="long"></span></p>
+        <p class="cd" data-camp-when="open">
+          <span><b data-camp-cd="d"></b><small>ימים</small></span>
+          <span><b data-camp-cd="h"></b><small>שעות</small></span>
+          <span><b data-camp-cd="m"></b><small>דקות</small></span>
+        </p>
+      </div>
+      <div class="tile b-stat">
+        <div class="stat-top"><span class="stat-ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span></div>
+        <p class="stat-num" data-camp-count data-count></p>
+        <p class="stat-lbl">תורמים</p>
+        <p class="stat-sub">כל תרומה מקבלת מקום, בכל סכום.</p>
+      </div>
+      <div class="tile b-stat">
+        <div class="stat-top"><span class="stat-ico"><svg aria-hidden="true"><use href="#i-repeat"/></svg></span></div>
+        <p class="stat-num" data-camp-monthly-count></p>
+        <p class="stat-lbl">בהוראת קבע</p>
+        <p class="stat-sub" data-camp-monthly-note></p>
+      </div>
+      <div class="tile b-cta on-navy">
+        <p><b>180 ₪</b>הם שבת אחת למשפחה אחת.</p>
+        <a class="btn btn-light cta-open" href="#donate">להצטרף לקמפיין <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-light" href="#donate" data-camp-when="ended" hidden>להמשיך לתרום <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <p class="b-note"><span>המד מתעדכן מעצמו עם כל תרומה, כולל תרומות במזומן ובצ׳קים שנרשמות ביד.</span></p>
+    </div>
+  </section>
+
+  <!-- לתרומה + התורמים -->
+  <section class="section" id="donate" aria-labelledby="donate-title">
+    <div class="container donate-grid">
+      <div class="tile donate-card">
+        <div class="sec-head">
+          <h2 class="h2" id="donate-title">לתרום לסל ברכה</h2>
+          <p class="sec-sub">בוחרים סכום, חד־פעמי או בהוראת קבע. קבלה לפי סעיף 46 נשלחת במייל מיד אחרי התרומה.</p>
+        </div>
+
+        <form id="donate-form" data-freq="once" novalidate>
+          <fieldset>
+            <legend class="sr-only">סוג התרומה</legend>
+            <div class="freq">
+              <label><input type="radio" name="freq" value="once" checked><span>חד־פעמית</span></label>
+              <label><input type="radio" name="freq" value="monthly"><span><i class="rep" aria-hidden="true"></i>חודשית (הוראת קבע)</span></label>
+            </div>
+          </fieldset>
+          <p class="monthly-note" data-camp-monthly-note></p>
+
+          <fieldset class="tiers">
+            <legend class="legend">סכום התרומה</legend>
+            <label class="tier"><input type="radio" name="amount" value="180" checked><span class="tier-body"><span class="tier-check" aria-hidden="true"></span><span class="tier-amt">180 ₪<span class="per">לחודש</span></span><span class="tier-title">סל לשבת</span><span class="tier-text">שבת אחת למשפחה אחת: חלות, מיץ ענבים, עוף, ירקות ופירות.</span></span></label>
+            <label class="tier"><input type="radio" name="amount" value="360"><span class="tier-body"><span class="tier-check" aria-hidden="true"></span><span class="tier-amt">360 ₪<span class="per">לחודש</span></span><span class="tier-title">סל לחג</span><span class="tier-text">סל חג מלא, ובחנוכה גם שמן זית ונרות.</span></span></label>
+            <label class="tier"><input type="radio" name="amount" value="720"><span class="tier-body"><span class="tier-check" aria-hidden="true"></span><span class="tier-amt">720 ₪<span class="per">לחודש</span></span><span class="tier-title">חודש של סלים</span><span class="tier-text">ארבע שבתות למשפחה אחת.</span></span></label>
+            <label class="tier"><input type="radio" name="amount" value="1800"><span class="tier-body"><span class="tier-check" aria-hidden="true"></span><span class="tier-amt">1,800 ₪<span class="per">לחודש</span></span><span class="tier-title">שבת לעשר משפחות</span><span class="tier-text">עשרה סלים לשבת אחת.</span></span></label>
+            <div class="tier tier-other">
+              <input type="radio" name="amount" value="other" id="amt-other">
+              <div class="tier-body">
+                <label class="tier-hit" for="amt-other"><span class="tier-check" aria-hidden="true"></span><span class="tier-title">סכום אחר</span><span class="tier-text">כל סכום עוזר, מ־10 ₪.</span></label>
+                <div class="other-field">
+                  <label class="sr-only" for="other">סכום אחר, בשקלים</label>
+                  <span class="other-input"><input id="other" name="other" type="text" inputmode="numeric" autocomplete="off" placeholder="כמה לתרום?" maxlength="6" aria-describedby="donate-error"><span class="cur" aria-hidden="true">₪</span></span>
+                  <span class="per">לחודש</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="fields">
+            <div class="field">
+              <label for="donor_name">שם, כפי שיופיע ברשימת התורמים</label>
+              <input id="donor_name" name="donor_name" type="text" autocomplete="name" placeholder="למשל: משפחת כהן" maxlength="60">
+              <label class="check"><input type="checkbox" name="anon" id="anon">בעילום שם</label>
+            </div>
+            <div class="field">
+              <label for="email">מייל לקבלה</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="name@example.com" dir="ltr">
+              <p class="field-note">בדוגמה המייל לא נשמר ולא נשלח.</p>
+            </div>
+            <div class="field">
+              <label for="ded_kind">הקדשה <span class="field-opt">(לא חובה)</span></label>
+              <select id="ded_kind" name="ded_kind">
+                <option value="">בלי הקדשה</option>
+                <option value="לעילוי נשמת">לעילוי נשמת</option>
+                <option value="לרפואה שלמה של">לרפואה שלמה של</option>
+                <option value="להצלחת">להצלחת</option>
+                <option value="לזכות">לזכות</option>
+              </select>
+            </div>
+            <div class="field" id="ded-name-field" hidden>
+              <label for="ded_name">שם להקדשה</label>
+              <input id="ded_name" name="ded_name" type="text" autocomplete="off" placeholder="למשל: אבינו ר׳ יעקב ז״ל" maxlength="60">
+            </div>
+          </div>
+
+          <p class="secure"><svg aria-hidden="true"><use href="#i-lock"/></svg><span>התשלום עובר בעמוד המאובטח של חברת הסליקה. אנחנו לא רואים ולא שומרים את פרטי הכרטיס.</span></p>
+
+          <div class="form-foot">
+            <p class="demo-note">זה אתר לדוגמה: לא נגבה כסף, והתרומה נשמרת רק אצלכם בדפדפן.</p>
+            <button class="btn btn-primary btn-donate" type="submit"><span class="btn-label">לתרומה של 180 ₪</span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <p class="form-error" id="donate-error" role="alert"></p>
+          </div>
+        </form>
+
+        <div class="thanks" id="thanks" role="status" tabindex="-1" hidden>
+          <span class="ok" aria-hidden="true"></span>
+          <h3>תודה! התרומה נקלטה, לדוגמה.</h3>
+          <p class="thanks-sum" id="thanks-sum"></p>
+          <p>זו תרומה לדוגמה בלבד: לא נגבה כסף ולא נשלחה קבלה. התרומה נוספה למד היעד ולרשימת התורמים, רק אצלכם בדפדפן. באתר האמיתי, קבלה לפי סעיף 46 מגיעה למייל תוך דקה.</p>
+          <div class="thanks-cta">
+            <a class="btn btn-primary" href="#campaign">לראות את מד היעד <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button class="btn btn-ghost" type="button" id="again">לתרומה נוספת</button>
+          </div>
+        </div>
+
+        <p class="other-ways">
+          <img src="/demo/donate/img/coinjar-560.webp" width="560" height="700" loading="lazy" alt="צנצנת זכוכית מלאה מטבעות">
+          <span>אפשר לתרום גם בהעברה בנקאית או בצ׳ק. התקשרו, ונשלח פרטים: <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a></span>
+        </p>
+      </div>
+
+      <aside class="plaque on-navy" id="donors" aria-labelledby="donors-title">
+        <div class="plaque-in">
+          <p class="plaque-tag">רשימת תורמים לדוגמה</p>
+          <h2 id="donors-title">תודה לתורמים</h2>
+          <p class="plaque-sub">התורמים האחרונים. כל תרומה מקבלת מקום, בכל סכום.</p>
+          <ul class="dboard" data-camp-donors="8" aria-label="התורמים האחרונים"></ul>
+          <div class="plaque-foot">
+            <p class="plaque-count"><b data-camp-count></b> תורמים בקמפיין עד עכשיו</p>
+            <span class="plaque-live"><span class="live-dot" aria-hidden="true"></span>מתעדכן עם כל תרומה</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- מה יש בסל -->
+  <section class="section section--panel" id="basket" aria-labelledby="basket-title">
+    <div class="container basket-grid">
+      <figure class="ph basket-img">
+        <img src="/demo/donate/img/flatlay-960.webp" srcset="/demo/donate/img/flatlay-560.webp 560w, /demo/donate/img/flatlay-960.webp 960w" sizes="(max-width: 960px) 92vw, 660px" width="960" height="640" loading="lazy" alt="תכולת סל לשבת במבט מלמעלה: חלה, מיץ ענבים, שמן זית, דבש, שימורים ופירות">
+      </figure>
+      <div class="basket-copy">
+        <div class="sec-head">
+          <h2 class="h2" id="basket-title">מה יש בסל</h2>
+          <p class="sec-sub">כל סל נארז ביד ביום חמישי בערב, לפי רשימה קבועה. בחגים מוסיפים את מה שהחג צריך.</p>
+        </div>
+        <ol class="manifest">
+          <li><span class="n" aria-hidden="true">01</span>2 חלות טריות</li>
+          <li><span class="n" aria-hidden="true">02</span>מיץ ענבים לקידוש</li>
+          <li><span class="n" aria-hidden="true">03</span>עוף ודגים לשבת</li>
+          <li><span class="n" aria-hidden="true">04</span>ירקות ופירות של העונה</li>
+          <li><span class="n" aria-hidden="true">05</span>אורז, קטניות ושימורים</li>
+          <li><span class="n" aria-hidden="true">06</span>שמן, דבש ומוצרי יסוד</li>
+          <li class="hol"><span class="n" aria-hidden="true">07</span>בחנוכה: שמן זית ונרות</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- איך זה עובד -->
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="container">
+      <div class="sec-head">
+        <p class="kicker">איך זה עובד</p>
+        <h2 class="h2" id="how-title">מהתרומה שלכם, עד הדלת</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <figure class="ph"><img src="/demo/donate/img/tzedakah-960.webp" srcset="/demo/donate/img/tzedakah-560.webp 560w, /demo/donate/img/tzedakah-960.webp 960w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 300px, 400px" width="960" height="640" loading="lazy" alt="קופת צדקה מעץ עם לוחית פליז, ומטבעות לפניה"></figure>
+          <div class="step-body">
+            <p class="step-no"><b>1</b>בכל זמן</p>
+            <h3>תורמים</h3>
+            <p>באשראי, חד־פעמי או בהוראת קבע. הקבלה מגיעה במייל.</p>
+          </div>
+        </li>
+        <li class="step">
+          <figure class="ph"><img src="/demo/donate/img/packing-960.webp" srcset="/demo/donate/img/packing-560.webp 560w, /demo/donate/img/packing-960.webp 960w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 300px, 400px" width="960" height="640" loading="lazy" alt="קופסה פתוחה באמצע אריזה, ולצדה רשימת אריזה וסלוטייפ"></figure>
+          <div class="step-body">
+            <p class="step-no"><b>2</b>חמישי בערב</p>
+            <h3>אורזים ביום חמישי</h3>
+            <p>כ־40 מתנדבים אורזים במחסן, מ־18:00 ועד שהסל האחרון נסגר.</p>
+          </div>
+        </li>
+        <li class="step">
+          <figure class="ph"><img src="/demo/donate/img/boxes-960.webp" srcset="/demo/donate/img/boxes-560.webp 560w, /demo/donate/img/boxes-960.webp 960w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 300px, 400px" width="960" height="640" loading="lazy" alt="קופסאות קרטון של סל ברכה, מוכנות לחלוקה"></figure>
+          <div class="step-body">
+            <p class="step-no"><b>3</b>שישי בבוקר</p>
+            <h3>מחלקים ביום שישי</h3>
+            <p>נהגים מתנדבים מביאים את הסלים עד הדלת, בלי שלט ובלי תמונות.</p>
+          </div>
+        </li>
+      </ol>
+      <ul class="kpis">
+        <li><b><small>כ־</small>400</b><span>משפחות בכל שבת</span></li>
+        <li><b><small>כ־</small>40</b><span>מתנדבים</span></li>
+        <li><b><small>מאז</small>2013</b><span>סלי שבת וחג למשפחות</span></li>
+        <li><b>86%</b><span>מכל שקל הולכים לאוכל</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- עדכונים מהשטח -->
+  <section class="section section--panel" id="updates" aria-labelledby="updates-title">
+    <div class="container">
+      <div class="upd-head">
+        <div class="sec-head">
+          <h2 class="h2" id="updates-title">עדכונים מהשטח</h2>
+          <p class="sec-sub">אחרי כל יום חמישי אנחנו כותבים כאן כמה סלים יצאו, ומה צריך השבוע.</p>
+        </div>
+      </div>
+      <div class="updates" data-camp-updates="3" data-heading="3"></div>
+      <div class="admin-try">
+        <span class="a-ico" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>
+        <div>
+          <a href="/demo/donate/admin/">לנסות: מסך הניהול של העמותה</a>
+          <p>בדוגמה הזו כל אחד יכול לעדכן את הקמפיין, להוסיף תרומה במזומן או לכתוב עדכון. השינוי נשמר רק אצלכם בדפדפן.</p>
+        </div>
+        <svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- לאן הולך הכסף -->
+  <section class="section" id="transparency" aria-labelledby="tr-title">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="h2" id="tr-title">לאן הולך הכסף</h2>
+        <p class="sec-sub">אין לנו משרד, ורוב העבודה נעשית בהתנדבות. לכן כמעט כל שקל הופך לאוכל.</p>
+      </div>
+      <div class="tr-grid">
+        <div class="tile chart-card">
+          <p class="chart-title"><span>החלוקה ב־2025</span><span>מכל 100 ₪</span></p>
+          <div class="stack" aria-hidden="true"><span class="c1" style="--w:86"></span><span class="c2" style="--w:8"></span><span class="c3" style="--w:6"></span></div>
+          <ul class="legend-list">
+            <li><b style="--sw:var(--navy)">86%</b><span><strong>מזון ומוצרים לסלים</strong></span></li>
+            <li><b style="--sw:#5D6E8E">8%</b><span><strong>אריזה והובלה:</strong> ארגזים, דלק ושכירות המחסן</span></li>
+            <li><b style="--sw:#A9B4C8">6%</b><span><strong>ניהול:</strong> הנהלת חשבונות, סליקה ואתר</span></li>
+          </ul>
+        </div>
+        <figure class="tile ph tr-img">
+          <img src="/demo/donate/img/report-960.webp" srcset="/demo/donate/img/report-560.webp 560w, /demo/donate/img/report-960.webp 960w" sizes="(max-width: 960px) 92vw, 500px" width="960" height="640" loading="lazy" alt="הדוח השנתי של סל ברכה על שולחן, עם עט וכוס תה">
+        </figure>
+        <div class="tr-items">
+          <div class="tile tr-item">
+            <span class="stat-ico" aria-hidden="true"><svg><use href="#i-doc"/></svg></span>
+            <h3>דוח שנתי 2025</h3>
+            <a class="dl" href="#" id="report-link"><svg aria-hidden="true"><use href="#i-down"/></svg>להורדת הדוח (PDF)</a>
+            <p class="dl-status" id="report-status" role="status"></p>
+          </div>
+          <div class="tile tr-item">
+            <span class="stat-ico" aria-hidden="true"><svg><use href="#i-receipt"/></svg></span>
+            <h3>קבלה לפי סעיף 46</h3>
+            <p>נשלחת במייל מיד אחרי כל תרומה, ובינואר נשלח סיכום שנתי.</p>
+          </div>
+          <div class="tile tr-item">
+            <span class="stat-ico" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>
+            <h3>עמותה רשומה</h3>
+            <p>ע״ר 58-000000-0 (מספר לדוגמה), עם אישור ניהול תקין לשנת 2026.</p>
+          </div>
+        </div>
+        <div class="tile privacy" id="privacy">
+          <span class="p-ico" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>
+          <h3>כבוד המשפחות: בלי שמות ובלי תמונות</h3>
+          <p>שמות המשפחות לא נחשפים, אף פעם: לא באתר, לא בעדכונים מהשטח ולא בדוחות. אנחנו לא מצלמים את המשפחות ולא את הבתים שלהן. בתמונות באתר יש רק סלים, מצרכים וחפצים, והסל מגיע עד הדלת בלי שלט.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- התנדבות -->
+  <section class="section vol on-navy" id="volunteer" aria-labelledby="vol-title">
+    <div class="container vol-grid">
+      <div class="ticket-wrap">
+        <div class="ticket">
+          <div class="ticket-main">
+            <span class="ticket-tag">הזמנה לערב חמישי</span>
+            <h2 class="h2" id="vol-title">באים לארוז איתנו?</h2>
+            <p class="ticket-text">בכל יום חמישי מ־18:00, במחסן ברחוב הדוגמה&nbsp;7. לא צריך ניסיון. אבות ובנים, חברותות ובחורי ישיבות מגיעים, ויש עבודה לכולם.</p>
+            <ul class="ticket-list">
+              <li><span class="t-ico" aria-hidden="true"><svg><use href="#i-box"/></svg></span><span><b>אריזה:</b> חמישי, 18:00 עד 22:00</span></li>
+              <li><span class="t-ico" aria-hidden="true"><svg><use href="#i-car"/></svg></span><span><b>חלוקה ברכב:</b> שישי מ־7:30, כשעתיים</span></li>
+              <li><span class="t-ico" aria-hidden="true"><svg><use href="#i-star"/></svg></span><span><b>בר מצווה של נתינה:</b> ערב אריזה לכיתה או למשפחה, בתיאום מראש</span></li>
+            </ul>
+            <div class="ticket-cta">
+              <a class="btn btn-primary" href="https://wa.me/972500000000"><svg aria-hidden="true"><use href="#i-chat"/></svg>להצטרפות בוואטסאפ</a>
+              <a class="btn btn-ghost" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>להתקשר</a>
+            </div>
+          </div>
+          <div class="ticket-stub" aria-hidden="true">
+            <svg class="stub-mark"><use href="#mark"/></svg>
+            <span class="day">חמישי</span>
+            <b>18:00</b>
+            <span class="vline"></span>
+            <span class="where">רחוב הדוגמה 7<br>ירושלים</span>
+          </div>
+        </div>
+      </div>
+      <figure class="ph vol-img">
+        <img src="/demo/donate/img/dolly-960.webp" srcset="/demo/donate/img/dolly-560.webp 560w, /demo/donate/img/dolly-960.webp 960w" sizes="(max-width: 960px) 92vw, 470px" width="960" height="1200" loading="lazy" alt="עגלת משא עם קופסאות סלים בדרך לחלוקה">
+      </figure>
+    </div>
+  </section>
+
+  <!-- המלצות -->
+  <section class="section" aria-labelledby="quotes-title">
+    <div class="container">
+      <div class="quotes-head">
+        <div class="sec-head">
+          <h2 class="h2" id="quotes-title">המלצות</h2>
+        </div>
+        <span class="tag-sample">המלצות לדוגמה</span>
+      </div>
+      <div class="quotes">
+        <figure class="tile quote">
+          <span class="q-mark" aria-hidden="true"><svg><use href="#i-quote"/></svg></span>
+          <blockquote><p>אני תורם 180 ₪ בחודש כבר שלוש שנים, ובכל יום שישי מקבל עדכון כמה סלים יצאו. אין עוד מקום שמרגיש לי ככה.</p></blockquote>
+          <figcaption>תורם קבוע</figcaption>
+        </figure>
+        <figure class="tile quote">
+          <span class="q-mark" aria-hidden="true"><svg><use href="#i-quote"/></svg></span>
+          <blockquote><p>באתי לארוז עם הבן שלי לקראת בר המצווה. היום הוא מגיע בכל חמישי לבד.</p></blockquote>
+          <figcaption>מתנדב מהשכונה</figcaption>
+        </figure>
+        <figure class="tile quote">
+          <span class="q-mark" aria-hidden="true"><svg><use href="#i-quote"/></svg></span>
+          <blockquote><p>הסל מגיע בשקט, עד הדלת, ותמיד יש בו חלות טריות. תודה שאתם שומרים עלינו.</p></blockquote>
+          <figcaption>ממכתב של משפחה, בלי שם</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- שאלות נפוצות -->
+  <section class="section section--panel" id="faq" aria-labelledby="faq-title">
+    <div class="container faq-grid">
+      <div class="faq-aside">
+        <div class="sec-head">
+          <h2 class="h2" id="faq-title">שאלות נפוצות</h2>
+          <p class="sec-sub">לא מצאתם תשובה? אפשר להתקשר, לשלוח וואטסאפ או מייל.</p>
+        </div>
+        <a class="btn btn-ghost" href="#contact">לפרטי הקשר</a>
+      </div>
+      <div class="faq-list">
+        <details><summary>התרומה מוכרת לצורכי מס?<span class="pm" aria-hidden="true"></span></summary><p class="ans">כן. העמותה מוכרת לפי סעיף 46, והקבלה נשלחת אליכם במייל מיד אחרי התרומה. בינואר נשלח גם סיכום שנתי.</p></details>
+        <details><summary>איך עובדת הוראת קבע?<span class="pm" aria-hidden="true"></span></summary><p class="ans">בוחרים "חודשית", והסכום יורד מהכרטיס פעם בחודש. אפשר לשנות או להפסיק בכל זמן, בטלפון או במייל, בלי שאלות. בקמפיין, הוראת קבע נספרת ביעד כ־12 חודשים.</p></details>
+        <details><summary>אפשר להקדיש את התרומה?<span class="pm" aria-hidden="true"></span></summary><p class="ans">כן. לעילוי נשמת, לרפואה שלמה, להצלחה או לזכות מישהו. ההקדשה מופיעה ליד התרומה ברשימת התורמים.</p></details>
+        <details><summary>אפשר לתרום בלי שהשם יופיע?<span class="pm" aria-hidden="true"></span></summary><p class="ans">בוודאי. מסמנים "בעילום שם", וברשימה יופיע רק הסכום. הקבלה עדיין תגיע אליכם במייל.</p></details>
+        <details><summary>איך בוחרים את המשפחות?<span class="pm" aria-hidden="true"></span></summary><p class="ans">המשפחות מגיעות אלינו דרך רבני קהילות, עובדים סוציאליים ומנהלי תלמודי תורה. הפרטים שלהן נשמרים אצלנו בלבד, והסל מגיע עד הדלת בלי שלט.</p></details>
+        <details><summary>יש באתר שמות או תמונות של המשפחות?<span class="pm" aria-hidden="true"></span></summary><p class="ans">לא, ולא יהיו. שמות המשפחות לא נחשפים, ואנחנו לא מצלמים אותן. בעדכונים מהשטח כותבים רק כמה סלים יצאו, ובתמונות יש רק סלים ומצרכים.</p></details>
+        <details><summary>אפשר לתרום בהעברה בנקאית או בצ׳ק?<span class="pm" aria-hidden="true"></span></summary><p class="ans">כן. התקשרו או שלחו וואטסאפ, ונשלח פרטים. גם התרומות האלה נכנסות למד היעד.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- צרו קשר -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <div class="sec-head">
+          <h2 class="h2" id="contact-title">צרו קשר</h2>
+          <p class="sec-sub">שאלות על תרומה, קבלה או התנדבות? מכירים משפחה שצריכה סל? אפשר להתקשר, לשלוח וואטסאפ או מייל.</p>
+        </div>
+        <ul class="c-list">
+          <li><span class="stat-ico" aria-hidden="true"><svg><use href="#i-phone"/></svg></span><div><small>טלפון</small><a href="tel:0500000000"><span class="ltr">050-000-0000</span></a></div></li>
+          <li><span class="stat-ico" aria-hidden="true"><svg><use href="#i-chat"/></svg></span><div><small>וואטסאפ</small><a href="https://wa.me/972500000000">לשלוח הודעה בוואטסאפ</a></div></li>
+          <li><span class="stat-ico" aria-hidden="true"><svg><use href="#i-mail"/></svg></span><div><small>מייל</small><a href="mailto:office@salbracha-example.co.il"><span class="ltr">office@salbracha-example.co.il</span></a></div></li>
+          <li><span class="stat-ico" aria-hidden="true"><svg><use href="#i-pin"/></svg></span><div><small>המחסן</small><b>רחוב הדוגמה 7, ירושלים</b><span>אין קבלת קהל, רק בתיאום</span></div></li>
+          <li><span class="stat-ico" aria-hidden="true"><svg><use href="#i-clock"/></svg></span><div><small>בטלפון</small><b>א׳ עד ה׳, 9:00 עד 14:00</b></div></li>
+        </ul>
+      </div>
+      <div class="tile form-card">
+        <h3>נשמח לשמוע מכם</h3>
+        <form class="c-form" id="contact-form" novalidate>
+          <div class="field"><label for="c-name">שם</label><input id="c-name" name="name" type="text" autocomplete="name"></div>
+          <div class="field"><label for="c-phone">טלפון</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" dir="ltr"></div>
+          <div class="field full"><label for="c-topic">במה אפשר לעזור?</label>
+            <select id="c-topic" name="topic">
+              <option>תרומה וקבלות</option>
+              <option>התנדבות</option>
+              <option>משפחה שצריכה סל</option>
+              <option>אחר</option>
+            </select>
+          </div>
+          <div class="field full"><label for="c-msg">הודעה</label><textarea id="c-msg" name="message" rows="4"></textarea></div>
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit">שליחה</button>
+            <p class="form-status" role="status"></p>
+          </div>
+        </form>
+        <p class="discreet"><svg aria-hidden="true"><use href="#i-shield"/></svg>פניות על משפחות נשמרות בדיסקרטיות מלאה.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-navy">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#main" aria-label="סל ברכה, לראש העמוד">
+          <svg class="brand-mark" aria-hidden="true"><use href="#mark"/></svg>
+          <span class="brand-text"><span class="brand-name">סל ברכה</span><span class="brand-sub">סלי שבת וחג למשפחות</span></span>
+        </a>
+        <p class="f-line">סל ברכה · סלי מזון לשבת ולחג · ירושלים</p>
+        <p class="f-legal">עמותה רשומה, ע״ר 58-000000-0 (מספר לדוגמה) · אישור ניהול תקין · סעיף 46</p>
+      </div>
+      <nav aria-label="ניווט בפוטר">
+        <h3>בדף</h3>
+        <div class="f-links">
+          <a href="#donate">לתרומה</a><a href="#basket">מה יש בסל</a><a href="#transparency">לאן הולך הכסף</a><a href="#volunteer">התנדבות</a><a href="#contact">צרו קשר</a>
+        </div>
+      </nav>
+      <div>
+        <h3>פרטים</h3>
+        <div class="f-contact">
+          <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a>
+          <a href="mailto:office@salbracha-example.co.il"><span class="ltr">office@salbracha-example.co.il</span></a>
+          <a class="f-owner" href="/demo/donate/admin/"><svg aria-hidden="true"><use href="#i-sliders"/></svg>כניסה לניהול (לדוגמה)</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>אתר לדוגמה שעיצב <a href="https://yygweb.com/demo/donate/">YYG</a>. העמותה, הפרטים, התורמים וההמלצות דמיוניים. התמונות הן הדמיות תלת־ממד שנבנו במיוחד.</p>
+      <a class="to-top" href="#main">לראש העמוד <svg aria-hidden="true"><use href="#i-up"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- בטלפון: כפתור תרומה דביק בתחתית, עם המד הקטן -->
+<div class="dock on-navy" id="dock">
+  <div class="dock-meter">
+    <p class="dock-row"><span><b data-camp-percent></b> מהיעד</span><span data-camp-days="text"></span></p>
+    <div class="dock-bar" data-camp-progress aria-label="התקדמות קמפיין החורף"><span data-camp-fill></span></div>
+  </div>
+  <a class="btn" href="#donate">לתרומה</a>
+</div>
+
+<script src="/demo/donate/campaign.js" defer></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  root.classList.add('js');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* כותרת: קו תחתון בגלילה */
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* תפריט בטלפון */
+  const menuBtn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
+  const setMenu = (open) => { menuBtn.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); };
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') { setMenu(false); menuBtn.focus(); } });
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (m) => { if (m.matches) setMenu(false); });
+
+  /* המדים מתמלאים כשהם נכנסים למסך */
+  const grow = document.querySelectorAll('[data-grow]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((list) => list.forEach((en) => {
+      if (en.isIntersecting) { requestAnimationFrame(() => en.target.classList.add('is-in')); io.unobserve(en.target); }
+    }), { threshold: 0.3 });
+    grow.forEach((el) => io.observe(el));
+  } else grow.forEach((el) => el.classList.add('is-in'));
+
+  /* מספרים שעולים: רק כשלא ביקשו להפחית תנועה, ותמיד נגמרים בטקסט שהמנוע כתב */
+  const NF = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 0 });
+  const toNum = (s) => Number(String(s).replace(/[^\d]/g, '')) || 0;
+  const runs = new WeakMap();
+  let firstRender = true;
+  function countTo(el, from, to, finalText) {
+    const run = { cur: from, raf: 0 }, dur = from === 0 ? 1600 : 900, t0 = performance.now();
+    runs.set(el, run);
+    const frame = (now) => {
+      const k = Math.min(1, (now - t0) / dur), ease = 1 - Math.pow(1 - k, 3);
+      run.cur = Math.round(from + (to - from) * ease);
+      if (k < 1) { el.textContent = finalText.replace(/\d[\d,]*/, NF.format(run.cur)); run.raf = requestAnimationFrame(frame); }
+      else { el.textContent = finalText; run.cur = to; }
+    };
+    el.textContent = finalText.replace(/\d[\d,]*/, NF.format(from));
+    run.raf = requestAnimationFrame(frame);
+  }
+  document.addEventListener('salbracha:change', () => {
+    document.querySelectorAll('[data-count]').forEach((el) => {
+      const text = el.textContent, to = toNum(text), prev = runs.get(el);
+      if (prev) cancelAnimationFrame(prev.raf);
+      const from = prev ? prev.cur : (firstRender && el.dataset.count === 'load' ? 0 : to);
+      if (calm.matches || from === to || !/\d/.test(text)) { runs.set(el, { cur: to, raf: 0 }); return; }
+      countTo(el, from, to, text);
+    });
+    firstRender = false;
+  });
+
+  /* תרומה חדשה: הסמן על המד קופץ קצת */
+  document.addEventListener('salbracha:donate', () => {
+    document.querySelectorAll('.live-card, .b-meter').forEach((el) => {
+      el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump');
+      setTimeout(() => el.classList.remove('is-bump'), 1000);
+    });
+  });
+
+  /* טופס התרומה. מחכים למנוע (הוא נטען ב־defer) */
+  function initDonate() {
+    const S = window.SalBracha;
+    const form = document.getElementById('donate-form');
+    const errorBox = document.getElementById('donate-error');
+    const thanks = document.getElementById('thanks'), sum = document.getElementById('thanks-sum');
+    const label = form.querySelector('.btn-label');
+    const other = form.other, otherRadio = document.getElementById('amt-other');
+    const dedField = document.getElementById('ded-name-field');
+    if (!S) { label.textContent = 'לתרומה'; return; }
+    const amountOf = () => { const v = form.querySelector('input[name="amount"]:checked')?.value; return v === 'other' ? other.value : v; };
+    const monthly = () => form.querySelector('input[name="freq"]:checked')?.value === 'monthly';
+    function sync() {
+      const a = Number(String(amountOf() || '').replace(/[^\d]/g, ''));
+      form.dataset.freq = monthly() ? 'monthly' : 'once';
+      label.textContent = a ? `לתרומה של ${S.fmt(a)}${monthly() ? ' בכל חודש' : ''}` : 'לתרומה';
+      dedField.hidden = !form.ded_kind.value;
+      form.donor_name.disabled = form.anon.checked;
+    }
+    const pickOther = () => { if (!otherRadio.checked) otherRadio.checked = true; };
+    /* בחירה בסכום אחר רק כשמקלידים או לוחצים בשדה, לא כשעוברים דרכו ב־Tab */
+    other.addEventListener('pointerdown', () => { pickOther(); sync(); });
+    other.addEventListener('input', () => {
+      const clean = other.value.replace(/[^\d]/g, '');
+      if (clean !== other.value) other.value = clean;
+      other.removeAttribute('aria-invalid'); pickOther();
+    });
+    document.querySelector('label[for="amt-other"]').addEventListener('click', () => setTimeout(() => other.focus(), 0));
+    form.addEventListener('input', sync);
+    form.addEventListener('change', sync);
+    const showError = (msg) => { errorBox.textContent = ''; setTimeout(() => { errorBox.textContent = msg; }, 40); };
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorBox.textContent = '';
+      const kind = form.ded_kind.value, dedName = form.ded_name.value.trim();
+      if (kind && !dedName) { showError('נא לכתוב שם להקדשה, או לבחור "בלי הקדשה".'); form.ded_name.focus(); return; }
+      const res = S.donate({
+        amount: amountOf(), name: form.donor_name.value, anonymous: form.anon.checked, monthly: monthly(),
+        dedication: kind ? { kind, name: dedName } : null,
+      });
+      if (!res.ok) {
+        showError(res.error);
+        if (otherRadio.checked) { other.setAttribute('aria-invalid', 'true'); other.focus(); }
+        return;
+      }
+      /* מצב תודה */
+      const d = res.donation;
+      sum.replaceChildren();
+      const amt = document.createElement('b'); amt.textContent = d.monthly ? `${S.fmt(d.amount)} בכל חודש` : S.fmt(d.amount);
+      const who = document.createElement('span'); who.textContent = d.anonymous ? 'בעילום שם' : d.name;
+      sum.append(amt, who);
+      const ded = S.dedText(d.dedication); if (ded) { const x = document.createElement('span'); x.textContent = ded; sum.append(x); }
+      form.hidden = true; thanks.hidden = false;
+      thanks.focus({ preventScroll: true });
+      thanks.scrollIntoView({ block: 'center', behavior: calm.matches ? 'auto' : 'smooth' });
+    });
+    document.getElementById('again').addEventListener('click', () => {
+      form.reset(); other.removeAttribute('aria-invalid'); errorBox.textContent = '';
+      thanks.hidden = true; form.hidden = false; sync();
+      form.querySelector('input[name="amount"]:checked').focus();
+    });
+    sync();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDonate); else initDonate();
+
+  /* כפתור התרומה הדביק בטלפון: מופיע אחרי הפתיחה, ונעלם ליד הטופס */
+  const dock = document.getElementById('dock');
+  const heroSec = document.querySelector('.hero'), donateSec = document.getElementById('donate'), footer = document.querySelector('.site-footer');
+  if ('IntersectionObserver' in window) {
+    const seen = new Map();
+    const io2 = new IntersectionObserver((list) => {
+      list.forEach((en) => seen.set(en.target, en.isIntersecting));
+      const heroOn = seen.get(heroSec), donOn = seen.get(donateSec), footOn = seen.get(footer);
+      dock.classList.toggle('is-shown', heroOn === false && !donOn && !footOn);
+    }, { rootMargin: '-15% 0px -15% 0px' });
+    [heroSec, donateSec, footer].forEach((el) => io2.observe(el));
+  }
+
+  /* הדוח השנתי: אין קובץ בדוגמה */
+  document.getElementById('report-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    const st = document.getElementById('report-status');
+    st.textContent = ''; setTimeout(() => { st.textContent = 'זה אתר לדוגמה, אין קובץ להורדה.'; }, 30);
+  });
+
+  /* טופס יצירת קשר לדוגמה */
+  const cform = document.getElementById('contact-form');
+  cform.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const st = cform.querySelector('.form-status');
+    st.textContent = ''; setTimeout(() => { st.textContent = 'זה אתר לדוגמה, הטופס לא נשלח.'; }, 30);
+  });
+})();
+</script>
+</body>
+</html>
