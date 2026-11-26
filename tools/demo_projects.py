@@ -121,7 +121,7 @@ exec(open(ROOT / 'tools/demo_projects_more.py').read())
 def ready(v):
     need = ('final/index.html', 'shots/final-d.webp') + (() if v.get('no_admin') else ('admin/index.html', 'shots/admin-d.webp'))
     return all((ROOT / v['prefix'] / f).exists() for f in need) and v['T']['he'].get('s5p', 'x') != ''
-PROJECTS = {k: v for k, v in {'anaf': ANAF, 'optika': OPTIKA, 'donate': DONATE, 'shul': SHUL, 'shop': SHOP}.items() if ready(v)}
+PROJECTS = {k: v for k, v in {'basic': BASIC, 'optika': OPTIKA, 'anaf': ANAF, 'donate': DONATE, 'shul': SHUL, 'shop': SHOP}.items() if ready(v)}
 
 def use(key):
     global DATA, DESIGNS, T, QUOTE, P

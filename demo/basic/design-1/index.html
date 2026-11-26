@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בית בסדר · העיצוב | דף נחיתה בסיסי לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="בית בסדר, הנדימן לתיקונים קטנים בבית שמש והסביבה (עסק דמיוני): מדפים, דלתות, ברזים, הרכבת רהיטים ואיטום. דף נחיתה בסיסי לדוגמה של YYG, העיצוב האחד לפני סבב התיקונים.">
+<meta name="theme-color" content="#FBF8F3">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/heebo-900-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/assistant-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים: היבו לכותרות ולכפתורים, אסיסטנט לטקסט ---------- */
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- בסיס: נייר חם, כחול אמין וענבר של כלי עבודה ---------- */
+:root{
+  --paper:#FBF8F3;--sand:#F4EEE4;--sand-2:#EDE4D6;--card:#FFFFFF;
+  --ink:#1D2B38;--ink-2:#3E4B58;--muted:#56626E;
+  --navy:#22374B;--navy-2:#2E4A64;--navy-3:#172738;
+  --amber:#E9A23B;--amber-2:#F2B85C;--amber-soft:#FBEBCF;--amber-ink:#8A5410;
+  --green:#1E7A4C;--green-d:#17623D;
+  --line:#E6DDCF;--line-2:#D8CCBA;
+  --head:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:12px;--r-lg:20px;
+  --shadow:0 1px 2px rgba(29,43,56,.05),0 10px 28px -14px rgba(29,43,56,.18);
+  --shadow-lg:0 2px 6px rgba(29,43,56,.05),0 26px 60px -26px rgba(29,43,56,.32);
+  --gutter:20px;--sec:72px;--header:68px;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.65 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:var(--navy-2)}
+h1,h2,h3{font-family:var(--head);margin:0;color:var(--ink);line-height:1.18;font-weight:900}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--navy-2);outline-offset:3px;border-radius:6px}
+/* על רקע כהה: מסגרת פוקוס בענבר */
+.contact :focus-visible,.prices :focus-visible,.estimate :focus-visible{outline-color:var(--amber-2)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;z-index:200;background:var(--ink);color:#fff;padding:10px 16px;border-radius:var(--r);text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+.container{width:min(1160px,100% - var(--gutter)*2);margin-inline:auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+section[id]{scroll-margin-top:calc(var(--header) + 8px)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:var(--r);border:2px solid transparent;font:700 17px/1.2 var(--head);text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,box-shadow .2s,transform .2s;white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-call{background:var(--amber);color:var(--navy-3);box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 10px 22px -12px rgba(184,110,18,.75)}
+.btn-call:hover{background:var(--amber-2)}
+.btn-wa{background:var(--green);color:#fff}
+.btn-wa:hover{background:var(--green-d)}
+.btn-line{background:transparent;color:var(--navy);border-color:var(--line-2)}
+.btn-line:hover{border-color:var(--navy-2);background:#fff}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-2)}
+.btn .num{font-weight:900;letter-spacing:.01em}
+/* ---------- כותרת עליונה ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(251,248,243,.94);-webkit-backdrop-filter:saturate(1.3) blur(10px);backdrop-filter:saturate(1.3) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+.site-header.is-scrolled{border-bottom-color:var(--line);box-shadow:0 8px 22px -18px rgba(29,43,56,.45)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--header)}
+.brand{display:inline-flex;align-items:center;flex:none;min-height:44px;text-decoration:none;border-radius:6px}
+.brand img{width:auto;height:40px}
+.main-nav{display:none;align-items:center;gap:4px}
+.main-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:var(--ink-2);text-decoration:none;font:700 16px/1 var(--head);border-radius:8px}
+.main-nav a:hover{color:var(--navy);background:var(--sand)}
+.head-call{min-height:44px;padding:0 16px;font-size:16px}
+.head-call .lbl{display:none}
+/* ---------- פתיחה ---------- */
+.hero{position:relative;padding:28px 0 56px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto -10% -40% 30%;height:80%;background:radial-gradient(closest-side,rgba(233,162,59,.16),rgba(233,162,59,0));pointer-events:none}
+.hero-grid{position:relative;display:grid;gap:30px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 14px;border-radius:999px;background:var(--amber-soft);color:var(--amber-ink);font:700 15px/1.2 var(--head)}
+.eyebrow svg{width:18px;height:18px}
+.hero h1{margin-top:16px;font-size:clamp(2.1rem,1.3rem + 2.7vw,3.25rem);line-height:1.1;letter-spacing:-.01em}
+.hero h1 .soft{color:var(--navy-2);font-weight:700;display:block}
+.hero-lead{margin-top:16px;max-width:34em;font-size:clamp(1.08rem,1rem + .3vw,1.25rem);line-height:1.6;color:var(--ink-2)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.hero-cta .btn{flex:1 1 auto}
+.ticks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;color:var(--ink-2);font:600 16px/1.3 var(--body)}
+.ticks li{display:inline-flex;align-items:center;gap:7px}
+.ticks svg{width:20px;height:20px;color:var(--green);flex:none}
+.hours-line{display:flex;align-items:center;gap:8px;margin-top:16px;color:var(--muted);font-size:16px}
+.hours-line svg{width:18px;height:18px;flex:none}
+.hero-visual{position:relative;margin-inline:auto;width:min(100%,560px)}
+.hero-photo{position:relative;border-radius:28px;overflow:hidden;background:#EDE5D8;box-shadow:var(--shadow-lg);aspect-ratio:4/3}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+/* רשימת התיקונים: פתק קטן על התמונה */
+.todo{position:absolute;inset-inline-start:-6px;bottom:-22px;width:min(62%,250px);padding:14px 16px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);transform:rotate(-2deg)}
+.todo b{display:block;font:900 15px/1.2 var(--head);color:var(--navy);margin-bottom:8px}
+.todo li{display:flex;align-items:center;gap:8px;padding:5px 0;font:600 15px/1.3 var(--body);color:var(--ink-2);border-top:1px dashed var(--line)}
+.todo li:first-child{border-top:0}
+.todo li span{text-decoration:line-through;text-decoration-color:rgba(30,122,76,.55);text-decoration-thickness:2px}
+.todo svg{width:18px;height:18px;color:var(--green);flex:none}
+/* ---------- חלקים ---------- */
+.section{padding:var(--sec) 0}
+.section--sand{background:var(--sand)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:40em}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:700 15px/1 var(--head);color:var(--amber-ink)}
+.kicker::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--amber)}
+.sec-head h2{font-size:clamp(1.8rem,1.3rem + 1.8vw,2.6rem);letter-spacing:-.005em}
+.sec-sub{color:var(--muted);font-size:1.1rem}
+/* שירותים */
+.services-grid{display:grid;gap:16px}
+.service{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.service-img{aspect-ratio:16/10;background:#EDE5D8;overflow:hidden}
+.service-img img{width:100%;height:100%;object-fit:cover}
+.service-body{display:grid;gap:6px;padding:18px 20px 22px}
+.service h3{font-size:1.3rem;font-weight:900}
+.service p{color:var(--muted);font-size:1.02rem;line-height:1.55}
+/* בטלפון: כרטיס בשורה, תמונה קטנה בצד, כדי שהדף לא יהיה ארוך מדי */
+@media (max-width:599px){
+  .service{display:grid;grid-template-columns:118px 1fr;align-items:stretch}
+  .service-img{aspect-ratio:auto;height:100%;min-height:128px}
+  .service-body{padding:14px 16px 16px;align-content:center}
+  .service h3{font-size:1.15rem}
+  .service p{font-size:.98rem;line-height:1.5}
+}
+/* מחירון בקצרה */
+.prices{display:flex;flex-direction:column;gap:14px;padding:22px 22px 20px;background:var(--navy);color:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.prices h3{color:#fff;font-size:1.3rem}
+.prices ul{display:grid;gap:2px}
+.prices li{display:flex;align-items:baseline;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.14);font:600 16.5px/1.35 var(--body);color:#E6EDF4}
+.prices li::after{content:"";order:2;flex:1 1 auto;border-bottom:2px dotted rgba(255,255,255,.28);transform:translateY(-4px);min-width:12px}
+.prices li span{order:1}
+.prices li b{order:3;font:900 18px/1 var(--head);color:var(--amber-2);white-space:nowrap}
+.prices small{color:#C9D5E1;font-size:15px;line-height:1.5}
+/* עליי ואזורים */
+.about-grid{display:grid;gap:28px;align-items:start}
+.about-photo{border-radius:var(--r-lg);overflow:hidden;background:#EDE5D8;box-shadow:var(--shadow);aspect-ratio:4/3}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-text p{font-size:1.12rem;line-height:1.7;color:var(--ink-2)}
+.about-text p + p{margin-top:12px}
+.sign{display:flex;align-items:center;gap:12px;margin-top:20px}
+.sign-badge{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;font:900 20px/1 var(--head)}
+.sign b{display:block;font:900 18px/1.2 var(--head)}
+.sign small{color:var(--muted);font-size:15px}
+.areas{margin-top:26px;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.areas h3{display:flex;align-items:center;gap:8px;font-size:1.2rem}
+.areas h3 svg{width:22px;height:22px;color:var(--amber-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips li{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;background:var(--sand);border:1px solid var(--line);font:700 16px/1 var(--head);color:var(--navy)}
+.chips li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.areas p{margin-top:14px;color:var(--muted);font-size:16px}
+.areas p a{font-weight:600}
+/* המלצות */
+.quotes-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:28px}
+.quotes-head .sec-head{margin-bottom:0}
+.tag-sample{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;border:1px dashed var(--line-2);color:var(--muted);font:600 14px/1 var(--body)}
+.quotes{display:grid;gap:16px}
+.quote{margin:0;display:flex;flex-direction:column;gap:14px;padding:24px 22px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.quote svg{width:30px;height:30px;color:var(--amber)}
+.quote blockquote{margin:0;font:600 1.12rem/1.6 var(--body);color:var(--ink)}
+.quote figcaption{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font:700 15.5px/1.3 var(--head);color:var(--navy)}
+.quote figcaption small{display:block;font:400 14.5px/1.4 var(--body);color:var(--muted);margin-top:2px}
+/* צור קשר */
+.contact{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.contact-grid{position:relative;display:grid;gap:28px;align-items:start}
+.contact .kicker{color:var(--amber-2)}
+.contact h2{color:#fff;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem)}
+.contact .sec-sub{color:#D3DDE7}
+.contact-actions{display:grid;gap:12px;margin-top:22px}
+.contact-actions .btn{justify-content:flex-start;padding:0 18px;min-height:60px;font-size:18px}
+.contact-actions .btn .sub{margin-inline-start:auto;font:700 16px/1 var(--head);opacity:.85}
+.contact-hours{margin-top:22px;display:grid;gap:6px;color:#D3DDE7;font-size:16px}
+.contact-hours div{display:flex;justify-content:space-between;gap:16px;max-width:360px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.contact-hours b{color:#fff;font-weight:600}
+.form-card{background:#fff;color:var(--ink);border-radius:var(--r-lg);padding:24px 20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.form-card h3{font-size:1.35rem}
+.form-card > p{color:var(--muted);font-size:16px;margin-top:6px}
+.form{display:grid;gap:14px;margin-top:18px}
+.field{display:grid;gap:6px}
+.field label{font:700 15.5px/1.2 var(--head);color:var(--ink)}
+.field input,.field select,.field textarea{width:100%;min-height:50px;padding:10px 14px;border:1.5px solid var(--line-2);border-radius:10px;background:var(--paper);font-size:17px;transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:96px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy-2);box-shadow:0 0 0 3px rgba(46,74,100,.18)}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.form-foot .btn{flex:1 1 160px}
+.form-status{flex:1 1 100%;font:600 15.5px/1.4 var(--body);color:var(--amber-ink);min-height:1.4em}
+/* ---------- תחתית ---------- */
+.site-footer{padding:40px 0 30px;background:var(--paper);border-top:1px solid var(--line)}
+.footer-grid{display:grid;gap:22px}
+.footer-grid img{height:46px;width:auto}
+.f-slogan{margin-top:10px;color:var(--muted);font-size:16px}
+.f-contact{display:grid;gap:6px;font-size:16px;color:var(--ink-2)}
+.f-contact a{display:inline-flex;align-items:center;min-height:44px;color:var(--navy);font-weight:600;text-decoration:none}
+.f-contact a:hover{text-decoration:underline}
+.f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
+.f-bottom a{color:var(--navy-2)}
+.f-bottom .to-top{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+/* ---------- תנועה עדינה ---------- */
+/* ברשימת התיקונים, הפריטים מסומנים אחד אחרי השני */
+@media (prefers-reduced-motion:no-preference){
+  .todo li span{text-decoration:none;position:relative}
+  .todo li span::after{content:"";position:absolute;inset-inline:0;top:52%;height:2px;border-radius:2px;background:rgba(30,122,76,.55);transform:scaleX(0);transform-origin:right;animation:strike .5s ease forwards}
+  .todo li svg{animation:pop .4s ease both}
+  .todo li:nth-child(1) span::after,.todo li:nth-child(1) svg{animation-delay:.6s}
+  .todo li:nth-child(2) span::after,.todo li:nth-child(2) svg{animation-delay:1.1s}
+  .todo li:nth-child(3) span::after,.todo li:nth-child(3) svg{animation-delay:1.6s}
+  @keyframes strike{to{transform:scaleX(1)}}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+  .btn:active{transform:translateY(1px)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* ---------- מסכים רחבים יותר ---------- */
+@media (min-width:600px){
+  :root{--gutter:28px}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .quotes{grid-template-columns:repeat(2,1fr)}
+  .hero-cta .btn{flex:0 0 auto}
+  .contact-actions{grid-template-columns:1fr 1fr}
+  .form-card{padding:28px}
+  .form .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+}
+@media (min-width:900px){
+  :root{--sec:104px;--header:76px}
+  .brand img{height:46px}
+  .main-nav{display:flex}
+  .head-call .lbl{display:inline}
+  .hero{padding:56px 0 96px}
+  .hero-grid{grid-template-columns:1.05fr 1fr;gap:56px}
+  .services-grid{grid-template-columns:repeat(3,1fr);gap:20px}
+  .quotes{grid-template-columns:repeat(3,1fr);gap:20px}
+  .about-grid{grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+  .contact-grid{grid-template-columns:1fr 1fr;gap:56px}
+  .contact-actions{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1.3fr 1fr 1fr;align-items:start}
+}
+@media (max-width:380px){
+  .todo{width:72%}
+  .btn{padding:0 16px}
+}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. העיצוב האחד של דף הנחיתה הבסיסי, לפני סבב התיקונים.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/basic/design-1/" aria-current="page">העיצוב</a><a href="/demo/basic/final/">הגרסה הסופית</a></nav>
+ <a class="demo-back" href="/demo/basic/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<!-- סמלים משותפים -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path class="ico" d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g class="ico"><path d="M4.3 19.7l1.2-3.6A8 8 0 1 1 8.8 19Z"/><path d="M9 10.2h6M9 13.4h4"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g class="ico" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.7 2.7L16.2 9.4"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g class="ico"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g class="ico"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path class="ico" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M10.2 5.5C6.3 6.6 4 9.6 4 13.6V18.5h6.2v-6.2H7.3c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Zm9.8 0c-3.9 1.1-6.2 4.1-6.2 8.1V18.5H20v-6.2h-2.9c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path class="ico" d="m3.5 11 17-7.5L13 20.5l-2-7.5Z"/></symbol>
+</svg>
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#main"><img src="/demo/basic/img/beseder-wordmark.svg" width="246" height="93" alt="בית בסדר, תיקונים קטנים בבית. לראש העמוד"></a>
+    <nav class="main-nav" aria-label="ניווט ראשי">
+      <a href="#services">מה אני מתקן</a>
+      <a href="#about">עליי ואזורים</a>
+      <a href="#reviews">המלצות</a>
+      <a href="#contact">יצירת קשר</a>
+    </nav>
+    <a class="btn btn-navy head-call" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="lbl">חיוג </span><span class="ltr">050-000-0000</span></a>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- 1. פתיחה -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><svg aria-hidden="true"><use href="#i-wrench"/></svg>הנדימן לבית · בית שמש והסביבה</p>
+        <h1 id="hero-title">תיקונים קטנים בבית, <span class="soft">בלי לחכות שבועות</span></h1>
+        <p class="hero-lead">מדף לתלות, דלת שלא נסגרת, ברז שמטפטף או ארון שהגיע בקרטון. אני מגיע עם כל הכלים, אומר את המחיר לפני שמתחיל, ומשאיר נקי.</p>
+        <div class="hero-cta">
+          <a class="btn btn-call" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>להתקשר <span class="num ltr">050-000-0000</span></a>
+          <a class="btn btn-wa" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>וואטסאפ</a>
+        </div>
+        <ul class="ticks">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>מחיר לפני שמתחילים</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>גם עבודה של רבע שעה</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>משאיר נקי אחריי</li>
+        </ul>
+        <p class="hours-line"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>א׳ עד ה׳ 8:00 עד 19:00, ו׳ 8:00 עד 12:00</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-photo"><img src="/demo/basic/img/drill-960.webp" srcset="/demo/basic/img/drill-560.webp 560w, /demo/basic/img/drill-960.webp 960w" sizes="(max-width: 600px) 92vw, 560px" width="960" height="720" alt="מקדחה־מברגה נטענת בכחול וענבר, עומדת על רקע בהיר" fetchpriority="high"></div>
+        <div class="todo" aria-hidden="true">
+          <b>רשימת התיקונים</b>
+          <ul>
+            <li><svg><use href="#i-check"/></svg><span>מדף בסלון</span></li>
+            <li><svg><use href="#i-check"/></svg><span>ידית בחדר הילדים</span></li>
+            <li><svg><use href="#i-check"/></svg><span>טפטוף במטבח</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. שירותים -->
+  <section class="section section--sand" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="sec-head">
+        <span class="kicker">מה אני מתקן</span>
+        <h2 id="services-title">עבודות קטנות, שעושים כמו שצריך</h2>
+        <p class="sec-sub">אני מביא את הכלים, הברגים והדיבלים. ואם משהו לא בתחום שלי, אגיד את זה מראש.</p>
+      </div>
+      <ul class="services-grid">
+        <li class="service"><div class="service-img"><img src="/demo/basic/img/shelf-560.webp" srcset="/demo/basic/img/shelf-560.webp 560w, /demo/basic/img/shelf-960.webp 960w" sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 370px" width="960" height="720" loading="lazy" alt="מדף עץ על קיר בהיר, עם ספרים, עציץ קטן ואגרטל"></div>
+          <div class="service-body"><h3>מדפים, וילונות ומנורות</h3><p>תליית מדפים, מוטות וילון, מנורות ומראות. ישר בפלס, ובלי חורים מיותרים בקיר.</p></div></li>
+        <li class="service"><div class="service-img"><img src="/demo/basic/img/handle-560.webp" srcset="/demo/basic/img/handle-560.webp 560w, /demo/basic/img/handle-960.webp 960w" sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 370px" width="960" height="720" loading="lazy" alt="ידית דלת מנירוסטה על דלת לבנה, עם רוזטה למנעול"></div>
+          <div class="service-body"><h3>דלתות וידיות</h3><p>דלת שלא נסגרת, ציר שחורק, ידית רופפת או מנעול שנתקע.</p></div></li>
+        <li class="service"><div class="service-img"><img src="/demo/basic/img/tap-560.webp" srcset="/demo/basic/img/tap-560.webp 560w, /demo/basic/img/tap-960.webp 960w" sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 370px" width="960" height="720" loading="lazy" alt="ברז מטבח מכרום עם צוואר מקושת, מעל כיור לבן וקיר אריחים"></div>
+          <div class="service-body"><h3>ברזים וטפטופים</h3><p>החלפת ברז, ראש מקלחת או אטם, וטיפול בטפטוף שלא נגמר.</p></div></li>
+        <li class="service"><div class="service-img"><img src="/demo/basic/img/assembly-560.webp" srcset="/demo/basic/img/assembly-560.webp 560w, /demo/basic/img/assembly-960.webp 960w" sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 370px" width="960" height="720" loading="lazy" alt="מפתחות אלן, דיבלים מעץ, אומים עגולים וברגים על משטח עץ בהיר"></div>
+          <div class="service-body"><h3>הרכבת רהיטים</h3><p>ארונות, מיטות, שולחנות ומדפים שהגיעו בקרטון. מרכיב, מחזק לקיר, ולוקח את הקרטונים.</p></div></li>
+        <li class="service"><div class="service-img"><img src="/demo/basic/img/caulk-560.webp" srcset="/demo/basic/img/caulk-560.webp 560w, /demo/basic/img/caulk-960.webp 960w" sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 370px" width="960" height="720" loading="lazy" alt="שפופרת סיליקון, גליל סרט הדבקה ומרית החלקה על רקע בהיר"></div>
+          <div class="service-body"><h3>איטום קטן</h3><p>סיליקון חדש סביב האמבטיה, הכיור והמשטח, במקום הישן שהשחיר.</p></div></li>
+        <li class="prices" aria-labelledby="prices-title">
+          <h3 id="prices-title">מחירים להתחלה</h3>
+          <ul>
+            <li><span>מדף, מוט וילון או מנורה</span><b>מ־150 ₪</b></li>
+            <li><span>דלת, ציר או ידית</span><b>מ־120 ₪</b></li>
+            <li><span>החלפת ברז או טפטוף</span><b>מ־180 ₪</b></li>
+            <li><span>הרכבת רהיט</span><b>מ־200 ₪</b></li>
+            <li><span>איטום סיליקון</span><b>מ־150 ₪</b></li>
+          </ul>
+          <small>המחיר הסופי לפי העבודה, ותמיד נסגור אותו לפני שמתחילים.</small>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. עליי ואזורים -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="container about-grid">
+      <div class="about-photo"><img src="/demo/basic/img/level-560.webp" srcset="/demo/basic/img/level-560.webp 560w, /demo/basic/img/level-960.webp 960w" sizes="(max-width: 900px) 92vw, 520px" width="960" height="720" loading="lazy" alt="פלס בצבע ענבר, ולידו ברגים ודיבלים לקיר"></div>
+      <div class="about-text">
+        <div class="sec-head" style="margin-bottom:18px">
+          <span class="kicker">עליי</span>
+          <h2 id="about-title">נעים מאוד, יוסף</h2>
+        </div>
+        <p>אני גר בבית שמש עם המשפחה. כמה שנים עשיתי תיקונים קטנים לשכנים ולחברים, ובשנה האחרונה זו העבודה שלי.</p>
+        <p>אני מגיע עם כל הכלים, עובד בשקט ובזהירות, ומנקה אחריי. ואם משהו לא בתחום שלי, אגיד מראש ואמליץ על מי שכן.</p>
+        <div class="sign"><span class="sign-badge" aria-hidden="true">י</span><span><b>יוסף</b><small>בית בסדר · תיקונים קטנים בבית</small></span></div>
+        <div class="areas" id="areas">
+          <h3><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>איפה אני עובד</h3>
+          <ul class="chips">
+            <li>בית שמש</li>
+            <li>צור הדסה</li>
+            <li>מבוא ביתר</li>
+            <li>מושבי האזור</li>
+          </ul>
+          <p>לא בטוחים שאני מגיע אליכם? <a href="https://wa.me/972500000000" target="_blank" rel="noopener">שאלו בוואטסאפ</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. המלצות -->
+  <section class="section section--sand" id="reviews" aria-labelledby="reviews-title">
+    <div class="container">
+      <div class="quotes-head">
+        <div class="sec-head">
+          <span class="kicker">המלצות</span>
+          <h2 id="reviews-title">מה אומרים השכנים</h2>
+        </div>
+        <span class="tag-sample">המלצות לדוגמה</span>
+      </div>
+      <div class="quotes">
+        <figure class="quote">
+          <svg aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote><p>יוסף הגיע באותו שבוע, תלה שלושה מדפים ומוט וילון, ולא השאיר אפילו אבק.</p></blockquote>
+          <figcaption>משפחת כהן<small>בית שמש</small></figcaption>
+        </figure>
+        <figure class="quote">
+          <svg aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote><p>הברז במטבח טפטף חודשים. חצי שעה, והכול שקט.</p></blockquote>
+          <figcaption>משפחת פרידמן<small>רמת בית שמש</small></figcaption>
+        </figure>
+        <figure class="quote">
+          <svg aria-hidden="true"><use href="#i-quote"/></svg>
+          <blockquote><p>הרכיב לנו ארון ושתי מיטות לילדים, בסבלנות ובמחיר שסיכמנו מראש.</p></blockquote>
+          <figcaption>משפחת אזולאי<small>צור הדסה</small></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. יצירת קשר -->
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="kicker">יצירת קשר</span>
+          <h2 id="contact-title">יש משהו שמחכה לתיקון?</h2>
+          <p class="sec-sub">התקשרו או שלחו וואטסאפ, ונקבע זמן. אפשר גם להשאיר פרטים, ואחזור אליכם עוד היום.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-call" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>חיוג<span class="sub ltr">050-000-0000</span></a>
+          <a class="btn btn-wa" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>וואטסאפ<span class="sub ltr">050-000-0000</span></a>
+        </div>
+        <div class="contact-hours">
+          <div><span>א׳ עד ה׳</span><b>8:00 עד 19:00</b></div>
+          <div><span>ו׳</span><b>8:00 עד 12:00</b></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>להשאיר פרטים</h3>
+        <p>כמה מילים על התיקון מספיקות. אחזור אליכם עם מחיר וזמן.</p>
+        <form class="form" id="contact-form" novalidate>
+          <div class="two">
+            <div class="field"><label for="f-name">שם</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" style="text-align:right" required></div>
+          </div>
+          <div class="field"><label for="f-what">מה צריך לתקן?</label><textarea id="f-what" name="what" rows="3" placeholder="למשל: לתלות שני מדפים בסלון"></textarea></div>
+          <div class="field"><label for="f-where">איפה?</label>
+            <select id="f-where" name="where">
+              <option>בית שמש</option>
+              <option>צור הדסה</option>
+              <option>מבוא ביתר</option>
+              <option>מושבי האזור</option>
+              <option>מקום אחר</option>
+            </select>
+          </div>
+          <div class="form-foot">
+            <button class="btn btn-navy" type="submit"><svg aria-hidden="true"><use href="#i-send"/></svg>שליחה</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="/demo/basic/img/beseder-wordmark.svg" width="246" height="93" alt="בית בסדר, תיקונים קטנים בבית" loading="lazy">
+        <p class="f-slogan">מגיע, מתקן, ומשאיר נקי.</p>
+      </div>
+      <div class="f-contact">
+        <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a>
+        <span>בית שמש והסביבה</span>
+      </div>
+      <div class="f-contact">
+        <span>א׳ עד ה׳ 8:00 עד 19:00</span>
+        <span>ו׳ 8:00 עד 12:00</span>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>אתר לדוגמה שעיצב <a href="https://yygweb.com/demo/basic/">YYG</a>. העסק, הפרטים וההמלצות דמיוניים. התמונות: הדמיות תלת־ממד שנבנו במיוחד לדוגמה.</p>
+      <a class="to-top" href="#main">לראש העמוד</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  document.documentElement.classList.add('js');
+
+  /* צל לכותרת העליונה כשגוללים */
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* טופס לדוגמה */
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const status = form.querySelector('.form-status');
+    status.textContent = '';
+    setTimeout(() => { status.textContent = 'זה אתר לדוגמה, הטופס לא נשלח.'; }, 30);
+  });
+})();
+</script>
+</body>
+</html>

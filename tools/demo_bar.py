@@ -11,6 +11,8 @@ PAGES = {  # תיקיית פרויקט -> עמודים, וכל עמוד: איז�
  '/demo/donate/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
  '/demo/shul/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
  '/demo/shop/': ['design-1', 'design-2', 'design-3', 'final', 'admin'],
+ '/demo/basic/': ['design-1', 'final'],
+ '/demo/landing/': ['design-1', 'design-2', 'design-3', 'final'],
 }
 CSS = '''.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
 .demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
@@ -28,9 +30,12 @@ CSS = '''.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;p
 ADMIN = {'/demo/': 'מסך ניהול התוכן', '/demo/optika/': 'מסך עדכון השעות', '/demo/donate/': 'מסך ניהול הקמפיין', '/demo/shul/': 'מסך הגבאי', '/demo/shop/': 'ניהול החנות'}
 
 def bar(prefix, current):
-    links = [('design-1', 'עיצוב 1'), ('design-2', 'עיצוב 2'), ('design-3', 'עיצוב 3'), ('final', 'הגרסה הסופית'), ('admin', ADMIN[prefix])]
+    pages = PAGES[prefix]   # בדף הבסיסי יש עיצוב אחד, ובדף נחיתה רגיל אין מסך ניהול
+    names = {'design-1': 'העיצוב' if len([x for x in pages if x.startswith('design-')]) == 1 else 'עיצוב 1', 'design-2': 'עיצוב 2', 'design-3': 'עיצוב 3', 'final': 'הגרסה הסופית', 'admin': ADMIN.get(prefix, 'מסך הניהול')}
+    links = [(k, names[k]) for k in pages]
     nav = ''.join(f'<a href="{prefix}{k}/"{" aria-current=\"page\"" if k == current else ""}>{t}</a>' for k, t in links)
-    kind = 'הגרסה הסופית, אחרי המשוב של הלקוח.' if current == 'final' else ('מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.' if current == 'admin' else 'אחד מ־3 כיווני עיצוב לאותו תוכן.')
+    kind = 'הגרסה הסופית, אחרי המשוב של הלקוח.' if current == 'final' else ('העיצוב האחד של דף הנחיתה הבסיסי, לפני סבב התיקונים.' if prefix == '/demo/basic/' and current == 'design-1' else None)
+    kind = kind or ('מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.' if current == 'admin' else 'אחד מ־3 כיווני עיצוב לאותו תוכן.')
     return (f'<div class="demo-bar" role="note" aria-label="אתר לדוגמה">\n'
             f' <strong class="demo-flag">אתר לדוגמה בלבד</strong>\n'
             f' <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. {kind}</span>\n'

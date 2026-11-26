@@ -1,0 +1,497 @@
+{
+ "_note": "פרויקט לדוגמה (בית בסדר, הנדימן לתיקונים קטנים בבית, עסק דמיוני): דף נחיתה בסיסי ב־1,290 ₪, עם עיצוב אחד וסבב תיקונים אחד, והטקסטים מהלקוח. בדף הבסיסי אין עיצוב לוגו: היה רק צילום של מגנט, אז השם מסודר בגופן (היבו) כסימן מילולי פשוט. התשובות לשאלון האפיון ולשאלון המשוב, ובמשוב רק השאלות הכלליות ושל עיצוב 1. טקסט חופשי: he/en. בחירות: הערך בעברית, והתרגום נלקח מ־assets/q-defs.js לפי המיקום.",
+ "quote": "YYG-2026-009",
+ "intake": [
+  [
+   "business",
+   {
+    "he": "בית בסדר · תיקונים קטנים בבית",
+    "en": "Bayit Beseder · small home repairs"
+   }
+  ],
+  [
+   "biz_what",
+   {
+    "he": "הנדימן לתיקונים קטנים בבית: תולה מדפים, מוטות וילון ומנורות, מתקן דלתות, ידיות וברזים, מרכיב רהיטים, ועושה איטום קטן באמבטיה ובמטבח.",
+    "en": "A handyman for small home repairs: I put up shelves, curtain rails and lamps, fix doors, handles and taps, assemble furniture, and do small sealing jobs in the bathroom and kitchen."
+   }
+  ],
+  [
+   "biz_field",
+   "שירות מקצועי"
+  ],
+  [
+   "biz_area",
+   "בעיר או באזור מסוים"
+  ],
+  [
+   "biz_area_where",
+   {
+    "he": "בית שמש והסביבה",
+    "en": "Beit Shemesh and the surrounding area"
+   }
+  ],
+  [
+   "biz_age",
+   "שנה עד 5 שנים"
+  ],
+  [
+   "biz_unique",
+   {
+    "he": "מגיע בשעה שקבענו, אומר את המחיר לפני שמתחיל, ומשאיר נקי. גם עבודה של רבע שעה, כמו מדף אחד, אני לא דוחה.",
+    "en": "I arrive at the time we set, give the price before I start, and leave the place clean. I don't turn down even a 15-minute job, like a single shelf."
+   }
+  ],
+  [
+   "competitors",
+   {
+    "he": "הנדימנים מקבוצות הוואטסאפ של השכונה ומהעלונים. לרובם אין אתר בכלל, רק מספר טלפון ושורה אחת.",
+    "en": "Handymen from the neighborhood WhatsApp groups and the local flyers. Most of them have no website at all, just a phone number and one line."
+   }
+  ],
+  [
+   "site_name",
+   {
+    "he": "בית בסדר",
+    "en": "Bayit Beseder"
+   }
+  ],
+  [
+   "slogan",
+   {
+    "he": "מגיע, מתקן, ומשאיר נקי.",
+    "en": "I come, I fix it, and I leave it clean."
+   }
+  ],
+  [
+   "domain_wish",
+   {
+    "he": "משהו קצר עם בית בסדר. אם תפוס, אשמח להצעה.",
+    "en": "Something short with Bayit Beseder. If it's taken, I'd like a suggestion."
+   }
+  ],
+  [
+   "site_phone",
+   "050-0000000"
+  ],
+  [
+   "site_hours",
+   {
+    "he": "א׳ עד ה׳ 8:00 עד 19:00, ו׳ 8:00 עד 12:00.",
+    "en": "Sun to Thu 8:00 to 19:00, Fri 8:00 to 12:00."
+   }
+  ],
+  [
+   "social",
+   {
+    "he": "אין רשתות. יש פרופיל עסק בגוגל עם כמה ביקורות, ואני מפרסם בקבוצות הוואטסאפ של השכונות.",
+    "en": "No social media. There's a Google Business profile with a few reviews, and I post in the neighborhood WhatsApp groups."
+   }
+  ],
+  [
+   "cust_who",
+   [
+    "לקוחות פרטיים",
+    "הורים",
+    "מבוגרים",
+    "ציבור דתי וחרדי"
+   ]
+  ],
+  [
+   "cust_need",
+   {
+    "he": "משהו קטן בבית שמחכה כבר שבועות: מדף שצריך לתלות, דלת שלא נסגרת, ברז שמטפטף, ארון שהגיע בקרטון. אין להם זמן או כלים, ובעל מקצוע גדול לא מגיע לעבודה כזאת.",
+    "en": "Something small at home that's been waiting for weeks: a shelf to put up, a door that won't close, a dripping tap, a wardrobe that arrived in a box. They don't have the time or the tools, and a big contractor won't come for a job like that."
+   }
+  ],
+  [
+   "cust_questions",
+   {
+    "he": "כמה זה עולה, מתי אני יכול להגיע, אם אני מביא ברגים ודיבלים, ואם אני מגיע גם לעבודה אחת קטנה.",
+    "en": "How much it costs, when I can come, whether I bring the screws and wall plugs, and whether I come for one small job too."
+   }
+  ],
+  [
+   "cust_from",
+   [
+    "המלצות מפה לאוזן",
+    "קבוצות וואטסאפ",
+    "פרסום בעלונים ובעיתונים"
+   ]
+  ],
+  [
+   "cust_sensitive",
+   {
+    "he": "הרבה משפחות חרדיות, וגם מבוגרים. שפה פשוטה ומכבדת, ובלי תמונות של אנשים.",
+    "en": "Many Haredi families, and older people too. Simple, respectful language, and no photos of people."
+   }
+  ],
+  [
+   "goal_action",
+   "להתקשר"
+  ],
+  [
+   "goal_success",
+   {
+    "he": "שיגיעו עוד 3 או 4 שיחות בשבוע מאנשים שלא מכירים אותי, ושיהיה לי קישור מסודר לשלוח בקבוצות, במקום להסביר כל פעם מה אני עושה.",
+    "en": "3 or 4 more calls a week from people who don't know me, and a proper link I can send in the groups instead of explaining every time what I do."
+   }
+  ],
+  [
+   "goal_channels",
+   [
+    "טלפון",
+    "וואטסאפ"
+   ]
+  ],
+  [
+   "pages",
+   [
+    "עמוד בית",
+    "שירותים",
+    "אודות",
+    "המלצות",
+    "צור קשר"
+   ]
+  ],
+  [
+   "features",
+   [
+    "כפתור חיוג",
+    "כפתור וואטסאפ",
+    "טופס פנייה"
+   ]
+  ],
+  [
+   "prices_show",
+   "רק \"החל מ־\""
+  ],
+  [
+   "update_who",
+   "כמעט לא צריך עדכונים"
+  ],
+  [
+   "update_what",
+   {
+    "he": "כמעט כלום. אולי פעם בשנה שינוי במחירים או אזור חדש, ואת זה אבקש ממך.",
+    "en": "Almost nothing. Maybe once a year a price change or a new area, and I'll ask you to do that."
+   }
+  ],
+  [
+   "logo",
+   "יש רק תמונה או צילום של הלוגו"
+  ],
+  [
+   "logo_file",
+   {
+    "files": [
+     "magnet-photo.jpg"
+    ]
+   }
+  ],
+  [
+   "about_text",
+   {
+    "he": "שמי יוסף, ואני גר בבית שמש עם המשפחה. כמה שנים עשיתי תיקונים קטנים לשכנים ולחברים, ובשנה האחרונה זה הפך לעבודה שלי. אני מגיע עם כל הכלים, עובד בשקט ובזהירות, ומנקה אחריי. אם משהו לא בתחום שלי, אגיד מראש ואמליץ על מי שכן.",
+    "en": "My name is Yosef, and I live in Beit Shemesh with my family. For a few years I did small repairs for neighbors and friends, and in the past year it became my job. I come with all the tools, work quietly and carefully, and clean up after myself. If something isn't in my line, I'll say so up front and recommend someone who does it."
+   }
+  ],
+  [
+   "services_text",
+   {
+    "he": "תליית מדפים, מוטות וילון ומנורות. מ־150 ₪\nתיקון דלתות, צירים וידיות. מ־120 ₪\nהחלפת ברזים וטיפול בטפטוף. מ־180 ₪\nהרכבת רהיטים: ארונות, מיטות ושולחנות. מ־200 ₪\nאיטום סיליקון באמבטיה ובמטבח. מ־150 ₪",
+    "en": "Putting up shelves, curtain rails and lamps. From ₪150\nFixing doors, hinges and handles. From ₪120\nReplacing taps and fixing drips. From ₪180\nAssembling furniture: wardrobes, beds and tables. From ₪200\nSilicone sealing in the bathroom and kitchen. From ₪150"
+   }
+  ],
+  [
+   "texts",
+   "יש טקסטים מוכנים, אצרף"
+  ],
+  [
+   "docs",
+   {
+    "files": [
+     "texts-for-the-site.docx"
+    ]
+   }
+  ],
+  [
+   "photos",
+   "יש תמונות מהטלפון"
+  ],
+  [
+   "photo_files",
+   {
+    "files": [
+     "shelf-living-room.jpg",
+     "kitchen-tap.jpg",
+     "wardrobe-assembled.jpg",
+     "door-handle.jpg"
+    ]
+   }
+  ],
+  [
+   "reviews",
+   "יש"
+  ],
+  [
+   "reviews_text",
+   {
+    "he": "\"יוסף הגיע באותו שבוע, תלה שלושה מדפים ומוט וילון, ולא השאיר אפילו אבק.\" (משפחת כהן, בית שמש)\n\"הברז במטבח טפטף חודשים. חצי שעה, והכול שקט.\" (משפחת פרידמן, רמת בית שמש)\n\"הרכיב לנו ארון ושתי מיטות לילדים, בסבלנות ובמחיר שסיכמנו מראש.\" (משפחת אזולאי, צור הדסה)",
+    "en": "\"Yosef came the same week, put up three shelves and a curtain rail, and didn't leave a speck of dust.\" (The Cohen family, Beit Shemesh)\n\"The kitchen tap dripped for months. Half an hour, and it's all quiet.\" (The Friedman family, Ramat Beit Shemesh)\n\"He assembled a wardrobe and two beds for the children, patiently and at the price we agreed in advance.\" (The Azoulay family, Tzur Hadassah)"
+   }
+  ],
+  [
+   "brand_colors",
+   {
+    "he": "אין צבעים קבועים. כחול נראה לי אמין.",
+    "en": "No set colors. Blue feels trustworthy to me."
+   }
+  ],
+  [
+   "feel",
+   [
+    "מקצועי ואמין",
+    "חם ומשפחתי",
+    "שקט ונקי"
+   ]
+  ],
+  [
+   "bg",
+   "בהיר"
+  ],
+  [
+   "sc_formal",
+   "4"
+  ],
+  [
+   "sc_rich",
+   "2"
+  ],
+  [
+   "sc_bold",
+   "3"
+  ],
+  [
+   "likes",
+   {
+    "he": "אתרים פשוטים של בעלי מקצוע, שרואים בהם את הטלפון מיד, בלי לחפש.",
+    "en": "Simple sites of tradespeople, where you see the phone number right away, without searching."
+   }
+  ],
+  [
+   "dislikes",
+   {
+    "he": "אתר עמוס, עם הרבה טקסט ותמונות של אנשים. ושלא ייראה כמו חברת שיפוצים גדולה, כי אני עושה עבודות קטנות.",
+    "en": "A busy site, with lots of text and photos of people. And it shouldn't look like a big renovation company, because I do small jobs."
+   }
+  ],
+  [
+   "motion",
+   "מעט ועדין"
+  ],
+  [
+   "domain",
+   "לא, צריך לרשום"
+  ],
+  [
+   "site_now",
+   "לא"
+  ],
+  [
+   "biz_email",
+   "לא צריך"
+  ],
+  [
+   "languages",
+   [
+    "עברית"
+   ]
+  ],
+  [
+   "deadline",
+   "תוך שבועיים"
+  ],
+  [
+   "package",
+   "דף נחיתה בסיסי (1,290 ₪)"
+  ],
+  [
+   "budget",
+   "עד 2,000 ₪"
+  ],
+  [
+   "deciders",
+   {
+    "he": "אני לבד.",
+    "en": "Just me."
+   }
+  ],
+  [
+   "extra",
+   {
+    "he": "אני רוצה את האפשרות הכי זולה שעדיין נראית מקצועית. את הטקסטים כתבתי בעצמי, ואפשר לסדר אותם קצת.",
+    "en": "I want the cheapest option that still looks professional. I wrote the texts myself, and they can be tidied up a little."
+   }
+  ],
+  [
+   "name",
+   {
+    "he": "יוסף, הנדימן (לקוח לדוגמה)",
+    "en": "Yosef, handyman (example client)"
+   }
+  ],
+  [
+   "email",
+   "yosef.fix@mail-example.co.il"
+  ],
+  [
+   "phone",
+   "050-0000000"
+  ],
+  [
+   "when",
+   "אחר הצהריים"
+  ]
+ ],
+ "feedback": [
+  [
+   "name",
+   {
+    "he": "יוסף, הנדימן (לקוח לדוגמה)",
+    "en": "Yosef, handyman (example client)"
+   }
+  ],
+  [
+   "email",
+   "yosef.fix@mail-example.co.il"
+  ],
+  [
+   "phone",
+   "050-0000000"
+  ],
+  [
+   "business",
+   {
+    "he": "בית בסדר · תיקונים קטנים בבית",
+    "en": "Bayit Beseder · small home repairs"
+   }
+  ],
+  [
+   "quote",
+   "YYG-2026-009"
+  ],
+  [
+   "choice",
+   "עיצוב 1"
+  ],
+  [
+   "rate1",
+   "4"
+  ],
+  [
+   "first",
+   {
+    "he": "נקי וברור. הטלפון למעלה, ורואים מיד מה אני עושה. נראה מסודר, כמו שאני רוצה שיחשבו עליי.",
+    "en": "Clean and clear. The phone number is at the top, and you see right away what I do. It looks tidy, the way I want people to think of me."
+   }
+  ],
+  [
+   "d1_like",
+   [
+    "צבעים",
+    "פונטים",
+    "תמונות",
+    "התחושה הכללית"
+   ]
+  ],
+  [
+   "d1_dislike",
+   [
+    "כפתורים"
+   ]
+  ],
+  [
+   "d1_note",
+   {
+    "he": "כפתור החיוג צריך להיות הכי גדול בדף. ובתמונה הראשונה, במקום המקדחה הייתי שם משהו פחות של שיפוצים, אולי ארגז כלים.",
+    "en": "The call button should be the biggest thing on the page. And in the first picture, instead of the drill I'd put something less like renovations, maybe a toolbox."
+   }
+  ],
+  [
+   "colors",
+   "להשאיר כמו שהם"
+  ],
+  [
+   "dir_warm",
+   "3"
+  ],
+  [
+   "dir_detail",
+   "2"
+  ],
+  [
+   "dir_bold",
+   "4"
+  ],
+  [
+   "dir_modern",
+   "3"
+  ],
+  [
+   "fonts",
+   "מתאימים"
+  ],
+  [
+   "images",
+   "מתאימות"
+  ],
+  [
+   "texts_ok",
+   "צריך תיקונים"
+  ],
+  [
+   "texts_fix",
+   {
+    "he": "להוריד את המחירון. אני מעדיף לתת מחיר בטלפון, כי כל עבודה שונה. במקומו לכתוב שאפשר לשלוח תמונה בוואטסאפ ולקבל הערכת מחיר.",
+    "en": "Remove the price list. I prefer to quote by phone, because every job is different. Instead, say that people can send a photo on WhatsApp and get a price estimate."
+   }
+  ],
+  [
+   "missing",
+   {
+    "he": "רמת בית שמש ברשימת האזורים. הרבה לקוחות שלי משם, אפילו ההמלצה של משפחת פרידמן.",
+    "en": "Ramat Beit Shemesh in the list of areas. Many of my customers are from there, even the Friedman family's testimonial."
+   }
+  ],
+  [
+   "mobile",
+   "כן, ומשהו לא נוח"
+  ],
+  [
+   "mobile_note",
+   {
+    "he": "כשגוללים למטה צריך לחזור למעלה כדי להתקשר. שהכפתור יישאר תמיד למטה במסך.",
+    "en": "When you scroll down, you have to go back up to call. The button should always stay at the bottom of the screen."
+   }
+  ],
+  [
+   "top3",
+   {
+    "he": "1. כפתור חיוג גדול יותר, ובטלפון שיישאר תמיד למטה במסך.\n2. להוסיף את רמת בית שמש לאזורים.\n3. להוריד את המחירון. מחיר אני נותן בטלפון.",
+    "en": "1. A bigger call button, and on the phone it should always stay at the bottom of the screen.\n2. Add Ramat Beit Shemesh to the areas.\n3. Remove the price list. I give prices by phone."
+   }
+  ],
+  [
+   "call",
+   "אפשר להמשיך בלי שיחה"
+  ],
+  [
+   "extra",
+   {
+    "he": "תודה. יש לי סבב תיקונים אחד, אז ריכזתי כאן הכול.",
+    "en": "Thanks. I have one revision round, so I put everything here."
+   }
+  ]
+ ]
+}

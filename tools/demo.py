@@ -310,7 +310,7 @@ def build(lang):
         L = d[lang]; n = d['n']
         designs += f'''<article class="d-design">
    <a class="d-shot" href="/{pfx}design-{n}/" aria-label="{E(t['open'].format(n=n))}"><img class="dk" src="/{pfx}shots/design-{n}-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/design-{n}-m.webp" width="240" height="520" alt="" loading="lazy"></a>
-   <div class="d-design-b"><h3><small>{'עיצוב' if he else 'Design'} {n}</small>{E(L['name'])}</h3><p>{E(L['text'])}</p>
+   <div class="d-design-b"><h3><small>{(('העיצוב' if he else 'The design') if len(DESIGNS) == 1 else (('עיצוב' if he else 'Design') + f' {n}'))}</small>{E(L['name'])}</h3><p>{E(L['text'])}</p>
     <p class="d-meta">{E(t['fonts'])}: {E(L['fonts'])}</p>
     <div class="d-sw" aria-label="{E(t['palette'])}"><span class="d-meta">{E(t['palette'])}:</span>{''.join(f'<i style="background:{c}"></i>' for c in d['colors'])}</div>
     <a class="btn btn-line" href="/{pfx}design-{n}/">{E(t['open'].format(n=n))}</a></div>
