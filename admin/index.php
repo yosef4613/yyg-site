@@ -17,7 +17,7 @@ $fails = array_filter(array_map('intval', @file($failFile, FILE_IGNORE_NEW_LINES
 $tryKey = trim((string) ($_GET['k'] ?? ($_POST['k'] ?? '')));
 if ($tryKey !== '') {
     if (count($fails) >= 10) { http_response_code(429); exit('יותר מדי ניסיונות. נסו שוב בעוד שעה.'); }
-    if (hash_equals(adm_key(), $tryKey)) { adm_login(); @unlink($failFile); header('Location: /admin/', true, 303); exit; }
+    if (hash_equals(adm_key(), $tryKey)) { adm_login(); @unlink($failFile); header('Location: ' . adm_after_login(), true, 303); exit; }
     $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails));
 }
 if (isset($_GET['logout'])) { adm_logout(); header('Location: /admin/', true, 303); exit; }
@@ -51,7 +51,7 @@ if ($magic !== '' && preg_match('/^[a-f0-9]{40}$/', $magic)) {
         foreach ($m as $i => $x) if (empty($x['used']) && (int) $x['exp'] > time() && hash_equals((string) $x['h'], hash('sha256', $magic))) { $m[$i]['used'] = time(); return true; }
         return false;
     });
-    if ($ok) { adm_login(); header('Location: /admin/', true, 303); exit; }
+    if ($ok) { adm_login(); header('Location: ' . adm_after_login(), true, 303); exit; }
     adm_page('כניסה לניהול | YYG', '<div class="login"><h1>הקישור כבר לא בתוקף</h1><p class="muted">הקישור עובד פעם אחת ובמשך 15 דקות. אפשר לבקש קישור חדש.</p><form method="post" action="/admin/"><input type="hidden" name="do" value="magic_send"><button class="btn gold" type="submit">שלחו לי קישור חדש</button></form></div>');
 }
 
@@ -243,7 +243,7 @@ ob_start(); ?>
 <div class="acts" style="margin:0 0 12px"><a class="btn" href="https://yygweb.com/questionnaire/" target="_blank" rel="noopener">שאלון האפיון באתר</a><a class="btn" href="https://yygweb.com/feedback/" target="_blank" rel="noopener">שאלון המשוב באתר</a></div>
 <?php if (!$forms): ?><p class="muted">עוד לא מולאו שאלונים. כל שאלון שלקוח שולח מגיע אליך במייל ומופיע כאן.</p><?php else: ?>
 <div class="tscroll"><table class="list"><thead><tr><th>תאריך</th><th>שאלון</th><th>לקוח</th><th>טלפון</th><th></th></tr></thead><tbody>
-<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?><?= !empty($fr['files']) ? ' <span class="tag">' . count($fr['files']) . ' קבצים</span>' : '' ?><?= !empty($fr['flags']) ? ' <span class="tag warn">לבדיקה</span>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td><td><form method="post" class="del" onsubmit="return confirm('למחוק את השאלון ואת הקבצים שצורפו אליו? אי אפשר לשחזר.')"><input type="hidden" name="do" value="form_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $fid) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></td></tr><?php endforeach; ?>
+<?php foreach (array_reverse($forms, true) as $fid => $fr): ?><tr><td><small><?= $e(fmt_time((int) $fr['t'], 'd/m H:i')) ?></small></td><td><a href="/admin/form.php?id=<?= $e(rawurlencode((string) $fid)) ?>"><?= $fr['form'] === 'intake' ? 'אפיון' : 'משוב על עיצובים' ?></a></td><td><?= $e($fr['contact']['name']) ?><?= $fr['contact']['business'] ? ' <small>· ' . $e($fr['contact']['business']) . '</small>' : '' ?><?= !empty($fr['files']) || form_files($fr) ? ' <span class="tag">' . count(form_files($fr)) . ' קבצים</span>' : '' ?><?= !empty($fr['flags']) ? ' <span class="tag warn">לבדיקה</span>' : '' ?></td><td><bdi><?= $e($fr['contact']['phone']) ?></bdi></td><td><form method="post" class="del" onsubmit="return confirm('למחוק את השאלון ואת הקבצים שצורפו אליו? אי אפשר לשחזר.')"><input type="hidden" name="do" value="form_delete"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="id" value="<?= $e((string) $fid) ?>"><button class="btn" type="submit" aria-label="מחיקה">מחיקה</button></form></td></tr><?php endforeach; ?>
 </tbody></table></div>
 <?php endif; ?>
 

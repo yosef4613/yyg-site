@@ -37,10 +37,11 @@ function adm_authed(): bool {
 }
 function adm_login(): void {
     $exp = (string) (time() + 30 * 86400);
-    setcookie(ADM_COOKIE, $exp . '.' . adm_sign($exp), ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Strict']);
+    /* Lax ולא Strict: אחרת הדפדפן לא שולח את העוגייה כשנכנסים מקישור במייל, ודף הניהול חושב שלא מחוברים */
+    setcookie(ADM_COOKIE, $exp . '.' . adm_sign($exp), ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
 }
 function adm_logout(): void {
-    foreach (['/', '/admin/'] as $p) setcookie(ADM_COOKIE, '', ['expires' => 1, 'path' => $p, 'secure' => true, 'httponly' => true, 'samesite' => 'Strict']);
+    foreach (['/', '/admin/'] as $p) setcookie(ADM_COOKIE, '', ['expires' => 1, 'path' => $p, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
 }
 function adm_csrf(): string { return adm_sign('csrf' . substr((string) ($_COOKIE[ADM_COOKIE] ?? ''), 0, 10)); }
 function adm_headers(): void {
@@ -52,7 +53,21 @@ function adm_headers(): void {
 /* מי שלא מחובר מועבר לדף הכניסה */
 function adm_require(): void {
     adm_headers();
-    if (!adm_authed()) { header('Location: /admin/', true, 303); exit; }
+    if (!adm_authed()) {
+        /* זוכרים לאן רצו להגיע (למשל שאלון מקישור במייל), וחוזרים לשם אחרי הכניסה */
+        $to = (string) ($_SERVER['REQUEST_URI'] ?? '');
+        if (str_starts_with($to, '/admin/') && strlen($to) < 300) setcookie('yyg_next', $to, ['expires' => time() + 1800, 'path' => '/admin/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+        header('Location: /admin/', true, 303); exit;
+    }
+    /* עוגייה ישנה מסוג Strict מוחלפת ב־Lax, באותו תוקף */
+    $c = (string) ($_COOKIE[ADM_COOKIE] ?? '');
+    if (preg_match('/^(\d{10})\./', $c, $m)) setcookie(ADM_COOKIE, $c, ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+}
+/* אחרי כניסה: חזרה לדף שרצו להגיע אליו, אם יש */
+function adm_after_login(): string {
+    $to = (string) ($_COOKIE['yyg_next'] ?? '');
+    setcookie('yyg_next', '', ['expires' => 1, 'path' => '/admin/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+    return (str_starts_with($to, '/admin/') && !str_contains($to, '//') && preg_match('#^/admin/[\w./?=&%-]*$#', $to)) ? $to : '/admin/';
 }
 
 /* ---------- קבצי נתונים ---------- */
