@@ -133,7 +133,7 @@ const countHit = (() => {
 countHit('view');
 if ('IntersectionObserver' in window) {
   const seen = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { countHit(en.target.id); seen.unobserve(en.target); } }), { threshold: 0.25 });
-  ['process', 'work', 'plan', 'packages', 'examples', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
+  ['process', 'results', 'work', 'plan', 'packages', 'examples', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
 }
 
 /* ===== פתיחה: אתר אמיתי שמתעצב מחדש בלחיצה (תפקיד: להראות את המוצר ומה השתנה) =====

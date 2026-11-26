@@ -1192,3 +1192,30 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 @media (max-width:760px){.ex-grid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;overscroll-behavior-x:contain}.ex-card{scroll-snap-align:start}}
 .ex-grid:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:16px}
 @media (prefers-reduced-motion:reduce){.ex-card:hover .ex-img img{transform:none}}
+
+/* ===== גיוון בטיפוגרפיה ובצבע (בלי להוסיף צבע הדגשה: הזהב נשאר רק על מה שלוחצים) =====
+   גופן עם סריפים לפסקאות הפתיחה ולהמלצות, כתב יד להערות קטנות, ואזור בהיר אחד באמצע העמוד */
+:root{--serif:"Frank",Georgia,"Times New Roman",serif;--warm:#DCCFBA;--warm-hi:#EFE4D0}
+.sec-lead{font-family:var(--serif);font-weight:500;color:var(--warm);font-size:clamp(1.12rem,1.02rem + .45vw,1.38rem);line-height:1.6}
+.quote blockquote p{font-family:var(--serif);font-weight:500;font-size:1.12rem;color:var(--warm-hi)}
+.hand-note{font-family:var(--hand);font-size:clamp(1.35rem,1.2rem + .55vw,1.75rem);line-height:1.2;color:var(--warm-hi);margin-top:10px;transform:rotate(-1.2deg);transform-origin:right center}
+[dir="ltr"] .hand-note{transform-origin:left center;transform:rotate(1.2deg)}
+
+/* ככה אתר מביא לקוחות: האזור הבהיר */
+.results{--ink:#151920;--ink-2:#465061;--paper:#F4EFE6;position:relative;padding:clamp(56px,8vw,104px) 0;color:var(--ink);color-scheme:light;
+ background:radial-gradient(900px 360px at 88% 0,#FFFDF9 0,rgba(255,253,249,0) 70%),radial-gradient(700px 300px at 0 100%,#EDE4D3 0,rgba(237,228,211,0) 70%),var(--paper)}
+.results .sec-title{color:var(--ink)}
+.results .sec-title::after{background:radial-gradient(circle at calc(100% - 4px) 50%,#465061 0 3px,transparent 3.6px),linear-gradient(270deg,#465061,rgba(70,80,97,0)) 0 50%/calc(100% - 8px) 2px no-repeat;opacity:.8}
+[dir="ltr"] .results .sec-title::after{background:radial-gradient(circle at 4px 50%,#465061 0 3px,transparent 3.6px),linear-gradient(90deg,#465061,rgba(70,80,97,0)) 8px 50%/calc(100% - 8px) 2px no-repeat}
+.results .sec-lead{color:var(--ink-2)}
+.res-grid{list-style:none;padding:0;margin:clamp(28px,4vw,44px) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px)}
+.res-item{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #E6DDCC;border-radius:20px;padding:clamp(22px,2.6vw,30px);box-shadow:0 26px 46px -30px rgba(21,25,32,.5)}
+.res-n{display:block;font-family:var(--display);font-weight:700;font-size:clamp(3rem,2.3rem + 2vw,4.2rem);line-height:.9;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
+.res-item h3{margin-top:12px;font-size:clamp(1.3rem,1.12rem + .6vw,1.6rem);color:var(--ink)}
+.res-item p{margin-top:8px;color:var(--ink-2);line-height:1.7}
+.res-item .res-proof{margin-top:auto;padding-top:16px;border-top:1px dashed #D6C9B0;font-family:var(--hand);font-size:1.32rem;line-height:1.35;color:#6E4314}
+.res-item p:not(.res-proof){margin-bottom:16px}
+.res-next{margin-top:28px;font-size:var(--step-1)}
+.results .text-link{color:var(--ink)}
+@media (max-width:860px){.res-grid{grid-template-columns:1fr}}
+@media print{.results{background:none}}
