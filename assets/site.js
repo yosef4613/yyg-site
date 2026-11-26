@@ -308,29 +308,68 @@ document.querySelectorAll('.case .shot').forEach((shot) => {
   motionListeners.push((on) => { if (!on) race.classList.remove('is-ready', 'is-running'); });
 })();
 
-/* ===== תהליך: הקו מתמלא ומדליק כל שלב שהוא מגיע אליו (תפקיד: להוביל את העין) ===== */
+/* ===== תהליך: הקו המואר עובר מתחנה לתחנה (תפקיד: להוביל את העין שלב אחרי שלב) =====
+   הגלילה קובעת עד איזה שלב מותר להגיע: כל שלב שהנקודה שלו עברה את קו הקריאה (70% מגובה המסך).
+   התנועה עצמה לפי זמן: הקו נוסע לנקודה הבאה, היא נדלקת, הוא עוצר רגע וממשיך. כך רואים כל תחנה גם בגלילה מהירה.
+   במחשב כל הנקודות באותו גובה, ולכן כשהשורה נכנסת למסך הקו עובר את כל חמש התחנות ברצף. */
 (() => {
   const wrap = $('steps-wrap');
   const steps = $('steps');
   if (!wrap || !steps) return;
   const items = [...steps.querySelectorAll('li')];
-  const set = (p) => {
-    wrap.style.setProperty('--p', p.toFixed(3));
-    const vertical = window.matchMedia('(max-width: 900px)').matches;
-    items.forEach((li, i) => {
-      const at = vertical ? li.offsetTop / steps.offsetHeight : i / items.length;
-      li.classList.toggle('is-on', p >= at + 0.01 || p === 1);
+  const MOVE = 480, PAUSE = 420, END = 320;          // נסיעה לתחנה, עצירה בה, והמשך הקו אחרי התחנה האחרונה
+  const vertical = () => window.matchMedia('(max-width: 900px)').matches;
+  /* איפה כל נקודה יושבת לאורך הקו (0 עד 1), ובאיזה גובה במסך */
+  const dots = () => {
+    const sr = steps.getBoundingClientRect();
+    return items.map((li) => {
+      const r = li.getBoundingClientRect();
+      if (vertical()) {
+        const y = r.top + (parseFloat(getComputedStyle(li).fontSize) || 16) * 0.45 + 7;
+        return { at: clamp01((y - sr.top) / Math.max(sr.height, 1)), y };
+      }
+      return { at: clamp01((sr.right - r.right + 7) / Math.max(sr.width, 1)), y: sr.top };   // מימין לשמאל
     });
   };
+  let p = 0, lit = 0, timer = 0, raf = 0, running = false;
+  const paint = () => {
+    wrap.style.setProperty('--p', p.toFixed(4));
+    items.forEach((li, i) => li.classList.toggle('is-on', i < lit));
+  };
+  const stop = () => { clearTimeout(timer); cancelAnimationFrame(raf); running = false; };
+  const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const glide = (to, ms, done) => {
+    const from = p, t0 = performance.now();
+    busyUntil = t0 + ms + PAUSE;                        // בזמן הזה שום דבר אחר במסך לא זז
+    const frame = (now) => {
+      const t = Math.min(1, (now - t0) / ms);
+      p = from + (to - from) * ease(t); paint();
+      if (t < 1) raf = requestAnimationFrame(frame); else done();
+    };
+    raf = requestAnimationFrame(frame);
+  };
+  /* כמה תחנות הגלילה כבר "פתחה" */
+  const target = () => { const line = window.innerHeight * 0.7; return dots().filter((d) => d.y < line).length; };
+  const step = () => {
+    if (!motionOn()) { finish(); return; }
+    const d = dots(), goal = target();
+    if (lit < goal) {
+      running = true;
+      glide(d[lit].at, lit === 0 ? 1 : MOVE, () => { lit++; paint(); timer = setTimeout(step, PAUSE); });
+    } else if (lit === items.length && p < 1) {
+      running = true;
+      glide(1, END, () => { running = false; });
+    } else running = false;
+  };
+  const finish = () => { stop(); p = 1; lit = items.length; paint(); };
+  addEventListener('resize', () => { if (!running && lit && lit < items.length) { p = dots()[lit - 1].at; paint(); } }, { passive: true });
   movers.push({
     el: wrap,
-    /* הקו מגיע לשלב 5 כשכל השלבים עוד על המסך: במחשב כשראש האזור בשליש העליון של המסך,
-       ובטלפון (קו אנכי) כשקו הקריאה, ב־62% מגובה המסך, מגיע לסוף הרשימה */
-    update(r, vh) {
-      const vertical = window.matchMedia('(max-width: 900px)').matches;
-      set(clamp01(vertical ? (vh * 0.62 - r.top) / Math.max(r.height, 1) : (vh * 0.85 - r.top) / (vh * 0.5)));
-    },
-    settle(where) { set(where === 'before' ? 0 : 1); }
+    update() { if (!running) step(); },
+    settle(where) {
+      if (where === 'before') { stop(); p = 0; lit = 0; paint(); }   // חוזרים למעלה: הקו יעבור שוב בתחנות בפעם הבאה
+      else finish();
+    }
   });
 })();
 requestMovers();
