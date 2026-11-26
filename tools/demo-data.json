@@ -429,8 +429,8 @@
   [
    "d1_note",
    {
-    "he": "הכפתורים קצת חלשים. לא רואים מיד איפה מתאמים מדידה.",
-    "en": "The buttons are a bit weak. You don't see right away where to book a measurement."
+    "he": "הכפתורים כהים ונבלעים ליד העץ. לא רואים מיד איפה מתאמים מדידה.",
+    "en": "The dark buttons get lost next to the wood. You don't see right away where to book a measurement."
    }
   ],
   [
@@ -476,7 +476,10 @@
   ],
   [
    "colors",
-   "להשאיר כמו שהם"
+   {
+    "he": "של עיצוב 1, רק הכפתור הראשי בכתום של עיצוב 2",
+    "en": "Design 1 colors, with the main button in the orange from design 2"
+   }
   ],
   [
    "dir_warm",

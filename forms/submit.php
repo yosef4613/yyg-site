@@ -32,10 +32,8 @@ if (!rate_ok('forms-' . client_ip(), 8, 3600)) $out(false, 'rate', 429);
 $form = in_array($in['form'] ?? '', ['intake', 'feedback'], true) ? $in['form'] : '';
 if ($form === '') $out(false, 'form', 400);
 if (mb_strlen($contact['name'], 'UTF-8') < 2) $out(false, 'name', 422);
-$phoneOk = strlen(preg_replace('/\D/', '', $contact['phone'])) >= 9;
 $mailOk = (bool) filter_var($contact['email'], FILTER_VALIDATE_EMAIL);
-if (!$phoneOk && !$mailOk) $out(false, 'contact', 422);
-if (!$mailOk) $contact['email'] = '';
+if (!$mailOk) $out(false, 'contact', 422);   // מייל חובה, טלפון לא חובה
 $items = [];
 foreach (array_slice((array) ($in['items'] ?? []), 0, 200) as $it) {
     if (!is_array($it)) continue;

@@ -17,8 +17,8 @@ Nice to meet you, I'm Yehuda Gordon. I design and build websites for small busin
 
 ## Work
 
-- Hakef (hakef.com): a website for a home bakery, with 3 design directions.
-- Pirchei Shamayim: a website for a children's choir, with sign-ups sent to the director's email.
+- HaKef SheBaAfiya (hakef.com): a website for a boutique catering and petit-four bar business in Jerusalem, after 6 design directions to choose from.
+- Pirchei Shomayim: a website for a boys' choir and voice classes, with a class search by age and city, sign-ups, accounts and updates.
 - Two complete example projects: a carpentry website, and an eyewear shop landing page with self-updated hours.
 
 Availability: Sunday to Wednesday, 10:00 to 13:30 (Israel time), or by appointment. Phone, for calls: 054-854-0700

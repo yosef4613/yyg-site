@@ -77,7 +77,7 @@
   ["d2_note", {"he": "יוקרתי מאוד, אבל כהה מדי לחנות שכונתית.", "en": "Very luxurious, but too dark for a neighborhood shop."}],
   ["d3_like", ["כפתורים"]],
   ["d3_dislike", ["צבעים", "פונטים"]],
-  ["d3_note", {"he": "חמוד, והמדבקה 'מוכן תוך 3 ימים' מצוינת, אבל צבעוני מדי בשבילנו.", "en": "Cute, and the 'ready in 3 days' sticker is great, but too colorful for us."}],
+  ["d3_note", {"he": "חמוד, והמדבקה 'מוכן תוך 3 ימי עבודה' מצוינת, אבל צבעוני מדי בשבילנו.", "en": "Cute, and the 'ready in 3 working days' sticker is great, but too colorful for us."}],
   ["colors", "להשאיר כמו שהם"],
   ["dir_warm", "3"], ["dir_detail", "3"], ["dir_bold", "4"], ["dir_modern", "4"],
   ["fonts", "מתאימים"],
@@ -85,7 +85,7 @@
   ["texts_ok", "מדויקים"],
   ["missing", {"he": "לכתוב שבמוצאי שבת פתוח רק בחורף.", "en": "Say that Saturday night opening is in winter only."}],
   ["mobile", "כן, והכול נוח"],
-  ["top3", {"he": "1. הסטטוס 'פתוח עכשיו' גדול יותר בראש הדף, כמו המדבקה בעיצוב 3.\n2. המדבקה 'מוכן תוך 3 ימי עבודה' מעיצוב 3.\n3. תמונת מסגרות הזהב מעיצוב 2 בחלק של המסגרות.", "en": "1. A bigger 'open now' status at the top, like the sticker in design 3.\n2. The 'ready in 3 working days' sticker from design 3.\n3. The gold frames image from design 2 in the frames section."}],
+  ["top3", {"he": "1. הסטטוס 'פתוח עכשיו' גדול יותר בראש הדף, כמו המדבקה בעיצוב 3.\n2. המדבקה 'מוכן תוך 3 ימי עבודה' מעיצוב 3.\n3. תמונת מסגרות הזהב הגדולה, כמו בפתיחה של עיצוב 2, בחלק של המסגרות.", "en": "1. A bigger 'open now' status at the top, like the sticker in design 3.\n2. The 'ready in 3 working days' sticker from design 3.\n3. The big gold-frames shot, like the opening of design 2, in the frames section."}],
   ["call", "אפשר להמשיך בלי שיחה"],
   ["ready", ["אני מאשר/ת להתקדם עם הכיוון שבחרתי. אחרי זה משלמים 40% ומתחילים לבנות."]],
   ["extra", {"he": "מסך עדכון השעות בדיוק מה שחיפשתי.", "en": "The hours update screen is exactly what I was looking for."}]

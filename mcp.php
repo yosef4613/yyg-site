@@ -102,7 +102,7 @@ function call_tool(string $name, array $a, array $O): string {
             $lines[] = $he ? 'זו הערכה ראשונית. הצעת מחיר מסודרת מגיעה אחרי שאלון קצר: https://yygweb.com/questionnaire/' : 'This is a first estimate. A formal quote comes after a short questionnaire: https://yygweb.com/en/questionnaire/';
             return implode("\n", $lines);
         case 'list_examples':
-            $t = [$he ? 'אתרים של לקוחות:' : 'Client websites:', '- hakef.com: ' . ($he ? 'מאפייה ביתית' : 'a home bakery'), '- https://xn--cebeaqd7a2ak.com/: ' . ($he ? 'מקהלת ילדים, עם הרשמה' : "a children's choir, with sign-ups"), '', $he ? 'פרויקטים לדוגמה מלאים:' : 'Complete example projects:'];
+            $t = [$he ? 'אתרים של לקוחות:' : 'Client websites:', '- hakef.com: ' . ($he ? 'קייטרינג בוטיק ובר פטיפורים בירושלים' : 'boutique catering and petit-four bars in Jerusalem'), '- https://xn--cebeaqd7a2ak.com/: ' . ($he ? 'מקהלת ילדים וחוגי פיתוח קול, עם חיפוש חוג, הרשמה וחשבונות' : "a boys' choir and voice classes, with a class search, sign-ups and accounts"), '', $he ? 'פרויקטים לדוגמה מלאים:' : 'Complete example projects:'];
             foreach ($O['examples'] ?? [] as $x) $t[] = '- ' . L($x['name'], $lang) . ': ' . ($he ? $x['url'] : str_replace('https://yygweb.com/', 'https://yygweb.com/en/', $x['url']));
             return implode("\n", $t);
         case 'get_contact':

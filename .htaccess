@@ -4,6 +4,8 @@ Options -Indexes
 <FilesMatch "\.(zip|tar|gz|tgz|bak|sql|env)$">
   Require all denied
 </FilesMatch>
+# כלי הבנייה (סקריפטים ונתוני הדוגמאות) לא צריכים להיות נגישים מהרשת
+RedirectMatch 404 ^/tools/
 AddDefaultCharset UTF-8
 RewriteEngine On
 RewriteCond %{HTTPS} off

@@ -91,7 +91,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=39">
+<link rel="stylesheet" href="/assets/site.css?v=41">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -193,7 +193,7 @@ cost_body = '''
 '''
 cost_faq = [
     ('כמה עולה דף נחיתה?', 'אצלי דף נחיתה מתחיל ב־2,000 ₪, ולא מוסיפים מע״מ. הוא כולל 3 כיווני עיצוב, 3 סבבי תיקונים, טופס פנייה וכפתור חיוג, ומוכן עד 4 ימי עבודה. המחיר הסופי נקבע לפי מה שהדף צריך.'),
-    ('האם המחיר כולל מע״מ?', 'כן. המחירים אצלי סופיים, לא מוסיפים מע״מ.'),
+    ('האם צריך להוסיף מע״מ למחיר?', 'לא. המחיר שכתוב הוא המחיר הסופי שמשלמים, ולא מוסיפים עליו מע״מ.'),
     ('יש תשלום חודשי?', 'אין תשלום חודשי. השנה הראשונה של דומיין, אחסון ומייל עסקי כלולה במחיר האתר, ואחר כך 590 ₪ לשנה אם רוצים שאני אדאג להכול.'),
     ('מה אם אצטרך עוד עמודים בהמשך?', 'אפשר להוסיף עמודים גם אחרי שהאתר עלה. עמוד נוסף מעבר למסלול עולה 350 ₪.'),
 ]

@@ -13,7 +13,7 @@ Who: Yehuda Gordon. Area: All of Israel, by Zoom and phone.
 - **Online store**: from 7,000 ₪. A full store with up to 30 products (I upload them), a cart, card payments and shipping, and an admin area for products, stock and orders.
 - **Brand from 0 to 100%**: from 5,900 ₪. Logo, visual language, all the content, print and social, and Google, together with the website: 5,900 with a landing page, 7,900 with a website, 9,900 with sign-ups, 10,900 with a store.
 
-Prices are final, and no VAT is added. In every package: 3 design directions, 3 revision rounds, and mobile, Google and accessibility readiness.
+Prices are final, and no VAT is added. In every package except the basic landing page: 3 design directions, 3 revision rounds, 4 months of support, and mobile, Google and accessibility readiness. The basic landing page: one design, one revision round and one month of support.
 Full pricing: https://yygweb.com/en/pricing/
 
 ## How it works
@@ -70,7 +70,7 @@ Yes, on Zoom. I'm available Sunday to Wednesday, 10:00–13:30 (Israel time), or
 
 ### Can I update the site myself?
 
-Yes. Anything that changes often, like products, recipes or classes, gets a simple update screen. The rest of the site stays fixed, which keeps it fast.
+Yes, on a website with an admin area: anything that changes often, like products, recipes or classes, gets a simple update screen. The rest of the site stays fixed, which keeps it fast. On a landing page I handle small changes, and you can add a small update screen, for example for opening hours.
 
 ### I already have a website. What happens with Google?
 

@@ -105,7 +105,7 @@ def page(slug, title, desc, h1, lead, body, faq=None, related=()):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=39">
+<link rel="stylesheet" href="/assets/site.css?v=41">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -207,7 +207,7 @@ cost_body = '''
 '''
 cost_faq = [
     ('How much does a landing page cost?', 'My landing pages start at ₪2,000, and no VAT is added. That includes 3 design directions, 3 revision rounds, a contact form, and a click-to-call button, and it’s ready within 4 working days. The final price depends on what the page needs.'),
-    ('Does the price include VAT?', 'Yes. My prices are final, and no VAT is added on top.'),
+    ('Is VAT added to the price?', 'No. The price you see is the final price you pay, and no VAT is added on top.'),
     ('Is there a monthly fee?', 'There’s no monthly fee. The first year of domain, hosting, and business email is included in the price of the website. After that, All-in Care is ₪590 a year if you’d like me to take care of everything.'),
     ('What if I need more pages later?', 'You can add pages even after the site is live. Each page beyond your package costs ₪350.'),
 ]

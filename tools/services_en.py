@@ -430,7 +430,7 @@ PAGES += [
 <h2>What's included in every package</h2>
 {incl}
 <h2>An example: the site you're reading</h2>
-<p>This website is built the same way: it explains what I do and for whom, shows real work, gives a starting price and a <a class="text-link" href="/en/#plan">price calculator</a>, and lets you leave a name and phone number wherever you make a decision. <a class="text-link" href="/en/#work">See my work</a></p>
+<p>This website is built the same way: it explains what I do and for whom, shows real work, gives a starting price and a <a class="text-link" href="/en/#plan">price calculator</a>, and lets you leave a name and email wherever you make a decision, with the next step arriving by email right away. <a class="text-link" href="/en/#work">See my work</a></p>
 <h2>What to prepare</h2>
 <ul>
 <li>A list of your services, with a sentence on what each includes.</li>
@@ -511,7 +511,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=39">
+<link rel="stylesheet" href="/assets/site.css?v=41">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -536,7 +536,7 @@ def page(p, is_index=False, cards=''):
 {body}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">Want to know what it will cost you?</h2>
-   <p>Answer 3 quick questions in the price calculator, no contact details required. Or leave your details, and I'll get back to you Sunday to Wednesday, 10:00–13:30 (Israel time).</p>
+   <p>Answer 3 quick questions in the price calculator, no contact details required. Or leave your name and email, and get the next step by email right away.</p>
    <a class="btn btn-gold" href="/en/?src=svc-{slug}#plan">Open the price calculator</a>
    <p style="margin-top:12px"><a class="text-link" href="/en/#contact">Or leave your details</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (calls only)</p>
   </section>

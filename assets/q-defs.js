@@ -9,10 +9,10 @@ window.YYG_FORMS = {
       { title: t('נעים להכיר', 'Nice to meet you'), intro: t('כ־10 דקות. אפשר לדלג על כל שאלה, ומה שלא יודעים סוגרים יחד בשיחה. התשובות נשמרות אצלכם בדפדפן תוך כדי, כך שאפשר להפסיק ולחזור.', 'About 10 minutes. You can skip any question, and we\'ll settle anything you\'re unsure about on a call. Your answers are saved in your browser as you go, so you can stop and come back.'),
         qs: [
           { id: 'name', type: 'text', label: t('שם', 'Name'), required: true, auto: 'name' },
-          { id: 'phone', type: 'tel', label: t('טלפון', 'Phone'), auto: 'tel' },
-          { id: 'email', type: 'email', label: t('מייל', 'Email'), hint: t('טלפון או מייל, לפחות אחד מהם', 'Phone or email, at least one'), auto: 'email' },
+          { id: 'email', type: 'email', label: t('מייל', 'Email'), required: true, hint: t('לכאן תגיע הצעת המחיר', 'Your quote will arrive here'), auto: 'email' },
+          { id: 'phone', type: 'tel', label: t('טלפון', 'Phone'), hint: t('לא חובה', 'Optional'), auto: 'tel' },
           { id: 'business', type: 'text', label: t('שם העסק', 'Business name'), auto: 'organization' },
-          { id: 'when', type: 'radio', label: t('מתי נוח שאחזור אליכם?', 'When is a good time to call?'), options: [t('בבוקר', 'Morning'), t('בצהריים', 'Midday'), t('אחר הצהריים', 'Afternoon'), t('לא משנה', 'Any time')] }
+          { id: 'when', type: 'radio', label: t('אם נצטרך לדבר בטלפון, מתי נוח לכם?', 'If we need to talk by phone, when suits you?'), options: [t('בבוקר', 'Morning'), t('בצהריים', 'Midday'), t('אחר הצהריים', 'Afternoon'), t('לא משנה', 'Any time')] }
         ] },
       { title: t('העסק', 'The business'),
         qs: [
@@ -121,8 +121,8 @@ window.YYG_FORMS = {
         { title: t('פרטים', 'Your details'), intro: t('את השאלון הזה ממלאים אחרי שמקבלים 3 עיצובים של האתר. כ־5 דקות. כדאי לפתוח את העיצובים בחלון אחר, ולעבור עליהם גם בטלפון.', 'You fill this in after you receive 3 designs of your site. About 5 minutes. Keep the designs open in another window, and look at them on your phone too.'),
           qs: [
             { id: 'name', type: 'text', label: t('שם', 'Name'), required: true, auto: 'name' },
-            { id: 'phone', type: 'tel', label: t('טלפון', 'Phone'), auto: 'tel' },
-            { id: 'email', type: 'email', label: t('מייל', 'Email'), hint: t('טלפון או מייל, לפחות אחד מהם', 'Phone or email, at least one'), auto: 'email' },
+            { id: 'email', type: 'email', label: t('מייל', 'Email'), required: true, auto: 'email' },
+            { id: 'phone', type: 'tel', label: t('טלפון', 'Phone'), hint: t('לא חובה', 'Optional'), auto: 'tel' },
             { id: 'business', type: 'text', label: t('שם העסק', 'Business name'), auto: 'organization' },
             { id: 'quote', type: 'text', label: t('מספר ההצעה', 'Quote number'), hint: t('לא חובה. מופיע בהצעת המחיר, למשל YYG-2026-001', 'Optional. It\'s on your quote, for example YYG-2026-001'), ltr: true }
           ] },

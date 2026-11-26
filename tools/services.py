@@ -404,7 +404,7 @@ PAGES += [
 <h2>מה כלול בכל מסלול</h2>
 {incl}
 <h2>דוגמה: האתר שאתם קוראים</h2>
-<p>האתר הזה בנוי באותה שיטה: הוא מסביר מה אני עושה ולמי, מראה עבודות אמיתיות, נותן מחיר התחלתי ו<a class="text-link" href="/#plan">מחשבון מחיר</a>, ומאפשר להשאיר שם וטלפון ליד כל מקום שבו מחליטים. <a class="text-link" href="/#work">לעבודות שלי</a></p>
+<p>האתר הזה בנוי באותה שיטה: הוא מסביר מה אני עושה ולמי, מראה עבודות אמיתיות, נותן מחיר התחלתי ו<a class="text-link" href="/#plan">מחשבון מחיר</a>, ומאפשר להשאיר שם ומייל ליד כל מקום שבו מחליטים, ומיד מקבלים במייל את הצעד הבא. <a class="text-link" href="/#work">לעבודות שלי</a></p>
 <h2>מה כדאי להכין</h2>
 <ul>
 <li>רשימת השירותים, ולצד כל אחד משפט על מה הוא כולל.</li>
@@ -534,7 +534,7 @@ def page(p, is_index=False, cards=''):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=39">
+<link rel="stylesheet" href="/assets/site.css?v=41">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -559,7 +559,7 @@ def page(p, is_index=False, cards=''):
 {body}
   <section class="g-cta" aria-labelledby="cta-t">
    <h2 id="cta-t">רוצים לדעת כמה זה יעלה לכם?</h2>
-   <p>3 שאלות קצרות במחשבון, בלי להשאיר פרטים. או השאירו פרטים, ואחזור אליכם בימים א׳ עד ד׳, בין 10:00 ל־13:30.</p>
+   <p>3 שאלות קצרות במחשבון, בלי להשאיר פרטים. או השאירו שם ומייל, ותקבלו מיד במייל את הצעד הבא.</p>
    <a class="btn btn-gold" href="/?src=svc-{slug}#plan">למחשבון המחיר</a>
    <p style="margin-top:12px"><a class="text-link" href="/#contact">או להשאיר פרטים</a> · <a class="text-link" href="tel:0548540700">054-854-0700</a> (שיחות בלבד)</p>
   </section>

@@ -75,20 +75,22 @@ DESIGNS = [
 T = {
  'he': dict(
    title='ככה זה עובד: פרויקט לדוגמה מהשאלון ועד 3 עיצובים | YYG',
-   desc='נגריה דמיונית עוברת את כל התהליך של YYG: שאלון אפיון מלא, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו אתר, ושאלון משוב שבוחר כיוון. אפשר להיכנס לכל שלב.',
+   desc='נגריה דמיונית עוברת את כל התהליך של YYG: שאלון אפיון מלא, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו אתר, שאלון משוב, הגרסה הסופית ומסך ניהול התוכן. אפשר להיכנס לכל שלב.',
    h1='ככה זה עובד, על פרויקט לדוגמה',
-   lead='לקחתי נגריה דמיונית בשם "ענף" והעברתי אותה בדיוק את מה שעובר כל לקוח: שאלון אפיון, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו תוכן, ושאלון משוב שבוחר כיוון. העסק דמיוני. השאלונים, ההצעה והעיצובים אמיתיים, ואפשר להיכנס לכל אחד מהם.',
+   lead='לקחתי נגריה דמיונית בשם "ענף" והעברתי אותה בדיוק את מה שעובר כל לקוח: שאלון אפיון, הצעת מחיר, 3 עיצובים שונים לגמרי לאותו תוכן, שאלון משוב שבוחר כיוון, ועד הגרסה הסופית ומסך הניהול. העסק דמיוני, וזה לא אתר חי של עסק. השאלונים, ההצעה והעיצובים אמיתיים, ואפשר להיכנס לכל אחד מהם.',
    note='עסק דמיוני לדוגמה: השם, הפרטים וההמלצות בדויים. התמונות מ־StockSnap, ברישיון CC0.',
-   nav=['שאלון אפיון', 'הצעת מחיר', '3 עיצובים', 'משוב ובחירה', 'מה הלאה'],
+   nav=['שאלון אפיון', 'הצעת מחיר', '3 עיצובים', 'משוב ובחירה', 'הגרסה הסופית', 'מסך הניהול'],
    s1='שאלון האפיון', s1p='הלקוח מילא את השאלון באתר בכ־10 דקות, וצירף את הלוגו ו־4 תמונות של עבודות. אלה התשובות שהכי השפיעו על העיצוב:',
    files='הקבצים שהלקוח צירף', all='כל {n} התשובות, לפי שלבי השאלון', try1='למלא את שאלון האפיון לעסק שלכם',
-   s2='הצעת המחיר', s2p='מהתשובות נבנתה טיוטת הצעה אוטומטית בבונה ההצעות שלי: המסלול, התוספות, ומה שכדאי לבדוק בשיחה. עברתי עליה, והלקוח קיבל במייל הצעה מסודרת עם קישור לאישור בלחיצה.',
+   s2='הצעת המחיר', s2p='למה אתר עם אזור ניהול, ולא דף נחיתה? כי יש לו 5 עמודים (בית, אודות, שירותים, עבודות וצור קשר. שאלות נפוצות והמלצות הם חלקים בדף הבית), והוא רוצה להוסיף בעצמו עבודות חדשות לגלריה, בערך פעם בחודש, בלי לחכות לאף אחד. בונה ההצעות שלי זיהה את זה מהשאלון והכין טיוטה. עברתי עליה, והלקוח קיבל במייל הצעה מסודרת עם אישור בלחיצה.',
    s3='שלושה עיצובים, אותו תוכן', s3p='אחרי 10% הראשונים מכינים 3 כיוונים שונים לגמרי, עם התוכן האמיתי של העסק. ככה בוחרים בעיניים, ולא מתוך דמיון. כל עיצוב הוא אתר שעובד, גם בטלפון:',
    open='לפתוח את עיצוב {n}', fonts='פונטים', palette='צבעים',
    s4='שאלון המשוב', s4p='הלקוח עבר על 3 העיצובים, גם בטלפון, ומילא את שאלון המשוב. ככה נראית בחירה מדויקת:',
    chose='הבחירה', rating='כמה כל עיצוב מרגיש נכון לעסק', took='מה הוא לקח מכל עיצוב', liked='אהב', disliked='פחות', top3='3 הדברים הכי חשובים לשנות', dirs='לאן לזוז בסבב הבא',
    all2='כל התשובות לשאלון המשוב', try2='לראות את שאלון המשוב',
-   s5='מה הלאה', s5p='הלקוח אישר את הכיוון ושילם 40%. עכשיו בונים את האתר המלא על עיצוב 1, עם הכפתור הבולט וסרגל המידות מעיצוב 2, והתמונות של הנגריה עצמה. כשהאתר מוכן, הלקוח בודק ומאשר, משלם את ה־50% האחרונים, והאתר עולה לאוויר.',
+   s5='הגרסה הסופית', s5p='הלקוח אישר את הכיוון ושילם 40%. בניתי את האתר המלא על עיצוב 1, ושיניתי בדיוק את מה שביקש בשאלון המשוב. משם הלקוח בודק ומאשר, משלם את ה־50% האחרונים, והאתר עולה לאוויר.',
+   changed='מה השתנה אחרי המשוב', open_final='לפתוח את הגרסה הסופית', final_note='גם הגרסה הסופית היא דוגמה: העסק דמיוני, והאתר לא באוויר בשביל עסק אמיתי.',
+   changes=['כפתור ראשי בולט, בכתום של עיצוב 2, כדי שמיד רואים איפה מתאמים מדידה', 'סרגל המידות מעיצוב 2, כקו מפריד בין החלקים', 'טיק נוסף לסוגי העץ: לרהיטי מרפסת וגינה', 'חלק חדש: אפשר לבוא לנגריה ולראות את העץ לפני שמחליטים', 'הגלריה מוכנה לתמונות של הנגריה, ובעל העסק מחליף אותן בעצמו במסך הניהול'],
    cta='רוצים לעבור את התהליך הזה עם העסק שלכם?', ctap='מתחילים בשאלון של 10 דקות, או בשיחה קצרה. אחרי 10% בלבד מקבלים 3 עיצובים כאלה, עם התוכן שלכם.',
    q_open='לשאלון האפיון', calc='למחשבון המחיר', of5='מתוך 5',
    quote_h='הצעת מחיר', quote_for='עבור', item='פריט', price='מחיר', total='סה״כ', final='המחיר סופי, לא מוסיפים מע״מ.', incl='מה כלול', terms='תנאים',
@@ -97,20 +99,22 @@ T = {
  ),
  'en': dict(
    title='How it works: an example project from questionnaire to 3 designs | YYG',
-   desc='A fictional carpentry shop goes through the whole YYG process: a full discovery questionnaire, a quote, 3 completely different designs of the same site, and a feedback form that picks a direction.',
+   desc='A fictional carpentry shop goes through the whole YYG process: a full discovery questionnaire, a quote, 3 completely different designs of the same site, a feedback form, the final version and the content admin screen.',
    h1='How it works, on an example project',
-   lead='I took a fictional carpentry shop called "Anaf" and put it through exactly what every client goes through: a discovery questionnaire, a quote, 3 completely different designs for the same content, and a feedback form that picks a direction. The business is fictional. The questionnaires, the quote and the designs are real, and you can open each of them.',
+   lead='I took a fictional carpentry shop called "Anaf" and put it through exactly what every client goes through: a discovery questionnaire, a quote, 3 completely different designs for the same content, a feedback form that picks a direction, all the way to the final version and the admin screen. The business is fictional, and this is not a live business website. The questionnaires, the quote and the designs are real, and you can open each of them.',
    note='A fictional example business: the name, details and testimonials are made up. Photos from StockSnap, CC0 license.',
-   nav=['Questionnaire', 'Quote', '3 designs', 'Feedback', "What's next"],
+   nav=['Questionnaire', 'Quote', '3 designs', 'Feedback', 'Final version', 'Admin screen'],
    s1='The discovery questionnaire', s1p='The client filled in the questionnaire on the site in about 10 minutes, and attached the logo and 4 photos of their work. These are the answers that shaped the design most:',
    files='Files the client attached', all='All {n} answers, by questionnaire step', try1='Fill in the questionnaire for your business',
-   s2='The quote', s2p='From the answers, my quote builder drafted a quote automatically: the package, the add-ons, and what to check on the call. I reviewed it, and the client got a formal quote by email with a one-click approval link.',
+   s2='The quote', s2p="Why a website with an admin area, and not a landing page? Because he has 5 pages (home, about, services, work and contact; the FAQ and testimonials are sections on the home page), and he wants to add new projects to the gallery himself, about once a month, without waiting for anyone. My quote builder picked this up from the questionnaire and drafted a quote. I reviewed it, and the client got a formal quote by email with one-click approval.",
    s3='Three designs, the same content', s3p='After the first 10%, I prepare 3 completely different directions with the business\'s real content. So you choose with your eyes, not your imagination. Each design is a working site, on the phone too:',
    open='Open design {n}', fonts='Fonts', palette='Colors',
    s4='The feedback form', s4p='The client went through the 3 designs, on the phone too, and filled in the feedback form. This is what a precise choice looks like:',
    chose='The choice', rating='How right each design feels for the business', took='What he took from each design', liked='Liked', disliked='Less', top3='The 3 most important changes', dirs='Where to move in the next round',
    all2='All the feedback answers', try2='See the feedback form',
-   s5="What's next", s5p='The client approved the direction and paid 40%. Now the full site is built on design 1, with the stronger button and the measuring-tape ruler from design 2, and the shop\'s own photos. When the site is ready, the client checks and approves it, pays the final 50%, and the site goes live.',
+   s5='The final version', s5p='The client approved the direction and paid 40%. I built the full site on design 1, and changed exactly what he asked for in the feedback form. From here the client checks and approves it, pays the final 50%, and the site goes live.',
+   changed='What changed after the feedback', open_final='Open the final version', final_note='The final version is an example too: the business is fictional, and the site is not live for a real business.',
+   changes=['A stronger main button, in the orange from design 2, so you see right away where to book a measurement', 'The measuring-tape ruler from design 2, as a divider between sections', 'Teak added to the wood types: for balcony and garden furniture', 'A new section: you can come to the workshop and see the wood before deciding', 'The gallery is ready for the shop\'s own photos, and the owner swaps them himself in the admin screen'],
    cta='Want to go through this process with your business?', ctap='Start with a 10-minute questionnaire, or a short call. After just 10%, you get 3 designs like these, with your content.',
    q_open='To the questionnaire', calc='To the price calculator', of5='of 5',
    quote_h='Quote', quote_for='for', item='Item', price='Price', total='Total', final='Final price, no VAT added.', incl="What's included", terms='Terms',
@@ -121,17 +125,17 @@ T = {
 
 QUOTE = {
  'he': dict(base='אתר עם אזור ניהול', price=4000,
-   incl=['עד 6 עמודים', 'אזור ניהול לעדכון התוכן שמשתנה', 'טפסים ומדור תוכן', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
+   incl=['עד 6 עמודים', 'אזור ניהול לעדכון התוכן שמשתנה', 'טפסים, וגלריית עבודות שמתעדכנת מאזור הניהול', 'הדרכה: שיחה אישית ומדריך כתוב', 'דומיין, אחסון ומייל עסקי לשנה הראשונה', 'טקסטים לאתר: כתיבה בעזרת AI ועריכה אישית', 'התאמה לטלפון, לגוגל ולנגישות, והצהרת נגישות'],
    terms=['3 כיווני עיצוב', '3 סבבי תיקונים', '10 ימי עבודה לאספקה', '4 חודשי ליווי'],
    pay=[(10, 'כדי להתחיל, לפני הכנת 3 העיצובים'), (40, 'אחרי שבוחרים עיצוב, לפני הבנייה'), (50, 'בסיום, אחרי האישור שלכם ולפני העלייה לאוויר')],
-   annual='"הכול עליי": דומיין, אחסון, מייל עסקי ועדכוני אבטחה. 590 ₪ לשנה, מהשנה השנייה.',
-   notes=['סימן 5 עמודים, ובמסלול כלולים עד 6. אין תוספת עמודים.', 'צריך לרשום דומיין: משהו קצר עם המילה ענף. כלול בשנה הראשונה.', 'לוח זמנים: תוך חודש. התקציב שציין: 4,000 עד 7,000 ₪.']),
+   annual='"הכול עליי": דומיין, אחסון, מייל עסקי, אבטחה, גיבויים ותיקון תקלות. 590 ₪ לשנה, מהשנה השנייה.',
+   notes=['סימן 7 עמודים וחלקים. שאלות נפוצות והמלצות נספרו כחלקים בדף הבית, אז יש 5 עמודים, ובמסלול כלולים עד 6. אין תוספת עמודים.', 'צריך לרשום דומיין: משהו קצר עם המילה ענף. כלול בשנה הראשונה.', 'לוח זמנים: תוך חודש. התקציב שציין: 4,000 עד 7,000 ₪.']),
  'en': dict(base='Website with an admin area', price=4000,
-   incl=['Up to 6 pages', 'An admin area to update changing content', 'Forms and a content section', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
+   incl=['Up to 6 pages', 'An admin area to update changing content', 'Forms, and a work gallery updated from the admin area', 'Training: a personal call and a written guide', 'Domain, hosting and business email for the first year', 'Website copy: written with AI and personally edited', 'Mobile, Google and accessibility ready, with an accessibility statement'],
    terms=['3 design directions', '3 revision rounds', '10 working days to deliver', '4 months of support'],
    pay=[(10, 'To start, before the 3 designs'), (40, 'After you choose a design, before the build'), (50, 'At the end, after your approval and before going live')],
-   annual='"I handle it all": domain, hosting, business email and security updates. 590 ₪ a year, from the second year.',
-   notes=['Marked 5 pages; the package includes up to 6. No extra pages.', 'A domain needs registering: something short with the word Anaf. Included in the first year.', 'Timing: within a month. Stated budget: 4,000 to 7,000 ₪.']),
+   annual='"All-in Care": domain, hosting, business email, security, backups and fixes. ₪590 a year, from the second year.',
+   notes=['Marked 7 pages and sections. The FAQ and testimonials count as sections on the home page, so there are 5 pages, and the package includes up to 6. No extra pages.', 'A domain needs registering: something short with the word Anaf. Included in the first year.', 'Timing: within a month. Stated budget: 4,000 to 7,000 ₪.']),
 }
 
 STYLE = '''<style>
@@ -230,12 +234,19 @@ STYLE = '''<style>
  .d-hours ul{margin-top:10px;padding-inline-start:20px;list-style:disc;color:#C9D1DD;line-height:1.85}
  .d-hours .btn{margin-top:16px}
  .d-hours small{display:block;margin-top:10px;color:var(--muted)}
+ .d-final{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:center;margin-top:24px}
+ .d-final .d-shot{border-radius:16px;border:1px solid var(--line-2);box-shadow:0 24px 60px -28px rgba(0,0,0,.6)}
+ .d-final h3{font-size:var(--step-1)}
+ .d-final ul{margin-top:10px;padding-inline-start:20px;list-style:disc;color:#C9D1DD;line-height:1.85}
+ .d-final .btn{margin-top:16px}
+ .d-final small{display:block;margin-top:10px;color:var(--muted)}
+ .d-flag{position:absolute;top:12px;inset-inline-start:12px;padding:4px 12px;border-radius:999px;background:#F2C95A;color:#151920;font-weight:800;font-size:.85rem;box-shadow:0 4px 14px rgba(0,0,0,.35)}
  .d-other{display:block;margin-top:clamp(48px,7vw,80px);padding:20px 22px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(135deg,#262D3A,#1B212B);color:var(--text);text-decoration:none}
  .d-other:hover,.d-other:focus-visible{border-color:var(--gold)}
  .d-other small{display:block;color:var(--gold);font-weight:700;font-size:.85rem}
  .d-other b{display:block;margin-top:4px;font-size:var(--step-1)}
  .d-other span{display:block;margin-top:4px;color:var(--muted)}
- @media (max-width:960px){.d-designs{grid-template-columns:1fr;max-width:620px}.d-fb,.d-took,.d-hours{grid-template-columns:1fr}}
+ @media (max-width:960px){.d-designs{grid-template-columns:1fr;max-width:620px}.d-fb,.d-took,.d-hours,.d-final{grid-template-columns:1fr}}
  @media (max-width:520px){.d-bar{grid-template-columns:4.6em 1fr auto}.d-scale{grid-template-columns:5em 1fr 5em}}
 </style>'''
 
@@ -251,6 +262,7 @@ def hi_anaf(ans, he):
      ('3 מילים שהאתר צריך לשדר' if he else '3 words the site should convey', ans('intake', 'feel') + '. ' + ('רקע: ' if he else 'Background: ') + ans('intake', 'bg') + '.'),
      ('מה לא רוצים לראות' if he else "What they don't want to see", ans('intake', 'dislikes')),
      ('עמודים' if he else 'Pages', ans('intake', 'pages')),
+     ('מה הוא רוצה לעדכן בעצמו' if he else 'What he wants to update himself', ans('intake', 'update_what') + ' (' + ans('intake', 'update_who') + ')'),
      ('מסלול, תקציב וזמנים' if he else 'Package, budget and timing', ('מסלול: ' if he else 'Package: ') + ans('intake', 'package') + '\n' + ('תקציב: ' if he else 'Budget: ') + ans('intake', 'budget') + '\n' + ('מתי: ' if he else 'When: ') + ans('intake', 'deadline')),
     ]
 
@@ -318,11 +330,19 @@ def build(lang):
           {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
            {'@type': 'ListItem', 'position': 1, 'name': 'YYG', 'item': SITE + ('/' if he else '/en/')}, {'@type': 'ListItem', 'position': 2, 'name': t['h1'], 'item': url}]}]
     home = '/' if he else '/en/'
-    ex = P.get('extra')
-    anchors = ['s1', 's2', 's3'] + (['sx'] if ex else []) + ['s4', 's5']
+    ex = P.get('extra'); af = P.get('after')
+    anchors = ['s1', 's2', 's3'] + (['sx'] if ex else []) + ['s4', 's5'] + (['sa'] if af else [])
     nav = ''.join(f'<a href="#{a}">{E(x)}</a>' for a, x in zip(anchors, t['nav']))
     n4, n5 = (5, 6) if ex else (4, 5)
     extra_html = ex(lang, pfx) if ex else ''
+    after_html = af(lang, pfx, n5 + 1) if af else ''
+    changes = ''.join(f'<li>{E(x)}</li>' for x in t['changes'])
+    final_html = f'''<div class="d-final">
+    <a class="d-shot" href="/{pfx}final/" aria-label="{E(t['open_final'])}"><img class="dk" src="/{pfx}shots/final-d.webp" width="960" height="660" alt="" loading="lazy"><img class="mb" src="/{pfx}shots/final-m.webp" width="240" height="520" alt="" loading="lazy"><span class="d-flag">{'דוגמה' if he else 'Example'}</span></a>
+    <div><h3>{E(t['changed'])}</h3><ul>{changes}</ul>
+     <a class="btn btn-gold" href="/{pfx}final/">{E(t['open_final'])}</a>
+     <small>{E(t['final_note'])}</small></div>
+   </div>'''
     o = P['other'][lang]
     other_html = f'<a class="d-other" href="{o[0]}"><small>{E(o[1])}</small><b>{E(o[2])}</b><span>{E(o[3])}</span></a>'
     other_href = ('/en/' + pfx) if he else ('/' + pfx)
@@ -347,7 +367,7 @@ def build(lang):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=39">
+<link rel="stylesheet" href="/assets/site.css?v=41">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -414,7 +434,9 @@ def build(lang):
   <section class="d-step" id="s5" aria-labelledby="s5-t">
    <div class="d-step-h"><span class="d-num" aria-hidden="true">{n5}</span><h2 id="s5-t">{E(t['s5'])}</h2></div>
    <p>{E(t['s5p'])}</p>
+   {final_html}
   </section>
+{after_html}
 
   {other_html}
 

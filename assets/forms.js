@@ -133,9 +133,9 @@
       const phoneOk = (state.phone || '').replace(/\D/g, '').length >= 9;
       const mail = (state.email || '').trim();
       const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
-      err('phone', !phoneOk && !mailOk ? t('נא לכתוב טלפון או מייל, כדי שאוכל לחזור אליכם.', 'Please enter a phone or an email, so I can get back to you.') : '');
-      if (mail && !mailOk) err('email', t('כתובת המייל לא נראית תקינה.', 'This email address doesn\'t look right.'));
-      else err('email', '');
+      // מייל חובה, טלפון לא חובה (אבל אם כתבו, שיהיה מלא)
+      err('email', !mail ? t('נא לכתוב מייל, כדי שאוכל לשלוח לכם את ההצעה.', 'Please enter your email, so I can send you the quote.') : (!mailOk ? t('כתובת המייל לא נראית תקינה.', 'This email address doesn\'t look right.') : ''));
+      err('phone', state.phone && !phoneOk ? t('מספר הטלפון לא נראה מלא.', 'This phone number looks incomplete.') : '');
     }
     return ok;
   };

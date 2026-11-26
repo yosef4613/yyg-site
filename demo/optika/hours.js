@@ -1,12 +1,19 @@
-/* צלול (עסק לדוגמה): שעות פתיחה, סטטוס "פתוח עכשיו" והודעה זמנית.
-   השעות הקבועות כתובות כאן. מה שבעל העסק משנה במסך הניהול לדוגמה (/demo/optika/admin/) נשמר רק בדפדפן שלו,
+/* צלול (עסק לדוגמה): שעות פתיחה, סטטוס "פתוח עכשיו", הודעה זמנית ומבצע.
+   השעות הקבועות כתובות כאן. מה שבעל העסק משנה במסך העדכון לדוגמה (/demo/optika/admin/) נשמר רק בדפדפן שלו,
    כדי שכל אחד יוכל לנסות. באתר אמיתי השינוי נשמר בשרת ומופיע מיד לכל הגולשים.
    שימוש בעיצוב: מוסיפים אלמנטים עם התכונות האלה, והסקריפט ממלא אותם:
      data-hours-status  שורת סטטוס ("פתוח עכשיו · נסגר ב־20:00"). מקבל data-open="true|false"
      data-hours-list    רשימת הימים: ב־<ul>/<ol> נוצרים <li>, ב־<tbody>/<table> שורות, ב־<dl> זוגות dt/dd.
                         היום הנוכחי מקבל class="is-today" ו־aria-current="date"
      data-hours-today   "היום: 10:00 עד 20:00"
-     data-hours-notice  ההודעה הזמנית. מוסתר (hidden) כשאין הודעה */
+     data-hours-notice  ההודעה הזמנית. מוסתר (hidden) כשאין הודעה
+   מבצע (לא חובה, רק בעיצוב שמשתמש בזה):
+     data-promo         העטיפה של המבצע. מוסתרת (hidden) כשאין כותרת, או כשתאריך הסיום כבר עבר (לפי שעון ישראל)
+     data-promo-title   כותרת המבצע ("זוג שני ב־50%")
+     data-promo-text    פרטים ("על משקפי ראייה."). מוסתר כשאין
+     data-promo-until   "בתוקף עד 31.12". מוסתר כשאין תאריך סיום
+     data-promo-badge   האחוז הראשון שמופיע בכותרת ("50%"), לעיגול גדול. מוסתר כשאין אחוז בכותרת
+   הכול נכתב כטקסט בלבד (textContent), כך שאפשר לכתוב במסך העדכון כל דבר בלי לשבור את העמוד. */
 (() => {
   const KEY = 'tzalul-hours-v1';
   const DAYS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
@@ -21,10 +28,19 @@
       { open: '20:00', close: '22:30', label: 'מוצאי שבת' },
     ],
     notice: { text: '', until: '' },
+    /* until: תאריך אחרון בפורמט YYYY-MM-DD, או ריק כשאין תאריך סיום */
+    promo: { title: 'זוג שני ב־50%', text: 'על משקפי ראייה.', until: '' },
   };
   const clone = (o) => JSON.parse(JSON.stringify(o));
   const load = () => {
-    try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && Array.isArray(d.days) && d.days.length === 7) return d; } catch (e) { /* בלי שמירה */ }
+    try {
+      const d = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (d && Array.isArray(d.days) && d.days.length === 7) {
+        /* שמירה ישנה, מלפני שהיה מבצע במסך העדכון: מציגים את המבצע הקבוע */
+        if (!d.promo || typeof d.promo !== 'object') d.promo = clone(DEFAULT.promo);
+        return d;
+      }
+    } catch (e) { /* בלי שמירה */ }
     return clone(DEFAULT);
   };
   const save = (d) => { try { localStorage.setItem(KEY, JSON.stringify(Object.assign({}, d, { updated: Date.now() }))); } catch (e) { return false; } render(); return true; };
@@ -62,7 +78,17 @@
     if (nt.until && nt.until < now().date) return '';
     return String(nt.text).trim();
   };
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  /* המבצע שמוצג עכשיו, או null כשאין כותרת או שהתאריך עבר */
+  const promo = () => {
+    const p = load().promo || {};
+    const title = String(p.title || '').trim();
+    if (!title) return null;
+    const until = /^\d{4}-\d{2}-\d{2}$/.test(String(p.until || '')) ? p.until : '';
+    if (until && until < now().date) return null;
+    return { title, text: String(p.text || '').trim(), until };
+  };
+  const dm = (iso) => { const [, m, d] = iso.split('-'); return `${Number(d)}.${Number(m)}`; };
+  const esc =(s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   function render() {
     const data = load(), n = now(), st = status(), nt = notice();
     document.querySelectorAll('[data-hours-status]').forEach((el) => { el.textContent = st.text; el.dataset.open = String(st.open); });
@@ -78,8 +104,14 @@
         return `<li${cur}><span class="h-day">${name}</span><span class="h-time">${t}</span></li>`;
       }).join('');
     });
+    const pr = promo(), pct = pr && (pr.title.match(/\d{1,3}\s*%/) || [''])[0].replace(/\s+/g, '');
+    document.querySelectorAll('[data-promo]').forEach((el) => { el.hidden = !pr; });
+    document.querySelectorAll('[data-promo-title]').forEach((el) => { el.textContent = pr ? pr.title : ''; });
+    document.querySelectorAll('[data-promo-text]').forEach((el) => { el.textContent = pr ? pr.text : ''; el.hidden = !(pr && pr.text); });
+    document.querySelectorAll('[data-promo-until]').forEach((el) => { el.textContent = pr && pr.until ? `בתוקף עד ${dm(pr.until)}` : ''; el.hidden = !(pr && pr.until); });
+    document.querySelectorAll('[data-promo-badge]').forEach((el) => { el.textContent = pct || ''; el.hidden = !pct; });
   }
-  window.TzalulHours = { KEY, DAYS, DEFAULT, load, save, reset, status, notice, render };
+  window.TzalulHours = { KEY, DAYS, DEFAULT, load, save, reset, status, notice, promo, render };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
   setInterval(render, 60000);
   /* שינוי במסך הניהול בלשונית אחרת מתעדכן כאן מיד */

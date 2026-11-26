@@ -40,8 +40,8 @@ document.querySelectorAll('[data-tel]').forEach((a) => {
   if (bdi) bdi.textContent = CONFIG.phone;
   else if (/\d/.test(a.textContent)) a.textContent = CONFIG.phone;
 });
-const DEFAULT_MAIL = T({ subject: 'פנייה מהאתר: אתר לעסק שלי', body: 'שלום יהודה,\n\nהעסק שלי: \nיש לו כבר אתר? \nהטלפון שלי: \nמתי נוח שתתקשר: \n' },
-  { subject: 'Website inquiry: a site for my business', body: 'Hi Yehuda,\n\nMy business: \nDo we already have a website? \nMy phone: \nBest time to call: \n' });
+const DEFAULT_MAIL = T({ subject: 'פנייה מהאתר: אתר לעסק שלי', body: 'שלום יהודה,\n\nהשם שלי: \nהעסק שלי: \nיש לו כבר אתר? \nטלפון (לא חובה): \n' },
+  { subject: 'Website inquiry: a site for my business', body: 'Hi Yehuda,\n\nMy name: \nMy business: \nDo we already have a website? \nPhone (optional): \n' });
 const setMailLinks = (subject, body) => {
   document.querySelectorAll('[data-mail]').forEach((a) => {
     a.href = mailHref(subject, body);
@@ -346,7 +346,7 @@ const Selection = (() => {
     const p = PKG[s.track];
     return [
       `${s.source === 'planner' ? T('התכנית מהמתכנן', 'Plan from the calculator') : T('המסלול שנבחר', 'Chosen package')}: ${p.name}`,
-      T(`מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, לא מוסיפים מע״מ`, `Price: ${s.source === 'planner' ? 'estimated ' : 'from '}${nis(priceOf())}, final, no VAT is added`) + (en.checked ? T(' (כולל גרסה באנגלית)', ' (including an English version)') : ''),
+      T(`מחיר: ${s.source === 'planner' ? 'משוער ' : 'החל מ־'}${nis(priceOf())}, בלי תוספת מע״מ`, `Price: ${s.source === 'planner' ? 'estimated ' : 'from '}${nis(priceOf())}, no VAT added`) + (en.checked ? T(' (כולל גרסה באנגלית)', ' (including an English version)') : ''),
       s.extraPages ? extraText(s.extraPages) : null,
       ...p.incl.map((r) => `${r.label}: ${r.value}`),
       s.answers ? T(`\nתשובות במתכנן:\n${s.answers}`, `\nCalculator answers:\n${s.answers}`) : null,
@@ -360,7 +360,7 @@ const Selection = (() => {
     box.hidden = false;
     $('picked-k').textContent = s.source === 'planner' ? T('התכנית שלכם', 'Your plan') : T('המסלול שבחרתם', 'Your package');
     $('picked-name').textContent = p.name;
-    $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, סופי, לא מוסיפים מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, final, no VAT is added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
+    $('picked-price').textContent = T(`${s.source === 'planner' ? 'מחיר משוער ' : 'החל מ־'}${nis(priceOf())}, בלי תוספת מע״מ`, `${s.source === 'planner' ? 'Estimated ' : 'From '}${nis(priceOf())}, no VAT added`) + (en.checked ? T(', כולל אנגלית', ', with English') : '') + (s.extraPages ? `, ${extraText(s.extraPages)}` : '');
     $('picked-incl').replaceChildren(...p.incl.map((r) => {
       const li = document.createElement('li');
       const sp = document.createElement('span'); sp.textContent = r.label;
@@ -370,7 +370,7 @@ const Selection = (() => {
     const text = summary();
     $('lead-plan').value = text;
     setMailLinks(T(`${s.source === 'planner' ? 'תכנית לאתר' : 'בחירת מסלול'}: ${p.name}`, `${s.source === 'planner' ? 'Website plan' : 'Package choice'}: ${p.name}`),
-      T(`שלום יהודה,\n\n${text}\n\nשם: \nשם העסק: \nטלפון לחזרה: \nמתי נוח שתתקשר: \n`, `Hi Yehuda,\n\n${text}\n\nName: \nBusiness: \nPhone: \nBest time to call: \n`));
+      T(`שלום יהודה,\n\n${text}\n\nשם: \nשם העסק: \nטלפון (לא חובה): \n`, `Hi Yehuda,\n\n${text}\n\nName: \nBusiness: \nPhone (optional): \n`));
   };
   en.addEventListener('change', render);
   $('picked-change').addEventListener('click', () => { const h = $('pkgs-title'); h.setAttribute('tabindex', '-1'); $('packages').scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto' }); h.focus({ preventScroll: true }); });
@@ -424,7 +424,7 @@ const Planner = (() => {
   const plan = ({ kind, acts, upd, en }) => {
     let track = 'site';
     if (kind === 'store' || acts.includes('pay')) track = 'store';
-    else if (upd === 'team') track = 'club';
+    else if (upd === 'team' || acts.includes('register')) track = 'club';   // הרשמה = המסלול עם הרשמה, כמו בבונה ההצעות
     else if (upd === 'none' && !acts.includes('register') && !acts.includes('read')) track = 'landing';
 
     let pages;
@@ -668,8 +668,8 @@ const Planner = (() => {
   });
 })();
 
-/* ===== פנייה מהירה: שם, מייל וטלפון, למי שכבר השתכנע ולא רוצה לגלול עד הסוף =====
-   אחרי השליחה הלקוח מקבל מייל לאישור הכתובת, ורק אחרי האישור את הטלפון שלי ואת הקישור לשאלון */
+/* ===== פנייה מהירה: שם ומייל (טלפון לא חובה), למי שכבר השתכנע ולא רוצה לגלול עד הסוף =====
+   אחרי השליחה הלקוח מקבל מיד מייל אישי עם קישור לשאלון, ואת הטלפון שלי רק אחרי שאישר את המייל */
 const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
 const qLink = (d) => (EN ? '/en/questionnaire/?' : '/questionnaire/?') + new URLSearchParams({ name: d.name, email: d.email, phone: d.phone || '', business: d.business || '' }).toString();
 const sentMsg = (status, d) => {

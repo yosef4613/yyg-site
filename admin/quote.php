@@ -369,13 +369,15 @@ const ADDONS = [
   { k: 'page', label: 'עמוד נוסף', price: 350, qty: true },
   { k: 'en', label: 'גרסה באנגלית', price: null },
   { k: 'design', label: 'כיוון עיצוב נוסף', price: 400, qty: true },
+  { k: 'rev', label: 'סבב תיקונים נוסף או שעת עבודה', price: 150, qty: true },
+  { k: 'products', label: '10 מוצרים נוספים בחנות', price: 200, qty: true },
   { k: 'logo1', label: 'לוגו בסיסי: סקיצה אחת וסבב תיקונים אחד', price: 590 },
   { k: 'logo2', label: 'לוגו מקצועי: 3 כיוונים ו־3 סבבי תיקונים', price: 1500 },
-  { k: 'brand', label: 'מיתוג בסיסי: לוגו, צבעים, פונטים ודף הנחיות', price: 2500 }
+  { k: 'brand', label: 'מיתוג בסיסי: לוגו, צבעים, פונטים, דף הנחיות וכרטיס ביקור', price: 2500 }
 ];
 const RECURRING = [
-  { k: 'care', label: '"הכול עליי": דומיין, אחסון, מייל עסקי ועדכוני אבטחה', price: 590, per: 'year', note: 'מהשנה השנייה', on: true },
-  { k: 'maint', label: 'תחזוקה: עדכונים, גיבויים ושינויים קטנים עד חצי שעה בחודש', price: 199, per: 'month', note: 'לא חובה', on: false },
+  { k: 'care', label: '"הכול עליי": דומיין, אחסון, מייל עסקי, אבטחה, גיבויים ותיקון תקלות', price: 590, per: 'year', note: 'מהשנה השנייה', on: true },
+  { k: 'maint', label: 'תחזוקה: עדכונים ושינויים קטנים, עד חצי שעה בחודש', price: 199, per: 'month', note: 'לא חובה', on: false },
   { k: 'seo', label: 'קידום בגוגל: תוכן חודשי ומעקב', price: 0, per: 'month', note: 'לפי הצעה נפרדת', on: false }
 ];
 

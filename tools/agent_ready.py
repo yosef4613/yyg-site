@@ -143,7 +143,7 @@ def offers_ld(lang):
 def pricing(lang):
     he = lang == 'he'; base = '/' if he else '/en/'
     days = lambda d: (f'עד {d} ימי עבודה' if he else f'up to {d} business days')
-    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}</td><td>{days(p["days"])}</td></tr>' for p in O['packages'])
+    rows = ''.join(f'<tr><td><b>{E(p["name"][lang])}</b><br>{E(p["summary"][lang])}</td><td class="p">{("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}</td><td>{E(p["days_text"][lang]) if p.get("days_text") else days(p["days"])}</td></tr>' for p in O['packages'])
     adds = ''.join(f'<li>{E(a["name"][lang])}: <b>{("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"])}</b></li>' for a in O['addons'])
     rec = ''.join(f'<li>{E(r["name"][lang])}: <b>{nis(r["price"])} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}</b></li>' for r in O['recurring'])
     body = f'''  <div class="g-scroll"><table class="g-table">
@@ -173,7 +173,7 @@ def md_pricing(lang):
     he = lang == 'he'
     L = [f'# {"מחירון YYG" if he else "YYG pricing"}', '', O['vat_note'][lang] + ' ' + O['included_everywhere'][lang], '', f'## {"מסלולים" if he else "Packages"}', '']
     for p in O['packages']:
-        L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}, {("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days")}. {p["summary"][lang]}')
+        L.append(f'- **{p["name"][lang]}**: {("מ־" if he else "from ") if p.get("from") else ""}{nis(p["price"])}, {p["days_text"][lang] if p.get("days_text") else (("עד " + str(p["days"]) + " ימי עבודה") if he else ("up to " + str(p["days"]) + " business days"))}. {p["summary"][lang]}')
     L += ['', f'## {"תוספות" if he else "Add-ons"}', ''] + [f'- {a["name"][lang]}: {("מ־" if he else "from ") if a.get("from") else ""}{nis(a["price"])}' for a in O['addons']]
     L += ['', f'## {"תשלומים קבועים" if he else "Recurring"}', ''] + [f'- {r["name"][lang]}: {nis(r["price"])} {("לשנה" if he else "a year") if r["per"] == "year" else ("לחודש" if he else "a month")}' for r in O['recurring']]
     L += ['', f'## {"איך משלמים" if he else "How payment works"}', '', O['payment'][lang], '', O['launch_offer'][lang], '']
@@ -184,12 +184,12 @@ ABOUT = {
  'he': dict(lead='נעים מאוד, יהודה גורדון. אני מעצב ובונה אתרים לעסקים קטנים ולמוסדות. את כל העבודה, מהשרטוט ועד העלייה לאוויר, אני עושה בעצמי, כך שאתם מדברים כל הזמן עם אותו אדם.',
    parts=[('איך אני עובד', ['מתחילים בשאלון קצר או בשיחה, ומקבלים הצעת מחיר מסודרת וסגורה.', 'משלמים 10% ומקבלים 3 עיצובים מלאים של האתר שלכם, עם התוכן שלכם. בוחרים בעיניים, לא מתוך דמיון.', 'בוחרים עיצוב, משלמים עוד 40%, ואני בונה. את 50% האחרונים משלמים רק אחרי שאישרתם שהכול טוב.', 'המחירים סופיים, ולא מוסיפים עליהם מע״מ.']),
           ('מה חשוב לי באתר', ['שיביא לקוחות: ברור מה אתם עושים, ומה הצעד הבא של הגולש.', 'שייטען מהר, גם בטלפון ובקליטה חלשה.', 'שיהיה נגיש, מוכן לגוגל ולכלי בינה מלאכותית, ושתוכלו לעדכן את מה שמשתנה.']),
-          ('עבודות', ['הכיף שבאפייה (hakef.com): אתר למאפייה ביתית, עם 3 כיווני עיצוב.', 'פרחי שמיים (פרחישמים.com): אתר למקהלת ילדים, עם הרשמה למייל של המנהל.', 'שני פרויקטים לדוגמה מלאים: אתר לנגריה, ודף נחיתה לחנות משקפיים עם עדכון שעות עצמי.'])],
+          ('עבודות', ['הכיף שבאפיה (hakef.com): אתר לקייטרינג בוטיק ובר פטיפורים בירושלים, אחרי 6 כיווני עיצוב לבחירה.', 'פרחי שמיים (פרחישמים.com): אתר למקהלת ילדים וחוגי פיתוח קול, עם חיפוש חוג לפי גיל ועיר, הרשמה, חשבונות ועדכונים.', 'שני פרויקטים לדוגמה מלאים: אתר לנגריה, ודף נחיתה לחנות משקפיים עם עדכון שעות עצמי.'])],
    links=[('/demo/', 'לפרויקטים לדוגמה'), ('/pricing/', 'למחירון'), ('/contact/', 'ליצירת קשר')]),
  'en': dict(lead="Nice to meet you, I'm Yehuda Gordon. I design and build websites for small businesses and institutions. I do all the work myself, from the first sketch to launch, so you always talk to the same person.",
    parts=[('How I work', ['We start with a short questionnaire or a call, and you get a formal, fixed quote.', 'You pay 10% and get 3 complete designs of your own site, with your content. You choose with your eyes, not your imagination.', 'You pick a design, pay another 40%, and I build. You pay the final 50% only after you confirm everything is right.', 'Prices are final, and no VAT is added.']),
           ('What matters to me in a website', ['That it brings in customers: clear about what you do, and clear about the next step.', 'That it loads fast, even on a phone with a weak signal.', 'That it is accessible, ready for Google and AI tools, and that you can update what changes.']),
-          ('Work', ['Hakef (hakef.com): a website for a home bakery, with 3 design directions.', 'Pirchei Shamayim: a website for a children\'s choir, with sign-ups sent to the director\'s email.', 'Two complete example projects: a carpentry website, and an eyewear shop landing page with self-updated hours.'])],
+          ('Work', ['HaKef SheBaAfiya (hakef.com): a website for a boutique catering and petit-four bar business in Jerusalem, after 6 design directions to choose from.', 'Pirchei Shomayim: a website for a boys\' choir and voice classes, with a class search by age and city, sign-ups, accounts and updates.', 'Two complete example projects: a carpentry website, and an eyewear shop landing page with self-updated hours.'])],
    links=[('/en/demo/', 'Example projects'), ('/en/pricing/', 'Pricing'), ('/en/contact/', 'Contact')]),
 }
 
@@ -234,7 +234,7 @@ def contact(lang):
     body = f'  <div class="c-grid">{cg}</div>\n{form}'
     h = 'יצירת קשר' if he else 'Contact'
     t = 'יצירת קשר | YYG, עיצוב ובניית אתרים' if he else 'Contact | YYG web design and development'
-    lead = lbl('אפשר להשאיר פרטים, להתקשר, או למלא ישר את שאלון האפיון. אחזור אליכם תוך יום עבודה.', 'Leave your details, call, or go straight to the discovery questionnaire. I get back to you within one business day.')
+    lead = lbl('משאירים שם ומייל, ומקבלים מיד מייל אישי עם הצעד הבא. אפשר גם למלא ישר את שאלון האפיון, או להתקשר. תשובה אישית תוך יום עבודה.', 'Leave your name and email, and get a personal email with the next step right away. You can also go straight to the discovery questionnaire, or call. A personal reply within one business day.')
     ld = [{'@context': 'https://schema.org', '@type': 'ContactPage', 'name': h, 'url': f'{SITE}{base}contact/', 'inLanguage': lang,
            'about': dict(ORG, contactPoint={'@type': 'ContactPoint', 'telephone': '+972-54-854-0700', 'contactType': 'customer service', 'areaServed': 'IL', 'availableLanguage': ['he', 'en'],
                                            'hoursAvailable': {'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Sunday', 'Monday', 'Tuesday', 'Wednesday'], 'opens': '10:00', 'closes': '13:30'}})}, crumbs(lang, 'contact', h)]
