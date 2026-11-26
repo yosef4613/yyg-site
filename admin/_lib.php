@@ -170,7 +170,7 @@ function notify_me(string $subject, string $html, string $text): bool {
 function mail_wrap(string $title, string $body, string $footer = '', bool $en = false, bool $phone = true): string {
     return '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><body style="margin:0;padding:24px 12px;background:#F4F5F7;font-family:Arial,sans-serif;color:#151920">'
         . '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #DCE0E6">'
-        . '<div style="padding:16px 22px;background:#151920;color:#fff;font-size:17px;font-weight:700">YYG Web Design · ' . ($en ? 'Web design &amp; development' : 'עיצוב ובניית אתרים') . '</div>'
+        . '<div style="padding:12px 22px;background:#151920;color:#fff;font-size:17px;font-weight:700">' . ($en ? '<img src="https://yygweb.com/assets/img/yyg-logo-mail.png" width="62" height="48" alt="YYG Web Design" style="display:inline-block;vertical-align:middle;border:0;margin:0 12px 0 0">' : '<img src="https://yygweb.com/assets/img/yyg-logo-mail.png" width="62" height="48" alt="YYG Web Design" style="display:inline-block;vertical-align:middle;border:0;margin:0 0 0 12px">') . '<span style="vertical-align:middle">YYG Web Design · ' . ($en ? 'Web design &amp; development' : 'עיצוב ובניית אתרים') . '</span></div>'
         . '<div style="padding:22px;font-size:16px;line-height:1.65"><h1 style="font-size:21px;margin:0 0 12px">' . h($title) . '</h1>' . $body . '</div>'
         . '<div style="padding:14px 22px;background:#F4F5F7;color:#5A6472;font-size:13px;line-height:1.6">' . ($footer !== '' ? $footer . '<br>' : '')
         . ($en ? 'YYG Web Design, Yehuda Gordon · ' : 'YYG Web Design, יהודה גורדון · ') . ($phone ? '054-854-0700 · ' : '') . 'yehuda@yygweb.com · yygweb.com</div></div></body></html>';
@@ -259,7 +259,7 @@ table.list{width:100%;border-collapse:collapse;font-size:.95rem}table.list th,ta
 
 function adm_page(string $title, string $body, string $extraCss = ''): void {
     header('Content-Type: text/html; charset=utf-8');
-    echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>' . h($title) . '</title><style>' . ADMIN_CSS . $extraCss . '</style></head><body>' . $body . '</body></html>';
+    echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png"><title>' . h($title) . '</title><style>' . ADMIN_CSS . $extraCss . '</style></head><body>' . $body . '</body></html>';
     exit;
 }
 function adm_nav(int $newLeads = 0): string {

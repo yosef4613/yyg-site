@@ -507,9 +507,9 @@ def page(p, is_index=False, cards=''):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{esc(h1)}">
 <meta property="og:description" content="{esc(desc)}">
-<meta property="og:image" content="{SITE}/assets/img/og.jpg">
+<meta property="og:image" content="{SITE}/assets/img/og-2.jpg">
 <meta name="theme-color" content="#151920">
-<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
@@ -519,7 +519,7 @@ def page(p, is_index=False, cards=''):
 <a class="skip" href="#main">Skip to content</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="/en/"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design, home page"></a>
+  <a href="/en/"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="YYG Web Design, home page"></a>
   <nav aria-label="Main">
    <a class="text-link" href="/en/services/">Services</a>
    <a class="text-link" href="/en/#plan">Price calculator</a>
@@ -544,7 +544,7 @@ def page(p, is_index=False, cards=''):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> YYG Web Design, Yehuda Gordon. Web design and development</p>
+  <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> YYG Web Design, Yehuda Gordon. Web design and development</p>
   <p><a class="foot-link" href="/en/services/">Services</a> · <a class="foot-link" href="/en/guides/">Guides</a> · <a class="foot-link" href="/en/accessibility.html">Accessibility statement</a> · <a class="foot-link" href="/en/privacy.html">Privacy policy</a> · <a class="foot-link" href="/account/?lang=en">My account</a></p>
   <p>{FOOT_SV}</p>
  </div>

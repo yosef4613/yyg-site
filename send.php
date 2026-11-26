@@ -22,7 +22,7 @@ function out(bool $ok, string $msg = '', int $code = 200): void {
         $t = $ok ? ($en ? 'Thank you, got it. I just emailed you the next step: a short questionnaire, then a formal quote.' : 'תודה, הפרטים התקבלו. שלחתי לכם עכשיו מייל עם הצעד הבא: שאלון קצר, ואחריו הצעת מחיר מסודרת.')
                  : (in_array($msg, ['missing', 'email', 'phone'], true) ? ($en ? 'Some details are missing. Please go back and fill in your name and email.' : 'חסרים פרטים. נא לחזור ולמלא שם ומייל.')
                  : ($en ? 'Something went wrong, and the details were not sent. Please email yehuda@yygweb.com.' : 'משהו השתבש, והפרטים לא נשלחו. אפשר לכתוב ל־yehuda@yygweb.com.'));
-        echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>YYG Web Design</title></head>'
+        echo '<!doctype html><html lang="' . ($en ? 'en' : 'he') . '" dir="' . ($en ? 'ltr' : 'rtl') . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png"><title>YYG Web Design</title></head>'
            . '<body style="margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#151920;color:#E9EDF3;font:18px/1.6 Arial,sans-serif;text-align:center"><main><p>' . $t . '</p>'
            . '<p><a style="color:#F2C95A" href="' . ($en ? '/en/' : '/') . '">' . ($en ? 'Back to the site' : 'חזרה לאתר') . '</a></p></main></body></html>';
         exit;
@@ -163,7 +163,7 @@ foreach ($labels as $k => $label) {
 }
 $html = '<!doctype html><html lang="he" dir="rtl"><body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;color:#111827">'
       . '<div style="max-width:640px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">'
-      . '<div style="padding:16px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700">פנייה חדשה מהאתר yygweb.com</div>'
+      . '<div style="padding:12px 20px;background:#151920;color:#fff;font-size:18px;font-weight:700"><img src="https://yygweb.com/assets/img/yyg-logo-mail.png" width="62" height="48" alt="YYG Web Design" style="display:inline-block;vertical-align:middle;border:0;margin:0 0 0 12px"><span style="vertical-align:middle">פנייה חדשה מהאתר yygweb.com</span></div>'
       . '<div style="padding:14px 20px;background:#FBF0DE;font-size:15px;line-height:1.5">הלקוח קיבל מייל אישי עם קישור לשאלון האפיון. כשיפתח אותו (וזה גם מאשר שהמייל אמיתי), תקבל מייל קצר. הטלפון שלך נשלח אליו רק אם יבקש לדבר.</div>'
       . '<div style="padding:14px 20px"><a href="mailto:' . htmlspecialchars($f['email'], ENT_QUOTES) . '?subject=' . rawurlencode('הפנייה שלך ל־YYG Web Design') . '" style="display:inline-block;background:#E3B341;color:#1A1404;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:10px">השבה ללקוח במייל</a></div>'
       . '<table dir="rtl" style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">' . $rows . '</table>'

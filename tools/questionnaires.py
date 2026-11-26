@@ -41,13 +41,13 @@ for (form, lang), p in PAGES.items():
 <link rel="alternate" hreflang="x-default" href="{he_url}">
 <meta name="description" content="{p['desc']}">
 <title>{p['title']}</title>
-<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 </head>
 <body>
 <main class="qf-page">
  <div class="wrap">
-  <div class="qf-top"><a href="{'/' if he else '/en/'}"><img class="qf-logo" src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG Web Design, חזרה לעמוד הבית' if he else 'YYG Web Design, back to the home page'}"></a>{other}</div>
+  <div class="qf-top"><a href="{'/' if he else '/en/'}"><img class="qf-logo" src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="{'YYG Web Design, חזרה לעמוד הבית' if he else 'YYG Web Design, back to the home page'}"></a>{other}</div>
   <h1 class="qf-h1">{p['h1']}</h1>
   <p class="qf-lead">{p['lead']}</p>
   <div id="qf" data-form="{form}"><noscript><p class="qf-intro">{noscript}</p></noscript></div>
@@ -56,7 +56,7 @@ for (form, lang), p in PAGES.items():
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
+  <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
   <p>{foot}</p>
  </div>
 </footer>

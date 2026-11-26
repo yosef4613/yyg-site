@@ -16,7 +16,7 @@ $token = (string) ($_GET['t'] ?? '');
 $num = quote_find_by_token($quotes, $token);
 $doc = static function (string $title, string $body): void {
     header('Content-Type: text/html; charset=utf-8');
-    echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>' . h($title) . '</title><style>' . QDOC_CSS . '</style></head><body>' . $body . '</body></html>';
+    echo '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png"><title>' . h($title) . '</title><style>' . QDOC_CSS . '</style></head><body>' . $body . '</body></html>';
     exit;
 };
 const QDOC_CSS = '@font-face{font-family:"Plex";font-weight:400;src:url(/assets/fonts/plex-400-hebrew.woff2) format("woff2");unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+FB1D-FB4F}
@@ -107,7 +107,7 @@ ob_start(); ?>
 <main class="paper">
  <?php if ($isAdmin): ?><p class="no-print" style="background:#FBF0DE;border-radius:10px;padding:8px 12px">זו התצוגה שהלקוח רואה. הצפיות שלך לא נספרות. <a href="<?= h($adminLink) ?>">לעריכה</a></p><?php endif; ?>
  <header class="head">
-  <div class="brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="YYG Web Design"><div><b>YYG Web Design · יהודה גורדון</b><span>עיצוב ובניית אתרים, מיתוג וקידום</span></div></div>
+  <div class="brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="YYG Web Design"><div><b>YYG Web Design · יהודה גורדון</b><span>עיצוב ובניית אתרים, מיתוג וקידום</span></div></div>
   <div class="contact"><a href="tel:0548540700">054-854-0700</a><br><a href="mailto:yehuda@yygweb.com">yehuda@yygweb.com</a><br><a href="https://yygweb.com/">yygweb.com</a></div>
  </header>
 

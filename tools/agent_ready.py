@@ -17,7 +17,7 @@ CSS_V = re.search(r'site\.css\?v=(\d+)', (ROOT / 'index.html').read_text()).grou
 STYLE = '''<style>
  .g-top{border-bottom:1px solid var(--line);background:var(--base)}
  .g-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
- .g-top img{height:48px;width:auto}
+ .g-top img{height:48px;width:auto;max-width:none} .g-top .wrap>a:first-child{flex-shrink:0}
  .g-top nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
  .g-main{padding:clamp(36px,6vw,72px) 0 clamp(56px,8vw,104px)}
  .g-main .wrap{max-width:820px}
@@ -77,9 +77,9 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{E(h1)}">
 <meta property="og:description" content="{E(desc)}">
-<meta property="og:image" content="{SITE}/assets/img/og.jpg">
+<meta property="og:image" content="{SITE}/assets/img/og-2.jpg">
 <meta name="theme-color" content="#151920">
-<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 {STYLE}
@@ -89,7 +89,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 <a class="skip" href="#main">{'דילוג לתוכן' if he else 'Skip to content'}</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="{base}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
+  <a href="{base}"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
   <nav aria-label="{'ניווט' if he else 'Navigation'}">
    <a class="text-link" href="{base}pricing/">{'מחירון' if he else 'Pricing'}</a>
    <a class="text-link" href="{base}about/">{'אודות' if he else 'About'}</a>
@@ -108,7 +108,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
+  <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
   <p>{foot}</p>
  </div>
 </footer>
@@ -117,7 +117,7 @@ def page(lang, slug, title, desc, h1, lead, body, ld, crumb):
 </html>
 '''
 
-ORG = {'@type': 'Organization', '@id': f'{SITE}/#organization', 'name': 'YYG Web Design', 'url': f'{SITE}/', 'logo': f'{SITE}/assets/img/logo-320.webp'}
+ORG = {'@type': 'Organization', '@id': f'{SITE}/#organization', 'name': 'YYG Web Design', 'url': f'{SITE}/', 'logo': f'{SITE}/assets/img/yyg-logo-320.webp'}
 
 def crumbs(lang, slug, name):
     base = '/' if lang == 'he' else '/en/'

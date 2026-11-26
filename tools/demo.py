@@ -141,7 +141,7 @@ QUOTE = {
 STYLE = '''<style>
  .g-top{border-bottom:1px solid var(--line);background:var(--base)}
  .g-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
- .g-top img{height:48px;width:auto}
+ .g-top img{height:48px;width:auto;max-width:none} .g-top .wrap>a:first-child{flex-shrink:0}
  .g-top nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
  .d-main{padding:clamp(36px,6vw,72px) 0 clamp(56px,8vw,104px)}
  .d-main .wrap{max-width:1120px}
@@ -334,7 +334,7 @@ def build(lang):
     all2, n2 = all_answers('feedback', lang)
     ld = [{'@context': 'https://schema.org', '@type': 'Article', 'headline': t['h1'], 'description': t['desc'], 'inLanguage': lang, 'datePublished': TODAY, 'dateModified': TODAY,
            'mainEntityOfPage': url, 'author': {'@type': 'Person', 'name': 'יהודה גורדון' if he else 'Yehuda Gordon', 'url': SITE + '/'},
-           'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/logo-320.webp'}}, 'image': f'{SITE}/{pfx}shots/design-1-d.webp'},
+           'publisher': {'@type': 'Organization', 'name': 'YYG Web Design', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/yyg-logo-320.webp'}}, 'image': f'{SITE}/{pfx}shots/design-1-d.webp'},
           {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
            {'@type': 'ListItem', 'position': 1, 'name': 'YYG Web Design', 'item': SITE + ('/' if he else '/en/')}, {'@type': 'ListItem', 'position': 2, 'name': t['h1'], 'item': url}]}]
     home = '/' if he else '/en/'
@@ -377,7 +377,7 @@ def build(lang):
 <meta property="og:description" content="{E(t['desc'])}">
 <meta property="og:image" content="{SITE}/{pfx}shots/design-1-d.webp">
 <meta name="theme-color" content="#151920">
-<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="icon" href="/assets/img/yyg-icon-96.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=48">
 {STYLE}
@@ -387,7 +387,7 @@ def build(lang):
 <a class="skip" href="#main">{'דילוג לתוכן' if he else 'Skip to content'}</a>
 <header class="g-top">
  <div class="wrap">
-  <a href="{home}"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
+  <a href="{home}"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="{'YYG Web Design, לעמוד הבית' if he else 'YYG Web Design, to the home page'}"></a>
   <nav aria-label="{'ניווט' if he else 'Navigation'}">
    <a class="text-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a>
    <a class="text-link" href="{home}#plan">{'מחשבון מחיר' if he else 'Price calculator'}</a>
@@ -461,7 +461,7 @@ def build(lang):
 </main>
 <footer class="foot">
  <div class="wrap foot-in">
-  <p class="foot-brand"><img src="/assets/img/logo-160.webp" width="160" height="118" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
+  <p class="foot-brand"><img src="/assets/img/yyg-logo-160.webp" width="160" height="122" alt="" loading="lazy"> {'YYG Web Design, יהודה גורדון. עיצוב ובניית אתרים' if he else 'YYG Web Design, Yehuda Gordon. Web design and development'}</p>
   <p><a class="foot-link" href="{home}">{E(t['home'])}</a> · <a class="foot-link" href="{'/services/' if he else '/en/services/'}">{'שירותים' if he else 'Services'}</a> · <a class="foot-link" href="{'/guides/' if he else '/en/guides/'}">{E(t['guides'])}</a> · <a class="foot-link" href="{'/privacy.html' if he else '/en/privacy.html'}">{'מדיניות פרטיות' if he else 'Privacy policy'}</a> · <a class="foot-link" href="{'/accessibility.html' if he else '/en/accessibility.html'}">{'הצהרת נגישות' if he else 'Accessibility statement'}</a></p>
  </div>
 </footer>
