@@ -158,6 +158,7 @@ function sub_send_confirm(array $s): bool {
 /* ---------- עמוד באזור האישי, בעיצוב של האתר ---------- */
 function acc_page(string $title, string $body): void {
     $en = !empty($GLOBALS['EN']);
+    adm_hint();
     header('Content-Type: text/html; charset=utf-8');
     header('Cache-Control: no-store');
     header('X-Robots-Tag: noindex, nofollow');

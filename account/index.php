@@ -12,6 +12,8 @@ $me = user_current();
 /* הרמז לכותרת האתר ("האזור האישי" במקום "כניסה"): גם לחיבור מלפני שהיה רמז, ומתנקה כשהחיבור פג */
 if ($me && ($_COOKIE['yyg_in'] ?? '') !== '1') setcookie('yyg_in', '1', ['expires' => time() + 60 * 86400, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
 if (!$me && isset($_COOKIE['yyg_in'])) setcookie('yyg_in', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+/* בעל האתר (מייל מהרשימה במסך הניהול) שמחובר לחשבון שלו: מחובר גם לניהול, גם אם המייל נוסף לרשימה אחרי הכניסה */
+if ($me && !adm_authed() && is_owner_email($me['email'])) adm_login();
 $langField = $EN ? '<input type="hidden" name="lang" value="en">' : '';
 $go = static function (string $q = '') use ($EN): void { header('Location: /account/' . ($EN ? '?lang=en' . ($q ? '&' . $q : '') : ($q ? '?' . $q : '')), true, 303); exit; };
 $msgPage = static function (string $title, string $text) : void {

@@ -32,7 +32,8 @@ const ADM_COOKIE = 'yyg_admin';
 function adm_key(): string { return (string) (private_config()['stats_key'] ?? ''); }
 function adm_sign(string $v): string { return hash_hmac('sha256', $v, adm_key()); }
 function adm_authed(): bool {
-    if (adm_key() === '') return false;
+    if (adm_key() === '' || !empty($GLOBALS['ADM_OUT'])) return false;
+    if (!empty($GLOBALS['ADM_JUST_IN'])) return true;   // נכנס בבקשה הזו, והעוגייה עוד לא חזרה מהדפדפן
     $c = (string) ($_COOKIE[ADM_COOKIE] ?? '');
     if (!preg_match('/^(\d{10})\.([a-f0-9]{64})$/', $c, $m)) return false;
     return (int) $m[1] > time() && hash_equals(adm_sign($m[1]), $m[2]);
@@ -43,10 +44,12 @@ function adm_login(): void {
     setcookie(ADM_COOKIE, $exp . '.' . adm_sign($exp), ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     /* רמז לדפי האתר (בלי שום הרשאה): קישור "ניהול" בכותרת. ההרשאה עצמה רק בעוגייה החתומה */
     setcookie('yyg_adm', '1', ['expires' => (int) $exp, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+    $GLOBALS['ADM_JUST_IN'] = true; $GLOBALS['ADM_OUT'] = false;
 }
 function adm_logout(): void {
     foreach (['/', '/admin/'] as $p) setcookie(ADM_COOKIE, '', ['expires' => 1, 'path' => $p, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     setcookie('yyg_adm', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+    $GLOBALS['ADM_OUT'] = true; $GLOBALS['ADM_JUST_IN'] = false;
 }
 function adm_csrf(): string { return adm_sign('csrf' . substr((string) ($_COOKIE[ADM_COOKIE] ?? ''), 0, 10)); }
 function adm_headers(): void {
@@ -73,8 +76,13 @@ function adm_require(): void {
 }
 /* מי שכבר מחובר (גם מלפני שהיה רמז): מוסיפים את הרמז לקישור "ניהול" בכותרת האתר */
 function adm_hint(): void {
+    if (!empty($GLOBALS['ADM_JUST_IN']) || !empty($GLOBALS['ADM_OUT'])) return;   // כניסה או יציאה בבקשה הזו כבר קבעו את הרמז
     $c = (string) ($_COOKIE[ADM_COOKIE] ?? '');
-    if (($_COOKIE['yyg_adm'] ?? '') !== '1' && preg_match('/^(\d{10})\./', $c, $m)) setcookie('yyg_adm', '1', ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+    if (adm_authed()) {
+        if (($_COOKIE['yyg_adm'] ?? '') !== '1' && preg_match('/^(\d{10})\./', $c, $m)) setcookie('yyg_adm', '1', ['expires' => (int) $m[1], 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);
+    } elseif (isset($_COOKIE['yyg_adm'])) {
+        setcookie('yyg_adm', '', ['expires' => 1, 'path' => '/', 'secure' => true, 'samesite' => 'Lax']);   // רמז ישן, בלי כניסה אמיתית
+    }
 }
 /* אחרי כניסה: חזרה לדף שרצו להגיע אליו, אם יש */
 function adm_after_login(): string {

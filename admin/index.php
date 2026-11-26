@@ -20,7 +20,12 @@ if ($tryKey !== '') {
     if (hash_equals(adm_key(), $tryKey)) { adm_login(); @unlink($failFile); header('Location: ' . adm_after_login(), true, 303); exit; }
     $fails[] = time(); @file_put_contents($failFile, implode("\n", $fails));
 }
-if (isset($_GET['logout'])) { adm_logout(); header('Location: /admin/', true, 303); exit; }
+if (isset($_GET['logout'])) {
+    /* יציאה מהניהול יוצאת גם מהחשבון של בעל האתר, אחרת הכניסה לחשבון הייתה מחזירה אותו לניהול */
+    $u = user_current();
+    if ($u && is_owner_email((string) $u['email'])) user_logout_cookie();
+    adm_logout(); header('Location: /admin/', true, 303); exit;
+}
 
 /* כניסה עם קישור במייל: לוחצים, מקבלים מייל לתיבה של העסק (שמעבירה עותק לג׳ימייל), ולוחצים על הקישור.
    הקישור חד־פעמי ובתוקף ל־15 דקות. הוא פותח דף עם כפתור (ולא נכנס מיד), כדי שסורקי קישורים במייל לא ינצלו אותו. */
@@ -98,6 +103,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 's
     exit;
 }
 $stOf = static fn(string $id): string => $status[$id]['st'] ?? 'new';
+
+/* מיילים עם גישה לניהול: כניסה לאזור האישי עם אחד מהם (גם עם Google) מכניסה גם לניהול. המייל של העסק תמיד ברשימה */
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && in_array($_POST['do'] ?? '', ['adm_mail_add', 'adm_mail_del'], true)) {
+    if (!hash_equals($csrf, (string) ($_POST['csrf'] ?? ''))) { http_response_code(400); exit('הטופס פג תוקף. רעננו את הדף ונסו שוב.'); }
+    $am = email_norm((string) ($_POST['email'] ?? ''));
+    $okMail = filter_var($am, FILTER_VALIDATE_EMAIL) !== false && strlen($am) <= 120;
+    if ($okMail) data_update('admin-accounts.json', static function (array &$a) use ($am): void { if (($_POST['do'] ?? '') === 'adm_mail_add') $a[$am] = ['t' => time()]; else unset($a[$am]); });
+    header('Location: /admin/?' . ($okMail ? 'saved=1' : 'mbad=1') . '#google', true, 303);
+    exit;
+}
 
 /* כניסה עם Google: שמירת ה־Client ID (מ־Google Cloud). הוא לא סוד, הוא מופיע בכל דף עם הכפתור */
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['do'] ?? '') === 'google_cid') {
@@ -319,8 +334,21 @@ ob_start(); ?>
 <div class="card spam"><?php if (!$spam): ?><small>לא נחסם כלום. מצוין.</small><?php endif; ?>
  <?php foreach ($spam as $l): ?><div><?= $e(mb_substr($l, 0, 400, 'UTF-8')) ?></div><?php endforeach; ?></div>
 
-<h2 id="google">כניסה עם Google</h2>
+<h2 id="google">כניסה לניהול וכניסה עם Google</h2>
 <div class="card">
+ <p style="margin:0 0 8px"><b>מיילים עם גישה לניהול.</b> מי שנכנס לאזור האישי עם אחד מהם (עם סיסמה או עם Google) נכנס גם לניהול, ורואה למעלה באתר את הקישור "ניהול".</p>
+ <?php $adminMails = array_keys(owner_linked()); ?>
+ <ul style="margin:0 0 10px;padding-inline-start:20px;line-height:2">
+  <li><bdi><?= $e($adminMail) ?></bdi> <small>(המייל של העסק, תמיד)</small></li>
+  <?php foreach ($adminMails as $am): if (email_norm($am) === email_norm($adminMail)) continue; ?>
+  <li><bdi><?= $e($am) ?></bdi> <form method="post" action="/admin/#google" style="display:inline" onsubmit="return confirm('להסיר את הגישה לניהול מהמייל הזה?')"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="do" value="adm_mail_del"><input type="hidden" name="email" value="<?= $e($am) ?>"><button class="btn" type="submit" style="padding:2px 10px;font-size:.85rem">הסרה</button></form></li>
+  <?php endforeach; ?>
+ </ul>
+ <?php if (isset($_GET['mbad'])): ?><p style="color:var(--bad)">זו לא כתובת מייל תקינה.</p><?php endif; ?>
+ <form method="post" action="/admin/#google" style="display:flex;gap:8px;flex-wrap:wrap;max-width:620px;align-items:end"><input type="hidden" name="csrf" value="<?= $e($csrf) ?>"><input type="hidden" name="do" value="adm_mail_add">
+  <label style="flex:1 1 260px">להוסיף מייל (למשל הג׳ימייל שלך)<input type="email" name="email" dir="ltr" required autocomplete="off" placeholder="name@gmail.com"></label>
+  <button class="btn" type="submit">הוספה</button></form>
+ <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
  <?php $gcid = google_client_id(); ?>
  <p style="margin:0 0 10px"><?= $gcid !== '' ? '<b style="color:var(--ok)">פעיל.</b> הכפתור "המשך עם Google" מופיע בהרשמה ובכניסה לאזור האישי, ובדף הכניסה לניהול.' : '<b style="color:var(--warn)">עוד לא פעיל.</b> צריך Client ID מ־Google Cloud. אחרי שמדביקים אותו כאן, הכפתור מופיע לבד.' ?></p>
  <?php if (isset($_GET['gbad'])): ?><p style="color:var(--bad)">זה לא נראה כמו Client ID. הוא נגמר ב־<bdi>.apps.googleusercontent.com</bdi>.</p><?php endif; ?>
@@ -334,7 +362,6 @@ ob_start(); ?>
   <li>Clients, Create client: סוג Web application. ב־Authorized JavaScript origins מוסיפים <bdi>https://yygweb.com</bdi>, ואז Create.</li>
   <li>מעתיקים את ה־Client ID ומדביקים כאן למעלה.</li>
  </ol></details>
- <p style="margin:12px 0 0"><small>כדי להיכנס לניהול עם Google: נכנסים <a href="/account/">לאזור האישי</a> עם חשבון ה־Google שלך, ולוחצים שם "לתת לחשבון הזה גישה לניהול". המייל של העסק מקבל גישה לבד.</small></p>
 </div>
 
 <h2 id="links">קישורים מהירים</h2>
