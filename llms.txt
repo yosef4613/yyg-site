@@ -10,8 +10,11 @@
 - Website with sign-ups & mailing list: from ₪6,000 (up to 15 business days)
 - Online store: from ₪7,000 (up to 30 products uploaded, up to 20 business days)
 - Basic logo ₪590; professional logo ₪1,500; basic brand identity ₪2,500
-- Brand from 0 to 100% (branding + website + content + print + social + Google): from ₪5,900 / ₪7,900 / ₪9,900 / ₪10,900
-- All-in Care (domain, hosting, business email, security, backups) from year 2: ₪590 per year
+- Brand from 0 to 100% (branding + website + content + print + social + Google): from ₪5,900 / ₪7,900 / ₪9,900 / ₪10,900 (14 to 30 business days)
+- All-in Care (domain, hosting, business email, security, backups and fixes) from year 2: ₪590 per year
+- Maintenance (optional): updates and small changes, up to half an hour a month: ₪199 per month
+- Extra page ₪350; extra design direction ₪400; extra revision round or an hour of work ₪150
+- Every package except the basic landing page: start with 10%, 3 design directions, 3 revision rounds, 4 months of support after launch
 
 ## Contact
 - Phone: 054-854-0700 (calls only), Sunday to Wednesday, 10:00–13:30 (Israel time)
@@ -36,6 +39,7 @@
 - [How it works: an example project, from the discovery questionnaire to 3 designs and feedback (Hebrew)](https://yygweb.com/demo/)
 - [How it works: an example project (English)](https://yygweb.com/en/demo/)
 - [Example landing page for an eyewear shop, with opening hours the owner updates himself (Hebrew)](https://yygweb.com/demo/optika/)
+- [Example landing page for an eyewear shop (English)](https://yygweb.com/en/demo/optika/)
 - [How much does a website cost (guide)](https://yygweb.com/guides/website-cost.html)
 - [What to prepare before building a website (guide)](https://yygweb.com/guides/before-you-build.html)
 - [Landing page or full website (guide)](https://yygweb.com/guides/landing-or-website.html)

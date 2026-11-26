@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ענף · ניהול התוכן | מסך ניהול לדוגמה של YYG</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="מסך לדוגמה: כך בעל נגריה מוסיף בעצמו עבודות חדשות לגלריה, מחליף תמונות ומעדכן הודעה באתר, מהטלפון, והאתר מתעדכן מיד.">
+<meta name="theme-color" content="#F6F1E8">
+<link rel="icon" href="/yyg-site/assets/img/icon-64.png" type="image/png">
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים (מקומיים, כמו בעיצוב 1) ---------- */
+@font-face{font-family:"Frank Ruhl Libre";font-weight:500;font-display:swap;src:url(/demo/fonts/frank-ruhl-libre-500-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Frank Ruhl Libre";font-weight:500;font-display:swap;src:url(/demo/fonts/frank-ruhl-libre-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"Frank Ruhl Libre";font-weight:700;font-display:swap;src:url(/demo/fonts/frank-ruhl-libre-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Assistant;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Assistant;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Assistant;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Assistant;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Assistant;font-weight:700;font-display:swap;src:url(/demo/fonts/assistant-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+/* ---------- צבעים: הפלטה של עיצוב 1, והכתום של הכפתור הראשי ---------- */
+:root{--bg:#F6F1E8;--surface:#FFFDF8;--ink:#2B2722;--ink-soft:#3F3933;--muted:#6E6559;--oak:#9A6B3C;--oak-ink:#7A5229;--sage:#7D8B6A;--sage-ink:#55613F;--line:#E2D8C8;--line-strong:#CDBFA9;--field:#8C8172;--orange:#E5652A;--orange-hi:#EF7A43;--on-orange:#1C1712;--danger:#A23A1E;--serif:"Frank Ruhl Libre","David",Georgia,serif;--sans:Assistant,"Segoe UI",Arial,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--oak-ink)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;line-height:1.2}
+p{margin:0}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--oak-ink);outline-offset:2px}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+/* ---------- ראש העמוד ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;padding:18px 16px 4px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);text-decoration:none}
+.brand svg{width:34px;height:34px;color:var(--oak);flex:none}
+.brand b{display:block;font:700 26px/1 var(--serif)}
+.brand small{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+.who{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
+.who::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--sage)}
+h1{margin:22px 0 6px;font-size:clamp(30px,2.2rem + 1vw,44px);line-height:1.15}
+.lead{max-width:40em;color:var(--muted);font-size:18px}
+.note{max-width:62em;margin-top:16px;padding:14px 16px;border:1px solid #EAD9AE;border-radius:12px;background:#FBF1DC;color:var(--ink-soft);font-size:16px;line-height:1.6}
+.note b{color:var(--ink)}
+/* ---------- פריסה ---------- */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start;margin:22px 0 56px}
+.side{position:sticky;top:16px;display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h2{font-size:24px;line-height:1.2}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
+.count{font-size:15px;font-weight:600;color:var(--oak-ink);font-variant-numeric:tabular-nums}
+.hint{margin-top:6px;font-size:15px;color:var(--muted)}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 22px;border:1px solid transparent;border-radius:999px;font:700 16px/1.2 var(--sans);text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,box-shadow .2s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:var(--orange);color:var(--on-orange);box-shadow:0 8px 18px -10px rgba(229,101,42,.75)}
+.btn.primary:hover{background:var(--orange-hi)}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--field);font-weight:600}
+.btn.ghost:hover{border-color:var(--ink);background:#fff}
+.btn.sm{min-height:44px;padding:8px 16px;font-size:15px}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+/* קלט קובץ: הקלט עצמו מוסתר ויזואלית אבל נשאר בפוקוס; התווית נראית כמו כפתור */
+.file-in{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.file-in:focus-visible+label{outline:3px solid var(--ink);outline-offset:3px}
+.file-in:disabled+label{opacity:.5;cursor:not-allowed}
+.file-in:not(:disabled)+label{cursor:pointer}
+/* ---------- הוספה ---------- */
+.add{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin-top:16px;padding:16px;border:1.5px dashed var(--line-strong);border-radius:12px;background:var(--bg)}
+.add .btn{background:var(--ink);color:var(--surface)}
+.add .btn:hover{background:#4A4038}
+.add-hint{flex:1 1 220px;font-size:15px;color:var(--muted)}
+/* ---------- כרטיס עבודה ---------- */
+.projects{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:14px}
+.proj{position:relative;display:grid;grid-template-columns:190px minmax(0,1fr);gap:18px;padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff;transition:box-shadow .3s,border-color .3s}
+.proj.is-new{border-color:var(--oak);box-shadow:0 0 0 3px rgba(154,107,60,.18)}
+.proj-media-col{display:grid;gap:10px;align-content:start}
+.proj-media{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:8px;background:#E8DFD0}
+.proj-media img{display:block;width:100%;height:100%;object-fit:cover}
+.proj-n{position:absolute;top:8px;inset-inline-start:8px;min-width:34px;padding:3px 8px;border-radius:999px;background:rgba(28,23,18,.78);color:#fff;font:700 14px/1.2 var(--sans);text-align:center;font-variant-numeric:tabular-nums}
+.proj-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.proj-h{font:600 15px/1.3 var(--sans);color:var(--oak-ink)}
+.tools{display:flex;gap:6px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 10px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink);font:600 15px/1 var(--sans);cursor:pointer}
+.icon-btn svg{width:18px;height:18px;flex:none}
+.icon-btn:hover{border-color:var(--ink)}
+.icon-btn:disabled{opacity:.35;cursor:default;border-color:var(--line)}
+.icon-btn.danger{color:var(--danger)}
+.icon-btn.danger:hover{border-color:var(--danger);background:#FBEDE6}
+.icon-btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 12px}
+.fld{display:flex;flex-direction:column;gap:5px;min-width:0}
+.fld.full{grid-column:1 / -1}
+.fld label{font-size:15px;font-weight:600;color:var(--ink)}
+.fld .opt{font-weight:400;color:var(--muted)}
+input[type=text],textarea{width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--field);border-radius:8px;background:#fff;color:var(--ink);font:400 16.5px/1.45 var(--sans)}
+textarea{resize:vertical;min-height:68px}
+input[type=text]:hover,textarea:hover{border-color:var(--ink)}
+input[type=text]:focus-visible,textarea:focus-visible{outline:3px solid rgba(122,82,41,.45);outline-offset:0;border-color:var(--oak-ink)}
+[aria-invalid="true"]{border-color:var(--danger)!important;box-shadow:0 0 0 1px var(--danger)}
+.err{font-size:14.5px;font-weight:600;color:var(--danger)}
+.photo-row{position:relative;display:grid;gap:4px;justify-items:stretch;text-align:center}
+.photo-note{font-size:14px;color:var(--muted)}
+/* ---------- צד: הודעה ושמירה ---------- */
+.nt-wrap{display:grid;gap:10px;margin-top:10px}
+.nt-wrap > label{font-size:15px;color:var(--muted)}
+.quick{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:44px;padding:6px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--bg);color:var(--ink);font:600 14.5px/1.2 var(--sans);cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+.chip:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.link-btn{justify-self:start;min-height:44px;padding:0 2px;border:0;background:none;color:var(--oak-ink);font:600 15px/1.2 var(--sans);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.acts{display:grid;gap:10px}
+.acts .row{display:flex;flex-wrap:wrap;gap:10px}
+.acts .row .btn{flex:1 1 120px}
+#status{min-height:1.5em;font-size:15.5px;font-weight:600;color:var(--sage-ink)}
+#status:not(:empty){display:flex;align-items:baseline;gap:8px}
+#status:not(:empty)::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--sage);transform:translateY(-1px)}
+#status.is-dirty{color:#7A5229}
+#status.is-dirty::before{background:var(--orange)}
+#status.is-err{color:var(--danger)}
+#status.is-err::before{background:var(--danger)}
+.how{font-size:15.5px;color:var(--ink-soft)}
+.how h2{font-size:20px;margin-bottom:8px}
+.how ul{margin:0 0 14px;padding:0 18px 0 0;display:grid;gap:6px}
+.how li::marker{color:var(--oak)}
+/* ---------- טלפון ---------- */
+@media (max-width:900px){
+  .layout{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+  .side{display:contents}
+  .gal{order:1}
+  .notice-card{order:2}
+  .acts{order:3;position:sticky;bottom:0;z-index:5;gap:6px;margin-inline:-16px;padding:12px 16px calc(10px + env(safe-area-inset-bottom));border-radius:16px 16px 0 0;border-bottom:0;box-shadow:0 -10px 24px -14px rgba(43,39,34,.35)}
+  #status{min-height:0;font-size:15px}
+  .how{order:4}
+}
+@media (max-width:640px){
+  .card{padding:16px}
+  .proj{grid-template-columns:1fr;gap:12px;padding:12px}
+  .proj-body{display:contents}
+  .proj-top{order:-1;margin-bottom:0}
+  .proj-media{aspect-ratio:16/9}
+  .photo-row{display:flex;align-items:center;gap:8px 14px;text-align:start}
+  .acts .row .btn{flex:1 1 0;padding-inline:12px}
+}
+@media (max-width:380px){
+  .fields{grid-template-columns:1fr}
+  .icon-btn .del-t{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. מסך ניהול לדוגמה: מה שמשנים כאן נשמר רק בדפדפן שלכם, ומופיע בגרסה הסופית.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/yyg-site/demo/design-1/">עיצוב 1</a><a href="/yyg-site/demo/design-2/">עיצוב 2</a><a href="/yyg-site/demo/design-3/">עיצוב 3</a><a href="/yyg-site/demo/final/">הגרסה הסופית</a><a href="/yyg-site/demo/admin/" aria-current="page">מסך ניהול התוכן</a></nav>
+ <a class="demo-back" href="/yyg-site/demo/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+
+<header class="wrap top">
+ <a class="brand" href="/yyg-site/demo/final/" aria-label="ענף, לאתר">
+  <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15 55 C 24 47 33 37 40 27 C 43 22 46 16 48 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M25 46 C 17 45 11 40 9 32 C 17 32 23 37 25 46 Z"/><path d="M33 37 C 35 29 41 24 49 24 C 47 32 41 37 33 37 Z"/><path d="M39 28 C 32 25 28 19 29 11 C 36 14 40 20 39 28 Z"/><path d="M47 11 C 46 6 49 2 54 1 C 55 6 52 10 47 11 Z"/></g></svg>
+  <span><b>ענף</b><small>ניהול התוכן</small></span>
+ </a>
+ <span class="who">מחובר: בעל העסק (לדוגמה)</span>
+</header>
+
+<main class="wrap">
+ <h1>העבודות באתר</h1>
+ <p class="lead">מוסיפים עבודה חדשה, מחליפים תמונה או משנים סדר, ולוחצים "שמירה". האתר מתעדכן מיד, וזה עובד גם מהטלפון.</p>
+ <p class="note"><b>זה מסך לדוגמה:</b> כל אחד יכול לנסות כאן, והשינויים נשמרים רק בדפדפן שלכם. פתחו את הגרסה הסופית בלשונית אחרת, שנו כאן משהו ולחצו "שמירה", ותראו אותה מתעדכנת. באתר אמיתי נכנסים עם סיסמה או קישור במייל, והשינוי מופיע לכל הגולשים.</p>
+
+ <form class="layout" id="f" novalidate>
+  <section class="card gal" aria-labelledby="gal-t">
+   <div class="card-head"><h2 id="gal-t">גלריית העבודות</h2><p class="count" id="count"></p></div>
+   <p class="hint">העבודה הראשונה מוצגת הכי גדול באתר. משנים את הסדר עם החצים.</p>
+   <div class="add">
+    <input type="file" id="add-file" class="file-in" accept="image/*" aria-describedby="add-hint">
+    <label for="add-file" class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>הוספת עבודה חדשה</label>
+    <p class="add-hint" id="add-hint">בוחרים תמונה מהטלפון או מהמחשב, והיא מוקטנת אוטומטית. העבודה החדשה נכנסת ראשונה.</p>
+   </div>
+   <ol class="projects" id="list" aria-labelledby="gal-t"></ol>
+  </section>
+
+  <div class="side">
+   <section class="card notice-card" aria-labelledby="nt-t">
+    <h2 id="nt-t">הודעה באתר</h2>
+    <div class="nt-wrap">
+     <label for="nt">פס קטן מתחת לתפריט, למשל לפני חג. משאירים ריק כשאין הודעה.</label>
+     <textarea id="nt" maxlength="140" rows="2" placeholder="לדוגמה: הנגריה סגורה בחול המועד"></textarea>
+     <div class="quick" role="group" aria-label="הודעות מוכנות">
+      <button type="button" class="chip" data-q="הנגריה סגורה בחול המועד, ונחזור לעבודה מיד אחרי החג.">סגור בחול המועד</button>
+      <button type="button" class="chip" data-q="לפני החגים התור מתארך. כדאי לתאם מדידה כבר עכשיו.">לפני החגים</button>
+      <button type="button" class="chip" data-q="חזרנו מחופשה, ומתאמים מדידות כרגיל.">חזרנו מחופשה</button>
+     </div>
+     <button type="button" class="link-btn" id="nt-clear">ניקוי ההודעה</button>
+    </div>
+   </section>
+
+   <div class="card acts">
+    <div class="row">
+     <button class="btn primary" type="submit">שמירה</button>
+     <a class="btn ghost" href="/yyg-site/demo/final/" target="_blank" rel="noopener">לראות באתר<span class="vh"> (נפתח בלשונית חדשה)</span></a>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+   </div>
+
+   <section class="card how" aria-labelledby="how-t">
+    <h2 id="how-t">כמה טיפים</h2>
+    <ul>
+     <li>תמונה לרוחב נראית הכי טוב. צלמו באור יום, בלי אנשים.</li>
+     <li>בכותרת כותבים מה נבנה ואיפה, למשל "ספרייה לסלון, בית שמש".</li>
+     <li>עד 12 עבודות. עבודה ישנה אפשר למחוק, או להוריד לסוף.</li>
+    </ul>
+    <button type="button" class="btn ghost sm" id="reset">איפוס לדוגמה</button>
+   </section>
+  </div>
+ </form>
+</main>
+
+<datalist id="kinds"><option value="מטבח"><option value="ארון"><option value="ספרייה"><option value="שולחן"><option value="חדר ילדים"><option value="בית כנסת"><option value="רהיטי מרפסת"></datalist>
+<datalist id="woods"><option value="אלון"><option value="אגוז"><option value="אשור"><option value="אורן"><option value="טיק"></datalist>
+
+<!-- תבנית לכרטיס עבודה. הטקסטים של בעל העסק נכנסים רק דרך value / textContent -->
+<template id="tpl">
+ <li class="proj">
+  <div class="proj-media-col">
+   <div class="proj-media"><img alt="" width="400" height="300" decoding="async"><span class="proj-n" aria-hidden="true"></span></div>
+   <div class="photo-row"><input type="file" class="file-in" accept="image/*" data-act="replace"><label class="btn ghost sm">החלפת תמונה</label><span class="photo-note"></span></div>
+  </div>
+  <div class="proj-body">
+   <div class="proj-top">
+    <h3 class="proj-h"></h3>
+    <div class="tools">
+     <button type="button" class="icon-btn" data-act="up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+     <button type="button" class="icon-btn" data-act="down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+     <button type="button" class="icon-btn danger" data-act="del"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg><span class="del-t">מחיקה</span></button>
+    </div>
+   </div>
+   <div class="fields">
+    <div class="fld full"><label data-for="title">כותרת: מה נבנה ואיפה</label><input type="text" data-k="title" maxlength="90" required autocomplete="off"><p class="err" hidden></p></div>
+    <div class="fld"><label data-for="kind">סוג עבודה</label><input type="text" data-k="kind" list="kinds" maxlength="30" autocomplete="off"></div>
+    <div class="fld"><label data-for="wood">סוג עץ</label><input type="text" data-k="wood" list="woods" maxlength="30" autocomplete="off"></div>
+    <div class="fld full"><label data-for="text">משפט קצר <span class="opt">(לא חובה)</span></label><textarea data-k="text" rows="2" maxlength="180"></textarea></div>
+    <div class="fld full"><label data-for="alt">מה רואים בתמונה <span class="opt">(למי שלא רואה אותה, ולגוגל)</span></label><input type="text" data-k="alt" maxlength="180" autocomplete="off"></div>
+   </div>
+  </div>
+ </li>
+</template>
+
+<script src="/yyg-site/demo/content.js"></script>
+<script>
+(() => {
+  const C = window.AnafContent;
+  const f = document.getElementById('f'), list = document.getElementById('list'), tpl = document.getElementById('tpl');
+  const statusEl = document.getElementById('status'), count = document.getElementById('count');
+  const nt = document.getElementById('nt'), addFile = document.getElementById('add-file'), addHint = document.getElementById('add-hint');
+  const ADD_HINT = addHint.textContent;
+  let draft = C.load(), dirty = false;
+  const freshIds = new Set();
+
+  const say = (msg, kind) => {
+    statusEl.classList.toggle('is-dirty', kind === 'dirty');
+    statusEl.classList.toggle('is-err', kind === 'err');
+    statusEl.textContent = '';
+    if (msg) setTimeout(() => { statusEl.textContent = msg; }, 40);
+  };
+  const markDirty = () => { if (!dirty) { dirty = true; say('יש שינויים שלא נשמרו.', 'dirty'); } };
+  const nameOf = (x, i) => (x.title ? `"${x.title}"` : `עבודה ${i + 1}`);
+
+  /* הקטנת תמונה בדפדפן: עד 1200 פיקסלים רוחב (ו־1600 גובה), WEBP ואם אין תמיכה JPEG */
+  const readImage = (file) => new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onload = () => { URL.revokeObjectURL(url); resolve(im); };
+    im.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+    im.src = url;
+  });
+  const shrink = async (file) => {
+    if (!file || !/^image\//.test(file.type)) throw new Error('type');
+    const im = await readImage(file);
+    const sw = im.naturalWidth, sh = im.naturalHeight;
+    if (!sw || !sh) throw new Error('decode');
+    const s = Math.min(1, 1200 / sw, 1600 / sh);
+    const w = Math.max(1, Math.round(sw * s)), h = Math.max(1, Math.round(sh * s));
+    const cv = document.createElement('canvas');
+    cv.width = w; cv.height = h;
+    const g = cv.getContext('2d');
+    g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, w, h);
+    g.imageSmoothingQuality = 'high';
+    g.drawImage(im, 0, 0, w, h);
+    let data = cv.toDataURL('image/webp', 0.8);
+    if (!data.startsWith('data:image/webp')) data = cv.toDataURL('image/jpeg', 0.8);
+    return { data, w, h };
+  };
+  const imgError = (e) => (e && e.message === 'type' ? 'הקובץ שנבחר הוא לא תמונה. בחרו קובץ JPG, PNG או WEBP.' : 'לא הצלחנו לפתוח את התמונה. נסו תמונה אחרת, בפורמט JPG או PNG.');
+
+  /* בניית הכרטיסים מהטיוטה */
+  const card = (x, i, n) => {
+    const li = tpl.content.firstElementChild.cloneNode(true);
+    li.dataset.id = x.id;
+    if (freshIds.has(x.id)) li.classList.add('is-new');
+    const img = li.querySelector('img');
+    img.src = x.img_small || x.img;
+    li.querySelector('.proj-n').textContent = String(i + 1).padStart(2, '0');
+    const h = li.querySelector('.proj-h');
+    h.id = `h-${x.id}`;
+    h.textContent = `עבודה ${i + 1} מתוך ${n}`;
+    li.querySelectorAll('[data-k]').forEach((inp) => {
+      const k = inp.dataset.k;
+      inp.id = `${k}-${x.id}`;
+      inp.value = x[k] || '';
+      li.querySelector(`label[data-for="${k}"]`).htmlFor = inp.id;
+    });
+    const err = li.querySelector('.err');
+    err.id = `err-${x.id}`;
+    const nm = nameOf(x, i);
+    const up = li.querySelector('[data-act="up"]'), down = li.querySelector('[data-act="down"]'), del = li.querySelector('[data-act="del"]');
+    up.setAttribute('aria-label', `להזיז למעלה: ${nm}`); up.title = 'למעלה';
+    down.setAttribute('aria-label', `להזיז למטה: ${nm}`); down.title = 'למטה';
+    del.setAttribute('aria-label', `מחיקה: ${nm}`);
+    up.disabled = i === 0;
+    down.disabled = i === n - 1;
+    if (n <= 1) del.setAttribute('aria-disabled', 'true');
+    const rep = li.querySelector('[data-act="replace"]');
+    rep.id = `rep-${x.id}`;
+    const repLabel = rep.nextElementSibling;
+    repLabel.htmlFor = rep.id;
+    repLabel.textContent = 'החלפת תמונה';
+    const note = li.querySelector('.photo-note');
+    note.id = `pn-${x.id}`;
+    note.textContent = x.img.startsWith('data:') ? 'תמונה שהעליתם' : 'תמונה לדוגמה';
+    rep.setAttribute('aria-label', `החלפת תמונה: ${nm}`);
+    return li;
+  };
+  const drawList = () => {
+    const n = draft.projects.length;
+    list.replaceChildren(...draft.projects.map((x, i) => card(x, i, n)));
+    count.textContent = `${n} מתוך ${C.LIMIT}`;
+    const full = n >= C.LIMIT;
+    addFile.disabled = full;
+    addHint.textContent = full ? `הגעתם ל־${C.LIMIT} עבודות. כדי להוסיף עבודה חדשה, מחקו קודם עבודה ישנה.` : ADD_HINT;
+  };
+  const fill = () => { nt.value = draft.notice || ''; drawList(); };
+  const indexOf = (li) => draft.projects.findIndex((x) => x.id === li.dataset.id);
+  const focusIn = (id, sel) => {
+    const li = list.querySelector(`[data-id="${CSS.escape(id)}"]`);
+    if (!li) return;
+    let el = li.querySelector(sel);
+    if (el && el.disabled) el = li.querySelector(sel === '[data-act="up"]' ? '[data-act="down"]' : '[data-act="up"]');
+    (el && !el.disabled ? el : li.querySelector('[data-k="title"]')).focus();
+  };
+
+  /* עריכה בתוך הכרטיס */
+  list.addEventListener('input', (e) => {
+    const k = e.target.dataset.k; if (!k) return;
+    const i = indexOf(e.target.closest('.proj')); if (i < 0) return;
+    draft.projects[i][k] = e.target.value;
+    if (k === 'title' && e.target.value.trim()) {
+      e.target.removeAttribute('aria-invalid');
+      e.target.removeAttribute('aria-describedby');
+      const err = e.target.parentElement.querySelector('.err'); err.hidden = true; err.textContent = '';
+    }
+    markDirty();
+  });
+  /* אחרי שינוי כותרת, מעדכנים את שמות הכפתורים לקוראי מסך */
+  list.addEventListener('change', (e) => {
+    if (e.target.dataset.k !== 'title') return;
+    const li = e.target.closest('.proj'), i = indexOf(li), nm = nameOf(draft.projects[i], i);
+    li.querySelector('[data-act="up"]').setAttribute('aria-label', `להזיז למעלה: ${nm}`);
+    li.querySelector('[data-act="down"]').setAttribute('aria-label', `להזיז למטה: ${nm}`);
+    li.querySelector('[data-act="del"]').setAttribute('aria-label', `מחיקה: ${nm}`);
+    li.querySelector('[data-act="replace"]').setAttribute('aria-label', `החלפת תמונה: ${nm}`);
+  });
+  /* למעלה, למטה, מחיקה */
+  list.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-act]'); if (!b) return;
+    const li = b.closest('.proj'), i = indexOf(li); if (i < 0) return;
+    const x = draft.projects[i], n = draft.projects.length, act = b.dataset.act;
+    if (act === 'up' || act === 'down') {
+      const j = act === 'up' ? i - 1 : i + 1;
+      if (j < 0 || j >= n) return;
+      [draft.projects[i], draft.projects[j]] = [draft.projects[j], draft.projects[i]];
+      drawList(); markDirty();
+      focusIn(x.id, `[data-act="${act}"]`);
+      say(`${nameOf(x, j)} עברה למקום ${j + 1} מתוך ${n}. לא לשכוח לשמור.`, 'dirty');
+    } else if (act === 'del') {
+      if (n <= 1) { say('צריך להשאיר לפחות עבודה אחת בגלריה.', 'err'); return; }
+      if (!window.confirm(`למחוק את ${nameOf(x, i)} מהגלריה?`)) return;
+      draft.projects.splice(i, 1);
+      freshIds.delete(x.id);
+      drawList(); markDirty();
+      const next = draft.projects[Math.min(i, draft.projects.length - 1)];
+      if (next) focusIn(next.id, '[data-k="title"]');
+      say(`${nameOf(x, i)} נמחקה. לחצו "שמירה" כדי שזה יופיע באתר.`, 'dirty');
+    }
+  });
+  /* החלפת תמונה בכרטיס */
+  list.addEventListener('change', async (e) => {
+    if (e.target.dataset.act !== 'replace') return;
+    const inp = e.target, li = inp.closest('.proj'), id = li.dataset.id, file = inp.files && inp.files[0];
+    if (!file) return;
+    say('מכינים את התמונה…');
+    try {
+      const r = await shrink(file);
+      const x = draft.projects.find((p) => p.id === id); if (!x) return;
+      Object.assign(x, { img: r.data, img_small: '', w: r.w, h: r.h, pos: '' });
+      drawList(); markDirty();
+      focusIn(id, '[data-act="replace"]');
+      say('התמונה הוחלפה. לחצו "שמירה" כדי שתופיע באתר.', 'dirty');
+    } catch (err) { say(imgError(err), 'err'); }
+    inp.value = '';
+  });
+  /* הוספת עבודה חדשה: התמונה קודם, ואז כותבים כותרת */
+  addFile.addEventListener('change', async () => {
+    const file = addFile.files && addFile.files[0];
+    if (!file) return;
+    if (draft.projects.length >= C.LIMIT) { say(`אפשר עד ${C.LIMIT} עבודות.`, 'err'); return; }
+    say('מכינים את התמונה…');
+    try {
+      const r = await shrink(file);
+      const id = C.newId();
+      draft.projects.unshift({ id, title: '', kind: '', wood: '', text: '', img: r.data, img_small: '', alt: '', w: r.w, h: r.h, pos: '' });
+      freshIds.add(id);
+      drawList(); markDirty();
+      focusIn(id, '[data-k="title"]');
+      say('התמונה נוספה ראשונה בגלריה. כתבו כותרת ולחצו "שמירה".', 'dirty');
+    } catch (err) { say(imgError(err), 'err'); }
+    addFile.value = '';
+  });
+
+  /* הודעה באתר */
+  nt.addEventListener('input', markDirty);
+  document.querySelectorAll('[data-q]').forEach((b) => b.addEventListener('click', () => { nt.value = b.dataset.q; markDirty(); nt.focus(); }));
+  document.getElementById('nt-clear').addEventListener('click', () => { nt.value = ''; markDirty(); nt.focus(); say('ההודעה נמחקה. אחרי השמירה הפס ייעלם מהאתר.', 'dirty'); });
+
+  /* שמירה */
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    draft.notice = nt.value.trim();
+    let first = null;
+    list.querySelectorAll('[data-k="title"]').forEach((inp) => {
+      const err = inp.parentElement.querySelector('.err');
+      if (inp.value.trim()) return;
+      inp.setAttribute('aria-invalid', 'true');
+      inp.setAttribute('aria-describedby', err.id);
+      err.textContent = 'צריך לכתוב כותרת לעבודה.';
+      err.hidden = false;
+      first = first || inp;
+    });
+    if (first) { say('לא נשמר: לכל עבודה צריך כותרת.', 'err'); first.focus(); return; }
+    if (C.save(draft)) {
+      dirty = false;
+      freshIds.clear();
+      draft = C.load();
+      fill();
+      say('נשמר. רואים את זה עכשיו באתר.');
+    } else if (C.lastError === 'quota') {
+      say('לא נשמר: אין מספיק מקום בדפדפן לכל התמונות. מחקו עבודה אחת או החליפו תמונה גדולה, ונסו שוב. (באתר האמיתי התמונות נשמרות בשרת, ואין מגבלה כזאת.)', 'err');
+    } else {
+      say('לא נשמר: הדפדפן הזה לא מאפשר לשמור (אולי זה חלון גלישה בסתר). באתר האמיתי השמירה היא בשרת.', 'err');
+    }
+  });
+
+  /* איפוס לדוגמה */
+  document.getElementById('reset').addEventListener('click', () => {
+    if (!window.confirm('לחזור ל־6 העבודות לדוגמה? מה שהוספתם או שיניתם כאן יימחק.')) return;
+    C.reset();
+    dirty = false;
+    freshIds.clear();
+    draft = C.load();
+    fill();
+    say('חזרנו לתוכן לדוגמה.');
+  });
+
+  /* לא לאבד שינויים בטעות */
+  window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+  fill();
+})();
+</script>
+</body>
+</html>

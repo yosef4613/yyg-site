@@ -10,23 +10,25 @@
 <link rel="icon" href="/yyg-site/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/yyg-site/demo/fonts/heebo-900-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;inset-inline-end:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
 @font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Heebo";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/heebo-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Heebo";font-style:normal;font-weight:900;font-display:swap;src:url(/demo/fonts/heebo-900-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-
 /* ---------- demo bar (shared, unchanged) ---------- */
-.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100}
-.demo-bar b{color:#F2C95A}
-.demo-bar nav{display:flex;gap:4px}
-.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
-.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
-.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
-.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
-@media (max-width:560px){.demo-bar{justify-content:center}.demo-bar>span{display:none}}
-
 /* ---------- tokens ---------- */
 :root{
   --paper:#F1EEE8;
@@ -49,7 +51,6 @@
   --focus:#1A1A1A;
   --mbar-h:64px;
 }
-
 /* ---------- base ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -67,7 +68,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .skip:focus{transform:none}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
 .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
-
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:2px solid transparent;border-radius:4px;font-weight:700;font-size:17px;line-height:1.2;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
 .btn svg{width:20px;height:20px;flex:none}
@@ -82,7 +82,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .btn-sm{min-height:44px;padding:0 18px;font-size:16px}
 .btn:hover svg{transform:translateX(-3px)}
 .btn svg{transition:transform .2s}
-
 /* ---------- ruler motif ---------- */
 .ruler{--t:rgba(26,26,26,.42);position:relative;display:block;height:26px;overflow:hidden;background:linear-gradient(var(--t),var(--t)) top/100% 1px no-repeat}
 .ruler::before{content:"";position:absolute;top:0;bottom:0;right:0;width:calc(100% + 200px);background:
@@ -93,13 +92,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* ticks slide in from the right when visible; the pattern repeats every 100px so the resting state is identical */
 .anim .rv::before{transform:translateX(200px);transition:transform 1.8s cubic-bezier(.16,.8,.24,1)}
 .anim .rv.is-in::before{transform:none}
-
 .kicker{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--ink-2);margin-bottom:18px}
 .kicker::before{content:"";width:28px;height:3px;background:var(--orange);flex:none}
 .dark .kicker{color:var(--on-dark-2)}
 .kicker .k-label{letter-spacing:0;font-size:15px}
 .kicker .k-sep{width:1px;height:14px;background:currentColor;opacity:.4}
-
 /* ---------- header ---------- */
 .site-header{position:sticky;top:0;z-index:50;background:var(--green);color:var(--on-dark);border-bottom:1px solid var(--on-dark-line)}
 .header-in{display:flex;align-items:center;gap:24px;min-height:var(--header-h)}
@@ -120,7 +117,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(2){opacity:0}
 .nav-toggle[aria-expanded="true"] .nt-ico i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-
 /* ---------- hero ---------- */
 .hero{background-color:var(--green);color:var(--on-dark);overflow:hidden;background-image:linear-gradient(rgba(241,238,232,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(241,238,232,.04) 1px,transparent 1px);background-size:64px 64px;background-position:center -1px}
 .hero-top{padding-top:clamp(40px,5.5vw,80px)}
@@ -153,7 +149,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .corner{position:absolute;width:18px;height:18px;border-color:var(--paper);border-style:solid;border-width:0}
 .corner-tr{top:10px;right:10px;border-top-width:2px;border-right-width:2px}
 .corner-bl{bottom:10px;left:10px;border-bottom-width:2px;border-left-width:2px}
-
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 .stat{padding:30px clamp(16px,2.4vw,32px) clamp(44px,5vw,64px);border-inline-start:1px solid var(--on-dark-line)}
 .stat:first-child{border-inline-start:0;padding-inline-start:0}
@@ -161,7 +156,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .stat-num .plus{color:var(--orange);font-size:.6em;line-height:1;margin-top:.04em}
 .stat-num svg{width:.82em;height:.82em;color:var(--orange);margin-top:.05em}
 .stat-label{margin-top:14px;font-size:17px;font-weight:700;color:var(--on-dark)}
-
 /* ---------- sections ---------- */
 .section{padding-block:clamp(72px,9vw,136px)}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 48px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
@@ -170,7 +164,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sec-aside b{color:var(--ink)}
 .ruler-sep{margin-bottom:clamp(64px,8vw,112px)}
 .works{padding-bottom:clamp(64px,8vw,112px)}
-
 /* works */
 .works-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(92px,9.6vw,136px);gap:20px}
 .work{position:relative;grid-column:span 4;grid-row:span 2}
@@ -185,7 +178,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .w-chair{grid-column:span 4;grid-row:span 3}
 .w-chair img{object-position:50% 70%}
 .w-wardrobe img{object-position:50% 40%}
-
 /* services */
 .services{padding-top:0}
 .svc-list{border-top:2px solid var(--ink)}
@@ -198,7 +190,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .svc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:44px}
 .tel-link{font-weight:700;text-decoration:none;border-bottom:2px solid var(--orange);padding-block:8px 2px}
 .tel-link:hover{border-bottom-color:var(--ink)}
-
 /* process */
 .process{background:var(--ink);color:var(--on-dark);overflow:hidden}
 .process .h2{color:var(--on-dark)}
@@ -217,7 +208,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .step-mark .sm b{font-size:34px;font-weight:900;letter-spacing:-.03em;margin-right:6px}
 .step h3{font-weight:700;font-size:clamp(21px,1.9vw,26px);line-height:1.25;margin-bottom:12px}
 .step p{color:var(--on-dark-2);font-size:16.5px}
-
 /* about */
 .about{overflow:hidden}
 .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:stretch}
@@ -231,7 +221,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .title-block span{padding:10px 14px;border-inline-start:1px solid var(--ink)}
 .title-block span:first-child{border-inline-start:0}
 .title-block small{display:block;font-size:11px;font-weight:400;color:var(--ink-2);margin-bottom:3px;letter-spacing:.04em}
-
 /* woods */
 .woods-sec{padding-top:0}
 .woods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
@@ -241,7 +230,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .wood-name{margin:0;font-weight:900;font-size:clamp(44px,5vw,72px);line-height:.95;letter-spacing:-.03em}
 .wood-desc{padding:20px 20px 16px;font-size:16.5px;color:var(--ink-2);line-height:1.6}
 .wood-use{margin:0 20px;padding:14px 0 22px;border-top:1px solid var(--line);font-weight:700;font-size:16px;line-height:1.45}
-
 /* testimonials */
 .testi{background:var(--orange);color:var(--ink);padding-top:0}
 .testi .ruler{--t:rgba(26,26,26,.6);margin-bottom:clamp(72px,9vw,136px)}
@@ -255,7 +243,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .quote blockquote p{font-weight:700;font-size:clamp(20px,1.85vw,25px);line-height:1.45;letter-spacing:-.01em}
 .quote figcaption{margin-top:auto;padding-top:24px;font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:10px}
 .quote figcaption::before{content:"";width:22px;height:2px;background:var(--ink)}
-
 /* faq */
 .faq{background:var(--green);color:var(--on-dark)}
 .faq-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,7vw,112px);align-items:start}
@@ -276,7 +263,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .faq-item[open] .pm::after{transform:rotate(0)}
 .faq-a{padding:0 53px 28px 60px;color:var(--on-dark-2);max-width:62ch}
 .faq-a p{font-size:17px}
-
 /* contact */
 .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-areas:"intro form" "info form";gap:0 clamp(40px,7vw,112px);align-items:start}
 .c-intro{grid-area:intro}
@@ -304,7 +290,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .c-form .btn{width:100%;margin-top:6px}
 .form-status{margin-top:18px;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:4px;background:#E3ECE6;color:var(--green);font-weight:700;border-inline-start:5px solid var(--green)}
 .form-status:empty{display:none}
-
 /* footer */
 .site-footer{background:var(--ink);color:var(--on-dark)}
 .site-footer .ruler{--t:rgba(241,238,232,.32)}
@@ -323,10 +308,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 32px;padding-block:22px 28px;border-top:1px solid rgba(241,238,232,.14);font-size:14px;color:rgba(241,238,232,.7)}
 .f-bottom a{color:var(--orange);font-weight:700}
 .f-bottom strong{color:var(--on-dark);font-weight:700}
-
 /* mobile contact bar */
 .mbar{display:none}
-
 /* ---------- responsive ---------- */
 @media (max-width:1180px){
   .nav-list{gap:18px}
@@ -447,7 +430,6 @@ button,input,select,textarea{font:inherit;color:inherit}
   .title-block{font-size:12.5px}
   .title-block span{padding:8px 10px}
 }
-
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
@@ -458,11 +440,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 </style>
 </head>
 <body id="top">
-<div class="demo-bar" role="note">
- <span><b>אתר לדוגמה</b> · עסק דמיוני, שלושה כיוונים עיצוביים לאותו תוכן</span>
- <nav aria-label="העיצובים לדוגמה"><a href="/yyg-site/demo/design-1/">עיצוב 1</a><a href="/yyg-site/demo/design-2/" aria-current="page">עיצוב 2</a><a href="/yyg-site/demo/design-3/">עיצוב 3</a></nav>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. אחד מ־3 כיווני עיצוב לאותו תוכן.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/yyg-site/demo/design-1/">עיצוב 1</a><a href="/yyg-site/demo/design-2/" aria-current="page">עיצוב 2</a><a href="/yyg-site/demo/design-3/">עיצוב 3</a><a href="/yyg-site/demo/final/">הגרסה הסופית</a><a href="/yyg-site/demo/admin/">מסך ניהול התוכן</a></nav>
  <a class="demo-back" href="/yyg-site/demo/">לסיפור הפרויקט</a>
 </div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
 <a class="skip" href="#main">דלגו לתוכן</a>
 
 <header class="site-header dark">
