@@ -7,6 +7,8 @@ Options -Indexes
 # כלי הבנייה (סקריפטים ונתוני הדוגמאות) לא צריכים להיות נגישים מהרשת
 RedirectMatch 404 ^/tools/
 AddDefaultCharset UTF-8
+# עמוד "לא נמצא" בעיצוב של האתר (בעברית, ובאנגלית לכתובות שמתחילות ב־/en/)
+ErrorDocument 404 /404.html
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
