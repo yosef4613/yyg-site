@@ -119,7 +119,8 @@ exec(open(ROOT / 'tools/demo_projects_more.py').read())
 
 # פרויקט נכנס לאתר רק כשיש לו גרסה סופית (כדי שלא יעלה חצי פרויקט)
 def ready(v):
-    return all((ROOT / v['prefix'] / f).exists() for f in ('final/index.html', 'admin/index.html', 'shots/final-d.webp', 'shots/admin-d.webp')) and v['T']['he'].get('s5p', 'x') != ''
+    need = ('final/index.html', 'shots/final-d.webp') + (() if v.get('no_admin') else ('admin/index.html', 'shots/admin-d.webp'))
+    return all((ROOT / v['prefix'] / f).exists() for f in need) and v['T']['he'].get('s5p', 'x') != ''
 PROJECTS = {k: v for k, v in {'anaf': ANAF, 'optika': OPTIKA, 'donate': DONATE, 'shul': SHUL, 'shop': SHOP}.items() if ready(v)}
 
 def use(key):

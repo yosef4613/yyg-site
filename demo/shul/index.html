@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=45">
+<link rel="stylesheet" href="/assets/site.css?v=46">
 <style>
  .g-top{border-bottom:1px solid var(--line);background:var(--base)}
  .g-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
@@ -76,6 +76,8 @@
  .d-quote .q-btn{display:inline-block;margin-top:18px;padding:12px 20px;border-radius:10px;background:#E3B341;color:#1A1404;font-weight:700}
  /* העיצובים */
  .d-designs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:26px}
+ .d-designs.is-one{grid-template-columns:minmax(0,1fr);max-width:620px}
+ .d-took:has(> .d-card:only-child){grid-template-columns:minmax(0,1fr);max-width:620px}
  .d-design{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
  .d-shot{position:relative;display:block;aspect-ratio:16/11;overflow:hidden;background:var(--base-2)}
  .d-shot img.dk{width:100%;height:100%;object-fit:cover;object-position:top}

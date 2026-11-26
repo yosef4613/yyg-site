@@ -73,7 +73,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .btn-gold{position:relative;overflow:hidden;isolation:isolate;color:var(--gold-ink);background:linear-gradient(180deg,#F8DE88 0%,#E9BC4C 45%,#C99528 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(120,80,10,.35),0 16px 36px -14px rgba(227,179,65,.8),0 2px 0 rgba(0,0,0,.35)}
 .btn-gold::after{content:"";position:absolute;z-index:-1;top:0;bottom:0;width:45%;right:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-18deg);transition:right .55s ease}
 .btn-gold:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(120,80,10,.35),0 22px 44px -14px rgba(227,179,65,.9),0 2px 0 rgba(0,0,0,.35)}
-.btn-gold:hover::after,.btn-gold:focus-visible::after{right:120%}
+.btn-gold:focus-visible::after{right:120%}
+@media (hover:hover){.btn-gold:hover::after{right:120%}}   /* בטלפון "ריחוף" נשאר דבוק אחרי נגיעה, ואז הברק רץ בזמן גלילה */
 .btn-gold:active{transform:translateY(0)}
 .btn-line{border-color:rgba(227,179,65,.55);color:var(--text)}
 .btn-line:hover{border-color:var(--gold);background:rgba(227,179,65,.08)}

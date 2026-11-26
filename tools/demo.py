@@ -194,6 +194,8 @@ STYLE = '''<style>
  .d-quote .q-btn{display:inline-block;margin-top:18px;padding:12px 20px;border-radius:10px;background:#E3B341;color:#1A1404;font-weight:700}
  /* העיצובים */
  .d-designs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:26px}
+ .d-designs.is-one{grid-template-columns:minmax(0,1fr);max-width:620px}
+ .d-took:has(> .d-card:only-child){grid-template-columns:minmax(0,1fr);max-width:620px}
  .d-design{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
  .d-shot{position:relative;display:block;aspect-ratio:16/11;overflow:hidden;background:var(--base-2)}
  .d-shot img.dk{width:100%;height:100%;object-fit:cover;object-position:top}
@@ -315,10 +317,11 @@ def build(lang):
   </article>'''
     # שלב 4: המשוב
     fb = dict(DATA['feedback'])
-    bars = ''.join(f'<div class="d-bar"><span>{"עיצוב" if he else "Design"} {i}</span><i><span style="width:{int(fb["rate" + str(i)]) * 20}%"></span></i><span>{fb["rate" + str(i)]} {E(t["of5"])}</span></div>' for i in (1, 2, 3))
+    nd = range(1, len(DESIGNS) + 1)   # בדף הבסיסי יש עיצוב אחד
+    bars = ''.join(f'<div class="d-bar"><span>{"עיצוב" if he else "Design"} {i}</span><i><span style="width:{int(fb["rate" + str(i)]) * 20}%"></span></i><span>{fb["rate" + str(i)]} {E(t["of5"])}</span></div>' for i in nd)
     fq = qmap('feedback', lang)
     took = ''
-    for i in (1, 2, 3):
+    for i in nd:
         likes = ''.join(f'<span class="d-tag">{E(x)}</span>' for x in ans('feedback', f'd{i}_like').split(', ')) if fb.get(f'd{i}_like') else ''
         nos = ''.join(f'<span class="d-tag no">{E(x)}</span>' for x in ans('feedback', f'd{i}_dislike').split(', ')) if fb.get(f'd{i}_dislike') else ''
         took += f'<div class="d-card"><h4>{"עיצוב" if he else "Design"} {i}: {E(DESIGNS[i - 1][lang]["name"])}</h4><p>{likes}{nos}</p><p>{E(ans("feedback", f"d{i}_note"))}</p></div>'
@@ -376,7 +379,7 @@ def build(lang):
 <meta name="theme-color" content="#151920">
 <link rel="icon" href="/assets/img/icon-64.png" type="image/png">
 <link rel="preload" href="/assets/fonts/karantina-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=45">
+<link rel="stylesheet" href="/assets/site.css?v=46">
 {STYLE}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(',', ':'))}</script>
 </head>
@@ -419,7 +422,7 @@ def build(lang):
   <section class="d-step" id="s3" aria-labelledby="s3-t">
    <div class="d-step-h"><span class="d-num" aria-hidden="true">3</span><h2 id="s3-t">{E(t['s3'])}</h2></div>
    <p>{E(t['s3p'])}</p>
-   <div class="d-designs">{designs}</div>
+   <div class="d-designs{' is-one' if len(DESIGNS) == 1 else ''}">{designs}</div>
   </section>
 
 {extra_html}
