@@ -1218,3 +1218,23 @@ html[dir="ltr"] .hero h1{max-width:21ch}
 .hero h1 .h1-key{position:relative;display:inline-block;color:#fff;-webkit-text-fill-color:#fff}
 .hero h1 .h1-key::after{content:"";position:absolute;inset-inline:-.04em;bottom:-.1em;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 14C50 5 120 3 196 9' fill='none' stroke='%2366CFDA' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.95}
 .hero h1 .h1-a{display:block;margin-top:.34em;font-size:.56em;line-height:1.05;color:#9ADCE3;-webkit-text-fill-color:#9ADCE3}
+
+/* כרטיסי המסלולים מקוצרים: מה שזהה בכל המסלולים מופיע פעם אחת מעל הכרטיסים (בשורת "בכל המסלולים"),
+   ובכרטיס נשאר מה ששונה. השם והערך באותה שורה */
+.promises-k{border:0!important;background:none!important;padding-inline:0!important;color:var(--muted)!important;font-weight:600}
+.pkg-same{display:none!important}
+.pkgs{grid-template-rows:repeat(9,auto)}
+.pkg{grid-row:span 9}
+.pkg-row{flex-direction:row;justify-content:space-between;align-items:baseline;gap:4px 14px;padding:10px 0}
+.pkg-row span{flex:none;font-size:.84rem}
+.pkg-row b{text-align:end;line-height:1.4}
+.pkg-toggle{display:none!important}
+/* בטלפון: "בכל המסלולים" כרשימה קצרה עם סימני וי, במקום שבע גלולות אחת מתחת לשנייה */
+@media (max-width:700px){
+ .promises{display:grid;gap:6px;padding:14px 16px;border:1px solid var(--line-2);border-radius:14px;background:var(--panel)}
+ .promises li{padding:0;border:0;background:none;font-size:.93rem;line-height:1.45}
+ .promises li:not(.promises-k)::before{content:"✓";margin-inline-end:8px;color:#C9D1DD;font-weight:700}
+}
+/* באנגלית התוויות ארוכות יותר: התווית מתכווצת ונשברת לפני הערך */
+html[dir="ltr"] .pkg-row span{flex:0 1 34%}
+html[dir="ltr"] .pkg-row b{flex:1 1 auto}
