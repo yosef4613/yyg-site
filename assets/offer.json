@@ -63,6 +63,7 @@
  "examples": [
   {"url": "https://yygweb.com/demo/", "name": {"he": "פרויקט לדוגמה: אתר לנגריה, 3 עיצובים", "en": "Example project: a carpentry website, 3 designs"}},
   {"url": "https://yygweb.com/demo/optika/", "name": {"he": "דף נחיתה לדוגמה: חנות משקפיים עם עדכון שעות עצמי", "en": "Example landing page: an eyewear shop with self-updated hours"}},
+  {"url": "https://yygweb.com/demo/landing/", "name": {"he": "דף נחיתה לדוגמה ב־2,000 ₪: יועץ החזרי מס, 3 עיצובים", "en": "Example landing page at ₪2,000: a tax-refund advisor, 3 designs"}},
   {"url": "https://yygweb.com/demo/basic/", "name": {"he": "דף נחיתה בסיסי לדוגמה: הנדימן, עיצוב אחד וסבב תיקונים אחד", "en": "Example basic landing page: a handyman, one design and one revision round"}},
   {"url": "https://yygweb.com/demo/donate/", "name": {"he": "אתר לעמותה לדוגמה: תרומות באשראי וקמפיין חי", "en": "Example nonprofit site: card donations and a live campaign"}},
   {"url": "https://yygweb.com/demo/shul/", "name": {"he": "אתר לבית כנסת לדוגמה: זמני תפילה, קמפיין שיפוץ והקדשות", "en": "Example synagogue site: prayer times, a renovation campaign and dedications"}},

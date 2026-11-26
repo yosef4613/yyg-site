@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>נקודה · עיצוב 1 מתוך 3 | דף נחיתה לדוגמה של YYG Web Design</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="נקודה, יועץ החזרי מס לשכירים ולמשפחות (עסק דמיוני): בדיקת זכאות, 6 שנים אחורה, ותשלום רק אם יש החזר. דף נחיתה לדוגמה של YYG Web Design, כיוון בנקאי ושקט.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="/assets/img/icon-64.png" type="image/png">
+<link rel="preload" href="/demo/fonts/heebo-700-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/demo/fonts/assistant-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+.demo-bar{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:8px 16px;background:#151920;color:#E9EDF3;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;position:relative;z-index:100;border-bottom:3px solid #F2C95A}
+.demo-flag{flex:none;background:#F2C95A;color:#151920;font-weight:800;padding:3px 10px;border-radius:6px}
+.demo-say{flex:1 1 260px;color:#C9D1DD}
+.demo-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.demo-bar a{color:#E9EDF3;text-decoration:none;padding:6px 10px;border-radius:8px;min-height:32px;display:inline-flex;align-items:center}
+.demo-bar nav a[aria-current]{background:#F2C95A;color:#151920;font-weight:700}
+.demo-bar a:hover{background:rgba(255,255,255,.1)}.demo-bar nav a[aria-current]:hover{background:#F2C95A}
+.demo-bar a:focus-visible{outline:2px solid #F2C95A;outline-offset:2px}
+.demo-ribbon{position:fixed;top:42%;right:0;z-index:99;writing-mode:vertical-rl;background:#F2C95A;color:#151920;font:800 12px/1 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:.04em;padding:12px 6px;border-radius:0 8px 8px 0;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none}
+@media (max-width:560px){.demo-say{flex-basis:100%;font-size:13px}}
+@media print{.demo-ribbon{display:none}}
+
+/* ---------- גופנים: היבו לכותרות ולמספרים, אסיסטנט לטקסט ---------- */
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Heebo";font-style:normal;font-weight:700;font-display:swap;src:url(/demo/fonts/heebo-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:400;font-display:swap;src:url(/demo/fonts/assistant-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-hebrew.woff2) format("woff2");unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Assistant";font-style:normal;font-weight:600;font-display:swap;src:url(/demo/fonts/assistant-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ---------- בסיס: נייר, דיו כחול כהה, קווים דקים ---------- */
+:root{
+  --paper:#F6F8FB;--white:#FFFFFF;--navy:#0F2742;--text:#2B3E56;--muted:#4B5D73;
+  --blue:#2A5C9A;--blue-d:#21497B;--blue-50:#EEF3F9;--blue-100:#DFE8F3;
+  --gold:#C9973A;--gold-t:#86601C;--gold-50:#FAF4E8;
+  --line:rgba(15,39,66,.12);--line-2:rgba(15,39,66,.18);--line-3:rgba(15,39,66,.3);
+  --head:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:6px;--r-sm:4px;
+  --shadow:0 1px 2px rgba(15,39,66,.05),0 14px 34px -20px rgba(15,39,66,.24);
+  --shadow-lg:0 1px 2px rgba(15,39,66,.06),0 30px 60px -30px rgba(15,39,66,.32);
+  --gutter:32px;--sec:120px;--header:76px;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--white);color:var(--text);font:400 18px/1.7 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:var(--blue)}
+h1,h2,h3{font-family:var(--head);font-weight:700;margin:0;color:var(--navy);line-height:1.2}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+figure{margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:var(--r-sm)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;z-index:200;background:var(--navy);color:#fff;padding:10px 16px;border-radius:var(--r);text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+.container{width:min(1200px,100% - var(--gutter)*2);margin-inline:auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-family:var(--head);font-weight:700;font-variant-numeric:tabular-nums lining-nums}
+section[id],main{scroll-margin-top:calc(var(--header) + 8px)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--r);border:1px solid transparent;font:700 16.5px/1.2 var(--head);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,border-color .2s,color .2s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--blue)}
+.btn-line{background:var(--white);color:var(--navy);border-color:var(--line-3)}
+.btn-line:hover{border-color:var(--navy);background:var(--blue-50)}
+.btn-line svg{color:var(--blue)}
+.btn-sm{min-height:44px;padding:0 20px;font-size:15.5px}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(-3px)}
+/* ---------- כותרת עליונה ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){.site-header{background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(1.3) blur(12px);backdrop-filter:saturate(1.3) blur(12px)}}
+.site-header.is-scrolled{box-shadow:0 10px 24px -20px rgba(15,39,66,.45)}
+.header-inner{display:flex;align-items:center;gap:28px;height:var(--header)}
+.brand{display:inline-flex;align-items:center;gap:12px;color:var(--navy);text-decoration:none;flex:none;min-height:44px}
+.brand-mark{width:38px;height:38px;color:var(--navy);--dot:var(--gold);flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-name{display:inline-flex;align-items:baseline;font:700 25px/1 var(--head);letter-spacing:-.01em}
+.brand-name::after{content:"";width:.24em;height:.24em;margin-inline-start:.08em;border-radius:50%;background:var(--gold)}
+.brand-sub{font:600 12.5px/1 var(--body);color:var(--muted);margin-top:6px;letter-spacing:.01em}
+.main-nav{display:flex;align-items:center;gap:24px;margin-inline-start:auto}
+.main-nav ul{display:flex;align-items:center;gap:2px}
+.main-nav ul a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:var(--text);text-decoration:none;font:600 16px/1 var(--body);border-radius:var(--r-sm);transition:color .2s}
+.main-nav ul a::after{content:"";position:absolute;inset-inline:12px;bottom:9px;height:1px;background:var(--navy);transform:scaleX(0);transition:transform .25s}
+.main-nav ul a:hover{color:var(--navy)}
+.main-nav ul a:hover::after{transform:scaleX(1)}
+.nav-tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--navy);text-decoration:none;font:700 15.5px/1 var(--head);font-variant-numeric:tabular-nums;padding-inline-start:24px;border-inline-start:1px solid var(--line)}
+.nav-tel svg{width:17px;height:17px;color:var(--blue)}
+.nav-tel:hover{color:var(--blue)}
+.menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;padding:0 14px;margin-inline-start:auto;border:1px solid var(--line-3);border-radius:var(--r);background:#fff;cursor:pointer;font:600 15.5px/1 var(--body);color:var(--navy)}
+.menu-btn .bars{position:relative;width:18px;height:12px}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;inset-inline:0;height:1.5px;background:currentColor;transition:transform .2s,top .2s}
+.menu-btn .bars::before{top:2px}.menu-btn .bars::after{top:8px}
+.menu-btn[aria-expanded="true"] .bars::before{top:5px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{top:5px;transform:rotate(-45deg)}
+/* ---------- תוויות מספור, כמו בראש עמוד בדף חשבון ---------- */
+.sec-tag{display:flex;align-items:center;gap:14px;margin-bottom:44px;font:700 13px/1 var(--head);color:var(--muted);letter-spacing:.06em}
+.sec-tag .no{color:var(--blue);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.sec-tag .ln{flex:1;height:1px;background:var(--line-2)}
+.sec-tag .nm{font:600 14px/1 var(--body);letter-spacing:.02em}
+.section{padding:var(--sec) 0;border-top:1px solid var(--line)}
+.section--paper{background:var(--paper)}
+.h2{font-size:clamp(1.95rem,1.25rem + 1.7vw,2.75rem);line-height:1.15;letter-spacing:-.012em;text-wrap:balance}
+.sec-sub{margin-top:16px;max-width:36em;font-size:1.12rem;color:var(--muted)}
+/* ---------- מסגרת תמונה דקה ---------- */
+.frame{position:relative;background:#fff;border:1px solid var(--line-2);border-radius:var(--r);padding:8px;box-shadow:var(--shadow)}
+.frame img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--r-sm);background:#EEF1F4}
+/* ---------- פתיחה ---------- */
+.hero{position:relative;padding:72px 0 104px;background:var(--paper);overflow:hidden}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:64px;align-items:center}
+.hero-copy{container-type:inline-size}
+.eyebrow{display:flex;align-items:center;gap:14px;font:600 16px/1.4 var(--body);color:var(--navy)}
+.eyebrow .no{font:700 13px/1 var(--head);color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.eyebrow .ln{width:36px;height:1px;background:var(--line-3);flex:none}
+.hero h1{margin-top:26px;font-size:clamp(2.3rem,1.15rem + 2.9vw,3.4rem);font-size:min(3.4rem,8.1cqi);line-height:1.14;letter-spacing:-.018em}
+.hero h1 .l1,.hero h1 .l2{display:block;text-wrap:balance}
+.hero h1 .l2{color:var(--blue)}
+.hero h1 .stop{color:var(--gold)}
+.hero-lead{margin-top:24px;max-width:33em;font-size:clamp(1.08rem,1rem + .3vw,1.22rem);line-height:1.75;color:var(--text)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-points{display:flex;flex-wrap:wrap;gap:12px 30px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line-2)}
+.hero-points li{display:inline-flex;align-items:center;gap:10px;font:600 16px/1.35 var(--body);color:var(--navy)}
+.tick{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--line-3);color:var(--blue);background:#fff}
+.tick svg{width:13px;height:13px}
+.tick svg .ico{stroke-width:2.2}
+/* הדף: שולחן העבודה מאחור, ודף החשבון מלפנים */
+.hero-visual{position:relative}
+.hero-visual .frame{width:88%;margin-inline-start:auto}
+.statement{position:relative;width:86%;margin-top:-23%;background:#fff;border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden}
+.statement::before{content:"";display:block;height:4px;background:linear-gradient(90deg,var(--navy) 0 calc(100% - 44px),var(--gold) calc(100% - 44px))}
+.st-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 26px 16px}
+.st-title{display:flex;align-items:center;gap:10px;font:700 18px/1.3 var(--head);color:var(--navy)}
+.st-title::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.st-meta{display:grid;justify-items:end;gap:5px;font:600 13px/1.2 var(--body);color:var(--muted);text-align:left}
+.st-meta .num{font-size:14px;color:var(--navy);letter-spacing:.01em;white-space:nowrap}
+.st-cols{display:flex;justify-content:space-between;padding:9px 26px;border-block:1px solid var(--line);background:#FAFBFD;font:600 12.5px/1 var(--body);color:var(--muted);letter-spacing:.04em}
+.ledger{padding:6px 0}
+.ledger li{display:flex;align-items:baseline;gap:12px;padding:10px 26px;line-height:1.3}
+.ledger li::after{content:"";order:1;flex:1 1 auto;min-width:20px;border-bottom:1.5px dotted rgba(15,39,66,.28);transform:translateY(-.3em)}
+.ledger .tax-y{order:0;font:700 18px/1.3 var(--head);font-variant-numeric:tabular-nums;color:var(--navy)}
+.ledger .tax-s{order:2;display:inline-flex;align-items:center;gap:8px;font:600 15px/1.3 var(--body);color:var(--muted);white-space:nowrap}
+.ledger .tax-s::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid var(--blue);flex:none;opacity:.7}
+.ledger li.is-closing{background:var(--gold-50);box-shadow:inset 3px 0 0 var(--gold)}
+.ledger li.is-closing .tax-s{color:var(--gold-t)}
+.ledger li.is-closing .tax-s::before{background:var(--gold);border-color:var(--gold);opacity:1}
+.js .ledger li.fb{visibility:hidden}
+.st-foot{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:2px 26px 0;padding:14px 0 20px;border-top:3px double var(--line-3)}
+.st-foot span{font:600 14.5px/1.3 var(--body);color:var(--muted)}
+.st-foot b{font:700 16px/1.35 var(--head);color:var(--navy);text-align:left}
+.closing-note{display:flex;gap:12px;align-items:flex-start;width:84%;margin-top:18px;padding:2px 0;font:400 15.5px/1.6 var(--body);color:var(--text)}
+.closing-note::before{content:"";flex:none;width:9px;height:9px;margin-top:.55em;border-radius:50%;background:var(--gold)}
+.closing-note b{font-weight:600;color:var(--navy)}
+@media (prefers-reduced-motion:no-preference){
+  .js .ledger:not(.is-static) li:not(.fb){animation:row-in .2s ease-out both}
+  .js .ledger:not(.is-static) li:nth-child(2){animation-delay:.04s}
+  .js .ledger:not(.is-static) li:nth-child(3){animation-delay:.08s}
+  .js .ledger:not(.is-static) li:nth-child(4){animation-delay:.12s}
+  .js .ledger:not(.is-static) li:nth-child(5){animation-delay:.16s}
+  .js .ledger:not(.is-static) li:nth-child(6){animation-delay:.2s}
+  @keyframes row-in{from{opacity:0}to{opacity:1}}
+}
+/* ---------- 02 למה מגיע ---------- */
+.why-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
+.why-head .frame{max-width:500px;justify-self:end;width:100%}
+.why-head .frame img{aspect-ratio:16/9}
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:72px}
+.reason{display:grid;align-content:start;gap:12px;padding-top:26px;border-top:2px solid var(--navy)}
+.reason-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.reason-top .num{font-size:14px;color:var(--blue);letter-spacing:.04em}
+.reason-top svg{width:30px;height:30px;color:var(--navy)}
+.reason h3{font-size:1.22rem;line-height:1.35}
+.reason p{color:var(--muted);font-size:1.03rem;line-height:1.7}
+.total{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 32px;margin-top:64px;padding:22px 0 0;border-top:3px double var(--line-3)}
+.total p{font:600 1.12rem/1.5 var(--body);color:var(--navy)}
+.total .years{font:700 clamp(1.5rem,1.2rem + .8vw,1.9rem)/1.2 var(--head);color:var(--blue);font-variant-numeric:tabular-nums;white-space:nowrap}
+/* ---------- 03 מי זכאי ---------- */
+.elig-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:80px;align-items:start}
+.elig-text .note{margin-top:32px;padding:18px 20px;border:1px solid var(--line-2);border-radius:var(--r);background:#fff;font-size:1.04rem;color:var(--navy)}
+.elig-text .btn{margin-top:28px}
+.checklist{background:#fff;border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow)}
+.checklist li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:20px 28px;font:600 1.08rem/1.5 var(--body);color:var(--navy)}
+.checklist li + li{border-top:1px solid var(--line)}
+.checklist .box{display:grid;place-items:center;width:26px;height:26px;border:1.5px solid var(--navy);border-radius:3px;color:var(--blue)}
+.checklist .box svg{width:16px;height:16px}
+.checklist .box .ico{stroke-width:2.2}
+.checklist .num{font-size:13px;color:var(--muted);letter-spacing:.04em}
+/* ---------- 04 איך זה עובד ---------- */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;margin-top:64px;counter-reset:s}
+.steps::before{content:"";position:absolute;top:21px;inset-inline-start:22px;inset-inline-end:calc((100% - 120px)/4 - 22px);height:1px;background:var(--line-3)}
+.step{position:relative;display:grid;align-content:start;gap:10px}
+.step .node{position:relative;display:grid;place-items:center;width:44px;height:44px;margin-bottom:18px;border-radius:50%;border:1px solid var(--navy);background:#fff;font:700 17px/1 var(--head);color:var(--navy);font-variant-numeric:tabular-nums}
+.step:last-child .node{background:var(--navy);color:#fff}
+.step:last-child .node::after{content:"";position:absolute;top:-1px;inset-inline-end:-3px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #fff}
+.step h3{font-size:1.2rem}
+.step p{color:var(--muted);font-size:1.02rem;line-height:1.7}
+.how-bottom{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;align-items:stretch;margin-top:80px}
+.how-bottom .frame{display:flex}
+.how-bottom .frame img{height:100%;aspect-ratio:auto;min-height:300px}
+.fee{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);background:#fff;border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.fee-main{display:grid;align-content:start;gap:4px;padding:36px 36px 34px;background:var(--paper);border-inline-end:1px solid var(--line)}
+.fee-main h3{font-size:1.2rem}
+.fee-big{margin-top:6px;font:700 clamp(4.2rem,3rem + 3vw,6rem)/1 var(--head);letter-spacing:-.03em;color:var(--navy);font-variant-numeric:tabular-nums}
+.fee-big .pc{font-size:.5em;letter-spacing:0;color:var(--blue);margin-inline-start:.04em}
+.fee-main p:last-child{margin-top:14px;color:var(--text);font-size:1.03rem;line-height:1.65}
+.fee-calc{display:grid;align-content:center;gap:18px;padding:32px 36px}
+.calc{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.calc th,.calc td{padding:12px 0;text-align:start;font-weight:400;vertical-align:baseline}
+.calc th{font:600 1.05rem/1.3 var(--body);color:var(--muted)}
+.calc td{text-align:end;font:700 1.15rem/1.3 var(--head);color:var(--navy);white-space:nowrap}
+.calc tr + tr th,.calc tr + tr td{border-top:1px solid var(--line)}
+.calc tr.total-row th,.calc tr.total-row td{border-top:3px double var(--navy);padding-top:16px}
+.calc tr.total-row th{color:var(--navy);font-weight:600}
+.calc tr.total-row td{font-size:1.6rem;color:var(--blue)}
+.calc-note{font-size:.98rem;color:var(--muted);line-height:1.6}
+/* ---------- 05 אמון ---------- */
+.trust-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:80px;align-items:start}
+.letter p{margin-top:24px;font-size:1.14rem;line-height:1.8;color:var(--text);max-width:32em}
+.sign{display:flex;align-items:center;gap:14px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line-2);max-width:22em}
+.sign svg{width:34px;height:34px;color:var(--navy);--dot:var(--gold)}
+.sign b{display:block;font:700 17px/1.2 var(--head);color:var(--navy)}
+.sign span{display:block;font-size:14.5px;color:var(--muted);margin-top:3px}
+.promises{display:grid;grid-template-columns:1fr 1fr;background:#fff;border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow)}
+.promise{display:grid;align-content:start;gap:10px;padding:30px 30px 32px}
+.promise:nth-child(even){border-inline-start:1px solid var(--line)}
+.promise:nth-child(n+3){border-top:1px solid var(--line)}
+.promise svg{width:28px;height:28px;color:var(--blue);margin-bottom:6px}
+.promise h3{font-size:1.12rem}
+.promise p{color:var(--muted);font-size:1rem;line-height:1.65}
+.quotes-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:96px;padding-bottom:22px;border-bottom:1px solid var(--line-2)}
+.quotes-head h3{font-size:clamp(1.4rem,1.1rem + .8vw,1.75rem)}
+.tag-sample{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:#fff;font:600 14px/1 var(--body);color:var(--muted)}
+.tag-sample::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.quotes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.quote{display:flex;flex-direction:column;gap:20px;padding:32px 28px 8px}
+.quote + .quote{border-inline-start:1px solid var(--line)}
+.quote:first-child{padding-inline-start:0}
+.quote:last-child{padding-inline-end:0}
+.quote svg{width:22px;height:22px;color:var(--blue);opacity:.75}
+.quote blockquote{margin:0;font:400 1.06rem/1.7 var(--body);color:var(--navy)}
+.quote figcaption{margin-top:auto;display:flex;align-items:center;gap:10px;font:700 15px/1.3 var(--head);color:var(--navy)}
+.quote figcaption::before{content:"";width:18px;height:1px;background:var(--gold)}
+/* ---------- 06 שאלות ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:80px;align-items:start}
+.faq-aside{position:sticky;top:calc(var(--header) + 40px)}
+.faq-aside .frame{margin-top:40px;max-width:380px}
+.faq-list{border-top:2px solid var(--navy)}
+.faq-list details{border-bottom:1px solid var(--line-2)}
+.faq-list summary{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;min-height:76px;padding:18px 0;cursor:pointer;list-style:none;font:700 1.14rem/1.4 var(--head);color:var(--navy)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .q{font:700 13px/1 var(--head);color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums;min-width:22px}
+.faq-list summary:hover{color:var(--blue)}
+.faq-list summary .pm{position:relative;width:32px;height:32px;border-radius:50%;border:1px solid var(--line-3);transition:background-color .2s,border-color .2s}
+.faq-list summary .pm::before,.faq-list summary .pm::after{content:"";position:absolute;top:50%;left:50%;width:11px;height:1.5px;margin:-.75px 0 0 -5.5px;background:var(--navy);transition:transform .2s}
+.faq-list summary .pm::after{transform:rotate(90deg)}
+.faq-list details[open] summary .pm{background:var(--navy);border-color:var(--navy)}
+.faq-list details[open] summary .pm::before,.faq-list details[open] summary .pm::after{background:#fff}
+.faq-list details[open] summary .pm::after{transform:rotate(0)}
+.faq-list .ans{padding:0 42px 26px 52px;max-width:42em;color:var(--text);font-size:1.06rem;line-height:1.75}
+/* ---------- 07 בדיקת זכאות ---------- */
+.check-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-rows:auto 1fr;grid-template-areas:"head form" "side form";gap:0 80px;align-items:start}
+.check-head{grid-area:head}
+.check-side{grid-area:side;margin-top:40px}
+.form-card{grid-area:form;background:#fff;border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden}
+.form-card::before{content:"";display:block;height:4px;background:linear-gradient(90deg,var(--navy) 0 calc(100% - 44px),var(--gold) calc(100% - 44px))}
+.check-form{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px;padding:36px 40px 34px}
+.field{display:grid;gap:8px;align-content:start;min-width:0}
+.field.full{grid-column:1/-1}
+.field > label,.field legend{font:600 15.5px/1.3 var(--body);color:var(--navy)}
+.field legend small{font-size:14px;color:var(--muted);font-weight:400}
+.field input[type=text],.field input[type=tel],.field select{width:100%;min-height:52px;padding:12px 16px;border:1px solid var(--line-3);border-radius:var(--r-sm);background:#fff;font-size:17px;color:var(--navy);transition:border-color .2s,box-shadow .2s}
+.field input[type=tel]{text-align:right}
+.field input:hover,.field select:hover{border-color:rgba(15,39,66,.5)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(42,92,154,.2)}
+.field select{appearance:none;-webkit-appearance:none;padding-inline-end:44px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A5C9A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat left 16px center/18px}
+.field [aria-invalid="true"]{border-color:var(--gold-t)!important;background-color:#FFFCF6!important}
+.field [aria-invalid="true"]:focus{box-shadow:0 0 0 3px rgba(201,151,58,.28)!important}
+.field-error{display:flex;align-items:center;gap:8px;font:600 14.5px/1.4 var(--body);color:var(--gold-t)}
+.field-error::before{content:"";flex:none;width:16px;height:16px;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+:root{--i-info:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5.5M12 7.6v.1'/%3E%3C/svg%3E")}
+fieldset.field{margin:0;padding:0;border:0;min-width:0}
+fieldset.field legend{padding:0;margin-bottom:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-2);border-radius:var(--r-sm)}
+.opt{display:flex;align-items:flex-start;gap:12px;min-height:54px;padding:14px 16px;cursor:pointer;font:400 15.5px/1.45 var(--body);color:var(--navy);transition:background-color .15s}
+.opt:nth-child(even){border-inline-start:1px solid var(--line)}
+.opt:nth-child(n+3){border-top:1px solid var(--line)}
+.opt:hover{background:var(--paper)}
+.opt input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;margin:1px 0 0;border:1.5px solid var(--line-3);border-radius:3px;background:#fff;cursor:pointer;transition:background-color .15s,border-color .15s}
+.opt input:checked{background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7'/%3E%3C/svg%3E") center/14px no-repeat;border-color:var(--navy)}
+.opt input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.opt:has(input:checked){background:var(--blue-50)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line-3);border-radius:var(--r-sm);overflow:hidden}
+.seg label{position:relative;display:block;cursor:pointer}
+.seg label + label{border-inline-start:1px solid var(--line-2)}
+.seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:50px;font:600 15.5px/1 var(--body);color:var(--text);transition:background-color .15s,color .15s}
+.seg input:checked + span{background:var(--navy);color:#fff}
+.seg input:focus-visible + span{outline:2px solid var(--blue);outline-offset:-4px}
+.form-foot{grid-column:1/-1;display:grid;gap:12px;margin-top:6px;padding-top:24px;border-top:1px solid var(--line)}
+.form-foot .btn{width:100%;min-height:56px;font-size:17.5px}
+.fine{font-size:14.5px;color:var(--muted);text-align:center}
+.form-status:empty{display:none}
+.form-status{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--r-sm);background:var(--gold-50);color:var(--gold-t);font:600 15.5px/1.45 var(--body)}
+.form-status::before{content:"";flex:none;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+.check-form.is-sent .form-status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.form-done{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border:1px solid var(--blue-100);border-inline-start:3px solid var(--blue);border-radius:var(--r-sm);background:var(--blue-50);font:600 16px/1.6 var(--body);color:var(--navy)}
+.form-done::before{content:"";flex:none;width:24px;height:24px;margin-top:1px;background:var(--blue);-webkit-mask:var(--i-ok) center/contain no-repeat;mask:var(--i-ok) center/contain no-repeat}
+.form-done:focus{outline:none}
+.form-done:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+:root{--i-ok:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.3 2.8 2.8L16.2 9.6'/%3E%3C/svg%3E")}
+.contact-btns{display:grid;gap:12px}
+.cbtn{display:flex;align-items:center;gap:16px;min-height:76px;padding:12px 20px;border:1px solid var(--line-2);border-radius:var(--r);background:#fff;color:var(--navy);text-decoration:none;transition:border-color .2s,background-color .2s}
+.cbtn:hover{border-color:var(--navy)}
+.cbtn .ci{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff}
+.cbtn.wa .ci{background:var(--blue-50);color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue-100)}
+.cbtn .ci svg{width:21px;height:21px}
+.cbtn small{display:block;font:600 14px/1.2 var(--body);color:var(--muted)}
+.cbtn b{display:block;margin-top:3px;font:700 1.22rem/1.25 var(--head);font-variant-numeric:tabular-nums}
+.cbtn .go{margin-inline-start:auto;width:20px;height:20px;color:var(--blue)}
+.details{margin-top:26px;border-top:1px solid var(--line-2)}
+.details > div{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.details dt{font:600 15px/1.4 var(--body);color:var(--muted)}
+.details dd{margin:0;font:600 15.5px/1.4 var(--body);color:var(--navy);text-align:end}
+.details dd a{display:inline-flex;align-items:center;min-height:44px;margin-block:-10px;color:var(--blue);text-decoration:none;font-weight:600}
+.details dd a:hover{text-decoration:underline;text-underline-offset:3px}
+.details .num{font-weight:700}
+.avail{display:flex;align-items:center;gap:10px;margin-top:20px;font:600 16px/1.4 var(--body);color:var(--navy)}
+.avail::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:#8C99A9;box-shadow:0 0 0 4px rgba(140,153,169,.18)}
+.avail[data-open="true"]::before{background:#2E8B57;box-shadow:0 0 0 4px rgba(46,139,87,.16)}
+/* ---------- פוטר ---------- */
+.site-footer{background:#fff;border-top:1px solid var(--line);padding:80px 0 0;color:var(--text)}
+.footer-grid{display:grid;grid-template-columns:1.35fr 1fr 1.15fr;gap:56px;padding-bottom:48px}
+.f-slogan{margin-top:24px;font:700 1.3rem/1.35 var(--head);color:var(--navy)}
+.f-line{margin-top:8px;color:var(--muted);font-size:1rem}
+.site-footer h2{font:700 13px/1 var(--head);color:var(--muted);letter-spacing:.06em;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+.f-links{display:grid;gap:0}
+.f-links a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;color:var(--navy);text-decoration:none;font-weight:600;justify-self:start}
+.f-links a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.f-contact{display:grid;gap:0;color:var(--navy)}
+.f-contact .hrs{margin-top:6px}
+.f-contact a{display:inline-flex;align-items:center;min-height:44px;color:var(--navy);text-decoration:none;font-weight:600;justify-self:start}
+.f-contact a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.f-contact .hrs{color:var(--muted);font-size:1rem;line-height:1.6}
+.f-small{margin-top:14px;font-size:14.5px;color:var(--muted)}
+.f-bottom{background:var(--paper);border-top:3px double var(--line-3)}
+.f-bottom .container{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:18px;font-size:14.5px;color:var(--muted)}
+.f-bottom a{color:var(--blue)}
+.to-top{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--navy)!important;text-decoration:none;font-weight:600}
+.to-top:hover{text-decoration:underline;text-underline-offset:4px}
+.to-top svg{width:16px;height:16px}
+/* ---------- פס פנייה קבוע בטלפון ---------- */
+.m-bar{display:none}
+/* ---------- רספונסיבי ---------- */
+@media (max-width:1180px){
+  .nav-tel{display:none}
+  .hero-grid{gap:48px;grid-template-columns:minmax(0,1fr) minmax(0,.92fr)}
+  .statement{width:94%}
+  .hero-visual .frame{width:90%}
+  .quotes{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:8px}
+  .quote:nth-child(3){border-inline-start:0;padding-inline-start:0}
+  .quote:nth-child(2){padding-inline-end:0}
+  .quote:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:1024px){
+  .main-nav ul a{padding:0 9px;font-size:15.5px}
+  .main-nav{gap:14px}
+  .header-inner{gap:18px}
+  .fee{grid-template-columns:1fr}
+  .fee-main{border-inline-end:0;border-bottom:1px solid var(--line)}
+  .how-bottom{grid-template-columns:1fr 1fr}
+}
+@media (max-width:940px){
+  :root{--sec:96px}
+  .menu-btn{display:inline-flex}
+  .main-nav{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;align-items:stretch;gap:14px;margin:0;padding:8px var(--gutter) 22px;background:#fff;border-bottom:1px solid var(--line-2);box-shadow:0 24px 40px -24px rgba(15,39,66,.35)}
+  .main-nav.is-open{display:flex}
+  .main-nav ul{flex-direction:column;align-items:stretch;gap:0}
+  .main-nav ul a{display:flex;min-height:52px;padding:0 2px;font-size:17px;border-bottom:1px solid var(--line);border-radius:0}
+  .main-nav ul a::after{display:none}
+  .main-nav .nav-tel{display:flex;justify-content:center;padding:0;border:1px solid var(--line-3);border-radius:var(--r);min-height:50px}
+  .main-nav .btn{min-height:52px}
+  .hero{padding:52px 0 80px}
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .hero-visual{width:min(100%,600px);justify-self:center}
+  .why-head,.elig-grid,.trust-grid,.faq-grid{grid-template-columns:1fr;gap:48px}
+  .why-head .frame{justify-self:start;max-width:560px}
+  .reasons{grid-template-columns:1fr;gap:36px;margin-top:56px}
+  .steps{grid-template-columns:1fr 1fr;gap:44px 32px}
+  .steps::before{display:none}
+  .how-bottom{grid-template-columns:1fr}
+  .how-bottom .frame img{aspect-ratio:3/2;height:auto;min-height:0}
+  .faq-aside{position:static}
+  .faq-aside{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .faq-aside .frame{flex:none;width:180px;margin:0;padding:5px}
+  .check-grid{grid-template-columns:1fr;grid-template-areas:"head" "form" "side";gap:0}
+  .form-card{margin-top:40px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .footer-grid > :first-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  :root{--gutter:20px;--sec:72px;--header:66px}
+  body{font-size:17px}
+  .f-bottom .container{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .brand-mark{width:34px;height:34px}
+  .brand-name{font-size:22px}
+  .brand-sub{font-size:12px;margin-top:5px}
+  .menu-btn .lbl{display:none}
+  .sec-tag{margin-bottom:30px}
+  .hero{padding:32px 0 64px}
+  .eyebrow{font-size:15px;gap:10px}
+  .eyebrow .ln{width:20px}
+  .hero h1{margin-top:18px;font-size:clamp(2rem,1.2rem + 3.6vw,2.4rem)}
+  .hero-lead{margin-top:18px}
+  .hero-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+  .hero-cta .btn-primary{grid-column:1/-1}
+  .hero-cta .btn{padding:0 14px}
+  .hero-grid{gap:0}
+  .hero-copy{display:contents}
+  .hero-visual{order:2;margin-top:36px}
+  .hero-points{order:3;flex-direction:column;gap:12px;margin-top:32px;padding-top:20px}
+  .hero-visual .frame{width:92%;padding:6px}
+  .statement{width:96%;margin-top:-26%}
+  .st-head{padding:18px 18px 14px}
+  .st-title{font-size:16.5px}
+  .st-cols{padding:9px 18px}
+  .ledger li{padding:10px 18px;gap:10px}
+  .ledger .tax-y{font-size:17px}
+  .ledger .tax-s{font-size:14.5px}
+  .st-foot{margin-inline:18px;flex-direction:column;gap:4px}
+  .st-foot b{text-align:start}
+  .closing-note{width:100%;font-size:15px}
+  .reasons{margin-top:44px}
+  .total{margin-top:44px}
+  .checklist li{padding:16px 18px;gap:14px;font-size:1.02rem}
+  .steps{grid-template-columns:1fr;gap:0;margin-top:44px}
+  .step{grid-template-columns:44px 1fr;column-gap:18px;row-gap:6px;padding-bottom:30px}
+  .step .node{grid-row:span 2;margin-bottom:0}
+  .step:not(:last-child)::before{content:"";position:absolute;top:44px;bottom:0;inset-inline-start:21.5px;width:1px;background:var(--line-3)}
+  .step h3{align-self:center}
+  .how-bottom{margin-top:36px;gap:24px}
+  .fee-main{padding:26px 22px}
+  .fee-calc{padding:24px 22px}
+  .promises{grid-template-columns:1fr}
+  .promise{grid-template-columns:28px 1fr;column-gap:16px;row-gap:6px;padding:22px 20px}
+  .promise svg{grid-row:span 2;margin:0;width:26px;height:26px}
+  .promise:nth-child(even){border-inline-start:0}
+  .promise + .promise{border-top:1px solid var(--line)}
+  .quotes-head{margin-top:64px}
+  .quotes{grid-template-columns:1fr}
+  .quote,.quote:first-child,.quote:last-child,.quote:nth-child(2),.quote:nth-child(3){padding:26px 0 26px;border-inline-start:0}
+  .quote + .quote{border-top:1px solid var(--line)}
+  .faq-aside .frame{width:118px}
+  .faq-list summary{gap:14px;font-size:1.06rem;min-height:68px;padding:16px 0}
+  .faq-list .ans{padding:0 0 22px 0}
+  .form-card{margin-top:32px}
+  .check-form{grid-template-columns:1fr;padding:26px 20px 24px;gap:20px}
+  .opts{grid-template-columns:1fr}
+  .opt:nth-child(even){border-inline-start:0}
+  .opt:nth-child(n+2){border-top:1px solid var(--line)}
+  .footer-grid{grid-template-columns:1fr;gap:36px}
+  .site-footer{padding-top:56px}
+  .m-bar{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:8px;position:fixed;inset-inline:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line-2);box-shadow:0 -10px 24px -18px rgba(15,39,66,.4);transition:transform .25s,visibility .25s}
+  .m-bar a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:var(--r);border:1px solid var(--line-3);background:#fff;color:var(--navy);text-decoration:none;font:700 15px/1 var(--head)}
+  .m-bar a svg{width:17px;height:17px;color:var(--blue)}
+  .m-bar a.go{background:var(--navy);border-color:var(--navy);color:#fff}
+  .m-bar.is-away{transform:translateY(110%);visibility:hidden}
+}
+@media (max-width:380px){
+  .ledger .tax-s{font-size:14px}
+  .ledger li{gap:8px}
+  .m-bar{gap:6px;padding-inline:8px}
+  .m-bar a{font-size:14px;gap:5px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="demo-bar" role="note" aria-label="אתר לדוגמה">
+ <strong class="demo-flag">אתר לדוגמה בלבד</strong>
+ <span class="demo-say">זה לא אתר של עסק אמיתי: העסק, הפרטים וההמלצות דמיוניים. אחד מ־3 כיווני עיצוב לאותו תוכן.</span>
+ <nav aria-label="עמודי הדוגמה"><a href="/demo/landing/design-1/" aria-current="page">עיצוב 1</a><a href="/demo/landing/design-2/">עיצוב 2</a><a href="/demo/landing/design-3/">עיצוב 3</a><a href="/demo/landing/final/">הגרסה הסופית</a></nav>
+ <a class="demo-back" href="/demo/landing/">לסיפור הפרויקט</a>
+</div>
+<div class="demo-ribbon" aria-hidden="true">אתר לדוגמה</div>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<!-- סמלים משותפים: הסימן של נקודה ואייקונים דקים -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 48 48"><path fill="currentColor" d="M30.79 10.14L31.41 10.4 31.51 10.41 31.67 10.39 31.82 10.33 31.91 10.26 31.98 10.18 33.55 7.46 33.58 7.36 33.59 7.25 33.57 7.08 33.53 6.98 33.47 6.89 33.4 6.81 33.13 6.66 32.38 6.28 31.72 5.98 30.94 5.67 30.15 5.39 29.35 5.14 28.64 4.96 27.82 4.78 27 4.63 26.16 4.52 25.44 4.45 24.6 4.41 23.76 4.4 22.92 4.43 22.2 4.48 21.36 4.58 20.53 4.71 19.47 4.93 18.42 5.21 17.4 5.55 16.28 5.98 15.3 6.44 14.34 6.95 13.41 7.51 12.52 8.12 11.66 8.77 10.75 9.56 9.97 10.31 9.24 11.11 8.55 11.94 7.91 12.81 7.31 13.72 6.72 14.76 6.28 15.62 5.89 16.5 5.55 17.4 5.24 18.31 4.99 19.24 4.78 20.17 4.61 21.12 4.49 22.08 4.42 23.04 4.4 24 4.42 24.96 4.49 25.92 4.61 26.87 4.78 27.82 4.99 28.76 5.24 29.69 5.55 30.6 5.89 31.5 6.28 32.38 6.71 33.24 7.19 34.07 7.7 34.89 8.26 35.67 8.85 36.43 9.48 37.16 10.14 37.86 10.84 38.52 11.56 39.15 12.32 39.74 13.11 40.3 13.92 40.81 14.76 41.28 15.62 41.72 16.5 42.11 17.4 42.45 18.31 42.76 19.24 43.01 20.17 43.22 21.12 43.39 22.08 43.51 23.04 43.58 24 43.6 24.96 43.58 25.92 43.51 26.87 43.39 27.82 43.22 28.76 43.01 29.69 42.76 30.6 42.45 31.5 42.11 32.38 41.72 33.24 41.29 34.07 40.81 34.89 40.3 35.67 39.74 36.43 39.15 37.16 38.52 37.86 37.86 38.52 37.16 39.15 36.44 39.74 35.68 40.3 34.89 40.81 34.08 41.28 33.24 41.72 32.38 42.11 31.5 42.45 30.6 42.79 29.58 43.04 28.65 43.25 27.7 43.41 26.76 43.53 25.68 43.59 24.6 43.59 23.52 43.54 22.44 43.42 21.36 43.22 20.18 42.97 19.09 42.89 18.95 42.82 18.87 42.73 18.8 42.58 18.74 42.41 18.73 42.3 18.75 39.39 19.59 39.29 19.63 39.2 19.68 39.12 19.76 39.06 19.85 39.01 20 38.99 20.16 39.11 20.94 39.18 21.6 39.21 22.34 39.2 23.08 39.16 23.73 39.09 24.39 38.99 25.04 38.85 25.68 38.68 26.31 38.46 27.02 38.19 27.71 37.93 28.31 37.59 28.97 37.26 29.54 36.86 30.16 36.48 30.7 36.17 31.08 35.8 31.52 35.11 32.23 34.38 32.89 33.99 33.2 33.53 33.54 33.12 33.82 32.63 34.12 31.77 34.59 31.24 34.83 30.79 35.03 29.86 35.36 29.23 35.54 28.67 35.68 28.02 35.8 27.45 35.88 26.8 35.95 26.23 35.98 25.65 35.98 24.99 35.96 24.42 35.91 23.77 35.83 23.12 35.71 22.56 35.58 22 35.43 21.38 35.23 20.76 35 20.23 34.77 19.72 34.52 19.14 34.2 18.58 33.86 18.1 33.54 17.63 33.2 17.12 32.79 16.69 32.4 16.22 31.94 15.83 31.52 15.4 31.02 15 30.5 14.67 30.03 14.36 29.54 14.03 28.97 13.77 28.46 13.53 27.94 13.17 27.02 12.88 26.08 12.74 25.52 12.64 25.04 12.49 24.06 12.42 23.08 12.42 22.09 12.49 21.11 12.56 20.62 12.65 20.05 12.88 19.09 13.01 18.62 13.2 18.07 13.56 17.16 13.99 16.27 14.23 15.84 14.53 15.35 15.1 14.54 15.72 13.77 16.39 13.05 16.75 12.71 17.18 12.33 17.96 11.72 18.78 11.18 19.64 10.69 20.53 10.27 21.45 9.91 22 9.74 22.48 9.61 23.44 9.4 24.01 9.31 24.5 9.25 25.48 9.19 26.47 9.2 27.45 9.28 28.43 9.44 29.38 9.67 30.33 9.97Z"/><path class="dot" style="fill:var(--dot,currentColor)" d="M42.26 13.13L42.24 12.71 42.17 12.28 42.07 11.87 41.93 11.47 41.74 11.08 41.53 10.72 41.27 10.37 40.98 10.06 40.67 9.77 40.33 9.52 39.96 9.3 39.57 9.11 39.17 8.97 38.76 8.87 38.33 8.8 37.91 8.78 37.48 8.8 37.06 8.87 36.65 8.97 36.24 9.11 35.86 9.3 35.49 9.52 35.15 9.77 34.83 10.06 34.55 10.37 34.29 10.72 34.07 11.08 33.89 11.47 33.75 11.87 33.64 12.28 33.58 12.71 33.56 13.13 33.58 13.56 33.64 13.98 33.75 14.4 33.89 14.8 34.07 15.18 34.29 15.55 34.55 15.89 34.83 16.21 35.15 16.5 35.49 16.75 35.86 16.97 36.24 17.15 36.65 17.3 37.06 17.4 37.48 17.46 37.91 17.48 38.33 17.46 38.76 17.4 39.17 17.3 39.57 17.15 39.96 16.97 40.33 16.75 40.67 16.5 40.98 16.21 41.27 15.89 41.53 15.55 41.74 15.18 41.93 14.8 42.07 14.4 42.17 13.98 42.24 13.56Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path class="ico" d="M19 12H5m6-6-6 6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path class="ico" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path class="ico" d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g class="ico"><path d="M4.3 19.7l1.2-3.6A8 8 0 1 1 8.8 19Z"/><path d="M9 10.2h6M9 13.4h4"/></g></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><g class="ico"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></g></symbol>
+  <symbol id="i-jobs" viewBox="0 0 24 24"><g class="ico"><path d="M3 20.5h18"/><path d="M4.5 20.5V8.5L10 5.5v15"/><path d="M10 20.5V10h9.5v10.5"/><path d="M13 13.5h3.5M13 17h3.5M7 10.5h.5M7 14h.5"/></g></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24"><g class="ico"><path d="M6.5 3.5h7.5l4.5 4.5v12.5h-12Z"/><path d="M14 3.5V8h4.5"/><path d="M9.5 12.5h5M9.5 16h3"/></g></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><g class="ico"><path d="M18 6 6 18"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></g></symbol>
+  <symbol id="i-ledger" viewBox="0 0 24 24"><g class="ico"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 8.5h17M7 12.5h6M7 16h6M16 12.5h1.5M16 16h1.5"/></g></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><g class="ico"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2"/></g></symbol>
+  <symbol id="i-talk" viewBox="0 0 24 24"><g class="ico"><path d="M5 4.5h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 6.4 6.4l1.3-2 4 1.6V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/><path d="M15 3.5a5.5 5.5 0 0 1 5.5 5.5"/></g></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M10.2 5.5C6.3 6.6 4 9.6 4 13.6V18.5h6.2v-6.2H7.3c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Zm9.8 0c-3.9 1.1-6.2 4.1-6.2 8.1V18.5H20v-6.2h-2.9c.1-2.5 1.4-4.3 3.6-5.1l-.7-1.7Z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path class="ico" d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+</svg>
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#main" aria-label="נקודה, החזרי מס לשכירים ולמשפחות, לראש העמוד">
+      <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+      <span class="brand-text"><span class="brand-name">נקודה</span><span class="brand-sub">החזרי מס לשכירים ולמשפחות</span></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="#why">למה מגיע</a></li>
+        <li><a href="#eligible">מי זכאי</a></li>
+        <li><a href="#how">איך זה עובד</a></li>
+        <li><a href="#trust">המלצות</a></li>
+        <li><a href="#faq">שאלות</a></li>
+      </ul>
+      <a class="nav-tel" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="ltr">050-000-0000</span></a>
+      <a class="btn btn-primary btn-sm" href="#check">לבדיקת זכאות</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="bars" aria-hidden="true"></span><span class="lbl">תפריט</span><span class="sr-only">ניווט</span></button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- 01 פתיחה -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="no" aria-hidden="true">01</span><span class="ln" aria-hidden="true"></span><span>החזרי מס לשכירים ולמשפחות · 6 שנים אחורה</span></p>
+        <h1 id="hero-title"><span class="l1">יש לכם כסף אצל מס הכנסה.</span> <span class="l2">בואו נחזיר אותו הביתה<span class="stop">.</span></span></h1>
+        <p class="hero-lead">משפחות רבות לא מנצלות נקודות זיכוי וזיכויים שמגיעים להן: על ילדים, על תרומות, על החלפת עבודה באמצע השנה. אני בודק את 6 השנים האחרונות, מגיש את הבקשה בשבילכם, ומקבל תשלום רק אם יש החזר.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#check">לבדיקת זכאות בחינם <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>חיוג</a>
+          <a class="btn btn-line" href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>וואטסאפ</a>
+        </div>
+        <ul class="hero-points">
+          <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>בודק 6 שנים אחורה</li>
+          <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>תשלום רק אם יש החזר</li>
+          <li><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>הכול בטלפון ובמייל, בלי לצאת מהבית</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <figure class="frame">
+          <img src="/demo/landing/img/desk-960.webp" srcset="/demo/landing/img/desk-560.webp 560w, /demo/landing/img/desk-960.webp 960w" sizes="(max-width: 640px) 92vw, (max-width: 940px) 540px, 480px" width="960" height="640" alt="שולחן עבודה מסודר: טפסים, מחשבון, עט וכמה מטבעות" fetchpriority="high">
+        </figure>
+        <div class="statement">
+          <div class="st-head">
+            <p class="st-title" id="st-title">השנים שאפשר לבדוק</p>
+            <p class="st-meta"><span>6 שנות מס</span><span class="num" data-tax-years>2020 עד 2025</span></p>
+          </div>
+          <p class="st-cols" aria-hidden="true"><span>שנת מס</span><span>מצב</span></p>
+          <ol class="ledger" data-tax-list aria-labelledby="st-title">
+            <li class="is-closing fb"><span class="tax-y">2020</span> <span class="tax-s">נסגרת בעוד 36 ימים</span></li>
+            <li class="fb"><span class="tax-y">2021</span> <span class="tax-s">פתוחה לבדיקה</span></li>
+            <li class="fb"><span class="tax-y">2022</span> <span class="tax-s">פתוחה לבדיקה</span></li>
+            <li class="fb"><span class="tax-y">2023</span> <span class="tax-s">פתוחה לבדיקה</span></li>
+            <li class="fb"><span class="tax-y">2024</span> <span class="tax-s">פתוחה לבדיקה</span></li>
+            <li class="fb"><span class="tax-y">2025</span> <span class="tax-s">פתוחה לבדיקה</span></li>
+          </ol>
+          <p class="st-foot"><span>תשלום</span><b>15% מההחזר, רק אם יש החזר</b></p>
+        </div>
+        <p class="closing-note"><span>שנת <b data-tax-closing>2020</b> נסגרת <b data-tax-days-text>בעוד 36 ימים</b>, ב־31 בדצמבר. עד אז אפשר עוד לבקש עליה החזר.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 למה מגיע -->
+  <section class="section" id="why" aria-labelledby="why-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">02</span><span class="ln"></span><span class="nm">למה מגיע</span></p>
+      <div class="why-head">
+        <div>
+          <h2 class="h2" id="why-title">למה בכלל מגיע לכם החזר?</h2>
+          <p class="sec-sub">המס יורד מהמשכורת כל חודש, לפי מה שהמעסיק יודע. והמעסיק לא יודע הכול.</p>
+        </div>
+        <figure class="frame">
+          <img src="/demo/landing/img/folder-960.webp" srcset="/demo/landing/img/folder-560.webp 560w, /demo/landing/img/folder-960.webp 960w" sizes="(max-width: 640px) 92vw, 500px" width="960" height="640" loading="lazy" alt="תיקייה פתוחה עם טפסים ואטב">
+        </figure>
+      </div>
+      <ul class="reasons">
+        <li class="reason">
+          <div class="reason-top"><span class="num" aria-hidden="true">א׳</span><svg aria-hidden="true"><use href="#i-receipt"/></svg></div>
+          <h3>התרומות לא מגיעות לתלוש.</h3>
+          <p>על תרומה לעמותה עם אישור לפי סעיף 46 מגיע זיכוי של 35% מהסכום. אבל הקבלות נשארות במגירה, והזיכוי הולך לאיבוד.</p>
+        </li>
+        <li class="reason">
+          <div class="reason-top"><span class="num" aria-hidden="true">ב׳</span><svg aria-hidden="true"><use href="#i-jobs"/></svg></div>
+          <h3>החלפתם עבודה, או עבדתם בשני מקומות.</h3>
+          <p>כל מעסיק מנכה מס כאילו הוא היחיד, ולפעמים מנכה יותר מדי. בסוף השנה אף אחד לא מאזן את החשבון בשבילכם.</p>
+        </li>
+        <li class="reason">
+          <div class="reason-top"><span class="num" aria-hidden="true">ג׳</span><svg aria-hidden="true"><use href="#i-form"/></svg></div>
+          <h3>נקודות זיכוי שלא נרשמו.</h3>
+          <p>על ילדים, על ילד עם צרכים מיוחדים, על תואר או על מגורים ביישוב מזכה. מה שלא נכתב בטופס 101, לא נכנס לתלוש.</p>
+        </li>
+      </ul>
+      <div class="total">
+        <p>את כל אלה אפשר לתקן בדיעבד, על 6 השנים האחרונות:</p>
+        <span class="years" data-tax-years>2020 עד 2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 מי זכאי -->
+  <section class="section section--paper" id="eligible" aria-labelledby="elig-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">03</span><span class="ln"></span><span class="nm">מי זכאי</span></p>
+      <div class="elig-grid">
+        <div class="elig-text">
+          <h2 class="h2" id="elig-title">מי יכול לקבל החזר?</h2>
+          <p class="sec-sub">אם אחד מהמשפטים האלה נכון לגביכם, באחת מ־6 השנים האחרונות, כדאי לבדוק:</p>
+          <p class="note">לא בטוחים? בשביל זה יש בדיקה ראשונה: 5 דקות בטלפון, בחינם ובלי התחייבות.</p>
+          <a class="btn btn-primary" href="#check">לבדוק אם מגיע לי <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <ul class="checklist">
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>החלפתי מקום עבודה באמצע השנה, או עבדתי בשני מקומות</span><span class="num" aria-hidden="true">01</span></li>
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>תרמנו לעמותות, ויש לנו קבלות</span><span class="num" aria-hidden="true">02</span></li>
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>יש לנו ילדים, ולא בטוח שכל נקודות הזיכוי נוצלו</span><span class="num" aria-hidden="true">03</span></li>
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>עבדתי רק חלק מהשנה, למשל בגלל לימודים או תקופה בלי עבודה</span><span class="num" aria-hidden="true">04</span></li>
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>הפקדתי בעצמי לביטוח חיים או לקופת גמל</span><span class="num" aria-hidden="true">05</span></li>
+          <li><span class="box" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span>יש במשפחה ילד עם צרכים מיוחדים</span><span class="num" aria-hidden="true">06</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 איך זה עובד -->
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">04</span><span class="ln"></span><span class="nm">איך זה עובד</span></p>
+      <h2 class="h2" id="how-title">איך זה עובד</h2>
+      <p class="sec-sub">4 צעדים, בלי לצאת מהבית.</p>
+      <ol class="steps">
+        <li class="step"><span class="node" aria-hidden="true">1</span><h3>בדיקה ראשונה.</h3><p>ממלאים טופס קצר או מתקשרים. תוך יום עבודה אני חוזר אליכם, ואומר אם יש מה לבדוק.</p></li>
+        <li class="step"><span class="node" aria-hidden="true">2</span><h3>שולחים מסמכים.</h3><p>טופסי 106 מהמעסיקים, קבלות על תרומות ואישורים. מספיק לצלם בטלפון ולשלוח בוואטסאפ או במייל. חסר משהו? אני עוזר להשיג אותו.</p></li>
+        <li class="step"><span class="node" aria-hidden="true">3</span><h3>אני מגיש בשבילכם.</h3><p>אני בודק כל שנה, מחשב, ומגיש את הבקשה למס הכנסה. אתם רק חותמים, ומקבלים עדכון בכל שלב.</p></li>
+        <li class="step"><span class="node" aria-hidden="true">4</span><h3>ההחזר נכנס לחשבון.</h3><p>הכסף עובר ישירות ממס הכנסה לחשבון הבנק שלכם. רק אחרי זה משלמים לי.</p></li>
+      </ol>
+      <div class="how-bottom">
+        <div class="fee" role="group" aria-labelledby="fee-title">
+          <div class="fee-main">
+            <h3 id="fee-title">כמה זה עולה?</h3>
+            <p class="fee-big">15<span class="pc">%</span></p>
+            <p>מההחזר שמתקבל בפועל. אין החזר, אין תשלום. בלי דמי פתיחת תיק ובלי מקדמה.</p>
+          </div>
+          <div class="fee-calc">
+            <table class="calc">
+              <caption class="sr-only">דוגמה לחישוב</caption>
+              <tbody>
+                <tr><th scope="row">החזר</th><td>8,000 ₪</td></tr>
+                <tr><th scope="row">שכר טרחה</th><td>1,200 ₪</td></tr>
+                <tr class="total-row"><th scope="row">נשאר לכם</th><td>6,800 ₪</td></tr>
+              </tbody>
+            </table>
+            <p class="calc-note">למשל: על החזר של 8,000 ₪, שכר הטרחה הוא 1,200 ₪, ו־6,800 ₪ נשארים אצלכם.</p>
+          </div>
+        </div>
+        <figure class="frame">
+          <img src="/demo/landing/img/stamp-960.webp" srcset="/demo/landing/img/stamp-560.webp 560w, /demo/landing/img/stamp-960.webp 960w" sizes="(max-width: 940px) 92vw, 480px" width="960" height="640" loading="lazy" alt="חותמת גומי ליד טופס עם חותמת אישור">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 אמון והמלצות -->
+  <section class="section section--paper" id="trust" aria-labelledby="trust-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">05</span><span class="ln"></span><span class="nm">המלצות</span></p>
+      <div class="trust-grid">
+        <div class="letter">
+          <h2 class="h2" id="trust-title">נעים להכיר, אני אברהם</h2>
+          <p>אני אברהם, מאלעד. כבר 8 שנים אני עוזר למשפחות לקבל בחזרה כסף שמגיע להן. התחלתי כשמצאתי החזר של כמה אלפי שקלים לשכן עם 7 ילדים, שלא ידע שמגיע לו משהו. אני עובד לבד, אז אתם מדברים תמיד איתי, ולא עם מוקד.</p>
+          <div class="sign" aria-hidden="true"><svg><use href="#mark"/></svg><span><b>אברהם</b><span>נקודה · החזרי מס לשכירים ולמשפחות</span></span></div>
+        </div>
+        <ul class="promises">
+          <li class="promise"><svg aria-hidden="true"><use href="#i-percent"/></svg><h3>תשלום רק בהצלחה.</h3><p>אם אין החזר, לא משלמים כלום. גם לא על הבדיקה.</p></li>
+          <li class="promise"><svg aria-hidden="true"><use href="#i-ledger"/></svg><h3>רואים כל שקל.</h3><p>לפני ההגשה מקבלים ממני את החישוב לכל שנה, ורואים מאיפה מגיע כל סכום.</p></li>
+          <li class="promise"><svg aria-hidden="true"><use href="#i-lock"/></svg><h3>המסמכים נשארים אצלי.</h3><p>הם משמשים רק להגשת הבקשה, ולא עוברים לאף אחד אחר.</p></li>
+          <li class="promise"><svg aria-hidden="true"><use href="#i-talk"/></svg><h3>בסבלנות.</h3><p>מי שקשה לו עם טפסים, מקבל הסבר צעד אחרי צעד, בטלפון.</p></li>
+        </ul>
+      </div>
+      <div class="quotes-head">
+        <h3>מה אומרות המשפחות</h3>
+        <span class="tag-sample">המלצות לדוגמה</span>
+      </div>
+      <div class="quotes">
+        <figure class="quote"><svg aria-hidden="true"><use href="#i-quote"/></svg><blockquote><p>לא ידענו שהקבלות על התרומות שוות משהו. אברהם מצא לנו החזר על 5 שנים, והכסף נכנס לפני פסח.</p></blockquote><figcaption>משפחת כהן, אלעד</figcaption></figure>
+        <figure class="quote"><svg aria-hidden="true"><use href="#i-quote"/></svg><blockquote><p>החלפתי עבודה פעמיים בשנה אחת, ולא הבנתי למה ירד לי כל כך הרבה מס. הוא הסביר הכול בסבלנות, ועשה את כל הניירת.</p></blockquote><figcaption>משפחת פרידמן, בני ברק</figcaption></figure>
+        <figure class="quote"><svg aria-hidden="true"><use href="#i-quote"/></svg><blockquote><p>צילמנו את המסמכים בטלפון ושלחנו בוואטסאפ. זהו. את כל השאר הוא עשה.</p></blockquote><figcaption>משפחת אזולאי, ביתר עילית</figcaption></figure>
+        <figure class="quote"><svg aria-hidden="true"><use href="#i-quote"/></svg><blockquote><p>הוא בדק ולא מצא החזר, ולא לקח שקל. בגלל זה אנחנו ממליצים עליו לכל השכנים.</p></blockquote><figcaption>משפחת וייס, ירושלים</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 שאלות נפוצות -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">06</span><span class="ln"></span><span class="nm">שאלות</span></p>
+      <div class="faq-grid">
+        <div class="faq-aside">
+          <h2 class="h2" id="faq-title">שאלות נפוצות</h2>
+          <figure class="frame">
+            <img src="/demo/landing/img/envelope-960.webp" srcset="/demo/landing/img/envelope-560.webp 560w, /demo/landing/img/envelope-960.webp 960w" sizes="(max-width: 640px) 118px, (max-width: 940px) 180px, 380px" width="960" height="640" loading="lazy" alt="מעטפה עם בול, ומעטפה סגורה מתחתיה">
+          </figure>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary><span class="q" aria-hidden="true">01</span><span>כמה שנים אחורה אפשר לבדוק?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">6 שנות מס אחורה. כרגע אלה השנים <span data-tax-years>2020 עד 2025</span>. שנה שלא מגישים עליה בזמן נסגרת, ולכן כדאי לא לחכות.</p>
+          </details>
+          <details>
+            <summary><span class="q" aria-hidden="true">02</span><span>כמה זה עולה?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">15% מההחזר שמתקבל בפועל, ורק אחרי שהכסף נכנס לחשבון שלכם. אם אין החזר, לא משלמים כלום. הבדיקה הראשונה בחינם.</p>
+          </details>
+          <details>
+            <summary><span class="q" aria-hidden="true">03</span><span>אילו מסמכים צריך?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">בעיקר טופס 106 מכל מעסיק, לכל שנה, וקבלות על תרומות. לפעמים גם אישורים על ילדים או על הפקדות. אין לכם הכול? את רוב הטפסים אפשר להשיג מחדש, ואני מסביר איך.</p>
+          </details>
+          <details>
+            <summary><span class="q" aria-hidden="true">04</span><span>כמה זמן לוקח עד שהכסף מגיע?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">את הבקשה אני מגיש בדרך כלל תוך שבועיים מהיום שכל המסמכים אצלי. אחרי זה מס הכנסה מטפל בה, ולרוב ההחזר מגיע תוך כמה חודשים.</p>
+          </details>
+          <details>
+            <summary><span class="q" aria-hidden="true">05</span><span>צריך להגיע אליך?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">לא. הכול בטלפון, בוואטסאפ ובמייל, מכל מקום בארץ. מי שמעדיף, יכול לשלוח מסמכים גם בדואר.</p>
+          </details>
+          <details>
+            <summary><span class="q" aria-hidden="true">06</span><span>זה בטוח לשלוח מסמכים בוואטסאפ?</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="ans">המסמכים נשארים אצלי בלבד, ומשמשים רק להגשת הבקשה. מי שמעדיף, שולח במייל. ואתם חותמים על הבקשה בעצמכם, אחרי שראיתם את החישוב.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 בדיקת זכאות -->
+  <section class="section section--paper" id="check" aria-labelledby="check-title">
+    <div class="container">
+      <p class="sec-tag" aria-hidden="true"><span class="no">07</span><span class="ln"></span><span class="nm">בדיקת זכאות</span></p>
+      <div class="check-grid">
+        <div class="check-head">
+          <h2 class="h2" id="check-title">בדיקת זכאות, בחינם ובלי התחייבות</h2>
+          <p class="sec-sub">ממלאים דקה, ואני חוזר אליכם תוך יום עבודה. מעדיפים לדבר? אפשר להתקשר או לשלוח וואטסאפ.</p>
+        </div>
+        <div class="form-card">
+          <form class="check-form" data-check-form aria-labelledby="check-title" novalidate>
+            <div class="field">
+              <label for="f-name">שם</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <p class="field-error" data-error-for="name" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">טלפון</label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required>
+              <p class="field-error" data-error-for="phone" hidden></p>
+            </div>
+            <fieldset class="field full">
+              <legend>מה נכון לגביכם ב־6 השנים האחרונות? <small>(לא חובה)</small></legend>
+              <div class="opts">
+                <label class="opt"><input type="checkbox" name="reasons" value="job"> החלפתי עבודה באמצע שנה, או עבדתי בשני מקומות</label>
+                <label class="opt"><input type="checkbox" name="reasons" value="donate"> תרמנו לעמותות, ויש קבלות</label>
+                <label class="opt"><input type="checkbox" name="reasons" value="kids"> יש ילדים, ולא בטוח שכל נקודות הזיכוי נוצלו</label>
+                <label class="opt"><input type="checkbox" name="reasons" value="part"> עבדתי רק חלק מהשנה</label>
+                <label class="opt"><input type="checkbox" name="reasons" value="deposit"> הפקדתי בעצמי לביטוח חיים או לקופת גמל</label>
+                <label class="opt"><input type="checkbox" name="reasons" value="unsure"> לא בטוחים, נבדוק יחד</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="f-kids">כמה ילדים במשפחה?</label>
+              <select id="f-kids" name="kids">
+                <option value="">בחרו</option><option value="0">אין ילדים</option><option value="1-2">1 עד 2</option>
+                <option value="3-4">3 עד 4</option><option value="5-6">5 עד 6</option><option value="7+">7 ומעלה</option>
+              </select>
+            </div>
+            <fieldset class="field">
+              <legend>מתי נוח שאחזור אליכם?</legend>
+              <div class="seg">
+                <label><input type="radio" name="when" value="בבוקר" checked><span>בבוקר</span></label>
+                <label><input type="radio" name="when" value="בצהריים"><span>בצהריים</span></label>
+                <label><input type="radio" name="when" value="בערב"><span>בערב</span></label>
+              </div>
+            </fieldset>
+            <div class="form-foot">
+              <button class="btn btn-primary" type="submit">לבדיקת זכאות</button>
+              <p class="fine">הפרטים משמשים רק כדי לחזור אליכם.</p>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+              <div class="form-done" data-form-done hidden></div>
+            </div>
+          </form>
+        </div>
+        <div class="check-side">
+          <div class="contact-btns">
+            <a class="cbtn" href="tel:0500000000"><span class="ci"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><span><small>חיוג</small><b class="ltr">050-000-0000</b></span><svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="cbtn wa" href="https://wa.me/972500000000" target="_blank" rel="noopener"><span class="ci"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><span><small>וואטסאפ</small><b class="ltr">050-000-0000</b></span><svg class="go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+          <dl class="details">
+            <div><dt>מייל</dt><dd><a class="ltr" href="mailto:hello@nekuda-example.co.il">hello@nekuda-example.co.il</a></dd></div>
+            <div><dt>א׳ עד ה׳</dt><dd class="num">9:00 עד 20:00</dd></div>
+            <div><dt>ו׳ וערבי חג</dt><dd class="num">9:00 עד 12:00</dd></div>
+          </dl>
+          <p class="avail" data-avail>זמין עכשיו בטלפון ובוואטסאפ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="#main" aria-label="נקודה, החזרי מס לשכירים ולמשפחות, לראש העמוד">
+        <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+        <span class="brand-text"><span class="brand-name">נקודה</span><span class="brand-sub">החזרי מס לשכירים ולמשפחות</span></span>
+      </a>
+      <p class="f-slogan">מה שמגיע לכם, חוזר אליכם.</p>
+      <p class="f-line">נקודה · החזרי מס לשכירים ולמשפחות · אלעד, שירות בכל הארץ</p>
+    </div>
+    <nav aria-labelledby="f-nav-title">
+      <h2 id="f-nav-title">בדף</h2>
+      <div class="f-links"><a href="#why">למה מגיע</a><a href="#eligible">מי זכאי</a><a href="#how">איך זה עובד</a><a href="#faq">שאלות</a><a href="#check">בדיקת זכאות</a></div>
+    </nav>
+    <div>
+      <h2>פרטים</h2>
+      <div class="f-contact">
+        <a href="tel:0500000000"><span class="ltr">050-000-0000</span></a>
+        <a href="mailto:hello@nekuda-example.co.il"><span class="ltr">hello@nekuda-example.co.il</span></a>
+        <p class="hrs">א׳ עד ה׳, 9:00 עד 20:00 · ו׳ וערבי חג, 9:00 עד 12:00</p>
+        <p class="f-small">המידע בדף כללי, ואינו ייעוץ מס אישי.</p>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <div class="container">
+      <p>אתר לדוגמה שעיצב <a href="https://yygweb.com/demo/landing/">YYG Web Design</a>. העסק, הפרטים וההמלצות דמיוניים. התמונות: הדמיות תלת־ממד שנבנו במיוחד לדוגמה.</p>
+      <a class="to-top" href="#main">לראש העמוד <svg aria-hidden="true"><use href="#i-up"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<nav class="m-bar" aria-label="פנייה מהירה">
+  <a href="tel:0500000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>חיוג</a>
+  <a href="https://wa.me/972500000000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>וואטסאפ</a>
+  <a class="go" href="#check">לבדיקה</a>
+</nav>
+
+<script src="/demo/landing/landing.js" defer></script>
+<script>
+(() => {
+  /* כותרת: צל עדין בגלילה */
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* תפריט בטלפון: נסגר בלחיצה על קישור, ב־Escape ובמעבר למסך רחב */
+  const btn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
+  const setMenu = (open) => { btn.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setMenu(false); btn.focus(); } });
+  window.matchMedia('(min-width: 941px)').addEventListener('change', (m) => { if (m.matches) setMenu(false); });
+
+  /* הפס התחתון בטלפון: מופיע רק אחרי שכפתורי הפתיחה יצאו מהמסך, ויורד כשהטופס על המסך (כדי לא להסתיר את כפתור השליחה) */
+  const bar = document.querySelector('.m-bar'), heroCta = document.querySelector('.hero-cta'), check = document.getElementById('check');
+  if (bar && heroCta && check && 'IntersectionObserver' in window) {
+    const seen = new Map([[heroCta, true], [check, false]]);
+    const update = () => bar.classList.toggle('is-away', seen.get(heroCta) || seen.get(check));
+    update();
+    const io = new IntersectionObserver((ens) => { ens.forEach((en) => seen.set(en.target, en.isIntersecting)); update(); });
+    io.observe(heroCta); io.observe(check);
+  }
+
+  /* דף החשבון: השורות נכנסות פעם אחת בלבד (גם כשהסקריפט מרענן אותן כל דקה) */
+  const ledger = document.querySelector('.ledger');
+  setTimeout(() => {
+    ledger.querySelectorAll('li.fb').forEach((li) => li.classList.remove('fb'));
+    ledger.classList.add('is-static');
+  }, 1500);
+})();
+</script>
+</body>
+</html>

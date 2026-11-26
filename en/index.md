@@ -88,6 +88,7 @@ My phone is for calls only. To write, leave your details in the form below or se
 
 - [Example project: a carpentry website, 3 designs](https://yygweb.com/en/demo/)
 - [Example landing page: an eyewear shop with self-updated hours](https://yygweb.com/en/demo/optika/)
+- [Example landing page at ₪2,000: a tax-refund advisor, 3 designs](https://yygweb.com/en/demo/landing/)
 - [Example basic landing page: a handyman, one design and one revision round](https://yygweb.com/en/demo/basic/)
 - [Example nonprofit site: card donations and a live campaign](https://yygweb.com/en/demo/donate/)
 - [Example synagogue site: prayer times, a renovation campaign and dedications](https://yygweb.com/en/demo/shul/)

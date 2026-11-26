@@ -44,6 +44,7 @@
 - [Example nonprofit site with card donations and a live campaign](https://yygweb.com/en/demo/donate/)
 - [Example synagogue site with prayer times, a renovation campaign and dedications](https://yygweb.com/en/demo/shul/)
 - [Example basic landing page: one design and one revision round](https://yygweb.com/en/demo/basic/)
+- [Example landing page at the base price: a tax-refund advisor](https://yygweb.com/en/demo/landing/)
 - [How much does a website cost (guide)](https://yygweb.com/guides/website-cost.html)
 - [What to prepare before building a website (guide)](https://yygweb.com/guides/before-you-build.html)
 - [Landing page or full website (guide)](https://yygweb.com/guides/landing-or-website.html)
